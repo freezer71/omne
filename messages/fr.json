@@ -193,7 +193,7 @@
       },
       "resize": {
         "name": "Redimensionner une image",
-        "description": "Adaptez la taille d'une image à une nouvelle largeur et hauteur.",
+        "description": "Adaptez la taille d'une image à une nouvelle largeur et hauteur — avec aperçu en direct.",
         "ui": {
           "selectButton": "Sélectionner une image",
           "empty": "Déposez une image PNG, JPG ou WebP ici.",
@@ -201,6 +201,8 @@
           "widthLabel": "Largeur (px)",
           "heightLabel": "Hauteur (px)",
           "lockAspect": "Conserver les proportions",
+          "scaleLabel": "Échelle",
+          "previewLabel": "Aperçu",
           "busy": "Redimensionnement…",
           "error": "Impossible de redimensionner cette image.",
           "removeFile": "Retirer"

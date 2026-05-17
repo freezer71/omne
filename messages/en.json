@@ -193,7 +193,7 @@
       },
       "resize": {
         "name": "Resize image",
-        "description": "Scale an image to a new width and height.",
+        "description": "Scale an image to a new width and height — with live preview.",
         "ui": {
           "selectButton": "Select an image",
           "empty": "Drop a PNG, JPG, or WebP image here.",
@@ -201,6 +201,8 @@
           "widthLabel": "Width (px)",
           "heightLabel": "Height (px)",
           "lockAspect": "Lock aspect ratio",
+          "scaleLabel": "Scale",
+          "previewLabel": "Preview",
           "busy": "Resizing…",
           "error": "Could not resize that image.",
           "removeFile": "Remove"

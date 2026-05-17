@@ -22,6 +22,8 @@ const messages = {
   widthLabel: 'Width',
   heightLabel: 'Height',
   lockAspect: 'Lock aspect ratio',
+  scaleLabel: 'Scale',
+  previewLabel: 'Preview',
   busy: 'Resizing…',
   error: 'Resize failed.',
   removeFile: 'Remove',
@@ -70,6 +72,16 @@ describe('ImageResizeTool', () => {
     expect(downloadBlobMock.mock.calls[0]![1]).toBe('resized-photo-320x240.png');
   });
 
+  it('renders preset scale buttons (×0.25, ×0.5, ×2, ×3)', async () => {
+    const user = userEvent.setup();
+    render(<ImageResizeTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), pngFile());
+    expect(screen.getByRole('button', { name: '×0.25' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '×0.5' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '×2' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '×3' })).toBeInTheDocument();
+  });
+
   it('shows error on failure', async () => {
     const user = userEvent.setup();
     resizeImageMock.mockRejectedValue(new Error('boom'));
@@ -77,5 +89,12 @@ describe('ImageResizeTool', () => {
     await user.upload(screen.getByLabelText(messages.selectButton), pngFile());
     await user.click(screen.getByRole('button', { name: messages.resizeButton }));
     expect(await screen.findByRole('alert')).toHaveTextContent(messages.error);
+  });
+
+  it('renders a preview canvas with the preview label', async () => {
+    const user = userEvent.setup();
+    render(<ImageResizeTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), pngFile());
+    expect(screen.getByLabelText(messages.previewLabel)).toBeInTheDocument();
   });
 });
