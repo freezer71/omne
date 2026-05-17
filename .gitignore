@@ -48,3 +48,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude code / superpowers tooling (local, per-developer)
+/.claude/
+/.agents/
+/skills-lock.json
