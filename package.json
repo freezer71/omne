@@ -19,6 +19,7 @@
     "@ffmpeg/core": "^0.12.10",
     "@ffmpeg/ffmpeg": "^0.12.15",
     "@ffmpeg/util": "^0.12.2",
+    "@huggingface/transformers": "^4.2.0",
     "cmdk": "^1.1.1",
     "jszip": "^3.10.1",
     "next": "16.2.6",

@@ -157,6 +157,104 @@
           "removeFile": "Remove"
         }
       }
+    },
+    "image": {
+      "convert": {
+        "name": "Convert image",
+        "description": "Change image format — PNG, JPG, or WebP.",
+        "ui": {
+          "selectButton": "Select an image",
+          "empty": "Drop a PNG, JPG, or WebP image here.",
+          "convertButton": "Convert",
+          "format": "Output format",
+          "formatPng": "PNG",
+          "formatJpeg": "JPG",
+          "formatWebp": "WebP",
+          "busy": "Converting…",
+          "error": "Could not convert that image.",
+          "removeFile": "Remove"
+        }
+      },
+      "compress": {
+        "name": "Compress image",
+        "description": "Shrink an image by re-encoding it at a lower quality.",
+        "ui": {
+          "selectButton": "Select an image",
+          "empty": "Drop a PNG, JPG, or WebP image here.",
+          "compressButton": "Compress",
+          "qualityLabel": "Quality",
+          "format": "Output format",
+          "formatJpeg": "JPG",
+          "formatWebp": "WebP",
+          "busy": "Compressing…",
+          "error": "Could not compress that image.",
+          "removeFile": "Remove"
+        }
+      },
+      "resize": {
+        "name": "Resize image",
+        "description": "Scale an image to a new width and height.",
+        "ui": {
+          "selectButton": "Select an image",
+          "empty": "Drop a PNG, JPG, or WebP image here.",
+          "resizeButton": "Resize",
+          "widthLabel": "Width (px)",
+          "heightLabel": "Height (px)",
+          "lockAspect": "Lock aspect ratio",
+          "busy": "Resizing…",
+          "error": "Could not resize that image.",
+          "removeFile": "Remove"
+        }
+      },
+      "rotate-flip": {
+        "name": "Rotate & flip",
+        "description": "Rotate by 90° steps and flip horizontally or vertically.",
+        "ui": {
+          "selectButton": "Select an image",
+          "empty": "Drop a PNG, JPG, or WebP image here.",
+          "applyButton": "Apply",
+          "rotate90": "Rotate 90°",
+          "rotate180": "Rotate 180°",
+          "rotate270": "Rotate 270°",
+          "flipH": "Flip horizontal",
+          "flipV": "Flip vertical",
+          "reset": "Reset",
+          "busy": "Applying…",
+          "error": "Could not transform that image.",
+          "removeFile": "Remove"
+        }
+      },
+      "crop": {
+        "name": "Crop image",
+        "description": "Cut a rectangular region out of an image.",
+        "ui": {
+          "selectButton": "Select an image",
+          "empty": "Drop a PNG, JPG, or WebP image here.",
+          "cropButton": "Crop",
+          "xLabel": "X",
+          "yLabel": "Y",
+          "widthLabel": "Width",
+          "heightLabel": "Height",
+          "hint": "Drag on the image to set the crop region. Coordinates are in source pixels.",
+          "busy": "Cropping…",
+          "error": "Could not crop that image.",
+          "removeFile": "Remove"
+        }
+      },
+      "remove-bg": {
+        "name": "Remove background",
+        "description": "AI-powered background removal — gives you a transparent PNG.",
+        "ui": {
+          "selectButton": "Select an image",
+          "empty": "Drop a PNG, JPG, or WebP image here.",
+          "removeButton": "Remove background",
+          "modelNotice": "First use downloads the ~44 MB RMBG-1.4 model from huggingface.co. It's cached afterward — and your image never leaves your device.",
+          "modelLoading": "Loading model",
+          "busy": "Processing…",
+          "error": "Could not remove the background.",
+          "removeFile": "Remove"
+        }
+      }
     }
   },
   "privacy": {
@@ -164,7 +262,8 @@
     "leadParagraph": "omne runs everything in your browser. Your files never leave your device.",
     "sections": {
       "whatWeLoad": "What your browser downloads",
-      "whatWeDoNot": "What we never do"
+      "whatWeDoNot": "What we never do",
+      "aiModels": "AI models (background removal)"
     }
   }
 }

@@ -157,6 +157,104 @@
           "removeFile": "Retirer"
         }
       }
+    },
+    "image": {
+      "convert": {
+        "name": "Convertir une image",
+        "description": "Changez le format d'image — PNG, JPG ou WebP.",
+        "ui": {
+          "selectButton": "Sélectionner une image",
+          "empty": "Déposez une image PNG, JPG ou WebP ici.",
+          "convertButton": "Convertir",
+          "format": "Format de sortie",
+          "formatPng": "PNG",
+          "formatJpeg": "JPG",
+          "formatWebp": "WebP",
+          "busy": "Conversion…",
+          "error": "Impossible de convertir cette image.",
+          "removeFile": "Retirer"
+        }
+      },
+      "compress": {
+        "name": "Compresser une image",
+        "description": "Réduisez le poids d'une image en la ré-encodant avec une qualité moindre.",
+        "ui": {
+          "selectButton": "Sélectionner une image",
+          "empty": "Déposez une image PNG, JPG ou WebP ici.",
+          "compressButton": "Compresser",
+          "qualityLabel": "Qualité",
+          "format": "Format de sortie",
+          "formatJpeg": "JPG",
+          "formatWebp": "WebP",
+          "busy": "Compression…",
+          "error": "Impossible de compresser cette image.",
+          "removeFile": "Retirer"
+        }
+      },
+      "resize": {
+        "name": "Redimensionner une image",
+        "description": "Adaptez la taille d'une image à une nouvelle largeur et hauteur.",
+        "ui": {
+          "selectButton": "Sélectionner une image",
+          "empty": "Déposez une image PNG, JPG ou WebP ici.",
+          "resizeButton": "Redimensionner",
+          "widthLabel": "Largeur (px)",
+          "heightLabel": "Hauteur (px)",
+          "lockAspect": "Conserver les proportions",
+          "busy": "Redimensionnement…",
+          "error": "Impossible de redimensionner cette image.",
+          "removeFile": "Retirer"
+        }
+      },
+      "rotate-flip": {
+        "name": "Pivoter & retourner",
+        "description": "Pivotez par paliers de 90° et inversez horizontalement ou verticalement.",
+        "ui": {
+          "selectButton": "Sélectionner une image",
+          "empty": "Déposez une image PNG, JPG ou WebP ici.",
+          "applyButton": "Appliquer",
+          "rotate90": "Pivoter 90°",
+          "rotate180": "Pivoter 180°",
+          "rotate270": "Pivoter 270°",
+          "flipH": "Miroir horizontal",
+          "flipV": "Miroir vertical",
+          "reset": "Réinitialiser",
+          "busy": "Application…",
+          "error": "Impossible d'appliquer la transformation.",
+          "removeFile": "Retirer"
+        }
+      },
+      "crop": {
+        "name": "Rogner une image",
+        "description": "Découpez une zone rectangulaire dans une image.",
+        "ui": {
+          "selectButton": "Sélectionner une image",
+          "empty": "Déposez une image PNG, JPG ou WebP ici.",
+          "cropButton": "Rogner",
+          "xLabel": "X",
+          "yLabel": "Y",
+          "widthLabel": "Largeur",
+          "heightLabel": "Hauteur",
+          "hint": "Faites glisser sur l'image pour définir la zone. Les coordonnées sont en pixels source.",
+          "busy": "Rognage…",
+          "error": "Impossible de rogner cette image.",
+          "removeFile": "Retirer"
+        }
+      },
+      "remove-bg": {
+        "name": "Retirer l'arrière-plan",
+        "description": "Détourage par IA — vous obtenez un PNG transparent.",
+        "ui": {
+          "selectButton": "Sélectionner une image",
+          "empty": "Déposez une image PNG, JPG ou WebP ici.",
+          "removeButton": "Retirer l'arrière-plan",
+          "modelNotice": "Au premier usage, le modèle RMBG-1.4 (~44 Mo) est téléchargé depuis huggingface.co, puis mis en cache. Votre image, elle, ne quitte jamais votre appareil.",
+          "modelLoading": "Chargement du modèle",
+          "busy": "Traitement…",
+          "error": "Impossible de retirer l'arrière-plan.",
+          "removeFile": "Retirer"
+        }
+      }
     }
   },
   "privacy": {
@@ -164,7 +262,8 @@
     "leadParagraph": "omne exécute tout dans votre navigateur. Vos fichiers ne quittent jamais votre appareil.",
     "sections": {
       "whatWeLoad": "Ce que votre navigateur télécharge",
-      "whatWeDoNot": "Ce que nous ne faisons jamais"
+      "whatWeDoNot": "Ce que nous ne faisons jamais",
+      "aiModels": "Modèles IA (détourage)"
     }
   }
 }

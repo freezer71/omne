@@ -14,9 +14,22 @@ if (typeof HTMLCanvasElement !== 'undefined') {
     const mime = type ?? 'image/png';
     const fakeBytes = mime === 'image/jpeg'
       ? new Uint8Array([0xff, 0xd8, 0xff, 0xe0])
-      : new Uint8Array([0x89, 0x50, 0x4e, 0x47]);
+      : mime === 'image/webp'
+        ? new Uint8Array([0x52, 0x49, 0x46, 0x46, 0x00, 0x00, 0x00, 0x00, 0x57, 0x45, 0x42, 0x50])
+        : new Uint8Array([0x89, 0x50, 0x4e, 0x47]);
     queueMicrotask(() => callback(new Blob([fakeBytes as BlobPart], { type: mime })));
   } as never;
+}
+
+if (typeof globalThis.createImageBitmap !== 'function') {
+  (globalThis as { createImageBitmap?: (b: Blob) => Promise<ImageBitmap> }).createImageBitmap =
+    async function stubCreateImageBitmap(_blob: Blob): Promise<ImageBitmap> {
+      return {
+        width: 100,
+        height: 80,
+        close() {},
+      } as unknown as ImageBitmap;
+    };
 }
 
 if (typeof HTMLCanvasElement !== 'undefined' && !HTMLCanvasElement.prototype.getContext.toString().includes('stub')) {

@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/registry';
 
 describe('TOOLS registry', () => {
-  it('contains the 7 MVP tools', () => {
-    expect(TOOLS).toHaveLength(7);
+  it('contains all current tools', () => {
+    expect(TOOLS).toHaveLength(13);
   });
 
   it('has unique (category, id) combinations', () => {
@@ -19,6 +19,11 @@ describe('TOOLS registry', () => {
   it('exposes the 2 video tools', () => {
     const video = TOOLS.filter((t) => t.category === 'video').map((t) => t.id).sort();
     expect(video).toEqual(['convert', 'trim']);
+  });
+
+  it('exposes the 6 image tools', () => {
+    const image = TOOLS.filter((t) => t.category === 'image').map((t) => t.id).sort();
+    expect(image).toEqual(['compress', 'convert', 'crop', 'remove-bg', 'resize', 'rotate-flip']);
   });
 
   it('every tool href matches /<category>/<id>', () => {
@@ -56,6 +61,7 @@ describe('toolsByCategory', () => {
     const grouped = toolsByCategory();
     expect(grouped.pdf?.length).toBe(5);
     expect(grouped.video?.length).toBe(2);
+    expect(grouped.image?.length).toBe(6);
   });
 });
 
