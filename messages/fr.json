@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "siteName": "omne",
+    "tagline": "Boîte à outils privacy-first."
+  },
+  "nav": {
+    "home": "Accueil",
+    "privacy": "Confidentialité"
+  },
+  "common": {
+    "backHome": "Accueil",
+    "previewLoading": "Chargement",
+    "previewError": "Aperçu impossible"
+  },
+  "badge": {
+    "privacy": "100 % local · aucun envoi"
+  },
+  "hub": {
+    "title": "omne",
+    "subtitle": "Une boîte à outils privacy-first. Tout s'exécute dans votre navigateur. Aucun fichier n'est envoyé.",
+    "dropHint": "Déposez un fichier n'importe où pour commencer.",
+    "categories": {
+      "pdf": "Outils PDF",
+      "video": "Outils vidéo",
+      "image": "Outils image",
+      "text": "Outils texte",
+      "utility": "Utilitaires"
+    },
+    "comingSoon": "Bientôt disponible"
+  },
+  "theme": {
+    "toggleLabel": "Changer de thème",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "locale": {
+    "label": "Langue",
+    "en": "English",
+    "fr": "Français"
+  },
+  "palette": {
+    "open": "Ouvrir la palette",
+    "placeholder": "Rechercher un outil…",
+    "empty": "Aucun outil ne correspond à votre recherche.",
+    "shortcut": "⌘K"
+  },
+  "tools": {
+    "pdf": {
+      "merge": {
+        "name": "Fusionner des PDFs",
+        "description": "Combinez plusieurs PDFs en un seul.",
+        "ui": {
+          "selectButton": "Sélectionner des PDFs",
+          "empty": "Déposez vos PDFs ici ou utilisez le bouton ci-dessous.",
+          "mergeButton": "Fusionner",
+          "removeFile": "Retirer",
+          "moveUp": "Monter",
+          "moveDown": "Descendre",
+          "busy": "Fusion en cours…",
+          "error": "Impossible de fusionner ces PDFs. Essayez d'autres fichiers."
+        }
+      },
+      "split": {
+        "name": "Découper un PDF",
+        "description": "Sélectionnez les pages, téléchargez-les une à une ou en un seul PDF.",
+        "ui": {
+          "selectButton": "Sélectionner un PDF",
+          "empty": "Déposez un PDF ici ou utilisez le bouton ci-dessous.",
+          "pageLabelTemplate": "Page {n}",
+          "selectedCountTemplate": "{n} pages sélectionnées",
+          "downloadSeparate": "Télécharger séparément",
+          "extractSelection": "Extraire en un seul PDF",
+          "downloadAll": "Tout télécharger",
+          "busy": "Traitement…",
+          "error": "Impossible de découper ce PDF.",
+          "removeFile": "Retirer"
+        }
+      },
+      "rotate": {
+        "name": "Faire pivoter un PDF",
+        "description": "Pivotez chaque page indépendamment — cliquez sur ↻ pour cycler de 90°.",
+        "ui": {
+          "selectButton": "Sélectionner un PDF",
+          "empty": "Déposez un PDF ici ou utilisez le bouton ci-dessous.",
+          "rotateButton": "Pivoter",
+          "pageLabelTemplate": "Page {n}",
+          "rotatePageLabelTemplate": "Pivoter la page {n}",
+          "rotateAll90": "Tout à 90°",
+          "rotateAll180": "Tout à 180°",
+          "rotateAll270": "Tout à 270°",
+          "resetAll": "Réinitialiser",
+          "busy": "Rotation…",
+          "error": "Impossible de faire pivoter ce PDF.",
+          "removeFile": "Retirer"
+        }
+      },
+      "to-images": {
+        "name": "PDF en images",
+        "description": "Exportez chaque page du PDF en PNG ou JPG.",
+        "ui": {
+          "selectButton": "Sélectionner un PDF",
+          "empty": "Déposez un PDF ici.",
+          "comingSoon": "Le rendu des pages PDF arrive bientôt."
+        }
+      },
+      "from-images": {
+        "name": "Images en PDF",
+        "description": "Combinez des images en un seul PDF.",
+        "ui": {
+          "selectButton": "Sélectionner des images",
+          "empty": "Déposez des images PNG ou JPG ici.",
+          "combineButton": "Combiner en PDF",
+          "removeFile": "Retirer",
+          "busy": "Combinaison…",
+          "error": "Impossible de combiner ces images."
+        }
+      }
+    },
+    "video": {
+      "convert": {
+        "name": "Convertir une vidéo",
+        "description": "Changez le format vidéo — MP4, WebM, MOV, GIF.",
+        "ui": {
+          "selectButton": "Sélectionner une vidéo",
+          "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
+          "convertButton": "Convertir",
+          "format": "Format de sortie",
+          "formatMp4": "MP4",
+          "formatWebm": "WebM",
+          "formatMov": "MOV",
+          "formatGif": "GIF",
+          "busy": "Conversion…",
+          "error": "Échec de la conversion. Essayez un autre fichier ou format.",
+          "removeFile": "Retirer"
+        }
+      },
+      "trim": {
+        "name": "Découper une vidéo",
+        "description": "Extrayez un clip d'une vidéo.",
+        "ui": {
+          "selectButton": "Sélectionner une vidéo",
+          "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
+          "trimButton": "Découper",
+          "startLabel": "Début (secondes)",
+          "endLabel": "Fin (secondes)",
+          "busy": "Découpage…",
+          "error": "Impossible de découper cette vidéo.",
+          "removeFile": "Retirer"
+        }
+      }
+    }
+  },
+  "privacy": {
+    "title": "Confidentialité",
+    "leadParagraph": "omne exécute tout dans votre navigateur. Vos fichiers ne quittent jamais votre appareil.",
+    "sections": {
+      "whatWeLoad": "Ce que votre navigateur télécharge",
+      "whatWeDoNot": "Ce que nous ne faisons jamais"
+    }
+  }
+}

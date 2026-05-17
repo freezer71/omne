@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "siteName": "omne",
+    "tagline": "Privacy-first toolkit."
+  },
+  "nav": {
+    "home": "Home",
+    "privacy": "Privacy"
+  },
+  "common": {
+    "backHome": "Home",
+    "previewLoading": "Loading",
+    "previewError": "Can't preview"
+  },
+  "badge": {
+    "privacy": "100% local · no upload"
+  },
+  "hub": {
+    "title": "omne",
+    "subtitle": "A privacy-first toolkit. Everything runs in your browser. Nothing is ever uploaded.",
+    "dropHint": "Drop a file anywhere to get started.",
+    "categories": {
+      "pdf": "PDF tools",
+      "video": "Video tools",
+      "image": "Image tools",
+      "text": "Text tools",
+      "utility": "Utilities"
+    },
+    "comingSoon": "Coming soon"
+  },
+  "theme": {
+    "toggleLabel": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "locale": {
+    "label": "Language",
+    "en": "English",
+    "fr": "Français"
+  },
+  "palette": {
+    "open": "Open command palette",
+    "placeholder": "Search tools…",
+    "empty": "No tool matches your search.",
+    "shortcut": "⌘K"
+  },
+  "tools": {
+    "pdf": {
+      "merge": {
+        "name": "Merge PDFs",
+        "description": "Combine multiple PDFs into one.",
+        "ui": {
+          "selectButton": "Select PDFs",
+          "empty": "Drop PDFs here or use the button below.",
+          "mergeButton": "Merge PDFs",
+          "removeFile": "Remove",
+          "moveUp": "Move up",
+          "moveDown": "Move down",
+          "busy": "Merging…",
+          "error": "Could not merge those PDFs. Please try different files."
+        }
+      },
+      "split": {
+        "name": "Split PDF",
+        "description": "Pick the pages you want, download them one by one or as a single PDF.",
+        "ui": {
+          "selectButton": "Select a PDF",
+          "empty": "Drop a PDF here or use the button below.",
+          "pageLabelTemplate": "Page {n}",
+          "selectedCountTemplate": "{n} pages selected",
+          "downloadSeparate": "Download separate",
+          "extractSelection": "Extract as single PDF",
+          "downloadAll": "Download all",
+          "busy": "Working…",
+          "error": "Could not split that PDF.",
+          "removeFile": "Remove"
+        }
+      },
+      "rotate": {
+        "name": "Rotate PDF",
+        "description": "Rotate each page independently — click the ↻ on a page to cycle 90°.",
+        "ui": {
+          "selectButton": "Select a PDF",
+          "empty": "Drop a PDF here or use the button below.",
+          "rotateButton": "Rotate",
+          "pageLabelTemplate": "Page {n}",
+          "rotatePageLabelTemplate": "Rotate page {n}",
+          "rotateAll90": "All 90°",
+          "rotateAll180": "All 180°",
+          "rotateAll270": "All 270°",
+          "resetAll": "Reset",
+          "busy": "Rotating…",
+          "error": "Could not rotate that PDF.",
+          "removeFile": "Remove"
+        }
+      },
+      "to-images": {
+        "name": "PDF to images",
+        "description": "Export every PDF page as a PNG or JPG.",
+        "ui": {
+          "selectButton": "Select a PDF",
+          "empty": "Drop a PDF here.",
+          "comingSoon": "PDF page rendering is coming soon."
+        }
+      },
+      "from-images": {
+        "name": "Images to PDF",
+        "description": "Combine images into a single PDF.",
+        "ui": {
+          "selectButton": "Select images",
+          "empty": "Drop PNG or JPG images here.",
+          "combineButton": "Combine into PDF",
+          "removeFile": "Remove",
+          "busy": "Combining…",
+          "error": "Could not combine those images."
+        }
+      }
+    },
+    "video": {
+      "convert": {
+        "name": "Convert video",
+        "description": "Change video format — MP4, WebM, MOV, GIF.",
+        "ui": {
+          "selectButton": "Select a video",
+          "empty": "Drop a video here or use the button below.",
+          "convertButton": "Convert",
+          "format": "Output format",
+          "formatMp4": "MP4",
+          "formatWebm": "WebM",
+          "formatMov": "MOV",
+          "formatGif": "GIF",
+          "busy": "Converting…",
+          "error": "Conversion failed. Try a different file or format.",
+          "removeFile": "Remove"
+        }
+      },
+      "trim": {
+        "name": "Trim video",
+        "description": "Cut a clip out of a video file.",
+        "ui": {
+          "selectButton": "Select a video",
+          "empty": "Drop a video here or use the button below.",
+          "trimButton": "Trim",
+          "startLabel": "Start (seconds)",
+          "endLabel": "End (seconds)",
+          "busy": "Trimming…",
+          "error": "Could not trim that video.",
+          "removeFile": "Remove"
+        }
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacy",
+    "leadParagraph": "omne runs everything in your browser. Your files never leave your device.",
+    "sections": {
+      "whatWeLoad": "What your browser downloads",
+      "whatWeDoNot": "What we never do"
+    }
+  }
+}
