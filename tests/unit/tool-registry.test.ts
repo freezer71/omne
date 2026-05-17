@@ -3,7 +3,7 @@ import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/regis
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(13);
+    expect(TOOLS).toHaveLength(18);
   });
 
   it('has unique (category, id) combinations', () => {
@@ -32,12 +32,22 @@ describe('TOOLS registry', () => {
     }
   });
 
-  it('every tool has a non-empty i18nKey, keywords, acceptedMime, status', () => {
+  it('every tool has a non-empty i18nKey, keywords, status', () => {
     for (const t of TOOLS) {
       expect(t.i18nKey).toMatch(/^tools\.\w+\.[\w-]+$/);
       expect(t.keywords.length).toBeGreaterThan(0);
-      expect(t.acceptedMime.length).toBeGreaterThan(0);
       expect(['stable', 'beta', 'soon']).toContain(t.status);
+    }
+  });
+
+  it('file-driven tools declare at least one accepted MIME; pure-text tools declare none', () => {
+    const TEXT_ONLY_CATEGORIES = new Set(['password', 'text']);
+    for (const t of TOOLS) {
+      if (TEXT_ONLY_CATEGORIES.has(t.category)) {
+        expect(t.acceptedMime).toEqual([]);
+      } else {
+        expect(t.acceptedMime.length).toBeGreaterThan(0);
+      }
     }
   });
 });

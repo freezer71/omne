@@ -5,7 +5,7 @@ import { ToolCard } from '@/components/tool-card';
 import { toolsByCategory } from '@/lib/tools/registry';
 import type { ToolCategory } from '@/lib/tools/types';
 
-const CATEGORY_ORDER: ToolCategory[] = ['pdf', 'video', 'image', 'text', 'utility'];
+const CATEGORY_ORDER: ToolCategory[] = ['pdf', 'video', 'image', 'password', 'text', 'utility'];
 
 export default async function HubPage({
   params,

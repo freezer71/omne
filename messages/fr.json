@@ -23,6 +23,7 @@
       "pdf": "Outils PDF",
       "video": "Outils vidéo",
       "image": "Outils image",
+      "password": "Mots de passe",
       "text": "Outils texte",
       "utility": "Utilitaires"
     },
@@ -273,6 +274,133 @@
           "busy": "Traitement…",
           "error": "Impossible de retirer l'arrière-plan.",
           "removeFile": "Retirer"
+        }
+      }
+    },
+    "password": {
+      "generate": {
+        "name": "Générer un mot de passe",
+        "description": "Créez un mot de passe aléatoire solide — entièrement personnalisable, généré localement avec un tirage cryptographique.",
+        "ui": {
+          "lengthLabel": "Longueur",
+          "count": "Combien",
+          "count1": "1",
+          "count5": "5",
+          "count10": "10",
+          "count25": "25",
+          "useUppercase": "Majuscules (A–Z)",
+          "useLowercase": "Minuscules (a–z)",
+          "useDigits": "Chiffres (0–9)",
+          "useSymbols": "Symboles (!@#…)",
+          "excludeAmbiguous": "Exclure les ambigus (0, O, 1, l, I)",
+          "regenerate": "Régénérer",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger .txt",
+          "noCharsetError": "Choisissez au moins un jeu de caractères.",
+          "strength": "Force",
+          "strengthVeryWeak": "Très faible",
+          "strengthWeak": "Faible",
+          "strengthFair": "Correcte",
+          "strengthStrong": "Fort",
+          "strengthVeryStrong": "Très fort",
+          "entropyLabel": "{bits} bits d'entropie"
+        }
+      },
+      "passphrase": {
+        "name": "Générer une passphrase",
+        "description": "Style diceware — des mots aléatoires faciles à retenir, difficiles à deviner.",
+        "ui": {
+          "wordCountLabel": "Nombre de mots",
+          "separator": "Séparateur",
+          "separatorSpace": "Espace",
+          "separatorDash": "Tiret",
+          "separatorDot": "Point",
+          "separatorUnderscore": "Underscore",
+          "capitalize": "Capitaliser chaque mot",
+          "appendDigit": "Ajouter un chiffre",
+          "regenerate": "Régénérer",
+          "copy": "Copier",
+          "copied": "Copié",
+          "strength": "Force",
+          "strengthVeryWeak": "Très faible",
+          "strengthWeak": "Faible",
+          "strengthFair": "Correcte",
+          "strengthStrong": "Fort",
+          "strengthVeryStrong": "Très fort",
+          "entropyLabel": "{bits} bits d'entropie"
+        }
+      },
+      "hash": {
+        "name": "Hasher du texte",
+        "description": "Calcule le SHA-1, SHA-256, SHA-384 ou SHA-512 d'un texte — sortie en hex ou base64.",
+        "ui": {
+          "inputLabel": "Texte d'entrée",
+          "inputPlaceholder": "Tapez ou collez un texte ici…",
+          "algorithm": "Algorithme",
+          "sha1": "SHA-1",
+          "sha256": "SHA-256",
+          "sha384": "SHA-384",
+          "sha512": "SHA-512",
+          "format": "Format de sortie",
+          "formatHex": "Hex",
+          "formatBase64": "Base64",
+          "outputLabel": "Empreinte",
+          "copy": "Copier",
+          "copied": "Copié",
+          "empty": "Le résultat apparaîtra ici pendant la saisie."
+        }
+      },
+      "bcrypt": {
+        "name": "Hash & vérification bcrypt",
+        "description": "Hashez un mot de passe avec bcrypt (sel + rounds) ou vérifiez-le contre un hash existant.",
+        "ui": {
+          "mode": "Mode",
+          "modeHash": "Hasher",
+          "modeVerify": "Vérifier",
+          "passwordLabel": "Mot de passe",
+          "passwordPlaceholder": "Votre mot de passe…",
+          "rounds": "Rounds (facteur de coût)",
+          "roundsHint": "Plus haut = plus sûr mais plus lent. 10 est un bon défaut.",
+          "hashButton": "Hasher",
+          "hashedAs": "Hash produit",
+          "elapsed": "Calculé en {ms} ms",
+          "copy": "Copier",
+          "copied": "Copié",
+          "verifyHashLabel": "Hash existant",
+          "verifyHashPlaceholder": "$2a$10$…",
+          "verifyButton": "Vérifier",
+          "verifyMatch": "Correspondance — le mot de passe est valide.",
+          "verifyNoMatch": "Pas de correspondance — ce mot de passe ne correspond pas à ce hash.",
+          "verifyError": "Ce n'est pas un hash bcrypt valide.",
+          "busy": "Calcul en cours…",
+          "show": "Afficher",
+          "hide": "Masquer"
+        }
+      },
+      "strength": {
+        "name": "Évaluer la force d'un mot de passe",
+        "description": "Estime l'entropie d'un mot de passe et détecte les faiblesses courantes — tout dans votre navigateur.",
+        "ui": {
+          "inputLabel": "Mot de passe",
+          "inputPlaceholder": "Tapez un mot de passe à tester…",
+          "show": "Afficher",
+          "hide": "Masquer",
+          "entropyLabel": "{bits} bits d'entropie",
+          "lengthLabel": "Longueur : {n}",
+          "charsetLabel": "Classes de caractères : {n}",
+          "label": "Force",
+          "strengthVeryWeak": "Très faible",
+          "strengthWeak": "Faible",
+          "strengthFair": "Correcte",
+          "strengthStrong": "Fort",
+          "strengthVeryStrong": "Très fort",
+          "warningsTitle": "Problèmes détectés",
+          "warningSequential": "Contient une suite (ex. abc, 123).",
+          "warningRepeated": "Contient des caractères répétés (ex. aaa).",
+          "warningCommon": "Contient un mot ou motif courant.",
+          "warningTooShort": "Trop court (moins de 8 caractères).",
+          "empty": "Entrez un mot de passe pour voir sa force."
         }
       }
     }

@@ -20,6 +20,8 @@
     "@ffmpeg/ffmpeg": "^0.12.15",
     "@ffmpeg/util": "^0.12.2",
     "@huggingface/transformers": "^4.2.0",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^3.0.3",
     "cmdk": "^1.1.1",
     "jszip": "^3.10.1",
     "next": "16.2.6",

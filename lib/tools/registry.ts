@@ -120,6 +120,60 @@ export const TOOLS: readonly ToolMeta[] = [
     acceptedMime: IMG_MIMES,
     status: 'beta',
   },
+  {
+    id: 'generate',
+    category: 'password',
+    href: '/password/generate',
+    i18nKey: 'tools.password.generate',
+    keywords: [
+      'password', 'generate', 'random', 'secure',
+      'mot de passe', 'générer', 'aleatoire', 'aléatoire',
+    ],
+    acceptedMime: [],
+    status: 'stable',
+  },
+  {
+    id: 'passphrase',
+    category: 'password',
+    href: '/password/passphrase',
+    i18nKey: 'tools.password.passphrase',
+    keywords: [
+      'passphrase', 'diceware', 'words', 'memorable',
+      'phrase', 'mots', 'memorisable', 'mémorisable',
+    ],
+    acceptedMime: [],
+    status: 'stable',
+  },
+  {
+    id: 'hash',
+    category: 'password',
+    href: '/password/hash',
+    i18nKey: 'tools.password.hash',
+    keywords: ['hash', 'sha', 'sha256', 'sha512', 'digest', 'checksum', 'empreinte'],
+    acceptedMime: [],
+    status: 'stable',
+  },
+  {
+    id: 'bcrypt',
+    category: 'password',
+    href: '/password/bcrypt',
+    i18nKey: 'tools.password.bcrypt',
+    keywords: ['bcrypt', 'password', 'salt', 'hash', 'verify', 'sel', 'verifier', 'vérifier'],
+    acceptedMime: [],
+    status: 'stable',
+  },
+  {
+    id: 'strength',
+    category: 'password',
+    href: '/password/strength',
+    i18nKey: 'tools.password.strength',
+    keywords: [
+      'strength', 'entropy', 'check', 'meter',
+      'force', 'entropie', 'evaluer', 'évaluer',
+    ],
+    acceptedMime: [],
+    status: 'stable',
+  },
 ] as const;
 
 export function getTool(category: string, id: string): ToolMeta | undefined {

@@ -23,6 +23,7 @@
       "pdf": "PDF tools",
       "video": "Video tools",
       "image": "Image tools",
+      "password": "Password tools",
       "text": "Text tools",
       "utility": "Utilities"
     },
@@ -273,6 +274,133 @@
           "busy": "Processing…",
           "error": "Could not remove the background.",
           "removeFile": "Remove"
+        }
+      }
+    },
+    "password": {
+      "generate": {
+        "name": "Generate password",
+        "description": "Create a strong random password — fully customizable, generated locally with crypto-grade randomness.",
+        "ui": {
+          "lengthLabel": "Length",
+          "count": "How many",
+          "count1": "1",
+          "count5": "5",
+          "count10": "10",
+          "count25": "25",
+          "useUppercase": "Uppercase (A–Z)",
+          "useLowercase": "Lowercase (a–z)",
+          "useDigits": "Digits (0–9)",
+          "useSymbols": "Symbols (!@#…)",
+          "excludeAmbiguous": "Exclude ambiguous (0, O, 1, l, I)",
+          "regenerate": "Regenerate",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download .txt",
+          "noCharsetError": "Select at least one character set.",
+          "strength": "Strength",
+          "strengthVeryWeak": "Very weak",
+          "strengthWeak": "Weak",
+          "strengthFair": "Fair",
+          "strengthStrong": "Strong",
+          "strengthVeryStrong": "Very strong",
+          "entropyLabel": "{bits} bits of entropy"
+        }
+      },
+      "passphrase": {
+        "name": "Generate passphrase",
+        "description": "Diceware-style passphrase — random words easy to remember, hard to guess.",
+        "ui": {
+          "wordCountLabel": "Word count",
+          "separator": "Separator",
+          "separatorSpace": "Space",
+          "separatorDash": "Hyphen",
+          "separatorDot": "Dot",
+          "separatorUnderscore": "Underscore",
+          "capitalize": "Capitalize each word",
+          "appendDigit": "Append a digit",
+          "regenerate": "Regenerate",
+          "copy": "Copy",
+          "copied": "Copied",
+          "strength": "Strength",
+          "strengthVeryWeak": "Very weak",
+          "strengthWeak": "Weak",
+          "strengthFair": "Fair",
+          "strengthStrong": "Strong",
+          "strengthVeryStrong": "Very strong",
+          "entropyLabel": "{bits} bits of entropy"
+        }
+      },
+      "hash": {
+        "name": "Hash text",
+        "description": "Compute SHA-1, SHA-256, SHA-384, or SHA-512 of any text — output as hex or base64.",
+        "ui": {
+          "inputLabel": "Input text",
+          "inputPlaceholder": "Type or paste any text here…",
+          "algorithm": "Algorithm",
+          "sha1": "SHA-1",
+          "sha256": "SHA-256",
+          "sha384": "SHA-384",
+          "sha512": "SHA-512",
+          "format": "Output format",
+          "formatHex": "Hex",
+          "formatBase64": "Base64",
+          "outputLabel": "Hash",
+          "copy": "Copy",
+          "copied": "Copied",
+          "empty": "Output will appear here as you type."
+        }
+      },
+      "bcrypt": {
+        "name": "bcrypt hash & verify",
+        "description": "Hash a password with bcrypt (salt + rounds), or verify a password against an existing hash.",
+        "ui": {
+          "mode": "Mode",
+          "modeHash": "Hash",
+          "modeVerify": "Verify",
+          "passwordLabel": "Password",
+          "passwordPlaceholder": "Your password…",
+          "rounds": "Rounds (cost factor)",
+          "roundsHint": "Higher = safer but slower. 10 is a good default.",
+          "hashButton": "Hash",
+          "hashedAs": "Output hash",
+          "elapsed": "Computed in {ms} ms",
+          "copy": "Copy",
+          "copied": "Copied",
+          "verifyHashLabel": "Existing hash",
+          "verifyHashPlaceholder": "$2a$10$…",
+          "verifyButton": "Verify",
+          "verifyMatch": "Match — password is correct.",
+          "verifyNoMatch": "No match — password does not fit this hash.",
+          "verifyError": "That doesn't look like a bcrypt hash.",
+          "busy": "Working…",
+          "show": "Show",
+          "hide": "Hide"
+        }
+      },
+      "strength": {
+        "name": "Check password strength",
+        "description": "Estimate the entropy of a password and detect common weaknesses — all in your browser.",
+        "ui": {
+          "inputLabel": "Password",
+          "inputPlaceholder": "Type a password to test…",
+          "show": "Show",
+          "hide": "Hide",
+          "entropyLabel": "{bits} bits of entropy",
+          "lengthLabel": "Length: {n}",
+          "charsetLabel": "Character classes: {n}",
+          "label": "Strength",
+          "strengthVeryWeak": "Very weak",
+          "strengthWeak": "Weak",
+          "strengthFair": "Fair",
+          "strengthStrong": "Strong",
+          "strengthVeryStrong": "Very strong",
+          "warningsTitle": "Issues found",
+          "warningSequential": "Contains a sequential run (e.g. abc, 123).",
+          "warningRepeated": "Contains repeated characters (e.g. aaa).",
+          "warningCommon": "Contains a common word or pattern.",
+          "warningTooShort": "Too short (under 8 characters).",
+          "empty": "Enter a password to see its strength."
         }
       }
     }
