@@ -3,6 +3,7 @@ import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
 import { getToolMetadata } from '@/lib/tools/metadata';
 import { ToolShell } from '@/components/tool-shell';
+import { ToolPageJsonLd } from '@/components/tool-page-jsonld';
 import { PdfToImagesTool } from '@/components/tools/pdf-to-images-tool';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -17,6 +18,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const dict = await getDictionary(locale);
   const ui = dict.tools.pdf['to-images'].ui;
   return (
+    <>
     <ToolShell
       locale={locale}
       category="pdf"
@@ -41,5 +43,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         previewError={dict.common.previewError}
       />
     </ToolShell>
+      <ToolPageJsonLd category="pdf" id="to-images" locale={locale} />
+    </>
   );
 }

@@ -1,9 +1,23 @@
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
 import { HubToolFinder } from '@/components/hub-tool-finder';
+import { JsonLd } from '@/components/json-ld';
 import { buildLocalizedTools } from '@/lib/tools/localized';
 import { TOOL_CATEGORIES, type ToolCategory } from '@/lib/tools/types';
+import { buildHubMetadata } from '@/lib/seo/metadata';
+import { siteJsonLd } from '@/lib/seo/jsonld';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  return buildHubMetadata(locale);
+}
 
 export default async function HubPage({
   params,
@@ -15,6 +29,7 @@ export default async function HubPage({
   const dict = await getDictionary(locale);
   const tools = buildLocalizedTools(dict);
   const categoryLabels = dict.hub.categories as Record<ToolCategory, string>;
+  const jsonLd = await siteJsonLd(locale);
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-12 px-4 sm:px-6 py-16 sm:py-24">
@@ -28,6 +43,7 @@ export default async function HubPage({
         placeholder={dict.palette.placeholder}
         emptyLabel={dict.palette.empty}
       />
+      <JsonLd data={jsonLd} id="omne-site-jsonld" />
     </main>
   );
 }

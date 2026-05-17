@@ -3,6 +3,7 @@ import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
 import { getToolMetadata } from '@/lib/tools/metadata';
 import { ToolShell } from '@/components/tool-shell';
+import { ToolPageJsonLd } from '@/components/tool-page-jsonld';
 import { ImageRotateTool } from '@/components/tools/image-rotate-tool';
 
 export async function generateMetadata({
@@ -26,6 +27,7 @@ export default async function Page({
   const tool = dict.tools.image['rotate-flip'];
 
   return (
+    <>
     <ToolShell
       locale={locale}
       category="image"
@@ -49,5 +51,7 @@ export default async function Page({
         removeFile={tool.ui.removeFile}
       />
     </ToolShell>
+      <ToolPageJsonLd category="image" id="rotate-flip" locale={locale} />
+    </>
   );
 }

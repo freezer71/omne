@@ -3,6 +3,7 @@ import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
 import { getToolMetadata } from '@/lib/tools/metadata';
 import { ToolShell } from '@/components/tool-shell';
+import { ToolPageJsonLd } from '@/components/tool-page-jsonld';
 import { VideoTrimTool } from '@/components/tools/video-trim-tool';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -17,6 +18,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const dict = await getDictionary(locale);
   const tool = dict.tools.video.trim;
   return (
+    <>
     <ToolShell
       locale={locale}
       category="video"
@@ -27,5 +29,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     >
       <VideoTrimTool {...tool.ui} />
     </ToolShell>
+      <ToolPageJsonLd category="video" id="trim" locale={locale} />
+    </>
   );
 }

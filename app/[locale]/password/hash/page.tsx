@@ -3,6 +3,7 @@ import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
 import { getToolMetadata } from '@/lib/tools/metadata';
 import { ToolShell } from '@/components/tool-shell';
+import { ToolPageJsonLd } from '@/components/tool-page-jsonld';
 import { PasswordHashTool } from '@/components/tools/password-hash-tool';
 
 export async function generateMetadata({
@@ -26,6 +27,7 @@ export default async function Page({
   const tool = dict.tools.password.hash;
 
   return (
+    <>
     <ToolShell
       locale={locale}
       category="password"
@@ -51,5 +53,7 @@ export default async function Page({
         empty={tool.ui.empty}
       />
     </ToolShell>
+      <ToolPageJsonLd category="password" id="hash" locale={locale} />
+    </>
   );
 }

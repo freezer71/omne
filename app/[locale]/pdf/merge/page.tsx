@@ -3,6 +3,7 @@ import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
 import { getToolMetadata } from '@/lib/tools/metadata';
 import { ToolShell } from '@/components/tool-shell';
+import { ToolPageJsonLd } from '@/components/tool-page-jsonld';
 import { PdfMergeTool } from '@/components/tools/pdf-merge-tool';
 
 export async function generateMetadata({
@@ -26,15 +27,16 @@ export default async function Page({
   const tool = dict.tools.pdf.merge;
 
   return (
-    <ToolShell
-      locale={locale}
-      category="pdf"
-      name={tool.name}
-      description={tool.description}
-      categoryLabel={dict.hub.categories.pdf}
-      backHomeLabel={dict.common.backHome}
-    >
-      <PdfMergeTool
+    <>
+      <ToolShell
+        locale={locale}
+        category="pdf"
+        name={tool.name}
+        description={tool.description}
+        categoryLabel={dict.hub.categories.pdf}
+        backHomeLabel={dict.common.backHome}
+      >
+        <PdfMergeTool
         selectButton={tool.ui.selectButton}
         empty={tool.ui.empty}
         mergeButton={tool.ui.mergeButton}
@@ -48,7 +50,9 @@ export default async function Page({
         pageLabelTemplate={tool.ui.pageLabelTemplate}
         filesCountSingular={tool.ui.filesCountSingular}
         filesCountPlural={tool.ui.filesCountPlural}
-      />
-    </ToolShell>
+        />
+      </ToolShell>
+      <ToolPageJsonLd category="pdf" id="merge" locale={locale} />
+    </>
   );
 }

@@ -1,12 +1,27 @@
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
+import { JsonLd } from '@/components/json-ld';
+import { buildPrivacyMetadata } from '@/lib/seo/metadata';
+import { privacyJsonLd } from '@/lib/seo/jsonld';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  return buildPrivacyMetadata(locale);
+}
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = await getDictionary(locale);
+  const jsonLd = await privacyJsonLd(locale);
 
   const isEn = locale === 'en';
 
@@ -86,6 +101,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           </li>
         </ul>
       </section>
+
+      <JsonLd data={jsonLd} id="omne-privacy-jsonld" />
     </main>
   );
 }

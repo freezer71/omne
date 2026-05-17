@@ -3,6 +3,7 @@ import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
 import { getToolMetadata } from '@/lib/tools/metadata';
 import { ToolShell } from '@/components/tool-shell';
+import { ToolPageJsonLd } from '@/components/tool-page-jsonld';
 import { PasswordPassphraseTool } from '@/components/tools/password-passphrase-tool';
 
 export async function generateMetadata({
@@ -26,6 +27,7 @@ export default async function Page({
   const tool = dict.tools.password.passphrase;
 
   return (
+    <>
     <ToolShell
       locale={locale}
       category="password"
@@ -55,5 +57,7 @@ export default async function Page({
         entropyLabel={tool.ui.entropyLabel}
       />
     </ToolShell>
+      <ToolPageJsonLd category="password" id="passphrase" locale={locale} />
+    </>
   );
 }

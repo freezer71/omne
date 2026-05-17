@@ -3,6 +3,7 @@ import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
 import { getToolMetadata } from '@/lib/tools/metadata';
 import { ToolShell } from '@/components/tool-shell';
+import { ToolPageJsonLd } from '@/components/tool-page-jsonld';
 import { ImageCompressTool } from '@/components/tools/image-compress-tool';
 
 export async function generateMetadata({
@@ -26,6 +27,7 @@ export default async function Page({
   const tool = dict.tools.image.compress;
 
   return (
+    <>
     <ToolShell
       locale={locale}
       category="image"
@@ -50,5 +52,7 @@ export default async function Page({
         removeFile={tool.ui.removeFile}
       />
     </ToolShell>
+      <ToolPageJsonLd category="image" id="compress" locale={locale} />
+    </>
   );
 }

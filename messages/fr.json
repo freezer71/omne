@@ -1,7 +1,23 @@
 {
   "meta": {
     "siteName": "omne",
-    "tagline": "Boîte à outils privacy-first."
+    "tagline": "Boîte à outils privacy-first.",
+    "seo": {
+      "title": "omne — Outils navigateur privacy-first pour PDF, image, vidéo, mots de passe",
+      "description": "Des outils en ligne gratuits qui s'exécutent entièrement dans votre navigateur. Fusionnez des PDF, convertissez des images, découpez des vidéos, générez des mots de passe — aucun envoi, aucune inscription, aucun tracking.",
+      "keywords": [
+        "outils pdf",
+        "outils image",
+        "outils vidéo",
+        "outils mot de passe",
+        "outils en ligne gratuits",
+        "outils navigateur",
+        "outils sans envoi",
+        "boîte à outils privée",
+        "conversion côté client"
+      ],
+      "ogTitle": "omne · boîte à outils privée"
+    }
   },
   "nav": {
     "home": "Accueil",
@@ -50,6 +66,20 @@
       "merge": {
         "name": "Fusionner des PDFs",
         "description": "Combinez plusieurs PDFs en un seul. Les pages s'affichent pour voir ce que vous fusionnez.",
+        "seo": {
+          "title": "Fusionner des PDF en ligne — Gratuit, privé, dans le navigateur",
+          "description": "Fusionnez plusieurs fichiers PDF en un seul document, gratuitement et instantanément. Tout se passe dans votre navigateur — aucun envoi, aucune inscription.",
+          "keywords": [
+            "fusionner pdf",
+            "combiner pdf",
+            "fusion pdf en ligne",
+            "merger pdf gratuit",
+            "joindre pdf",
+            "fusion pdf navigateur",
+            "regrouper pdf"
+          ],
+          "ogTitle": "Fusionner des PDFs · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner des PDFs",
           "empty": "Déposez vos PDFs ici ou utilisez le bouton ci-dessous.",
@@ -67,6 +97,20 @@
       "split": {
         "name": "Découper un PDF",
         "description": "Sélectionnez les pages, téléchargez-les une à une ou en un seul PDF.",
+        "seo": {
+          "title": "Découper un PDF en ligne — Extraire des pages gratuitement",
+          "description": "Extracteur de pages PDF gratuit. Choisissez les pages voulues et téléchargez-les une à une ou en un seul PDF — entièrement dans votre navigateur.",
+          "keywords": [
+            "découper pdf",
+            "decouper pdf",
+            "extraire pages pdf",
+            "splitter pdf en ligne",
+            "séparer pages pdf",
+            "diviser pdf",
+            "extracteur pdf gratuit"
+          ],
+          "ogTitle": "Découper un PDF · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner un PDF",
           "empty": "Déposez un PDF ici ou utilisez le bouton ci-dessous.",
@@ -83,6 +127,19 @@
       "rotate": {
         "name": "Faire pivoter un PDF",
         "description": "Pivotez chaque page indépendamment — cliquez sur ↻ pour cycler de 90°.",
+        "seo": {
+          "title": "Faire pivoter un PDF en ligne — Gratuit, dans le navigateur",
+          "description": "Pivotez chaque page d'un PDF de 90°, 180° ou 270°, indépendamment ou toutes en même temps. Tout dans votre navigateur — aucun envoi, aucune inscription.",
+          "keywords": [
+            "pivoter pdf",
+            "rotation pdf",
+            "tourner pdf",
+            "faire pivoter pdf",
+            "corriger orientation pdf",
+            "rotation pdf gratuit"
+          ],
+          "ogTitle": "Pivoter un PDF · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner un PDF",
           "empty": "Déposez un PDF ici ou utilisez le bouton ci-dessous.",
@@ -101,6 +158,19 @@
       "to-images": {
         "name": "PDF en images",
         "description": "Cliquez sur une page pour la télécharger, ou récupérez tout en ZIP.",
+        "seo": {
+          "title": "PDF en JPG / PNG — Convertir les pages PDF en images, gratuit",
+          "description": "Convertissez chaque page d'un PDF en image PNG ou JPG. Téléchargez une page seule ou toutes en ZIP — entièrement dans votre navigateur, sans envoi.",
+          "keywords": [
+            "pdf en jpg",
+            "pdf en png",
+            "pdf en image",
+            "convertir pdf en image",
+            "extraire images pdf",
+            "pdf vers jpg gratuit"
+          ],
+          "ogTitle": "PDF → JPG / PNG · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner un PDF",
           "empty": "Déposez un PDF ici ou utilisez le bouton ci-dessous.",
@@ -118,6 +188,19 @@
       "from-images": {
         "name": "Images en PDF",
         "description": "Combinez des images en un seul PDF.",
+        "seo": {
+          "title": "JPG / PNG en PDF — Convertir des images en PDF en ligne, gratuit",
+          "description": "Combinez des images PNG, JPG ou WebP en un seul fichier PDF. Tout se passe dans votre navigateur — aucun envoi, aucune inscription, aucun filigrane.",
+          "keywords": [
+            "jpg en pdf",
+            "png en pdf",
+            "image en pdf",
+            "convertir images en pdf",
+            "créer pdf depuis images",
+            "jpg vers pdf gratuit"
+          ],
+          "ogTitle": "Images → PDF · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner des images",
           "empty": "Déposez des images PNG ou JPG ici.",
@@ -136,6 +219,20 @@
       "convert": {
         "name": "Convertir une vidéo",
         "description": "Changez le format vidéo — MP4, WebM, MOV, GIF.",
+        "seo": {
+          "title": "Convertir une vidéo en ligne — MP4, WebM, MOV, GIF, gratuit",
+          "description": "Convertisseur vidéo gratuit. Changez votre vidéo en MP4, WebM, MOV ou GIF animé. 100 % dans le navigateur via FFmpeg WebAssembly — aucun envoi.",
+          "keywords": [
+            "convertir vidéo",
+            "convertisseur vidéo en ligne",
+            "mp4 vers webm",
+            "mov vers mp4",
+            "vidéo en gif",
+            "ffmpeg en ligne",
+            "convertisseur vidéo gratuit"
+          ],
+          "ogTitle": "Convertir une vidéo · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner une vidéo",
           "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
@@ -154,6 +251,20 @@
       "trim": {
         "name": "Découper une vidéo",
         "description": "Extrayez un clip d'une vidéo.",
+        "seo": {
+          "title": "Couper une vidéo en ligne — Découper un clip, gratuit, navigateur",
+          "description": "Découpeur vidéo gratuit. Extrayez un clip d'un fichier MP4, WebM, MOV ou MKV — entièrement dans votre navigateur. Aucun envoi, aucune inscription.",
+          "keywords": [
+            "couper vidéo",
+            "découper vidéo",
+            "decouper video",
+            "trim video",
+            "raccourcir vidéo",
+            "découpeur vidéo en ligne",
+            "video cutter gratuit"
+          ],
+          "ogTitle": "Couper une vidéo · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner une vidéo",
           "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
@@ -171,6 +282,20 @@
       "convert": {
         "name": "Convertir une image",
         "description": "Changez le format d'image — PNG, JPG ou WebP.",
+        "seo": {
+          "title": "Convertir une image en ligne — PNG ↔ JPG ↔ WebP gratuit",
+          "description": "Convertisseur d'image gratuit. Convertissez PNG, JPG ou WebP dans tous les sens, avec aperçu en direct. 100 % dans le navigateur — aucun envoi.",
+          "keywords": [
+            "convertir image",
+            "convertisseur image en ligne",
+            "png en jpg",
+            "jpg en png",
+            "png en webp",
+            "webp en png",
+            "convertisseur format image gratuit"
+          ],
+          "ogTitle": "Convertir une image · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner une image",
           "empty": "Déposez une image PNG, JPG ou WebP ici.",
@@ -189,6 +314,19 @@
       "compress": {
         "name": "Compresser une image",
         "description": "Réduisez le poids d'une image en la ré-encodant avec une qualité moindre.",
+        "seo": {
+          "title": "Compresser une image en ligne — Compresseur JPG / WebP gratuit",
+          "description": "Réduisez le poids d'une image JPG ou WebP avec un curseur de qualité et un aperçu avant/après en direct. Dans votre navigateur — aucun envoi.",
+          "keywords": [
+            "compresser image",
+            "compresseur image",
+            "compresser jpg en ligne",
+            "réduire taille image",
+            "optimiseur image gratuit",
+            "alléger jpg webp"
+          ],
+          "ogTitle": "Compresser une image · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner une image",
           "empty": "Déposez une image PNG, JPG ou WebP ici.",
@@ -208,6 +346,19 @@
       "resize": {
         "name": "Redimensionner une image",
         "description": "Adaptez la taille d'une image à une nouvelle largeur et hauteur — avec aperçu en direct.",
+        "seo": {
+          "title": "Redimensionner une image en ligne — Aperçu en direct, gratuit",
+          "description": "Redimensionnez vos images PNG, JPG ou WebP à n'importe quelle largeur et hauteur avec un aperçu canvas en direct. Proportions verrouillables ou curseur d'échelle.",
+          "keywords": [
+            "redimensionner image",
+            "redimensionneur image en ligne",
+            "changer taille image",
+            "image resize",
+            "redimensionner png jpg webp",
+            "redimensionneur image gratuit"
+          ],
+          "ogTitle": "Redimensionner une image · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner une image",
           "empty": "Déposez une image PNG, JPG ou WebP ici.",
@@ -225,6 +376,20 @@
       "rotate-flip": {
         "name": "Pivoter & retourner",
         "description": "Pivotez par paliers de 90° et inversez horizontalement ou verticalement.",
+        "seo": {
+          "title": "Pivoter et retourner une image en ligne — Gratuit, navigateur",
+          "description": "Pivotez vos images par paliers de 90° et retournez-les horizontalement ou verticalement. PNG, JPG, WebP — instantanément, dans le navigateur.",
+          "keywords": [
+            "pivoter image",
+            "retourner image",
+            "miroir image",
+            "rotation image en ligne",
+            "flip horizontal",
+            "flip vertical",
+            "rotation image gratuite"
+          ],
+          "ogTitle": "Pivoter & retourner · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner une image",
           "empty": "Déposez une image PNG, JPG ou WebP ici.",
@@ -243,6 +408,19 @@
       "crop": {
         "name": "Rogner une image",
         "description": "Découpez une zone rectangulaire dans une image.",
+        "seo": {
+          "title": "Rogner une image en ligne — Gratuit, dans le navigateur",
+          "description": "Rognez n'importe quelle image PNG, JPG ou WebP selon un rectangle précis. Glissez pour définir la zone avec un aperçu en direct — dans votre navigateur.",
+          "keywords": [
+            "rogner image",
+            "recadrer image",
+            "image crop en ligne",
+            "rogner png jpg webp",
+            "outil de rognage gratuit",
+            "couper image"
+          ],
+          "ogTitle": "Rogner une image · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner une image",
           "empty": "Déposez une image PNG, JPG ou WebP ici.",
@@ -262,6 +440,20 @@
       "remove-bg": {
         "name": "Retirer l'arrière-plan",
         "description": "Détourage par IA — vous obtenez un PNG transparent avec aperçu en direct.",
+        "seo": {
+          "title": "Retirer l'arrière-plan d'une image — Détourage IA gratuit, navigateur",
+          "description": "Détourage par IA qui s'exécute 100 % dans votre navigateur. Déposez une photo, obtenez un PNG transparent. Votre image ne quitte jamais votre appareil.",
+          "keywords": [
+            "retirer arrière-plan",
+            "détourer image",
+            "fond transparent",
+            "détourage ia",
+            "supprimer fond image",
+            "détourage gratuit",
+            "fond transparent png"
+          ],
+          "ogTitle": "Détourage IA · 100% local"
+        },
         "ui": {
           "selectButton": "Sélectionner une image",
           "empty": "Déposez une image PNG, JPG ou WebP ici.",
@@ -281,6 +473,20 @@
       "generate": {
         "name": "Générer un mot de passe",
         "description": "Créez un mot de passe aléatoire solide — entièrement personnalisable, généré localement avec un tirage cryptographique.",
+        "seo": {
+          "title": "Générer un mot de passe — Gratuit, local, cryptographiquement sûr",
+          "description": "Créez des mots de passe aléatoires solides avec longueur, jeux de caractères et exclusion des caractères ambigus paramétrables. Tirage crypto-sûr, généré localement.",
+          "keywords": [
+            "générateur mot de passe",
+            "mot de passe aléatoire",
+            "mot de passe sécurisé",
+            "générateur mot de passe gratuit",
+            "mot de passe fort",
+            "générateur local mot de passe",
+            "mot de passe crypto-sûr"
+          ],
+          "ogTitle": "Générer un mot de passe · 100% local"
+        },
         "ui": {
           "lengthLabel": "Longueur",
           "count": "Combien",
@@ -310,6 +516,19 @@
       "passphrase": {
         "name": "Générer une passphrase",
         "description": "Style diceware — des mots aléatoires faciles à retenir, difficiles à deviner.",
+        "seo": {
+          "title": "Générateur de passphrase — Style diceware, gratuit et mémorisable",
+          "description": "Générez des passphrases style diceware — des mots aléatoires faciles à retenir, difficiles à deviner. Séparateur et capitalisation paramétrables. 100 % local.",
+          "keywords": [
+            "générateur passphrase",
+            "diceware français",
+            "mot de passe mémorisable",
+            "passphrase aléatoire",
+            "passphrase sécurisée",
+            "générateur passphrase gratuit"
+          ],
+          "ogTitle": "Générer une passphrase · 100% local"
+        },
         "ui": {
           "wordCountLabel": "Nombre de mots",
           "separator": "Séparateur",
@@ -334,6 +553,20 @@
       "hash": {
         "name": "Hasher du texte",
         "description": "Calcule le SHA-1, SHA-256, SHA-384 ou SHA-512 d'un texte — sortie en hex ou base64.",
+        "seo": {
+          "title": "Hasher du texte en ligne — SHA-1, SHA-256, SHA-384, SHA-512 gratuit",
+          "description": "Calculez l'empreinte SHA-1, SHA-256, SHA-384 ou SHA-512 d'un texte, en hex ou base64. Gratuit, instantané, 100 % dans votre navigateur.",
+          "keywords": [
+            "sha256 en ligne",
+            "sha512 en ligne",
+            "générateur sha-256",
+            "hasher texte",
+            "texte vers sha",
+            "calculateur sha en ligne",
+            "outil hash gratuit"
+          ],
+          "ogTitle": "Hasher du texte · 100% local"
+        },
         "ui": {
           "inputLabel": "Texte d'entrée",
           "inputPlaceholder": "Tapez ou collez un texte ici…",
@@ -354,6 +587,19 @@
       "bcrypt": {
         "name": "Hash & vérification bcrypt",
         "description": "Hashez un mot de passe avec bcrypt (sel + rounds) ou vérifiez-le contre un hash existant.",
+        "seo": {
+          "title": "bcrypt en ligne — Hash & vérification gratuits dans le navigateur",
+          "description": "Hashez un mot de passe avec bcrypt (sel + facteur de coût) ou vérifiez-le contre un hash bcrypt existant. Tout local — votre mot de passe ne quitte jamais votre appareil.",
+          "keywords": [
+            "bcrypt en ligne",
+            "générateur bcrypt",
+            "vérifier bcrypt",
+            "bcrypt hash en ligne",
+            "outil bcrypt gratuit",
+            "mot de passe bcrypt"
+          ],
+          "ogTitle": "bcrypt · 100% local"
+        },
         "ui": {
           "mode": "Mode",
           "modeHash": "Hasher",
@@ -381,6 +627,19 @@
       "strength": {
         "name": "Évaluer la force d'un mot de passe",
         "description": "Estime l'entropie d'un mot de passe et détecte les faiblesses courantes — tout dans votre navigateur.",
+        "seo": {
+          "title": "Évaluer la force d'un mot de passe — Entropie en ligne, gratuit",
+          "description": "Estimez l'entropie d'un mot de passe et détectez les faiblesses courantes (suites, répétitions, mots courants). 100 % dans votre navigateur — il ne le quitte jamais.",
+          "keywords": [
+            "force mot de passe",
+            "entropie mot de passe",
+            "évaluer mot de passe",
+            "vérifier force mot de passe",
+            "mon mot de passe est-il sûr",
+            "testeur mot de passe gratuit"
+          ],
+          "ogTitle": "Force du mot de passe · 100% local"
+        },
         "ui": {
           "inputLabel": "Mot de passe",
           "inputPlaceholder": "Tapez un mot de passe à tester…",
@@ -408,6 +667,19 @@
   "privacy": {
     "title": "Confidentialité",
     "leadParagraph": "omne exécute tout dans votre navigateur. Vos fichiers ne quittent jamais votre appareil.",
+    "seo": {
+      "title": "Confidentialité — omne | 100 % navigateur, sans envoi, sans tracking",
+      "description": "Comment omne préserve votre vie privée : chaque conversion s'exécute dans votre navigateur, aucune analytique, aucun CDN tiers, aucun cookie — vérifiable dans DevTools Network.",
+      "keywords": [
+        "confidentialité",
+        "outils privés",
+        "conversion navigateur",
+        "sans envoi",
+        "sans tracking",
+        "outils côté client"
+      ],
+      "ogTitle": "Confidentialité · 100% local"
+    },
     "sections": {
       "whatWeLoad": "Ce que votre navigateur télécharge",
       "whatWeDoNot": "Ce que nous ne faisons jamais",

@@ -1,7 +1,23 @@
 {
   "meta": {
     "siteName": "omne",
-    "tagline": "Privacy-first toolkit."
+    "tagline": "Privacy-first toolkit.",
+    "seo": {
+      "title": "omne — Free Privacy-First Browser Tools for PDF, Image, Video, Passwords",
+      "description": "Free online tools that run entirely in your browser. Merge PDFs, convert images, trim videos, generate passwords — no upload, no signup, no tracking.",
+      "keywords": [
+        "pdf tools",
+        "image tools",
+        "video tools",
+        "password tools",
+        "free online tools",
+        "browser tools",
+        "no upload tools",
+        "privacy first toolkit",
+        "client side conversion"
+      ],
+      "ogTitle": "omne · privacy-first toolkit"
+    }
   },
   "nav": {
     "home": "Home",
@@ -50,6 +66,20 @@
       "merge": {
         "name": "Merge PDFs",
         "description": "Combine multiple PDFs into one. Pages are shown so you can see what you're merging.",
+        "seo": {
+          "title": "Merge PDF Files Online — Free, Private, In-Browser",
+          "description": "Free online PDF merger. Combine multiple PDF files into one document in seconds. 100% in your browser — no upload, no signup, no tracking.",
+          "keywords": [
+            "merge pdf",
+            "combine pdf",
+            "join pdf files",
+            "pdf merger online",
+            "pdf combiner free",
+            "merge pdfs in browser",
+            "no upload pdf merger"
+          ],
+          "ogTitle": "Merge PDFs · 100% local"
+        },
         "ui": {
           "selectButton": "Select PDFs",
           "empty": "Drop PDFs here or use the button below.",
@@ -67,6 +97,20 @@
       "split": {
         "name": "Split PDF",
         "description": "Pick the pages you want, download them one by one or as a single PDF.",
+        "seo": {
+          "title": "Split PDF Online — Extract Pages Free, In-Browser",
+          "description": "Free online PDF splitter. Pick the pages you want and extract them as a single PDF or download them one by one — all in your browser.",
+          "keywords": [
+            "split pdf",
+            "extract pdf pages",
+            "pdf splitter online",
+            "extract pages from pdf",
+            "separate pdf pages",
+            "pdf page extractor free",
+            "split pdf no upload"
+          ],
+          "ogTitle": "Split PDF · 100% local"
+        },
         "ui": {
           "selectButton": "Select a PDF",
           "empty": "Drop a PDF here or use the button below.",
@@ -83,6 +127,19 @@
       "rotate": {
         "name": "Rotate PDF",
         "description": "Rotate each page independently — click the ↻ on a page to cycle 90°.",
+        "seo": {
+          "title": "Rotate PDF Pages Online — Free, In-Browser PDF Rotator",
+          "description": "Free online PDF rotator. Rotate any page 90°, 180°, or 270° individually, or every page at once. Runs in your browser — no upload, no signup.",
+          "keywords": [
+            "rotate pdf",
+            "pdf rotator online",
+            "rotate pdf pages",
+            "turn pdf",
+            "fix pdf orientation",
+            "free pdf rotator"
+          ],
+          "ogTitle": "Rotate PDF · 100% local"
+        },
         "ui": {
           "selectButton": "Select a PDF",
           "empty": "Drop a PDF here or use the button below.",
@@ -101,6 +158,19 @@
       "to-images": {
         "name": "PDF to images",
         "description": "Click a page to download it as an image, or grab all of them as a ZIP.",
+        "seo": {
+          "title": "PDF to JPG / PNG — Convert PDF Pages to Images Free",
+          "description": "Convert every page of a PDF to PNG or JPG images. Download a single page or all of them as a ZIP — entirely in your browser, no upload required.",
+          "keywords": [
+            "pdf to jpg",
+            "pdf to png",
+            "pdf to image",
+            "pdf to images converter",
+            "extract images from pdf",
+            "pdf to jpg online free"
+          ],
+          "ogTitle": "PDF → JPG / PNG · 100% local"
+        },
         "ui": {
           "selectButton": "Select a PDF",
           "empty": "Drop a PDF here or use the button below.",
@@ -118,6 +188,19 @@
       "from-images": {
         "name": "Images to PDF",
         "description": "Combine images into a single PDF.",
+        "seo": {
+          "title": "JPG / PNG to PDF — Convert Images to PDF Online Free",
+          "description": "Combine PNG, JPG, or WebP images into a single PDF document. Works directly in your browser — no upload, no signup, no watermark.",
+          "keywords": [
+            "jpg to pdf",
+            "png to pdf",
+            "image to pdf",
+            "images to pdf",
+            "convert images to pdf",
+            "jpg to pdf converter free"
+          ],
+          "ogTitle": "Images → PDF · 100% local"
+        },
         "ui": {
           "selectButton": "Select images",
           "empty": "Drop PNG or JPG images here.",
@@ -136,6 +219,20 @@
       "convert": {
         "name": "Convert video",
         "description": "Change video format — MP4, WebM, MOV, GIF.",
+        "seo": {
+          "title": "Convert Video Online — MP4, WebM, MOV, GIF Free",
+          "description": "Free online video converter. Change your video to MP4, WebM, MOV, or animated GIF. 100% in-browser via FFmpeg WebAssembly — no upload, no signup.",
+          "keywords": [
+            "convert video",
+            "video converter online",
+            "mp4 to webm",
+            "mov to mp4",
+            "video to gif",
+            "ffmpeg online",
+            "video format converter free"
+          ],
+          "ogTitle": "Convert video · 100% local"
+        },
         "ui": {
           "selectButton": "Select a video",
           "empty": "Drop a video here or use the button below.",
@@ -154,6 +251,20 @@
       "trim": {
         "name": "Trim video",
         "description": "Cut a clip out of a video file.",
+        "seo": {
+          "title": "Trim Video Online — Cut Clips Free, In-Browser",
+          "description": "Free online video trimmer. Cut a clip from any MP4, WebM, MOV, or MKV file — entirely in your browser. No upload, no signup, no watermark.",
+          "keywords": [
+            "trim video",
+            "cut video",
+            "video trimmer online",
+            "video cutter free",
+            "clip video online",
+            "shorten video",
+            "trim video no upload"
+          ],
+          "ogTitle": "Trim video · 100% local"
+        },
         "ui": {
           "selectButton": "Select a video",
           "empty": "Drop a video here or use the button below.",
@@ -171,6 +282,20 @@
       "convert": {
         "name": "Convert image",
         "description": "Change image format — PNG, JPG, or WebP.",
+        "seo": {
+          "title": "Convert Image Online — PNG ↔ JPG ↔ WebP Free",
+          "description": "Free online image converter. Convert PNG, JPG, or WebP in both directions, with a live preview. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "convert image",
+            "image converter online",
+            "png to jpg",
+            "jpg to png",
+            "png to webp",
+            "webp to png",
+            "free image format converter"
+          ],
+          "ogTitle": "Convert image · 100% local"
+        },
         "ui": {
           "selectButton": "Select an image",
           "empty": "Drop a PNG, JPG, or WebP image here.",
@@ -189,6 +314,19 @@
       "compress": {
         "name": "Compress image",
         "description": "Shrink an image by re-encoding it at a lower quality.",
+        "seo": {
+          "title": "Compress Image Online — Free JPG / WebP Compressor",
+          "description": "Reduce the file size of JPG and WebP images with a quality slider and live before/after preview. Runs in your browser — no upload, no signup.",
+          "keywords": [
+            "compress image",
+            "image compressor",
+            "compress jpg online",
+            "reduce image size",
+            "image optimizer free",
+            "shrink jpg webp"
+          ],
+          "ogTitle": "Compress image · 100% local"
+        },
         "ui": {
           "selectButton": "Select an image",
           "empty": "Drop a PNG, JPG, or WebP image here.",
@@ -208,6 +346,19 @@
       "resize": {
         "name": "Resize image",
         "description": "Scale an image to a new width and height — with live preview.",
+        "seo": {
+          "title": "Resize Image Online — Free In-Browser Resizer with Live Preview",
+          "description": "Resize PNG, JPG, or WebP to any width and height with a live canvas preview. Lock aspect ratio or use a scale slider. No upload, no signup.",
+          "keywords": [
+            "resize image",
+            "image resizer online",
+            "scale image",
+            "change image size",
+            "resize png jpg webp",
+            "free image resizer"
+          ],
+          "ogTitle": "Resize image · 100% local"
+        },
         "ui": {
           "selectButton": "Select an image",
           "empty": "Drop a PNG, JPG, or WebP image here.",
@@ -225,6 +376,20 @@
       "rotate-flip": {
         "name": "Rotate & flip",
         "description": "Rotate by 90° steps and flip horizontally or vertically.",
+        "seo": {
+          "title": "Rotate & Flip Image Online — Free In-Browser",
+          "description": "Rotate images by 90° steps and flip horizontally or vertically. Works on PNG, JPG, WebP — instantly, in your browser, no upload required.",
+          "keywords": [
+            "rotate image",
+            "flip image",
+            "mirror image",
+            "image rotator online",
+            "horizontal flip",
+            "vertical flip",
+            "free image rotator"
+          ],
+          "ogTitle": "Rotate & flip · 100% local"
+        },
         "ui": {
           "selectButton": "Select an image",
           "empty": "Drop a PNG, JPG, or WebP image here.",
@@ -243,6 +408,19 @@
       "crop": {
         "name": "Crop image",
         "description": "Cut a rectangular region out of an image.",
+        "seo": {
+          "title": "Crop Image Online — Free In-Browser Image Cropper",
+          "description": "Crop any PNG, JPG, or WebP image to a precise rectangle. Drag to set the region with a live preview — all in your browser, no upload.",
+          "keywords": [
+            "crop image",
+            "image cropper online",
+            "crop png jpg webp",
+            "free image crop tool",
+            "trim image",
+            "crop image online free"
+          ],
+          "ogTitle": "Crop image · 100% local"
+        },
         "ui": {
           "selectButton": "Select an image",
           "empty": "Drop a PNG, JPG, or WebP image here.",
@@ -262,6 +440,20 @@
       "remove-bg": {
         "name": "Remove background",
         "description": "AI-powered background removal — gives you a transparent PNG with live preview.",
+        "seo": {
+          "title": "Remove Image Background — Free, In-Browser AI Cutout",
+          "description": "AI-powered background removal that runs 100% in your browser. Drop a photo, get a transparent PNG. Your image never leaves your device.",
+          "keywords": [
+            "remove background",
+            "background remover",
+            "transparent png",
+            "ai cutout",
+            "remove image background online",
+            "free background removal",
+            "in browser bg remover"
+          ],
+          "ogTitle": "Remove background · 100% local"
+        },
         "ui": {
           "selectButton": "Select an image",
           "empty": "Drop a PNG, JPG, or WebP image here.",
@@ -281,6 +473,20 @@
       "generate": {
         "name": "Generate password",
         "description": "Create a strong random password — fully customizable, generated locally with crypto-grade randomness.",
+        "seo": {
+          "title": "Generate Strong Password — Free, Local, Cryptographically Secure",
+          "description": "Create strong random passwords with custom length, character sets, and ambiguous-character exclusion. Crypto-grade randomness, generated locally in your browser.",
+          "keywords": [
+            "password generator",
+            "strong password",
+            "random password",
+            "secure password",
+            "free password generator",
+            "local password generator",
+            "crypto secure password"
+          ],
+          "ogTitle": "Generate password · 100% local"
+        },
         "ui": {
           "lengthLabel": "Length",
           "count": "How many",
@@ -310,6 +516,19 @@
       "passphrase": {
         "name": "Generate passphrase",
         "description": "Diceware-style passphrase — random words easy to remember, hard to guess.",
+        "seo": {
+          "title": "Passphrase Generator — Free Diceware-Style Memorable Passwords",
+          "description": "Generate diceware-style passphrases — random words easy to remember, hard to guess. Customizable separator and capitalization. 100% local in your browser.",
+          "keywords": [
+            "passphrase generator",
+            "diceware passphrase",
+            "memorable password",
+            "random words password",
+            "secure passphrase",
+            "free passphrase generator"
+          ],
+          "ogTitle": "Generate passphrase · 100% local"
+        },
         "ui": {
           "wordCountLabel": "Word count",
           "separator": "Separator",
@@ -334,6 +553,20 @@
       "hash": {
         "name": "Hash text",
         "description": "Compute SHA-1, SHA-256, SHA-384, or SHA-512 of any text — output as hex or base64.",
+        "seo": {
+          "title": "Hash Text Online — SHA-1, SHA-256, SHA-384, SHA-512 Free",
+          "description": "Compute the SHA-1, SHA-256, SHA-384, or SHA-512 hash of any text, in hex or base64. Free, instant, and 100% in your browser — your text never leaves your device.",
+          "keywords": [
+            "sha256 online",
+            "sha512 online",
+            "sha-256 generator",
+            "hash text",
+            "text to sha",
+            "online sha calculator",
+            "free hash tool"
+          ],
+          "ogTitle": "Hash text · 100% local"
+        },
         "ui": {
           "inputLabel": "Input text",
           "inputPlaceholder": "Type or paste any text here…",
@@ -354,6 +587,19 @@
       "bcrypt": {
         "name": "bcrypt hash & verify",
         "description": "Hash a password with bcrypt (salt + rounds), or verify a password against an existing hash.",
+        "seo": {
+          "title": "bcrypt Hash & Verify Online — Free, In-Browser bcrypt Tool",
+          "description": "Hash a password with bcrypt (salt + cost factor) or verify a password against an existing bcrypt hash. Runs locally — no password ever leaves your device.",
+          "keywords": [
+            "bcrypt online",
+            "bcrypt generator",
+            "bcrypt verify",
+            "bcrypt hash online",
+            "free bcrypt tool",
+            "password bcrypt"
+          ],
+          "ogTitle": "bcrypt · 100% local"
+        },
         "ui": {
           "mode": "Mode",
           "modeHash": "Hash",
@@ -381,6 +627,19 @@
       "strength": {
         "name": "Check password strength",
         "description": "Estimate the entropy of a password and detect common weaknesses — all in your browser.",
+        "seo": {
+          "title": "Check Password Strength Online — Free, Local Entropy Meter",
+          "description": "Estimate the entropy of a password and detect common weaknesses (sequences, repeats, common words). 100% in your browser — your password never leaves it.",
+          "keywords": [
+            "password strength",
+            "password entropy",
+            "password meter",
+            "check password strength",
+            "is my password strong",
+            "free password checker"
+          ],
+          "ogTitle": "Password strength · 100% local"
+        },
         "ui": {
           "inputLabel": "Password",
           "inputPlaceholder": "Type a password to test…",
@@ -408,6 +667,19 @@
   "privacy": {
     "title": "Privacy",
     "leadParagraph": "omne runs everything in your browser. Your files never leave your device.",
+    "seo": {
+      "title": "Privacy — omne | 100% In-Browser, No Upload, No Tracking",
+      "description": "How omne keeps your files private: every conversion runs in your browser, no analytics, no third-party CDN, no cookies — verifiable in DevTools Network.",
+      "keywords": [
+        "privacy",
+        "private file tools",
+        "in-browser conversion",
+        "no upload",
+        "no tracking",
+        "client-side tools"
+      ],
+      "ogTitle": "Privacy · 100% local"
+    },
     "sections": {
       "whatWeLoad": "What your browser downloads",
       "whatWeDoNot": "What we never do",

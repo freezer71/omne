@@ -8,6 +8,12 @@ import { PaletteProvider } from '@/components/command-palette/palette-context';
 import { CommandPalette } from '@/components/command-palette/command-palette';
 import { buildLocalizedTools } from '@/lib/tools/localized';
 import { TOOL_CATEGORIES, type ToolCategory } from '@/lib/tools/types';
+import {
+  OG_LOCALE,
+  SITE_NAME,
+  SITE_URL,
+  ogAlternateLocales,
+} from '@/lib/seo/site';
 import '../globals.css';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
@@ -25,9 +31,31 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const dict = await getDictionary(locale);
+  const tagline = dict.meta.tagline;
   return {
+    metadataBase: new URL(SITE_URL),
     title: { default: dict.meta.siteName, template: `%s · ${dict.meta.siteName}` },
-    description: dict.meta.tagline,
+    description: tagline,
+    applicationName: SITE_NAME,
+    referrer: 'strict-origin-when-cross-origin',
+    formatDetection: { telephone: false, email: false, address: false },
+    openGraph: {
+      type: 'website',
+      siteName: SITE_NAME,
+      locale: OG_LOCALE[locale],
+      alternateLocale: ogAlternateLocales(locale),
+    },
+    twitter: { card: 'summary_large_image' },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
   };
 }
 
