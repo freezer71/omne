@@ -8,13 +8,14 @@ import { usePdfPageCount } from '@/lib/hooks/use-pdf-page-count';
 import { rotatePdf, type RotationAngle } from '@/lib/tools/implementations/pdf-rotate';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { tpl } from '@/lib/tpl';
 
 type Messages = {
   selectButton: string;
   empty: string;
   rotateButton: string;
-  pageLabel: (n: number) => string;
-  rotatePageLabel: (n: number) => string;
+  pageLabelTemplate: string;
+  rotatePageLabelTemplate: string;
   rotateAll90: string;
   rotateAll180: string;
   rotateAll270: string;
@@ -26,12 +27,12 @@ type Messages = {
   previewError: string;
 };
 
-const NEXT: Record<RotationAngle | 0, RotationAngle | 0> = {
+type Angle = 0 | 90 | 180 | 270;
+const NEXT: Record<Angle, Angle> = {
   0: 90,
   90: 180,
   180: 270,
   270: 0,
-  360: 0,
 };
 
 export function PdfRotateTool(messages: Messages) {
@@ -44,7 +45,7 @@ export function PdfRotateTool(messages: Messages) {
   const [dragging, setDragging] = useState(false);
   const { pageCount } = usePdfPageCount(file);
 
-  const hasAnyRotation = Object.values(angles).some((a) => a !== 0);
+  const hasAnyRotation = Object.keys(angles).length > 0;
 
   const onPick = (incoming: FileList | File[] | null) => {
     if (!incoming) return;
@@ -57,7 +58,7 @@ export function PdfRotateTool(messages: Messages) {
 
   const cyclePage = (page: number) => {
     setAngles((prev) => {
-      const current = prev[page] ?? 0;
+      const current = (prev[page] ?? 0) as Angle;
       const next = NEXT[current];
       const updated = { ...prev };
       if (next === 0) delete updated[page];
@@ -66,7 +67,7 @@ export function PdfRotateTool(messages: Messages) {
     });
   };
 
-  const setAllPagesTo = (angle: RotationAngle | 0) => {
+  const setAllPagesTo = (angle: Angle) => {
     if (!pageCount) return;
     if (angle === 0) {
       setAngles({});
@@ -82,11 +83,7 @@ export function PdfRotateTool(messages: Messages) {
     setBusy(true);
     setError(null);
     try {
-      const perPage: Record<number, RotationAngle> = {};
-      for (const [k, v] of Object.entries(angles)) {
-        if (v !== 0) perPage[Number(k)] = v;
-      }
-      const bytes = await rotatePdf(file, { perPage });
+      const bytes = await rotatePdf(file, { perPage: angles });
       const blob = new Blob([new Uint8Array(bytes)], { type: 'application/pdf' });
       downloadBlob(blob, outputName('rotated', [file.name], 'pdf'));
     } catch (_err) {
@@ -96,7 +93,7 @@ export function PdfRotateTool(messages: Messages) {
     }
   };
 
-  const angleFor = (page: number): RotationAngle | 0 => angles[page] ?? 0;
+  const angleFor = (page: number): Angle => (angles[page] ?? 0) as Angle;
 
   return (
     <div className="flex flex-col gap-4">
@@ -126,7 +123,7 @@ export function PdfRotateTool(messages: Messages) {
               file={file}
               loadingLabel={messages.previewLoading}
               errorLabel={messages.previewError}
-              pageLabel={messages.pageLabel}
+              pageLabelTemplate={messages.pageLabelTemplate}
               pageTransform={(p) => {
                 const angle = angleFor(p);
                 return angle === 0 ? undefined : `rotate(${angle}deg)`;
@@ -134,7 +131,7 @@ export function PdfRotateTool(messages: Messages) {
               renderPageOverlay={(p) => (
                 <button
                   type="button"
-                  aria-label={messages.rotatePageLabel(p)}
+                  aria-label={tpl(messages.rotatePageLabelTemplate, { n: p })}
                   onClick={(e) => { e.stopPropagation(); cyclePage(p); }}
                   className="flex h-6 w-6 items-center justify-center rounded-full bg-bg/80 border border-border text-text-primary text-xs hover:bg-accent hover:text-accent-fg hover:border-accent transition-colors"
                 >

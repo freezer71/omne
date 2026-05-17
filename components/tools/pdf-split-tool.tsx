@@ -7,12 +7,13 @@ import { PdfPagesGrid } from '@/components/ui/pdf-pages-grid';
 import { splitPdf, extractPages } from '@/lib/tools/implementations/pdf-split';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { tpl } from '@/lib/tpl';
 
 type Messages = {
   selectButton: string;
   empty: string;
-  pageLabel: (n: number) => string;
-  selectedCount: (n: number) => string;
+  pageLabelTemplate: string;
+  selectedCountTemplate: string;
   downloadSeparate: string;
   extractSelection: string;
   downloadAll: string;
@@ -124,7 +125,7 @@ export function PdfSplitTool(messages: Messages) {
               onSelectionChange={setSelected}
               loadingLabel={messages.previewLoading}
               errorLabel={messages.previewError}
-              pageLabel={messages.pageLabel}
+              pageLabelTemplate={messages.pageLabelTemplate}
             />
           </div>
         )}
@@ -132,7 +133,7 @@ export function PdfSplitTool(messages: Messages) {
 
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <p className="text-xs font-mono text-text-faint">
-          {hasSelection ? messages.selectedCount(selected.size) : ' '}
+          {hasSelection ? tpl(messages.selectedCountTemplate, { n: selected.size }) : ' '}
         </p>
         <div className="flex items-center gap-3 flex-wrap">
           {error && <p role="alert" className="text-sm text-danger">{error}</p>}

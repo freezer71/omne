@@ -15,18 +15,28 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = await getDictionary(locale);
-  const tool = dict.tools.pdf['to-images'];
+  const ui = dict.tools.pdf['to-images'].ui;
   return (
     <ToolShell
       locale={locale}
       category="pdf"
-      name={tool.name}
-      description={tool.description}
+      name={dict.tools.pdf['to-images'].name}
+      description={dict.tools.pdf['to-images'].description}
       categoryLabel={dict.hub.categories.pdf}
       backHomeLabel={dict.common.backHome}
     >
       <PdfToImagesTool
-        {...tool.ui}
+        selectButton={ui.selectButton}
+        empty={ui.empty}
+        format={ui.format}
+        formatPng={ui.formatPng}
+        formatJpg={ui.formatJpg}
+        pageLabelTemplate={ui.pageLabelTemplate}
+        downloadPageLabelTemplate={ui.downloadPageLabelTemplate}
+        downloadAllZip={ui.downloadAllZip}
+        busy={ui.busy}
+        error={ui.error}
+        removeFile={ui.removeFile}
         previewLoading={dict.common.previewLoading}
         previewError={dict.common.previewError}
       />

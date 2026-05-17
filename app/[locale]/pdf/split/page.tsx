@@ -11,10 +11,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return getToolMetadata('pdf', 'split', locale);
 }
 
-function template(t: string, vars: Record<string, string | number>): string {
-  return t.replace(/\{(\w+)\}/g, (_, key: string) => String(vars[key] ?? ''));
-}
-
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
@@ -32,8 +28,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       <PdfSplitTool
         selectButton={ui.selectButton}
         empty={ui.empty}
-        pageLabel={(n) => template(ui.pageLabelTemplate, { n })}
-        selectedCount={(n) => template(ui.selectedCountTemplate, { n })}
+        pageLabelTemplate={ui.pageLabelTemplate}
+        selectedCountTemplate={ui.selectedCountTemplate}
         downloadSeparate={ui.downloadSeparate}
         extractSelection={ui.extractSelection}
         downloadAll={ui.downloadAll}

@@ -21,7 +21,7 @@ async function makePdfFile(pages: number): Promise<File> {
 const baseProps = {
   loadingLabel: 'L',
   errorLabel: 'E',
-  pageLabel: (n: number) => `Page ${n}`,
+  pageLabelTemplate: 'Page {n}',
 };
 
 beforeEach(() => {

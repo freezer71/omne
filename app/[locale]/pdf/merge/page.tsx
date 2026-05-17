@@ -45,6 +45,7 @@ export default async function Page({
         error={tool.ui.error}
         previewLoading={dict.common.previewLoading}
         previewError={dict.common.previewError}
+        pageLabelTemplate={tool.ui.pageLabelTemplate}
       />
     </ToolShell>
   );

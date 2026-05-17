@@ -22,8 +22,8 @@ import { PdfSplitTool } from '@/components/tools/pdf-split-tool';
 const messages = {
   selectButton: 'Select a PDF',
   empty: 'Drop a PDF here.',
-  pageLabel: (n: number) => `Page ${n}`,
-  selectedCount: (n: number) => `${n} pages selected`,
+  pageLabelTemplate: 'Page {n}',
+  selectedCountTemplate: '{n} pages selected',
   downloadSeparate: 'Download separate',
   extractSelection: 'Extract as single PDF',
   downloadAll: 'Download all',

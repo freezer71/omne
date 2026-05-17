@@ -48,7 +48,7 @@
     "pdf": {
       "merge": {
         "name": "Fusionner des PDFs",
-        "description": "Combinez plusieurs PDFs en un seul.",
+        "description": "Combinez plusieurs PDFs en un seul. Les pages s'affichent pour voir ce que vous fusionnez.",
         "ui": {
           "selectButton": "Sélectionner des PDFs",
           "empty": "Déposez vos PDFs ici ou utilisez le bouton ci-dessous.",
@@ -57,7 +57,8 @@
           "moveUp": "Monter",
           "moveDown": "Descendre",
           "busy": "Fusion en cours…",
-          "error": "Impossible de fusionner ces PDFs. Essayez d'autres fichiers."
+          "error": "Impossible de fusionner ces PDFs. Essayez d'autres fichiers.",
+          "pageLabelTemplate": "Page {n}"
         }
       },
       "split": {
@@ -96,11 +97,19 @@
       },
       "to-images": {
         "name": "PDF en images",
-        "description": "Exportez chaque page du PDF en PNG ou JPG.",
+        "description": "Cliquez sur une page pour la télécharger, ou récupérez tout en ZIP.",
         "ui": {
           "selectButton": "Sélectionner un PDF",
-          "empty": "Déposez un PDF ici.",
-          "comingSoon": "Le rendu des pages PDF arrive bientôt."
+          "empty": "Déposez un PDF ici ou utilisez le bouton ci-dessous.",
+          "format": "Format",
+          "formatPng": "PNG",
+          "formatJpg": "JPG",
+          "pageLabelTemplate": "Page {n}",
+          "downloadPageLabelTemplate": "Télécharger la page {n}",
+          "downloadAllZip": "Tout télécharger en ZIP",
+          "busy": "Traitement…",
+          "error": "Impossible d'exporter ces images.",
+          "removeFile": "Retirer"
         }
       },
       "from-images": {

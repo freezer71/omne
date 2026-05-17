@@ -18,6 +18,9 @@ import { PdfMergeTool } from '@/components/tools/pdf-merge-tool';
 vi.mock('@/components/ui/pdf-thumbnail', () => ({
   PdfThumbnail: () => <div data-testid="thumb" />,
 }));
+vi.mock('@/components/ui/pdf-pages-grid', () => ({
+  PdfPagesGrid: () => <div data-testid="pages-grid" />,
+}));
 
 const messages = {
   selectButton: 'Select PDFs',
@@ -30,6 +33,7 @@ const messages = {
   error: 'Something went wrong.',
   previewLoading: 'Loading',
   previewError: 'Failed',
+  pageLabelTemplate: 'Page {n}',
 };
 
 function pdfFile(name: string): File {

@@ -48,7 +48,7 @@
     "pdf": {
       "merge": {
         "name": "Merge PDFs",
-        "description": "Combine multiple PDFs into one.",
+        "description": "Combine multiple PDFs into one. Pages are shown so you can see what you're merging.",
         "ui": {
           "selectButton": "Select PDFs",
           "empty": "Drop PDFs here or use the button below.",
@@ -57,7 +57,8 @@
           "moveUp": "Move up",
           "moveDown": "Move down",
           "busy": "Merging…",
-          "error": "Could not merge those PDFs. Please try different files."
+          "error": "Could not merge those PDFs. Please try different files.",
+          "pageLabelTemplate": "Page {n}"
         }
       },
       "split": {
@@ -96,11 +97,19 @@
       },
       "to-images": {
         "name": "PDF to images",
-        "description": "Export every PDF page as a PNG or JPG.",
+        "description": "Click a page to download it as an image, or grab all of them as a ZIP.",
         "ui": {
           "selectButton": "Select a PDF",
-          "empty": "Drop a PDF here.",
-          "comingSoon": "PDF page rendering is coming soon."
+          "empty": "Drop a PDF here or use the button below.",
+          "format": "Format",
+          "formatPng": "PNG",
+          "formatJpg": "JPG",
+          "pageLabelTemplate": "Page {n}",
+          "downloadPageLabelTemplate": "Download page {n}",
+          "downloadAllZip": "Download all as ZIP",
+          "busy": "Working…",
+          "error": "Could not export those images.",
+          "removeFile": "Remove"
         }
       },
       "from-images": {

@@ -2,6 +2,7 @@
 
 import { useRef, type MouseEvent } from 'react';
 import { cn } from '@/lib/cn';
+import { tpl } from '@/lib/tpl';
 import { usePdfPageCount } from '@/lib/hooks/use-pdf-page-count';
 import { PdfThumbnail } from '@/components/ui/pdf-thumbnail';
 
@@ -15,7 +16,7 @@ type Props = {
   pageTransform?: (pageIndex: number) => string | undefined;
   loadingLabel: string;
   errorLabel: string;
-  pageLabel: (pageIndex: number) => string;
+  pageLabelTemplate: string;
   className?: string;
 };
 
@@ -29,7 +30,7 @@ export function PdfPagesGrid({
   pageTransform,
   loadingLabel,
   errorLabel,
-  pageLabel,
+  pageLabelTemplate,
   className,
 }: Props) {
   const { pageCount, loading, error } = usePdfPageCount(file);
@@ -78,7 +79,7 @@ export function PdfPagesGrid({
           <button
             key={pageNum}
             type="button"
-            aria-label={pageLabel(pageNum)}
+            aria-label={tpl(pageLabelTemplate, { n: pageNum })}
             aria-pressed={selectable ? isSelected : undefined}
             onClick={onClick}
             className={cn(

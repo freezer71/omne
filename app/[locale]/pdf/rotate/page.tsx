@@ -11,10 +11,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return getToolMetadata('pdf', 'rotate', locale);
 }
 
-function template(t: string, vars: Record<string, string | number>): string {
-  return t.replace(/\{(\w+)\}/g, (_, key: string) => String(vars[key] ?? ''));
-}
-
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
@@ -33,8 +29,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         selectButton={ui.selectButton}
         empty={ui.empty}
         rotateButton={ui.rotateButton}
-        pageLabel={(n) => template(ui.pageLabelTemplate, { n })}
-        rotatePageLabel={(n) => template(ui.rotatePageLabelTemplate, { n })}
+        pageLabelTemplate={ui.pageLabelTemplate}
+        rotatePageLabelTemplate={ui.rotatePageLabelTemplate}
         rotateAll90={ui.rotateAll90}
         rotateAll180={ui.rotateAll180}
         rotateAll270={ui.rotateAll270}

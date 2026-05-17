@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import { mergePdfs } from '@/lib/tools/implementations/pdf-merge';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
-import { PdfThumbnail } from '@/components/ui/pdf-thumbnail';
+import { PdfPagesGrid } from '@/components/ui/pdf-pages-grid';
 
 type Messages = {
   selectButton: string;
@@ -19,6 +19,7 @@ type Messages = {
   error: string;
   previewLoading: string;
   previewError: string;
+  pageLabelTemplate: string;
 };
 
 export function PdfMergeTool(messages: Messages) {
@@ -107,26 +108,29 @@ export function PdfMergeTool(messages: Messages) {
           {files.map((f, i) => (
             <li
               key={`${f.name}-${i}`}
-              className="flex items-center gap-3 rounded-md border border-border bg-surface p-3 text-sm"
+              className="flex flex-col gap-3 rounded-md border border-border bg-surface p-3 text-sm"
             >
-              <PdfThumbnail
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-text-primary">{f.name}</p>
+                  <p className="font-mono text-xs text-text-faint">{formatBytes(f.size)}</p>
+                </div>
+                <Button
+                  variant="subtle"
+                  size="sm"
+                  onClick={() => setFiles((prev) => prev.filter((_, idx) => idx !== i))}
+                  aria-label={messages.removeFile}
+                >
+                  {messages.removeFile}
+                </Button>
+              </div>
+              <PdfPagesGrid
                 file={f}
-                maxWidth={64}
+                thumbnailWidth={56}
                 loadingLabel={messages.previewLoading}
                 errorLabel={messages.previewError}
+                pageLabelTemplate={messages.pageLabelTemplate}
               />
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-text-primary">{f.name}</p>
-                <p className="font-mono text-xs text-text-faint">{formatBytes(f.size)}</p>
-              </div>
-              <Button
-                variant="subtle"
-                size="sm"
-                onClick={() => setFiles((prev) => prev.filter((_, idx) => idx !== i))}
-                aria-label={messages.removeFile}
-              >
-                {messages.removeFile}
-              </Button>
             </li>
           ))}
         </ul>
