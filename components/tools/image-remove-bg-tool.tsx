@@ -11,12 +11,18 @@ type Messages = {
   selectButton: string;
   empty: string;
   removeButton: string;
+  downloadButton: string;
+  resetButton: string;
+  resultLabel: string;
   modelNotice: string;
   modelLoading: string;
   busy: string;
   error: string;
   removeFile: string;
 };
+
+const CHECKERED_BG_CLASS =
+  'bg-[length:16px_16px] bg-[linear-gradient(45deg,#1a1a1a_25%,transparent_25%,transparent_75%,#1a1a1a_75%),linear-gradient(45deg,#1a1a1a_25%,transparent_25%,transparent_75%,#1a1a1a_75%)] [background-position:0_0,8px_8px] dark:bg-[linear-gradient(45deg,#2a2a2a_25%,transparent_25%,transparent_75%,#2a2a2a_75%),linear-gradient(45deg,#2a2a2a_25%,transparent_25%,transparent_75%,#2a2a2a_75%)]';
 
 export function ImageRemoveBgTool(messages: Messages) {
   const inputId = useId();
@@ -27,8 +33,27 @@ export function ImageRemoveBgTool(messages: Messages) {
   const [modelProgress, setModelProgress] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [resultBytes, setResultBytes] = useState<Uint8Array | null>(null);
+  const [resultUrl, setResultUrl] = useState<string | null>(null);
 
-  const canRun = file !== null && !busy;
+  const hasResult = resultBytes !== null && resultUrl !== null;
+  const canRun = file !== null && !busy && !hasResult;
+
+  useEffect(() => {
+    if (!resultBytes) {
+      setResultUrl(null);
+      return;
+    }
+    const blob = new Blob([new Uint8Array(resultBytes) as BlobPart], { type: 'image/png' });
+    const url = URL.createObjectURL(blob);
+    setResultUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [resultBytes]);
+
+  const resetResult = () => {
+    setResultBytes(null);
+    setError(null);
+  };
 
   const onPickFiles = (incoming: FileList | File[] | null) => {
     if (!incoming) return;
@@ -36,6 +61,7 @@ export function ImageRemoveBgTool(messages: Messages) {
     if (!first) return;
     setFile(first);
     setError(null);
+    setResultBytes(null);
   };
 
   const onRun = async () => {
@@ -43,13 +69,12 @@ export function ImageRemoveBgTool(messages: Messages) {
     setBusy(true);
     setError(null);
     setModelProgress(null);
+    setResultBytes(null);
     try {
       const bytes = await removeBackground(file, {
         onModelProgress: (r) => setModelProgress(r),
       });
-      const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: 'image/png' });
-      const name = outputName('no-bg', [file.name], 'png');
-      downloadBlob(blob, name);
+      setResultBytes(bytes);
     } catch (err) {
       console.error('[remove-bg]', err);
       setError(messages.error);
@@ -57,6 +82,13 @@ export function ImageRemoveBgTool(messages: Messages) {
       setBusy(false);
       setModelProgress(null);
     }
+  };
+
+  const onDownload = () => {
+    if (!resultBytes || !file) return;
+    const blob = new Blob([new Uint8Array(resultBytes) as BlobPart], { type: 'image/png' });
+    const name = outputName('no-bg', [file.name], 'png');
+    downloadBlob(blob, name);
   };
 
   return (
@@ -112,7 +144,25 @@ export function ImageRemoveBgTool(messages: Messages) {
               className="sr-only"
               onChange={(e) => onPickFiles(e.target.files)}
             />
-            <Preview file={file} />
+            {hasResult && resultUrl ? (
+              <div className="flex flex-col items-center gap-2">
+                <p className="text-xs text-text-faint">{messages.resultLabel}</p>
+                <div
+                  className={cn(
+                    'inline-block max-w-full overflow-hidden rounded-md border border-border',
+                    CHECKERED_BG_CLASS,
+                  )}
+                >
+                  <img
+                    src={resultUrl}
+                    alt={messages.resultLabel}
+                    className="block max-h-72 max-w-full object-contain"
+                  />
+                </div>
+              </div>
+            ) : (
+              <SourcePreview file={file} />
+            )}
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm text-text-primary">{file.name}</p>
@@ -121,7 +171,10 @@ export function ImageRemoveBgTool(messages: Messages) {
               <Button
                 variant="subtle"
                 size="sm"
-                onClick={() => setFile(null)}
+                onClick={() => {
+                  setFile(null);
+                  setResultBytes(null);
+                }}
                 aria-label={messages.removeFile}
               >
                 {messages.removeFile}
@@ -137,19 +190,28 @@ export function ImageRemoveBgTool(messages: Messages) {
             {error}
           </p>
         )}
-        <Button onClick={onRun} disabled={!canRun}>
-          {busy
-            ? modelProgress !== null && modelProgress < 1
-              ? `${messages.modelLoading} ${Math.round(modelProgress * 100)}%`
-              : messages.busy
-            : messages.removeButton}
-        </Button>
+        {hasResult ? (
+          <>
+            <Button variant="ghost" onClick={resetResult}>
+              {messages.resetButton}
+            </Button>
+            <Button onClick={onDownload}>{messages.downloadButton}</Button>
+          </>
+        ) : (
+          <Button onClick={onRun} disabled={!canRun}>
+            {busy
+              ? modelProgress !== null && modelProgress < 1
+                ? `${messages.modelLoading} ${Math.round(modelProgress * 100)}%`
+                : messages.busy
+              : messages.removeButton}
+          </Button>
+        )}
       </div>
     </div>
   );
 }
 
-function Preview({ file }: { file: File }) {
+function SourcePreview({ file }: { file: File }) {
   const [url, setUrl] = useState<string | null>(null);
   useEffect(() => {
     const objectUrl = URL.createObjectURL(file);

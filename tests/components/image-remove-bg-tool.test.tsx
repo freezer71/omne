@@ -19,6 +19,9 @@ const messages = {
   selectButton: 'Select an image',
   empty: 'Drop a PNG or JPG here.',
   removeButton: 'Remove background',
+  downloadButton: 'Download PNG',
+  resetButton: 'Process again',
+  resultLabel: 'Result',
   modelNotice: 'First use downloads ~44 MB.',
   modelLoading: 'Loading model',
   busy: 'Processing…',
@@ -51,14 +54,43 @@ describe('ImageRemoveBgTool', () => {
     expect(screen.getByRole('button', { name: messages.removeButton })).toBeEnabled();
   });
 
-  it('calls removeBackground and downloads a PNG with no-bg- prefix', async () => {
+  it('calls removeBackground and shows result preview + Download button', async () => {
     const user = userEvent.setup();
     removeBackgroundMock.mockResolvedValue(new Uint8Array([0x89, 0x50, 0x4e, 0x47]));
     render(<ImageRemoveBgTool {...messages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), pngFile('subject.jpg'));
     await user.click(screen.getByRole('button', { name: messages.removeButton }));
     expect(removeBackgroundMock).toHaveBeenCalledOnce();
+    // After processing, result preview shows and Download appears
+    expect(await screen.findByRole('img', { name: messages.resultLabel })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: messages.downloadButton })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: messages.resetButton })).toBeInTheDocument();
+    // Original Remove button is gone while result is shown
+    expect(screen.queryByRole('button', { name: messages.removeButton })).not.toBeInTheDocument();
+    // Download was NOT triggered automatically
+    expect(downloadBlobMock).not.toHaveBeenCalled();
+  });
+
+  it('downloads with no-bg-<name>.png when user clicks Download', async () => {
+    const user = userEvent.setup();
+    removeBackgroundMock.mockResolvedValue(new Uint8Array([0x89, 0x50, 0x4e, 0x47]));
+    render(<ImageRemoveBgTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), pngFile('subject.jpg'));
+    await user.click(screen.getByRole('button', { name: messages.removeButton }));
+    await user.click(await screen.findByRole('button', { name: messages.downloadButton }));
+    expect(downloadBlobMock).toHaveBeenCalledOnce();
     expect(downloadBlobMock.mock.calls[0]![1]).toBe('no-bg-subject.png');
+  });
+
+  it('clears result and re-enables Remove background on Process-again', async () => {
+    const user = userEvent.setup();
+    removeBackgroundMock.mockResolvedValue(new Uint8Array([0x89, 0x50, 0x4e, 0x47]));
+    render(<ImageRemoveBgTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), pngFile());
+    await user.click(screen.getByRole('button', { name: messages.removeButton }));
+    await user.click(await screen.findByRole('button', { name: messages.resetButton }));
+    expect(screen.queryByRole('img', { name: messages.resultLabel })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: messages.removeButton })).toBeEnabled();
   });
 
   it('shows error on failure', async () => {

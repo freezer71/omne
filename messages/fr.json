@@ -245,11 +245,14 @@
       },
       "remove-bg": {
         "name": "Retirer l'arrière-plan",
-        "description": "Détourage par IA — vous obtenez un PNG transparent.",
+        "description": "Détourage par IA — vous obtenez un PNG transparent avec aperçu en direct.",
         "ui": {
           "selectButton": "Sélectionner une image",
           "empty": "Déposez une image PNG, JPG ou WebP ici.",
           "removeButton": "Retirer l'arrière-plan",
+          "downloadButton": "Télécharger le PNG",
+          "resetButton": "Refaire",
+          "resultLabel": "Résultat",
           "modelNotice": "Au premier usage, le modèle RMBG-1.4 (~44 Mo) est téléchargé depuis huggingface.co, puis mis en cache. Votre image, elle, ne quitte jamais votre appareil.",
           "modelLoading": "Chargement du modèle",
           "busy": "Traitement…",

@@ -245,11 +245,14 @@
       },
       "remove-bg": {
         "name": "Remove background",
-        "description": "AI-powered background removal — gives you a transparent PNG.",
+        "description": "AI-powered background removal — gives you a transparent PNG with live preview.",
         "ui": {
           "selectButton": "Select an image",
           "empty": "Drop a PNG, JPG, or WebP image here.",
           "removeButton": "Remove background",
+          "downloadButton": "Download PNG",
+          "resetButton": "Process again",
+          "resultLabel": "Result",
           "modelNotice": "First use downloads the ~44 MB RMBG-1.4 model from huggingface.co. It's cached afterward — and your image never leaves your device.",
           "modelLoading": "Loading model",
           "busy": "Processing…",

@@ -38,6 +38,9 @@ export default async function Page({
         selectButton={tool.ui.selectButton}
         empty={tool.ui.empty}
         removeButton={tool.ui.removeButton}
+        downloadButton={tool.ui.downloadButton}
+        resetButton={tool.ui.resetButton}
+        resultLabel={tool.ui.resultLabel}
         modelNotice={tool.ui.modelNotice}
         modelLoading={tool.ui.modelLoading}
         busy={tool.ui.busy}
