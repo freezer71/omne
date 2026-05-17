@@ -224,12 +224,19 @@ function RotatedPreview({
   if (angle !== 0) transforms.push(`rotate(${angle}deg)`);
   if (flipH) transforms.push('scaleX(-1)');
   if (flipV) transforms.push('scaleY(-1)');
+  const isSideways = angle === 90 || angle === 270;
   return (
-    <img
-      src={url}
-      alt={file.name}
-      style={{ transform: transforms.join(' ') }}
-      className="w-full max-h-72 rounded-md border border-border bg-surface object-contain transition-transform"
-    />
+    <div className="flex h-72 items-center justify-center overflow-hidden rounded-md border border-border bg-surface">
+      <img
+        src={url}
+        alt={file.name}
+        style={{
+          transform: transforms.join(' '),
+          maxHeight: '18rem',
+          maxWidth: isSideways ? '18rem' : '100%',
+        }}
+        className="object-contain transition-transform"
+      />
+    </div>
   );
 }
