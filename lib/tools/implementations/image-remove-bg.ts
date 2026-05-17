@@ -11,50 +11,55 @@ export type RemoveBgOptions = {
   onModelProgress?: (ratio: number) => void;
 };
 
+async function inputToBlob(input: ImageBytesInput): Promise<Blob> {
+  if (input instanceof File) return input;
+  if (input instanceof Uint8Array) return new Blob([new Uint8Array(input) as BlobPart]);
+  return new Blob([new Uint8Array(input as ArrayBuffer) as BlobPart]);
+}
+
 export async function removeBackground(
   input: ImageBytesInput,
   options: RemoveBgOptions = {},
 ): Promise<Uint8Array> {
-  const segmenter = await getBackgroundRemover(options.onModelProgress);
+  const { model, processor, RawImage } = await getBackgroundRemover(options.onModelProgress);
+
+  const blob = await inputToBlob(input);
+  const rawImage = await RawImage.fromBlob(blob);
+  const sourceW = rawImage.width;
+  const sourceH = rawImage.height;
+
+  const { pixel_values } = await processor(rawImage);
+  const { output } = await model({ input: pixel_values });
+  const tensor = output[0];
+  if (!tensor) throw new Error('removeBackground: model returned no output tensor');
+
+  const maskImage = (await RawImage.fromTensor(tensor.mul(255).to('uint8')).resize(
+    sourceW,
+    sourceH,
+  )) as RawImageLikeWithData;
+  const maskData = maskImage.data;
+  const maskChannels = maskImage.channels;
 
   const bitmap = await loadImageBitmap(input);
   try {
-    const w = bitmap.width;
-    const h = bitmap.height;
-
-    const fileForSegmenter =
-      input instanceof File
-        ? URL.createObjectURL(input)
-        : URL.createObjectURL(new Blob([new Uint8Array(input as ArrayBuffer) as BlobPart]));
-
-    let mask: { data: Uint8Array; width: number; height: number };
-    try {
-      const result = await segmenter(fileForSegmenter);
-      const first = result[0];
-      if (!first || !first.mask) {
-        throw new Error('No segmentation mask returned');
-      }
-      mask = first.mask;
-    } finally {
-      URL.revokeObjectURL(fileForSegmenter);
-    }
-
-    const canvas = createCanvas(w, h);
+    const canvas = createCanvas(sourceW, sourceH);
     const ctx = get2dContext(canvas);
-    ctx.drawImage(bitmap, 0, 0);
-    const imageData = ctx.getImageData(0, 0, w, h);
+    ctx.drawImage(bitmap, 0, 0, sourceW, sourceH);
+    const imageData = ctx.getImageData(0, 0, sourceW, sourceH);
     const data = imageData.data;
-    const maskData = mask.data;
-    const totalPixels = w * h;
-    const maskStride = maskData.length === totalPixels ? 1 : 4;
-    for (let i = 0; i < totalPixels; i++) {
-      const alpha = maskData[i * maskStride] ?? 0;
+    const total = sourceW * sourceH;
+    for (let i = 0; i < total; i++) {
+      const alpha = maskData[i * maskChannels] ?? 0;
       data[i * 4 + 3] = alpha;
     }
     ctx.putImageData(imageData, 0, 0);
-
     return await canvasToBytes(canvas, 'image/png');
   } finally {
     bitmap.close();
   }
 }
+
+type RawImageLikeWithData = {
+  data: Uint8Array | Uint8ClampedArray;
+  channels: number;
+};

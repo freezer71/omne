@@ -1,12 +1,16 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-const { pipelineMock, env } = vi.hoisted(() => ({
-  pipelineMock: vi.fn(),
+const { autoModelMock, autoProcessorMock, RawImageMock, env } = vi.hoisted(() => ({
+  autoModelMock: vi.fn(),
+  autoProcessorMock: vi.fn(),
+  RawImageMock: { fromBlob: vi.fn(), fromURL: vi.fn(), fromTensor: vi.fn() },
   env: { allowLocalModels: true, useBrowserCache: false },
 }));
 
 vi.mock('@huggingface/transformers', () => ({
-  pipeline: pipelineMock,
+  AutoModel: { from_pretrained: autoModelMock },
+  AutoProcessor: { from_pretrained: autoProcessorMock },
+  RawImage: RawImageMock,
   env,
 }));
 
@@ -17,20 +21,22 @@ import {
 } from '@/lib/transformers-loader';
 
 beforeEach(() => {
-  pipelineMock.mockReset();
-  pipelineMock.mockImplementation(async () => vi.fn());
+  autoModelMock.mockReset();
+  autoProcessorMock.mockReset();
+  autoModelMock.mockResolvedValue(vi.fn());
+  autoProcessorMock.mockResolvedValue(vi.fn());
   env.allowLocalModels = true;
   env.useBrowserCache = false;
   _resetBackgroundRemover();
 });
 
 describe('getBackgroundRemover', () => {
-  it('lazily creates the image-segmentation pipeline with RMBG-1.4', async () => {
+  it('loads RMBG-1.4 via AutoModel + AutoProcessor', async () => {
     await getBackgroundRemover();
-    expect(pipelineMock).toHaveBeenCalledOnce();
-    const [task, model] = pipelineMock.mock.calls[0]!;
-    expect(task).toBe('image-segmentation');
-    expect(model).toBe('briaai/RMBG-1.4');
+    expect(autoModelMock).toHaveBeenCalledOnce();
+    expect(autoProcessorMock).toHaveBeenCalledOnce();
+    expect(autoModelMock.mock.calls[0]![0]).toBe('briaai/RMBG-1.4');
+    expect(autoProcessorMock.mock.calls[0]![0]).toBe('briaai/RMBG-1.4');
   });
 
   it('configures env to disable local models and enable browser cache', async () => {
@@ -39,16 +45,24 @@ describe('getBackgroundRemover', () => {
     expect(env.useBrowserCache).toBe(true);
   });
 
-  it('reuses the same pipeline instance across calls (singleton)', async () => {
+  it('reuses the same bundle across calls (singleton)', async () => {
     await getBackgroundRemover();
     await getBackgroundRemover();
     await getBackgroundRemover();
-    expect(pipelineMock).toHaveBeenCalledOnce();
+    expect(autoModelMock).toHaveBeenCalledOnce();
+    expect(autoProcessorMock).toHaveBeenCalledOnce();
   });
 
-  it('reports progress via the callback if a progress event arrives', async () => {
-    pipelineMock.mockImplementationOnce(
-      async (_task: string, _model: string, opts?: { progress_callback?: (e: { status: string; progress: number }) => void }) => {
+  it('exposes model, processor and RawImage on the bundle', async () => {
+    const bundle = await getBackgroundRemover();
+    expect(typeof bundle.model).toBe('function');
+    expect(typeof bundle.processor).toBe('function');
+    expect(bundle.RawImage).toBe(RawImageMock);
+  });
+
+  it('reports progress via callback', async () => {
+    autoModelMock.mockImplementationOnce(
+      async (_id: string, opts?: { progress_callback?: (e: { status: string; progress: number }) => void }) => {
         opts?.progress_callback?.({ status: 'downloading', progress: 50 });
         return vi.fn();
       },

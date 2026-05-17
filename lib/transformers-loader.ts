@@ -2,14 +2,38 @@ type ProgressEvent = { status: string; progress?: number; file?: string };
 
 export type RemoveBgProgress = (loaded: number) => void;
 
-type Segmenter = (input: string | Blob | ArrayBuffer) => Promise<Array<{ mask: { data: Uint8Array; width: number; height: number } }>>;
+export type Tensor = {
+  mul(scalar: number): Tensor;
+  to(dtype: string): Tensor;
+};
 
-let instance: Segmenter | null = null;
-let loading: Promise<Segmenter> | null = null;
+export type RawImageLike = {
+  width: number;
+  height: number;
+  resize(w: number, h: number): Promise<RawImageLike>;
+  toBlob(mime?: string): Promise<Blob>;
+  data: Uint8Array | Uint8ClampedArray;
+  channels: number;
+};
+
+export type RawImageStatic = {
+  fromURL(url: string): Promise<RawImageLike>;
+  fromBlob(blob: Blob): Promise<RawImageLike>;
+  fromTensor(tensor: Tensor): RawImageLike;
+};
+
+export type RmbgBundle = {
+  model: (inputs: { input: unknown }) => Promise<{ output: Tensor[] }>;
+  processor: (image: RawImageLike) => Promise<{ pixel_values: unknown }>;
+  RawImage: RawImageStatic;
+};
+
+let instance: RmbgBundle | null = null;
+let loading: Promise<RmbgBundle> | null = null;
 
 export async function getBackgroundRemover(
   onProgress?: RemoveBgProgress,
-): Promise<Segmenter> {
+): Promise<RmbgBundle> {
   if (instance) {
     if (onProgress) onProgress(1);
     return instance;
@@ -21,16 +45,24 @@ export async function getBackgroundRemover(
     mod.env.allowLocalModels = false;
     mod.env.useBrowserCache = true;
 
-    const pipe = await mod.pipeline('image-segmentation', 'briaai/RMBG-1.4', {
-      ...(onProgress
-        ? {
-            progress_callback: (event: ProgressEvent) => {
-              if (typeof event.progress === 'number') onProgress(event.progress / 100);
-            },
-          }
-        : {}),
-    });
-    instance = pipe as unknown as Segmenter;
+    const baseOpts = onProgress
+      ? {
+          progress_callback: (event: ProgressEvent) => {
+            if (typeof event.progress === 'number') onProgress(event.progress / 100);
+          },
+        }
+      : {};
+
+    const [model, processor] = await Promise.all([
+      mod.AutoModel.from_pretrained('briaai/RMBG-1.4', baseOpts),
+      mod.AutoProcessor.from_pretrained('briaai/RMBG-1.4', baseOpts),
+    ]);
+
+    instance = {
+      model: model as unknown as RmbgBundle['model'],
+      processor: processor as unknown as RmbgBundle['processor'],
+      RawImage: mod.RawImage as unknown as RawImageStatic,
+    };
     return instance;
   })();
   return loading;

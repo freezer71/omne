@@ -33,18 +33,39 @@ function fakeBitmap(w = 4, h = 4) {
 
 function fakeCtx(width = 4, height = 4) {
   const data = new Uint8ClampedArray(width * height * 4);
-  // Fill RGBA with non-zero values so we can verify alpha overwrites
   for (let i = 0; i < data.length; i += 4) {
-    data[i] = 200; // R
-    data[i + 1] = 100; // G
-    data[i + 2] = 50; // B
-    data[i + 3] = 255; // A — should be overwritten
+    data[i] = 200;
+    data[i + 1] = 100;
+    data[i + 2] = 50;
+    data[i + 3] = 255;
   }
   return {
     drawImage: vi.fn(),
     getImageData: vi.fn(() => ({ data, width, height })),
     putImageData: vi.fn(),
     data,
+  };
+}
+
+function fakeTensor() {
+  const t = {
+    mul: vi.fn(),
+    to: vi.fn(),
+  };
+  t.mul.mockReturnValue(t);
+  t.to.mockReturnValue(t);
+  return t;
+}
+
+function fakeRawImage(w = 4, h = 4, maskBytes?: Uint8Array) {
+  const bytes = maskBytes ?? new Uint8Array(w * h);
+  return {
+    width: w,
+    height: h,
+    data: bytes,
+    channels: 1,
+    resize: vi.fn(async () => fakeRawImage(w, h, bytes)),
+    toBlob: vi.fn(),
   };
 }
 
@@ -58,12 +79,20 @@ beforeEach(() => {
   loadImageBitmapMock.mockResolvedValue(fakeBitmap());
   canvasToBytesMock.mockResolvedValue(new Uint8Array([0x89, 0x50, 0x4e, 0x47]));
   createCanvasMock.mockReturnValue({ width: 0, height: 0 });
-  // by default mask: 16 pixels (4x4), alpha 0..255
-  const defaultMask = new Uint8Array(16);
-  for (let i = 0; i < 16; i++) defaultMask[i] = i % 2 === 0 ? 255 : 0;
-  getBackgroundRemoverMock.mockResolvedValue(
-    vi.fn(async () => [{ mask: { data: defaultMask, width: 4, height: 4 } }]),
-  );
+
+  const tensor = fakeTensor();
+  const sourceRaw = fakeRawImage(4, 4);
+  const maskRaw = fakeRawImage(4, 4, Uint8Array.from({ length: 16 }, (_, i) => (i % 2 === 0 ? 255 : 0)));
+
+  getBackgroundRemoverMock.mockResolvedValue({
+    model: vi.fn(async () => ({ output: [tensor] })),
+    processor: vi.fn(async () => ({ pixel_values: 'pv' })),
+    RawImage: {
+      fromBlob: vi.fn(async () => sourceRaw),
+      fromTensor: vi.fn(() => maskRaw),
+      fromURL: vi.fn(),
+    },
+  });
 });
 
 describe('removeBackground', () => {
@@ -76,25 +105,30 @@ describe('removeBackground', () => {
     expect(canvasToBytesMock.mock.calls[0]![1]).toBe('image/png');
   });
 
-  it('applies the segmentation mask to the alpha channel (1-channel mask)', async () => {
+  it('applies the resized mask to the alpha channel', async () => {
     const ctx = fakeCtx();
     get2dContextMock.mockReturnValueOnce(ctx);
-    const mask = new Uint8Array(16);
-    for (let i = 0; i < 16; i++) mask[i] = i * 16; // varied alpha
-    getBackgroundRemoverMock.mockResolvedValueOnce(
-      vi.fn(async () => [{ mask: { data: mask, width: 4, height: 4 } }]),
-    );
+    const customMask = Uint8Array.from({ length: 16 }, (_, i) => i * 16);
+    const tensor = fakeTensor();
+    getBackgroundRemoverMock.mockResolvedValueOnce({
+      model: vi.fn(async () => ({ output: [tensor] })),
+      processor: vi.fn(async () => ({ pixel_values: 'pv' })),
+      RawImage: {
+        fromBlob: vi.fn(async () => fakeRawImage(4, 4)),
+        fromTensor: vi.fn(() => fakeRawImage(4, 4, customMask)),
+        fromURL: vi.fn(),
+      },
+    });
     await removeBackground(
       new File([new Uint8Array([1])], 'pic.png', { type: 'image/png' }),
     );
     expect(ctx.putImageData).toHaveBeenCalledOnce();
-    // Verify alpha channel matches the mask
     for (let i = 0; i < 16; i++) {
       expect(ctx.data[i * 4 + 3]).toBe(i * 16);
     }
   });
 
-  it('forwards a model-progress callback', async () => {
+  it('forwards the model-progress callback', async () => {
     get2dContextMock.mockReturnValueOnce(fakeCtx());
     const onModelProgress = vi.fn();
     await removeBackground(
@@ -104,22 +138,27 @@ describe('removeBackground', () => {
     expect(getBackgroundRemoverMock).toHaveBeenCalledWith(onModelProgress);
   });
 
-  it('throws if the segmenter returns no mask', async () => {
+  it('throws when the model returns no output', async () => {
     get2dContextMock.mockReturnValueOnce(fakeCtx());
-    getBackgroundRemoverMock.mockResolvedValueOnce(vi.fn(async () => []));
+    getBackgroundRemoverMock.mockResolvedValueOnce({
+      model: vi.fn(async () => ({ output: [] })),
+      processor: vi.fn(async () => ({ pixel_values: 'pv' })),
+      RawImage: {
+        fromBlob: vi.fn(async () => fakeRawImage(4, 4)),
+        fromTensor: vi.fn(() => fakeRawImage(4, 4)),
+        fromURL: vi.fn(),
+      },
+    });
     await expect(
       removeBackground(new File([new Uint8Array([1])], 'pic.png', { type: 'image/png' })),
-    ).rejects.toThrow(/mask/i);
+    ).rejects.toThrow(/output/i);
   });
 
-  it('closes the bitmap even on failure', async () => {
+  it('closes the bitmap', async () => {
     const bmp = fakeBitmap();
     loadImageBitmapMock.mockResolvedValueOnce(bmp);
     get2dContextMock.mockReturnValueOnce(fakeCtx());
-    getBackgroundRemoverMock.mockResolvedValueOnce(vi.fn(async () => []));
-    await expect(
-      removeBackground(new File([new Uint8Array([1])], 'pic.png', { type: 'image/png' })),
-    ).rejects.toThrow();
+    await removeBackground(new File([new Uint8Array([1])], 'pic.png', { type: 'image/png' }));
     expect(bmp.close).toHaveBeenCalled();
   });
 });

@@ -50,7 +50,8 @@ export function ImageRemoveBgTool(messages: Messages) {
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: 'image/png' });
       const name = outputName('no-bg', [file.name], 'png');
       downloadBlob(blob, name);
-    } catch (_err) {
+    } catch (err) {
+      console.error('[remove-bg]', err);
       setError(messages.error);
     } finally {
       setBusy(false);
