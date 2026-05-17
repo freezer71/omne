@@ -49,17 +49,44 @@ test('pdf-split with thumbnail', async ({ page }) => {
   await page.screenshot({ path: join(OUT_DIR, '03-pdf-split.png'), fullPage: true });
 });
 
-test('pdf-rotate with thumbnail', async ({ page }) => {
+test('pdf-rotate per-page', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/en/pdf/rotate');
-  const pdf = await makePdf(3);
+  const pdf = await makePdf(4);
   await page.locator('input[type="file"]').setInputFiles([
     { name: 'invoice.pdf', mimeType: 'application/pdf', buffer: pdf },
   ]);
   await page.waitForTimeout(1500);
-  await page.selectOption('select', '180');
+  await page.getByRole('button', { name: 'Rotate page 2' }).click();
+  await page.getByRole('button', { name: 'Rotate page 3' }).click();
+  await page.getByRole('button', { name: 'Rotate page 3' }).click();
   await page.waitForTimeout(500);
-  await page.screenshot({ path: join(OUT_DIR, '04-pdf-rotate-180.png'), fullPage: true });
+  await page.screenshot({ path: join(OUT_DIR, '04-pdf-rotate-per-page.png'), fullPage: true });
+});
+
+test('pdf-to-images grid with per-page download', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/en/pdf/to-images');
+  const pdf = await makePdf(4);
+  await page.locator('input[type="file"]').setInputFiles([
+    { name: 'doc.pdf', mimeType: 'application/pdf', buffer: pdf },
+  ]);
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: join(OUT_DIR, '06-pdf-to-images.png'), fullPage: true });
+});
+
+test('pdf-split multi-select', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/en/pdf/split');
+  const pdf = await makePdf(6);
+  await page.locator('input[type="file"]').setInputFiles([
+    { name: 'report.pdf', mimeType: 'application/pdf', buffer: pdf },
+  ]);
+  await page.waitForTimeout(1500);
+  await page.getByLabel('Page 2').click();
+  await page.getByLabel('Page 4').click();
+  await page.waitForTimeout(300);
+  await page.screenshot({ path: join(OUT_DIR, '03-pdf-split-selected.png'), fullPage: true });
 });
 
 test('video-convert with player', async ({ page }) => {

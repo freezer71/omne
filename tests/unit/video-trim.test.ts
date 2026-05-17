@@ -46,7 +46,7 @@ describe('trimVideo', () => {
     expect(writeMock).toHaveBeenCalledOnce();
     expect(execMock).toHaveBeenCalledOnce();
     expect(readMock).toHaveBeenCalledOnce();
-    const args = execMock.mock.calls[0][0] as string[];
+    const args = execMock.mock.calls[0]![0] as string[];
     expect(args).toContain('-ss');
     expect(args).toContain('-to');
     expect(args[args.indexOf('-ss') + 1]).toBe('1.5');
@@ -57,7 +57,7 @@ describe('trimVideo', () => {
   it('uses -c copy by default for fast remuxing', async () => {
     const file = new File([new Uint8Array([0])], 'clip.mp4', { type: 'video/mp4' });
     await trimVideo(file, { startSec: 0, endSec: 1 });
-    const args = execMock.mock.calls[0][0] as string[];
+    const args = execMock.mock.calls[0]![0] as string[];
     expect(args).toContain('-c');
     expect(args).toContain('copy');
   });
@@ -65,7 +65,7 @@ describe('trimVideo', () => {
   it('preserves the source extension in the output filename', async () => {
     const file = new File([new Uint8Array([0])], 'clip.webm', { type: 'video/webm' });
     await trimVideo(file, { startSec: 0, endSec: 1 });
-    const args = execMock.mock.calls[0][0] as string[];
+    const args = execMock.mock.calls[0]![0] as string[];
     expect(args[args.length - 1]).toMatch(/\.webm$/);
   });
 

@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeAll } from 'vitest';
-import { PDFDocument, PDFImage } from 'pdf-lib';
+import { describe, it, expect } from 'vitest';
+import { PDFDocument } from 'pdf-lib';
 import { imagesToPdf } from '@/lib/tools/implementations/images-to-pdf';
 
 const PNG_1x1 = Uint8Array.from([

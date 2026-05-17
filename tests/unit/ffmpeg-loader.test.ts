@@ -44,7 +44,7 @@ describe('ffmpeg-loader', () => {
 
   it('loads from the self-hosted /ffmpeg/ URLs (privacy-first)', async () => {
     await getFfmpeg();
-    const config = loadMock.mock.calls[0][0];
+    const config = loadMock.mock.calls[0]![0];
     expect(config.coreURL).toBe('/ffmpeg/ffmpeg-core.js');
     expect(config.wasmURL).toBe('/ffmpeg/ffmpeg-core.wasm');
   });

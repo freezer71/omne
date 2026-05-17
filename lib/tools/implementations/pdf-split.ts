@@ -79,7 +79,7 @@ export function parseRanges(spec: string, totalPages: number): [number, number][
       continue;
     }
     const m = part.match(/^(\d+)\s*-\s*(\d+)$/);
-    if (!m) throw new Error(`Cannot parse range "${part}"`);
+    if (!m || !m[1] || !m[2]) throw new Error(`Cannot parse range "${part}"`);
     const a = parseInt(m[1], 10);
     const b = parseInt(m[2], 10);
     if (a < 1 || b > totalPages) throw new Error(`Range ${a}-${b} out of bounds (1-${totalPages})`);

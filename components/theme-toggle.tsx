@@ -14,7 +14,7 @@ type Props = {
 
 function readCurrentTheme(): Theme {
   if (typeof document === 'undefined') return 'dark';
-  return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  return document.documentElement.dataset['theme'] === 'light' ? 'light' : 'dark';
 }
 
 export function ThemeToggle({ labelLight, labelDark, srLabel }: Props) {
@@ -26,7 +26,7 @@ export function ThemeToggle({ labelLight, labelDark, srLabel }: Props) {
 
   const apply = (next: Theme) => {
     setTheme(next);
-    document.documentElement.dataset.theme = next;
+    document.documentElement.dataset['theme'] = next;
     try {
       localStorage.setItem(STORAGE_KEY, next);
     } catch (_) {

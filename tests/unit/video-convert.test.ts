@@ -54,7 +54,7 @@ describe('convertVideo', () => {
   it('passes -i input and the output filename in the exec args', async () => {
     const file = new File([new Uint8Array([0x00])], 'clip.mp4', { type: 'video/mp4' });
     await convertVideo(file, 'webm');
-    const args = execMock.mock.calls[0][0] as string[];
+    const args = execMock.mock.calls[0]![0] as string[];
     expect(args).toContain('-i');
     const iIndex = args.indexOf('-i');
     expect(args[iIndex + 1]).toMatch(/input/);
@@ -66,7 +66,7 @@ describe('convertVideo', () => {
     for (const fmt of ['mp4', 'webm', 'mov', 'gif'] as const) {
       execMock.mockClear();
       await convertVideo(file, fmt);
-      const args = execMock.mock.calls[0][0] as string[];
+      const args = execMock.mock.calls[0]![0] as string[];
       expect(args[args.length - 1]).toMatch(new RegExp(`\\.${fmt}$`));
     }
   });

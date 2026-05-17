@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { PDFDocument, degrees } from 'pdf-lib';
+import { PDFDocument } from 'pdf-lib';
 import { rotatePdf } from '@/lib/tools/implementations/pdf-rotate';
 
 async function makePdf(pageCount: number): Promise<Uint8Array> {

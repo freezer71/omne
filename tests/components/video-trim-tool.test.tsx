@@ -62,10 +62,10 @@ describe('VideoTrimTool', () => {
     await user.type(screen.getByLabelText(messages.endLabel), '3');
     await user.click(screen.getByRole('button', { name: messages.trimButton }));
     expect(trimVideo).toHaveBeenCalledOnce();
-    const opts = trimVideo.mock.calls[0][1] as { startSec: number; endSec: number };
+    const opts = trimVideo.mock.calls[0]![1] as { startSec: number; endSec: number };
     expect(opts.startSec).toBe(1);
     expect(opts.endSec).toBe(3);
-    expect(downloadBlob.mock.calls[0][1]).toBe('trimmed-movie.mp4');
+    expect(downloadBlob.mock.calls[0]![1]).toBe('trimmed-movie.mp4');
   });
 
   it('shows error on failure', async () => {

@@ -61,9 +61,9 @@ describe('VideoConvertTool', () => {
     await user.selectOptions(screen.getByLabelText(messages.format), 'webm');
     await user.click(screen.getByRole('button', { name: messages.convertButton }));
     expect(convertVideoMock).toHaveBeenCalledOnce();
-    expect(convertVideoMock.mock.calls[0][1]).toBe('webm');
+    expect(convertVideoMock.mock.calls[0]![1]).toBe('webm');
     expect(downloadBlobMock).toHaveBeenCalledOnce();
-    expect(downloadBlobMock.mock.calls[0][1]).toBe('converted-movie.webm');
+    expect(downloadBlobMock.mock.calls[0]![1]).toBe('converted-movie.webm');
   });
 
   it('shows an alert on conversion failure', async () => {

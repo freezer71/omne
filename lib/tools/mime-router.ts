@@ -28,10 +28,12 @@ export function routeDroppedFiles(files: File[]): RouteResult {
   }
 
   // Single file: get all tools that accept its MIME
-  if (files.length === 1) {
-    const candidates = toolsForMime(files[0].type);
-    if (candidates.length === 0) return { kind: 'unsupported', files };
-    if (candidates.length === 1) return { kind: 'direct', tool: candidates[0], files };
+  const onlyFile = files.length === 1 ? files[0] : undefined;
+  if (onlyFile) {
+    const candidates = toolsForMime(onlyFile.type);
+    const first = candidates[0];
+    if (!first) return { kind: 'unsupported', files };
+    if (candidates.length === 1) return { kind: 'direct', tool: first, files };
     return { kind: 'choose', tools: candidates, files };
   }
 

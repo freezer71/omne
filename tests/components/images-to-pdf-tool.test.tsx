@@ -52,8 +52,8 @@ describe('ImagesToPdfTool', () => {
     await user.upload(screen.getByLabelText(messages.selectButton), [png('a.png'), png('b.png')]);
     await user.click(screen.getByRole('button', { name: messages.combineButton }));
     expect(imagesToPdf).toHaveBeenCalledOnce();
-    expect((imagesToPdf.mock.calls[0][0] as File[]).length).toBe(2);
-    expect(downloadBlob.mock.calls[0][1]).toBe('pdf-from-a.pdf');
+    expect((imagesToPdf.mock.calls[0]![0] as File[]).length).toBe(2);
+    expect(downloadBlob.mock.calls[0]![1]).toBe('pdf-from-a.pdf');
   });
 
   it('shows error on failure', async () => {

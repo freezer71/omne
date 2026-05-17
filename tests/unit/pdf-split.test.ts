@@ -51,19 +51,19 @@ describe('splitPdf', () => {
   it('range mode produces one PDF per range with the correct page count', async () => {
     const out = await splitPdf(fivePage, { type: 'ranges', ranges: [[1, 2], [4, 5]] });
     expect(out).toHaveLength(2);
-    expect(await pages(out[0].bytes)).toBe(2);
-    expect(await pages(out[1].bytes)).toBe(2);
+    expect(await pages(out[0]!.bytes)).toBe(2);
+    expect(await pages(out[1]!.bytes)).toBe(2);
   });
 
   it('names parts deterministically using 1-based page indices', async () => {
     const out = await splitPdf(fivePage, { type: 'ranges', ranges: [[1, 2], [4, 5]] });
-    expect(out[0].name).toBe('pages-1-2');
-    expect(out[1].name).toBe('pages-4-5');
+    expect(out[0]!.name).toBe('pages-1-2');
+    expect(out[1]!.name).toBe('pages-4-5');
   });
 
   it('single page range uses single page in the name', async () => {
     const out = await splitPdf(fivePage, { type: 'ranges', ranges: [[3, 3]] });
-    expect(out[0].name).toBe('page-3');
+    expect(out[0]!.name).toBe('page-3');
   });
 
   it('individual pages mode uses page-N naming', async () => {

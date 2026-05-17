@@ -87,9 +87,9 @@ describe('PdfSplitTool (multi-select grid)', () => {
     await user.upload(screen.getByLabelText(messages.selectButton), await makePdfFile(2, 'doc.pdf'));
     await waitFor(() => expect(screen.getByLabelText('Page 1')).toBeInTheDocument());
     await user.click(screen.getByRole('button', { name: messages.downloadAll }));
-    expect(splitPdf.mock.calls[0][1]).toEqual({ type: 'pages' });
+    expect(splitPdf.mock.calls[0]![1]).toEqual({ type: 'pages' });
     expect(downloadBlob).toHaveBeenCalledTimes(2);
-    expect(downloadBlob.mock.calls[0][1]).toBe('split-doc-page-1.pdf');
+    expect(downloadBlob.mock.calls[0]![1]).toBe('split-doc-page-1.pdf');
   });
 
   it('Download separate calls splitPdf for each selected page individually', async () => {
@@ -104,7 +104,7 @@ describe('PdfSplitTool (multi-select grid)', () => {
     await user.click(screen.getByLabelText('Page 1'));
     await user.click(screen.getByLabelText('Page 3'));
     await user.click(screen.getByRole('button', { name: messages.downloadSeparate }));
-    expect(splitPdf.mock.calls[0][1]).toEqual({ type: 'ranges', ranges: [[1, 1], [3, 3]] });
+    expect(splitPdf.mock.calls[0]![1]).toEqual({ type: 'ranges', ranges: [[1, 1], [3, 3]] });
     expect(downloadBlob).toHaveBeenCalledTimes(2);
   });
 
@@ -118,9 +118,9 @@ describe('PdfSplitTool (multi-select grid)', () => {
     await user.click(screen.getByLabelText('Page 4'));
     await user.click(screen.getByRole('button', { name: messages.extractSelection }));
     expect(extractPages).toHaveBeenCalledOnce();
-    expect(extractPages.mock.calls[0][1]).toEqual([2, 4]);
+    expect(extractPages.mock.calls[0]![1]).toEqual([2, 4]);
     expect(downloadBlob).toHaveBeenCalledOnce();
-    expect(downloadBlob.mock.calls[0][1]).toBe('extract-doc.pdf');
+    expect(downloadBlob.mock.calls[0]![1]).toBe('extract-doc.pdf');
   });
 
   it('shows error if any action fails', async () => {

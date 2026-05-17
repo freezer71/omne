@@ -78,7 +78,7 @@ describe('PdfMergeTool', () => {
     await user.click(screen.getByRole('button', { name: messages.mergeButton }));
     expect(mergePdfs).toHaveBeenCalledOnce();
     expect(downloadBlob).toHaveBeenCalledOnce();
-    expect(downloadBlob.mock.calls[0][1]).toBe('merged-report.pdf');
+    expect(downloadBlob.mock.calls[0]![1]).toBe('merged-report.pdf');
   });
 
   it('allows removing a file from the list', async () => {
@@ -88,7 +88,7 @@ describe('PdfMergeTool', () => {
     await user.upload(input, [pdfFile('a.pdf'), pdfFile('b.pdf')]);
     expect(screen.getByText('a.pdf')).toBeInTheDocument();
     const removeButtons = screen.getAllByRole('button', { name: messages.removeFile });
-    await user.click(removeButtons[0]);
+    await user.click(removeButtons[0]!);
     expect(screen.queryByText('a.pdf')).not.toBeInTheDocument();
     expect(screen.getByText('b.pdf')).toBeInTheDocument();
   });

@@ -11,8 +11,9 @@ export function outputName(
   extension: string,
   infix?: string,
 ): string {
-  if (fileNames.length === 0) return `${action}.${extension}`;
-  const base = stripExtension(fileNames[0]);
+  const first = fileNames[0];
+  if (first === undefined) return `${action}.${extension}`;
+  const base = stripExtension(first);
   const middle = infix ? `${base}-${infix}` : base;
   return `${action}-${middle}.${extension}`;
 }

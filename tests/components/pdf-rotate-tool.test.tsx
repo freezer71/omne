@@ -72,8 +72,8 @@ describe('PdfRotateTool (per-page)', () => {
     await user.click(screen.getByRole('button', { name: 'Rotate page 2' }));
     await user.click(screen.getByRole('button', { name: messages.rotateButton }));
     expect(rotatePdf).toHaveBeenCalledOnce();
-    expect(rotatePdf.mock.calls[0][1]).toEqual({ perPage: { 2: 90 } });
-    expect(downloadBlob.mock.calls[0][1]).toBe('rotated-invoice.pdf');
+    expect(rotatePdf.mock.calls[0]![1]).toEqual({ perPage: { 2: 90 } });
+    expect(downloadBlob.mock.calls[0]![1]).toBe('rotated-invoice.pdf');
   });
 
   it('clicking rotate-overlay twice cycles 0→90→180', async () => {
@@ -85,7 +85,7 @@ describe('PdfRotateTool (per-page)', () => {
     await user.click(screen.getByRole('button', { name: 'Rotate page 1' }));
     await user.click(screen.getByRole('button', { name: 'Rotate page 1' }));
     await user.click(screen.getByRole('button', { name: messages.rotateButton }));
-    expect(rotatePdf.mock.calls[0][1]).toEqual({ perPage: { 1: 180 } });
+    expect(rotatePdf.mock.calls[0]![1]).toEqual({ perPage: { 1: 180 } });
   });
 
   it('All 90° sets every page to 90', async () => {
@@ -96,7 +96,7 @@ describe('PdfRotateTool (per-page)', () => {
     await waitFor(() => expect(screen.getByRole('button', { name: 'Rotate page 1' })).toBeInTheDocument());
     await user.click(screen.getByRole('button', { name: messages.rotateAll90 }));
     await user.click(screen.getByRole('button', { name: messages.rotateButton }));
-    expect(rotatePdf.mock.calls[0][1]).toEqual({ perPage: { 1: 90, 2: 90, 3: 90 } });
+    expect(rotatePdf.mock.calls[0]![1]).toEqual({ perPage: { 1: 90, 2: 90, 3: 90 } });
   });
 
   it('Reset clears all rotations', async () => {

@@ -53,9 +53,9 @@ export function VideoConvertTool(messages: Messages) {
 
   const onPickFiles = (incoming: FileList | File[] | null) => {
     if (!incoming) return;
-    const arr = Array.from(incoming).filter((f) => f.type.startsWith('video/'));
-    if (arr.length === 0) return;
-    setFile(arr[0]);
+    const first = Array.from(incoming).find((f) => f.type.startsWith('video/'));
+    if (!first) return;
+    setFile(first);
     setError(null);
   };
 

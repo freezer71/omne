@@ -17,7 +17,7 @@ export async function getToolMetadata(
   if (!tool) return {};
   const dict = await getDictionary(locale);
   const node = (dict as unknown as Record<string, Record<string, Record<string, ToolMessages>>>)
-    .tools?.[category]?.[id];
+    ['tools']?.[category]?.[id];
   if (!node) return {};
   return { title: node.name, description: node.description };
 }

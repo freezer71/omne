@@ -80,9 +80,9 @@ describe('PdfToImagesTool', () => {
     await user.upload(screen.getByLabelText(messages.selectButton), await makePdfFile(2, 'doc.pdf'));
     await waitFor(() => expect(screen.getByRole('button', { name: 'Download page 1' })).toBeInTheDocument());
     await user.click(screen.getByRole('button', { name: 'Download page 2' }));
-    expect(pdfToImages.mock.calls[0][1]).toEqual({ format: 'png' });
+    expect(pdfToImages.mock.calls[0]![1]).toEqual({ format: 'png' });
     expect(downloadBlob).toHaveBeenCalledOnce();
-    expect(downloadBlob.mock.calls[0][1]).toBe('doc-page-2.png');
+    expect(downloadBlob.mock.calls[0]![1]).toBe('doc-page-2.png');
   });
 
   it('switching format to JPG passes format:jpeg', async () => {
@@ -95,7 +95,7 @@ describe('PdfToImagesTool', () => {
     await waitFor(() => expect(screen.getByRole('button', { name: 'Download page 1' })).toBeInTheDocument());
     await user.selectOptions(screen.getByLabelText(messages.format), 'jpeg');
     await user.click(screen.getByRole('button', { name: 'Download page 1' }));
-    expect(pdfToImages.mock.calls[0][1]).toEqual({ format: 'jpeg' });
+    expect(pdfToImages.mock.calls[0]![1]).toEqual({ format: 'jpeg' });
   });
 
   it('Download all as ZIP packs each page via jszip and downloads a .zip', async () => {
@@ -110,9 +110,9 @@ describe('PdfToImagesTool', () => {
     await waitFor(() => expect(screen.getByRole('button', { name: 'Download page 1' })).toBeInTheDocument());
     await user.click(screen.getByRole('button', { name: messages.downloadAllZip }));
     expect(zipFile).toHaveBeenCalledTimes(2);
-    expect(zipFile.mock.calls[0][0]).toBe('page-1.png');
-    expect(zipFile.mock.calls[1][0]).toBe('page-2.png');
-    expect(downloadBlob.mock.calls[0][1]).toBe('images-from-doc.zip');
+    expect(zipFile.mock.calls[0]![0]).toBe('page-1.png');
+    expect(zipFile.mock.calls[1]![0]).toBe('page-2.png');
+    expect(downloadBlob.mock.calls[0]![1]).toBe('images-from-doc.zip');
   });
 
   it('shows error on export failure', async () => {
