@@ -32,7 +32,11 @@ export default async function HubPage({
   const jsonLd = await siteJsonLd(locale);
 
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-12 px-4 sm:px-6 py-16 sm:py-24">
+    <main className="relative mx-auto flex w-full max-w-5xl flex-1 flex-col gap-12 px-4 sm:px-6 py-16 sm:py-24">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[480px] [background:radial-gradient(ellipse_60%_60%_at_50%_0%,color-mix(in_srgb,var(--text-primary)_8%,transparent),transparent_70%)]"
+      />
       <Hero title={dict.hub.title} subtitle={dict.hub.subtitle} dropHint={dict.hub.dropHint} />
       <HubToolFinder
         locale={locale}
@@ -50,10 +54,12 @@ export default async function HubPage({
 
 function Hero({ title, subtitle, dropHint }: { title: string; subtitle: string; dropHint: string }) {
   return (
-    <section className="flex flex-col gap-3 max-w-2xl">
-      <h1 className="text-4xl sm:text-5xl font-medium tracking-tight text-text-primary">{title}</h1>
+    <section className="flex flex-col gap-4 max-w-2xl">
+      <h1 className="text-5xl sm:text-6xl font-semibold tracking-tighter text-text-primary leading-[1.05]">
+        {title}
+      </h1>
       <p className="text-base sm:text-lg text-text-muted leading-relaxed">{subtitle}</p>
-      <p className="text-sm text-text-faint font-mono mt-2">↳ {dropHint}</p>
+      <p className="text-sm text-text-faint font-mono mt-1">↳ {dropHint}</p>
     </section>
   );
 }

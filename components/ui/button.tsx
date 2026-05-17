@@ -16,14 +16,13 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-accent text-accent-fg hover:bg-accent-hover ' +
-    'shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]',
+    'bg-accent text-accent-fg hover:bg-accent-hover',
   ghost:
     'bg-transparent text-text-primary border border-border ' +
     'hover:bg-surface-hover hover:border-border-strong',
   subtle:
-    'bg-surface text-text-primary ' +
-    'hover:bg-surface-hover',
+    'bg-surface text-text-primary border border-border ' +
+    'hover:bg-surface-hover hover:border-border-strong',
   danger:
     'bg-danger text-white hover:opacity-90',
 };
@@ -31,7 +30,7 @@ const variants: Record<Variant, string> = {
 const sizes: Record<Size, string> = {
   sm: 'h-8 px-3 text-sm rounded-md',
   md: 'h-9 px-4 text-sm rounded-md',
-  lg: 'h-11 px-5 text-base rounded-lg',
+  lg: 'h-10 px-5 text-sm rounded-md',
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(

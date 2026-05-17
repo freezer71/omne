@@ -63,7 +63,7 @@ export function CommandPalette({
       filter={paletteFilter}
       loop
       overlayClassName="fixed inset-0 z-40 bg-bg/70 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in-0"
-      contentClassName="fixed left-1/2 top-[15vh] z-50 w-[min(640px,100vw-2rem)] -translate-x-1/2 overflow-hidden rounded-xl border border-border bg-surface-elevated shadow-2xl outline-none"
+      contentClassName="fixed left-1/2 top-[15vh] z-50 w-[min(640px,100vw-2rem)] -translate-x-1/2 overflow-hidden rounded-lg border border-border bg-surface-elevated shadow-2xl outline-none"
     >
       <RadixDialog.Title className="sr-only">{messages.placeholder}</RadixDialog.Title>
       <RadixDialog.Description className="sr-only">{messages.placeholder}</RadixDialog.Description>

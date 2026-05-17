@@ -50,7 +50,7 @@ function PrivacyBadge({ label }: { label: string }) {
     <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-2.5 py-1 text-xs text-text-muted">
       <span
         aria-hidden
-        className="inline-block h-1.5 w-1.5 rounded-full bg-success shadow-[0_0_8px_var(--success)]"
+        className="inline-block h-1.5 w-1.5 rounded-full bg-success"
       />
       {label}
     </span>

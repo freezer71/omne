@@ -1,42 +1,44 @@
 @import "tailwindcss";
 
-/* ---------- Design tokens (Linear-style) ---------- */
+/* ---------- Design tokens (Vercel / Geist-style) ---------- */
 
 :root,
 [data-theme="dark"] {
-  --bg: #08090a;
-  --surface: #111214;
-  --surface-elevated: #16181c;
-  --surface-hover: #1c1d22;
-  --border: rgb(255 255 255 / 0.08);
-  --border-strong: rgb(255 255 255 / 0.14);
-  --text-primary: #f4f4f5;
-  --text-muted: #8a8f98;
-  --text-faint: #5a5f68;
-  --accent: #5e6ad2;
-  --accent-hover: #7178e6;
-  --accent-fg: #ffffff;
-  --danger: #e5484d;
-  --success: #30a46c;
-  --warning: #f5a524;
+  --bg: #000000;
+  --surface: #0a0a0a;
+  --surface-elevated: #111111;
+  --surface-hover: #171717;
+  --border: #262626;
+  --border-strong: #404040;
+  --text-primary: #fafafa;
+  --text-muted: #a3a3a3;
+  --text-faint: #737373;
+  --accent: #ffffff;
+  --accent-hover: #ededed;
+  --accent-fg: #000000;
+  --danger: #ee0000;
+  --success: #0cce6b;
+  --warning: #f5a623;
+  --radius: 6px;
 }
 
 [data-theme="light"] {
   --bg: #ffffff;
-  --surface: #fafbfc;
+  --surface: #fafafa;
   --surface-elevated: #ffffff;
-  --surface-hover: #f3f4f6;
-  --border: rgb(0 0 0 / 0.08);
-  --border-strong: rgb(0 0 0 / 0.14);
-  --text-primary: #08090a;
-  --text-muted: #6b7280;
-  --text-faint: #9ca3af;
-  --accent: #5e6ad2;
-  --accent-hover: #4f57b8;
+  --surface-hover: #f5f5f5;
+  --border: #eaeaea;
+  --border-strong: #d4d4d4;
+  --text-primary: #0a0a0a;
+  --text-muted: #666666;
+  --text-faint: #999999;
+  --accent: #000000;
+  --accent-hover: #1f1f1f;
   --accent-fg: #ffffff;
-  --danger: #cc2127;
-  --success: #1f7a4d;
-  --warning: #b97309;
+  --danger: #ee0000;
+  --success: #0cce6b;
+  --warning: #f5a623;
+  --radius: 6px;
 }
 
 /* ---------- Tailwind v4 theme map ---------- */
@@ -77,14 +79,13 @@ body {
   background: var(--bg);
   color: var(--text-primary);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  font-feature-settings: "cv11", "ss01";
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
   color: var(--text-primary);
 }
 
@@ -93,5 +94,5 @@ body {
 :where(button, a, input, textarea, [role="button"], [tabindex]):focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: var(--radius);
 }
