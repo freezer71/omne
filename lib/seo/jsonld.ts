@@ -30,6 +30,7 @@ function applicationCategory(category: ToolCategory): string {
     case 'password':
     case 'text':
     case 'utility':
+    case 'json':
       return 'UtilitiesApplication';
     case 'image':
     case 'video':

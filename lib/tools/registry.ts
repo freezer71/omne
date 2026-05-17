@@ -174,6 +174,90 @@ export const TOOLS: readonly ToolMeta[] = [
     acceptedMime: [],
     status: 'stable',
   },
+  {
+    id: 'format',
+    category: 'json',
+    href: '/json/format',
+    i18nKey: 'tools.json.format',
+    keywords: [
+      'json', 'format', 'formatter', 'beautify', 'pretty print', 'minify',
+      'sort keys', 'validate', 'embellir', 'compresser', 'valider',
+    ],
+    acceptedMime: ['application/json'],
+    status: 'stable',
+  },
+  {
+    id: 'tree',
+    category: 'json',
+    href: '/json/tree',
+    i18nKey: 'tools.json.tree',
+    keywords: [
+      'json', 'tree', 'viewer', 'visualizer', 'explorer', 'browser', 'inspect',
+      'arborescence', 'visionneuse', 'explorer', 'inspecter',
+    ],
+    acceptedMime: ['application/json'],
+    status: 'stable',
+  },
+  {
+    id: 'query',
+    category: 'json',
+    href: '/json/query',
+    i18nKey: 'tools.json.query',
+    keywords: [
+      'json', 'query', 'jsonpath', 'filter', 'search', 'extract', 'find',
+      'interroger', 'filtrer', 'extraire',
+    ],
+    acceptedMime: ['application/json'],
+    status: 'stable',
+  },
+  {
+    id: 'table',
+    category: 'json',
+    href: '/json/table',
+    i18nKey: 'tools.json.table',
+    keywords: [
+      'json', 'table', 'array', 'rows', 'columns', 'sort', 'filter', 'search',
+      'tableau', 'lignes', 'colonnes', 'trier', 'filtrer',
+    ],
+    acceptedMime: ['application/json'],
+    status: 'stable',
+  },
+  {
+    id: 'csv',
+    category: 'json',
+    href: '/json/csv',
+    i18nKey: 'tools.json.csv',
+    keywords: [
+      'json', 'csv', 'convert', 'export', 'import', 'spreadsheet', 'tsv',
+      'convertir', 'exporter', 'importer', 'tableur',
+    ],
+    acceptedMime: ['application/json', 'text/csv'],
+    status: 'stable',
+  },
+  {
+    id: 'diff',
+    category: 'json',
+    href: '/json/diff',
+    i18nKey: 'tools.json.diff',
+    keywords: [
+      'json', 'diff', 'compare', 'comparison', 'changes',
+      'comparer', 'différence', 'difference',
+    ],
+    acceptedMime: ['application/json'],
+    status: 'stable',
+  },
+  {
+    id: 'schema',
+    category: 'json',
+    href: '/json/schema',
+    i18nKey: 'tools.json.schema',
+    keywords: [
+      'json', 'schema', 'validate', 'generate', 'ajv', 'json-schema', 'draft-07', 'draft-2020-12',
+      'valider', 'générer', 'schéma',
+    ],
+    acceptedMime: ['application/json'],
+    status: 'stable',
+  },
 ] as const;
 
 export function getTool(category: string, id: string): ToolMeta | undefined {

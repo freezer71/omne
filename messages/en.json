@@ -40,6 +40,7 @@
       "video": "Video tools",
       "image": "Image tools",
       "password": "Password tools",
+      "json": "JSON tools",
       "text": "Text tools",
       "utility": "Utilities"
     },
@@ -660,6 +661,289 @@
           "warningCommon": "Contains a common word or pattern.",
           "warningTooShort": "Too short (under 8 characters).",
           "empty": "Enter a password to see its strength."
+        }
+      }
+    },
+    "json": {
+      "format": {
+        "name": "JSON Formatter",
+        "description": "Beautify, minify, sort keys, validate — with live preview.",
+        "seo": {
+          "title": "JSON Formatter Online — Free Pretty-Print, Minify, Sort Keys, Validate",
+          "description": "Format, minify and sort-keys any JSON with a live preview and inline syntax validation. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "json formatter online",
+            "json beautifier",
+            "minify json",
+            "json validator",
+            "pretty print json",
+            "sort json keys",
+            "free json formatter"
+          ],
+          "ogTitle": "JSON Formatter · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste or type any JSON here…",
+          "outputLabel": "Output",
+          "indent": "Indent",
+          "indent2": "2 spaces",
+          "indent4": "4 spaces",
+          "indentTab": "Tab",
+          "minify": "Minify",
+          "sortKeys": "Sort keys alphabetically",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Output will appear here as you type.",
+          "validBadge": "Valid",
+          "invalidBadge": "Invalid",
+          "errorTemplate": "Line {line}, column {col} — {message}",
+          "sizeTemplate": "{bytes} bytes"
+        }
+      },
+      "tree": {
+        "name": "JSON Tree Viewer",
+        "description": "Explore JSON as an interactive tree — expand, collapse, search, copy paths.",
+        "seo": {
+          "title": "JSON Tree Viewer Online — Free, Interactive, Searchable",
+          "description": "Visualize any JSON as an interactive tree. Expand, collapse, search keys and values, copy paths or values. 100% in your browser — no upload.",
+          "keywords": [
+            "json viewer online",
+            "json tree explorer",
+            "json visualizer",
+            "json tree viewer",
+            "explore json",
+            "free json viewer"
+          ],
+          "ogTitle": "JSON Tree Viewer · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste or type any JSON here…",
+          "searchLabel": "Search",
+          "searchPlaceholder": "Search keys or string values…",
+          "empty": "Paste a JSON to start exploring.",
+          "loadSample": "Load sample",
+          "clear": "Clear",
+          "validBadge": "Valid",
+          "invalidBadge": "Invalid",
+          "errorTemplate": "Line {line}, column {col} — {message}",
+          "statsTemplate": "{nodes} nodes · depth {depth} · {keys} keys",
+          "copyPath": "Copy path",
+          "copyValue": "Copy value",
+          "copiedToast": "Copied!",
+          "expandAll": "Expand all",
+          "collapseAll": "Collapse all",
+          "emptyObject": "{}",
+          "emptyArray": "[]"
+        }
+      },
+      "query": {
+        "name": "JSON Query",
+        "description": "Filter and extract from any JSON using JSONPath — with live preview.",
+        "seo": {
+          "title": "JSON Query Online — Free JSONPath Tester with Live Preview",
+          "description": "Filter, extract, and explore JSON with JSONPath expressions ($..price, $.users[*].name, $.items[?(@.x>10)]). Live preview, 100% in your browser.",
+          "keywords": [
+            "jsonpath tester",
+            "json query online",
+            "filter json",
+            "jsonpath online",
+            "extract json",
+            "jq alternative online"
+          ],
+          "ogTitle": "JSON Query · 100% local"
+        },
+        "ui": {
+          "inputLabel": "JSON",
+          "inputPlaceholder": "Paste or type any JSON here…",
+          "pathLabel": "JSONPath expression",
+          "pathPlaceholder": "$..*",
+          "outputLabel": "Results",
+          "empty": "Paste a JSON and write a path to see results.",
+          "loadSample": "Load sample",
+          "clear": "Clear",
+          "validBadge": "Valid",
+          "invalidBadge": "Invalid",
+          "errorTemplate": "Line {line}, column {col} — {message}",
+          "pathError": "Invalid JSONPath: {message}",
+          "resultsTemplate": "{n} result(s)",
+          "noResults": "No match for this path.",
+          "copy": "Copy",
+          "copied": "Copied",
+          "examples": "Examples",
+          "exampleAllKeys": "Top-level keys",
+          "exampleAllValues": "All values",
+          "exampleByName": "All book titles",
+          "exampleFilter": "Books > $10",
+          "exampleRecursive": "All authors"
+        }
+      },
+      "table": {
+        "name": "JSON to Table",
+        "description": "Turn an array of objects into a sortable, filterable table — with CSV export.",
+        "seo": {
+          "title": "JSON to Table — Sort, Filter, and Export Any JSON Array",
+          "description": "Render any JSON array of objects as an interactive table. Sort, filter per column, search globally, export to CSV. 100% in your browser — no upload.",
+          "keywords": [
+            "json to table viewer",
+            "explore json array",
+            "json array filter",
+            "json table online",
+            "json grid",
+            "json sort filter"
+          ],
+          "ogTitle": "JSON Table · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Input JSON",
+          "inputPlaceholder": "Paste an array of objects, e.g. [{...}, {...}]",
+          "empty": "Paste a JSON array of objects to render a table.",
+          "notArray": "This JSON is not an array. Provide an array of objects to render a table.",
+          "loadSample": "Load sample",
+          "clear": "Clear",
+          "validBadge": "Valid",
+          "invalidBadge": "Invalid",
+          "errorTemplate": "Line {line}, column {col} — {message}",
+          "searchPlaceholder": "Search…",
+          "filterPlaceholder": "Filter",
+          "prev": "Prev",
+          "next": "Next",
+          "pageTemplate": "Page {page} / {total}",
+          "rowsTemplate": "{visible}/{total} rows",
+          "exportCsv": "Export CSV",
+          "exportJson": "Export JSON",
+          "columnsLabel": "Columns",
+          "columnsTemplate": "{cols} columns · {rows} rows"
+        }
+      },
+      "csv": {
+        "name": "JSON ↔ CSV",
+        "description": "Convert JSON arrays to CSV and back — with delimiter and quote options.",
+        "seo": {
+          "title": "JSON to CSV / CSV to JSON Converter — Free, In-Browser",
+          "description": "Convert any JSON array of objects to CSV or CSV to JSON. Choose delimiter (comma, semicolon, tab, pipe), quote character, header row. 100% in your browser.",
+          "keywords": [
+            "json to csv converter",
+            "csv to json",
+            "json csv online",
+            "csv converter free",
+            "json export csv",
+            "convert json csv"
+          ],
+          "ogTitle": "JSON ↔ CSV · 100% local"
+        },
+        "ui": {
+          "modeJsonToCsv": "JSON → CSV",
+          "modeCsvToJson": "CSV → JSON",
+          "jsonInputLabel": "JSON array",
+          "jsonInputPlaceholder": "Paste an array of objects, e.g. [{...}, {...}]",
+          "csvInputLabel": "CSV text",
+          "csvInputPlaceholder": "Paste your CSV here…",
+          "jsonOutputLabel": "JSON output",
+          "csvOutputLabel": "CSV output",
+          "delimiter": "Delimiter",
+          "delimiterComma": "Comma ,",
+          "delimiterSemicolon": "Semicolon ;",
+          "delimiterTab": "Tab",
+          "delimiterPipe": "Pipe |",
+          "headers": "First row is headers",
+          "notArray": "This JSON is not an array. Provide an array of objects.",
+          "empty": "Output will appear here as you type.",
+          "loadSample": "Load sample",
+          "clear": "Clear",
+          "validBadge": "Valid",
+          "invalidBadge": "Invalid",
+          "errorTemplate": "Line {line}, column {col} — {message}",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "autoDetect": "Auto-detected",
+          "rowsTemplate": "{rows} rows · {cols} columns"
+        }
+      },
+      "diff": {
+        "name": "JSON Diff",
+        "description": "Compare two JSON documents side-by-side — added, removed, and changed values are highlighted.",
+        "seo": {
+          "title": "JSON Diff Online — Compare Two JSON Files Side by Side",
+          "description": "Compare two JSON documents and see what's added, removed, and changed — side by side, with colored highlights. 100% in your browser, no upload.",
+          "keywords": [
+            "json diff online",
+            "compare json files",
+            "json comparison",
+            "json compare tool",
+            "diff json",
+            "json change tracker"
+          ],
+          "ogTitle": "JSON Diff · 100% local"
+        },
+        "ui": {
+          "inputALabel": "Version A",
+          "inputBLabel": "Version B",
+          "inputAPlaceholder": "Paste the first JSON document here…",
+          "inputBPlaceholder": "Paste the second JSON document here…",
+          "empty": "Paste a JSON to compare.",
+          "loadSample": "Load sample",
+          "clear": "Clear",
+          "validBadge": "Valid",
+          "invalidBadge": "Invalid",
+          "errorTemplate": "Line {line}, column {col} — {message}",
+          "statsTemplate": "+{added} added · -{removed} removed · ~{changed} changed",
+          "identicalLabel": "The two documents are identical.",
+          "legendAdded": "added",
+          "legendRemoved": "removed",
+          "legendChanged": "changed",
+          "treeALabel": "Tree A",
+          "treeBLabel": "Tree B"
+        }
+      },
+      "schema": {
+        "name": "JSON Schema",
+        "description": "Validate JSON against a schema, or generate a schema from a sample document.",
+        "seo": {
+          "title": "JSON Schema Online — Validate & Generate (Draft 2020-12 / 07)",
+          "description": "Validate any JSON against a JSON Schema (Ajv, draft 2020-12 or 07) or infer a schema from a sample. Errors listed by path. 100% in your browser.",
+          "keywords": [
+            "json schema generator",
+            "validate json schema online",
+            "infer json schema",
+            "json schema tester",
+            "ajv online",
+            "draft 2020-12"
+          ],
+          "ogTitle": "JSON Schema · 100% local"
+        },
+        "ui": {
+          "modeValidate": "Validate",
+          "modeGenerate": "Generate",
+          "draftLabel": "Draft",
+          "draft07": "draft-07",
+          "draft2020": "2020-12",
+          "dataLabel": "JSON data",
+          "dataPlaceholder": "Paste the JSON to validate…",
+          "schemaLabel": "JSON Schema",
+          "schemaPlaceholder": "Paste your JSON Schema here…",
+          "sampleLabel": "Sample JSON",
+          "samplePlaceholder": "Paste a representative JSON sample…",
+          "generatedSchemaLabel": "Inferred schema",
+          "validateBadge": "Valid",
+          "invalidBadge": "Invalid",
+          "validMessage": "Data matches the schema.",
+          "errorsTemplate": "{n} validation error(s)",
+          "errorRowTemplate": "{path} — {message}",
+          "parseDataError": "Invalid JSON data",
+          "parseSchemaError": "Invalid JSON Schema",
+          "errorTemplate": "line {line}, col {col} — {message}",
+          "empty": "Paste a sample to infer a schema.",
+          "loadSample": "Load sample",
+          "clear": "Clear",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download"
         }
       }
     }

@@ -3,7 +3,12 @@ import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/regis
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(18);
+    expect(TOOLS).toHaveLength(25);
+  });
+
+  it('exposes the 7 JSON tools', () => {
+    const json = TOOLS.filter((t) => t.category === 'json').map((t) => t.id).sort();
+    expect(json).toEqual(['csv', 'diff', 'format', 'query', 'schema', 'table', 'tree']);
   });
 
   it('has unique (category, id) combinations', () => {

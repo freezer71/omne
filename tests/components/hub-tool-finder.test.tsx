@@ -46,6 +46,7 @@ const categoryLabels = {
   video: 'Video tools',
   image: 'Image tools',
   password: 'Password tools',
+  json: 'JSON tools',
   text: 'Text tools',
   utility: 'Utilities',
 } as const;

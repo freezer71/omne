@@ -40,6 +40,7 @@
       "video": "Outils vidéo",
       "image": "Outils image",
       "password": "Mots de passe",
+      "json": "Outils JSON",
       "text": "Outils texte",
       "utility": "Utilitaires"
     },
@@ -660,6 +661,289 @@
           "warningCommon": "Contient un mot ou motif courant.",
           "warningTooShort": "Trop court (moins de 8 caractères).",
           "empty": "Entrez un mot de passe pour voir sa force."
+        }
+      }
+    },
+    "json": {
+      "format": {
+        "name": "Formatter JSON",
+        "description": "Embellir, compresser, trier les clés, valider — avec aperçu en direct.",
+        "seo": {
+          "title": "Formatter JSON en ligne — Gratuit, embellir, compresser, trier, valider",
+          "description": "Formattez, compressez et triez les clés de n'importe quel JSON avec aperçu en direct et validation de syntaxe. 100 % dans votre navigateur — aucun envoi.",
+          "keywords": [
+            "formatter json en ligne",
+            "embellir json",
+            "compresser json",
+            "valider json",
+            "pretty print json",
+            "trier clés json",
+            "formatter json gratuit"
+          ],
+          "ogTitle": "Formatter JSON · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez ou tapez n'importe quel JSON ici…",
+          "outputLabel": "Sortie",
+          "indent": "Indentation",
+          "indent2": "2 espaces",
+          "indent4": "4 espaces",
+          "indentTab": "Tabulation",
+          "minify": "Compressé",
+          "sortKeys": "Trier les clés par ordre alphabétique",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "Le résultat apparaîtra ici pendant la saisie.",
+          "validBadge": "Valide",
+          "invalidBadge": "Invalide",
+          "errorTemplate": "Ligne {line}, colonne {col} — {message}",
+          "sizeTemplate": "{bytes} octets"
+        }
+      },
+      "tree": {
+        "name": "Visionneuse JSON",
+        "description": "Explorez le JSON comme un arbre interactif — déplier, replier, rechercher, copier les chemins.",
+        "seo": {
+          "title": "Visionneuse JSON en ligne — Gratuit, interactif, recherche",
+          "description": "Visualisez n'importe quel JSON sous forme d'arbre interactif. Déplier, replier, rechercher des clés et des valeurs, copier les chemins. 100 % dans votre navigateur.",
+          "keywords": [
+            "visionneuse json",
+            "explorer json arborescence",
+            "afficher json",
+            "json arbre",
+            "explorer json",
+            "visionneuse json gratuite"
+          ],
+          "ogTitle": "Visionneuse JSON · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez ou tapez n'importe quel JSON ici…",
+          "searchLabel": "Rechercher",
+          "searchPlaceholder": "Rechercher des clés ou des valeurs…",
+          "empty": "Collez un JSON pour commencer à explorer.",
+          "loadSample": "Exemple",
+          "clear": "Effacer",
+          "validBadge": "Valide",
+          "invalidBadge": "Invalide",
+          "errorTemplate": "Ligne {line}, colonne {col} — {message}",
+          "statsTemplate": "{nodes} nœuds · profondeur {depth} · {keys} clés",
+          "copyPath": "Copier le chemin",
+          "copyValue": "Copier la valeur",
+          "copiedToast": "Copié !",
+          "expandAll": "Tout déplier",
+          "collapseAll": "Tout replier",
+          "emptyObject": "{}",
+          "emptyArray": "[]"
+        }
+      },
+      "query": {
+        "name": "Requête JSON",
+        "description": "Filtrez et extrayez n'importe quel JSON avec JSONPath — avec aperçu en direct.",
+        "seo": {
+          "title": "Requête JSON en ligne — Testeur JSONPath gratuit, aperçu en direct",
+          "description": "Filtrez, extrayez et explorez du JSON avec des expressions JSONPath ($..price, $.users[*].name, $.items[?(@.x>10)]). Aperçu en direct, 100 % dans votre navigateur.",
+          "keywords": [
+            "testeur jsonpath",
+            "interroger json en ligne",
+            "filtrer json",
+            "jsonpath en ligne",
+            "extraire json",
+            "alternative jq en ligne"
+          ],
+          "ogTitle": "Requête JSON · 100% local"
+        },
+        "ui": {
+          "inputLabel": "JSON",
+          "inputPlaceholder": "Collez ou tapez n'importe quel JSON ici…",
+          "pathLabel": "Expression JSONPath",
+          "pathPlaceholder": "$..*",
+          "outputLabel": "Résultats",
+          "empty": "Collez un JSON et écrivez un chemin pour voir les résultats.",
+          "loadSample": "Exemple",
+          "clear": "Effacer",
+          "validBadge": "Valide",
+          "invalidBadge": "Invalide",
+          "errorTemplate": "Ligne {line}, colonne {col} — {message}",
+          "pathError": "JSONPath invalide : {message}",
+          "resultsTemplate": "{n} résultat(s)",
+          "noResults": "Aucun résultat pour ce chemin.",
+          "copy": "Copier",
+          "copied": "Copié",
+          "examples": "Exemples",
+          "exampleAllKeys": "Clés racine",
+          "exampleAllValues": "Toutes les valeurs",
+          "exampleByName": "Titres des livres",
+          "exampleFilter": "Livres > 10 $",
+          "exampleRecursive": "Tous les auteurs"
+        }
+      },
+      "table": {
+        "name": "JSON en tableau",
+        "description": "Transformez un tableau d'objets JSON en table interactive — triable, filtrable, exportable en CSV.",
+        "seo": {
+          "title": "JSON en tableau — Trier, filtrer, exporter n'importe quel JSON array",
+          "description": "Affichez n'importe quel tableau JSON d'objets sous forme de table interactive. Triez, filtrez par colonne, recherchez, exportez en CSV. 100 % dans votre navigateur.",
+          "keywords": [
+            "json en tableau",
+            "visualiser tableau json",
+            "filtrer tableau json",
+            "json table en ligne",
+            "grille json",
+            "json trier filtrer"
+          ],
+          "ogTitle": "JSON en tableau · 100% local"
+        },
+        "ui": {
+          "inputLabel": "JSON d'entrée",
+          "inputPlaceholder": "Collez un tableau d'objets, par ex. [{...}, {...}]",
+          "empty": "Collez un tableau JSON d'objets pour afficher une table.",
+          "notArray": "Ce JSON n'est pas un tableau. Fournissez un tableau d'objets pour afficher une table.",
+          "loadSample": "Exemple",
+          "clear": "Effacer",
+          "validBadge": "Valide",
+          "invalidBadge": "Invalide",
+          "errorTemplate": "Ligne {line}, colonne {col} — {message}",
+          "searchPlaceholder": "Rechercher…",
+          "filterPlaceholder": "Filtrer",
+          "prev": "Précédent",
+          "next": "Suivant",
+          "pageTemplate": "Page {page} / {total}",
+          "rowsTemplate": "{visible}/{total} lignes",
+          "exportCsv": "Exporter CSV",
+          "exportJson": "Exporter JSON",
+          "columnsLabel": "Colonnes",
+          "columnsTemplate": "{cols} colonnes · {rows} lignes"
+        }
+      },
+      "csv": {
+        "name": "JSON ↔ CSV",
+        "description": "Convertissez des tableaux JSON en CSV et inversement — options de séparateur et de guillemets.",
+        "seo": {
+          "title": "JSON vers CSV / CSV vers JSON — Convertisseur gratuit, navigateur",
+          "description": "Convertissez n'importe quel tableau JSON d'objets en CSV ou inversement. Choisissez le séparateur (virgule, point-virgule, tab, pipe), le guillemet, la ligne d'en-tête. 100 % dans votre navigateur.",
+          "keywords": [
+            "convertir json csv",
+            "csv vers json",
+            "json csv en ligne",
+            "convertisseur csv gratuit",
+            "exporter json csv",
+            "conversion json csv"
+          ],
+          "ogTitle": "JSON ↔ CSV · 100% local"
+        },
+        "ui": {
+          "modeJsonToCsv": "JSON → CSV",
+          "modeCsvToJson": "CSV → JSON",
+          "jsonInputLabel": "Tableau JSON",
+          "jsonInputPlaceholder": "Collez un tableau d'objets, par ex. [{...}, {...}]",
+          "csvInputLabel": "Texte CSV",
+          "csvInputPlaceholder": "Collez votre CSV ici…",
+          "jsonOutputLabel": "Sortie JSON",
+          "csvOutputLabel": "Sortie CSV",
+          "delimiter": "Séparateur",
+          "delimiterComma": "Virgule ,",
+          "delimiterSemicolon": "Point-virgule ;",
+          "delimiterTab": "Tabulation",
+          "delimiterPipe": "Pipe |",
+          "headers": "La 1re ligne contient les en-têtes",
+          "notArray": "Ce JSON n'est pas un tableau. Fournissez un tableau d'objets.",
+          "empty": "Le résultat apparaîtra ici pendant la saisie.",
+          "loadSample": "Exemple",
+          "clear": "Effacer",
+          "validBadge": "Valide",
+          "invalidBadge": "Invalide",
+          "errorTemplate": "Ligne {line}, colonne {col} — {message}",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "autoDetect": "Détecté",
+          "rowsTemplate": "{rows} lignes · {cols} colonnes"
+        }
+      },
+      "diff": {
+        "name": "Diff JSON",
+        "description": "Comparez deux documents JSON côte à côte — ajouts, suppressions et changements surlignés.",
+        "seo": {
+          "title": "Diff JSON en ligne — Comparer deux fichiers JSON côte à côte",
+          "description": "Comparez deux documents JSON et voyez ce qui a été ajouté, supprimé ou modifié — côte à côte, surligné. 100 % dans votre navigateur, aucun envoi.",
+          "keywords": [
+            "comparer json",
+            "diff json en ligne",
+            "comparaison json",
+            "outil diff json",
+            "diff json gratuit",
+            "json changements"
+          ],
+          "ogTitle": "Diff JSON · 100% local"
+        },
+        "ui": {
+          "inputALabel": "Version A",
+          "inputBLabel": "Version B",
+          "inputAPlaceholder": "Collez le premier document JSON ici…",
+          "inputBPlaceholder": "Collez le second document JSON ici…",
+          "empty": "Collez un JSON à comparer.",
+          "loadSample": "Exemple",
+          "clear": "Effacer",
+          "validBadge": "Valide",
+          "invalidBadge": "Invalide",
+          "errorTemplate": "Ligne {line}, colonne {col} — {message}",
+          "statsTemplate": "+{added} ajouts · -{removed} suppressions · ~{changed} modifs",
+          "identicalLabel": "Les deux documents sont identiques.",
+          "legendAdded": "ajouté",
+          "legendRemoved": "supprimé",
+          "legendChanged": "modifié",
+          "treeALabel": "Arbre A",
+          "treeBLabel": "Arbre B"
+        }
+      },
+      "schema": {
+        "name": "Schéma JSON",
+        "description": "Validez un JSON contre un schéma, ou générez un schéma depuis un échantillon.",
+        "seo": {
+          "title": "Schéma JSON en ligne — Valider et générer (Draft 2020-12 / 07)",
+          "description": "Validez n'importe quel JSON contre un JSON Schema (Ajv, draft 2020-12 ou 07) ou inférez un schéma depuis un échantillon. Erreurs listées par chemin. 100 % dans votre navigateur.",
+          "keywords": [
+            "générer json schema",
+            "valider json schema",
+            "inférer schema json",
+            "testeur schéma json",
+            "ajv en ligne",
+            "draft 2020-12"
+          ],
+          "ogTitle": "Schéma JSON · 100% local"
+        },
+        "ui": {
+          "modeValidate": "Valider",
+          "modeGenerate": "Générer",
+          "draftLabel": "Draft",
+          "draft07": "draft-07",
+          "draft2020": "2020-12",
+          "dataLabel": "Données JSON",
+          "dataPlaceholder": "Collez le JSON à valider…",
+          "schemaLabel": "Schéma JSON",
+          "schemaPlaceholder": "Collez votre JSON Schema ici…",
+          "sampleLabel": "Échantillon JSON",
+          "samplePlaceholder": "Collez un échantillon JSON représentatif…",
+          "generatedSchemaLabel": "Schéma inféré",
+          "validateBadge": "Valide",
+          "invalidBadge": "Invalide",
+          "validMessage": "Les données correspondent au schéma.",
+          "errorsTemplate": "{n} erreur(s) de validation",
+          "errorRowTemplate": "{path} — {message}",
+          "parseDataError": "Données JSON invalides",
+          "parseSchemaError": "JSON Schema invalide",
+          "errorTemplate": "ligne {line}, col {col} — {message}",
+          "empty": "Collez un échantillon pour inférer un schéma.",
+          "loadSample": "Exemple",
+          "clear": "Effacer",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger"
         }
       }
     }
