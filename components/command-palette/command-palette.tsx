@@ -96,7 +96,7 @@ export function CommandPalette({
                     setOpen(false);
                     router.push(`/${locale}${tool.href}`);
                   }}
-                  className="flex cursor-pointer items-center justify-between gap-3 rounded-md px-3 py-2 text-sm text-text-primary aria-selected:bg-surface-hover data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50"
+                  className="flex cursor-pointer flex-col gap-0.5 rounded-md px-3 py-2 text-sm text-text-primary aria-selected:bg-surface-hover data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50"
                 >
                   <span className="truncate font-medium normal-case tracking-normal">{tool.name}</span>
                   <span className="truncate text-xs text-text-muted normal-case tracking-normal">
