@@ -58,7 +58,9 @@
           "moveDown": "Descendre",
           "busy": "Fusion en cours…",
           "error": "Impossible de fusionner ces PDFs. Essayez d'autres fichiers.",
-          "pageLabelTemplate": "Page {n}"
+          "pageLabelTemplate": "Page {n}",
+          "filesCountSingular": "{n} fichier",
+          "filesCountPlural": "{n} fichiers"
         }
       },
       "split": {
@@ -121,7 +123,11 @@
           "combineButton": "Combiner en PDF",
           "removeFile": "Retirer",
           "busy": "Combinaison…",
-          "error": "Impossible de combiner ces images."
+          "error": "Impossible de combiner ces images.",
+          "imagesCountSingular": "{n} image",
+          "imagesCountPlural": "{n} images",
+          "previewLabel": "Aperçu",
+          "previewPageLabelTemplate": "Page {n}"
         }
       }
     },
@@ -140,7 +146,8 @@
           "formatGif": "GIF",
           "busy": "Conversion…",
           "error": "Échec de la conversion. Essayez un autre fichier ou format.",
-          "removeFile": "Retirer"
+          "removeFile": "Retirer",
+          "outputLabel": "Sortie : {filename} · {mime}"
         }
       },
       "trim": {
@@ -154,7 +161,8 @@
           "endLabel": "Fin (secondes)",
           "busy": "Découpage…",
           "error": "Impossible de découper cette vidéo.",
-          "removeFile": "Retirer"
+          "removeFile": "Retirer",
+          "clipDurationLabel": "Durée du clip : {duration}s"
         }
       }
     },
@@ -170,6 +178,8 @@
           "formatPng": "PNG",
           "formatJpeg": "JPG",
           "formatWebp": "WebP",
+          "previewLabel": "Aperçu",
+          "previewSummary": "{format} · {size}",
           "busy": "Conversion…",
           "error": "Impossible de convertir cette image.",
           "removeFile": "Retirer"
@@ -186,6 +196,9 @@
           "format": "Format de sortie",
           "formatJpeg": "JPG",
           "formatWebp": "WebP",
+          "previewLabel": "Aperçu",
+          "previewSummary": "{format} · {size}",
+          "previewComparison": "Avant : {before} → Après : {after} ({ratio})",
           "busy": "Compression…",
           "error": "Impossible de compresser cette image.",
           "removeFile": "Retirer"
@@ -238,6 +251,8 @@
           "widthLabel": "Largeur",
           "heightLabel": "Hauteur",
           "hint": "Faites glisser sur l'image pour définir la zone. Les coordonnées sont en pixels source.",
+          "previewLabel": "Aperçu du rognage",
+          "previewEmpty": "Faites glisser sur l'image pour démarrer l'aperçu.",
           "busy": "Rognage…",
           "error": "Impossible de rogner cette image.",
           "removeFile": "Retirer"

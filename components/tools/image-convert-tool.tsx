@@ -9,6 +9,7 @@ import {
 } from '@/lib/tools/implementations/image-convert';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { tpl } from '@/lib/tpl';
 
 type Messages = {
   selectButton: string;
@@ -18,6 +19,8 @@ type Messages = {
   formatPng: string;
   formatJpeg: string;
   formatWebp: string;
+  previewLabel: string;
+  previewSummary: string;
   busy: string;
   error: string;
   removeFile: string;
@@ -37,16 +40,27 @@ const MIME_BY_FORMAT: Record<ImageTargetFormat, string> = {
   webp: 'image/webp',
 };
 
+const LABEL_BY_FORMAT: Record<ImageTargetFormat, string> = {
+  png: 'PNG',
+  jpeg: 'JPEG',
+  webp: 'WebP',
+};
+
 export function ImageConvertTool(messages: Messages) {
   const inputId = useId();
   const formatId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
+  const previewImgRef = useRef<HTMLImageElement>(null);
 
   const [file, setFile] = useState<File | null>(null);
   const [format, setFormat] = useState<ImageTargetFormat>('jpeg');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewSize, setPreviewSize] = useState<number | null>(null);
+  const [previewBytes, setPreviewBytes] = useState<Uint8Array | null>(null);
+  const previewUrlRef = useRef<string | null>(null);
 
   const labelFor: Record<ImageTargetFormat, string> = {
     png: messages.formatPng,
@@ -56,20 +70,76 @@ export function ImageConvertTool(messages: Messages) {
 
   const canConvert = file !== null && !busy;
 
+  const resetPreview = () => {
+    if (previewUrlRef.current) {
+      URL.revokeObjectURL(previewUrlRef.current);
+      previewUrlRef.current = null;
+    }
+    setPreviewUrl(null);
+    setPreviewBytes(null);
+    setPreviewSize(null);
+  };
+
   const onPickFiles = (incoming: FileList | File[] | null) => {
     if (!incoming) return;
     const first = Array.from(incoming).find((f) => f.type.startsWith('image/'));
     if (!first) return;
+    resetPreview();
     setFile(first);
     setError(null);
   };
+
+  const onRemove = () => {
+    setFile(null);
+    resetPreview();
+  };
+
+  // Debounced re-encode for live preview
+  useEffect(() => {
+    if (!file) return;
+    let cancelled = false;
+    const handle = setTimeout(() => {
+      void (async () => {
+        try {
+          const bytes = await convertImage(file, format);
+          if (cancelled) return;
+          const mime = MIME_BY_FORMAT[format];
+          const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: mime });
+          const url = URL.createObjectURL(blob);
+          if (previewUrlRef.current) URL.revokeObjectURL(previewUrlRef.current);
+          previewUrlRef.current = url;
+          setPreviewUrl(url);
+          setPreviewBytes(bytes);
+          setPreviewSize(bytes.byteLength);
+        } catch (_err) {
+          /* preview failed — keep showing prior preview */
+        }
+      })();
+    }, 200);
+    return () => {
+      cancelled = true;
+      clearTimeout(handle);
+    };
+  }, [file, format]);
+
+  // Cleanup the preview URL on unmount
+  useEffect(() => {
+    return () => {
+      if (previewUrlRef.current) {
+        URL.revokeObjectURL(previewUrlRef.current);
+        previewUrlRef.current = null;
+      }
+    };
+  }, []);
 
   const onConvert = async () => {
     if (!canConvert || !file) return;
     setBusy(true);
     setError(null);
     try {
-      const bytes = await convertImage(file, format);
+      // Reuse the already-encoded bytes from the live preview so what the user
+      // sees is exactly what gets downloaded.
+      const bytes = previewBytes ?? (await convertImage(file, format));
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: MIME_BY_FORMAT[format] });
       const name = outputName('converted', [file.name], EXT_BY_FORMAT[format]);
       downloadBlob(blob, name);
@@ -79,6 +149,14 @@ export function ImageConvertTool(messages: Messages) {
       setBusy(false);
     }
   };
+
+  const summary =
+    previewSize !== null
+      ? tpl(messages.previewSummary, {
+          format: LABEL_BY_FORMAT[format],
+          size: formatBytes(previewSize),
+        })
+      : null;
 
   return (
     <div className="flex flex-col gap-4">
@@ -130,7 +208,19 @@ export function ImageConvertTool(messages: Messages) {
               className="sr-only"
               onChange={(e) => onPickFiles(e.target.files)}
             />
-            <ImagePreview file={file} />
+            <div className="flex flex-col items-center gap-2">
+              {previewUrl ? (
+                <img
+                  ref={previewImgRef}
+                  src={previewUrl}
+                  alt={messages.previewLabel}
+                  className="block max-h-72 max-w-full rounded-md border border-border bg-surface object-contain"
+                />
+              ) : (
+                <FallbackImage file={file} />
+              )}
+              <p className="text-xs text-text-faint">{summary ?? messages.previewLabel}</p>
+            </div>
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm text-text-primary">{file.name}</p>
@@ -139,7 +229,7 @@ export function ImageConvertTool(messages: Messages) {
               <Button
                 variant="subtle"
                 size="sm"
-                onClick={() => setFile(null)}
+                onClick={onRemove}
                 aria-label={messages.removeFile}
               >
                 {messages.removeFile}
@@ -180,7 +270,7 @@ export function ImageConvertTool(messages: Messages) {
   );
 }
 
-export function ImagePreview({ file }: { file: File }) {
+function FallbackImage({ file }: { file: File }) {
   const [url, setUrl] = useState<string | null>(null);
   useEffect(() => {
     const objectUrl = URL.createObjectURL(file);
@@ -192,7 +282,7 @@ export function ImagePreview({ file }: { file: File }) {
     <img
       src={url}
       alt={file.name}
-      className="w-full max-h-72 rounded-md border border-border bg-surface object-contain"
+      className="block max-h-72 max-w-full rounded-md border border-border bg-surface object-contain"
     />
   );
 }

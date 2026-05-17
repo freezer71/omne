@@ -22,6 +22,10 @@ const messages = {
   removeFile: 'Remove',
   busy: 'Combining…',
   error: 'Could not combine.',
+  imagesCountSingular: '{n} image',
+  imagesCountPlural: '{n} images',
+  previewLabel: 'Preview',
+  previewPageLabelTemplate: 'Page {n}',
 };
 
 const png = (n = 'a.png') => new File([new Uint8Array([0x89, 0x50])], n, { type: 'image/png' });
@@ -54,6 +58,26 @@ describe('ImagesToPdfTool', () => {
     expect(imagesToPdf).toHaveBeenCalledOnce();
     expect((imagesToPdf.mock.calls[0]![0] as File[]).length).toBe(2);
     expect(downloadBlob.mock.calls[0]![1]).toBe('pdf-from-a.pdf');
+  });
+
+  it('renders the localized image count (singular and plural)', async () => {
+    const user = userEvent.setup();
+    render(<ImagesToPdfTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), png('a.png'));
+    expect(screen.getByText('1 image')).toBeInTheDocument();
+    await user.upload(screen.getByLabelText(messages.selectButton), png('b.png'));
+    expect(screen.getByText('2 images')).toBeInTheDocument();
+  });
+
+  it('renders one preview page per selected image', async () => {
+    const user = userEvent.setup();
+    render(<ImagesToPdfTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), [png('a.png'), png('b.png')]);
+    const grid = await screen.findByTestId('pdf-preview-grid');
+    // One canvas per page in the preview grid.
+    expect(grid.querySelectorAll('canvas').length).toBe(2);
+    expect(screen.getByLabelText('Page 1')).toBeInTheDocument();
+    expect(screen.getByLabelText('Page 2')).toBeInTheDocument();
   });
 
   it('shows error on failure', async () => {

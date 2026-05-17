@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { convertVideo, type VideoFormat } from '@/lib/tools/implementations/video-convert';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { tpl } from '@/lib/tpl';
 
 type Messages = {
   selectButton: string;
@@ -16,6 +17,7 @@ type Messages = {
   formatWebm: string;
   formatMov: string;
   formatGif: string;
+  outputLabel: string;
   busy: string;
   error: string;
   removeFile: string;
@@ -129,6 +131,12 @@ export function VideoConvertTool(messages: Messages) {
               onChange={(e) => onPickFiles(e.target.files)}
             />
             <VideoPreview file={file} />
+            <p className="text-xs text-text-faint text-center">
+              {tpl(messages.outputLabel, {
+                filename: outputName('converted', [file.name], format),
+                mime: MIME_BY_FORMAT[format],
+              })}
+            </p>
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm text-text-primary">{file.name}</p>

@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { mergePdfs } from '@/lib/tools/implementations/pdf-merge';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { tpl } from '@/lib/tpl';
 import { PdfPagesGrid } from '@/components/ui/pdf-pages-grid';
 
 type Messages = {
@@ -20,6 +21,8 @@ type Messages = {
   previewLoading: string;
   previewError: string;
   pageLabelTemplate: string;
+  filesCountSingular: string;
+  filesCountPlural: string;
 };
 
 export function PdfMergeTool(messages: Messages) {
@@ -38,6 +41,17 @@ export function PdfMergeTool(messages: Messages) {
     if (arr.length === 0) return;
     setFiles((prev) => [...prev, ...arr]);
     setError(null);
+  };
+
+  const moveFile = (from: number, to: number) => {
+    setFiles((prev) => {
+      if (to < 0 || to >= prev.length) return prev;
+      const next = prev.slice();
+      const [item] = next.splice(from, 1);
+      if (!item) return prev;
+      next.splice(to, 0, item);
+      return next;
+    });
   };
 
   const onMerge = async () => {
@@ -79,7 +93,10 @@ export function PdfMergeTool(messages: Messages) {
             <p className="text-text-muted">{messages.empty}</p>
           ) : (
             <p className="text-text-muted text-sm">
-              {files.length} {files.length > 1 ? 'files' : 'file'}
+              {tpl(
+                files.length === 1 ? messages.filesCountSingular : messages.filesCountPlural,
+                { n: files.length },
+              )}
             </p>
           )}
           <input
@@ -115,14 +132,34 @@ export function PdfMergeTool(messages: Messages) {
                   <p className="truncate text-text-primary">{f.name}</p>
                   <p className="font-mono text-xs text-text-faint">{formatBytes(f.size)}</p>
                 </div>
-                <Button
-                  variant="subtle"
-                  size="sm"
-                  onClick={() => setFiles((prev) => prev.filter((_, idx) => idx !== i))}
-                  aria-label={messages.removeFile}
-                >
-                  {messages.removeFile}
-                </Button>
+                <div className="flex items-center gap-1.5">
+                  <Button
+                    variant="subtle"
+                    size="sm"
+                    onClick={() => moveFile(i, i - 1)}
+                    disabled={i === 0}
+                    aria-label={messages.moveUp}
+                  >
+                    ↑
+                  </Button>
+                  <Button
+                    variant="subtle"
+                    size="sm"
+                    onClick={() => moveFile(i, i + 1)}
+                    disabled={i === files.length - 1}
+                    aria-label={messages.moveDown}
+                  >
+                    ↓
+                  </Button>
+                  <Button
+                    variant="subtle"
+                    size="sm"
+                    onClick={() => setFiles((prev) => prev.filter((_, idx) => idx !== i))}
+                    aria-label={messages.removeFile}
+                  >
+                    {messages.removeFile}
+                  </Button>
+                </div>
               </div>
               <PdfPagesGrid
                 file={f}

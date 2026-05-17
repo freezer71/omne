@@ -58,7 +58,9 @@
           "moveDown": "Move down",
           "busy": "Merging…",
           "error": "Could not merge those PDFs. Please try different files.",
-          "pageLabelTemplate": "Page {n}"
+          "pageLabelTemplate": "Page {n}",
+          "filesCountSingular": "{n} file",
+          "filesCountPlural": "{n} files"
         }
       },
       "split": {
@@ -121,7 +123,11 @@
           "combineButton": "Combine into PDF",
           "removeFile": "Remove",
           "busy": "Combining…",
-          "error": "Could not combine those images."
+          "error": "Could not combine those images.",
+          "imagesCountSingular": "{n} image",
+          "imagesCountPlural": "{n} images",
+          "previewLabel": "Preview",
+          "previewPageLabelTemplate": "Page {n}"
         }
       }
     },
@@ -140,7 +146,8 @@
           "formatGif": "GIF",
           "busy": "Converting…",
           "error": "Conversion failed. Try a different file or format.",
-          "removeFile": "Remove"
+          "removeFile": "Remove",
+          "outputLabel": "Output: {filename} · {mime}"
         }
       },
       "trim": {
@@ -154,7 +161,8 @@
           "endLabel": "End (seconds)",
           "busy": "Trimming…",
           "error": "Could not trim that video.",
-          "removeFile": "Remove"
+          "removeFile": "Remove",
+          "clipDurationLabel": "Clip duration: {duration}s"
         }
       }
     },
@@ -170,6 +178,8 @@
           "formatPng": "PNG",
           "formatJpeg": "JPG",
           "formatWebp": "WebP",
+          "previewLabel": "Preview",
+          "previewSummary": "{format} · {size}",
           "busy": "Converting…",
           "error": "Could not convert that image.",
           "removeFile": "Remove"
@@ -186,6 +196,9 @@
           "format": "Output format",
           "formatJpeg": "JPG",
           "formatWebp": "WebP",
+          "previewLabel": "Preview",
+          "previewSummary": "{format} · {size}",
+          "previewComparison": "Before: {before} → After: {after} ({ratio})",
           "busy": "Compressing…",
           "error": "Could not compress that image.",
           "removeFile": "Remove"
@@ -238,6 +251,8 @@
           "widthLabel": "Width",
           "heightLabel": "Height",
           "hint": "Drag on the image to set the crop region. Coordinates are in source pixels.",
+          "previewLabel": "Crop preview",
+          "previewEmpty": "Drag on the image to start the preview.",
           "busy": "Cropping…",
           "error": "Could not crop that image.",
           "removeFile": "Remove"

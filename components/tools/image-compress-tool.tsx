@@ -9,6 +9,7 @@ import {
 } from '@/lib/tools/implementations/image-compress';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { tpl } from '@/lib/tpl';
 
 type Messages = {
   selectButton: string;
@@ -18,6 +19,9 @@ type Messages = {
   format: string;
   formatJpeg: string;
   formatWebp: string;
+  previewLabel: string;
+  previewSummary: string;
+  previewComparison: string;
   busy: string;
   error: string;
   removeFile: string;
@@ -27,6 +31,10 @@ const EXT_BY_FORMAT: Record<CompressTarget, string> = { jpeg: 'jpg', webp: 'webp
 const MIME_BY_FORMAT: Record<CompressTarget, string> = {
   jpeg: 'image/jpeg',
   webp: 'image/webp',
+};
+const LABEL_BY_FORMAT: Record<CompressTarget, string> = {
+  jpeg: 'JPEG',
+  webp: 'WebP',
 };
 
 export function ImageCompressTool(messages: Messages) {
@@ -41,24 +49,87 @@ export function ImageCompressTool(messages: Messages) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewBytes, setPreviewBytes] = useState<Uint8Array | null>(null);
+  const [previewSize, setPreviewSize] = useState<number | null>(null);
+  const previewUrlRef = useRef<string | null>(null);
 
   const canCompress = file !== null && !busy;
+
+  const resetPreview = () => {
+    if (previewUrlRef.current) {
+      URL.revokeObjectURL(previewUrlRef.current);
+      previewUrlRef.current = null;
+    }
+    setPreviewUrl(null);
+    setPreviewBytes(null);
+    setPreviewSize(null);
+  };
 
   const onPickFiles = (incoming: FileList | File[] | null) => {
     if (!incoming) return;
     const first = Array.from(incoming).find((f) => f.type.startsWith('image/'));
     if (!first) return;
+    resetPreview();
     setFile(first);
     setError(null);
   };
+
+  const onRemove = () => {
+    setFile(null);
+    resetPreview();
+  };
+
+  // Debounced re-encode for live preview
+  useEffect(() => {
+    if (!file) return;
+    let cancelled = false;
+    const handle = setTimeout(() => {
+      void (async () => {
+        try {
+          const bytes = await compressImage(file, { quality, format });
+          if (cancelled) return;
+          const blob = new Blob([new Uint8Array(bytes) as BlobPart], {
+            type: MIME_BY_FORMAT[format],
+          });
+          const url = URL.createObjectURL(blob);
+          if (previewUrlRef.current) URL.revokeObjectURL(previewUrlRef.current);
+          previewUrlRef.current = url;
+          setPreviewUrl(url);
+          setPreviewBytes(bytes);
+          setPreviewSize(bytes.byteLength);
+        } catch (_err) {
+          /* preview failed — keep showing prior preview */
+        }
+      })();
+    }, 200);
+    return () => {
+      cancelled = true;
+      clearTimeout(handle);
+    };
+  }, [file, quality, format]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (previewUrlRef.current) {
+        URL.revokeObjectURL(previewUrlRef.current);
+        previewUrlRef.current = null;
+      }
+    };
+  }, []);
 
   const onCompress = async () => {
     if (!canCompress || !file) return;
     setBusy(true);
     setError(null);
     try {
-      const bytes = await compressImage(file, { quality, format });
-      const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: MIME_BY_FORMAT[format] });
+      // Reuse the already-encoded bytes from the live preview when available so
+      // the download matches the preview exactly.
+      const bytes = previewBytes ?? (await compressImage(file, { quality, format }));
+      const blob = new Blob([new Uint8Array(bytes) as BlobPart], {
+        type: MIME_BY_FORMAT[format],
+      });
       const name = outputName('compressed', [file.name], EXT_BY_FORMAT[format]);
       downloadBlob(blob, name);
     } catch (_err) {
@@ -67,6 +138,23 @@ export function ImageCompressTool(messages: Messages) {
       setBusy(false);
     }
   };
+
+  const summary =
+    previewSize !== null
+      ? tpl(messages.previewSummary, {
+          format: LABEL_BY_FORMAT[format],
+          size: formatBytes(previewSize),
+        })
+      : null;
+
+  const comparison =
+    file !== null && previewSize !== null
+      ? tpl(messages.previewComparison, {
+          before: formatBytes(file.size),
+          after: formatBytes(previewSize),
+          ratio: ratioLabel(file.size, previewSize),
+        })
+      : null;
 
   return (
     <div className="flex flex-col gap-4">
@@ -118,7 +206,21 @@ export function ImageCompressTool(messages: Messages) {
               className="sr-only"
               onChange={(e) => onPickFiles(e.target.files)}
             />
-            <Preview file={file} />
+            <div className="flex flex-col items-center gap-2">
+              {previewUrl ? (
+                <img
+                  src={previewUrl}
+                  alt={messages.previewLabel}
+                  className="block max-h-72 max-w-full rounded-md border border-border bg-surface object-contain"
+                />
+              ) : (
+                <FallbackImage file={file} />
+              )}
+              <p className="text-xs text-text-faint">{summary ?? messages.previewLabel}</p>
+              {comparison ? (
+                <p className="font-mono text-xs text-text-faint">{comparison}</p>
+              ) : null}
+            </div>
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm text-text-primary">{file.name}</p>
@@ -127,7 +229,7 @@ export function ImageCompressTool(messages: Messages) {
               <Button
                 variant="subtle"
                 size="sm"
-                onClick={() => setFile(null)}
+                onClick={onRemove}
                 aria-label={messages.removeFile}
               >
                 {messages.removeFile}
@@ -180,7 +282,13 @@ export function ImageCompressTool(messages: Messages) {
   );
 }
 
-function Preview({ file }: { file: File }) {
+function ratioLabel(before: number, after: number): string {
+  if (before <= 0) return '0%';
+  const delta = (after / before) * 100;
+  return `${delta.toFixed(0)}%`;
+}
+
+function FallbackImage({ file }: { file: File }) {
   const [url, setUrl] = useState<string | null>(null);
   useEffect(() => {
     const objectUrl = URL.createObjectURL(file);
@@ -192,7 +300,7 @@ function Preview({ file }: { file: File }) {
     <img
       src={url}
       alt={file.name}
-      className="w-full max-h-72 rounded-md border border-border bg-surface object-contain"
+      className="block max-h-72 max-w-full rounded-md border border-border bg-surface object-contain"
     />
   );
 }

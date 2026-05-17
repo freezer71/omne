@@ -23,6 +23,8 @@ const messages = {
   formatPng: 'PNG',
   formatJpeg: 'JPG',
   formatWebp: 'WebP',
+  previewLabel: 'Preview',
+  previewSummary: '{format} · {size}',
   busy: 'Converting…',
   error: 'Conversion failed.',
   removeFile: 'Remove',

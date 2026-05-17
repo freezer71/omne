@@ -46,6 +46,8 @@ export default async function Page({
         previewLoading={dict.common.previewLoading}
         previewError={dict.common.previewError}
         pageLabelTemplate={tool.ui.pageLabelTemplate}
+        filesCountSingular={tool.ui.filesCountSingular}
+        filesCountPlural={tool.ui.filesCountPlural}
       />
     </ToolShell>
   );

@@ -24,6 +24,8 @@ const messages = {
   widthLabel: 'Width',
   heightLabel: 'Height',
   hint: 'Drag on the image to select a region.',
+  previewLabel: 'Crop preview',
+  previewEmpty: 'Drag on the image to start the preview.',
   busy: 'Cropping…',
   error: 'Crop failed.',
   removeFile: 'Remove',

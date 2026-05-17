@@ -43,6 +43,7 @@ export default async function Page({
         formatWebm={tool.ui.formatWebm}
         formatMov={tool.ui.formatMov}
         formatGif={tool.ui.formatGif}
+        outputLabel={tool.ui.outputLabel}
         busy={tool.ui.busy}
         error={tool.ui.error}
         removeFile={tool.ui.removeFile}

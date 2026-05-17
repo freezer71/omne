@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { trimVideo } from '@/lib/tools/implementations/video-trim';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { tpl } from '@/lib/tpl';
 
 type Messages = {
   selectButton: string;
@@ -13,6 +14,7 @@ type Messages = {
   trimButton: string;
   startLabel: string;
   endLabel: string;
+  clipDurationLabel: string;
   busy: string;
   error: string;
   removeFile: string;
@@ -28,6 +30,7 @@ export function VideoTrimTool(messages: Messages) {
   const startId = useId();
   const endId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const [file, setFile] = useState<File | null>(null);
   const [startSec, setStartSec] = useState('0');
@@ -39,6 +42,45 @@ export function VideoTrimTool(messages: Messages) {
   const start = parseFloat(startSec);
   const end = parseFloat(endSec);
   const valid = file !== null && Number.isFinite(start) && Number.isFinite(end) && end > start && start >= 0;
+  const duration = Number.isFinite(end) && Number.isFinite(start) && end > start ? end - start : 0;
+
+  // Debounced seek to start when start changes (preview).
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (!Number.isFinite(start) || start < 0) return;
+    const el = videoRef.current;
+    const handle = window.setTimeout(() => {
+      try {
+        el.currentTime = start;
+      } catch {
+        // Some browsers throw before metadata loads; ignore.
+      }
+    }, 200);
+    return () => window.clearTimeout(handle);
+  }, [start, file]);
+
+  // Loop between start/end during playback.
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return;
+    const onTimeUpdate = () => {
+      if (el.currentTime >= end) {
+        el.currentTime = start;
+      }
+    };
+    const onPlay = () => {
+      if (el.currentTime < start || el.currentTime >= end) {
+        el.currentTime = start;
+      }
+    };
+    el.addEventListener('timeupdate', onTimeUpdate);
+    el.addEventListener('play', onPlay);
+    return () => {
+      el.removeEventListener('timeupdate', onTimeUpdate);
+      el.removeEventListener('play', onPlay);
+    };
+  }, [start, end, file]);
 
   const onPick = (incoming: FileList | File[] | null) => {
     if (!incoming) return;
@@ -82,7 +124,10 @@ export function VideoTrimTool(messages: Messages) {
         ) : (
           <div className="flex flex-col gap-3">
             <input ref={inputRef} id={inputId} type="file" accept="video/*" aria-label={messages.selectButton} className="sr-only" onChange={(e) => onPick(e.target.files)} />
-            <VideoPreview file={file} />
+            <VideoPreview file={file} videoRef={videoRef} />
+            <p className="text-xs text-text-faint text-center">
+              {tpl(messages.clipDurationLabel, { duration: duration.toFixed(2) })}
+            </p>
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm text-text-primary">{file.name}</p>
@@ -130,7 +175,7 @@ export function VideoTrimTool(messages: Messages) {
   );
 }
 
-function VideoPreview({ file }: { file: File }) {
+function VideoPreview({ file, videoRef }: { file: File; videoRef: React.RefObject<HTMLVideoElement | null> }) {
   const [url, setUrl] = useState<string | null>(null);
   useEffect(() => {
     const objectUrl = URL.createObjectURL(file);
@@ -140,6 +185,7 @@ function VideoPreview({ file }: { file: File }) {
   if (!url) return null;
   return (
     <video
+      ref={videoRef}
       src={url}
       controls
       className="w-full max-h-72 rounded-md border border-border bg-black"

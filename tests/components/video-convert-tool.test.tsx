@@ -24,6 +24,7 @@ const messages = {
   formatWebm: 'WebM',
   formatMov: 'MOV',
   formatGif: 'GIF',
+  outputLabel: 'Output: {filename} · {mime}',
   busy: 'Converting…',
   error: 'Conversion failed.',
   removeFile: 'Remove',

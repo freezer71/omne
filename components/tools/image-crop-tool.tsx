@@ -23,6 +23,8 @@ type Messages = {
   widthLabel: string;
   heightLabel: string;
   hint: string;
+  previewLabel: string;
+  previewEmpty: string;
   busy: string;
   error: string;
   removeFile: string;
@@ -43,6 +45,7 @@ export function ImageCropTool(messages: Messages) {
   const hId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
+  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
 
   const [file, setFile] = useState<File | null>(null);
   const [natural, setNatural] = useState<{ w: number; h: number } | null>(null);
@@ -114,6 +117,36 @@ export function ImageCropTool(messages: Messages) {
     setRect((r) => ({ ...r, [key]: Math.max(0, value) }));
   };
 
+  // Debounced live preview that paints only the cropped region of the source
+  // image onto a small canvas. Uses the same image element the user is dragging
+  // on, so we never re-decode the file.
+  useEffect(() => {
+    if (!file || !natural || rect.w <= 0 || rect.h <= 0) return;
+    let cancelled = false;
+    const handle = setTimeout(() => {
+      if (cancelled) return;
+      const img = imgRef.current;
+      const canvas = previewCanvasRef.current;
+      if (!img || !canvas) return;
+      const w = Math.max(1, Math.round(rect.w));
+      const h = Math.max(1, Math.round(rect.h));
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.clearRect(0, 0, w, h);
+      try {
+        ctx.drawImage(img, rect.x, rect.y, rect.w, rect.h, 0, 0, w, h);
+      } catch {
+        // ignore — happens if image hasn't decoded yet
+      }
+    }, 150);
+    return () => {
+      cancelled = true;
+      clearTimeout(handle);
+    };
+  }, [file, natural, rect.x, rect.y, rect.w, rect.h]);
+
   const onCrop = async () => {
     if (!canCrop || !file) return;
     setBusy(true);
@@ -144,6 +177,8 @@ export function ImageCropTool(messages: Messages) {
       height: `${heightPct}%`,
     };
   })();
+
+  const hasRegion = rect.w > 0 && rect.h > 0;
 
   return (
     <div className="flex flex-col gap-4">
@@ -195,15 +230,34 @@ export function ImageCropTool(messages: Messages) {
               className="sr-only"
               onChange={(e) => onPickFiles(e.target.files)}
             />
-            <CropPreview
-              file={file}
-              imgRef={imgRef}
-              onImgLoad={onImgLoad}
-              onPointerDown={onPointerDown}
-              onPointerMove={onPointerMove}
-              onPointerUp={onPointerUp}
-              overlayStyle={overlayStyle}
-            />
+            <div className="grid gap-3 sm:grid-cols-2">
+              <CropPreview
+                file={file}
+                imgRef={imgRef}
+                onImgLoad={onImgLoad}
+                onPointerDown={onPointerDown}
+                onPointerMove={onPointerMove}
+                onPointerUp={onPointerUp}
+                overlayStyle={overlayStyle}
+              />
+              <div className="flex flex-col items-center justify-center gap-2 rounded-md border border-dashed border-border p-3">
+                <p className="text-xs text-text-faint">
+                  {messages.previewLabel}
+                  {hasRegion ? ` · ${rect.w}×${rect.h} px` : ''}
+                </p>
+                <canvas
+                  ref={previewCanvasRef}
+                  aria-label={messages.previewLabel}
+                  className={cn(
+                    'block max-h-72 max-w-full rounded-md border border-border bg-surface object-contain',
+                    hasRegion ? '' : 'hidden',
+                  )}
+                />
+                {!hasRegion && (
+                  <p className="text-xs text-text-faint">{messages.previewEmpty}</p>
+                )}
+              </div>
+            </div>
             <p className="text-xs text-text-faint">{messages.hint}</p>
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">

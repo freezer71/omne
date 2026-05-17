@@ -21,6 +21,7 @@ const messages = {
   trimButton: 'Trim',
   startLabel: 'Start (seconds)',
   endLabel: 'End (seconds)',
+  clipDurationLabel: 'Clip duration: {duration}s',
   busy: 'Trimming…',
   error: 'Could not trim.',
   removeFile: 'Remove',

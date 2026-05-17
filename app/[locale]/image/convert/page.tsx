@@ -42,6 +42,8 @@ export default async function Page({
         formatPng={tool.ui.formatPng}
         formatJpeg={tool.ui.formatJpeg}
         formatWebp={tool.ui.formatWebp}
+        previewLabel={tool.ui.previewLabel}
+        previewSummary={tool.ui.previewSummary}
         busy={tool.ui.busy}
         error={tool.ui.error}
         removeFile={tool.ui.removeFile}

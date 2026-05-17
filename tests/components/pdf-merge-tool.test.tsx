@@ -34,6 +34,8 @@ const messages = {
   previewLoading: 'Loading',
   previewError: 'Failed',
   pageLabelTemplate: 'Page {n}',
+  filesCountSingular: '{n} file',
+  filesCountPlural: '{n} files',
 };
 
 function pdfFile(name: string): File {
@@ -91,6 +93,37 @@ describe('PdfMergeTool', () => {
     await user.click(removeButtons[0]!);
     expect(screen.queryByText('a.pdf')).not.toBeInTheDocument();
     expect(screen.getByText('b.pdf')).toBeInTheDocument();
+  });
+
+  it('renders the localized file count (singular and plural)', async () => {
+    const user = userEvent.setup();
+    render(<PdfMergeTool {...messages} />);
+    const input = screen.getByLabelText(messages.selectButton);
+    await user.upload(input, pdfFile('a.pdf'));
+    expect(screen.getByText('1 file')).toBeInTheDocument();
+    await user.upload(input, pdfFile('b.pdf'));
+    expect(screen.getByText('2 files')).toBeInTheDocument();
+  });
+
+  it('reorders files via move up / move down', async () => {
+    const user = userEvent.setup();
+    mergePdfs.mockResolvedValue(new Uint8Array([0x25, 0x50, 0x44, 0x46]));
+    render(<PdfMergeTool {...messages} />);
+    const input = screen.getByLabelText(messages.selectButton);
+    await user.upload(input, [pdfFile('a.pdf'), pdfFile('b.pdf'), pdfFile('c.pdf')]);
+
+    // First row's "move up" is disabled, last row's "move down" is disabled.
+    const moveUpButtons = screen.getAllByRole('button', { name: messages.moveUp });
+    const moveDownButtons = screen.getAllByRole('button', { name: messages.moveDown });
+    expect(moveUpButtons[0]).toBeDisabled();
+    expect(moveDownButtons[moveDownButtons.length - 1]).toBeDisabled();
+
+    // Move "c.pdf" up twice → order becomes c, a, b.
+    await user.click(moveUpButtons[2]!);
+    await user.click(screen.getAllByRole('button', { name: messages.moveUp })[1]!);
+    await user.click(screen.getByRole('button', { name: messages.mergeButton }));
+    const passed = mergePdfs.mock.calls[0]![0] as File[];
+    expect(passed.map((f) => f.name)).toEqual(['c.pdf', 'a.pdf', 'b.pdf']);
   });
 
   it('shows an error if merge fails', async () => {

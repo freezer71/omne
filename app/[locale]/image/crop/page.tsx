@@ -43,6 +43,8 @@ export default async function Page({
         widthLabel={tool.ui.widthLabel}
         heightLabel={tool.ui.heightLabel}
         hint={tool.ui.hint}
+        previewLabel={tool.ui.previewLabel}
+        previewEmpty={tool.ui.previewEmpty}
         busy={tool.ui.busy}
         error={tool.ui.error}
         removeFile={tool.ui.removeFile}
