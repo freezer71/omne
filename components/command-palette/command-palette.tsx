@@ -67,10 +67,10 @@ export function CommandPalette({
     >
       <RadixDialog.Title className="sr-only">{messages.placeholder}</RadixDialog.Title>
       <RadixDialog.Description className="sr-only">{messages.placeholder}</RadixDialog.Description>
-      <div className="border-b border-border px-3">
+      <div className="border-b border-border px-2">
         <Command.Input
           placeholder={messages.placeholder}
-          className="h-12 w-full bg-transparent text-sm text-text-primary placeholder:text-text-faint outline-none"
+          className="h-12 w-full bg-transparent px-3 text-sm text-text-primary placeholder:text-text-faint outline-none"
         />
       </div>
       <Command.List className="max-h-[60vh] overflow-y-auto overscroll-contain p-2">
