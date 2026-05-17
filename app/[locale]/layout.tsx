@@ -4,6 +4,10 @@ import { notFound } from 'next/navigation';
 import { isLocale, locales } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
 import { Header } from '@/components/header';
+import { PaletteProvider } from '@/components/command-palette/palette-context';
+import { CommandPalette } from '@/components/command-palette/command-palette';
+import { buildLocalizedTools } from '@/lib/tools/localized';
+import { TOOL_CATEGORIES, type ToolCategory } from '@/lib/tools/types';
 import '../globals.css';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
@@ -37,6 +41,8 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = await getDictionary(locale);
+  const tools = buildLocalizedTools(dict);
+  const categoryLabels = dict.hub.categories as Record<ToolCategory, string>;
 
   return (
     <html
@@ -49,8 +55,20 @@ export default async function LocaleLayout({
         <script src="/theme-init.js" />
       </head>
       <body className="min-h-full flex flex-col">
-        <Header locale={locale} dict={dict} />
-        {children}
+        <PaletteProvider>
+          <Header locale={locale} dict={dict} />
+          {children}
+          <CommandPalette
+            locale={locale}
+            tools={tools}
+            categoryOrder={TOOL_CATEGORIES}
+            categoryLabels={categoryLabels}
+            messages={{
+              placeholder: dict.palette.placeholder,
+              empty: dict.palette.empty,
+            }}
+          />
+        </PaletteProvider>
       </body>
     </html>
   );

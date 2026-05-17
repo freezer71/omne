@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { LocaleSwitcher } from '@/components/locale-switcher';
+import { PaletteButton } from '@/components/command-palette/palette-button';
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 
@@ -25,6 +26,7 @@ export function Header({ locale, dict }: Props) {
           </Link>
         </div>
         <div className="flex items-center gap-3">
+          <PaletteButton labelOpen={dict.palette.open} shortcut={dict.palette.shortcut} />
           <PrivacyBadge label={dict.badge.privacy} />
           <LocaleSwitcher
             currentLocale={locale}
