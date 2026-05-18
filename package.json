@@ -13,7 +13,7 @@
     "test:ui": "vitest --ui",
     "test:e2e": "playwright test",
     "test:all": "npm run test && npm run test:e2e",
-    "postinstall": "node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs"
+    "postinstall": "node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs"
   },
   "dependencies": {
     "@ffmpeg/core": "^0.12.10",
@@ -30,6 +30,8 @@
     "next": "16.2.6",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^5.7.284",
+    "qr-scanner": "^1.4.2",
+    "qrcode": "^1.5.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "server-only": "^0.0.1"
@@ -41,6 +43,7 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.2",
