@@ -1,10 +1,36 @@
-# omne
+<p align="center">
+  <img src="./app/icon.svg" alt="omne logo" width="96" height="96" />
+</p>
 
-> Privacy-first toolbox. Everything runs in your browser. No file is ever uploaded.
+<h1 align="center">omne</h1>
+
+<p align="center">
+  <strong>Privacy-first toolbox. Everything runs in your browser. No file is ever uploaded.</strong>
+</p>
+
+<p align="center">
+  <a href="./README.fr.md">🇫🇷 Lire en français</a>
+</p>
+
+---
 
 **omne** is a collection of 50+ online tools — PDF, video, audio, image, SVG, passwords, JSON, text, encoding, QR codes, colors — that run **entirely client-side**. No backend, no analytics, no third-party CDN, no cookies. Your files never leave the tab.
 
 Bilingual **English / French**, light / dark mode, `⌘K` command palette.
+
+---
+
+## Values
+
+These are not feature ideas — they are constraints. Everything in the codebase has to honor them.
+
+- 🛡️ **Privacy by design.** Files never leave the device. Processing happens in the browser, in WebAssembly when needed. There is no "trust us, we'll delete it later" — there is no server to delete from.
+- 🔍 **Verifiable, not promised.** Open the DevTools Network tab during a conversion: you should see zero outbound requests. If you ever do, that's a bug, not a feature.
+- 🚫 **No tracking, ever.** No analytics, no telemetry, no cookies, no third-party CDN, no fingerprinting. We don't know who you are and we don't want to know.
+- 🧱 **Self-hosted heavy assets.** ffmpeg.wasm, pdf.js worker, the QR scanner and the background-removal ONNX model are all served from this origin so processing doesn't leak metadata to a CDN.
+- 🆓 **No friction.** No signup, no account, no paywall, no rate limit, no "premium tier". Open the page, do the thing, close the tab.
+- 🌍 **Open source, built in the open.** Every line is auditable. If you can't verify a claim by reading the code, the claim doesn't count.
+- 🌗 **Accessible and bilingual.** Light & dark themes with pre-paint anti-flash, English & French at full parity (enforced by CI), and an `⌘K` palette for keyboard users.
 
 ---
 
