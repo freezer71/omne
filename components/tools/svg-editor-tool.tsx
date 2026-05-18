@@ -102,6 +102,12 @@ export function SvgEditorTool(messages: Messages) {
   const hasMarkup = markup.trim().length > 0;
   const sanitized = useMemo(() => (hasMarkup ? sanitizeForRender(markup) : ''), [markup, hasMarkup]);
 
+  const { inferredWidth, inferredHeight } = useMemo(() => {
+    const parts = viewBox.trim().split(/[\s,]+/);
+    if (parts.length === 4) return { inferredWidth: parts[2] ?? '', inferredHeight: parts[3] ?? '' };
+    return { inferredWidth: '', inferredHeight: '' };
+  }, [viewBox]);
+
   useEffect(() => {
     const node = previewRef.current;
     if (!node) return;
@@ -332,7 +338,7 @@ export function SvgEditorTool(messages: Messages) {
               aria-label={messages.previewLabel}
               className={cn(
                 'flex h-72 w-full items-center justify-center overflow-hidden rounded-md border border-border p-2 [&_svg]:max-h-full [&_svg]:max-w-full',
-                showBounds && '[&_svg]:outline [&_svg]:outline-1 [&_svg]:outline-dashed [&_svg]:outline-accent/60',
+                showBounds && '[&_svg]:outline-2 [&_svg]:outline-dashed [&_svg]:outline-accent [&_svg]:outline [&_svg]:[outline-offset:2px]',
                 transparent &&
                   'bg-[conic-gradient(at_50%_50%,#e5e5e5_25%,transparent_25%_50%,#e5e5e5_50%_75%,transparent_75%)] bg-[length:16px_16px]',
               )}
@@ -377,21 +383,23 @@ export function SvgEditorTool(messages: Messages) {
               <FieldRow label={messages.widthLabel}>
                 <input
                   value={width}
+                  placeholder={inferredWidth}
                   onChange={(e) => {
                     setWidth(e.target.value);
                     onRootAttrChange({ width: e.target.value });
                   }}
-                  className="h-8 w-24 rounded-md border border-border bg-surface px-2 text-xs text-text-primary"
+                  className="h-8 w-24 rounded-md border border-border bg-surface px-2 text-xs text-text-primary placeholder:text-text-faint"
                 />
               </FieldRow>
               <FieldRow label={messages.heightLabel}>
                 <input
                   value={height}
+                  placeholder={inferredHeight}
                   onChange={(e) => {
                     setHeight(e.target.value);
                     onRootAttrChange({ height: e.target.value });
                   }}
-                  className="h-8 w-24 rounded-md border border-border bg-surface px-2 text-xs text-text-primary"
+                  className="h-8 w-24 rounded-md border border-border bg-surface px-2 text-xs text-text-primary placeholder:text-text-faint"
                 />
               </FieldRow>
               <FieldRow label={messages.viewBoxLabel}>
