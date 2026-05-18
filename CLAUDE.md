@@ -68,6 +68,19 @@ All projects alias `server-only` → `tests/setup/server-only-shim.ts` (a no-op)
 
 When adding a new tool, the expected coverage is: pure logic test (unit), component interaction test (components), and at minimum one happy-path E2E if user-visible.
 
+## Documentation
+
+**`README.md` and `README.fr.md` are part of every change.** They live next to each other at the root and must stay in sync — the English file is the source of truth, the French file is its translated mirror (same sections, same order, same content). If a change affects anything user-visible or contributor-visible — a new tool, a new category, a stack swap, a new command, a behavior change in the privacy promise, a new value, an updated architecture rule — update **both** READMEs in the same commit as the code.
+
+Things to check on every change:
+- **Tool catalog table** — add/remove the entry for the affected category in both files.
+- **Tech stack list** — keep it accurate if a library is added, removed, or replaced.
+- **Commands table** — sync any `package.json` script change.
+- **Architecture / "Anatomy of a tool"** — update if the recipe for adding a tool changes (new mandatory file, new convention).
+- **Values / privacy promise** — only edit deliberately; these are load-bearing claims about the product.
+
+If you're unsure whether a change is "user-facing enough" to warrant a README update, it probably is — err on the side of updating. A stale README is worse than a verbose one.
+
 ## Pitfalls (learned the hard way)
 
 - **Do not run dev with Turbopack.** `--webpack` is intentional; switching to Turbopack will panic on HMR through `app/[locale]/...`.
