@@ -3,7 +3,27 @@ import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/regis
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(25);
+    expect(TOOLS).toHaveLength(36);
+  });
+
+  it('exposes the 3 Text tools', () => {
+    const text = TOOLS.filter((t) => t.category === 'text').map((t) => t.id).sort();
+    expect(text).toEqual(['case', 'count', 'lorem']);
+  });
+
+  it('exposes the 3 Encode tools', () => {
+    const encode = TOOLS.filter((t) => t.category === 'encode').map((t) => t.id).sort();
+    expect(encode).toEqual(['base64', 'jwt', 'url']);
+  });
+
+  it('exposes the 3 Color tools', () => {
+    const color = TOOLS.filter((t) => t.category === 'color').map((t) => t.id).sort();
+    expect(color).toEqual(['contrast', 'convert', 'palette']);
+  });
+
+  it('exposes the 2 QR tools', () => {
+    const qr = TOOLS.filter((t) => t.category === 'qr').map((t) => t.id).sort();
+    expect(qr).toEqual(['generate', 'scan']);
   });
 
   it('exposes the 7 JSON tools', () => {
@@ -46,10 +66,17 @@ describe('TOOLS registry', () => {
   });
 
   it('file-driven tools declare at least one accepted MIME; pure-text tools declare none', () => {
-    const TEXT_ONLY_CATEGORIES = new Set(['password', 'text']);
+    const TEXT_ONLY_CATEGORIES = new Set(['password', 'text', 'encode']);
+    // Some categories are mixed: a tool may operate on text input only
+    // (e.g. `color/convert`, `color/contrast`, `qr/generate`) while another
+    // in the same category accepts files (e.g. `color/palette`, `qr/scan`).
+    const MIXED_CATEGORIES = new Set(['color', 'qr']);
     for (const t of TOOLS) {
       if (TEXT_ONLY_CATEGORIES.has(t.category)) {
         expect(t.acceptedMime).toEqual([]);
+      } else if (MIXED_CATEGORIES.has(t.category)) {
+        // No constraint — depends on the individual tool.
+        expect(Array.isArray(t.acceptedMime)).toBe(true);
       } else {
         expect(t.acceptedMime.length).toBeGreaterThan(0);
       }
