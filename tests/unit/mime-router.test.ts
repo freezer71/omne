@@ -33,11 +33,13 @@ describe('routeDroppedFiles', () => {
     expect(result.tool.category).toBe('pdf');
   });
 
-  it('routes a single video to the list of compatible video tools (modal)', () => {
+  it('routes a single video to the list of compatible tools (modal)', () => {
     const result = routeDroppedFiles([mp4()]);
     expect(result.kind).toBe('choose');
     if (result.kind !== 'choose') return;
-    expect(result.tools.every((t) => t.category === 'video')).toBe(true);
+    expect(result.tools.every((t) => t.category === 'video' || t.category === 'audio')).toBe(true);
+    expect(result.tools.some((t) => t.category === 'video')).toBe(true);
+    expect(result.tools.some((t) => t.id === 'extract' && t.category === 'audio')).toBe(true);
   });
 
   it('returns unsupported for files with no compatible tool', () => {

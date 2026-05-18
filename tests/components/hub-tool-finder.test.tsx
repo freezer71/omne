@@ -44,10 +44,15 @@ const tools: SearchableTool[] = [
 const categoryLabels = {
   pdf: 'PDF tools',
   video: 'Video tools',
+  audio: 'Audio tools',
   image: 'Image tools',
+  svg: 'SVG tools',
   password: 'Password tools',
   json: 'JSON tools',
   text: 'Text tools',
+  encode: 'Encoding tools',
+  qr: 'QR & barcodes',
+  color: 'Color tools',
   utility: 'Utilities',
 } as const;
 

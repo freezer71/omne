@@ -27,6 +27,12 @@ export function routeDroppedFiles(files: File[]): RouteResult {
     return { kind: 'direct', tool, files };
   }
 
+  // 2+ audio files → audio merge directly
+  if (files.length > 1 && allHaveMime(files, (m) => m.startsWith('audio/'))) {
+    const tool = getTool('audio', 'merge');
+    if (tool) return { kind: 'direct', tool, files };
+  }
+
   // Single .json file → JSON Formatter directly (avoids a "choose" between 7 JSON tools)
   if (files.length === 1 && files[0]?.type === 'application/json') {
     const tool = getTool('json', 'format');

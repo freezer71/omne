@@ -38,6 +38,7 @@
     "categories": {
       "pdf": "PDF tools",
       "video": "Video tools",
+      "audio": "Audio tools",
       "image": "Image tools",
       "svg": "SVG tools",
       "password": "Password tools",
@@ -361,6 +362,223 @@
           "pauseLabel": "Pause",
           "muteLabel": "Mute",
           "unmuteLabel": "Unmute"
+        }
+      }
+    },
+    "audio": {
+      "tags": {
+        "name": "Edit audio tags & cover",
+        "description": "Change MP3, FLAC, M4A or OGG tags — title, artist, album, year — and embed an album cover.",
+        "seo": {
+          "title": "Edit MP3 Tags & Album Cover Online — Free, In-Browser ID3 Editor",
+          "description": "Free online MP3 tag editor. Edit ID3v2 metadata — title, artist, album, year, genre — and embed an album cover. Works with FLAC, M4A and OGG too. 100% in your browser, no upload.",
+          "keywords": [
+            "edit mp3 tags online",
+            "id3 tag editor free",
+            "add album cover to mp3",
+            "mp3 metadata editor browser",
+            "flac tag editor",
+            "m4a metadata editor",
+            "no upload id3 editor"
+          ],
+          "ogTitle": "Edit audio tags · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select an audio file",
+          "empty": "Drop an audio file here or use the button below.",
+          "applyButton": "Apply tags & download",
+          "busy": "Writing tags…",
+          "error": "Tag write failed. Try a different file.",
+          "removeFile": "Remove",
+          "titleLabel": "Title",
+          "artistLabel": "Artist",
+          "albumLabel": "Album",
+          "albumArtistLabel": "Album artist",
+          "yearLabel": "Year",
+          "genreLabel": "Genre",
+          "trackLabel": "Track",
+          "commentLabel": "Comment",
+          "coverHeading": "Album cover",
+          "coverHint": "Drop image or click",
+          "coverSelect": "Change cover",
+          "coverRemove": "Remove cover",
+          "coverNone": "No cover",
+          "loadingTags": "Reading tags…",
+          "loadTagsError": "Could not read existing tags."
+        }
+      },
+      "convert": {
+        "name": "Convert audio",
+        "description": "Convert between MP3, WAV, FLAC, AAC, Opus and M4A with a bitrate of your choice.",
+        "seo": {
+          "title": "Convert Audio Online — MP3, WAV, FLAC, AAC, Opus, M4A Free",
+          "description": "Free online audio converter. Convert MP3, WAV, FLAC, AAC, Opus and M4A with the bitrate you want. 100% in-browser via FFmpeg WebAssembly — no upload, no signup.",
+          "keywords": [
+            "convert mp3 to wav online",
+            "audio converter free",
+            "wav to mp3 browser",
+            "flac to mp3 in browser",
+            "convert audio online",
+            "free mp3 converter no upload",
+            "online audio file converter"
+          ],
+          "ogTitle": "Convert audio · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select an audio file",
+          "empty": "Drop an audio file here or use the button below.",
+          "convertButton": "Convert",
+          "format": "Output format",
+          "formatMp3": "MP3",
+          "formatWav": "WAV",
+          "formatFlac": "FLAC",
+          "formatAac": "AAC",
+          "formatOpus": "Opus",
+          "formatM4a": "M4A",
+          "bitrate": "Bitrate",
+          "busy": "Converting…",
+          "error": "Conversion failed. Try a different file or format.",
+          "removeFile": "Remove",
+          "outputLabel": "Output: {filename} · {mime}",
+          "estimatedSizeLabel": "Estimated size: {size}",
+          "etaLabel": "~{remaining} remaining",
+          "etaCalculating": "Estimating remaining time…"
+        }
+      },
+      "extract": {
+        "name": "Extract audio from video",
+        "description": "Pull the soundtrack out of an MP4, MOV, WebM or MKV file as MP3, WAV, M4A or FLAC.",
+        "seo": {
+          "title": "Extract Audio from Video Online — MP4 to MP3 Free, In-Browser",
+          "description": "Free online MP4 to MP3 extractor. Pull the audio out of MP4, MOV, WebM or MKV files as MP3, WAV, M4A or FLAC. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "mp4 to mp3 online free",
+            "extract audio from video",
+            "video to mp3 converter",
+            "mov to mp3",
+            "extract sound from mp4",
+            "rip audio from video browser",
+            "no upload audio extractor"
+          ],
+          "ogTitle": "Extract audio · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a video",
+          "empty": "Drop a video here or use the button below.",
+          "extractButton": "Extract audio",
+          "format": "Output format",
+          "formatMp3": "MP3",
+          "formatWav": "WAV",
+          "formatM4a": "M4A",
+          "formatFlac": "FLAC",
+          "bitrate": "Bitrate",
+          "busy": "Extracting…",
+          "error": "Audio extraction failed. Try a different file.",
+          "removeFile": "Remove",
+          "outputLabel": "Output: {filename} · {mime}",
+          "estimatedSizeLabel": "Estimated size: {size}",
+          "etaLabel": "~{remaining} remaining",
+          "etaCalculating": "Estimating remaining time…"
+        }
+      },
+      "trim": {
+        "name": "Trim audio",
+        "description": "Cut a section out of an MP3, WAV, FLAC, M4A, OGG or Opus file with a scrubbable waveform.",
+        "seo": {
+          "title": "Trim MP3 Online — Free Audio Cutter, In-Browser",
+          "description": "Free online MP3 cutter. Trim a section out of any MP3, WAV, FLAC, M4A or OGG file with a scrubbable waveform. 100% in your browser — no upload.",
+          "keywords": [
+            "cut mp3 online",
+            "audio trimmer free",
+            "mp3 cutter no upload",
+            "trim audio in browser",
+            "wav cutter online",
+            "découper mp3",
+            "couper musique en ligne"
+          ],
+          "ogTitle": "Trim audio · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select an audio file",
+          "empty": "Drop an audio file here or use the button below.",
+          "trimButton": "Trim & download",
+          "startLabel": "Start (seconds)",
+          "endLabel": "End (seconds)",
+          "preciseLabel": "Precise cut",
+          "preciseHint": "(re-encodes — slower but exact)",
+          "busy": "Trimming…",
+          "error": "Could not trim that file.",
+          "removeFile": "Remove",
+          "clipDurationLabel": "Clip duration: {duration}s"
+        }
+      },
+      "merge": {
+        "name": "Merge audio files",
+        "description": "Concatenate multiple audio files into one — perfect for joining recordings, podcasts or playlists.",
+        "seo": {
+          "title": "Merge MP3 Files Online — Free Audio Joiner, In-Browser",
+          "description": "Free online MP3 merger. Concatenate multiple MP3, WAV, FLAC or M4A files into one in seconds. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "merge mp3 online",
+            "combine audio files",
+            "join mp3 free",
+            "concatenate audio",
+            "audio joiner online",
+            "fusionner mp3 en ligne",
+            "concaténer audio"
+          ],
+          "ogTitle": "Merge audio · 100% local"
+        },
+        "ui": {
+          "selectButton": "Add audio files",
+          "empty": "Drop two or more audio files here or use the button below.",
+          "mergeButton": "Merge & download",
+          "format": "Output format",
+          "formatMp3": "MP3",
+          "formatWav": "WAV",
+          "formatFlac": "FLAC",
+          "formatM4a": "M4A",
+          "bitrate": "Bitrate",
+          "busy": "Merging…",
+          "error": "Merge failed. Make sure your files are valid audio.",
+          "removeFile": "Remove",
+          "moveUpLabel": "Move up",
+          "moveDownLabel": "Move down",
+          "totalLabel": "Total size",
+          "needMore": "Add at least one more file to merge."
+        }
+      },
+      "volume": {
+        "name": "Volume, normalize & fade",
+        "description": "Adjust gain in decibels, normalize loudness to EBU R128 (-16 LUFS), or apply fade in / fade out.",
+        "seo": {
+          "title": "Normalize Audio Online — MP3 Volume Booster & Fade Free",
+          "description": "Free online audio loudness tool. Boost or cut volume in decibels, normalize to EBU R128 (-16 LUFS), or apply fade in / fade out. 100% in your browser — no upload.",
+          "keywords": [
+            "normalize audio online",
+            "mp3 volume booster",
+            "loudness normalization",
+            "audio fade in fade out",
+            "increase mp3 volume",
+            "normaliser audio en ligne",
+            "monter volume mp3"
+          ],
+          "ogTitle": "Audio loudness · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select an audio file",
+          "empty": "Drop an audio file here or use the button below.",
+          "applyButton": "Apply & download",
+          "gainLabel": "Gain",
+          "normalizeLabel": "Normalize loudness (EBU R128)",
+          "normalizeHint": "(targets -16 LUFS)",
+          "fadeInLabel": "Fade in",
+          "fadeOutLabel": "Fade out",
+          "filterPreviewLabel": "Filter: {filter}",
+          "noFilterLabel": "No filter — output identical to input.",
+          "busy": "Processing…",
+          "error": "Could not apply the volume changes.",
+          "removeFile": "Remove"
         }
       }
     },

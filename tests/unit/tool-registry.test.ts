@@ -3,7 +3,12 @@ import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/regis
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(44);
+    expect(TOOLS).toHaveLength(50);
+  });
+
+  it('exposes the 6 audio tools', () => {
+    const audio = TOOLS.filter((t) => t.category === 'audio').map((t) => t.id).sort();
+    expect(audio).toEqual(['convert', 'extract', 'merge', 'tags', 'trim', 'volume']);
   });
 
   it('exposes the 6 SVG tools', () => {

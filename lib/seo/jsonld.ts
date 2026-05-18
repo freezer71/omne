@@ -19,10 +19,24 @@ const VIDEO_MIME_LABEL: Record<string, string> = {
   'video/quicktime': 'MOV',
   'video/x-matroska': 'MKV',
 };
+const AUDIO_MIME_LABEL: Record<string, string> = {
+  'audio/mpeg': 'MP3',
+  'audio/wav': 'WAV',
+  'audio/x-wav': 'WAV',
+  'audio/flac': 'FLAC',
+  'audio/x-flac': 'FLAC',
+  'audio/aac': 'AAC',
+  'audio/mp4': 'M4A',
+  'audio/x-m4a': 'M4A',
+  'audio/ogg': 'OGG',
+  'audio/opus': 'Opus',
+  'audio/webm': 'WebM',
+};
 const MIME_LABEL: Record<string, string> = {
   ...PDF_MIME_LABEL,
   ...IMAGE_MIME_LABEL,
   ...VIDEO_MIME_LABEL,
+  ...AUDIO_MIME_LABEL,
 };
 
 function applicationCategory(category: ToolCategory): string {
@@ -34,6 +48,7 @@ function applicationCategory(category: ToolCategory): string {
       return 'UtilitiesApplication';
     case 'image':
     case 'video':
+    case 'audio':
     case 'pdf':
     case 'svg':
     default:

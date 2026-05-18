@@ -88,6 +88,93 @@ export const TOOLS: readonly ToolMeta[] = [
     status: 'stable',
   },
   {
+    id: 'tags',
+    category: 'audio',
+    href: '/audio/tags',
+    i18nKey: 'tools.audio.tags',
+    keywords: [
+      'mp3', 'tags', 'id3', 'metadata', 'cover', 'album', 'artist', 'title', 'pochette',
+      'métadonnées', 'modifier', 'éditer', 'edit',
+    ],
+    acceptedMime: [
+      'audio/mpeg', 'audio/wav', 'audio/x-wav', 'audio/flac', 'audio/x-flac',
+      'audio/mp4', 'audio/x-m4a', 'audio/aac', 'audio/ogg', 'audio/opus',
+    ],
+    status: 'stable',
+  },
+  {
+    id: 'convert',
+    category: 'audio',
+    href: '/audio/convert',
+    i18nKey: 'tools.audio.convert',
+    keywords: [
+      'audio', 'convert', 'mp3', 'wav', 'flac', 'aac', 'opus', 'm4a', 'ogg',
+      'convertir', 'conversion', 'format', 'bitrate',
+    ],
+    acceptedMime: [
+      'audio/mpeg', 'audio/wav', 'audio/x-wav', 'audio/flac', 'audio/x-flac',
+      'audio/mp4', 'audio/x-m4a', 'audio/aac', 'audio/ogg', 'audio/opus',
+    ],
+    status: 'stable',
+  },
+  {
+    id: 'extract',
+    category: 'audio',
+    href: '/audio/extract',
+    i18nKey: 'tools.audio.extract',
+    keywords: [
+      'extract', 'audio', 'video', 'mp4 to mp3', 'mov to mp3', 'extraire',
+      'son', 'piste audio', 'demuxer',
+    ],
+    acceptedMime: ['video/mp4', 'video/webm', 'video/quicktime', 'video/x-matroska'],
+    status: 'stable',
+  },
+  {
+    id: 'trim',
+    category: 'audio',
+    href: '/audio/trim',
+    i18nKey: 'tools.audio.trim',
+    keywords: [
+      'trim', 'cut', 'clip', 'audio', 'mp3', 'découper', 'couper', 'raccourcir',
+      'extraire passage',
+    ],
+    acceptedMime: [
+      'audio/mpeg', 'audio/wav', 'audio/x-wav', 'audio/flac', 'audio/x-flac',
+      'audio/mp4', 'audio/x-m4a', 'audio/aac', 'audio/ogg', 'audio/opus',
+    ],
+    status: 'stable',
+  },
+  {
+    id: 'merge',
+    category: 'audio',
+    href: '/audio/merge',
+    i18nKey: 'tools.audio.merge',
+    keywords: [
+      'merge', 'combine', 'join', 'concatenate', 'audio', 'mp3',
+      'fusionner', 'concatener', 'concaténer', 'joindre',
+    ],
+    acceptedMime: [
+      'audio/mpeg', 'audio/wav', 'audio/x-wav', 'audio/flac', 'audio/x-flac',
+      'audio/mp4', 'audio/x-m4a', 'audio/aac', 'audio/ogg', 'audio/opus',
+    ],
+    status: 'stable',
+  },
+  {
+    id: 'volume',
+    category: 'audio',
+    href: '/audio/volume',
+    i18nKey: 'tools.audio.volume',
+    keywords: [
+      'volume', 'gain', 'normalize', 'loudness', 'loudnorm', 'fade', 'fade in', 'fade out',
+      'audio', 'mp3', 'normaliser', 'fondu', 'amplifier',
+    ],
+    acceptedMime: [
+      'audio/mpeg', 'audio/wav', 'audio/x-wav', 'audio/flac', 'audio/x-flac',
+      'audio/mp4', 'audio/x-m4a', 'audio/aac', 'audio/ogg', 'audio/opus',
+    ],
+    status: 'stable',
+  },
+  {
     id: 'convert',
     category: 'image',
     href: '/image/convert',

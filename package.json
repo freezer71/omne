@@ -27,6 +27,7 @@
     "cmdk": "^1.1.1",
     "jsonpath-plus": "^10.4.0",
     "jszip": "^3.10.1",
+    "music-metadata": "^11.12.3",
     "next": "16.2.6",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^5.7.284",

@@ -38,6 +38,7 @@
     "categories": {
       "pdf": "Outils PDF",
       "video": "Outils vidéo",
+      "audio": "Outils audio",
       "image": "Outils image",
       "svg": "Outils SVG",
       "password": "Mots de passe",
@@ -361,6 +362,223 @@
           "pauseLabel": "Pause",
           "muteLabel": "Couper le son",
           "unmuteLabel": "Activer le son"
+        }
+      }
+    },
+    "audio": {
+      "tags": {
+        "name": "Modifier les tags et la pochette",
+        "description": "Modifiez les tags MP3, FLAC, M4A ou OGG — titre, artiste, album, année — et intégrez une pochette d'album.",
+        "seo": {
+          "title": "Modifier tags MP3 et pochette en ligne — Éditeur ID3 gratuit dans le navigateur",
+          "description": "Éditeur de tags MP3 gratuit. Modifiez les métadonnées ID3v2 — titre, artiste, album, année, genre — et ajoutez une pochette d'album. Fonctionne aussi avec FLAC, M4A et OGG. 100 % dans le navigateur, aucun envoi.",
+          "keywords": [
+            "modifier tags mp3 en ligne",
+            "éditer métadonnées mp3",
+            "ajouter pochette mp3",
+            "éditeur id3 gratuit",
+            "tags flac en ligne",
+            "métadonnées m4a",
+            "id3 sans inscription"
+          ],
+          "ogTitle": "Modifier les tags audio · 100% local"
+        },
+        "ui": {
+          "selectButton": "Sélectionner un fichier audio",
+          "empty": "Déposez un fichier audio ici ou utilisez le bouton ci-dessous.",
+          "applyButton": "Appliquer et télécharger",
+          "busy": "Écriture des tags…",
+          "error": "Échec de l'écriture des tags. Essayez un autre fichier.",
+          "removeFile": "Retirer",
+          "titleLabel": "Titre",
+          "artistLabel": "Artiste",
+          "albumLabel": "Album",
+          "albumArtistLabel": "Artiste de l'album",
+          "yearLabel": "Année",
+          "genreLabel": "Genre",
+          "trackLabel": "Piste",
+          "commentLabel": "Commentaire",
+          "coverHeading": "Pochette",
+          "coverHint": "Déposez ou cliquez",
+          "coverSelect": "Changer la pochette",
+          "coverRemove": "Retirer la pochette",
+          "coverNone": "Aucune pochette",
+          "loadingTags": "Lecture des tags…",
+          "loadTagsError": "Impossible de lire les tags existants."
+        }
+      },
+      "convert": {
+        "name": "Convertir un fichier audio",
+        "description": "Convertissez entre MP3, WAV, FLAC, AAC, Opus et M4A avec le bitrate de votre choix.",
+        "seo": {
+          "title": "Convertir un audio en ligne — MP3, WAV, FLAC, AAC, Opus, M4A, gratuit",
+          "description": "Convertisseur audio gratuit. Convertissez MP3, WAV, FLAC, AAC, Opus et M4A au bitrate désiré. 100 % dans le navigateur via FFmpeg WebAssembly — aucun envoi.",
+          "keywords": [
+            "convertir mp3 en wav",
+            "convertisseur audio gratuit",
+            "wav vers mp3",
+            "flac en mp3 en ligne",
+            "convertir audio en ligne",
+            "convertisseur mp3 sans inscription",
+            "convertir fichier audio navigateur"
+          ],
+          "ogTitle": "Convertir un audio · 100% local"
+        },
+        "ui": {
+          "selectButton": "Sélectionner un fichier audio",
+          "empty": "Déposez un fichier audio ici ou utilisez le bouton ci-dessous.",
+          "convertButton": "Convertir",
+          "format": "Format de sortie",
+          "formatMp3": "MP3",
+          "formatWav": "WAV",
+          "formatFlac": "FLAC",
+          "formatAac": "AAC",
+          "formatOpus": "Opus",
+          "formatM4a": "M4A",
+          "bitrate": "Bitrate",
+          "busy": "Conversion…",
+          "error": "Échec de la conversion. Essayez un autre fichier ou format.",
+          "removeFile": "Retirer",
+          "outputLabel": "Sortie : {filename} · {mime}",
+          "estimatedSizeLabel": "Taille estimée : {size}",
+          "etaLabel": "~{remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
+        }
+      },
+      "extract": {
+        "name": "Extraire l'audio d'une vidéo",
+        "description": "Extrayez la piste audio d'un MP4, MOV, WebM ou MKV en MP3, WAV, M4A ou FLAC.",
+        "seo": {
+          "title": "Extraire l'audio d'une vidéo en ligne — MP4 vers MP3 gratuit",
+          "description": "Extracteur audio MP4 vers MP3 gratuit. Récupérez la piste audio d'une vidéo MP4, MOV, WebM ou MKV en MP3, WAV, M4A ou FLAC. 100 % dans le navigateur — aucun envoi.",
+          "keywords": [
+            "extraire audio mp4",
+            "vidéo en mp3",
+            "mp4 vers mp3 en ligne",
+            "mov vers mp3",
+            "récupérer son d'une vidéo",
+            "extraire son mp4 navigateur",
+            "extracteur audio gratuit"
+          ],
+          "ogTitle": "Extraire l'audio · 100% local"
+        },
+        "ui": {
+          "selectButton": "Sélectionner une vidéo",
+          "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
+          "extractButton": "Extraire l'audio",
+          "format": "Format de sortie",
+          "formatMp3": "MP3",
+          "formatWav": "WAV",
+          "formatM4a": "M4A",
+          "formatFlac": "FLAC",
+          "bitrate": "Bitrate",
+          "busy": "Extraction…",
+          "error": "Échec de l'extraction. Essayez un autre fichier.",
+          "removeFile": "Retirer",
+          "outputLabel": "Sortie : {filename} · {mime}",
+          "estimatedSizeLabel": "Taille estimée : {size}",
+          "etaLabel": "~{remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
+        }
+      },
+      "trim": {
+        "name": "Découper un audio",
+        "description": "Coupez une section d'un MP3, WAV, FLAC, M4A, OGG ou Opus avec une waveform interactive.",
+        "seo": {
+          "title": "Découper un MP3 en ligne — Couper de la musique gratuit, navigateur",
+          "description": "Découpeur MP3 gratuit. Coupez une section d'un MP3, WAV, FLAC, M4A ou OGG avec une waveform interactive. 100 % dans votre navigateur — aucun envoi.",
+          "keywords": [
+            "découper mp3",
+            "couper musique en ligne",
+            "mp3 cutter gratuit",
+            "raccourcir mp3",
+            "découper audio",
+            "découpeur mp3 sans inscription",
+            "couper un audio dans le navigateur"
+          ],
+          "ogTitle": "Découper un audio · 100% local"
+        },
+        "ui": {
+          "selectButton": "Sélectionner un fichier audio",
+          "empty": "Déposez un fichier audio ici ou utilisez le bouton ci-dessous.",
+          "trimButton": "Découper et télécharger",
+          "startLabel": "Début (secondes)",
+          "endLabel": "Fin (secondes)",
+          "preciseLabel": "Découpe précise",
+          "preciseHint": "(réencode — plus lent mais exact)",
+          "busy": "Découpage…",
+          "error": "Impossible de découper ce fichier.",
+          "removeFile": "Retirer",
+          "clipDurationLabel": "Durée du clip : {duration}s"
+        }
+      },
+      "merge": {
+        "name": "Fusionner des audios",
+        "description": "Concaténez plusieurs fichiers audio en un seul — idéal pour assembler enregistrements, podcasts ou playlists.",
+        "seo": {
+          "title": "Fusionner des MP3 en ligne — Joindre des audios gratuit, navigateur",
+          "description": "Outil de fusion MP3 gratuit. Concaténez plusieurs fichiers MP3, WAV, FLAC ou M4A en un seul. 100 % dans votre navigateur — aucun envoi.",
+          "keywords": [
+            "fusionner mp3 en ligne",
+            "concaténer mp3",
+            "joindre fichiers audio",
+            "assembler mp3",
+            "fusionner audio gratuit",
+            "merge mp3 navigateur",
+            "concaténer audio"
+          ],
+          "ogTitle": "Fusionner des audios · 100% local"
+        },
+        "ui": {
+          "selectButton": "Ajouter des fichiers audio",
+          "empty": "Déposez au moins deux fichiers audio ici ou utilisez le bouton ci-dessous.",
+          "mergeButton": "Fusionner et télécharger",
+          "format": "Format de sortie",
+          "formatMp3": "MP3",
+          "formatWav": "WAV",
+          "formatFlac": "FLAC",
+          "formatM4a": "M4A",
+          "bitrate": "Bitrate",
+          "busy": "Fusion…",
+          "error": "Échec de la fusion. Assurez-vous que les fichiers sont valides.",
+          "removeFile": "Retirer",
+          "moveUpLabel": "Monter",
+          "moveDownLabel": "Descendre",
+          "totalLabel": "Taille totale",
+          "needMore": "Ajoutez au moins un fichier supplémentaire pour fusionner."
+        }
+      },
+      "volume": {
+        "name": "Volume, normalisation et fondu",
+        "description": "Ajustez le gain en décibels, normalisez la sonie EBU R128 (-16 LUFS) ou appliquez un fondu en entrée / sortie.",
+        "seo": {
+          "title": "Normaliser un audio en ligne — Booster MP3 et fondu gratuits",
+          "description": "Outil de sonie audio gratuit. Augmentez ou réduisez le volume en décibels, normalisez EBU R128 (-16 LUFS) ou appliquez un fondu. 100 % dans votre navigateur — aucun envoi.",
+          "keywords": [
+            "normaliser audio en ligne",
+            "monter volume mp3",
+            "loudness normalization",
+            "fondu mp3 en ligne",
+            "augmenter volume audio",
+            "amplifier mp3",
+            "fade in fade out mp3"
+          ],
+          "ogTitle": "Sonie audio · 100% local"
+        },
+        "ui": {
+          "selectButton": "Sélectionner un fichier audio",
+          "empty": "Déposez un fichier audio ici ou utilisez le bouton ci-dessous.",
+          "applyButton": "Appliquer et télécharger",
+          "gainLabel": "Gain",
+          "normalizeLabel": "Normaliser la sonie (EBU R128)",
+          "normalizeHint": "(cible -16 LUFS)",
+          "fadeInLabel": "Fondu en entrée",
+          "fadeOutLabel": "Fondu en sortie",
+          "filterPreviewLabel": "Filtre : {filter}",
+          "noFilterLabel": "Aucun filtre — sortie identique à l'entrée.",
+          "busy": "Traitement…",
+          "error": "Impossible d'appliquer les modifications.",
+          "removeFile": "Retirer"
         }
       }
     },
