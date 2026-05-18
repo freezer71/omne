@@ -338,7 +338,7 @@ export function SvgEditorTool(messages: Messages) {
               aria-label={messages.previewLabel}
               className={cn(
                 'flex h-72 w-full items-center justify-center overflow-hidden rounded-md border border-border p-2 [&_svg]:max-h-full [&_svg]:max-w-full',
-                showBounds && '[&_svg]:outline-2 [&_svg]:outline-dashed [&_svg]:outline-accent [&_svg]:outline [&_svg]:[outline-offset:2px]',
+                showBounds && '[&_svg]:outline-2 [&_svg]:outline-dashed [&_svg]:outline-warning [&_svg]:outline [&_svg]:[outline-offset:2px]',
                 transparent &&
                   'bg-[conic-gradient(at_50%_50%,#e5e5e5_25%,transparent_25%_50%,#e5e5e5_50%_75%,transparent_75%)] bg-[length:16px_16px]',
               )}
