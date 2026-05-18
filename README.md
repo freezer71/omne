@@ -1,37 +1,37 @@
 # omne
 
-> Boîte à outils privacy-first. Tout s'exécute dans votre navigateur. Aucun fichier n'est envoyé.
+> Privacy-first toolbox. Everything runs in your browser. No file is ever uploaded.
 
-**omne** est une collection de plus de 50 outils en ligne — PDF, vidéo, audio, image, SVG, mots de passe, JSON, texte, encodage, QR codes, couleurs — qui tournent **entièrement côté client**. Pas de backend, pas d'analytics, pas de CDN tiers, pas de cookies. Vos fichiers ne quittent jamais l'onglet.
+**omne** is a collection of 50+ online tools — PDF, video, audio, image, SVG, passwords, JSON, text, encoding, QR codes, colors — that run **entirely client-side**. No backend, no analytics, no third-party CDN, no cookies. Your files never leave the tab.
 
-Bilingue **français / anglais**, mode clair / sombre, raccourci `⌘K` pour la palette de commandes.
-
----
-
-## La promesse privacy-first
-
-C'est la raison d'être du projet, pas un argument marketing :
-
-- Chaque conversion s'exécute dans le navigateur via Web APIs, WebAssembly et Web Workers.
-- `@ffmpeg/ffmpeg` (vidéo, audio) et `pdfjs-dist` (PDF) sont **auto-hébergés** sous `/public/ffmpeg/` et `/public/pdfjs/` — l'onglet Réseau de DevTools doit afficher **zéro** trafic sortant pendant un traitement.
-- Aucun service externe : pas de Sentry, pas de Google Analytics, pas de pixel, pas de CDN d'assets.
-
-Toute contribution qui casserait cette promesse (traitement serveur, télémétrie, ressource distante) sort du périmètre.
+Bilingual **English / French**, light / dark mode, `⌘K` command palette.
 
 ---
 
-## Démarrage rapide
+## The privacy-first promise
 
-Prérequis : Node.js 20+.
+This is the reason the project exists, not a marketing line:
+
+- Every conversion runs in the browser via Web APIs, WebAssembly and Web Workers.
+- `@ffmpeg/ffmpeg` (video, audio) and `pdfjs-dist` (PDF) are **self-hosted** under `/public/ffmpeg/` and `/public/pdfjs/` — the DevTools Network tab must show **zero** outbound traffic during processing.
+- No external services: no Sentry, no Google Analytics, no tracking pixel, no asset CDN.
+
+Any contribution that would break that promise (server-side processing, telemetry, remote asset loads) is out of scope.
+
+---
+
+## Getting started
+
+Requirements: Node.js 20+.
 
 ```bash
-npm install   # déclenche le postinstall qui copie ffmpeg + pdf.js + qr-scanner dans /public
+npm install   # runs the postinstall that copies ffmpeg + pdf.js + qr-scanner into /public
 npm run dev   # http://localhost:3000
 ```
 
-> ⚠️ `npm run dev` utilise volontairement **Webpack** (`next dev --webpack`). Turbopack plante sur le HMR avec les routes dynamiques `[locale]`. `npm run dev:turbo` existe uniquement pour des vérifications ponctuelles.
+> ⚠️ `npm run dev` deliberately uses **Webpack** (`next dev --webpack`). Turbopack panics on HMR through `[locale]` dynamic routes. `npm run dev:turbo` exists for spot checks only.
 
-Après un clone propre, si les fonctionnalités ffmpeg/pdf.js échouent, relancez :
+After a clean clone, if ffmpeg/pdf.js features fail, re-run:
 
 ```bash
 node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs
@@ -39,133 +39,133 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 
 ---
 
-## Catalogue d'outils
+## Tool catalog
 
-| Catégorie | Outils |
-|-----------|--------|
-| **PDF** | Fusionner · Diviser · Pivoter · Filigrane · PDF → images · Extraire les images · Images → PDF |
-| **Vidéo** | Convertir (MP4 / WebM / GIF) · Découper |
-| **Audio** | Convertir · Extraire (depuis vidéo) · Découper · Fusionner · Volume / normaliser / fondus · Tags ID3 |
-| **Image** | Convertir · Compresser · Redimensionner · Recadrer · Pivoter / miroir · Détourer (IA locale, *beta*) |
-| **SVG** | Aperçu · Éditeur · Optimiser (SVGO) · → PNG / JPG / WebP · → Data URL · Générateur de favicon |
-| **Mot de passe** | Générer · Phrase de passe (Diceware) · Hash (SHA) · bcrypt · Vérificateur de force |
-| **JSON** | Formater · Arborescence · JSONPath · Tableau · CSV ↔ JSON · Diff · Schéma (AJV) |
-| **Texte** | Casse · Compteur · Lorem Ipsum |
-| **Encodage** | Base64 · URL · JWT |
-| **QR** | Générer (WiFi, vCard…) · Scanner (caméra ou image) |
-| **Couleur** | Convertisseur (hex / rgb / hsl / oklch) · Contraste WCAG · Palette depuis image |
+| Category | Tools |
+|----------|-------|
+| **PDF** | Merge · Split · Rotate · Watermark · PDF → images · Extract images · Images → PDF |
+| **Video** | Convert (MP4 / WebM / GIF) · Trim |
+| **Audio** | Convert · Extract (from video) · Trim · Merge · Volume / normalize / fades · ID3 tags |
+| **Image** | Convert · Compress · Resize · Crop · Rotate / flip · Remove background (local AI, *beta*) |
+| **SVG** | Viewer · Editor · Optimize (SVGO) · → PNG / JPG / WebP · → Data URL · Favicon generator |
+| **Password** | Generate · Passphrase (Diceware) · Hash (SHA) · bcrypt · Strength meter |
+| **JSON** | Format · Tree · JSONPath · Table · CSV ↔ JSON · Diff · Schema (AJV) |
+| **Text** | Case · Counter · Lorem Ipsum |
+| **Encoding** | Base64 · URL · JWT |
+| **QR** | Generate (WiFi, vCard…) · Scan (camera or image) |
+| **Color** | Converter (hex / rgb / hsl / oklch) · WCAG contrast · Palette from image |
 
-Source de vérité : [`lib/tools/registry.ts`](./lib/tools/registry.ts). Le sitemap, les cartes de la page d'accueil et le routage MIME en sont dérivés.
+Source of truth: [`lib/tools/registry.ts`](./lib/tools/registry.ts). The sitemap, the home page cards and MIME-based drop routing all derive from it.
 
 ---
 
-## Stack technique
+## Tech stack
 
 - **[Next.js 16](https://nextjs.org)** (App Router) + **React 19**
-- **TypeScript** strict
-- **Tailwind v4** — configuration CSS-first (pas de `tailwind.config.js`), tokens dans `@theme inline` de `app/globals.css`
-- **[@ffmpeg/ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm)** pour la vidéo et l'audio
-- **[pdf-lib](https://pdf-lib.js.org/)** + **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** pour les PDF
-- **[@huggingface/transformers](https://huggingface.co/docs/transformers.js)** pour le détourage d'image (modèle ONNX local)
-- **[SVGO](https://github.com/svg/svgo)** pour l'optimisation SVG
-- **[AJV](https://ajv.js.org/)** pour la validation de schémas JSON
-- **i18n maison** — pas de runtime, dictionnaires statiques `messages/{en,fr}.json`
-- **Vitest** (unit + components + setup) + **Playwright** (e2e chromium + webkit)
+- **TypeScript** (strict)
+- **Tailwind v4** — CSS-first config (no `tailwind.config.js`), tokens in `@theme inline` inside `app/globals.css`
+- **[@ffmpeg/ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm)** for video and audio
+- **[pdf-lib](https://pdf-lib.js.org/)** + **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** for PDFs
+- **[@huggingface/transformers](https://huggingface.co/docs/transformers.js)** for image background removal (local ONNX model)
+- **[SVGO](https://github.com/svg/svgo)** for SVG optimization
+- **[AJV](https://ajv.js.org/)** for JSON Schema validation
+- **In-house i18n** — no runtime, static dictionaries at `messages/{en,fr}.json`
+- **Vitest** (unit + components + setup) + **Playwright** (e2e on chromium + webkit)
 
 ---
 
 ## Architecture
 
-### Routing (spécificités Next 16)
+### Routing (Next 16 specifics)
 
-- **`proxy.ts`** à la racine remplace l'ancien `middleware.ts`. Il détecte `Accept-Language` et redirige les chemins nus vers `/[locale]/...`.
-- Toutes les routes vivent sous `app/[locale]/...`. Il n'y a **pas** de `app/layout.tsx` — le seul layout racine est `app/[locale]/layout.tsx`.
-- `params` est une **Promesse** dans chaque page, layout et `generateMetadata` : `const { locale } = await params;` est obligatoire.
+- **`proxy.ts`** at the project root replaces the old `middleware.ts` convention. It sniffs `Accept-Language` and 307-redirects bare paths into `/[locale]/...`.
+- All routes live under `app/[locale]/...`. There is **no** `app/layout.tsx` — the only root layout is `app/[locale]/layout.tsx`.
+- `params` is a **Promise** in every page, layout and `generateMetadata`: `const { locale } = await params;` is mandatory.
 
-### Anatomie d'un outil
+### Anatomy of a tool
 
-Chaque outil suit le même squelette en 5 fichiers + une entrée de registre :
+Each tool follows the same 5-file skeleton plus one registry entry:
 
-1. **Logique pure** — `lib/tools/implementations/<id>.ts` (testable en Node, sans React)
-2. **Composant client** — `components/tools/<id>-tool.tsx` (`'use client'`)
-3. **Page** — `app/[locale]/<catégorie>/<id>/page.tsx` (Server Component)
-4. **OpenGraph image** — `app/[locale]/<catégorie>/<id>/opengraph-image.tsx`
-5. **Entrée registre** — `lib/tools/registry.ts`
-6. **Traductions** — clés `tools.<catégorie>.<id>` dans **les deux** `messages/{en,fr}.json` (bloc `seo` inclus, parité testée en CI)
+1. **Pure logic** — `lib/tools/implementations/<id>.ts` (testable in Node, no React)
+2. **Client component** — `components/tools/<id>-tool.tsx` (`'use client'`)
+3. **Page** — `app/[locale]/<category>/<id>/page.tsx` (Server Component)
+4. **OpenGraph image** — `app/[locale]/<category>/<id>/opengraph-image.tsx`
+5. **Registry entry** — `lib/tools/registry.ts`
+6. **Translations** — `tools.<category>.<id>` keys in **both** `messages/{en,fr}.json` (`seo` block included, parity checked in CI)
 
-**Aperçu temps réel obligatoire** : tout outil doit afficher un résultat live qui reflète les paramètres courants — un debounce de ~150-250 ms sur l'effet, pas de bouton "Apply" avant l'aperçu. Pour les pipelines lourds (ffmpeg, pdf.js, remove-bg), rendre un proxy léger (résolution réduite, première page/frame).
+**Real-time preview is mandatory**: every tool must render a live result that reflects the current parameters — drive it from a ~150–250 ms debounced effect, no "Apply" button before the preview shows. For heavy pipelines (ffmpeg, pdf.js, remove-bg), render a lightweight proxy (lower resolution, first page/frame).
 
-Détails complets dans [`CLAUDE.md`](./CLAUDE.md).
+Full details in [`CLAUDE.md`](./CLAUDE.md).
 
 ---
 
-## Commandes
+## Commands
 
-| Commande | Description |
-|----------|-------------|
-| `npm run dev` | Serveur de dev sur `:3000` (Webpack — voir avertissement plus haut) |
-| `npm run build` | Build de production |
-| `npm run start` | Sert le build de production |
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Dev server on `:3000` (Webpack — see warning above) |
+| `npm run build` | Production build |
+| `npm run start` | Serve the production build |
 | `npm run lint` | ESLint (flat config) |
-| `npm test` | Vitest (unit + components + setup) en un coup |
-| `npm run test:watch` | Vitest en watch |
-| `npm run test:ui` | UI Vitest |
+| `npm test` | Vitest (unit + components + setup) one-shot |
+| `npm run test:watch` | Vitest in watch mode |
+| `npm run test:ui` | Vitest UI |
 | `npm run test:e2e` | Playwright (chromium + webkit) |
-| `npm run test:all` | Vitest puis Playwright |
+| `npm run test:all` | Vitest then Playwright |
 
-Lancer un seul test :
+Run a single test:
 
 ```bash
-npx vitest run path/to/file.test.ts -t "nom du test"
-npx playwright test tests/e2e/<nom>.spec.ts --project=chromium
+npx vitest run path/to/file.test.ts -t "test name"
+npx playwright test tests/e2e/<name>.spec.ts --project=chromium
 ```
 
 ---
 
-## Structure du dépôt
+## Repository layout
 
 ```
 omne/
-├── app/[locale]/         # Pages (Server Components) par catégorie/outil
-├── components/tools/     # Composants client de chaque outil
+├── app/[locale]/         # Pages (Server Components) per category/tool
+├── components/tools/     # Client components for each tool
 ├── lib/
 │   ├── tools/
-│   │   ├── implementations/  # Logique pure (testable hors DOM)
-│   │   ├── registry.ts       # Source de vérité du catalogue
+│   │   ├── implementations/  # Pure logic (testable outside the DOM)
+│   │   ├── registry.ts       # Source of truth for the catalog
 │   │   ├── metadata.ts       # SEO / OG / hreflang
-│   │   └── mime-router.ts    # Routage par type MIME au drop
-│   ├── i18n/             # Dictionnaires côté serveur (server-only)
+│   │   └── mime-router.ts    # MIME-based routing on drop
+│   ├── i18n/             # Server-side dictionaries (server-only)
 │   ├── ffmpeg-loader.ts  # Singleton ffmpeg.wasm
 │   └── file-utils.ts     # downloadBlob, outputName, etc.
-├── messages/{en,fr}.json # Traductions (parité vérifiée en CI)
+├── messages/{en,fr}.json # Translations (parity enforced in CI)
 ├── public/
-│   ├── ffmpeg/           # ffmpeg-core.js + .wasm (copiés au postinstall, gitignored)
-│   ├── pdfjs/            # pdf.worker.min.mjs (idem)
-│   └── theme-init.js     # Script statique pour éviter le flash de thème
-├── proxy.ts              # Redirection /[locale] (remplace middleware.ts)
+│   ├── ffmpeg/           # ffmpeg-core.js + .wasm (postinstall-copied, gitignored)
+│   ├── pdfjs/            # pdf.worker.min.mjs (same)
+│   └── theme-init.js     # Static script to avoid theme flash
+├── proxy.ts              # /[locale] redirect (replaces middleware.ts)
 ├── scripts/              # copy-ffmpeg, copy-pdfjs, copy-qr-scanner
 └── tests/
-    ├── unit/             # Vitest Node
-    ├── components/       # Vitest jsdom + RTL
-    ├── setup/            # Tests transverses (parité i18n…)
+    ├── unit/             # Vitest (Node env)
+    ├── components/       # Vitest (jsdom) + RTL
+    ├── setup/            # Cross-cutting tests (i18n parity…)
     └── e2e/              # Playwright
 ```
 
 ---
 
-## Contribuer un nouvel outil
+## Contributing a new tool
 
-1. Implémenter la logique pure dans `lib/tools/implementations/<id>.ts` avec un test unitaire.
-2. Créer le composant client dans `components/tools/<id>-tool.tsx` avec un aperçu temps réel.
-3. Câbler la page sous `app/[locale]/<catégorie>/<id>/page.tsx` + l'`opengraph-image.tsx`.
-4. Ajouter l'entrée dans `lib/tools/registry.ts`.
-5. Ajouter les clés `tools.<catégorie>.<id>` (avec le bloc `seo`) dans `messages/en.json` **et** `messages/fr.json`.
-6. Vérifier : `npm test` (parité i18n + unit + components) puis `npm run test:e2e`.
+1. Implement the pure logic in `lib/tools/implementations/<id>.ts` with a unit test.
+2. Build the client component in `components/tools/<id>-tool.tsx` with a real-time preview.
+3. Wire the page under `app/[locale]/<category>/<id>/page.tsx` + the `opengraph-image.tsx`.
+4. Add the entry in `lib/tools/registry.ts`.
+5. Add `tools.<category>.<id>` keys (including the `seo` block) in `messages/en.json` **and** `messages/fr.json`.
+6. Verify: `npm test` (i18n parity + unit + components), then `npm run test:e2e`.
 
-Le sitemap, le routage par MIME et la palette `⌘K` se mettent à jour automatiquement.
+The sitemap, MIME-based routing and the `⌘K` palette pick the new tool up automatically.
 
 ---
 
-## Licence
+## License
 
-Code source ouvert, contribué à ciel ouvert.
+Open source, built in the open.
