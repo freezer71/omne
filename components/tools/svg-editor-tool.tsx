@@ -13,14 +13,14 @@ import {
   replaceColor,
   type ColorEntry,
 } from '@/lib/tools/implementations/svg-editor';
-import { tokenizeSvg } from '@/lib/tools/implementations/svg-viewer';
 import { downloadBlob, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
 
 type Messages = {
-  pasteLabel: string;
+  heading: string;
   dropLabel: string;
-  empty: string;
+  selectButton: string;
+  sampleButton: string;
   sourceLabel: string;
   previewLabel: string;
   controlsLabel: string;
@@ -101,7 +101,6 @@ export function SvgEditorTool(messages: Messages) {
   const [translateY, setTranslateY] = useState(0);
 
   const hasMarkup = markup.trim().length > 0;
-  const tokens = useMemo(() => (hasMarkup ? tokenizeSvg(markup) : []), [markup, hasMarkup]);
   const srcDoc = useMemo(
     () => (hasMarkup ? buildSrcDoc(markup, transparent ? '' : background) : ''),
     [markup, transparent, background, hasMarkup],
@@ -257,16 +256,16 @@ export function SvgEditorTool(messages: Messages) {
           onChange={(e) => onPickFiles(e.target.files)}
         />
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-col gap-1">
-            <p className="text-sm text-text-primary">{messages.pasteLabel}</p>
+          <div className="flex min-w-0 flex-col gap-1">
+            <p className="text-sm text-text-primary">{messages.heading}</p>
             <p className="text-xs text-text-faint">{messages.dropLabel}</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <Button variant="ghost" size="sm" type="button" onClick={() => inputRef.current?.click()}>
-              {messages.pasteLabel}
+              {messages.selectButton}
             </Button>
             <Button variant="subtle" size="sm" type="button" onClick={loadSample}>
-              {messages.empty}
+              {messages.sampleButton}
             </Button>
             {hasMarkup ? (
               <Button
@@ -286,9 +285,9 @@ export function SvgEditorTool(messages: Messages) {
       </Card>
 
       {hasMarkup ? (
-        <div className="grid gap-4 xl:grid-cols-[1fr_1fr_320px]">
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_320px]">
           {/* Source */}
-          <div className="flex flex-col gap-2">
+          <div className="flex min-w-0 flex-col gap-2">
             <div className="flex items-center justify-between gap-2">
               <span className="text-xs text-text-muted">{messages.sourceLabel}</span>
               <div className="flex items-center gap-2">
@@ -305,27 +304,14 @@ export function SvgEditorTool(messages: Messages) {
               value={markup}
               onChange={(e) => setMarkup(e.target.value)}
               spellCheck={false}
-              className="h-72 w-full resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-[11px] leading-relaxed text-text-primary"
+              wrap="soft"
+              style={{ wordBreak: 'break-all' }}
+              className="h-80 w-full min-w-0 resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-[11px] leading-relaxed text-text-primary"
             />
-            <pre className="hidden max-h-32 overflow-auto rounded-md border border-border bg-surface px-3 py-2 font-mono text-[11px] leading-relaxed text-text-primary lg:block">
-              {tokens.map((t, i) => (
-                <span
-                  key={i}
-                  className={cn(
-                    t.type === 'tag' && 'text-accent',
-                    t.type === 'attr' && 'text-text-muted',
-                    t.type === 'string' && 'text-success',
-                    t.type === 'comment' && 'text-text-faint italic',
-                  )}
-                >
-                  {t.value}
-                </span>
-              ))}
-            </pre>
           </div>
 
           {/* Preview */}
-          <div className="flex flex-col gap-2">
+          <div className="flex min-w-0 flex-col gap-2">
             <span className="text-xs text-text-muted">{messages.previewLabel}</span>
             <iframe
               key={srcDoc.length}
@@ -359,7 +345,7 @@ export function SvgEditorTool(messages: Messages) {
           </div>
 
           {/* Controls */}
-          <aside className="flex flex-col gap-4 rounded-md border border-border bg-surface p-4">
+          <aside className="flex min-w-0 flex-col gap-4 rounded-md border border-border bg-surface p-4">
             <span className="text-xs text-text-muted">{messages.controlsLabel}</span>
 
             <section className="flex flex-col gap-2">

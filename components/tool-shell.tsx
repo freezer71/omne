@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Locale } from '@/lib/i18n/config';
 import type { ToolCategory } from '@/lib/tools/types';
+import { cn } from '@/lib/cn';
 
 type Props = {
   locale: Locale;
@@ -9,6 +10,7 @@ type Props = {
   description: string;
   categoryLabel: string;
   backHomeLabel: string;
+  wide?: boolean;
   children: React.ReactNode;
 };
 
@@ -19,10 +21,16 @@ export function ToolShell({
   description,
   categoryLabel,
   backHomeLabel,
+  wide = false,
   children,
 }: Props) {
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-4 sm:px-6 py-10 sm:py-16">
+    <main
+      className={cn(
+        'mx-auto flex w-full flex-1 flex-col gap-8 px-4 sm:px-6 py-10 sm:py-16',
+        wide ? 'max-w-6xl' : 'max-w-3xl',
+      )}
+    >
       <nav
         aria-label="breadcrumb"
         className="flex items-center gap-2 text-sm text-text-muted"

@@ -621,9 +621,10 @@
           "ogTitle": "SVG editor · 100% local"
         },
         "ui": {
-          "pasteLabel": "Select an SVG file",
+          "heading": "Open an SVG to start editing",
           "dropLabel": "Drop a .svg file anywhere on this card.",
-          "empty": "Load sample",
+          "selectButton": "Select a file",
+          "sampleButton": "Load sample",
           "sourceLabel": "Source",
           "previewLabel": "Preview",
           "controlsLabel": "Controls",

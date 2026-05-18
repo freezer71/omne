@@ -621,9 +621,10 @@
           "ogTitle": "Éditeur SVG · 100 % local"
         },
         "ui": {
-          "pasteLabel": "Sélectionner un fichier SVG",
+          "heading": "Ouvrez un SVG pour commencer",
           "dropLabel": "Déposez un fichier .svg n'importe où sur cette carte.",
-          "empty": "Charger l'exemple",
+          "selectButton": "Sélectionner un fichier",
+          "sampleButton": "Charger l'exemple",
           "sourceLabel": "Source",
           "previewLabel": "Aperçu",
           "controlsLabel": "Contrôles",

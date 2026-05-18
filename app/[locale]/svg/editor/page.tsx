@@ -35,11 +35,13 @@ export default async function Page({
         description={tool.description}
         categoryLabel={dict.hub.categories.svg}
         backHomeLabel={dict.common.backHome}
+        wide
       >
         <SvgEditorTool
-          pasteLabel={tool.ui.pasteLabel}
+          heading={tool.ui.heading}
           dropLabel={tool.ui.dropLabel}
-          empty={tool.ui.empty}
+          selectButton={tool.ui.selectButton}
+          sampleButton={tool.ui.sampleButton}
           sourceLabel={tool.ui.sourceLabel}
           previewLabel={tool.ui.previewLabel}
           controlsLabel={tool.ui.controlsLabel}
