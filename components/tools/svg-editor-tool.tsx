@@ -11,6 +11,7 @@ import {
   readRootAttrs,
   readRootTransform,
   replaceColor,
+  sanitizeForRender,
   type ColorEntry,
 } from '@/lib/tools/implementations/svg-editor';
 import { downloadBlob, outputName } from '@/lib/file-utils';
@@ -48,11 +49,6 @@ type Messages = {
   error: string;
 };
 
-function buildSrcDoc(markup: string, background: string): string {
-  const bg = background || 'transparent';
-  return `<!doctype html><html><head><style>html,body{margin:0;height:100%;background:${bg}}body{display:flex;align-items:center;justify-content:center;padding:8px}svg{max-width:100%;max-height:100%;height:auto;width:auto}</style></head><body>${markup}</body></html>`;
-}
-
 function formatXml(markup: string, indent = 2): string {
   // Lightweight pretty-printer: inserts newlines between tags, indents by depth.
   const tokens = markup.replace(/>\s+</g, '><').split(/(<[^>]+>)/g).filter(Boolean);
@@ -78,6 +74,7 @@ const SAMPLE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" 
 export function SvgEditorTool(messages: Messages) {
   const inputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
   const selectionRef = useRef<{ start: number; end: number } | null>(null);
   const copyResetRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -101,10 +98,24 @@ export function SvgEditorTool(messages: Messages) {
   const [translateY, setTranslateY] = useState(0);
 
   const hasMarkup = markup.trim().length > 0;
-  const srcDoc = useMemo(
-    () => (hasMarkup ? buildSrcDoc(markup, transparent ? '' : background) : ''),
-    [markup, transparent, background, hasMarkup],
-  );
+  const sanitized = useMemo(() => (hasMarkup ? sanitizeForRender(markup) : ''), [markup, hasMarkup]);
+
+  useEffect(() => {
+    const node = previewRef.current;
+    if (!node) return;
+    if (!sanitized) {
+      node.replaceChildren();
+      return;
+    }
+    const parsed = new DOMParser().parseFromString(sanitized, 'image/svg+xml');
+    const root = parsed.documentElement;
+    if (!root || parsed.querySelector('parsererror')) {
+      node.replaceChildren();
+      return;
+    }
+    const imported = document.importNode(root, true);
+    node.replaceChildren(imported);
+  }, [sanitized]);
 
   // Recompute colors + read root state when markup changes
   useEffect(() => {
@@ -313,16 +324,16 @@ export function SvgEditorTool(messages: Messages) {
           {/* Preview */}
           <div className="flex min-w-0 flex-col gap-2">
             <span className="text-xs text-text-muted">{messages.previewLabel}</span>
-            <iframe
-              key={srcDoc.length}
-              srcDoc={srcDoc}
-              sandbox=""
-              title={messages.previewLabel}
+            <div
+              ref={previewRef}
+              role="img"
+              aria-label={messages.previewLabel}
               className={cn(
-                'h-72 w-full rounded-md border border-border',
+                'flex h-72 w-full items-center justify-center overflow-hidden rounded-md border border-border p-2 [&_svg]:max-h-full [&_svg]:max-w-full',
                 transparent &&
                   'bg-[conic-gradient(at_50%_50%,#e5e5e5_25%,transparent_25%_50%,#e5e5e5_50%_75%,transparent_75%)] bg-[length:16px_16px]',
               )}
+              style={transparent ? undefined : { background }}
             />
             <div className="flex items-center gap-2 text-xs text-text-muted">
               <span>{messages.backgroundLabel}</span>

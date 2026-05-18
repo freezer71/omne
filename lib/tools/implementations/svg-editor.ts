@@ -248,6 +248,41 @@ export function readRootAttrs(markup: string): RootAttrs {
   };
 }
 
+const SCRIPTABLE_TAGS = new Set(['script', 'foreignobject']);
+
+export function sanitizeForRender(markup: string): string {
+  const { doc, root, error } = parseSvgDoc(markup);
+  if (error || !doc || !root) return '';
+
+  const removeScriptable = (el: Element) => {
+    for (const child of Array.from(el.children)) {
+      if (SCRIPTABLE_TAGS.has(child.nodeName.toLowerCase())) {
+        child.remove();
+      } else {
+        removeScriptable(child);
+      }
+    }
+  };
+  removeScriptable(root);
+
+  const scrubAttrs = (el: Element) => {
+    for (const attr of Array.from(el.attributes)) {
+      const name = attr.name.toLowerCase();
+      if (name.startsWith('on')) {
+        el.removeAttribute(attr.name);
+        continue;
+      }
+      if (name === 'href' || name === 'xlink:href') {
+        if (/^\s*javascript:/i.test(attr.value)) el.removeAttribute(attr.name);
+      }
+    }
+    for (const child of Array.from(el.children)) scrubAttrs(child);
+  };
+  scrubAttrs(root);
+
+  return new XMLSerializer().serializeToString(doc);
+}
+
 export function readRootTransform(markup: string): RootTransform {
   const { root, error } = parseSvgDoc(markup);
   if (error || !root) return {};
