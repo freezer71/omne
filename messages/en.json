@@ -21,7 +21,9 @@
   },
   "nav": {
     "home": "Home",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "github": "GitHub",
+    "githubAriaLabel": "View source code on GitHub"
   },
   "common": {
     "backHome": "Home",
@@ -127,6 +129,7 @@
       "categories": "Tools",
       "about": "About",
       "privacy": "Privacy",
+      "github": "GitHub",
       "language": "Language",
       "copyright": "© omne"
     }

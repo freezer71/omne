@@ -3,6 +3,7 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { LocaleSwitcher } from '@/components/locale-switcher';
 import { PaletteButton } from '@/components/command-palette/palette-button';
 import { Logo } from '@/components/logo';
+import { GithubIcon, GITHUB_URL } from '@/components/icons/github';
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 
@@ -24,6 +25,16 @@ export function Header({ locale, dict }: Props) {
             className="text-sm text-text-muted hover:text-text-primary transition-colors"
           >
             {dict.nav.privacy}
+          </Link>
+          <Link
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={dict.nav.githubAriaLabel}
+            className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-text-primary transition-colors"
+          >
+            <GithubIcon size={16} />
+            <span className="hidden sm:inline">{dict.nav.github}</span>
           </Link>
         </div>
         <div className="flex items-center gap-3">

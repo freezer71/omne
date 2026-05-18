@@ -29,7 +29,7 @@ These are not feature ideas — they are constraints. Everything in the codebase
 - 🚫 **No tracking, ever.** No analytics, no telemetry, no cookies, no third-party CDN, no fingerprinting. We don't know who you are and we don't want to know.
 - 🧱 **Self-hosted heavy assets.** ffmpeg.wasm, pdf.js worker, the QR scanner and the background-removal ONNX model are all served from this origin so processing doesn't leak metadata to a CDN.
 - 🆓 **No friction.** No signup, no account, no paywall, no rate limit, no "premium tier". Open the page, do the thing, close the tab.
-- 🌍 **Open source, built in the open.** Every line is auditable. If you can't verify a claim by reading the code, the claim doesn't count.
+- 🌍 **Open source, built in the open.** Every line is auditable on [github.com/freezer71/omne](https://github.com/freezer71/omne) — also linked from the site header and footer. If you can't verify a claim by reading the code, the claim doesn't count.
 - 🌗 **Accessible and bilingual.** Light & dark themes with pre-paint anti-flash, English & French at full parity (enforced by CI), and an `⌘K` palette for keyboard users.
 
 ---

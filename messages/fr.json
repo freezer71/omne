@@ -21,7 +21,9 @@
   },
   "nav": {
     "home": "Accueil",
-    "privacy": "Confidentialité"
+    "privacy": "Confidentialité",
+    "github": "GitHub",
+    "githubAriaLabel": "Voir le code source sur GitHub"
   },
   "common": {
     "backHome": "Accueil",
@@ -127,6 +129,7 @@
       "categories": "Outils",
       "about": "À propos",
       "privacy": "Confidentialité",
+      "github": "GitHub",
       "language": "Langue",
       "copyright": "© omne"
     }

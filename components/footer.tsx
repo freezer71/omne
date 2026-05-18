@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Logo } from '@/components/logo';
+import { GithubIcon, GITHUB_URL } from '@/components/icons/github';
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 import type { ToolCategory } from '@/lib/tools/types';
@@ -52,6 +53,17 @@ export function Footer({ locale, dict, categoryOrder }: Props) {
                   className="text-sm text-text-muted transition-colors hover:text-text-primary"
                 >
                   {dict.home.footer.privacy}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-text-muted transition-colors hover:text-text-primary"
+                >
+                  <GithubIcon size={14} />
+                  {dict.home.footer.github}
                 </Link>
               </li>
             </ul>
