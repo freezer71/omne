@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { LocaleSwitcher } from '@/components/locale-switcher';
 import { PaletteButton } from '@/components/command-palette/palette-button';
+import { Logo } from '@/components/logo';
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 
@@ -15,8 +16,8 @@ export function Header({ locale, dict }: Props) {
     <header className="sticky top-0 z-30 border-b border-border bg-bg/80 backdrop-blur-md">
       <div className="mx-auto flex h-12 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-6">
-          <Link href={`/${locale}`} className="text-sm font-semibold tracking-tight text-text-primary">
-            {dict.meta.siteName}
+          <Link href={`/${locale}`} aria-label={dict.meta.siteName}>
+            <Logo />
           </Link>
           <Link
             href={`/${locale}/privacy`}

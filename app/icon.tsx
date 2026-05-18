@@ -11,19 +11,21 @@ export default function Icon() {
         style={{
           width: '100%',
           height: '100%',
-          background: '#5e6ad2',
-          color: '#ffffff',
+          background: '#000000',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: 24,
-          fontWeight: 700,
-          fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
-          letterSpacing: '-0.04em',
-          borderRadius: 8,
+          borderRadius: 7,
         }}
       >
-        o
+        <div
+          style={{
+            width: 18,
+            height: 18,
+            borderRadius: '50%',
+            border: '3px solid #ffffff',
+          }}
+        />
       </div>
     ),
     size,
