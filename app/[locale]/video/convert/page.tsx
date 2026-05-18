@@ -49,6 +49,8 @@ export default async function Page({
         busy={tool.ui.busy}
         error={tool.ui.error}
         removeFile={tool.ui.removeFile}
+        etaLabel={tool.ui.etaLabel}
+        etaCalculating={tool.ui.etaCalculating}
       />
     </ToolShell>
       <ToolPageJsonLd category="video" id="convert" locale={locale} />

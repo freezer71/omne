@@ -282,7 +282,9 @@
           "busy": "Conversion…",
           "error": "Échec de la conversion. Essayez un autre fichier ou format.",
           "removeFile": "Retirer",
-          "outputLabel": "Sortie : {filename} · {mime}"
+          "outputLabel": "Sortie : {filename} · {mime}",
+          "etaLabel": "~{remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
         }
       },
       "trim": {
@@ -311,7 +313,14 @@
           "busy": "Découpage…",
           "error": "Impossible de découper cette vidéo.",
           "removeFile": "Retirer",
-          "clipDurationLabel": "Durée du clip : {duration}s"
+          "clipDurationLabel": "Durée du clip : {duration}s",
+          "timelineLabel": "Plage de découpe",
+          "startHandleLabel": "Début de la découpe",
+          "endHandleLabel": "Fin de la découpe",
+          "playLabel": "Lire",
+          "pauseLabel": "Pause",
+          "muteLabel": "Couper le son",
+          "unmuteLabel": "Activer le son"
         }
       }
     },

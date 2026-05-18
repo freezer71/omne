@@ -21,7 +21,20 @@ type Messages = {
   busy: string;
   error: string;
   removeFile: string;
+  etaLabel: string;
+  etaCalculating: string;
 };
+
+function formatRemaining(seconds: number): string {
+  if (!Number.isFinite(seconds) || seconds < 1) return '<1s';
+  if (seconds < 60) return `${Math.ceil(seconds)}s`;
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.ceil(seconds % 60);
+  if (minutes < 60) return secs === 0 ? `${minutes}min` : `${minutes}min ${secs}s`;
+  const hours = Math.floor(minutes / 60);
+  const remMin = minutes % 60;
+  return remMin === 0 ? `${hours}h` : `${hours}h ${remMin}min`;
+}
 
 const FORMATS: VideoFormat[] = ['mp4', 'webm', 'mov', 'gif'];
 
@@ -43,6 +56,23 @@ export function VideoConvertTool(messages: Messages) {
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
   const [dragging, setDragging] = useState(false);
+  const [startedAt, setStartedAt] = useState<number | null>(null);
+  const [nowTick, setNowTick] = useState(0);
+
+  useEffect(() => {
+    if (!busy) return;
+    const id = window.setInterval(() => setNowTick(Date.now()), 250);
+    return () => window.clearInterval(id);
+  }, [busy]);
+
+  let etaSeconds: number | null = null;
+  if (busy && startedAt !== null && progress > 0.02) {
+    const elapsed = (nowTick - startedAt) / 1000;
+    if (elapsed > 0.5) {
+      const clamped = Math.min(progress, 1);
+      etaSeconds = Math.max(0, elapsed / clamped - elapsed);
+    }
+  }
 
   const labelFor: Record<VideoFormat, string> = {
     mp4: messages.formatMp4,
@@ -66,6 +96,9 @@ export function VideoConvertTool(messages: Messages) {
     setBusy(true);
     setError(null);
     setProgress(0);
+    const started = Date.now();
+    setStartedAt(started);
+    setNowTick(started);
     try {
       const bytes = await convertVideo(file!, format, {
         onProgress: (r) => setProgress(r),
@@ -77,6 +110,7 @@ export function VideoConvertTool(messages: Messages) {
       setError(messages.error);
     } finally {
       setBusy(false);
+      setStartedAt(null);
     }
   };
 
@@ -171,15 +205,24 @@ export function VideoConvertTool(messages: Messages) {
             ))}
           </select>
         </label>
-        <div className="flex items-center gap-3">
-          {error && (
-            <p role="alert" className="text-sm text-danger">
-              {error}
+        <div className="flex flex-col items-end gap-1">
+          <div className="flex items-center gap-3">
+            {error && (
+              <p role="alert" className="text-sm text-danger">
+                {error}
+              </p>
+            )}
+            <Button onClick={onConvert} disabled={!canConvert}>
+              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.convertButton}
+            </Button>
+          </div>
+          {busy && (
+            <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
+              {etaSeconds === null
+                ? messages.etaCalculating
+                : tpl(messages.etaLabel, { remaining: formatRemaining(etaSeconds) })}
             </p>
           )}
-          <Button onClick={onConvert} disabled={!canConvert}>
-            {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.convertButton}
-          </Button>
         </div>
       </div>
     </div>

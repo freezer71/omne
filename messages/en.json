@@ -282,7 +282,9 @@
           "busy": "Converting…",
           "error": "Conversion failed. Try a different file or format.",
           "removeFile": "Remove",
-          "outputLabel": "Output: {filename} · {mime}"
+          "outputLabel": "Output: {filename} · {mime}",
+          "etaLabel": "~{remaining} remaining",
+          "etaCalculating": "Estimating remaining time…"
         }
       },
       "trim": {
@@ -311,7 +313,14 @@
           "busy": "Trimming…",
           "error": "Could not trim that video.",
           "removeFile": "Remove",
-          "clipDurationLabel": "Clip duration: {duration}s"
+          "clipDurationLabel": "Clip duration: {duration}s",
+          "timelineLabel": "Trim timeline",
+          "startHandleLabel": "Trim start",
+          "endHandleLabel": "Trim end",
+          "playLabel": "Play",
+          "pauseLabel": "Pause",
+          "muteLabel": "Mute",
+          "unmuteLabel": "Unmute"
         }
       }
     },

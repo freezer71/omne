@@ -28,6 +28,8 @@ const messages = {
   busy: 'Converting…',
   error: 'Conversion failed.',
   removeFile: 'Remove',
+  etaLabel: '~{remaining} remaining',
+  etaCalculating: 'Estimating remaining time…',
 };
 
 function videoFile(name = 'clip.mp4', type = 'video/mp4'): File {

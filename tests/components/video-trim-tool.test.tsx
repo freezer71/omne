@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const trimVideo = vi.fn();
@@ -25,7 +25,22 @@ const messages = {
   busy: 'Trimming…',
   error: 'Could not trim.',
   removeFile: 'Remove',
+  timelineLabel: 'Trim timeline',
+  startHandleLabel: 'Trim start',
+  endHandleLabel: 'Trim end',
+  playLabel: 'Play',
+  pauseLabel: 'Pause',
+  muteLabel: 'Mute',
+  unmuteLabel: 'Unmute',
 };
+
+function setVideoDuration(d: number) {
+  const video = document.querySelector('video');
+  if (!video) throw new Error('No <video> element in the DOM');
+  Object.defineProperty(video, 'duration', { value: d, configurable: true });
+  fireEvent.loadedMetadata(video);
+  return video;
+}
 
 const mp4 = (n = 'clip.mp4') => new File([new Uint8Array([0])], n, { type: 'video/mp4' });
 
@@ -80,5 +95,37 @@ describe('VideoTrimTool', () => {
     await user.type(screen.getByLabelText(messages.endLabel), '2');
     await user.click(screen.getByRole('button', { name: messages.trimButton }));
     expect(await screen.findByRole('alert')).toHaveTextContent(messages.error);
+  });
+
+  it('auto-sets end to video duration after loadedmetadata', async () => {
+    const user = userEvent.setup();
+    render(<VideoTrimTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), mp4());
+    setVideoDuration(8);
+    expect(screen.getByLabelText(messages.endLabel)).toHaveValue(8);
+  });
+
+  it('increments start handle by 0.1s with ArrowRight', async () => {
+    const user = userEvent.setup();
+    render(<VideoTrimTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), mp4());
+    setVideoDuration(10);
+    const startHandle = screen.getByRole('slider', { name: messages.startHandleLabel });
+    startHandle.focus();
+    await user.keyboard('{ArrowRight}');
+    expect(screen.getByLabelText(messages.startLabel)).toHaveValue(0.1);
+  });
+
+  it('clamps start handle so it cannot pass end - MIN_GAP', async () => {
+    const user = userEvent.setup();
+    render(<VideoTrimTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), mp4());
+    setVideoDuration(5);
+    await user.clear(screen.getByLabelText(messages.endLabel));
+    await user.type(screen.getByLabelText(messages.endLabel), '2');
+    const startHandle = screen.getByRole('slider', { name: messages.startHandleLabel });
+    startHandle.focus();
+    await user.keyboard('{End}');
+    expect(screen.getByLabelText(messages.startLabel)).toHaveValue(1.9);
   });
 });
