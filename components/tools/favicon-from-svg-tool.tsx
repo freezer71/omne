@@ -10,6 +10,7 @@ import { cn } from '@/lib/cn';
 
 type Messages = {
   pasteLabel: string;
+  selectButton: string;
   dropLabel: string;
   empty: string;
   appNameLabel: string;
@@ -133,8 +134,13 @@ export function FaviconFromSvgTool(messages: Messages) {
               spellCheck={false}
               className="min-h-28 w-full resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-xs text-text-primary"
             />
-            <span className="text-text-faint">{messages.dropLabel}</span>
           </label>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <Button variant="ghost" size="sm" type="button" onClick={() => inputRef.current?.click()}>
+              {messages.selectButton}
+            </Button>
+            <span className="text-xs text-text-faint">{messages.dropLabel}</span>
+          </div>
         </div>
       </Card>
 

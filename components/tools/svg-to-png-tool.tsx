@@ -16,6 +16,7 @@ type Messages = {
   selectButton: string;
   empty: string;
   pasteLabel: string;
+  dropLabel: string;
   widthLabel: string;
   heightLabel: string;
   scaleLabel: string;
@@ -209,7 +210,7 @@ export function SvgToPngTool(messages: Messages) {
               className="min-h-32 w-full resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-xs text-text-primary"
             />
           </label>
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <Button
               variant="ghost"
               size="sm"
@@ -233,7 +234,9 @@ export function SvgToPngTool(messages: Messages) {
                   {messages.removeFile}
                 </Button>
               </div>
-            ) : null}
+            ) : (
+              <span className="text-xs text-text-faint">{messages.dropLabel}</span>
+            )}
           </div>
         </div>
       </Card>

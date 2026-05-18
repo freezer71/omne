@@ -525,6 +525,7 @@
         },
         "ui": {
           "pasteLabel": "Paste SVG markup",
+          "selectButton": "Select a file",
           "dropLabel": "…or drop a .svg file onto this card.",
           "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
           "sourceLabel": "Source",
@@ -558,6 +559,7 @@
         },
         "ui": {
           "pasteLabel": "Paste SVG markup",
+          "selectButton": "Select a file",
           "dropLabel": "…or drop a .svg file onto this card.",
           "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
           "precisionLabel": "Float precision",
@@ -592,6 +594,7 @@
         },
         "ui": {
           "pasteLabel": "Paste SVG markup",
+          "selectButton": "Select a file",
           "dropLabel": "…or drop a .svg file onto this card.",
           "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\">…</svg>",
           "appNameLabel": "App name (used in site.webmanifest)",
@@ -625,6 +628,8 @@
           "dropLabel": "Drop a .svg file anywhere on this card.",
           "selectButton": "Select a file",
           "sampleButton": "Load sample",
+          "pasteHere": "Or paste SVG markup",
+          "pastePlaceholder": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
           "sourceLabel": "Source",
           "previewLabel": "Preview",
           "controlsLabel": "Controls",
@@ -670,9 +675,10 @@
           "ogTitle": "SVG → PNG · 100% local"
         },
         "ui": {
-          "selectButton": "Select an SVG file",
+          "selectButton": "Select a file",
           "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
-          "pasteLabel": "Paste SVG markup or drop a .svg file",
+          "pasteLabel": "Paste SVG markup",
+          "dropLabel": "…or drop a .svg file onto this card.",
           "widthLabel": "Width (px)",
           "heightLabel": "Height (px)",
           "scaleLabel": "Scale",
@@ -707,7 +713,9 @@
           "ogTitle": "SVG → Data URL · 100% local"
         },
         "ui": {
-          "pasteLabel": "Paste SVG markup or drop a .svg file",
+          "pasteLabel": "Paste SVG markup",
+          "selectButton": "Select a file",
+          "dropLabel": "…or drop a .svg file onto this card.",
           "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
           "base64Label": "Base64 data URI",
           "urlEncodedLabel": "URL-encoded data URI (CSS-friendly)",

@@ -42,6 +42,8 @@ export default async function Page({
           dropLabel={tool.ui.dropLabel}
           selectButton={tool.ui.selectButton}
           sampleButton={tool.ui.sampleButton}
+          pasteHere={tool.ui.pasteHere}
+          pastePlaceholder={tool.ui.pastePlaceholder}
           sourceLabel={tool.ui.sourceLabel}
           previewLabel={tool.ui.previewLabel}
           controlsLabel={tool.ui.controlsLabel}

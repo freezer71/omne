@@ -38,6 +38,8 @@ export default async function Page({
       >
         <SvgToDataUrlTool
           pasteLabel={tool.ui.pasteLabel}
+          selectButton={tool.ui.selectButton}
+          dropLabel={tool.ui.dropLabel}
           empty={tool.ui.empty}
           base64Label={tool.ui.base64Label}
           urlEncodedLabel={tool.ui.urlEncodedLabel}

@@ -9,6 +9,7 @@ import { cn } from '@/lib/cn';
 
 type Messages = {
   pasteLabel: string;
+  selectButton: string;
   dropLabel: string;
   empty: string;
   precisionLabel: string;
@@ -145,17 +146,24 @@ export function SvgOptimizeTool(messages: Messages) {
           className="sr-only"
           onChange={(e) => onPickFiles(e.target.files)}
         />
-        <label className="flex flex-col gap-2 text-xs text-text-muted">
-          {messages.pasteLabel}
-          <textarea
-            value={markup}
-            onChange={(e) => setMarkup(e.target.value)}
-            placeholder={messages.empty}
-            spellCheck={false}
-            className="min-h-32 w-full resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-xs text-text-primary"
-          />
-          <span className="text-text-faint">{messages.dropLabel}</span>
-        </label>
+        <div className="flex flex-col gap-3">
+          <label className="flex flex-col gap-2 text-xs text-text-muted">
+            {messages.pasteLabel}
+            <textarea
+              value={markup}
+              onChange={(e) => setMarkup(e.target.value)}
+              placeholder={messages.empty}
+              spellCheck={false}
+              className="min-h-32 w-full resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-xs text-text-primary"
+            />
+          </label>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <Button variant="ghost" size="sm" type="button" onClick={() => inputRef.current?.click()}>
+              {messages.selectButton}
+            </Button>
+            <span className="text-xs text-text-faint">{messages.dropLabel}</span>
+          </div>
+        </div>
       </Card>
 
       {hasMarkup ? (

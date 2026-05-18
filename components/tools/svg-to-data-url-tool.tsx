@@ -9,6 +9,8 @@ import { cn } from '@/lib/cn';
 
 type Messages = {
   pasteLabel: string;
+  selectButton: string;
+  dropLabel: string;
   empty: string;
   base64Label: string;
   urlEncodedLabel: string;
@@ -19,6 +21,7 @@ type Messages = {
 };
 
 export function SvgToDataUrlTool(messages: Messages) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [markup, setMarkup] = useState('');
   const [dragging, setDragging] = useState(false);
   const [copied, setCopied] = useState<'b64' | 'url' | null>(null);
@@ -67,16 +70,31 @@ export function SvgToDataUrlTool(messages: Messages) {
           onPickFiles(e.dataTransfer.files);
         }}
       >
-        <label className="flex flex-col gap-2 text-xs text-text-muted">
-          {messages.pasteLabel}
-          <textarea
-            value={markup}
-            onChange={(e) => setMarkup(e.target.value)}
-            placeholder={messages.empty}
-            spellCheck={false}
-            className="min-h-40 w-full resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-xs text-text-primary"
-          />
-        </label>
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/svg+xml,.svg"
+          className="sr-only"
+          onChange={(e) => onPickFiles(e.target.files)}
+        />
+        <div className="flex flex-col gap-3">
+          <label className="flex flex-col gap-2 text-xs text-text-muted">
+            {messages.pasteLabel}
+            <textarea
+              value={markup}
+              onChange={(e) => setMarkup(e.target.value)}
+              placeholder={messages.empty}
+              spellCheck={false}
+              className="min-h-40 w-full resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-xs text-text-primary"
+            />
+          </label>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <Button variant="ghost" size="sm" type="button" onClick={() => inputRef.current?.click()}>
+              {messages.selectButton}
+            </Button>
+            <span className="text-xs text-text-faint">{messages.dropLabel}</span>
+          </div>
+        </div>
       </Card>
 
       {hasMarkup ? (

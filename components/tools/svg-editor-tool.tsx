@@ -22,6 +22,8 @@ type Messages = {
   dropLabel: string;
   selectButton: string;
   sampleButton: string;
+  pasteHere: string;
+  pastePlaceholder: string;
   sourceLabel: string;
   previewLabel: string;
   controlsLabel: string;
@@ -274,32 +276,48 @@ export function SvgEditorTool(messages: Messages) {
           className="sr-only"
           onChange={(e) => onPickFiles(e.target.files)}
         />
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex min-w-0 flex-col gap-1">
-            <p className="text-sm text-text-primary">{messages.heading}</p>
-            <p className="text-xs text-text-faint">{messages.dropLabel}</p>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <Button variant="ghost" size="sm" type="button" onClick={() => inputRef.current?.click()}>
-              {messages.selectButton}
-            </Button>
-            <Button variant="subtle" size="sm" type="button" onClick={loadSample}>
-              {messages.sampleButton}
-            </Button>
-            {hasMarkup ? (
-              <Button
-                variant="subtle"
-                size="sm"
-                type="button"
-                onClick={() => {
-                  setMarkup('');
-                  setFileName(null);
-                }}
-              >
-                {messages.resetButton}
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex min-w-0 flex-col gap-1">
+              <p className="text-sm text-text-primary">{messages.heading}</p>
+              <p className="text-xs text-text-faint">{messages.dropLabel}</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <Button variant="ghost" size="sm" type="button" onClick={() => inputRef.current?.click()}>
+                {messages.selectButton}
               </Button>
-            ) : null}
+              <Button variant="subtle" size="sm" type="button" onClick={loadSample}>
+                {messages.sampleButton}
+              </Button>
+              {hasMarkup ? (
+                <Button
+                  variant="subtle"
+                  size="sm"
+                  type="button"
+                  onClick={() => {
+                    setMarkup('');
+                    setFileName(null);
+                  }}
+                >
+                  {messages.resetButton}
+                </Button>
+              ) : null}
+            </div>
           </div>
+          {!hasMarkup ? (
+            <label className="flex flex-col gap-2 text-xs text-text-muted">
+              {messages.pasteHere}
+              <textarea
+                value={markup}
+                onChange={(e) => setMarkup(e.target.value)}
+                placeholder={messages.pastePlaceholder}
+                spellCheck={false}
+                wrap="soft"
+                style={{ wordBreak: 'break-all' }}
+                className="min-h-28 w-full min-w-0 resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-[11px] leading-relaxed text-text-primary"
+              />
+            </label>
+          ) : null}
         </div>
       </Card>
 

@@ -38,6 +38,7 @@ export default async function Page({
       >
         <SvgViewerTool
           pasteLabel={tool.ui.pasteLabel}
+          selectButton={tool.ui.selectButton}
           dropLabel={tool.ui.dropLabel}
           empty={tool.ui.empty}
           sourceLabel={tool.ui.sourceLabel}

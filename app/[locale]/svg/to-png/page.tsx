@@ -40,6 +40,7 @@ export default async function Page({
           selectButton={tool.ui.selectButton}
           empty={tool.ui.empty}
           pasteLabel={tool.ui.pasteLabel}
+          dropLabel={tool.ui.dropLabel}
           widthLabel={tool.ui.widthLabel}
           heightLabel={tool.ui.heightLabel}
           scaleLabel={tool.ui.scaleLabel}

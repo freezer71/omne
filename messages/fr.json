@@ -525,6 +525,7 @@
         },
         "ui": {
           "pasteLabel": "Collez votre SVG",
+          "selectButton": "Sélectionner un fichier",
           "dropLabel": "…ou déposez un fichier .svg sur cette carte.",
           "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
           "sourceLabel": "Source",
@@ -557,7 +558,8 @@
           "ogTitle": "Optimiseur SVG · 100 % local"
         },
         "ui": {
-          "pasteLabel": "Collez le code SVG",
+          "pasteLabel": "Collez votre SVG",
+          "selectButton": "Sélectionner un fichier",
           "dropLabel": "…ou déposez un fichier .svg sur cette carte.",
           "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
           "precisionLabel": "Précision décimale",
@@ -591,7 +593,8 @@
           "ogTitle": "Favicon depuis SVG · 100 % local"
         },
         "ui": {
-          "pasteLabel": "Collez le code SVG",
+          "pasteLabel": "Collez votre SVG",
+          "selectButton": "Sélectionner un fichier",
           "dropLabel": "…ou déposez un fichier .svg sur cette carte.",
           "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\">…</svg>",
           "appNameLabel": "Nom de l'app (utilisé dans site.webmanifest)",
@@ -625,6 +628,8 @@
           "dropLabel": "Déposez un fichier .svg n'importe où sur cette carte.",
           "selectButton": "Sélectionner un fichier",
           "sampleButton": "Charger l'exemple",
+          "pasteHere": "Ou collez votre code SVG",
+          "pastePlaceholder": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
           "sourceLabel": "Source",
           "previewLabel": "Aperçu",
           "controlsLabel": "Contrôles",
@@ -670,9 +675,10 @@
           "ogTitle": "SVG → PNG · 100 % local"
         },
         "ui": {
-          "selectButton": "Sélectionner un fichier SVG",
+          "selectButton": "Sélectionner un fichier",
           "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
-          "pasteLabel": "Collez du SVG ou déposez un fichier .svg",
+          "pasteLabel": "Collez votre SVG",
+          "dropLabel": "…ou déposez un fichier .svg sur cette carte.",
           "widthLabel": "Largeur (px)",
           "heightLabel": "Hauteur (px)",
           "scaleLabel": "Échelle",
@@ -707,7 +713,9 @@
           "ogTitle": "SVG → Data URL · 100 % local"
         },
         "ui": {
-          "pasteLabel": "Collez du SVG ou déposez un fichier .svg",
+          "pasteLabel": "Collez votre SVG",
+          "selectButton": "Sélectionner un fichier",
+          "dropLabel": "…ou déposez un fichier .svg sur cette carte.",
           "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
           "base64Label": "Data URI base64",
           "urlEncodedLabel": "Data URI URL-encodée (compatible CSS)",
