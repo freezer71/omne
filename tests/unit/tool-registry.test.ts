@@ -3,7 +3,7 @@ import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/regis
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(43);
+    expect(TOOLS).toHaveLength(44);
   });
 
   it('exposes the 6 SVG tools', () => {
@@ -41,9 +41,9 @@ describe('TOOLS registry', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('exposes the 6 PDF tools', () => {
+  it('exposes the 7 PDF tools', () => {
     const pdf = TOOLS.filter((t) => t.category === 'pdf').map((t) => t.id).sort();
-    expect(pdf).toEqual(['extract-images', 'from-images', 'merge', 'rotate', 'split', 'to-images']);
+    expect(pdf).toEqual(['extract-images', 'from-images', 'merge', 'rotate', 'split', 'to-images', 'watermark']);
   });
 
   it('exposes the 2 video tools', () => {
@@ -106,7 +106,7 @@ describe('getTool', () => {
 describe('toolsByCategory', () => {
   it('groups tools by category', () => {
     const grouped = toolsByCategory();
-    expect(grouped.pdf?.length).toBe(6);
+    expect(grouped.pdf?.length).toBe(7);
     expect(grouped.video?.length).toBe(2);
     expect(grouped.image?.length).toBe(6);
   });

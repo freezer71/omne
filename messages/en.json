@@ -160,6 +160,46 @@
           "removeFile": "Remove"
         }
       },
+      "watermark": {
+        "name": "Watermark PDF",
+        "description": "Stamp every page of a PDF with text or a logo — diagonal, semi-transparent, in your browser.",
+        "seo": {
+          "title": "Add Watermark to PDF Online Free — Text or Logo, In-Browser",
+          "description": "Add a text or image watermark to every page of a PDF. Diagonal, transparent, customizable opacity and size. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "add watermark to pdf",
+            "watermark pdf online",
+            "pdf watermark",
+            "stamp pdf",
+            "add logo to pdf",
+            "pdf watermark online free",
+            "confidential watermark pdf"
+          ],
+          "ogTitle": "Watermark PDF · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a PDF",
+          "empty": "Drop a PDF here or use the button below.",
+          "applyButton": "Add watermark",
+          "pageLabelTemplate": "Page {n}",
+          "modeLabel": "Watermark type",
+          "modeText": "Text",
+          "modeImage": "Image",
+          "textLabel": "Text",
+          "textPlaceholder": "CONFIDENTIAL",
+          "fontSizeLabel": "Size",
+          "imageLabel": "Image",
+          "imageSelectButton": "Select image (PNG or JPG)",
+          "imageRemove": "Remove image",
+          "scaleLabel": "Scale",
+          "opacityLabel": "Opacity",
+          "angleLabel": "Angle",
+          "busy": "Adding watermark…",
+          "error": "Could not watermark that PDF.",
+          "errorUnsupportedChar": "Some characters aren't supported. Stick to Latin letters for now.",
+          "removeFile": "Remove"
+        }
+      },
       "to-images": {
         "name": "PDF to images",
         "description": "Click a page to download it as an image, or grab all of them as a ZIP.",

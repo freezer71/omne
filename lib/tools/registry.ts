@@ -31,6 +31,15 @@ export const TOOLS: readonly ToolMeta[] = [
     status: 'stable',
   },
   {
+    id: 'watermark',
+    category: 'pdf',
+    href: '/pdf/watermark',
+    i18nKey: 'tools.pdf.watermark',
+    keywords: ['watermark', 'stamp', 'logo', 'overlay', 'pdf', 'filigrane', 'tampon', 'cachet'],
+    acceptedMime: ['application/pdf'],
+    status: 'stable',
+  },
+  {
     id: 'to-images',
     category: 'pdf',
     href: '/pdf/to-images',

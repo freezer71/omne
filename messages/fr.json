@@ -160,6 +160,46 @@
           "removeFile": "Retirer"
         }
       },
+      "watermark": {
+        "name": "Filigrane PDF",
+        "description": "Apposez un texte ou un logo en filigrane sur chaque page d'un PDF — diagonal, semi-transparent, dans votre navigateur.",
+        "seo": {
+          "title": "Ajouter un filigrane à un PDF en ligne — Texte ou logo, gratuit",
+          "description": "Ajoutez un filigrane texte ou image sur chaque page d'un PDF. Diagonal, transparent, opacité et taille personnalisables. 100% dans votre navigateur — aucun envoi, aucune inscription.",
+          "keywords": [
+            "ajouter filigrane pdf",
+            "filigrane pdf en ligne",
+            "tampon pdf",
+            "ajouter logo pdf",
+            "filigrane pdf gratuit",
+            "watermark pdf",
+            "filigrane confidentiel pdf"
+          ],
+          "ogTitle": "Filigrane PDF · 100% local"
+        },
+        "ui": {
+          "selectButton": "Sélectionner un PDF",
+          "empty": "Déposez un PDF ici ou utilisez le bouton ci-dessous.",
+          "applyButton": "Ajouter le filigrane",
+          "pageLabelTemplate": "Page {n}",
+          "modeLabel": "Type de filigrane",
+          "modeText": "Texte",
+          "modeImage": "Image",
+          "textLabel": "Texte",
+          "textPlaceholder": "CONFIDENTIEL",
+          "fontSizeLabel": "Taille",
+          "imageLabel": "Image",
+          "imageSelectButton": "Choisir une image (PNG ou JPG)",
+          "imageRemove": "Retirer l'image",
+          "scaleLabel": "Échelle",
+          "opacityLabel": "Opacité",
+          "angleLabel": "Angle",
+          "busy": "Application du filigrane…",
+          "error": "Impossible d'appliquer le filigrane à ce PDF.",
+          "errorUnsupportedChar": "Certains caractères ne sont pas pris en charge. Utilisez l'alphabet latin pour l'instant.",
+          "removeFile": "Retirer"
+        }
+      },
       "to-images": {
         "name": "PDF en images",
         "description": "Cliquez sur une page pour la télécharger, ou récupérez tout en ZIP.",
