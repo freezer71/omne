@@ -39,6 +39,7 @@
       "pdf": "Outils PDF",
       "video": "Outils vidéo",
       "image": "Outils image",
+      "svg": "Outils SVG",
       "password": "Mots de passe",
       "json": "Outils JSON",
       "text": "Outils texte",
@@ -502,6 +503,216 @@
           "busy": "Traitement…",
           "error": "Impossible de retirer l'arrière-plan.",
           "removeFile": "Retirer"
+        }
+      }
+    },
+    "svg": {
+      "viewer": {
+        "name": "Visionneuse SVG",
+        "description": "Déposez ou collez un SVG pour le prévisualiser, inspecter ses dimensions et lire son code source — en toute sécurité (sandbox).",
+        "seo": {
+          "title": "Visionneuse SVG en ligne — Ouvrir, inspecter et afficher un SVG",
+          "description": "Ouvrez n'importe quel SVG en aperçu sandbox, inspectez width, height, viewBox et le nombre d'éléments, copiez le code source. 100 % navigateur, aucun envoi.",
+          "keywords": [
+            "visionneuse svg",
+            "ouvrir svg",
+            "afficher svg",
+            "inspecter svg",
+            "lecteur svg",
+            "aperçu svg"
+          ],
+          "ogTitle": "Visionneuse SVG · 100 % local"
+        },
+        "ui": {
+          "pasteLabel": "Collez votre SVG",
+          "dropLabel": "…ou déposez un fichier .svg sur cette carte.",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
+          "sourceLabel": "Source",
+          "infoLabel": "Inspecteur",
+          "widthLabel": "largeur",
+          "heightLabel": "hauteur",
+          "viewBoxLabel": "viewBox",
+          "elementsLabel": "éléments",
+          "sizeLabel": "taille",
+          "previewLabel": "Aperçu",
+          "copyButton": "Copier la source",
+          "copied": "Copié",
+          "error": "Impossible de lire ce SVG."
+        }
+      },
+      "optimize": {
+        "name": "Optimiseur SVG",
+        "description": "Minifiez et nettoyez votre SVG avec SVGO — retire métadonnées, arrondit les chemins, supprime les IDs inutilisés — avec aperçu avant/après.",
+        "seo": {
+          "title": "Optimiseur SVG en ligne — Minificateur SVGO gratuit avec diff live",
+          "description": "Optimisez et minifiez le SVG avec SVGO directement dans votre navigateur. Précision, nettoyage des IDs, suppression du viewBox. Aperçu avant/après et économies en octets.",
+          "keywords": [
+            "optimiseur svg",
+            "minifier svg",
+            "svgo en ligne",
+            "compresser svg",
+            "nettoyer svg",
+            "réduire svg"
+          ],
+          "ogTitle": "Optimiseur SVG · 100 % local"
+        },
+        "ui": {
+          "pasteLabel": "Collez le code SVG",
+          "dropLabel": "…ou déposez un fichier .svg sur cette carte.",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
+          "precisionLabel": "Précision décimale",
+          "cleanupIdsLabel": "Nettoyer les IDs",
+          "removeViewBoxLabel": "Supprimer viewBox",
+          "multipassLabel": "Multipasses",
+          "beforeLabel": "Avant",
+          "afterLabel": "Après",
+          "savingsLabel": "Gagné",
+          "downloadButton": "Télécharger .svg",
+          "copyButton": "Copier",
+          "copied": "Copié",
+          "busy": "Optimisation…",
+          "error": "Impossible d'optimiser ce SVG."
+        }
+      },
+      "favicon": {
+        "name": "Favicon depuis un SVG",
+        "description": "Générez un pack de favicons complet à partir d'un seul SVG : favicon.ico, apple-touch-icon, icônes Android Chrome et un site.webmanifest — dans un ZIP.",
+        "seo": {
+          "title": "Générateur de Favicon depuis SVG — Pack .ico, PNG et manifest gratuit",
+          "description": "Transformez un SVG en pack favicon complet : favicon.ico (16/32/48), apple-touch-icon, android-chrome 192/512 et site.webmanifest — dans un ZIP. 100 % local.",
+          "keywords": [
+            "générateur favicon",
+            "svg vers favicon",
+            "favicon ico en ligne",
+            "générateur apple touch icon",
+            "générateur favicon pwa",
+            "pack favicon gratuit"
+          ],
+          "ogTitle": "Favicon depuis SVG · 100 % local"
+        },
+        "ui": {
+          "pasteLabel": "Collez le code SVG",
+          "dropLabel": "…ou déposez un fichier .svg sur cette carte.",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\">…</svg>",
+          "appNameLabel": "Nom de l'app (utilisé dans site.webmanifest)",
+          "previewLabel": "Aperçu",
+          "previewLargeLabel": "Grand (apple-touch)",
+          "previewSmallLabel": "Onglet (16 px)",
+          "downloadButton": "Télécharger .zip",
+          "includesLabel": "Le pack contient :",
+          "busy": "Génération du pack…",
+          "error": "Impossible de générer le pack favicon."
+        }
+      },
+      "editor": {
+        "name": "Éditeur SVG",
+        "description": "Modifiez le code SVG, les dimensions, viewBox, les couleurs et les transformations — avec aperçu live. Un éditeur à panneau qui garde votre source propre.",
+        "seo": {
+          "title": "Éditeur SVG en ligne — Édition code et couleurs avec aperçu live",
+          "description": "Éditez le code SVG, recolorez les fills et strokes via un sélecteur, ajustez viewBox, rotation, échelle, translation — avec un aperçu sandbox live. 100 % navigateur.",
+          "keywords": [
+            "éditeur svg en ligne",
+            "modifier svg",
+            "recolorer svg",
+            "éditeur viewbox svg",
+            "éditeur code svg",
+            "éditeur svg gratuit"
+          ],
+          "ogTitle": "Éditeur SVG · 100 % local"
+        },
+        "ui": {
+          "pasteLabel": "Sélectionner un fichier SVG",
+          "dropLabel": "Déposez un fichier .svg n'importe où sur cette carte.",
+          "empty": "Charger l'exemple",
+          "sourceLabel": "Source",
+          "previewLabel": "Aperçu",
+          "controlsLabel": "Contrôles",
+          "dimensionsLabel": "Dimensions",
+          "widthLabel": "largeur",
+          "heightLabel": "hauteur",
+          "viewBoxLabel": "viewBox",
+          "preserveAspectRatioLabel": "preserveAspectRatio",
+          "colorsLabel": "Couleurs détectées",
+          "colorsEmpty": "Aucune couleur fill ou stroke trouvée.",
+          "transformLabel": "Transformation",
+          "rotateLabel": "Rotation (°)",
+          "scaleLabel": "Échelle",
+          "translateXLabel": "Translation X",
+          "translateYLabel": "Translation Y",
+          "resetTransformButton": "Réinitialiser",
+          "backgroundLabel": "Arrière-plan",
+          "transparentLabel": "Transparent",
+          "formatButton": "Formater",
+          "downloadButton": "Télécharger .svg",
+          "copyButton": "Copier la source",
+          "copied": "Copié",
+          "resetButton": "Effacer",
+          "busy": "Traitement…",
+          "error": "Code SVG invalide."
+        }
+      },
+      "to-png": {
+        "name": "SVG vers PNG / JPG / WebP",
+        "description": "Rastérisez n'importe quel SVG en PNG, JPG ou WebP haute qualité à la taille exacte voulue — avec aperçu live.",
+        "seo": {
+          "title": "SVG vers PNG en ligne — Convertisseur gratuit (PNG, JPG, WebP)",
+          "description": "Convertissez un SVG en PNG, JPG ou WebP à n'importe quelle résolution. Aperçu canvas live, fond transparent, presets 1×/2×/4×. 100 % navigateur, aucun envoi.",
+          "keywords": [
+            "svg vers png",
+            "svg vers jpg",
+            "svg vers webp",
+            "convertir svg en png",
+            "rastériser svg",
+            "svg haute résolution"
+          ],
+          "ogTitle": "SVG → PNG · 100 % local"
+        },
+        "ui": {
+          "selectButton": "Sélectionner un fichier SVG",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
+          "pasteLabel": "Collez du SVG ou déposez un fichier .svg",
+          "widthLabel": "Largeur (px)",
+          "heightLabel": "Hauteur (px)",
+          "scaleLabel": "Échelle",
+          "scalePreset1x": "1×",
+          "scalePreset2x": "2×",
+          "scalePreset4x": "4×",
+          "formatLabel": "Format de sortie",
+          "backgroundLabel": "Arrière-plan",
+          "transparentLabel": "Transparent (PNG uniquement)",
+          "lockAspect": "Verrouiller le ratio",
+          "previewLabel": "Aperçu",
+          "downloadButton": "Télécharger",
+          "busy": "Rastérisation…",
+          "error": "Impossible de rastériser ce SVG.",
+          "removeFile": "Retirer"
+        }
+      },
+      "to-data-url": {
+        "name": "SVG vers Data URL",
+        "description": "Convertissez n'importe quel SVG en data URI base64 ou URL-encodée — avec aperçu miniature live.",
+        "seo": {
+          "title": "SVG vers Data URL en ligne — Encodeur base64 et URL gratuit",
+          "description": "Collez un SVG et obtenez instantanément une data URI base64 et une data URI URL-encodée prête pour le CSS. Aperçu live, comptage des octets, copie en un clic. Aucun envoi, 100 % navigateur.",
+          "keywords": [
+            "svg en data url",
+            "svg en base64",
+            "data uri svg",
+            "encoder svg css",
+            "url encode svg",
+            "svg inline"
+          ],
+          "ogTitle": "SVG → Data URL · 100 % local"
+        },
+        "ui": {
+          "pasteLabel": "Collez du SVG ou déposez un fichier .svg",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
+          "base64Label": "Data URI base64",
+          "urlEncodedLabel": "Data URI URL-encodée (compatible CSS)",
+          "copyButton": "Copier",
+          "copied": "Copié",
+          "previewLabel": "Aperçu",
+          "bytesLabel": "Taille :"
         }
       }
     },

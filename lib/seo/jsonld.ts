@@ -35,6 +35,7 @@ function applicationCategory(category: ToolCategory): string {
     case 'image':
     case 'video':
     case 'pdf':
+    case 'svg':
     default:
       return 'MultimediaApplication';
   }

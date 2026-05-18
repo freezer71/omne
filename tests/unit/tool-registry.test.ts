@@ -3,7 +3,12 @@ import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/regis
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(37);
+    expect(TOOLS).toHaveLength(43);
+  });
+
+  it('exposes the 6 SVG tools', () => {
+    const svg = TOOLS.filter((t) => t.category === 'svg').map((t) => t.id).sort();
+    expect(svg).toEqual(['editor', 'favicon', 'optimize', 'to-data-url', 'to-png', 'viewer']);
   });
 
   it('exposes the 3 Text tools', () => {

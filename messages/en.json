@@ -39,6 +39,7 @@
       "pdf": "PDF tools",
       "video": "Video tools",
       "image": "Image tools",
+      "svg": "SVG tools",
       "password": "Password tools",
       "json": "JSON tools",
       "text": "Text tools",
@@ -502,6 +503,216 @@
           "busy": "Processing…",
           "error": "Could not remove the background.",
           "removeFile": "Remove"
+        }
+      }
+    },
+    "svg": {
+      "viewer": {
+        "name": "SVG viewer",
+        "description": "Drop or paste any SVG to preview it live, inspect its dimensions, and read its source — safely sandboxed.",
+        "seo": {
+          "title": "SVG Viewer Online — Open, Inspect & Preview SVG Files Free",
+          "description": "Open any SVG instantly in a sandboxed preview, inspect width, height, viewBox and element count, and copy the source. Runs 100% locally — no upload.",
+          "keywords": [
+            "svg viewer",
+            "open svg online",
+            "preview svg",
+            "inspect svg",
+            "svg reader",
+            "view svg file"
+          ],
+          "ogTitle": "SVG viewer · 100% local"
+        },
+        "ui": {
+          "pasteLabel": "Paste SVG markup",
+          "dropLabel": "…or drop a .svg file onto this card.",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
+          "sourceLabel": "Source",
+          "infoLabel": "Inspector",
+          "widthLabel": "width",
+          "heightLabel": "height",
+          "viewBoxLabel": "viewBox",
+          "elementsLabel": "elements",
+          "sizeLabel": "size",
+          "previewLabel": "Preview",
+          "copyButton": "Copy source",
+          "copied": "Copied",
+          "error": "Could not read that SVG."
+        }
+      },
+      "optimize": {
+        "name": "SVG optimizer",
+        "description": "Minify and clean up your SVG with SVGO — strip metadata, round paths, remove unused IDs — with a before/after preview.",
+        "seo": {
+          "title": "SVG Optimizer Online — Free SVGO Minifier with Live Diff",
+          "description": "Optimize and minify SVG with SVGO directly in your browser. Configure precision, ID cleanup, viewBox removal. Live before/after preview and byte savings.",
+          "keywords": [
+            "svg optimizer",
+            "svg minifier",
+            "svgo online",
+            "minify svg",
+            "compress svg",
+            "clean svg"
+          ],
+          "ogTitle": "SVG optimizer · 100% local"
+        },
+        "ui": {
+          "pasteLabel": "Paste SVG markup",
+          "dropLabel": "…or drop a .svg file onto this card.",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
+          "precisionLabel": "Float precision",
+          "cleanupIdsLabel": "Cleanup IDs",
+          "removeViewBoxLabel": "Remove viewBox",
+          "multipassLabel": "Multipass",
+          "beforeLabel": "Before",
+          "afterLabel": "After",
+          "savingsLabel": "Saved",
+          "downloadButton": "Download .svg",
+          "copyButton": "Copy",
+          "copied": "Copied",
+          "busy": "Optimizing…",
+          "error": "Could not optimize that SVG."
+        }
+      },
+      "favicon": {
+        "name": "Favicon from SVG",
+        "description": "Generate a full favicon bundle from a single SVG: favicon.ico, apple-touch-icon, Android Chrome icons, and a webmanifest snippet — in one ZIP.",
+        "seo": {
+          "title": "Favicon Generator from SVG — Free .ico, PNG & Web Manifest Bundle",
+          "description": "Turn a single SVG into a complete favicon set: favicon.ico (16/32/48), apple-touch-icon, android-chrome 192/512, and site.webmanifest — bundled as a ZIP. 100% local.",
+          "keywords": [
+            "favicon generator",
+            "svg to favicon",
+            "favicon ico online",
+            "apple touch icon generator",
+            "pwa icon generator",
+            "free favicon bundle"
+          ],
+          "ogTitle": "Favicon from SVG · 100% local"
+        },
+        "ui": {
+          "pasteLabel": "Paste SVG markup",
+          "dropLabel": "…or drop a .svg file onto this card.",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\">…</svg>",
+          "appNameLabel": "App name (used in site.webmanifest)",
+          "previewLabel": "Preview",
+          "previewLargeLabel": "Large (apple-touch)",
+          "previewSmallLabel": "Tab (16px)",
+          "downloadButton": "Download .zip",
+          "includesLabel": "The bundle includes:",
+          "busy": "Building bundle…",
+          "error": "Could not build the favicon bundle."
+        }
+      },
+      "editor": {
+        "name": "SVG editor",
+        "description": "Edit SVG markup, dimensions, viewBox, colors, and transforms — with live preview. A panel-based editor that keeps your source clean.",
+        "seo": {
+          "title": "SVG Editor Online — Free Code & Color Editor with Live Preview",
+          "description": "Edit SVG markup, recolor fills and strokes with a picker, tweak viewBox, rotate, scale, and translate — all with a live sandboxed preview. No upload, runs in your browser.",
+          "keywords": [
+            "svg editor online",
+            "edit svg",
+            "svg recolor",
+            "svg viewbox editor",
+            "svg code editor",
+            "free svg editor"
+          ],
+          "ogTitle": "SVG editor · 100% local"
+        },
+        "ui": {
+          "pasteLabel": "Select an SVG file",
+          "dropLabel": "Drop a .svg file anywhere on this card.",
+          "empty": "Load sample",
+          "sourceLabel": "Source",
+          "previewLabel": "Preview",
+          "controlsLabel": "Controls",
+          "dimensionsLabel": "Dimensions",
+          "widthLabel": "width",
+          "heightLabel": "height",
+          "viewBoxLabel": "viewBox",
+          "preserveAspectRatioLabel": "preserveAspectRatio",
+          "colorsLabel": "Detected colors",
+          "colorsEmpty": "No fill or stroke colors found.",
+          "transformLabel": "Transform",
+          "rotateLabel": "Rotate (°)",
+          "scaleLabel": "Scale",
+          "translateXLabel": "Translate X",
+          "translateYLabel": "Translate Y",
+          "resetTransformButton": "Reset",
+          "backgroundLabel": "Background",
+          "transparentLabel": "Transparent",
+          "formatButton": "Format",
+          "downloadButton": "Download .svg",
+          "copyButton": "Copy source",
+          "copied": "Copied",
+          "resetButton": "Clear",
+          "busy": "Working…",
+          "error": "Invalid SVG markup."
+        }
+      },
+      "to-png": {
+        "name": "SVG to PNG / JPG / WebP",
+        "description": "Rasterize any SVG to a high-quality PNG, JPG, or WebP at the exact size you want — with live preview.",
+        "seo": {
+          "title": "SVG to PNG Online — Free High-Quality SVG Rasterizer (PNG, JPG, WebP)",
+          "description": "Convert SVG to PNG, JPG, or WebP at any resolution. Live canvas preview, transparent background, 1×/2×/4× presets. No upload — runs in your browser.",
+          "keywords": [
+            "svg to png",
+            "svg to jpg",
+            "svg to webp",
+            "svg rasterizer",
+            "convert svg online",
+            "svg high resolution"
+          ],
+          "ogTitle": "SVG → PNG · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select an SVG file",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
+          "pasteLabel": "Paste SVG markup or drop a .svg file",
+          "widthLabel": "Width (px)",
+          "heightLabel": "Height (px)",
+          "scaleLabel": "Scale",
+          "scalePreset1x": "1×",
+          "scalePreset2x": "2×",
+          "scalePreset4x": "4×",
+          "formatLabel": "Output format",
+          "backgroundLabel": "Background",
+          "transparentLabel": "Transparent (PNG only)",
+          "lockAspect": "Lock aspect ratio",
+          "previewLabel": "Preview",
+          "downloadButton": "Download",
+          "busy": "Rasterizing…",
+          "error": "Could not rasterize that SVG.",
+          "removeFile": "Remove"
+        }
+      },
+      "to-data-url": {
+        "name": "SVG to Data URL",
+        "description": "Convert any SVG markup into a base64 or URL-encoded data URI — with a live thumbnail preview.",
+        "seo": {
+          "title": "SVG to Data URL Online — Free Base64 & URL-Encoded SVG Encoder",
+          "description": "Paste an SVG and instantly get a base64 data URI and a CSS-friendly URL-encoded data URI. Live preview, byte counts, one-click copy. No upload, runs in your browser.",
+          "keywords": [
+            "svg to data url",
+            "svg to base64",
+            "svg data uri",
+            "css background svg",
+            "url encode svg",
+            "inline svg encoder"
+          ],
+          "ogTitle": "SVG → Data URL · 100% local"
+        },
+        "ui": {
+          "pasteLabel": "Paste SVG markup or drop a .svg file",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
+          "base64Label": "Base64 data URI",
+          "urlEncodedLabel": "URL-encoded data URI (CSS-friendly)",
+          "copyButton": "Copy",
+          "copied": "Copied",
+          "previewLabel": "Preview",
+          "bytesLabel": "Size:"
         }
       }
     },

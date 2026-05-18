@@ -33,6 +33,12 @@ export function routeDroppedFiles(files: File[]): RouteResult {
     if (tool) return { kind: 'direct', tool, files };
   }
 
+  // Single .svg file → SVG editor directly (it covers viewer + editing + dimensions)
+  if (files.length === 1 && files[0]?.type === 'image/svg+xml') {
+    const tool = getTool('svg', 'editor');
+    if (tool) return { kind: 'direct', tool, files };
+  }
+
   // Single file: get all tools that accept its MIME
   const onlyFile = files.length === 1 ? files[0] : undefined;
   if (onlyFile) {

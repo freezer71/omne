@@ -1,4 +1,4 @@
-export const TOOL_CATEGORIES = ['pdf', 'video', 'image', 'password', 'json', 'text', 'encode', 'qr', 'color', 'utility'] as const;
+export const TOOL_CATEGORIES = ['pdf', 'video', 'image', 'svg', 'password', 'json', 'text', 'encode', 'qr', 'color', 'utility'] as const;
 export type ToolCategory = (typeof TOOL_CATEGORIES)[number];
 
 export type ToolStatus = 'stable' | 'beta' | 'soon';
