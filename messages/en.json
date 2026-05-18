@@ -186,6 +186,38 @@
           "removeFile": "Remove"
         }
       },
+      "extract-images": {
+        "name": "Extract images from PDF",
+        "description": "Pull every embedded image out of a PDF and download them individually or as a ZIP.",
+        "seo": {
+          "title": "Extract Images from PDF — Save Embedded Photos & Figures Free",
+          "description": "Pull every embedded image out of a PDF and save them as lossless PNG. No upload — runs entirely in your browser.",
+          "keywords": [
+            "extract images from pdf",
+            "pdf image extractor",
+            "save pictures from pdf",
+            "get embedded images from pdf",
+            "pdf image extractor online free",
+            "extract photos from pdf",
+            "pdf to png extract"
+          ],
+          "ogTitle": "Extract images from PDF · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a PDF",
+          "empty": "Drop a PDF here or use the button below.",
+          "extracting": "Extracting images…",
+          "noImages": "No embedded images found in this PDF.",
+          "imageLabelTemplate": "Image {n} · page {p}",
+          "downloadImageLabelTemplate": "Download image {n}",
+          "downloadAllZip": "Download all as ZIP",
+          "busy": "Working…",
+          "error": "Could not extract images from this PDF.",
+          "removeFile": "Remove",
+          "countTemplate": "{n} image found",
+          "countTemplatePlural": "{n} images found"
+        }
+      },
       "from-images": {
         "name": "Images to PDF",
         "description": "Combine images into a single PDF.",

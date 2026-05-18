@@ -40,6 +40,18 @@ export const TOOLS: readonly ToolMeta[] = [
     status: 'stable',
   },
   {
+    id: 'extract-images',
+    category: 'pdf',
+    href: '/pdf/extract-images',
+    i18nKey: 'tools.pdf.extract-images',
+    keywords: [
+      'extract', 'images', 'embedded', 'pictures', 'figures', 'pdf',
+      'extraire', 'photos', 'récupérer',
+    ],
+    acceptedMime: ['application/pdf'],
+    status: 'stable',
+  },
+  {
     id: 'from-images',
     category: 'pdf',
     href: '/pdf/from-images',

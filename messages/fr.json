@@ -186,6 +186,38 @@
           "removeFile": "Retirer"
         }
       },
+      "extract-images": {
+        "name": "Extraire les images d'un PDF",
+        "description": "Récupérez toutes les images intégrées d'un PDF et téléchargez-les individuellement ou en ZIP.",
+        "seo": {
+          "title": "Extraire les images d'un PDF — Récupérer photos et figures, gratuit",
+          "description": "Extrayez toutes les images intégrées d'un PDF en PNG sans perte. Sans envoi — tout se passe dans votre navigateur.",
+          "keywords": [
+            "extraire images pdf",
+            "extracteur images pdf",
+            "récupérer photos pdf",
+            "recuperer images pdf",
+            "extraire photos pdf gratuit",
+            "images embarquées pdf",
+            "pdf extracteur images en ligne"
+          ],
+          "ogTitle": "Extraire les images d'un PDF · 100% local"
+        },
+        "ui": {
+          "selectButton": "Sélectionner un PDF",
+          "empty": "Déposez un PDF ici ou utilisez le bouton ci-dessous.",
+          "extracting": "Extraction des images…",
+          "noImages": "Aucune image intégrée trouvée dans ce PDF.",
+          "imageLabelTemplate": "Image {n} · page {p}",
+          "downloadImageLabelTemplate": "Télécharger l'image {n}",
+          "downloadAllZip": "Tout télécharger en ZIP",
+          "busy": "Traitement…",
+          "error": "Impossible d'extraire les images de ce PDF.",
+          "removeFile": "Retirer",
+          "countTemplate": "{n} image trouvée",
+          "countTemplatePlural": "{n} images trouvées"
+        }
+      },
       "from-images": {
         "name": "Images en PDF",
         "description": "Combinez des images en un seul PDF.",
