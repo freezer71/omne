@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { ToolCard } from '@/components/tool-card';
-import { filterTools, type SearchableTool } from '@/lib/tools/search';
+import { searchTools, type RankedResult, type SearchableTool } from '@/lib/tools/search';
 import type { Locale } from '@/lib/i18n/config';
 import type { ToolCategory, ToolMeta } from '@/lib/tools/types';
 
@@ -15,6 +15,8 @@ type Props = {
   comingSoonLabel: string;
   placeholder: string;
   emptyLabel: string;
+  title?: string;
+  subtitle?: string;
 };
 
 function toToolMeta(t: SearchableTool): ToolMeta {
@@ -37,22 +39,33 @@ export function HubToolFinder({
   comingSoonLabel,
   placeholder,
   emptyLabel,
+  title,
+  subtitle,
 }: Props) {
   const [query, setQuery] = useState('');
   const trimmed = query.trim();
-  const filtered = useMemo(() => filterTools(tools, trimmed), [tools, trimmed]);
+  const ranked = useMemo<RankedResult[]>(
+    () => searchTools(tools, trimmed),
+    [tools, trimmed],
+  );
 
   const grouped = useMemo(() => {
     return categoryOrder
       .map((cat) => ({
         cat,
-        items: filtered.filter((t) => t.category === cat),
+        items: ranked.filter((r) => r.tool.category === cat),
       }))
       .filter((g) => g.items.length > 0);
-  }, [filtered, categoryOrder]);
+  }, [ranked, categoryOrder]);
 
   return (
-    <div className="flex flex-col gap-8">
+    <section id="all-tools" className="flex flex-col gap-6 scroll-mt-20">
+      {title ? (
+        <div className="flex flex-col gap-1">
+          <h2 className="text-lg font-medium text-text-primary">{title}</h2>
+          {subtitle ? <p className="text-sm text-text-muted">{subtitle}</p> : null}
+        </div>
+      ) : null}
       <div className="relative">
         <svg
           aria-hidden
@@ -73,28 +86,30 @@ export function HubToolFinder({
           onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
           aria-label={placeholder}
-          className="h-10 pl-9"
+          className="h-11 pl-9"
         />
       </div>
 
-      {filtered.length === 0 ? (
+      {ranked.length === 0 ? (
         <p className="text-sm text-text-muted">{emptyLabel}</p>
       ) : (
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-10">
           {grouped.map(({ cat, items }) => (
-            <section key={cat} className="flex flex-col gap-4">
-              <h2 className="text-sm font-medium uppercase tracking-wider text-text-faint">
+            <section key={cat} id={`cat-${cat}`} className="flex flex-col gap-4 scroll-mt-20">
+              <h3 className="text-xs font-medium uppercase tracking-wider text-text-faint">
                 {categoryLabels[cat]}
-              </h2>
+              </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {items.map((tool) => (
+                {items.map((r) => (
                   <ToolCard
-                    key={`${tool.category}/${tool.id}`}
-                    tool={toToolMeta(tool)}
+                    key={`${r.tool.category}/${r.tool.id}`}
+                    tool={toToolMeta(r.tool)}
                     locale={locale}
-                    name={tool.name}
-                    description={tool.description}
+                    name={r.tool.name}
+                    description={r.tool.description}
                     comingSoonLabel={comingSoonLabel}
+                    nameRanges={r.nameRanges}
+                    descriptionRanges={r.descriptionRanges}
                   />
                 ))}
               </div>
@@ -102,6 +117,6 @@ export function HubToolFinder({
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 }

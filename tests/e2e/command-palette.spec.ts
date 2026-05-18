@@ -47,7 +47,7 @@ test.describe('command palette', () => {
     const palette = page.getByRole('dialog');
     await expect(palette).toBeVisible();
 
-    const search = palette.getByPlaceholder('Search tools…');
+    const search = palette.getByPlaceholder('Search tools, actions…');
     await search.fill('merge');
     await expect(palette.getByText('Merge PDFs').first()).toBeVisible();
     await search.press('Enter');
@@ -67,7 +67,7 @@ test.describe('command palette', () => {
     const palette = page.getByRole('dialog');
     await expect(palette).toBeVisible();
 
-    const search = palette.getByPlaceholder('Search tools…');
+    const search = palette.getByPlaceholder('Search tools, actions…');
     await search.fill('resize');
     // Wait for cmdk to filter down to the resize item before pressing Enter,
     // otherwise the selected item may still be a stale match from before filtering.
@@ -80,7 +80,7 @@ test.describe('command palette', () => {
   test('hub search bar filters the visible tool grid', async ({ page }) => {
     await gotoAndHydrate(page, '/en');
 
-    const hubSearch = page.getByRole('searchbox', { name: 'Search tools…' });
+    const hubSearch = page.getByRole('searchbox', { name: 'Search tools, actions…' });
     await hubSearch.fill('fusion');
 
     await expect(page.getByRole('link', { name: /merge pdfs/i })).toBeVisible();
@@ -90,7 +90,7 @@ test.describe('command palette', () => {
   test('hub search bar shows the empty state when nothing matches', async ({ page }) => {
     await gotoAndHydrate(page, '/en');
 
-    const hubSearch = page.getByRole('searchbox', { name: 'Search tools…' });
+    const hubSearch = page.getByRole('searchbox', { name: 'Search tools, actions…' });
     await hubSearch.fill('totallyabsentterm');
 
     await expect(page.getByText(/no tool matches your search/i)).toBeVisible();

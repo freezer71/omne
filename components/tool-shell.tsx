@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Locale } from '@/lib/i18n/config';
 import type { ToolCategory } from '@/lib/tools/types';
 import { cn } from '@/lib/cn';
+import { RecentTracker } from '@/components/command-palette/recent-tracker';
 
 type Props = {
   locale: Locale;
@@ -48,6 +49,7 @@ export function ToolShell({
       </header>
 
       <section data-tool-category={category}>{children}</section>
+      <RecentTracker />
     </main>
   );
 }

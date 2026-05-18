@@ -63,9 +63,73 @@
   },
   "palette": {
     "open": "Ouvrir la palette",
-    "placeholder": "Rechercher un outil…",
+    "placeholder": "Rechercher un outil, une action…",
     "empty": "Aucun outil ne correspond à votre recherche.",
-    "shortcut": "⌘K"
+    "shortcut": "⌘K",
+    "recent": "Récents",
+    "results": "Résultats",
+    "actions": {
+      "heading": "Actions rapides",
+      "toggleTheme": "Changer de thème",
+      "changeLanguage": "Changer de langue",
+      "openPrivacy": "Ouvrir la page Confidentialité",
+      "browseAll": "Voir tous les outils"
+    },
+    "badge": {
+      "beta": "Bêta",
+      "soon": "Bientôt"
+    },
+    "hint": {
+      "navigate": "Naviguer",
+      "select": "Sélectionner",
+      "close": "Fermer"
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "100 % local · aucun envoi",
+      "title": "Votre navigateur, c'est la boîte à outils.",
+      "subtitle": "Convertir, éditer, générer — tout dans votre navigateur. Vos fichiers ne quittent jamais votre appareil.",
+      "ctaBrowse": "Voir les outils",
+      "ctaSearch": "Tapez ⌘K pour chercher"
+    },
+    "stats": {
+      "toolsLabel": "outils",
+      "uploadsLabel": "envois, jamais",
+      "ossLabel": "open source"
+    },
+    "featured": {
+      "title": "Les plus utilisés",
+      "subtitle": "Un point de départ choisi pour vous."
+    },
+    "categoryGrid": {
+      "title": "Par catégorie",
+      "subtitle": "Choisissez une famille d'outils.",
+      "countSingular": "{n} outil",
+      "countPlural": "{n} outils"
+    },
+    "tools": {
+      "title": "Tous les outils",
+      "subtitle": "Cherchez parmi tous les outils."
+    },
+    "howItWorks": {
+      "title": "Comment ça marche",
+      "subtitle": "Trois étapes, aucun serveur.",
+      "step1Title": "Déposez un fichier",
+      "step1Body": "Ou choisissez-en un. Tout reste dans cet onglet.",
+      "step2Title": "Réglez en direct",
+      "step2Body": "Modifiez les paramètres, le résultat se met à jour en temps réel.",
+      "step3Title": "Téléchargez",
+      "step3Body": "Le résultat est généré dans votre navigateur. Aucun envoi."
+    },
+    "footer": {
+      "tagline": "Boîte à outils privacy-first. Construite à ciel ouvert.",
+      "categories": "Outils",
+      "about": "À propos",
+      "privacy": "Confidentialité",
+      "language": "Langue",
+      "copyright": "© omne"
+    }
   },
   "tools": {
     "pdf": {

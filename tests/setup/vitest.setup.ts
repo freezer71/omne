@@ -6,6 +6,20 @@ afterEach(() => {
   cleanup();
 });
 
+if (typeof globalThis.ResizeObserver === 'undefined') {
+  class StubResizeObserver {
+    observe(): void {}
+    unobserve(): void {}
+    disconnect(): void {}
+  }
+  (globalThis as { ResizeObserver: typeof ResizeObserver }).ResizeObserver =
+    StubResizeObserver as unknown as typeof ResizeObserver;
+}
+
+if (typeof Element !== 'undefined' && typeof Element.prototype.scrollIntoView === 'undefined') {
+  Element.prototype.scrollIntoView = function stubScrollIntoView() {};
+}
+
 if (typeof HTMLCanvasElement !== 'undefined') {
   HTMLCanvasElement.prototype.toBlob = function stubToBlob(
     callback: BlobCallback,

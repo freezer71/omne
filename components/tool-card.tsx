@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
+import { HighlightedText } from '@/components/ui/highlighted-text';
+import { CategoryIcon } from '@/components/command-palette/category-icons';
 import { cn } from '@/lib/cn';
-import type { ToolMeta } from '@/lib/tools/types';
+import type { Range } from '@/lib/tools/highlight';
+import type { ToolMeta, ToolCategory } from '@/lib/tools/types';
 import type { Locale } from '@/lib/i18n/config';
 
 type Props = {
@@ -10,9 +13,19 @@ type Props = {
   name: string;
   description: string;
   comingSoonLabel: string;
+  nameRanges?: readonly Range[];
+  descriptionRanges?: readonly Range[];
 };
 
-export function ToolCard({ tool, locale, name, description, comingSoonLabel }: Props) {
+export function ToolCard({
+  tool,
+  locale,
+  name,
+  description,
+  comingSoonLabel,
+  nameRanges,
+  descriptionRanges,
+}: Props) {
   const isSoon = tool.status === 'soon';
   const content = (
     <Card
@@ -21,14 +34,28 @@ export function ToolCard({ tool, locale, name, description, comingSoonLabel }: P
       className={cn('p-5 h-full flex flex-col gap-2', isSoon && 'opacity-50 cursor-not-allowed')}
     >
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-base font-medium text-text-primary">{name}</h3>
+        <div className="flex items-center gap-2 min-w-0">
+          <CategoryIcon
+            category={tool.category as ToolCategory}
+            className="h-4 w-4 shrink-0 text-text-faint"
+          />
+          <HighlightedText
+            text={name}
+            {...(nameRanges ? { ranges: nameRanges } : {})}
+            className="text-base font-medium text-text-primary truncate"
+          />
+        </div>
         {isSoon && (
-          <span className="text-[10px] uppercase tracking-wider font-medium text-text-faint">
+          <span className="shrink-0 text-[10px] uppercase tracking-wider font-medium text-text-faint">
             {comingSoonLabel}
           </span>
         )}
       </div>
-      <p className="text-sm text-text-muted leading-relaxed">{description}</p>
+      <HighlightedText
+        text={description}
+        {...(descriptionRanges ? { ranges: descriptionRanges } : {})}
+        className="text-sm text-text-muted leading-relaxed"
+      />
     </Card>
   );
 

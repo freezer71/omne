@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { isLocale, locales } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
 import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 import { PaletteProvider } from '@/components/command-palette/palette-context';
 import { CommandPalette } from '@/components/command-palette/command-palette';
 import { buildLocalizedTools } from '@/lib/tools/localized';
@@ -86,6 +87,7 @@ export default async function LocaleLayout({
         <PaletteProvider>
           <Header locale={locale} dict={dict} />
           {children}
+          <Footer locale={locale} dict={dict} categoryOrder={TOOL_CATEGORIES} />
           <CommandPalette
             locale={locale}
             tools={tools}
@@ -94,6 +96,20 @@ export default async function LocaleLayout({
             messages={{
               placeholder: dict.palette.placeholder,
               empty: dict.palette.empty,
+              recent: dict.palette.recent,
+              results: dict.palette.results,
+              badgeBeta: dict.palette.badge.beta,
+              badgeSoon: dict.palette.badge.soon,
+              hintNavigate: dict.palette.hint.navigate,
+              hintSelect: dict.palette.hint.select,
+              hintClose: dict.palette.hint.close,
+              quickActions: {
+                heading: dict.palette.actions.heading,
+                toggleTheme: dict.palette.actions.toggleTheme,
+                changeLanguage: dict.palette.actions.changeLanguage,
+                openPrivacy: dict.palette.actions.openPrivacy,
+                browseAll: dict.palette.actions.browseAll,
+              },
             }}
           />
         </PaletteProvider>

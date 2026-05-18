@@ -86,9 +86,30 @@ describe('HubToolFinder', () => {
     renderFinder();
     const input = screen.getByPlaceholderText('Search tools…');
     await user.type(input, 'merge');
-    expect(screen.getByText('Merge PDFs')).toBeInTheDocument();
+    expect(
+      screen.getAllByText((_, el) => el?.textContent === 'Merge PDFs').length,
+    ).toBeGreaterThan(0);
     expect(screen.queryByText('Resize image')).not.toBeInTheDocument();
     expect(screen.queryByText('Trim video')).not.toBeInTheDocument();
+  });
+
+  it('highlights the matched portion of the tool name', async () => {
+    const user = userEvent.setup();
+    renderFinder();
+    await user.type(screen.getByPlaceholderText('Search tools…'), 'merge');
+    const marks = document.querySelectorAll('mark');
+    expect(marks.length).toBeGreaterThan(0);
+    const hasMerge = Array.from(marks).some(
+      (m) => m.textContent?.toLowerCase() === 'merge',
+    );
+    expect(hasMerge).toBe(true);
+  });
+
+  it('exposes a stable anchor for each rendered category section', () => {
+    renderFinder();
+    expect(document.querySelector('#cat-pdf')).not.toBeNull();
+    expect(document.querySelector('#cat-image')).not.toBeNull();
+    expect(document.querySelector('#cat-video')).not.toBeNull();
   });
 
   it('matches accents-insensitively via French keywords', async () => {

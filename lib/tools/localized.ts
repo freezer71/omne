@@ -18,6 +18,7 @@ export function buildLocalizedTools(dict: Dictionary): SearchableTool[] {
       description: entry.description,
       keywords: t.keywords,
       status: t.status,
+      acceptedMime: t.acceptedMime,
     });
   }
   return out;

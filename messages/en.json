@@ -63,9 +63,73 @@
   },
   "palette": {
     "open": "Open command palette",
-    "placeholder": "Search tools…",
+    "placeholder": "Search tools, actions…",
     "empty": "No tool matches your search.",
-    "shortcut": "⌘K"
+    "shortcut": "⌘K",
+    "recent": "Recent",
+    "results": "Results",
+    "actions": {
+      "heading": "Quick actions",
+      "toggleTheme": "Toggle theme",
+      "changeLanguage": "Change language",
+      "openPrivacy": "Open privacy page",
+      "browseAll": "Browse all tools"
+    },
+    "badge": {
+      "beta": "Beta",
+      "soon": "Soon"
+    },
+    "hint": {
+      "navigate": "Navigate",
+      "select": "Select",
+      "close": "Close"
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "100% local · zero upload",
+      "title": "Your browser is the toolkit.",
+      "subtitle": "Convert, edit, generate — all in your browser. Files never leave your device.",
+      "ctaBrowse": "Browse tools",
+      "ctaSearch": "Press ⌘K to search"
+    },
+    "stats": {
+      "toolsLabel": "tools",
+      "uploadsLabel": "uploads, ever",
+      "ossLabel": "open source"
+    },
+    "featured": {
+      "title": "Most used",
+      "subtitle": "A curated starting point."
+    },
+    "categoryGrid": {
+      "title": "Browse by category",
+      "subtitle": "Pick a family of tools.",
+      "countSingular": "{n} tool",
+      "countPlural": "{n} tools"
+    },
+    "tools": {
+      "title": "All tools",
+      "subtitle": "Search across every tool."
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "subtitle": "Three steps, zero servers.",
+      "step1Title": "Drop a file",
+      "step1Body": "Or pick one from your device. Everything stays in this tab.",
+      "step2Title": "Tweak live",
+      "step2Body": "Adjust settings and see the result update in real time.",
+      "step3Title": "Download",
+      "step3Body": "The result is generated in your browser. Nothing is uploaded."
+    },
+    "footer": {
+      "tagline": "Privacy-first toolkit. Built in the open.",
+      "categories": "Tools",
+      "about": "About",
+      "privacy": "Privacy",
+      "language": "Language",
+      "copyright": "© omne"
+    }
   },
   "tools": {
     "pdf": {
