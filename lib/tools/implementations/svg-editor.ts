@@ -179,16 +179,48 @@ export function applyRootAttrs(markup: string, attrs: RootAttrs): string {
   return serialize(doc);
 }
 
-function buildTransformString(t: RootTransform): string {
+function readViewBoxCenter(root: Element): { cx: number; cy: number } {
+  const viewBox = root.getAttribute('viewBox');
+  if (viewBox) {
+    const parts = viewBox.trim().split(/[\s,]+/);
+    if (parts.length === 4) {
+      const x = parseFloat(parts[0] ?? '');
+      const y = parseFloat(parts[1] ?? '');
+      const w = parseFloat(parts[2] ?? '');
+      const h = parseFloat(parts[3] ?? '');
+      if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(w) && Number.isFinite(h) && w > 0 && h > 0) {
+        return { cx: x + w / 2, cy: y + h / 2 };
+      }
+    }
+  }
+  const widthAttr = parseFloat((root.getAttribute('width') ?? '').replace(/[^\d.\-]/g, ''));
+  const heightAttr = parseFloat((root.getAttribute('height') ?? '').replace(/[^\d.\-]/g, ''));
+  if (Number.isFinite(widthAttr) && Number.isFinite(heightAttr) && widthAttr > 0 && heightAttr > 0) {
+    return { cx: widthAttr / 2, cy: heightAttr / 2 };
+  }
+  return { cx: 0, cy: 0 };
+}
+
+function buildTransformString(t: RootTransform, center: { cx: number; cy: number }): string {
+  const tx = t.translateX ?? 0;
+  const ty = t.translateY ?? 0;
+  const rot = t.rotate ?? 0;
+  const sc = t.scale ?? 1;
+  const hasTranslate = tx !== 0 || ty !== 0;
+  const hasRotate = rot !== 0;
+  const hasScale = sc !== 1;
+  if (!hasTranslate && !hasRotate && !hasScale) return '';
+
   const parts: string[] = [];
-  if (t.translateX || t.translateY) {
-    parts.push(`translate(${t.translateX ?? 0} ${t.translateY ?? 0})`);
-  }
-  if (t.rotate) {
-    parts.push(`rotate(${t.rotate})`);
-  }
-  if (t.scale !== undefined && t.scale !== 1) {
-    parts.push(`scale(${t.scale})`);
+  // Always emit the user translation first so readRootTransform's first
+  // translate() match is the user-facing value, not the centering helper.
+  parts.push(`translate(${tx} ${ty})`);
+  if (hasRotate || hasScale) {
+    const { cx, cy } = center;
+    parts.push(`translate(${cx} ${cy})`);
+    if (hasRotate) parts.push(`rotate(${rot})`);
+    if (hasScale) parts.push(`scale(${sc})`);
+    parts.push(`translate(${-cx} ${-cy})`);
   }
   return parts.join(' ');
 }
@@ -196,7 +228,8 @@ function buildTransformString(t: RootTransform): string {
 export function applyRootTransform(markup: string, transform: RootTransform): string {
   const { doc, root, error } = parseSvgDoc(markup);
   if (error || !doc || !root) return markup;
-  const transformStr = buildTransformString(transform);
+  const center = readViewBoxCenter(root);
+  const transformStr = buildTransformString(transform, center);
 
   const ns = root.namespaceURI ?? 'http://www.w3.org/2000/svg';
   let wrapper: Element | null = null;

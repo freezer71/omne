@@ -91,11 +91,18 @@ describe('applyRootAttrs', () => {
 
 describe('applyRootTransform', () => {
   const BASE = '<svg xmlns="http://www.w3.org/2000/svg"><rect/></svg>';
+  const CENTERED = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect/></svg>';
 
   it('wraps children in a <g> with transform', () => {
     const next = applyRootTransform(BASE, { rotate: 45 });
     expect(next).toContain('rotate(45)');
     expect(next).toContain('data-omne-transform');
+  });
+
+  it('rotates/scales around the viewBox center when one exists', () => {
+    const next = applyRootTransform(CENTERED, { rotate: 30, scale: 2 });
+    // Should sandwich rotate/scale between translate(32 32) and translate(-32 -32)
+    expect(next).toMatch(/translate\(32 32\)\s*rotate\(30\)\s*scale\(2\)\s*translate\(-32 -32\)/);
   });
 
   it('is idempotent: repeated calls do not stack <g>', () => {
@@ -113,10 +120,12 @@ describe('applyRootTransform', () => {
     expect(next).not.toContain('data-omne-transform');
   });
 
-  it('readRootTransform returns the applied values', () => {
-    const next = applyRootTransform(BASE, { rotate: 30, scale: 2 });
+  it('readRootTransform returns the applied user-facing values', () => {
+    const next = applyRootTransform(CENTERED, { rotate: 30, scale: 2 });
     const t = readRootTransform(next);
     expect(t.rotate).toBe(30);
     expect(t.scale).toBe(2);
+    expect(t.translateX).toBe(0);
+    expect(t.translateY).toBe(0);
   });
 });
