@@ -42,6 +42,9 @@
       "password": "Mots de passe",
       "json": "Outils JSON",
       "text": "Outils texte",
+      "encode": "Encodage / décodage",
+      "qr": "QR et codes-barres",
+      "color": "Outils couleur",
       "utility": "Utilitaires"
     },
     "comingSoon": "Bientôt disponible"
@@ -976,6 +979,472 @@
           "copy": "Copier",
           "copied": "Copié",
           "download": "Télécharger"
+        }
+      }
+    },
+    "text": {
+      "case": {
+        "name": "Convertisseur de casse",
+        "description": "Convertissez du texte en MAJUSCULES, minuscules, Casse titre, casse phrase, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE et dot.case.",
+        "seo": {
+          "title": "Convertisseur de casse en ligne — snake_case, camelCase, kebab, MAJUSCULES",
+          "description": "Convertissez du texte en MAJUSCULES, minuscules, Casse titre, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE et dot.case. 100% dans le navigateur — sans envoi, sans inscription.",
+          "keywords": [
+            "convertir snake case en ligne",
+            "convertisseur de casse",
+            "camelcase convertisseur",
+            "pascalcase en ligne",
+            "kebab case générateur",
+            "majuscule minuscule en ligne",
+            "convertisseur casse gratuit"
+          ],
+          "ogTitle": "Convertisseur de casse · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez ou saisissez votre texte ici…",
+          "outputLabel": "Sortie",
+          "mode": "Mode",
+          "modeUpper": "MAJUSCULES",
+          "modeLower": "minuscules",
+          "modeTitle": "Casse Titre",
+          "modeSentence": "Casse phrase",
+          "modeCamel": "camelCase",
+          "modePascal": "PascalCase",
+          "modeSnake": "snake_case",
+          "modeKebab": "kebab-case",
+          "modeConstant": "CONSTANT_CASE",
+          "modeDot": "dot.case",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "Le résultat apparaîtra ici au fur et à mesure.",
+          "charsTemplate": "{n} car."
+        }
+      },
+      "count": {
+        "name": "Compteur de mots et caractères",
+        "description": "Comptez mots, caractères, lignes, paragraphes et phrases — avec estimation du temps de lecture et de prise de parole.",
+        "seo": {
+          "title": "Compteur de mots en ligne — Mots, caractères, temps de lecture en direct",
+          "description": "Comptez en direct mots, caractères (avec et sans espaces), lignes, paragraphes, phrases, et estimez le temps de lecture et de prise de parole. 100% dans le navigateur.",
+          "keywords": [
+            "compter mots et caractères en ligne",
+            "compteur de mots",
+            "compteur de caractères en direct",
+            "temps de lecture estimation",
+            "compteur mots gratuit",
+            "outil comptage texte"
+          ],
+          "ogTitle": "Compteur de mots · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez ou saisissez votre texte ici…",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "characters": "Caractères",
+          "charactersNoSpaces": "Caractères (sans espaces)",
+          "words": "Mots",
+          "lines": "Lignes",
+          "paragraphs": "Paragraphes",
+          "sentences": "Phrases",
+          "readingTime": "Temps de lecture",
+          "speakingTime": "Temps de parole",
+          "countTemplate": "{n}"
+        }
+      },
+      "lorem": {
+        "name": "Générateur Lorem Ipsum",
+        "description": "Générez du faux texte Lorem Ipsum — mots, phrases ou paragraphes, avec option d'enveloppement HTML.",
+        "seo": {
+          "title": "Générateur Lorem Ipsum — Texte fictif en mots, phrases, paragraphes",
+          "description": "Générez du texte Lorem Ipsum en mots, phrases ou paragraphes. Option d'enveloppement HTML <p>, option de démarrage Lorem ipsum. 100% dans le navigateur — sans envoi.",
+          "keywords": [
+            "générateur lorem ipsum",
+            "texte fictif",
+            "faux texte générateur",
+            "texte de remplissage",
+            "lorem ipsum en ligne",
+            "outil texte placeholder"
+          ],
+          "ogTitle": "Lorem Ipsum · 100% local"
+        },
+        "ui": {
+          "unit": "Type",
+          "unitWords": "Mots",
+          "unitSentences": "Phrases",
+          "unitParagraphs": "Paragraphes",
+          "count": "Quantité",
+          "startWithLoremIpsum": "Commencer par « Lorem ipsum dolor sit amet »",
+          "htmlWrap": "Envelopper chaque paragraphe dans <p>",
+          "outputLabel": "Sortie",
+          "regenerate": "Régénérer",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "empty": "Choisissez un type et une quantité pour générer du texte."
+        }
+      }
+    },
+    "encode": {
+      "base64": {
+        "name": "Encodeur / décodeur Base64",
+        "description": "Encodez du texte ou des fichiers en Base64 — ou décodez du Base64 vers le texte ou le fichier binaire d'origine. Alphabets standard et URL-safe.",
+        "seo": {
+          "title": "Encodeur / décodeur Base64 en ligne — Fichiers, Data URI, URL-safe (sans envoi)",
+          "description": "Encodez et décodez du Base64 dans votre navigateur. Convertissez texte ou fichiers (PNG, JPG, PDF…) en Base64, créez des URI data:, ou décodez vers le binaire d'origine. URL-safe & retour à la ligne MIME inclus. Aucun envoi, aucune inscription.",
+          "keywords": [
+            "encoder base64 en ligne sans envoi",
+            "décoder base64 en ligne",
+            "base64 image data uri",
+            "encodeur base64 fichier",
+            "base64 url safe",
+            "convertisseur base64 gratuit"
+          ],
+          "ogTitle": "Base64 · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEncode": "Encoder",
+          "modeDecode": "Décoder",
+          "source": "Source",
+          "sourceText": "Texte",
+          "sourceFile": "Fichier",
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Saisissez, collez du texte ou du Base64 ici…",
+          "outputLabel": "Sortie",
+          "dropHint": "Déposez un fichier ici ou cliquez pour choisir",
+          "fileSelected": "{name}",
+          "removeFile": "Retirer",
+          "urlSafe": "Alphabet URL-safe (- _, sans padding)",
+          "wrapLines": "Retour à la ligne tous les 76 car. (MIME)",
+          "dataUri": "Ajouter le préfixe data: URI",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "Le résultat apparaîtra ici au fur et à mesure.",
+          "error": "Impossible de traiter l'entrée — vérifiez qu'il s'agit bien de Base64.",
+          "charsTemplate": "{n} car.",
+          "bytesTemplate": "{n} octets"
+        }
+      },
+      "url": {
+        "name": "Encodeur / décodeur d'URL",
+        "description": "Encodez ou décodez des URL et paramètres en percent-encoding. Choisissez entre component, URI complète, ou formulaire (x-www-form-urlencoded).",
+        "seo": {
+          "title": "Encodeur / décodeur d'URL en ligne — encodeURIComponent, encodeURI, formulaire",
+          "description": "Encodez et décodez des URL et paramètres en direct dans votre navigateur. Basculez entre encodeURIComponent, encodeURI, et application/x-www-form-urlencoded. 100% local — aucun envoi, aucune inscription.",
+          "keywords": [
+            "encoder url en ligne",
+            "décoder url en ligne sans envoi",
+            "encodeuricomponent en ligne",
+            "percent encoding outil",
+            "x-www-form-urlencoded encodeur",
+            "encodeur url gratuit"
+          ],
+          "ogTitle": "Encodeur URL · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEncode": "Encoder",
+          "modeDecode": "Décoder",
+          "variant": "Variante",
+          "variantComponent": "Composant",
+          "variantFull": "URI complète",
+          "variantForm": "Formulaire (+ pour l'espace)",
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez une URL ou du texte ici…",
+          "outputLabel": "Sortie",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "Le résultat apparaîtra ici au fur et à mesure.",
+          "error": "Impossible de décoder — séquence percent invalide dans l'entrée.",
+          "charsTemplate": "{n} car.",
+          "ratioTemplate": "{n}%"
+        }
+      },
+      "jwt": {
+        "name": "Décodeur JWT",
+        "description": "Décodez un JSON Web Token pour inspecter son en-tête, sa charge utile et sa signature — entièrement dans votre navigateur. Les signatures NE sont PAS vérifiées.",
+        "seo": {
+          "title": "Décodeur JWT en ligne — Inspecter en-tête, payload, claims (sans envoi)",
+          "description": "Collez un JWT pour inspecter son en-tête et sa charge utile localement dans votre navigateur. iat / exp / nbf sont rendus en dates lisibles avec leur statut. La signature est affichée mais pas vérifiée — vos tokens ne quittent jamais votre appareil.",
+          "keywords": [
+            "décoder jwt en ligne",
+            "décodeur jwt sans envoi",
+            "inspecter jwt token",
+            "json web token décoder",
+            "jwt claims viewer",
+            "jwt iat exp en ligne"
+          ],
+          "ogTitle": "Décodeur JWT · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Token",
+          "inputPlaceholder": "Collez un JWT (header.payload.signature) ici…",
+          "headerLabel": "En-tête",
+          "payloadLabel": "Charge utile",
+          "signatureLabel": "Signature",
+          "notVerifiedNote": "Signature non vérifiée.",
+          "noVerifyWarning": "Cet outil ne fait que décoder — il ne vérifie pas les signatures. Ne collez jamais de secret de production où que ce soit.",
+          "loadSample": "Exemple",
+          "clear": "Effacer",
+          "copy": "Copier",
+          "copied": "Copié",
+          "error": "Impossible de décoder — le JWT est mal formé.",
+          "empty": "Collez un JWT ci-dessus pour voir ses parties.",
+          "status": "Statut",
+          "statusValid": "Valide",
+          "statusExpired": "Expiré",
+          "statusNotYetValid": "Pas encore valide",
+          "statusUnknown": "Inconnu",
+          "claimIat": "iat : {date}",
+          "claimExp": "exp : {date}",
+          "claimNbf": "nbf : {date}",
+          "dateTemplate": "{date}"
+        }
+      }
+    },
+    "color": {
+      "convert": {
+        "name": "Convertisseur de couleur",
+        "description": "Convertissez n'importe quelle couleur CSS entre HEX, RGB, HSL, HSV et OKLCH. Collez une couleur dans n'importe quel format — tout est calculé localement dans votre navigateur.",
+        "seo": {
+          "title": "Convertisseur de couleur en ligne — HEX · RGB · HSL · HSV · OKLCH (sans envoi)",
+          "description": "Convertissez vos couleurs entre HEX, RGB, HSL, HSV et OKLCH instantanément. Collez un code hex, une chaîne rgb()/hsl()/oklch() ou un nom CSS — chaque conversion s'exécute dans votre navigateur, sans compte, sans tracking.",
+          "keywords": [
+            "convertisseur couleur en ligne",
+            "hex vers rgb en ligne",
+            "rgb vers hsl convertisseur",
+            "oklch convertisseur couleur",
+            "convertir couleur css gratuit",
+            "color picker en ligne sans envoi",
+            "hex vers hsl"
+          ],
+          "ogTitle": "Convertisseur couleur · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Couleur",
+          "inputPlaceholder": "#3b82f6, rgb(59 130 246), hsl(217 91% 60%), oklch(0.62 0.18 257)…",
+          "swatchLabel": "Aperçu couleur",
+          "alphaNote": "Inclut l'alpha — un damier indique la transparence.",
+          "hex": "HEX",
+          "rgb": "RGB",
+          "hsl": "HSL",
+          "hsv": "HSV",
+          "oklch": "OKLCH",
+          "named": "Nom CSS le plus proche",
+          "copy": "Copier",
+          "copied": "Copié",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "Collez une couleur ci-dessus pour voir tous les formats.",
+          "error": "Format non reconnu — essayez HEX, rgb(), hsl(), oklch() ou un nom CSS."
+        }
+      },
+      "contrast": {
+        "name": "Vérificateur de contraste",
+        "description": "Vérifiez le contraste WCAG entre deux couleurs. Obtenez le ratio et les verdicts AA / AAA pour texte normal et grand — tout s'exécute localement dans votre navigateur.",
+        "seo": {
+          "title": "Vérificateur de contraste WCAG en ligne — ratio AA / AAA (sans envoi)",
+          "description": "Choisissez une couleur de texte et un fond pour obtenir leur ratio de contraste avec les verdicts WCAG 2 AA / AAA pour texte normal et grand. Aperçu en direct à plusieurs tailles. 100% dans votre navigateur, sans compte, sans tracking.",
+          "keywords": [
+            "vérifier contraste accessibilité",
+            "contraste wcag en ligne",
+            "ratio contraste couleur outil",
+            "checker contraste aa aaa",
+            "calculateur contraste wcag",
+            "contraste couleur en ligne sans envoi"
+          ],
+          "ogTitle": "Contraste WCAG · 100% local"
+        },
+        "ui": {
+          "foregroundLabel": "Texte (premier plan)",
+          "backgroundLabel": "Arrière-plan",
+          "swapLabel": "Inverser",
+          "resetLabel": "Réinitialiser",
+          "ratioLabel": "Ratio de contraste",
+          "ratioTemplate": "{n}:1",
+          "verdictTitle": "Verdict WCAG",
+          "aaNormal": "AA · texte normal",
+          "aaLarge": "AA · grand texte",
+          "aaaNormal": "AAA · texte normal",
+          "aaaLarge": "AAA · grand texte",
+          "pass": "OK",
+          "fail": "Échec",
+          "previewTitle": "Aperçu en direct",
+          "previewSampleSmall": "Petit texte (12 px) — voix ambiguë d'un cœur qui au zéphyr préfère les jattes de kiwis.",
+          "previewSampleNormal": "Texte courant (16 px) — voix ambiguë d'un cœur qui au zéphyr préfère les jattes de kiwis.",
+          "previewSampleBold": "Texte gras (14 px gras) — voix ambiguë d'un cœur qui au zéphyr préfère les jattes de kiwis.",
+          "previewSampleLarge": "Grand texte (24 px) — voix ambiguë d'un cœur.",
+          "error": "Impossible de lire ces couleurs — essayez HEX, rgb(), hsl() ou un nom CSS."
+        }
+      },
+      "palette": {
+        "name": "Palette depuis une image",
+        "description": "Extrayez les couleurs dominantes d'une image. Choisissez k-means ou median-cut, de 2 à 16 nuances, puis copiez la palette en variables CSS ou JSON. Votre image ne quitte jamais votre navigateur.",
+        "seo": {
+          "title": "Extraire la palette de couleurs d'une image — gratuit, navigateur (sans envoi)",
+          "description": "Déposez un PNG, JPG ou WebP et extrayez ses couleurs dominantes avec k-means ou median-cut. Copiez en variables CSS, JSON, ou téléchargez la palette en PNG. Chaque pixel reste dans votre navigateur — sans envoi, sans compte.",
+          "keywords": [
+            "extraire palette couleur image",
+            "image vers palette de couleurs",
+            "couleurs dominantes d'une image",
+            "extracteur couleur image sans envoi",
+            "générateur palette kmeans",
+            "palette image en ligne gratuit"
+          ],
+          "ogTitle": "Extracteur palette · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choisir une image",
+          "empty": "Déposez une image (PNG · JPG · WebP) ou utilisez le bouton ci-dessous.",
+          "removeFile": "Retirer",
+          "countLabel": "Nuances",
+          "algorithmLabel": "Algorithme",
+          "algorithmKmeans": "k-means",
+          "algorithmMedianCut": "Median cut",
+          "previewLabel": "Aperçu de l'image",
+          "paletteLabel": "Palette",
+          "copyHex": "Copier",
+          "copied": "Copié",
+          "coverageTemplate": "{n} %",
+          "downloadPng": "Télécharger PNG",
+          "copyCss": "Copier CSS",
+          "copyJson": "Copier JSON",
+          "busy": "Analyse…",
+          "error": "Impossible de lire cette image — essayez un autre fichier."
+        }
+      }
+    },
+    "qr": {
+      "generate": {
+        "name": "Générateur QR Code",
+        "description": "Générez des QR codes pour du texte, des liens, des réseaux Wi-Fi ou des cartes de contact. Choisissez les couleurs, la taille et le niveau de correction d'erreur — tout est rendu localement dans votre navigateur.",
+        "seo": {
+          "title": "Générateur QR Code gratuit — Texte, URL, Wi-Fi, vCard (sans inscription, sans envoi)",
+          "description": "Générateur de QR codes gratuit en ligne. Encodez du texte, des liens, des identifiants Wi-Fi ou des contacts (vCard). Personnalisez les couleurs, la taille et la correction d'erreur. Téléchargez en PNG ou SVG. 100 % dans votre navigateur — sans compte, sans tracking.",
+          "keywords": [
+            "générer qr code en ligne",
+            "générateur qr code wifi",
+            "générateur qr code vcard",
+            "qr code en ligne gratuit",
+            "créer qr code sans inscription",
+            "générateur qr code privé",
+            "qr code couleur personnalisée"
+          ],
+          "ogTitle": "Générateur QR · 100% local"
+        },
+        "ui": {
+          "modeLabel": "Type de contenu",
+          "modeText": "Texte",
+          "modeUrl": "URL",
+          "modeWifi": "Wi-Fi",
+          "modeVcard": "Contact",
+          "textLabel": "Texte",
+          "textPlaceholder": "Ce que vous voulez encoder…",
+          "urlLabel": "URL",
+          "urlPlaceholder": "https://exemple.fr",
+          "wifiSsid": "Nom du réseau (SSID)",
+          "wifiSsidPlaceholder": "MonReseau",
+          "wifiPassword": "Mot de passe",
+          "wifiPasswordPlaceholder": "••••••••",
+          "wifiEncryption": "Chiffrement",
+          "wifiEncryptionWpa": "WPA / WPA2",
+          "wifiEncryptionWep": "WEP",
+          "wifiEncryptionNone": "Ouvert",
+          "wifiHidden": "Réseau caché",
+          "vcardFirstName": "Prénom",
+          "vcardLastName": "Nom",
+          "vcardOrg": "Organisation",
+          "vcardTitle": "Poste",
+          "vcardEmail": "Email",
+          "vcardPhone": "Téléphone",
+          "vcardUrl": "Site web",
+          "fgLabel": "Premier plan",
+          "bgLabel": "Arrière-plan",
+          "ecLabel": "Correction d'erreur",
+          "ecHelp": "L = faible · H = maximale (plus dense)",
+          "marginLabel": "Marge",
+          "sizeLabel": "Échelle",
+          "pixelTemplate": "{n} px",
+          "previewLabel": "Aperçu QR",
+          "previewEmpty": "Saisissez quelque chose pour voir le QR.",
+          "downloadPng": "Télécharger PNG",
+          "downloadSvg": "Télécharger SVG",
+          "copyDataUri": "Copier data URI",
+          "copyPayload": "Copier le contenu",
+          "copied": "Copié",
+          "payloadLabel": "Contenu encodé",
+          "payloadHint": "Apparaîtra dès que vous tapez quelque chose ci-dessus.",
+          "error": "Impossible de générer ce QR — essayez un contenu plus court ou un niveau de correction plus bas.",
+          "sampleHint": "Astuce : une correction plus élevée résiste aux rayures mais réduit la capacité."
+        }
+      },
+      "scan": {
+        "name": "Lecteur QR Code",
+        "description": "Scannez un QR code avec votre caméra ou en déposant une image. Le flux vidéo et le décodage restent sur votre appareil — rien n'est envoyé.",
+        "seo": {
+          "title": "Lecteur QR Code en ligne — Caméra ou image, 100 % privé (sans app)",
+          "description": "Lecteur de QR code gratuit en ligne. Scannez via votre webcam ou déposez une image PNG/JPG/WebP. Décodez liens, identifiants Wi-Fi, vCards et texte — chaque octet reste dans votre navigateur, sans compte, sans tracking, sans application à installer.",
+          "keywords": [
+            "scan qr en ligne sans app",
+            "lecture qr code privée",
+            "scanner qr code navigateur",
+            "lire qr code depuis image",
+            "lecteur qr code gratuit",
+            "décoder qr code en ligne"
+          ],
+          "ogTitle": "Lecteur QR · 100% local"
+        },
+        "ui": {
+          "sourceLabel": "Source",
+          "sourceCamera": "Caméra",
+          "sourceImage": "Image",
+          "cameraStart": "Démarrer la caméra",
+          "cameraStop": "Arrêter la caméra",
+          "cameraScanning": "Démarrage de la caméra…",
+          "cameraInsecure": "L'accès à la caméra nécessite HTTPS (ou localhost). Utilisez plutôt la source Image.",
+          "cameraDenied": "Permission caméra refusée — vérifiez les paramètres du navigateur.",
+          "cameraUnavailable": "Impossible de démarrer la caméra. Vérifiez qu'aucune autre application ne l'utilise.",
+          "scanAgain": "Scanner à nouveau",
+          "dropLabel": "Déposez une image QR (PNG · JPG · WebP)",
+          "dropHint": "Ou choisissez un fichier sur votre appareil. Tout reste en local.",
+          "selectImage": "Choisir une image",
+          "decodingImage": "Décodage…",
+          "imageError": "Aucun QR détecté dans cette image — essayez une photo plus nette ou plus grande.",
+          "noResult": "Pointez un QR code sur la caméra ou déposez une image.",
+          "resultLabel": "Décodé",
+          "payloadRaw": "Contenu brut",
+          "copy": "Copier",
+          "copied": "Copié",
+          "kindUrl": "Lien",
+          "kindWifi": "Wi-Fi",
+          "kindVcard": "Contact",
+          "kindText": "Texte",
+          "openLink": "Ouvrir le lien",
+          "wifiSsidLabel": "Réseau",
+          "wifiPasswordLabel": "Mot de passe",
+          "wifiEncryptionLabel": "Chiffrement",
+          "wifiHiddenLabel": "Caché",
+          "wifiYes": "Oui",
+          "wifiNo": "Non",
+          "copyPassword": "Copier le mot de passe",
+          "vcardNameLabel": "Nom",
+          "vcardOrgLabel": "Organisation",
+          "vcardTitleLabel": "Poste",
+          "vcardEmailLabel": "Email",
+          "vcardPhoneLabel": "Téléphone",
+          "vcardUrlLabel": "Site web",
+          "vcardDownload": "Télécharger .vcf"
         }
       }
     }
