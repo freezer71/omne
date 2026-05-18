@@ -643,6 +643,7 @@
           "resetTransformButton": "Réinitialiser",
           "backgroundLabel": "Arrière-plan",
           "transparentLabel": "Transparent",
+          "showBoundsLabel": "Afficher les limites",
           "formatButton": "Formater",
           "downloadButton": "Télécharger .svg",
           "copyButton": "Copier la source",

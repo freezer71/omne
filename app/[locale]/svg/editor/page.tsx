@@ -60,6 +60,7 @@ export default async function Page({
           resetTransformButton={tool.ui.resetTransformButton}
           backgroundLabel={tool.ui.backgroundLabel}
           transparentLabel={tool.ui.transparentLabel}
+          showBoundsLabel={tool.ui.showBoundsLabel}
           formatButton={tool.ui.formatButton}
           downloadButton={tool.ui.downloadButton}
           copyButton={tool.ui.copyButton}
