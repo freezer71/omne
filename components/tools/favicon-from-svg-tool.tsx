@@ -2,11 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { SvgSourceInput } from '@/components/tools/svg-source-input';
 import { rasterizeSvgToCanvas } from '@/lib/tools/implementations/svg-to-png';
 import { generateFaviconZip } from '@/lib/tools/implementations/favicon-from-svg';
 import { downloadBlob, outputName } from '@/lib/file-utils';
-import { cn } from '@/lib/cn';
 
 type Messages = {
   pasteLabel: string;
@@ -27,7 +26,6 @@ const PREVIEW_LARGE = 64;
 const PREVIEW_SMALL = 16;
 
 export function FaviconFromSvgTool(messages: Messages) {
-  const inputRef = useRef<HTMLInputElement>(null);
   const largeCanvasRef = useRef<HTMLCanvasElement>(null);
   const smallCanvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -36,7 +34,6 @@ export function FaviconFromSvgTool(messages: Messages) {
   const [appName, setAppName] = useState('My App');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [dragging, setDragging] = useState(false);
 
   const hasMarkup = markup.trim().length > 0;
 
@@ -101,48 +98,17 @@ export function FaviconFromSvgTool(messages: Messages) {
 
   return (
     <div className="flex flex-col gap-4">
-      <Card
-        className={cn(
-          'p-6 border-2 border-dashed transition-colors',
-          dragging ? 'border-accent bg-surface-hover' : 'border-border',
-        )}
-        onDragOver={(e) => {
-          e.preventDefault();
-          setDragging(true);
+      <SvgSourceInput
+        markup={markup}
+        onMarkupChange={setMarkup}
+        onPickFiles={onPickFiles}
+        messages={{
+          pasteLabel: messages.pasteLabel,
+          selectButton: messages.selectButton,
+          dropLabel: messages.dropLabel,
+          empty: messages.empty,
         }}
-        onDragLeave={() => setDragging(false)}
-        onDrop={(e) => {
-          e.preventDefault();
-          setDragging(false);
-          onPickFiles(e.dataTransfer.files);
-        }}
-      >
-        <input
-          ref={inputRef}
-          type="file"
-          accept="image/svg+xml,.svg"
-          className="sr-only"
-          onChange={(e) => onPickFiles(e.target.files)}
-        />
-        <div className="flex flex-col gap-3">
-          <label className="flex flex-col gap-2 text-xs text-text-muted">
-            {messages.pasteLabel}
-            <textarea
-              value={markup}
-              onChange={(e) => setMarkup(e.target.value)}
-              placeholder={messages.empty}
-              spellCheck={false}
-              className="min-h-28 w-full resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-xs text-text-primary"
-            />
-          </label>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <Button variant="ghost" size="sm" type="button" onClick={() => inputRef.current?.click()}>
-              {messages.selectButton}
-            </Button>
-            <span className="text-xs text-text-faint">{messages.dropLabel}</span>
-          </div>
-        </div>
-      </Card>
+      />
 
       {hasMarkup ? (
         <>

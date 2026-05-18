@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { SvgSourceInput } from '@/components/tools/svg-source-input';
 import {
   applyRootAttrs,
   applyRootTransform,
@@ -18,12 +18,10 @@ import { downloadBlob, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
 
 type Messages = {
-  heading: string;
-  dropLabel: string;
+  pasteLabel: string;
   selectButton: string;
-  sampleButton: string;
-  pasteHere: string;
-  pastePlaceholder: string;
+  dropLabel: string;
+  empty: string;
   sourceLabel: string;
   previewLabel: string;
   controlsLabel: string;
@@ -72,10 +70,7 @@ function formatXml(markup: string, indent = 2): string {
   return lines.join('\n');
 }
 
-const SAMPLE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="28" fill="#6366f1"/><path d="M20 32 L28 40 L44 24" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
 export function SvgEditorTool(messages: Messages) {
-  const inputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const selectionRef = useRef<{ start: number; end: number } | null>(null);
@@ -86,7 +81,6 @@ export function SvgEditorTool(messages: Messages) {
   const [colors, setColors] = useState<ColorEntry[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [dragging, setDragging] = useState(false);
   const [copied, setCopied] = useState(false);
   const [transparent, setTransparent] = useState(true);
   const [background, setBackground] = useState('#ffffff');
@@ -185,9 +179,9 @@ export function SvgEditorTool(messages: Messages) {
     void first.text().then((text) => setMarkup(text));
   };
 
-  const loadSample = () => {
-    setFileName('sample.svg');
-    setMarkup(SAMPLE_SVG);
+  const onClear = () => {
+    setMarkup('');
+    setFileName(null);
   };
 
   const onColorChange = (from: string, to: string) => {
@@ -253,73 +247,19 @@ export function SvgEditorTool(messages: Messages) {
 
   return (
     <div className="flex flex-col gap-4">
-      <Card
-        className={cn(
-          'p-6 border-2 border-dashed transition-colors',
-          dragging ? 'border-accent bg-surface-hover' : 'border-border',
-        )}
-        onDragOver={(e) => {
-          e.preventDefault();
-          setDragging(true);
-        }}
-        onDragLeave={() => setDragging(false)}
-        onDrop={(e) => {
-          e.preventDefault();
-          setDragging(false);
-          onPickFiles(e.dataTransfer.files);
-        }}
-      >
-        <input
-          ref={inputRef}
-          type="file"
-          accept="image/svg+xml,.svg"
-          className="sr-only"
-          onChange={(e) => onPickFiles(e.target.files)}
+      {!hasMarkup ? (
+        <SvgSourceInput
+          markup={markup}
+          onMarkupChange={setMarkup}
+          onPickFiles={onPickFiles}
+          messages={{
+            pasteLabel: messages.pasteLabel,
+            selectButton: messages.selectButton,
+            dropLabel: messages.dropLabel,
+            empty: messages.empty,
+          }}
         />
-        <div className="flex flex-col gap-3">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex min-w-0 flex-col gap-1">
-              <p className="text-sm text-text-primary">{messages.heading}</p>
-              <p className="text-xs text-text-faint">{messages.dropLabel}</p>
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <Button variant="ghost" size="sm" type="button" onClick={() => inputRef.current?.click()}>
-                {messages.selectButton}
-              </Button>
-              <Button variant="subtle" size="sm" type="button" onClick={loadSample}>
-                {messages.sampleButton}
-              </Button>
-              {hasMarkup ? (
-                <Button
-                  variant="subtle"
-                  size="sm"
-                  type="button"
-                  onClick={() => {
-                    setMarkup('');
-                    setFileName(null);
-                  }}
-                >
-                  {messages.resetButton}
-                </Button>
-              ) : null}
-            </div>
-          </div>
-          {!hasMarkup ? (
-            <label className="flex flex-col gap-2 text-xs text-text-muted">
-              {messages.pasteHere}
-              <textarea
-                value={markup}
-                onChange={(e) => setMarkup(e.target.value)}
-                placeholder={messages.pastePlaceholder}
-                spellCheck={false}
-                wrap="soft"
-                style={{ wordBreak: 'break-all' }}
-                className="min-h-28 w-full min-w-0 resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-[11px] leading-relaxed text-text-primary"
-              />
-            </label>
-          ) : null}
-        </div>
-      </Card>
+      ) : null}
 
       {hasMarkup ? (
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_320px]">
@@ -333,6 +273,9 @@ export function SvgEditorTool(messages: Messages) {
                 </Button>
                 <Button variant="subtle" size="sm" type="button" onClick={onCopy}>
                   {copied ? messages.copied : messages.copyButton}
+                </Button>
+                <Button variant="subtle" size="sm" type="button" onClick={onClear}>
+                  {messages.resetButton}
                 </Button>
               </div>
             </div>

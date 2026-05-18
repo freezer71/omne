@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { SvgSourceInput } from '@/components/tools/svg-source-input';
 import {
   rasterizeSvg,
   rasterizeSvgToCanvas,
@@ -49,7 +49,6 @@ export function SvgToPngTool(messages: Messages) {
   const fmtId = useId();
   const bgId = useId();
   const transparentId = useId();
-  const inputRef = useRef<HTMLInputElement>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
 
   const [markup, setMarkup] = useState('');
@@ -63,7 +62,6 @@ export function SvgToPngTool(messages: Messages) {
   const [background, setBackground] = useState('#ffffff');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [dragging, setDragging] = useState(false);
 
   const ratio = natural ? natural.w / natural.h : 1;
   const hasMarkup = markup.trim().length > 0;
@@ -173,73 +171,38 @@ export function SvgToPngTool(messages: Messages) {
 
   return (
     <div className="flex flex-col gap-4">
-      <Card
-        className={cn(
-          'p-6 border-2 border-dashed transition-colors',
-          dragging ? 'border-accent bg-surface-hover' : 'border-border',
-        )}
-        onDragOver={(e) => {
-          e.preventDefault();
-          setDragging(true);
+      <SvgSourceInput
+        markup={markup}
+        onMarkupChange={(next) => {
+          setMarkup(next);
+          if (!next) setFileName(null);
         }}
-        onDragLeave={() => setDragging(false)}
-        onDrop={(e) => {
-          e.preventDefault();
-          setDragging(false);
-          onPickFiles(e.dataTransfer.files);
+        onPickFiles={onPickFiles}
+        messages={{
+          pasteLabel: messages.pasteLabel,
+          selectButton: messages.selectButton,
+          dropLabel: messages.dropLabel,
+          empty: messages.empty,
         }}
-      >
-        <input
-          ref={inputRef}
-          type="file"
-          accept="image/svg+xml,.svg"
-          className="sr-only"
-          onChange={(e) => onPickFiles(e.target.files)}
-        />
-        <div className="flex flex-col gap-3">
-          <label className="flex flex-col gap-2 text-xs text-text-muted">
-            {messages.pasteLabel}
-            <textarea
-              value={markup}
-              onChange={(e) => {
-                setMarkup(e.target.value);
-                if (!e.target.value) setFileName(null);
-              }}
-              placeholder={messages.empty}
-              spellCheck={false}
-              className="min-h-32 w-full resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-xs text-text-primary"
-            />
-          </label>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              type="button"
-              onClick={() => inputRef.current?.click()}
-            >
-              {messages.selectButton}
-            </Button>
-            {fileName ? (
-              <div className="flex items-center gap-2">
-                <span className="truncate text-xs text-text-muted">{fileName}</span>
-                <Button
-                  variant="subtle"
-                  size="sm"
-                  type="button"
-                  onClick={() => {
-                    setMarkup('');
-                    setFileName(null);
-                  }}
-                >
-                  {messages.removeFile}
-                </Button>
-              </div>
-            ) : (
-              <span className="text-xs text-text-faint">{messages.dropLabel}</span>
-            )}
-          </div>
-        </div>
-      </Card>
+        trailing={
+          fileName ? (
+            <div className="flex items-center gap-2">
+              <span className="truncate text-xs text-text-muted">{fileName}</span>
+              <Button
+                variant="subtle"
+                size="sm"
+                type="button"
+                onClick={() => {
+                  setMarkup('');
+                  setFileName(null);
+                }}
+              >
+                {messages.removeFile}
+              </Button>
+            </div>
+          ) : undefined
+        }
+      />
 
       {hasMarkup ? (
         <>

@@ -38,12 +38,10 @@ export default async function Page({
         wide
       >
         <SvgEditorTool
-          heading={tool.ui.heading}
-          dropLabel={tool.ui.dropLabel}
+          pasteLabel={tool.ui.pasteLabel}
           selectButton={tool.ui.selectButton}
-          sampleButton={tool.ui.sampleButton}
-          pasteHere={tool.ui.pasteHere}
-          pastePlaceholder={tool.ui.pastePlaceholder}
+          dropLabel={tool.ui.dropLabel}
+          empty={tool.ui.empty}
           sourceLabel={tool.ui.sourceLabel}
           previewLabel={tool.ui.previewLabel}
           controlsLabel={tool.ui.controlsLabel}

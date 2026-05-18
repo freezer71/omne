@@ -2,10 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { SvgSourceInput } from '@/components/tools/svg-source-input';
 import { svgToDataUrl } from '@/lib/tools/implementations/svg-to-data-url';
 import { formatBytes } from '@/lib/file-utils';
-import { cn } from '@/lib/cn';
 
 type Messages = {
   pasteLabel: string;
@@ -21,9 +20,7 @@ type Messages = {
 };
 
 export function SvgToDataUrlTool(messages: Messages) {
-  const inputRef = useRef<HTMLInputElement>(null);
   const [markup, setMarkup] = useState('');
-  const [dragging, setDragging] = useState(false);
   const [copied, setCopied] = useState<'b64' | 'url' | null>(null);
   const copyResetRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -54,48 +51,17 @@ export function SvgToDataUrlTool(messages: Messages) {
 
   return (
     <div className="flex flex-col gap-4">
-      <Card
-        className={cn(
-          'p-6 border-2 border-dashed transition-colors',
-          dragging ? 'border-accent bg-surface-hover' : 'border-border',
-        )}
-        onDragOver={(e) => {
-          e.preventDefault();
-          setDragging(true);
+      <SvgSourceInput
+        markup={markup}
+        onMarkupChange={setMarkup}
+        onPickFiles={onPickFiles}
+        messages={{
+          pasteLabel: messages.pasteLabel,
+          selectButton: messages.selectButton,
+          dropLabel: messages.dropLabel,
+          empty: messages.empty,
         }}
-        onDragLeave={() => setDragging(false)}
-        onDrop={(e) => {
-          e.preventDefault();
-          setDragging(false);
-          onPickFiles(e.dataTransfer.files);
-        }}
-      >
-        <input
-          ref={inputRef}
-          type="file"
-          accept="image/svg+xml,.svg"
-          className="sr-only"
-          onChange={(e) => onPickFiles(e.target.files)}
-        />
-        <div className="flex flex-col gap-3">
-          <label className="flex flex-col gap-2 text-xs text-text-muted">
-            {messages.pasteLabel}
-            <textarea
-              value={markup}
-              onChange={(e) => setMarkup(e.target.value)}
-              placeholder={messages.empty}
-              spellCheck={false}
-              className="min-h-40 w-full resize-y rounded-md border border-border bg-surface px-3 py-2 font-mono text-xs text-text-primary"
-            />
-          </label>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <Button variant="ghost" size="sm" type="button" onClick={() => inputRef.current?.click()}>
-              {messages.selectButton}
-            </Button>
-            <span className="text-xs text-text-faint">{messages.dropLabel}</span>
-          </div>
-        </div>
-      </Card>
+      />
 
       {hasMarkup ? (
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-start">

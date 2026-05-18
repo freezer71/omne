@@ -624,12 +624,10 @@
           "ogTitle": "SVG editor · 100% local"
         },
         "ui": {
-          "heading": "Open an SVG to start editing",
-          "dropLabel": "Drop a .svg file anywhere on this card.",
+          "pasteLabel": "Paste SVG markup",
           "selectButton": "Select a file",
-          "sampleButton": "Load sample",
-          "pasteHere": "Or paste SVG markup",
-          "pastePlaceholder": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
+          "dropLabel": "…or drop a .svg file onto this card.",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
           "sourceLabel": "Source",
           "previewLabel": "Preview",
           "controlsLabel": "Controls",

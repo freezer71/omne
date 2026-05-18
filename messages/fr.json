@@ -624,12 +624,10 @@
           "ogTitle": "Éditeur SVG · 100 % local"
         },
         "ui": {
-          "heading": "Ouvrez un SVG pour commencer",
-          "dropLabel": "Déposez un fichier .svg n'importe où sur cette carte.",
+          "pasteLabel": "Collez votre SVG",
           "selectButton": "Sélectionner un fichier",
-          "sampleButton": "Charger l'exemple",
-          "pasteHere": "Ou collez votre code SVG",
-          "pastePlaceholder": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
+          "dropLabel": "…ou déposez un fichier .svg sur cette carte.",
+          "empty": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">…</svg>",
           "sourceLabel": "Source",
           "previewLabel": "Aperçu",
           "controlsLabel": "Contrôles",
