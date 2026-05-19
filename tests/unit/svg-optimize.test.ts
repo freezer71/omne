@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 
-vi.mock('svgo', () => ({
+vi.mock('svgo/browser', () => ({
   optimize: vi.fn((input: string) => ({ data: input.replace(/\s+/g, ' ').trim() })),
 }));
 
@@ -30,7 +30,7 @@ describe('optimizeSvg (with svgo mocked)', () => {
   });
 
   it('passes plugin configuration to svgo.optimize', async () => {
-    const { optimize } = await import('svgo');
+    const { optimize } = await import('svgo/browser');
     await optimizeSvg('<svg></svg>', { precision: 2, cleanupIds: false, removeViewBox: true, multipass: true });
     const call = (optimize as ReturnType<typeof vi.fn>).mock.calls.at(-1);
     expect(call).toBeDefined();
