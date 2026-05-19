@@ -3,7 +3,7 @@ import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/regis
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(77);
+    expect(TOOLS).toHaveLength(79);
   });
 
   it('exposes the 6 audio tools', () => {
@@ -54,11 +54,11 @@ describe('TOOLS registry', () => {
     expect(pdf).toEqual(['extract-images', 'from-images', 'merge', 'rotate', 'split', 'to-images', 'watermark']);
   });
 
-  it('exposes the 11 video tools', () => {
+  it('exposes the 13 video tools', () => {
     const video = TOOLS.filter((t) => t.category === 'video').map((t) => t.id).sort();
     expect(video).toEqual([
       'compress', 'convert', 'crop', 'frames', 'merge', 'mute',
-      'resize', 'rotate', 'speed', 'trim', 'watermark',
+      'resize', 'rotate', 'short-studio', 'speed', 'split', 'trim', 'watermark',
     ]);
   });
 
@@ -118,7 +118,7 @@ describe('toolsByCategory', () => {
   it('groups tools by category', () => {
     const grouped = toolsByCategory();
     expect(grouped.pdf?.length).toBe(7);
-    expect(grouped.video?.length).toBe(11);
+    expect(grouped.video?.length).toBe(13);
     expect(grouped.image?.length).toBe(6);
   });
 });

@@ -1,5 +1,28 @@
 @import "tailwindcss";
 
+/* ---------- Watermark fonts (copied by scripts/copy-fonts.mjs at postinstall) ---------- */
+
+@font-face {
+  font-family: "Inter Wm";
+  src: url("/fonts/Inter-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anton Wm";
+  src: url("/fonts/Anton-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora Wm";
+  src: url("/fonts/Lora-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono Wm";
+  src: url("/fonts/JetBrainsMono-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
 /* ---------- Design tokens (Vercel / Geist-style) ---------- */
 
 :root,

@@ -13,7 +13,7 @@
     "test:ui": "vitest --ui",
     "test:e2e": "playwright test",
     "test:all": "npm run test && npm run test:e2e",
-    "postinstall": "node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs"
+    "postinstall": "node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs && node scripts/copy-fonts.mjs"
   },
   "dependencies": {
     "@ffmpeg/core": "^0.12.10",
@@ -39,6 +39,10 @@
     "svgo": "^4.0.1"
   },
   "devDependencies": {
+    "@expo-google-fonts/anton": "^0.4.2",
+    "@expo-google-fonts/inter": "^0.4.2",
+    "@expo-google-fonts/jetbrains-mono": "^0.4.1",
+    "@expo-google-fonts/lora": "^0.4.2",
     "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
