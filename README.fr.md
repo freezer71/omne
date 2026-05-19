@@ -14,7 +14,7 @@
 
 ---
 
-**omne** est une collection de plus de 50 outils en ligne — PDF, vidéo, audio, image, SVG, mots de passe, JSON, texte, encodage, QR codes, couleurs — qui tournent **entièrement côté client**. Pas de backend, pas d'analytics, pas de CDN tiers, pas de cookies. Vos fichiers ne quittent jamais l'onglet.
+**omne** est une collection de plus de 75 outils en ligne — PDF, vidéo, audio, image, SVG, mots de passe, JSON, texte, encodage, QR codes, couleurs — qui tournent **entièrement côté client**. Pas de backend, pas d'analytics, pas de CDN tiers, pas de cookies. Vos fichiers ne quittent jamais l'onglet.
 
 Bilingue **français / anglais**, mode clair / sombre, raccourci `⌘K` pour la palette de commandes.
 
@@ -70,16 +70,16 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | Catégorie | Outils |
 |-----------|--------|
 | **PDF** | Fusionner · Diviser · Pivoter · Filigrane · PDF → images · Extraire les images · Images → PDF |
-| **Vidéo** | Convertir (MP4 / WebM / GIF) · Découper |
+| **Vidéo** | Convertir (MP4 / WebM / GIF) · Découper · Fusionner · Compresser · Redimensionner · Couper le son · Recadrer · Pivoter / miroir · Extraire frames · Filigrane · Vitesse |
 | **Audio** | Convertir · Extraire (depuis vidéo) · Découper · Fusionner · Volume / normaliser / fondus · Tags ID3 |
 | **Image** | Convertir · Compresser · Redimensionner · Recadrer · Pivoter / miroir · Détourer (IA locale, *beta*) |
 | **SVG** | Aperçu · Éditeur · Optimiser (SVGO) · → PNG / JPG / WebP · → Data URL · Générateur de favicon |
 | **Mot de passe** | Générer · Phrase de passe (Diceware) · Hash (SHA) · bcrypt · Vérificateur de force |
 | **JSON** | Formater · Arborescence · JSONPath · Tableau · CSV ↔ JSON · Diff · Schéma (AJV) |
-| **Texte** | Casse · Compteur · Lorem Ipsum |
-| **Encodage** | Base64 · URL · JWT |
-| **QR** | Générer (WiFi, vCard…) · Scanner (caméra ou image) |
-| **Couleur** | Convertisseur (hex / rgb / hsl / oklch) · Contraste WCAG · Palette depuis image |
+| **Texte** | Casse · Compteur · Lorem Ipsum · Diff · Testeur regex · Slugify · Trier les lignes · Échapper/Désechapper · Nettoyeur d'espaces · Aperçu Markdown · Rechercher & Remplacer |
+| **Encodage** | Base64 · URL · JWT · Hex · Entités HTML · Binaire · Code Morse |
+| **QR** | Générer (WiFi, vCard…) · Scanner (caméra ou image) · Générer code-barres (Code 128 / EAN) · Scanner code-barres |
+| **Couleur** | Convertisseur (hex / rgb / hsl / oklch) · Contraste WCAG · Palette depuis image · Générateur de dégradé · Teintes & nuances · Mélangeur · Simulateur de daltonisme |
 
 Source de vérité : [`lib/tools/registry.ts`](./lib/tools/registry.ts). Le sitemap, les cartes de la page d'accueil et le routage MIME en sont dérivés.
 

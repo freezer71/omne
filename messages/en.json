@@ -430,6 +430,294 @@
           "muteLabel": "Mute",
           "unmuteLabel": "Unmute"
         }
+      },
+      "merge": {
+        "name": "Merge videos",
+        "description": "Concatenate two or more videos into a single file. Reorder before merging.",
+        "seo": {
+          "title": "Merge Videos Online — Free Concatenate MP4, WebM, MOV in Browser",
+          "description": "Join two or more videos into one — reorder, then merge. MP4, WebM, MOV, MKV. 100% in your browser — no upload, no watermark, no signup.",
+          "keywords": [
+            "merge videos online",
+            "join videos online free",
+            "concatenate mp4",
+            "combine videos online",
+            "video merger no upload",
+            "free video joiner"
+          ],
+          "ogTitle": "Merge videos · 100% local"
+        },
+        "ui": {
+          "selectButton": "Add videos",
+          "empty": "Drop videos here or use the button below.",
+          "mergeButton": "Merge",
+          "busy": "Merging…",
+          "error": "Could not merge those videos.",
+          "removeFile": "Remove",
+          "filesTemplate": "{n} videos selected",
+          "moveUp": "Move up",
+          "moveDown": "Move down",
+          "needsTwo": "Add at least two videos to merge.",
+          "etaLabel": "About {remaining} left",
+          "etaCalculating": "Estimating remaining time…"
+        }
+      },
+      "compress": {
+        "name": "Compress video",
+        "description": "Reduce a video's file size with three quality presets (high / medium / low).",
+        "seo": {
+          "title": "Compress Video Online — Free Reduce MP4 Size in Browser",
+          "description": "Shrink any MP4, WebM, MOV or MKV with three quality presets — high, medium, low. 100% in your browser — no upload, no signup, no watermark.",
+          "keywords": [
+            "compress video online",
+            "reduce video size online",
+            "video compressor free",
+            "shrink mp4 online",
+            "video size reducer",
+            "compress video no upload"
+          ],
+          "ogTitle": "Compress video · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a video",
+          "empty": "Drop a video here or use the button below.",
+          "compressButton": "Compress",
+          "quality": "Quality",
+          "qualityHigh": "High",
+          "qualityMedium": "Medium",
+          "qualityLow": "Low",
+          "busy": "Compressing…",
+          "error": "Could not compress that video.",
+          "removeFile": "Remove",
+          "etaLabel": "About {remaining} left",
+          "etaCalculating": "Estimating remaining time…"
+        }
+      },
+      "resize": {
+        "name": "Resize video",
+        "description": "Change a video's resolution to 480p, 720p, 1080p or custom dimensions. Keep aspect ratio with padding.",
+        "seo": {
+          "title": "Resize Video Online — Free Scale MP4 to 720p, 1080p, Custom",
+          "description": "Resize any video to 480p, 720p, 1080p or a custom resolution. Optional aspect-ratio preservation. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "resize video online",
+            "scale mp4 online",
+            "resize video 720p",
+            "resize video 1080p",
+            "change video resolution online",
+            "video resizer free"
+          ],
+          "ogTitle": "Resize video · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a video",
+          "empty": "Drop a video here or use the button below.",
+          "resizeButton": "Resize",
+          "preset": "Preset",
+          "preset480": "480p",
+          "preset720": "720p",
+          "preset1080": "1080p",
+          "presetCustom": "Custom",
+          "widthLabel": "Width (px)",
+          "heightLabel": "Height (px)",
+          "keepAspect": "Keep aspect ratio (letterbox)",
+          "busy": "Resizing…",
+          "error": "Could not resize that video.",
+          "removeFile": "Remove",
+          "etaLabel": "About {remaining} left",
+          "etaCalculating": "Estimating remaining time…"
+        }
+      },
+      "mute": {
+        "name": "Mute video",
+        "description": "Remove the audio track from a video while keeping the original quality.",
+        "seo": {
+          "title": "Mute Video Online — Free Remove Audio from MP4 in Browser",
+          "description": "Strip the audio track from any MP4, WebM, MOV or MKV. 100% in your browser — no upload, no signup, no watermark.",
+          "keywords": [
+            "mute video online",
+            "remove audio from video",
+            "silence video online",
+            "no sound video",
+            "video without audio",
+            "free mute video tool"
+          ],
+          "ogTitle": "Mute video · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a video",
+          "empty": "Drop a video here or use the button below.",
+          "muteButton": "Mute",
+          "busy": "Muting…",
+          "error": "Could not mute that video.",
+          "removeFile": "Remove",
+          "etaLabel": "About {remaining} left",
+          "etaCalculating": "Estimating remaining time…"
+        }
+      },
+      "crop": {
+        "name": "Crop video",
+        "description": "Crop a rectangular region of a video. Adjust position and size before exporting.",
+        "seo": {
+          "title": "Crop Video Online — Free Trim Video Edges in Browser",
+          "description": "Crop any video to a rectangular region. Drag handles to set position and size. 100% in your browser — no upload, no signup, no watermark.",
+          "keywords": [
+            "crop video online",
+            "video crop free",
+            "trim video edges",
+            "crop mp4 online",
+            "video cropper no upload",
+            "crop video without watermark"
+          ],
+          "ogTitle": "Crop video · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a video",
+          "empty": "Drop a video here or use the button below.",
+          "cropButton": "Crop",
+          "xLabel": "X (px)",
+          "yLabel": "Y (px)",
+          "widthLabel": "Width (px)",
+          "heightLabel": "Height (px)",
+          "busy": "Cropping…",
+          "error": "Could not crop that video.",
+          "removeFile": "Remove",
+          "etaLabel": "About {remaining} left",
+          "etaCalculating": "Estimating remaining time…"
+        }
+      },
+      "rotate": {
+        "name": "Rotate / Flip video",
+        "description": "Rotate a video by 90, 180 or 270 degrees, or flip it horizontally or vertically.",
+        "seo": {
+          "title": "Rotate Video Online — Free Flip MP4 90/180/270 in Browser",
+          "description": "Rotate any video by 90, 180 or 270 degrees or flip it horizontally/vertically. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "rotate video online",
+            "flip video online",
+            "rotate mp4 free",
+            "rotate video 90 degrees",
+            "mirror video horizontal",
+            "rotate video no upload"
+          ],
+          "ogTitle": "Rotate video · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a video",
+          "empty": "Drop a video here or use the button below.",
+          "rotateButton": "Apply",
+          "transform": "Transform",
+          "rotate90": "Rotate 90° CW",
+          "rotate180": "Rotate 180°",
+          "rotate270": "Rotate 270° CW",
+          "flipH": "Flip horizontal",
+          "flipV": "Flip vertical",
+          "busy": "Processing…",
+          "error": "Could not transform that video.",
+          "removeFile": "Remove",
+          "etaLabel": "About {remaining} left",
+          "etaCalculating": "Estimating remaining time…"
+        }
+      },
+      "frames": {
+        "name": "Extract video frames",
+        "description": "Export frames from a video as PNG or JPG images at a chosen frame rate.",
+        "seo": {
+          "title": "Extract Video Frames Online — Free Video to PNG/JPG in Browser",
+          "description": "Export frames from any video as PNG or JPG, one every N seconds. Bulk download as a ZIP. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "extract video frames online",
+            "video to png free",
+            "video to jpg online",
+            "video frame extractor",
+            "video screenshots online",
+            "video thumbnail generator"
+          ],
+          "ogTitle": "Frames · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a video",
+          "empty": "Drop a video here or use the button below.",
+          "extractButton": "Extract",
+          "fpsLabel": "Frames per second",
+          "formatLabel": "Format",
+          "formatPng": "PNG",
+          "formatJpg": "JPG",
+          "busy": "Extracting…",
+          "error": "Could not extract frames from that video.",
+          "removeFile": "Remove",
+          "framesTemplate": "{n} frames generated",
+          "downloadZip": "Download ZIP",
+          "etaLabel": "About {remaining} left",
+          "etaCalculating": "Estimating remaining time…"
+        }
+      },
+      "watermark": {
+        "name": "Watermark video",
+        "description": "Overlay a text watermark on a video. Choose corner position, color and opacity.",
+        "seo": {
+          "title": "Add Watermark to Video Online — Free Text Overlay in Browser",
+          "description": "Overlay a text watermark on any video. Position, color and opacity controls. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "add watermark to video online",
+            "video watermark free",
+            "text overlay video",
+            "video watermark generator",
+            "watermark mp4 online",
+            "free video watermark tool"
+          ],
+          "ogTitle": "Watermark · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a video",
+          "empty": "Drop a video here or use the button below.",
+          "watermarkButton": "Apply",
+          "textLabel": "Watermark text",
+          "textPlaceholder": "Your watermark…",
+          "position": "Position",
+          "posTopLeft": "Top left",
+          "posTopRight": "Top right",
+          "posBottomLeft": "Bottom left",
+          "posBottomRight": "Bottom right",
+          "posCenter": "Center",
+          "fontSizeLabel": "Font size",
+          "opacityLabel": "Opacity",
+          "busy": "Processing…",
+          "error": "Could not watermark that video.",
+          "removeFile": "Remove",
+          "etaLabel": "About {remaining} left",
+          "etaCalculating": "Estimating remaining time…"
+        }
+      },
+      "speed": {
+        "name": "Change video speed",
+        "description": "Speed up or slow down a video from 0.25× to 4×, keeping the audio in pitch.",
+        "seo": {
+          "title": "Change Video Speed Online — Free Slow Motion & Fast Forward",
+          "description": "Speed up or slow down any video from 0.25× to 4×. 100% in your browser — no upload, no signup, no watermark.",
+          "keywords": [
+            "change video speed online",
+            "slow motion video online",
+            "video speed up online",
+            "video playback speed free",
+            "fast forward video",
+            "slow down mp4 online"
+          ],
+          "ogTitle": "Speed · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a video",
+          "empty": "Drop a video here or use the button below.",
+          "speedButton": "Apply",
+          "speedLabel": "Speed (×)",
+          "keepAudio": "Keep audio",
+          "muteAudio": "Mute audio",
+          "busy": "Processing…",
+          "error": "Could not change speed.",
+          "removeFile": "Remove",
+          "etaLabel": "About {remaining} left",
+          "etaCalculating": "Estimating remaining time…"
+        }
       }
     },
     "audio": {
@@ -1640,6 +1928,308 @@
           "download": "Download",
           "empty": "Choose a type and count to generate text."
         }
+      },
+      "diff": {
+        "name": "Text Diff",
+        "description": "Compare two text snippets side by side. Line, word, or character diff with additions and deletions highlighted.",
+        "seo": {
+          "title": "Text Diff Online — Free Compare Two Texts Side by Side",
+          "description": "Compare two texts line-by-line, word-by-word or character-by-character. Highlights additions and deletions. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "text diff online",
+            "compare two texts online",
+            "text comparison tool",
+            "diff checker free",
+            "side by side text compare",
+            "no upload diff tool"
+          ],
+          "ogTitle": "Text Diff · 100% local"
+        },
+        "ui": {
+          "leftLabel": "Original",
+          "rightLabel": "Modified",
+          "leftPlaceholder": "Paste the original text…",
+          "rightPlaceholder": "Paste the modified text…",
+          "mode": "Mode",
+          "modeLine": "Line",
+          "modeWord": "Word",
+          "modeChar": "Character",
+          "statsAdditions": "{n} added",
+          "statsDeletions": "{n} removed",
+          "statsUnchanged": "{n} unchanged",
+          "showUnchanged": "Show unchanged",
+          "swap": "Swap",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "download": "Download patch",
+          "empty": "Paste two texts to compare them."
+        }
+      },
+      "regex": {
+        "name": "Regex Tester",
+        "description": "Test JavaScript regular expressions live with match highlighting, capture groups, named groups and find-and-replace.",
+        "seo": {
+          "title": "Regex Tester Online — Free JavaScript RegExp Match & Replace",
+          "description": "Build and test JavaScript regular expressions with live highlighting, capture groups and replace preview. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "regex tester online",
+            "regex tester javascript",
+            "regular expression online",
+            "regex match highlight",
+            "regex replace tool",
+            "free regex builder"
+          ],
+          "ogTitle": "Regex Tester · 100% local"
+        },
+        "ui": {
+          "patternLabel": "Pattern",
+          "patternPlaceholder": "Enter a regular expression…",
+          "flagsLabel": "Flags",
+          "flagGlobal": "global",
+          "flagCaseInsensitive": "case insensitive",
+          "flagMultiline": "multiline",
+          "flagDotAll": "dotAll",
+          "flagUnicode": "unicode",
+          "flagSticky": "sticky",
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste the text to test against…",
+          "replacementLabel": "Replacement ($1, $2, $<name>)",
+          "replacementPlaceholder": "Optional replacement string…",
+          "matchesLabel": "Matches",
+          "resultLabel": "Replaced text",
+          "matchesTemplate": "{n} match",
+          "errorLabel": "Pattern error",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Enter a pattern and some text to see matches.",
+          "noMatches": "No matches in the current input."
+        }
+      },
+      "slugify": {
+        "name": "Slugify",
+        "description": "Convert any text into a clean URL slug — strip accents, collapse separators, lowercase, with optional hyphen, underscore or dot separator.",
+        "seo": {
+          "title": "Slugify Online — Free URL Slug Generator with Accent Removal",
+          "description": "Turn titles, headlines or sentences into URL-safe slugs. Strips accents, lowercases, collapses separators. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "slugify online",
+            "url slug generator",
+            "permalink generator",
+            "seo slug tool",
+            "remove accents url",
+            "kebab case slug"
+          ],
+          "ogTitle": "Slugify · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste a title or sentence…",
+          "outputLabel": "Slug",
+          "separator": "Separator",
+          "separatorHyphen": "Hyphen",
+          "separatorUnderscore": "Underscore",
+          "separatorDot": "Dot",
+          "lowercase": "Lowercase",
+          "removeDiacritics": "Remove accents",
+          "collapse": "Collapse separators",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Slug will appear here as you type.",
+          "charsTemplate": "{n} chars"
+        }
+      },
+      "sort-lines": {
+        "name": "Sort Lines",
+        "description": "Sort lines alphabetically, naturally, numerically, by length, reverse or shuffle. Optionally trim, deduplicate or remove blank lines.",
+        "seo": {
+          "title": "Sort Lines Online — Free Alphabetical, Numeric, Natural Sort",
+          "description": "Sort any list of lines alphabetically, numerically, by length, reverse or shuffle. Dedupe, trim and remove blanks. 100% in your browser — no upload.",
+          "keywords": [
+            "sort lines online",
+            "sort text alphabetically",
+            "natural sort tool",
+            "dedupe lines online",
+            "shuffle lines tool",
+            "numeric line sort"
+          ],
+          "ogTitle": "Sort Lines · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Input",
+          "inputPlaceholder": "One item per line…",
+          "outputLabel": "Sorted",
+          "mode": "Mode",
+          "modeAlpha": "Alphabetical",
+          "modeNatural": "Natural",
+          "modeNumeric": "Numeric",
+          "modeLength": "Length",
+          "modeReverse": "Reverse",
+          "modeShuffle": "Shuffle",
+          "order": "Order",
+          "orderAsc": "Ascending",
+          "orderDesc": "Descending",
+          "caseSensitive": "Case sensitive",
+          "trim": "Trim each line",
+          "removeEmpty": "Remove empty lines",
+          "removeDuplicates": "Remove duplicates",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Paste some lines to sort them.",
+          "linesTemplate": "{n} lines"
+        }
+      },
+      "escape": {
+        "name": "Escape / Unescape",
+        "description": "Escape or unescape strings for HTML, XML, JavaScript and JSON — handles entities, unicode escapes and special characters.",
+        "seo": {
+          "title": "Escape Online — Free HTML, XML, JavaScript and JSON Escape / Unescape",
+          "description": "Escape or unescape strings for HTML, XML, JavaScript and JSON. Handles named entities, numeric refs, unicode escapes. 100% in your browser — no upload.",
+          "keywords": [
+            "html escape online",
+            "javascript string escape",
+            "json escape online",
+            "xml escape tool",
+            "html entities decoder",
+            "unicode escape converter"
+          ],
+          "ogTitle": "Escape · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEscape": "Escape",
+          "modeUnescape": "Unescape",
+          "kind": "Target",
+          "kindHtml": "HTML",
+          "kindJs": "JavaScript",
+          "kindJson": "JSON",
+          "kindXml": "XML",
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste text to escape or unescape…",
+          "outputLabel": "Output",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Output will appear here as you type.",
+          "charsTemplate": "{n} chars"
+        }
+      },
+      "whitespace": {
+        "name": "Whitespace Cleaner",
+        "description": "Clean whitespace in any text — trim lines, collapse spaces, remove blank lines, convert tabs and normalize CRLF / LF line endings.",
+        "seo": {
+          "title": "Whitespace Cleaner Online — Free Trim, Collapse Spaces, Normalize Line Endings",
+          "description": "Trim trailing spaces, collapse multiple spaces, remove blank lines, convert tabs and normalize CRLF/LF/CR line endings. 100% in your browser — no upload.",
+          "keywords": [
+            "whitespace cleaner online",
+            "trim whitespace tool",
+            "remove blank lines",
+            "normalize line endings",
+            "crlf lf converter",
+            "tabs to spaces online"
+          ],
+          "ogTitle": "Whitespace · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste text with extra whitespace…",
+          "outputLabel": "Cleaned",
+          "trimLines": "Trim each line",
+          "collapseSpaces": "Collapse multiple spaces",
+          "removeBlankLines": "Remove blank lines",
+          "trimDocument": "Trim start/end of document",
+          "removeTrailingSpaces": "Remove trailing spaces",
+          "lineEndings": "Line endings",
+          "endingsUnix": "LF (Unix)",
+          "endingsWindows": "CRLF (Windows)",
+          "endingsMac": "CR (classic Mac)",
+          "endingsKeep": "Keep as-is",
+          "tabsToSpaces": "Tabs → spaces (0 = keep tabs)",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Output will appear here as you type.",
+          "charsTemplate": "{n} chars"
+        }
+      },
+      "markdown": {
+        "name": "Markdown Preview",
+        "description": "Live Markdown preview with side-by-side editor. Supports headings, lists, links, code blocks, emphasis, blockquotes and tables.",
+        "seo": {
+          "title": "Markdown Preview Online — Free Live Editor & HTML Export",
+          "description": "Write Markdown and see the rendered HTML side by side. Headings, lists, links, code, tables, emphasis and blockquotes. 100% in your browser — no upload.",
+          "keywords": [
+            "markdown preview online",
+            "markdown editor online",
+            "markdown to html",
+            "live markdown",
+            "md to html converter",
+            "free markdown viewer"
+          ],
+          "ogTitle": "Markdown Preview · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Markdown",
+          "inputPlaceholder": "Write some Markdown…",
+          "previewLabel": "Preview",
+          "htmlLabel": "Generated HTML",
+          "showHtml": "Show HTML source",
+          "showPreview": "Show preview",
+          "copyHtml": "Copy HTML",
+          "copied": "Copied",
+          "download": "Download HTML",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Preview will appear here as you type."
+        }
+      },
+      "find-replace": {
+        "name": "Find & Replace",
+        "description": "Find and replace in any text — literal or regular expression mode, case sensitive, whole word, with live preview and match count.",
+        "seo": {
+          "title": "Find and Replace Online — Free Text Search & Replace with Regex",
+          "description": "Search and replace in any text. Literal or regular expression mode, case sensitive, whole word match, replace all or step through. 100% in your browser — no upload.",
+          "keywords": [
+            "find and replace online",
+            "text find replace tool",
+            "search and replace text",
+            "regex replace online",
+            "free text editor replace",
+            "no upload find replace"
+          ],
+          "ogTitle": "Find & Replace · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste the text to search…",
+          "outputLabel": "Result",
+          "findLabel": "Find",
+          "findPlaceholder": "Text or pattern…",
+          "replaceLabel": "Replace with",
+          "replacePlaceholder": "Replacement text…",
+          "regex": "Regex",
+          "caseSensitive": "Case sensitive",
+          "wholeWord": "Whole word",
+          "matchesTemplate": "{n} matches",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Result will appear here as you type."
+        }
       }
     },
     "encode": {
@@ -1764,6 +2354,152 @@
           "claimNbf": "nbf: {date}",
           "dateTemplate": "{date}"
         }
+      },
+      "hex": {
+        "name": "Hex Encoder / Decoder",
+        "description": "Encode any text into hex (UTF-8 byte sequence) or decode a hex string back to text. Separator and case configurable.",
+        "seo": {
+          "title": "Hex Encoder / Decoder Online — Free Text ↔ Hex Converter",
+          "description": "Convert text to hex (UTF-8) and back. Choose separator, uppercase/lowercase. 100% in your browser — no upload, no signup, no tracking.",
+          "keywords": [
+            "hex encoder online",
+            "hex decoder online",
+            "text to hex converter",
+            "hex to text converter",
+            "string to hex online",
+            "free hex encoder"
+          ],
+          "ogTitle": "Hex · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEncode": "Encode",
+          "modeDecode": "Decode",
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste text or a hex string…",
+          "outputLabel": "Output",
+          "separator": "Separator",
+          "sepNone": "None",
+          "sepSpace": "Space",
+          "sepDash": "Dash",
+          "sepColon": "Colon",
+          "uppercase": "Uppercase",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Output will appear here as you type.",
+          "errorLabel": "Error",
+          "charsTemplate": "{n} chars"
+        }
+      },
+      "html-entities": {
+        "name": "HTML Entities Encoder / Decoder",
+        "description": "Encode special characters to HTML entities (named, numeric or hex) or decode entities back to characters.",
+        "seo": {
+          "title": "HTML Entities Encoder / Decoder — Free Online, No Upload",
+          "description": "Convert any character to its HTML entity (named, numeric or hex) and decode entities back. Supports accents, symbols and emoji. 100% in your browser — no upload.",
+          "keywords": [
+            "html entities encoder",
+            "html entities decoder",
+            "decode html entities online",
+            "encode special characters html",
+            "named entities to characters",
+            "free html entities tool"
+          ],
+          "ogTitle": "HTML Entities · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEncode": "Encode",
+          "modeDecode": "Decode",
+          "format": "Format",
+          "formatNamed": "Named (&amp;)",
+          "formatNumeric": "Numeric (&#38;)",
+          "formatHex": "Hex (&#x26;)",
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste characters or entities…",
+          "outputLabel": "Output",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Output will appear here as you type.",
+          "charsTemplate": "{n} chars"
+        }
+      },
+      "binary": {
+        "name": "Binary Encoder / Decoder",
+        "description": "Convert text to its UTF-8 binary representation (8 bits per byte) — and back.",
+        "seo": {
+          "title": "Text to Binary Online — Free Binary Encoder / Decoder, No Upload",
+          "description": "Convert any text to binary (UTF-8, 8 bits per byte) and back. 100% in your browser — no upload, no signup, no tracking.",
+          "keywords": [
+            "text to binary online",
+            "binary to text online",
+            "binary converter free",
+            "string to binary",
+            "utf-8 binary converter",
+            "free binary encoder"
+          ],
+          "ogTitle": "Binary · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEncode": "Encode",
+          "modeDecode": "Decode",
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste text or a binary string…",
+          "outputLabel": "Output",
+          "separator": "Separator",
+          "sepNone": "None",
+          "sepSpace": "Space",
+          "sepDash": "Dash",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Output will appear here as you type.",
+          "errorLabel": "Error",
+          "charsTemplate": "{n} chars"
+        }
+      },
+      "morse": {
+        "name": "Morse Code Encoder / Decoder",
+        "description": "Translate text to Morse code (international) and back. Optional audio playback through your speakers.",
+        "seo": {
+          "title": "Morse Code Translator Online — Free Encode & Decode + Audio",
+          "description": "Convert text to international Morse code and back, with optional audio playback. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "morse code translator online",
+            "morse code encoder",
+            "morse code decoder",
+            "morse code audio online",
+            "free morse code converter",
+            "international morse online"
+          ],
+          "ogTitle": "Morse · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEncode": "Encode",
+          "modeDecode": "Decode",
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste text or Morse code…",
+          "outputLabel": "Output",
+          "play": "Play",
+          "stop": "Stop",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Output will appear here as you type.",
+          "charsTemplate": "{n} chars"
+        }
       }
     },
     "color": {
@@ -1875,6 +2611,130 @@
           "copyJson": "Copy JSON",
           "busy": "Analyzing…",
           "error": "Couldn't read that image — please try another file."
+        }
+      },
+      "gradient": {
+        "name": "CSS Gradient Builder",
+        "description": "Build linear, radial or conic CSS gradients with multiple color stops, custom angle and live preview. Copy the CSS in one click.",
+        "seo": {
+          "title": "CSS Gradient Builder Online — Free Linear, Radial & Conic Generator",
+          "description": "Build beautiful CSS gradients with multiple stops, angle and type. Copy the CSS in one click. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "css gradient generator",
+            "linear gradient online",
+            "radial gradient online",
+            "conic gradient online",
+            "gradient builder free",
+            "css gradient maker"
+          ],
+          "ogTitle": "Gradient · 100% local"
+        },
+        "ui": {
+          "kind": "Type",
+          "kindLinear": "Linear",
+          "kindRadial": "Radial",
+          "kindConic": "Conic",
+          "angleLabel": "Angle",
+          "stopsLabel": "Color stops",
+          "addStop": "Add stop",
+          "removeStop": "Remove",
+          "preview": "Preview",
+          "cssLabel": "CSS",
+          "copy": "Copy",
+          "copied": "Copied",
+          "reset": "Reset"
+        }
+      },
+      "shades": {
+        "name": "Tints, Shades & Tones",
+        "description": "Generate tints (toward white), shades (toward black) and tones (toward gray) from any base color. Great for design systems.",
+        "seo": {
+          "title": "Tints & Shades Generator Online — Free Color Variations Tool",
+          "description": "Generate tints, shades and tones from any base color. Copy individual swatches or the whole palette. 100% in your browser — no upload.",
+          "keywords": [
+            "tints and shades generator",
+            "color variations online",
+            "monochromatic palette generator",
+            "design system colors",
+            "color tints generator",
+            "color shades online"
+          ],
+          "ogTitle": "Shades · 100% local"
+        },
+        "ui": {
+          "baseLabel": "Base color",
+          "mode": "Mode",
+          "modeTints": "Tints",
+          "modeShades": "Shades",
+          "modeTones": "Tones",
+          "countLabel": "Count",
+          "copyAll": "Copy all",
+          "copied": "Copied",
+          "copyOne": "Copy"
+        }
+      },
+      "blender": {
+        "name": "Color Blender",
+        "description": "Mix any two colors in RGB, HSL or OKLCH space with a ratio slider. Also generates an interpolation scale.",
+        "seo": {
+          "title": "Color Blender Online — Free RGB · HSL · OKLCH Color Mixer",
+          "description": "Mix any two colors in RGB, HSL or OKLCH space. Live preview, ratio slider, full interpolation scale. 100% in your browser — no upload.",
+          "keywords": [
+            "color blender online",
+            "color mixer rgb",
+            "color mixer hsl",
+            "oklch color mixer",
+            "color interpolation tool",
+            "blend two colors online"
+          ],
+          "ogTitle": "Color Blender · 100% local"
+        },
+        "ui": {
+          "colorALabel": "Color A",
+          "colorBLabel": "Color B",
+          "ratioLabel": "Ratio",
+          "mode": "Color space",
+          "modeRgb": "RGB",
+          "modeHsl": "HSL",
+          "modeOklch": "OKLCH",
+          "blendedLabel": "Blended",
+          "scaleLabel": "Interpolation scale",
+          "copy": "Copy",
+          "copied": "Copied",
+          "copyOne": "Copy"
+        }
+      },
+      "blindness": {
+        "name": "Color Blindness Simulator",
+        "description": "Simulate how a color or image looks to people with protanopia, deuteranopia, tritanopia or full achromatopsia.",
+        "seo": {
+          "title": "Color Blindness Simulator Online — Free Daltonism / CVD Check",
+          "description": "Check colors and images for color-vision deficiencies — protanopia, deuteranopia, tritanopia, achromatopsia. 100% in your browser — no upload.",
+          "keywords": [
+            "color blindness simulator",
+            "daltonism simulator online",
+            "deuteranopia simulator",
+            "protanopia simulator",
+            "color vision deficiency tool",
+            "accessibility color check"
+          ],
+          "ogTitle": "Color Blindness · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeColor": "Color",
+          "modeImage": "Image",
+          "colorLabel": "Color",
+          "deficiency": "Deficiency",
+          "protanopia": "Protanopia",
+          "deuteranopia": "Deuteranopia",
+          "tritanopia": "Tritanopia",
+          "achromatopsia": "Achromatopsia",
+          "empty": "Drop an image to simulate.",
+          "selectImage": "Select an image",
+          "removeImage": "Remove",
+          "originalLabel": "Original",
+          "simulatedLabel": "Simulated"
         }
       }
     },
@@ -1998,6 +2858,70 @@
           "vcardPhoneLabel": "Phone",
           "vcardUrlLabel": "Website",
           "vcardDownload": "Download .vcf"
+        }
+      },
+      "barcode-generate": {
+        "name": "Barcode Generator",
+        "description": "Generate Code 128, EAN-13 and EAN-8 barcodes as SVG. Adjust height, module width and label.",
+        "seo": {
+          "title": "Barcode Generator Online — Free Code 128, EAN-13, EAN-8 SVG",
+          "description": "Create Code 128, EAN-13 and EAN-8 barcodes as crisp SVG. Adjust height, module width and label. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "barcode generator online",
+            "code 128 generator",
+            "ean 13 generator",
+            "ean 8 generator",
+            "barcode svg generator",
+            "free barcode maker"
+          ],
+          "ogTitle": "Barcode · 100% local"
+        },
+        "ui": {
+          "format": "Format",
+          "formatCode128": "Code 128",
+          "formatEan13": "EAN-13",
+          "formatEan8": "EAN-8",
+          "valueLabel": "Value",
+          "valuePlaceholder": "Enter text or digits…",
+          "invalid": "Invalid value for the selected format.",
+          "preview": "Preview",
+          "heightLabel": "Height (px)",
+          "moduleWidthLabel": "Module width (px)",
+          "showText": "Show text under the barcode",
+          "downloadSvg": "Download SVG",
+          "copySvg": "Copy SVG",
+          "copied": "Copied"
+        }
+      },
+      "barcode-scan": {
+        "name": "Barcode Scanner",
+        "description": "Decode barcodes from an image — Code 128, EAN-13, EAN-8, ITF, Data Matrix and more. Uses the browser's native BarcodeDetector API.",
+        "seo": {
+          "title": "Barcode Scanner Online — Free Decode EAN, Code 128 from Image",
+          "description": "Decode any barcode from an image in your browser — EAN, Code 128, Code 39, ITF, Data Matrix and more. 100% local, no upload, no signup.",
+          "keywords": [
+            "barcode scanner online",
+            "decode barcode online",
+            "barcode reader image",
+            "ean reader online",
+            "code 128 reader",
+            "free barcode decoder"
+          ],
+          "ogTitle": "Barcode Scanner · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select an image",
+          "empty": "Drop a barcode image here or use the button below.",
+          "unavailable": "Your browser does not support the BarcodeDetector API. Try Chrome or Edge.",
+          "noResults": "Couldn't find a barcode in this image.",
+          "resultsLabel": "Results",
+          "formatLabel": "Format",
+          "valueLabel": "Value",
+          "copy": "Copy",
+          "copied": "Copied",
+          "removeFile": "Remove",
+          "scanning": "Scanning…",
+          "scanError": "Couldn't read that image."
         }
       }
     }

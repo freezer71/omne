@@ -430,6 +430,294 @@
           "muteLabel": "Couper le son",
           "unmuteLabel": "Activer le son"
         }
+      },
+      "merge": {
+        "name": "Fusionner des vidéos",
+        "description": "Concaténez deux vidéos ou plus en un seul fichier. Réordonnez avant de fusionner.",
+        "seo": {
+          "title": "Fusionner des vidéos en ligne — Concaténer MP4, WebM, MOV gratuitement",
+          "description": "Joignez plusieurs vidéos en une seule — réordonnez, puis fusionnez. MP4, WebM, MOV, MKV. 100% dans le navigateur — aucun upload, aucune inscription.",
+          "keywords": [
+            "fusionner vidéos en ligne",
+            "joindre vidéos en ligne gratuit",
+            "concaténer mp4",
+            "combiner vidéos en ligne",
+            "fusion vidéo sans upload",
+            "fusionner vidéos gratuit"
+          ],
+          "ogTitle": "Fusionner · 100% local"
+        },
+        "ui": {
+          "selectButton": "Ajouter des vidéos",
+          "empty": "Déposez vos vidéos ici ou utilisez le bouton ci-dessous.",
+          "mergeButton": "Fusionner",
+          "busy": "Fusion en cours…",
+          "error": "Impossible de fusionner ces vidéos.",
+          "removeFile": "Retirer",
+          "filesTemplate": "{n} vidéos sélectionnées",
+          "moveUp": "Monter",
+          "moveDown": "Descendre",
+          "needsTwo": "Ajoutez au moins deux vidéos à fusionner.",
+          "etaLabel": "Environ {remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
+        }
+      },
+      "compress": {
+        "name": "Compresser une vidéo",
+        "description": "Réduisez la taille d'une vidéo avec trois préréglages de qualité (haute / moyenne / basse).",
+        "seo": {
+          "title": "Compresser une vidéo en ligne — Réduire la taille MP4 gratuit",
+          "description": "Compressez n'importe quel MP4, WebM, MOV ou MKV avec trois préréglages — haute, moyenne, basse. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "compresser vidéo en ligne",
+            "réduire taille vidéo en ligne",
+            "compresseur vidéo gratuit",
+            "réduire mp4 en ligne",
+            "diminuer taille vidéo",
+            "compresser vidéo sans upload"
+          ],
+          "ogTitle": "Compresser · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choisir une vidéo",
+          "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
+          "compressButton": "Compresser",
+          "quality": "Qualité",
+          "qualityHigh": "Haute",
+          "qualityMedium": "Moyenne",
+          "qualityLow": "Basse",
+          "busy": "Compression…",
+          "error": "Impossible de compresser cette vidéo.",
+          "removeFile": "Retirer",
+          "etaLabel": "Environ {remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
+        }
+      },
+      "resize": {
+        "name": "Redimensionner une vidéo",
+        "description": "Modifiez la résolution d'une vidéo : 480p, 720p, 1080p ou dimensions personnalisées. Conservation du ratio possible (letterbox).",
+        "seo": {
+          "title": "Redimensionner une vidéo en ligne — 720p, 1080p, sur mesure, gratuit",
+          "description": "Redimensionnez n'importe quelle vidéo en 480p, 720p, 1080p ou sur mesure. Conservation du ratio en option. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "redimensionner vidéo en ligne",
+            "changer résolution vidéo en ligne",
+            "redimensionner vidéo 720p",
+            "redimensionner vidéo 1080p",
+            "changer taille mp4 en ligne",
+            "vidéo resize gratuit"
+          ],
+          "ogTitle": "Redimensionner · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choisir une vidéo",
+          "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
+          "resizeButton": "Redimensionner",
+          "preset": "Préréglage",
+          "preset480": "480p",
+          "preset720": "720p",
+          "preset1080": "1080p",
+          "presetCustom": "Personnalisé",
+          "widthLabel": "Largeur (px)",
+          "heightLabel": "Hauteur (px)",
+          "keepAspect": "Conserver le ratio (letterbox)",
+          "busy": "Redimensionnement…",
+          "error": "Impossible de redimensionner cette vidéo.",
+          "removeFile": "Retirer",
+          "etaLabel": "Environ {remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
+        }
+      },
+      "mute": {
+        "name": "Couper le son d'une vidéo",
+        "description": "Supprime la piste audio d'une vidéo tout en conservant la qualité originale.",
+        "seo": {
+          "title": "Couper le son d'une vidéo en ligne — Supprimer l'audio MP4, gratuit",
+          "description": "Retirez la piste audio de n'importe quelle MP4, WebM, MOV ou MKV. 100% dans le navigateur — aucun upload, aucune inscription.",
+          "keywords": [
+            "couper son vidéo en ligne",
+            "supprimer audio vidéo",
+            "vidéo sans son en ligne",
+            "vidéo muette en ligne",
+            "vidéo sans audio",
+            "mute vidéo gratuit"
+          ],
+          "ogTitle": "Couper le son · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choisir une vidéo",
+          "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
+          "muteButton": "Couper le son",
+          "busy": "Traitement…",
+          "error": "Impossible de couper le son.",
+          "removeFile": "Retirer",
+          "etaLabel": "Environ {remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
+        }
+      },
+      "crop": {
+        "name": "Recadrer une vidéo",
+        "description": "Recadrez une zone rectangulaire d'une vidéo. Ajustez position et taille avant d'exporter.",
+        "seo": {
+          "title": "Recadrer une vidéo en ligne — Rogner les bords MP4, gratuit",
+          "description": "Recadrez n'importe quelle vidéo sur une zone rectangulaire. Position et taille ajustables. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "recadrer vidéo en ligne",
+            "rogner vidéo gratuit",
+            "découper bords vidéo",
+            "recadrer mp4 en ligne",
+            "video crop sans upload",
+            "recadrer vidéo sans filigrane"
+          ],
+          "ogTitle": "Recadrer · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choisir une vidéo",
+          "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
+          "cropButton": "Recadrer",
+          "xLabel": "X (px)",
+          "yLabel": "Y (px)",
+          "widthLabel": "Largeur (px)",
+          "heightLabel": "Hauteur (px)",
+          "busy": "Recadrage…",
+          "error": "Impossible de recadrer cette vidéo.",
+          "removeFile": "Retirer",
+          "etaLabel": "Environ {remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
+        }
+      },
+      "rotate": {
+        "name": "Pivoter / Retourner une vidéo",
+        "description": "Pivotez une vidéo de 90, 180 ou 270 degrés, ou retournez-la horizontalement ou verticalement.",
+        "seo": {
+          "title": "Pivoter une vidéo en ligne — Retourner MP4 90/180/270, gratuit",
+          "description": "Pivotez n'importe quelle vidéo de 90, 180 ou 270 degrés ou retournez-la horizontalement/verticalement. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "pivoter vidéo en ligne",
+            "retourner vidéo en ligne",
+            "pivoter mp4 gratuit",
+            "pivoter vidéo 90 degrés",
+            "miroir vidéo horizontal",
+            "rotation vidéo sans upload"
+          ],
+          "ogTitle": "Pivoter · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choisir une vidéo",
+          "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
+          "rotateButton": "Appliquer",
+          "transform": "Transformation",
+          "rotate90": "Pivoter 90° horaire",
+          "rotate180": "Pivoter 180°",
+          "rotate270": "Pivoter 270° horaire",
+          "flipH": "Miroir horizontal",
+          "flipV": "Miroir vertical",
+          "busy": "Traitement…",
+          "error": "Impossible d'appliquer la transformation.",
+          "removeFile": "Retirer",
+          "etaLabel": "Environ {remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
+        }
+      },
+      "frames": {
+        "name": "Extraire les frames",
+        "description": "Exportez les frames d'une vidéo en PNG ou JPG, avec un taux d'images par seconde au choix.",
+        "seo": {
+          "title": "Extraire les frames d'une vidéo en ligne — Vidéo vers PNG/JPG, gratuit",
+          "description": "Exportez les frames d'une vidéo en PNG ou JPG, une toutes les N secondes. Téléchargement groupé en ZIP. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "extraire frames vidéo en ligne",
+            "vidéo vers png gratuit",
+            "vidéo vers jpg en ligne",
+            "extracteur de frames",
+            "captures vidéo en ligne",
+            "générateur vignettes vidéo"
+          ],
+          "ogTitle": "Frames · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choisir une vidéo",
+          "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
+          "extractButton": "Extraire",
+          "fpsLabel": "Images par seconde",
+          "formatLabel": "Format",
+          "formatPng": "PNG",
+          "formatJpg": "JPG",
+          "busy": "Extraction…",
+          "error": "Impossible d'extraire les frames.",
+          "removeFile": "Retirer",
+          "framesTemplate": "{n} frames générées",
+          "downloadZip": "Télécharger ZIP",
+          "etaLabel": "Environ {remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
+        }
+      },
+      "watermark": {
+        "name": "Filigraner une vidéo",
+        "description": "Apposez un filigrane texte sur une vidéo. Choisissez position, couleur et opacité.",
+        "seo": {
+          "title": "Ajouter un filigrane à une vidéo en ligne — Texte en superposition, gratuit",
+          "description": "Apposez un filigrane texte sur n'importe quelle vidéo. Position, couleur et opacité ajustables. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "ajouter filigrane vidéo en ligne",
+            "filigrane vidéo gratuit",
+            "texte sur vidéo",
+            "générateur filigrane vidéo",
+            "filigraner mp4 en ligne",
+            "outil filigrane vidéo gratuit"
+          ],
+          "ogTitle": "Filigrane · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choisir une vidéo",
+          "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
+          "watermarkButton": "Appliquer",
+          "textLabel": "Texte du filigrane",
+          "textPlaceholder": "Votre filigrane…",
+          "position": "Position",
+          "posTopLeft": "Haut gauche",
+          "posTopRight": "Haut droit",
+          "posBottomLeft": "Bas gauche",
+          "posBottomRight": "Bas droit",
+          "posCenter": "Centre",
+          "fontSizeLabel": "Taille de police",
+          "opacityLabel": "Opacité",
+          "busy": "Traitement…",
+          "error": "Impossible d'appliquer le filigrane.",
+          "removeFile": "Retirer",
+          "etaLabel": "Environ {remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
+        }
+      },
+      "speed": {
+        "name": "Changer la vitesse d'une vidéo",
+        "description": "Accélérez ou ralentissez une vidéo de 0.25× à 4×, en conservant la hauteur de l'audio.",
+        "seo": {
+          "title": "Changer la vitesse d'une vidéo en ligne — Ralenti & accéléré, gratuit",
+          "description": "Accélérez ou ralentissez n'importe quelle vidéo de 0.25× à 4×. 100% dans le navigateur — aucun upload, aucune inscription, aucun filigrane.",
+          "keywords": [
+            "changer vitesse vidéo en ligne",
+            "ralenti vidéo en ligne",
+            "accélérer vidéo en ligne",
+            "vitesse de lecture vidéo gratuit",
+            "avance rapide vidéo",
+            "ralentir mp4 en ligne"
+          ],
+          "ogTitle": "Vitesse · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choisir une vidéo",
+          "empty": "Déposez une vidéo ici ou utilisez le bouton ci-dessous.",
+          "speedButton": "Appliquer",
+          "speedLabel": "Vitesse (×)",
+          "keepAudio": "Conserver l'audio",
+          "muteAudio": "Couper l'audio",
+          "busy": "Traitement…",
+          "error": "Impossible de changer la vitesse.",
+          "removeFile": "Retirer",
+          "etaLabel": "Environ {remaining} restant",
+          "etaCalculating": "Estimation du temps restant…"
+        }
       }
     },
     "audio": {
@@ -1640,6 +1928,308 @@
           "download": "Télécharger",
           "empty": "Choisissez un type et une quantité pour générer du texte."
         }
+      },
+      "diff": {
+        "name": "Diff de texte",
+        "description": "Comparez deux textes côte à côte. Diff ligne par ligne, mot par mot ou caractère par caractère, avec ajouts et suppressions surlignés.",
+        "seo": {
+          "title": "Diff de texte en ligne — Comparer deux textes gratuitement, côte à côte",
+          "description": "Comparez deux textes ligne par ligne, mot à mot ou caractère par caractère. Ajouts et suppressions surlignés. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "diff texte en ligne",
+            "comparer deux textes en ligne",
+            "outil comparaison texte",
+            "diff checker gratuit",
+            "comparer textes côte à côte",
+            "diff sans upload"
+          ],
+          "ogTitle": "Diff de texte · 100% local"
+        },
+        "ui": {
+          "leftLabel": "Original",
+          "rightLabel": "Modifié",
+          "leftPlaceholder": "Collez le texte original…",
+          "rightPlaceholder": "Collez le texte modifié…",
+          "mode": "Mode",
+          "modeLine": "Ligne",
+          "modeWord": "Mot",
+          "modeChar": "Caractère",
+          "statsAdditions": "{n} ajouts",
+          "statsDeletions": "{n} suppressions",
+          "statsUnchanged": "{n} inchangés",
+          "showUnchanged": "Afficher les lignes inchangées",
+          "swap": "Inverser",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "download": "Télécharger le patch",
+          "empty": "Collez deux textes pour les comparer."
+        }
+      },
+      "regex": {
+        "name": "Testeur de regex",
+        "description": "Testez des expressions régulières JavaScript en direct avec coloration des correspondances, groupes de capture, groupes nommés et recherche/remplacement.",
+        "seo": {
+          "title": "Testeur regex en ligne — Tester JavaScript RegExp, gratuit",
+          "description": "Construisez et testez vos expressions régulières JavaScript avec surlignage en direct, groupes de capture et aperçu du remplacement. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "testeur regex en ligne",
+            "regex tester javascript",
+            "expression régulière en ligne",
+            "regex match coloration",
+            "regex remplacer outil",
+            "constructeur regex gratuit"
+          ],
+          "ogTitle": "Regex · 100% local"
+        },
+        "ui": {
+          "patternLabel": "Motif",
+          "patternPlaceholder": "Entrez une expression régulière…",
+          "flagsLabel": "Drapeaux",
+          "flagGlobal": "global",
+          "flagCaseInsensitive": "insensible à la casse",
+          "flagMultiline": "multiligne",
+          "flagDotAll": "dotAll",
+          "flagUnicode": "unicode",
+          "flagSticky": "sticky",
+          "inputLabel": "Texte",
+          "inputPlaceholder": "Collez le texte à tester…",
+          "replacementLabel": "Remplacement ($1, $2, $<nom>)",
+          "replacementPlaceholder": "Chaîne de remplacement (optionnel)…",
+          "matchesLabel": "Correspondances",
+          "resultLabel": "Texte remplacé",
+          "matchesTemplate": "{n} correspondance",
+          "errorLabel": "Erreur de motif",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "Saisissez un motif et un texte pour voir les correspondances.",
+          "noMatches": "Aucune correspondance dans le texte actuel."
+        }
+      },
+      "slugify": {
+        "name": "Slugify",
+        "description": "Convertit n'importe quel texte en slug URL — retire les accents, fusionne les séparateurs, met en minuscules. Séparateur tiret, souligné ou point au choix.",
+        "seo": {
+          "title": "Slugify en ligne — Générateur de slug URL gratuit avec suppression d'accents",
+          "description": "Transformez titres ou phrases en slugs URL. Supprime les accents, met en minuscules, fusionne les séparateurs. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "slugify en ligne",
+            "générateur slug url",
+            "générateur permalien",
+            "outil slug seo",
+            "supprimer accents url",
+            "slug kebab case"
+          ],
+          "ogTitle": "Slugify · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez un titre ou une phrase…",
+          "outputLabel": "Slug",
+          "separator": "Séparateur",
+          "separatorHyphen": "Tiret",
+          "separatorUnderscore": "Souligné",
+          "separatorDot": "Point",
+          "lowercase": "Minuscules",
+          "removeDiacritics": "Retirer les accents",
+          "collapse": "Fusionner les séparateurs",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "Le slug s'affichera ici au fur et à mesure.",
+          "charsTemplate": "{n} car."
+        }
+      },
+      "sort-lines": {
+        "name": "Trier les lignes",
+        "description": "Triez les lignes par ordre alphabétique, naturel, numérique, par longueur, en sens inverse ou aléatoire. Options pour rogner, dédupliquer et supprimer les lignes vides.",
+        "seo": {
+          "title": "Trier les lignes en ligne — Tri alphabétique, numérique, naturel gratuit",
+          "description": "Triez n'importe quelle liste de lignes par ordre alphabétique, numérique, par longueur, inverse ou aléatoire. Déduplication, rognage, suppression des vides. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "trier lignes en ligne",
+            "trier texte alphabétiquement",
+            "tri naturel en ligne",
+            "dédupliquer lignes en ligne",
+            "mélanger lignes outil",
+            "tri numérique lignes"
+          ],
+          "ogTitle": "Trier · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Un élément par ligne…",
+          "outputLabel": "Trié",
+          "mode": "Mode",
+          "modeAlpha": "Alphabétique",
+          "modeNatural": "Naturel",
+          "modeNumeric": "Numérique",
+          "modeLength": "Longueur",
+          "modeReverse": "Inverse",
+          "modeShuffle": "Aléatoire",
+          "order": "Ordre",
+          "orderAsc": "Croissant",
+          "orderDesc": "Décroissant",
+          "caseSensitive": "Sensible à la casse",
+          "trim": "Rogner chaque ligne",
+          "removeEmpty": "Supprimer les lignes vides",
+          "removeDuplicates": "Retirer les doublons",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "Collez quelques lignes pour les trier.",
+          "linesTemplate": "{n} lignes"
+        }
+      },
+      "escape": {
+        "name": "Échapper / Désechapper",
+        "description": "Échappez ou désechappez des chaînes pour HTML, XML, JavaScript et JSON — gère les entités, les échappements unicode et les caractères spéciaux.",
+        "seo": {
+          "title": "Échapper en ligne — HTML, XML, JavaScript et JSON, gratuit",
+          "description": "Échappez ou désechappez des chaînes pour HTML, XML, JavaScript et JSON. Entités nommées, références numériques, échappements unicode. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "échapper html en ligne",
+            "échapper chaîne javascript",
+            "échapper json en ligne",
+            "échapper xml outil",
+            "décoder entités html",
+            "convertisseur échappement unicode"
+          ],
+          "ogTitle": "Échapper · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEscape": "Échapper",
+          "modeUnescape": "Désechapper",
+          "kind": "Cible",
+          "kindHtml": "HTML",
+          "kindJs": "JavaScript",
+          "kindJson": "JSON",
+          "kindXml": "XML",
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez le texte à échapper ou désechapper…",
+          "outputLabel": "Sortie",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "La sortie s'affichera ici au fur et à mesure.",
+          "charsTemplate": "{n} car."
+        }
+      },
+      "whitespace": {
+        "name": "Nettoyeur d'espaces",
+        "description": "Nettoyez les espaces blancs : rogner les lignes, fusionner les espaces, supprimer les lignes vides, convertir les tabulations et normaliser CRLF / LF.",
+        "seo": {
+          "title": "Nettoyeur d'espaces en ligne — Rogner, fusionner espaces, normaliser sauts de ligne, gratuit",
+          "description": "Rognez les espaces de fin, fusionnez les espaces multiples, supprimez les lignes vides, convertissez les tabs et normalisez CRLF/LF/CR. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "nettoyer espaces en ligne",
+            "rogner espaces outil",
+            "supprimer lignes vides",
+            "normaliser sauts de ligne",
+            "convertisseur crlf lf",
+            "tabulations en espaces en ligne"
+          ],
+          "ogTitle": "Espaces · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez le texte à nettoyer…",
+          "outputLabel": "Nettoyé",
+          "trimLines": "Rogner chaque ligne",
+          "collapseSpaces": "Fusionner les espaces multiples",
+          "removeBlankLines": "Supprimer les lignes vides",
+          "trimDocument": "Rogner début/fin du document",
+          "removeTrailingSpaces": "Supprimer les espaces de fin",
+          "lineEndings": "Sauts de ligne",
+          "endingsUnix": "LF (Unix)",
+          "endingsWindows": "CRLF (Windows)",
+          "endingsMac": "CR (Mac classique)",
+          "endingsKeep": "Conserver tels quels",
+          "tabsToSpaces": "Tabs → espaces (0 = conserver)",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "La sortie s'affichera ici au fur et à mesure.",
+          "charsTemplate": "{n} car."
+        }
+      },
+      "markdown": {
+        "name": "Aperçu Markdown",
+        "description": "Aperçu Markdown en direct avec éditeur côte à côte. Supporte titres, listes, liens, blocs de code, emphase, citations et tableaux.",
+        "seo": {
+          "title": "Aperçu Markdown en ligne — Éditeur live & export HTML, gratuit",
+          "description": "Écrivez du Markdown et voyez le HTML rendu côte à côte. Titres, listes, liens, code, tableaux, emphase et citations. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "aperçu markdown en ligne",
+            "éditeur markdown en ligne",
+            "markdown vers html",
+            "markdown live",
+            "convertisseur md vers html",
+            "visualiseur markdown gratuit"
+          ],
+          "ogTitle": "Markdown · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Markdown",
+          "inputPlaceholder": "Écrivez du Markdown…",
+          "previewLabel": "Aperçu",
+          "htmlLabel": "HTML généré",
+          "showHtml": "Voir le HTML",
+          "showPreview": "Voir l'aperçu",
+          "copyHtml": "Copier HTML",
+          "copied": "Copié",
+          "download": "Télécharger HTML",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "L'aperçu s'affichera ici au fur et à mesure."
+        }
+      },
+      "find-replace": {
+        "name": "Rechercher & Remplacer",
+        "description": "Recherchez et remplacez dans un texte — mode littéral ou expression régulière, sensibilité à la casse, mot entier, avec aperçu live et compteur de correspondances.",
+        "seo": {
+          "title": "Rechercher et remplacer en ligne — Recherche & remplacement texte avec regex, gratuit",
+          "description": "Recherchez et remplacez dans n'importe quel texte. Mode littéral ou regex, sensible à la casse, mot entier, remplacer tout ou un par un. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "rechercher remplacer en ligne",
+            "outil rechercher remplacer texte",
+            "search and replace texte",
+            "regex remplacer en ligne",
+            "éditeur texte remplacer gratuit",
+            "rechercher remplacer sans upload"
+          ],
+          "ogTitle": "Rechercher / Remplacer · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez le texte à parcourir…",
+          "outputLabel": "Résultat",
+          "findLabel": "Rechercher",
+          "findPlaceholder": "Texte ou motif…",
+          "replaceLabel": "Remplacer par",
+          "replacePlaceholder": "Texte de remplacement…",
+          "regex": "Regex",
+          "caseSensitive": "Sensible à la casse",
+          "wholeWord": "Mot entier",
+          "matchesTemplate": "{n} correspondances",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "Le résultat s'affichera ici au fur et à mesure."
+        }
       }
     },
     "encode": {
@@ -1764,6 +2354,152 @@
           "claimNbf": "nbf : {date}",
           "dateTemplate": "{date}"
         }
+      },
+      "hex": {
+        "name": "Encodeur / décodeur Hex",
+        "description": "Encodez du texte en hex (séquence UTF-8) ou décodez une chaîne hex vers du texte. Séparateur et casse au choix.",
+        "seo": {
+          "title": "Encodeur / Décodeur Hex en ligne — Texte ↔ Hex, gratuit",
+          "description": "Convertissez du texte en hex (UTF-8) et inversement. Choisissez le séparateur et la casse. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "encodeur hex en ligne",
+            "décodeur hex en ligne",
+            "convertir texte en hex",
+            "convertir hex en texte",
+            "chaîne vers hex en ligne",
+            "encodeur hex gratuit"
+          ],
+          "ogTitle": "Hex · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEncode": "Encoder",
+          "modeDecode": "Décoder",
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez du texte ou une chaîne hex…",
+          "outputLabel": "Sortie",
+          "separator": "Séparateur",
+          "sepNone": "Aucun",
+          "sepSpace": "Espace",
+          "sepDash": "Tiret",
+          "sepColon": "Deux-points",
+          "uppercase": "Majuscules",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "La sortie s'affichera ici au fur et à mesure.",
+          "errorLabel": "Erreur",
+          "charsTemplate": "{n} car."
+        }
+      },
+      "html-entities": {
+        "name": "Encodeur / décodeur d'entités HTML",
+        "description": "Encodez les caractères spéciaux en entités HTML (nommées, numériques ou hex) ou décodez les entités vers leurs caractères.",
+        "seo": {
+          "title": "Entités HTML en ligne — Encodeur / Décodeur gratuit, sans upload",
+          "description": "Convertissez n'importe quel caractère en son entité HTML (nommée, numérique ou hex) et décodez les entités. Accents, symboles et emoji. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "encodeur entités html",
+            "décodeur entités html",
+            "décoder entités html en ligne",
+            "encoder caractères spéciaux html",
+            "entités nommées vers caractères",
+            "outil entités html gratuit"
+          ],
+          "ogTitle": "Entités HTML · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEncode": "Encoder",
+          "modeDecode": "Décoder",
+          "format": "Format",
+          "formatNamed": "Nommé (&amp;)",
+          "formatNumeric": "Numérique (&#38;)",
+          "formatHex": "Hex (&#x26;)",
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez caractères ou entités…",
+          "outputLabel": "Sortie",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "La sortie s'affichera ici au fur et à mesure.",
+          "charsTemplate": "{n} car."
+        }
+      },
+      "binary": {
+        "name": "Encodeur / décodeur binaire",
+        "description": "Convertit du texte en représentation binaire UTF-8 (8 bits par octet) — et inversement.",
+        "seo": {
+          "title": "Texte vers binaire en ligne — Encodeur / Décodeur binaire, gratuit",
+          "description": "Convertissez n'importe quel texte en binaire (UTF-8, 8 bits par octet) et inversement. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "texte vers binaire en ligne",
+            "binaire vers texte en ligne",
+            "convertisseur binaire gratuit",
+            "chaîne vers binaire",
+            "convertisseur binaire utf-8",
+            "encodeur binaire gratuit"
+          ],
+          "ogTitle": "Binaire · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEncode": "Encoder",
+          "modeDecode": "Décoder",
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez du texte ou une chaîne binaire…",
+          "outputLabel": "Sortie",
+          "separator": "Séparateur",
+          "sepNone": "Aucun",
+          "sepSpace": "Espace",
+          "sepDash": "Tiret",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "La sortie s'affichera ici au fur et à mesure.",
+          "errorLabel": "Erreur",
+          "charsTemplate": "{n} car."
+        }
+      },
+      "morse": {
+        "name": "Encodeur / décodeur Morse",
+        "description": "Traduisez du texte en code Morse international et inversement. Lecture audio optionnelle via les haut-parleurs.",
+        "seo": {
+          "title": "Traducteur Morse en ligne — Encoder / Décoder + audio, gratuit",
+          "description": "Convertissez du texte en code Morse international et inversement, avec lecture audio. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "traducteur code morse en ligne",
+            "encodeur code morse",
+            "décodeur code morse",
+            "code morse audio en ligne",
+            "convertisseur morse gratuit",
+            "morse international en ligne"
+          ],
+          "ogTitle": "Morse · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeEncode": "Encoder",
+          "modeDecode": "Décoder",
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez du texte ou du code Morse…",
+          "outputLabel": "Sortie",
+          "play": "Lire",
+          "stop": "Arrêter",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "La sortie s'affichera ici au fur et à mesure.",
+          "charsTemplate": "{n} car."
+        }
       }
     },
     "color": {
@@ -1875,6 +2611,130 @@
           "copyJson": "Copier JSON",
           "busy": "Analyse…",
           "error": "Impossible de lire cette image — essayez un autre fichier."
+        }
+      },
+      "gradient": {
+        "name": "Générateur de dégradé CSS",
+        "description": "Créez des dégradés CSS linéaires, radiaux ou coniques avec plusieurs points de couleur, angle personnalisé et aperçu en direct. CSS copiable en un clic.",
+        "seo": {
+          "title": "Générateur de dégradé CSS en ligne — Linéaire, radial, conique, gratuit",
+          "description": "Construisez de beaux dégradés CSS avec plusieurs stops, angle et type. CSS copiable en un clic. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "générateur dégradé css",
+            "dégradé linéaire en ligne",
+            "dégradé radial en ligne",
+            "dégradé conique en ligne",
+            "constructeur dégradé gratuit",
+            "css gradient builder fr"
+          ],
+          "ogTitle": "Dégradé · 100% local"
+        },
+        "ui": {
+          "kind": "Type",
+          "kindLinear": "Linéaire",
+          "kindRadial": "Radial",
+          "kindConic": "Conique",
+          "angleLabel": "Angle",
+          "stopsLabel": "Points de couleur",
+          "addStop": "Ajouter un stop",
+          "removeStop": "Retirer",
+          "preview": "Aperçu",
+          "cssLabel": "CSS",
+          "copy": "Copier",
+          "copied": "Copié",
+          "reset": "Réinitialiser"
+        }
+      },
+      "shades": {
+        "name": "Teintes, nuances et tons",
+        "description": "Générez teintes (vers blanc), nuances (vers noir) et tons (vers gris) à partir d'une couleur de base. Idéal pour les design systems.",
+        "seo": {
+          "title": "Générateur de teintes & nuances en ligne — Variations de couleur, gratuit",
+          "description": "Générez teintes, nuances et tons à partir d'une couleur de base. Copiez les swatches ou la palette entière. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "générateur teintes et nuances",
+            "variations de couleur en ligne",
+            "palette monochromatique en ligne",
+            "couleurs design system",
+            "générateur teintes",
+            "nuances de couleur en ligne"
+          ],
+          "ogTitle": "Nuances · 100% local"
+        },
+        "ui": {
+          "baseLabel": "Couleur de base",
+          "mode": "Mode",
+          "modeTints": "Teintes",
+          "modeShades": "Nuances",
+          "modeTones": "Tons",
+          "countLabel": "Nombre",
+          "copyAll": "Tout copier",
+          "copied": "Copié",
+          "copyOne": "Copier"
+        }
+      },
+      "blender": {
+        "name": "Mélangeur de couleurs",
+        "description": "Mélangez deux couleurs dans l'espace RGB, HSL ou OKLCH avec un curseur de ratio. Génère également une échelle d'interpolation.",
+        "seo": {
+          "title": "Mélangeur de couleurs en ligne — RGB · HSL · OKLCH, gratuit",
+          "description": "Mélangez deux couleurs en RGB, HSL ou OKLCH. Aperçu live, curseur de ratio, échelle d'interpolation complète. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "mélangeur de couleurs en ligne",
+            "color mixer rgb fr",
+            "color mixer hsl fr",
+            "mélangeur couleur oklch",
+            "interpolation couleur outil",
+            "mélanger deux couleurs en ligne"
+          ],
+          "ogTitle": "Mélangeur · 100% local"
+        },
+        "ui": {
+          "colorALabel": "Couleur A",
+          "colorBLabel": "Couleur B",
+          "ratioLabel": "Ratio",
+          "mode": "Espace colorimétrique",
+          "modeRgb": "RGB",
+          "modeHsl": "HSL",
+          "modeOklch": "OKLCH",
+          "blendedLabel": "Mélange",
+          "scaleLabel": "Échelle d'interpolation",
+          "copy": "Copier",
+          "copied": "Copié",
+          "copyOne": "Copier"
+        }
+      },
+      "blindness": {
+        "name": "Simulateur de daltonisme",
+        "description": "Simulez comment une couleur ou une image est perçue par les personnes daltoniennes — protanopie, deutéranopie, tritanopie, achromatopsie.",
+        "seo": {
+          "title": "Simulateur de daltonisme en ligne — Vérifier l'accessibilité, gratuit",
+          "description": "Vérifiez couleurs et images face aux déficiences visuelles — protanopie, deutéranopie, tritanopie, achromatopsie. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "simulateur daltonisme en ligne",
+            "deutéranopie simulateur",
+            "protanopie simulateur",
+            "tritanopie simulateur",
+            "outil déficience visuelle couleur",
+            "vérifier accessibilité couleurs"
+          ],
+          "ogTitle": "Daltonisme · 100% local"
+        },
+        "ui": {
+          "mode": "Mode",
+          "modeColor": "Couleur",
+          "modeImage": "Image",
+          "colorLabel": "Couleur",
+          "deficiency": "Déficience",
+          "protanopia": "Protanopie",
+          "deuteranopia": "Deutéranopie",
+          "tritanopia": "Tritanopie",
+          "achromatopsia": "Achromatopsie",
+          "empty": "Déposez une image pour simuler.",
+          "selectImage": "Choisir une image",
+          "removeImage": "Retirer",
+          "originalLabel": "Original",
+          "simulatedLabel": "Simulé"
         }
       }
     },
@@ -1998,6 +2858,70 @@
           "vcardPhoneLabel": "Téléphone",
           "vcardUrlLabel": "Site web",
           "vcardDownload": "Télécharger .vcf"
+        }
+      },
+      "barcode-generate": {
+        "name": "Générateur de code-barres",
+        "description": "Générez des codes-barres Code 128, EAN-13 et EAN-8 en SVG. Ajustez hauteur, largeur de module et libellé.",
+        "seo": {
+          "title": "Générateur de code-barres en ligne — Code 128, EAN-13, EAN-8 SVG, gratuit",
+          "description": "Créez des codes-barres Code 128, EAN-13 et EAN-8 en SVG net. Hauteur, largeur de module et libellé ajustables. 100% dans le navigateur — aucun upload.",
+          "keywords": [
+            "générateur code-barres en ligne",
+            "générateur code 128",
+            "générateur ean 13",
+            "générateur ean 8",
+            "générateur code-barres svg",
+            "code-barres gratuit"
+          ],
+          "ogTitle": "Code-barres · 100% local"
+        },
+        "ui": {
+          "format": "Format",
+          "formatCode128": "Code 128",
+          "formatEan13": "EAN-13",
+          "formatEan8": "EAN-8",
+          "valueLabel": "Valeur",
+          "valuePlaceholder": "Saisissez du texte ou des chiffres…",
+          "invalid": "Valeur invalide pour le format sélectionné.",
+          "preview": "Aperçu",
+          "heightLabel": "Hauteur (px)",
+          "moduleWidthLabel": "Largeur de module (px)",
+          "showText": "Afficher le texte sous le code-barres",
+          "downloadSvg": "Télécharger SVG",
+          "copySvg": "Copier SVG",
+          "copied": "Copié"
+        }
+      },
+      "barcode-scan": {
+        "name": "Lecteur de code-barres",
+        "description": "Décodez les codes-barres depuis une image — Code 128, EAN-13, EAN-8, ITF, Data Matrix et plus. Utilise l'API native BarcodeDetector du navigateur.",
+        "seo": {
+          "title": "Lecteur de code-barres en ligne — Décoder EAN, Code 128 depuis image, gratuit",
+          "description": "Décodez n'importe quel code-barres depuis une image dans votre navigateur — EAN, Code 128, Code 39, ITF, Data Matrix et plus. 100% local, aucun upload.",
+          "keywords": [
+            "lecteur code-barres en ligne",
+            "décoder code-barres en ligne",
+            "lecteur code-barres image",
+            "lecteur ean en ligne",
+            "lecteur code 128",
+            "décodeur code-barres gratuit"
+          ],
+          "ogTitle": "Lecteur code-barres · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choisir une image",
+          "empty": "Déposez ici une image de code-barres ou utilisez le bouton ci-dessous.",
+          "unavailable": "Votre navigateur ne supporte pas l'API BarcodeDetector. Essayez Chrome ou Edge.",
+          "noResults": "Aucun code-barres trouvé dans cette image.",
+          "resultsLabel": "Résultats",
+          "formatLabel": "Format",
+          "valueLabel": "Valeur",
+          "copy": "Copier",
+          "copied": "Copié",
+          "removeFile": "Retirer",
+          "scanning": "Lecture…",
+          "scanError": "Impossible de lire cette image."
         }
       }
     }

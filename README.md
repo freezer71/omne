@@ -14,7 +14,7 @@
 
 ---
 
-**omne** is a collection of 50+ online tools — PDF, video, audio, image, SVG, passwords, JSON, text, encoding, QR codes, colors — that run **entirely client-side**. No backend, no analytics, no third-party CDN, no cookies. Your files never leave the tab.
+**omne** is a collection of 75+ online tools — PDF, video, audio, image, SVG, passwords, JSON, text, encoding, QR codes, colors — that run **entirely client-side**. No backend, no analytics, no third-party CDN, no cookies. Your files never leave the tab.
 
 Bilingual **English / French**, light / dark mode, `⌘K` command palette.
 
@@ -70,16 +70,16 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | Category | Tools |
 |----------|-------|
 | **PDF** | Merge · Split · Rotate · Watermark · PDF → images · Extract images · Images → PDF |
-| **Video** | Convert (MP4 / WebM / GIF) · Trim |
+| **Video** | Convert (MP4 / WebM / GIF) · Trim · Merge · Compress · Resize · Mute · Crop · Rotate / flip · Extract frames · Watermark · Speed |
 | **Audio** | Convert · Extract (from video) · Trim · Merge · Volume / normalize / fades · ID3 tags |
 | **Image** | Convert · Compress · Resize · Crop · Rotate / flip · Remove background (local AI, *beta*) |
 | **SVG** | Viewer · Editor · Optimize (SVGO) · → PNG / JPG / WebP · → Data URL · Favicon generator |
 | **Password** | Generate · Passphrase (Diceware) · Hash (SHA) · bcrypt · Strength meter |
 | **JSON** | Format · Tree · JSONPath · Table · CSV ↔ JSON · Diff · Schema (AJV) |
-| **Text** | Case · Counter · Lorem Ipsum |
-| **Encoding** | Base64 · URL · JWT |
-| **QR** | Generate (WiFi, vCard…) · Scan (camera or image) |
-| **Color** | Converter (hex / rgb / hsl / oklch) · WCAG contrast · Palette from image |
+| **Text** | Case · Counter · Lorem Ipsum · Diff · Regex tester · Slugify · Sort lines · Escape/Unescape · Whitespace cleaner · Markdown preview · Find & Replace |
+| **Encoding** | Base64 · URL · JWT · Hex · HTML entities · Binary · Morse code |
+| **QR** | Generate (WiFi, vCard…) · Scan (camera or image) · Barcode generate (Code 128 / EAN) · Barcode scan |
+| **Color** | Converter (hex / rgb / hsl / oklch) · WCAG contrast · Palette from image · Gradient builder · Tints & shades · Blender · Color-blindness simulator |
 
 Source of truth: [`lib/tools/registry.ts`](./lib/tools/registry.ts). The sitemap, the home page cards and MIME-based drop routing all derive from it.
 

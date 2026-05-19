@@ -3,7 +3,7 @@ import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/regis
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(50);
+    expect(TOOLS).toHaveLength(77);
   });
 
   it('exposes the 6 audio tools', () => {
@@ -16,24 +16,27 @@ describe('TOOLS registry', () => {
     expect(svg).toEqual(['editor', 'favicon', 'optimize', 'to-data-url', 'to-png', 'viewer']);
   });
 
-  it('exposes the 3 Text tools', () => {
+  it('exposes the 11 Text tools', () => {
     const text = TOOLS.filter((t) => t.category === 'text').map((t) => t.id).sort();
-    expect(text).toEqual(['case', 'count', 'lorem']);
+    expect(text).toEqual([
+      'case', 'count', 'diff', 'escape', 'find-replace', 'lorem',
+      'markdown', 'regex', 'slugify', 'sort-lines', 'whitespace',
+    ]);
   });
 
-  it('exposes the 3 Encode tools', () => {
+  it('exposes the 7 Encode tools', () => {
     const encode = TOOLS.filter((t) => t.category === 'encode').map((t) => t.id).sort();
-    expect(encode).toEqual(['base64', 'jwt', 'url']);
+    expect(encode).toEqual(['base64', 'binary', 'hex', 'html-entities', 'jwt', 'morse', 'url']);
   });
 
-  it('exposes the 3 Color tools', () => {
+  it('exposes the 7 Color tools', () => {
     const color = TOOLS.filter((t) => t.category === 'color').map((t) => t.id).sort();
-    expect(color).toEqual(['contrast', 'convert', 'palette']);
+    expect(color).toEqual(['blender', 'blindness', 'contrast', 'convert', 'gradient', 'palette', 'shades']);
   });
 
-  it('exposes the 2 QR tools', () => {
+  it('exposes the 4 QR tools', () => {
     const qr = TOOLS.filter((t) => t.category === 'qr').map((t) => t.id).sort();
-    expect(qr).toEqual(['generate', 'scan']);
+    expect(qr).toEqual(['barcode-generate', 'barcode-scan', 'generate', 'scan']);
   });
 
   it('exposes the 7 JSON tools', () => {
@@ -51,9 +54,12 @@ describe('TOOLS registry', () => {
     expect(pdf).toEqual(['extract-images', 'from-images', 'merge', 'rotate', 'split', 'to-images', 'watermark']);
   });
 
-  it('exposes the 2 video tools', () => {
+  it('exposes the 11 video tools', () => {
     const video = TOOLS.filter((t) => t.category === 'video').map((t) => t.id).sort();
-    expect(video).toEqual(['convert', 'trim']);
+    expect(video).toEqual([
+      'compress', 'convert', 'crop', 'frames', 'merge', 'mute',
+      'resize', 'rotate', 'speed', 'trim', 'watermark',
+    ]);
   });
 
   it('exposes the 6 image tools', () => {
@@ -112,7 +118,7 @@ describe('toolsByCategory', () => {
   it('groups tools by category', () => {
     const grouped = toolsByCategory();
     expect(grouped.pdf?.length).toBe(7);
-    expect(grouped.video?.length).toBe(2);
+    expect(grouped.video?.length).toBe(11);
     expect(grouped.image?.length).toBe(6);
   });
 });
