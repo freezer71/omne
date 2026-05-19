@@ -219,12 +219,14 @@ describe('generateShorts', () => {
     expect(vf).toContain('drawtext=');
   });
 
-  it('re-encodes video and copies audio (mpeg4 + audio copy)', async () => {
+  it('re-encodes video with libx264 ultrafast and copies audio', async () => {
     const file = new File([new Uint8Array([0])], 'movie.mp4', { type: 'video/mp4' });
     await generateShorts(file, { mode: 'parts', parts: 2, totalDuration: 10, ...defaults });
     const args = execMock.mock.calls[0]![0] as string[];
     expect(args).toContain('-c:v');
-    expect(args[args.indexOf('-c:v') + 1]).toBe('mpeg4');
+    expect(args[args.indexOf('-c:v') + 1]).toBe('libx264');
+    expect(args).toContain('-preset');
+    expect(args[args.indexOf('-preset') + 1]).toBe('ultrafast');
     expect(args).toContain('-c:a');
     expect(args[args.indexOf('-c:a') + 1]).toBe('copy');
   });

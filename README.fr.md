@@ -40,6 +40,7 @@ C'est la raison d'être du projet, pas un argument marketing :
 
 - Chaque conversion s'exécute dans le navigateur via Web APIs, WebAssembly et Web Workers.
 - `@ffmpeg/ffmpeg` (vidéo, audio) et `pdfjs-dist` (PDF) sont **auto-hébergés** sous `/public/ffmpeg/` et `/public/pdfjs/` — l'onglet Réseau de DevTools doit afficher **zéro** trafic sortant pendant un traitement.
+- L'app sert `Cross-Origin-Opener-Policy: same-origin` et `Cross-Origin-Embedder-Policy: require-corp` pour activer `SharedArrayBuffer` (requis par le build ffmpeg multi-thread). Comme tous les assets sont same-origin, ces en-têtes renforcent la page sans rien casser.
 - Aucun service externe : pas de Sentry, pas de Google Analytics, pas de pixel, pas de CDN d'assets.
 
 Toute contribution qui casserait cette promesse (traitement serveur, télémétrie, ressource distante) sort du périmètre.
@@ -90,7 +91,7 @@ Source de vérité : [`lib/tools/registry.ts`](./lib/tools/registry.ts). Le site
 - **[Next.js 16](https://nextjs.org)** (App Router) + **React 19**
 - **TypeScript** strict
 - **Tailwind v4** — configuration CSS-first (pas de `tailwind.config.js`), tokens dans `@theme inline` de `app/globals.css`
-- **[@ffmpeg/ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm)** pour la vidéo et l'audio
+- **[@ffmpeg/ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm)** pour la vidéo et l'audio — **build multi-thread (`@ffmpeg/core-mt`)** pour paralléliser sur tous les cœurs CPU
 - **[pdf-lib](https://pdf-lib.js.org/)** + **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** pour les PDF
 - **[@huggingface/transformers](https://huggingface.co/docs/transformers.js)** pour le détourage d'image (modèle ONNX local)
 - **[SVGO](https://github.com/svg/svgo)** pour l'optimisation SVG

@@ -213,7 +213,7 @@ export async function generateShorts(
           '-i', inputName,
           '-t', String(duration),
           '-vf', vf,
-          '-c:v', 'mpeg4', '-q:v', '5',
+          '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '23',
           '-c:a', 'copy',
           outName,
         ]);

@@ -106,8 +106,10 @@ export function VideoConvertTool(messages: Messages) {
       const blob = new Blob([new Uint8Array(bytes)], { type: MIME_BY_FORMAT[format] });
       const name = outputName('converted', [file!.name], format);
       downloadBlob(blob, name);
-    } catch (_err) {
-      setError(messages.error);
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : String(err);
+      setError(`${messages.error} — ${detail}`);
+      console.error('[video-convert]', err);
     } finally {
       setBusy(false);
       setStartedAt(null);

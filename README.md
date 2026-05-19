@@ -40,6 +40,7 @@ This is the reason the project exists, not a marketing line:
 
 - Every conversion runs in the browser via Web APIs, WebAssembly and Web Workers.
 - `@ffmpeg/ffmpeg` (video, audio) and `pdfjs-dist` (PDF) are **self-hosted** under `/public/ffmpeg/` and `/public/pdfjs/` — the DevTools Network tab must show **zero** outbound traffic during processing.
+- The app serves `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp` to enable `SharedArrayBuffer` (required by the multi-thread ffmpeg build). Because every asset is same-origin, this hardens the page instead of breaking anything.
 - No external services: no Sentry, no Google Analytics, no tracking pixel, no asset CDN.
 
 Any contribution that would break that promise (server-side processing, telemetry, remote asset loads) is out of scope.
@@ -90,7 +91,7 @@ Source of truth: [`lib/tools/registry.ts`](./lib/tools/registry.ts). The sitemap
 - **[Next.js 16](https://nextjs.org)** (App Router) + **React 19**
 - **TypeScript** (strict)
 - **Tailwind v4** — CSS-first config (no `tailwind.config.js`), tokens in `@theme inline` inside `app/globals.css`
-- **[@ffmpeg/ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm)** for video and audio
+- **[@ffmpeg/ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm)** for video and audio — **multi-thread build (`@ffmpeg/core-mt`)** to parallelize across CPU cores
 - **[pdf-lib](https://pdf-lib.js.org/)** + **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** for PDFs
 - **[@huggingface/transformers](https://huggingface.co/docs/transformers.js)** for image background removal (local ONNX model)
 - **[SVGO](https://github.com/svg/svgo)** for SVG optimization

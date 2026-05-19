@@ -12,13 +12,24 @@ const INPUT_NAME = 'input.bin';
 function buildArgs(format: VideoFormat, input: string, output: string): string[] {
   switch (format) {
     case 'webm':
-      return ['-i', input, '-c:v', 'libvpx', '-b:v', '1M', '-c:a', 'libvorbis', output];
+      return [
+        '-i', input,
+        '-c:v', 'libvpx-vp9', '-b:v', '1M',
+        '-row-mt', '1', '-cpu-used', '8', '-deadline', 'realtime',
+        '-c:a', 'libopus',
+        output,
+      ];
     case 'gif':
       return ['-i', input, '-vf', 'fps=10,scale=480:-1:flags=lanczos', '-loop', '0', output];
     case 'mov':
     case 'mp4':
     default:
-      return ['-i', input, '-c:v', 'mpeg4', '-q:v', '5', output];
+      return [
+        '-i', input,
+        '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '23',
+        '-c:a', 'aac', '-b:a', '128k',
+        output,
+      ];
   }
 }
 
