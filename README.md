@@ -14,7 +14,7 @@
 
 ---
 
-**omne** is a collection of 79+ online tools — PDF, video, audio, image, SVG, passwords, JSON, text, encoding, QR codes, colors — that run **entirely client-side**. No backend, no analytics, no third-party CDN, no cookies. Your files never leave the tab.
+**omne** is a collection of 81+ online tools — PDF, video, audio, image, SVG, passwords, JSON, text, encoding, QR codes, colors, developer utilities — that run **entirely client-side**. No backend, no analytics, no third-party CDN, no cookies. Your files never leave the tab.
 
 Bilingual **English / French**, light / dark mode, `⌘K` command palette.
 
@@ -81,6 +81,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **Encoding** | Base64 · URL · JWT · Hex · HTML entities · Binary · Morse code |
 | **QR** | Generate (WiFi, vCard…) · Scan (camera or image) · Barcode generate (Code 128 / EAN) · Barcode scan |
 | **Color** | Converter (hex / rgb / hsl / oklch) · WCAG contrast · Palette from image · Gradient builder · Tints & shades · Blender · Color-blindness simulator |
+| **Developer** | Skills installer builder (parse `npx skills add` commands) · Browse & install skills (search the skills.sh catalog and install multiple in one one-liner) |
 
 Source of truth: [`lib/tools/registry.ts`](./lib/tools/registry.ts). The sitemap, the home page cards and MIME-based drop routing all derive from it.
 

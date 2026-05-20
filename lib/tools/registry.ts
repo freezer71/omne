@@ -878,6 +878,32 @@ export const TOOLS: readonly ToolMeta[] = [
     acceptedMime: ['image/png', 'image/jpeg', 'image/webp'],
     status: 'stable',
   },
+  {
+    id: 'skills',
+    category: 'dev',
+    href: '/dev/skills',
+    i18nKey: 'tools.dev.skills',
+    keywords: [
+      'skills', 'npx', 'install', 'claude code', 'cursor', 'codex',
+      'gemini cli', 'copilot', 'agent skills', 'one-liner', 'cli',
+      'installer', 'installateur', 'commande',
+    ],
+    acceptedMime: [],
+    status: 'stable',
+  },
+  {
+    id: 'skills-browse',
+    category: 'dev',
+    href: '/dev/skills-browse',
+    i18nKey: 'tools.dev.skills-browse',
+    keywords: [
+      'skills', 'browse', 'search', 'skills.sh', 'discover',
+      'install', 'claude code', 'cursor', 'codex', 'agent skills',
+      'rechercher', 'explorer', 'parcourir', 'catalogue',
+    ],
+    acceptedMime: [],
+    status: 'stable',
+  },
 ] as const;
 
 export function getTool(category: string, id: string): ToolMeta | undefined {

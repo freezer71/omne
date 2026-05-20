@@ -124,6 +124,15 @@ function Color(props: IconProps) {
   );
 }
 
+function Dev(props: IconProps) {
+  return (
+    <svg {...SVG_PROPS} {...props}>
+      <path d="m4 8 4 4-4 4" />
+      <path d="M12 16h8" />
+    </svg>
+  );
+}
+
 function Utility(props: IconProps) {
   return (
     <svg {...SVG_PROPS} {...props}>
@@ -146,6 +155,7 @@ const ICONS: Record<ToolCategory, (p: IconProps) => React.ReactElement> = {
   qr: Qr,
   color: Color,
   utility: Utility,
+  dev: Dev,
 };
 
 type CategoryIconProps = {

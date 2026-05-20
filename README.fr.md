@@ -14,7 +14,7 @@
 
 ---
 
-**omne** est une collection de plus de 79 outils en ligne — PDF, vidéo, audio, image, SVG, mots de passe, JSON, texte, encodage, QR codes, couleurs — qui tournent **entièrement côté client**. Pas de backend, pas d'analytics, pas de CDN tiers, pas de cookies. Vos fichiers ne quittent jamais l'onglet.
+**omne** est une collection de plus de 81 outils en ligne — PDF, vidéo, audio, image, SVG, mots de passe, JSON, texte, encodage, QR codes, couleurs, utilitaires développeur — qui tournent **entièrement côté client**. Pas de backend, pas d'analytics, pas de CDN tiers, pas de cookies. Vos fichiers ne quittent jamais l'onglet.
 
 Bilingue **français / anglais**, mode clair / sombre, raccourci `⌘K` pour la palette de commandes.
 
@@ -81,6 +81,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **Encodage** | Base64 · URL · JWT · Hex · Entités HTML · Binaire · Code Morse |
 | **QR** | Générer (WiFi, vCard…) · Scanner (caméra ou image) · Générer code-barres (Code 128 / EAN) · Scanner code-barres |
 | **Couleur** | Convertisseur (hex / rgb / hsl / oklch) · Contraste WCAG · Palette depuis image · Générateur de dégradé · Teintes & nuances · Mélangeur · Simulateur de daltonisme |
+| **Développeur** | Constructeur d'installateur de skills (parse `npx skills add`) · Explorer et installer des skills (recherche dans le catalogue skills.sh, installation multiple en un one-liner) |
 
 Source de vérité : [`lib/tools/registry.ts`](./lib/tools/registry.ts). Le sitemap, les cartes de la page d'accueil et le routage MIME en sont dérivés.
 

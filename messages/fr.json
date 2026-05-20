@@ -49,7 +49,8 @@
       "encode": "Encodage / décodage",
       "qr": "QR et codes-barres",
       "color": "Outils couleur",
-      "utility": "Utilitaires"
+      "utility": "Utilitaires",
+      "dev": "Outils développeur"
     },
     "comingSoon": "Bientôt disponible"
   },
@@ -3043,6 +3044,112 @@
           "removeFile": "Retirer",
           "scanning": "Lecture…",
           "scanError": "Impossible de lire cette image."
+        }
+      }
+    },
+    "dev": {
+      "skills-browse": {
+        "name": "Explorer et installer des skills",
+        "description": "Cherchez dans le catalogue skills.sh depuis votre navigateur, sélectionnez ceux qui vous intéressent, et obtenez un one-liner shell qui les installe tous.",
+        "seo": {
+          "title": "Explorer et installer des skills skills.sh — générateur npx skills add",
+          "description": "Cherchez dans le catalogue skills.sh, multi-sélectionnez des skills, copiez un one-liner shell. Fonctionne avec Claude Code, Cursor, Codex, Gemini CLI, Copilot.",
+          "keywords": [
+            "recherche skills.sh",
+            "explorer skills claude code",
+            "installer plusieurs skills one liner",
+            "installateur skills.sh",
+            "catalogue agent skills"
+          ],
+          "ogTitle": "Explorer skills · skills.sh"
+        },
+        "ui": {
+          "searchLabel": "Chercher dans skills.sh",
+          "searchPlaceholder": "Tapez au moins 2 caractères (ex : ffmpeg, react, design)",
+          "searchHint": "Tapez 2 caractères ou plus pour interroger le catalogue skills.sh.",
+          "loading": "Recherche…",
+          "searchError": "Impossible de joindre skills.sh. Réessayez dans un instant.",
+          "noResults": "Aucun skill ne correspond à cette recherche.",
+          "resultsLabel": "Résultats",
+          "installsTemplate": "{n} installations",
+          "selectedLabel": "Sélectionnés",
+          "selectedEmpty": "Choisissez des skills dans les résultats pour les ajouter ici.",
+          "clearSelected": "Vider",
+          "globalLabel": "Global",
+          "globalHint": "-g",
+          "agentsLabel": "Agents",
+          "agentClaudeCode": "Claude Code",
+          "agentCursor": "Cursor",
+          "agentCodex": "Codex",
+          "agentGeminiCli": "Gemini CLI",
+          "agentCopilot": "Copilot",
+          "agentAll": "Tous (*)",
+          "yesLabel": "Sans confirmation",
+          "yesHint": "-y",
+          "copyLabel": "Copier (sans lien symbolique)",
+          "copyHint": "--copy",
+          "fullDepthLabel": "Recherche profonde",
+          "fullDepthHint": "--full-depth",
+          "styleLabel": "Style de sortie",
+          "styleMultiline": "Multi-ligne",
+          "styleSingle": "Une ligne",
+          "outputLabel": "One-liner",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger .sh",
+          "empty": "Sélectionnez des skills ci-dessus pour générer la commande d'installation.",
+          "commandsTemplate": "{n} sélectionnés",
+          "charsTemplate": "{n} car.",
+          "privacyNote": "Les requêtes de recherche sont relayées par le serveur omne vers skills.sh. Aucune donnée personnelle n'est envoyée.",
+          "viewSkill": "Voir"
+        }
+      },
+      "skills": {
+        "name": "Installateur de skills",
+        "description": "Collez vos commandes npx skills add, choisissez agents et options, et obtenez un one-liner shell pour tout installer d'un coup.",
+        "seo": {
+          "title": "Installateur de skills — Combiner npx skills add en une seule commande",
+          "description": "Collez plusieurs lignes npx skills add, choisissez agents et options, copiez un one-liner shell. 100% local dans votre navigateur, aucun envoi.",
+          "keywords": [
+            "npx skills add one liner",
+            "installer skills claude code",
+            "skills.sh générateur cli",
+            "installateur skills cursor",
+            "commande installation agent skills"
+          ],
+          "ogTitle": "Installateur de skills · 100% local"
+        },
+        "ui": {
+          "optionsLabel": "Options",
+          "globalLabel": "Global",
+          "globalHint": "-g",
+          "agentsLabel": "Agents",
+          "agentClaudeCode": "Claude Code",
+          "agentCursor": "Cursor",
+          "agentCodex": "Codex",
+          "agentGeminiCli": "Gemini CLI",
+          "agentCopilot": "Copilot",
+          "agentAll": "Tous (*)",
+          "yesLabel": "Sans confirmation",
+          "yesHint": "-y",
+          "copyLabel": "Copier (sans lien symbolique)",
+          "copyHint": "--copy",
+          "fullDepthLabel": "Recherche profonde",
+          "fullDepthHint": "--full-depth",
+          "styleLabel": "Style de sortie",
+          "styleMultiline": "Multi-ligne",
+          "styleSingle": "Une ligne",
+          "inputLabel": "Collez vos lignes npx skills add",
+          "inputPlaceholder": "npx skills add anthropics/skills --skill frontend-design\nnpx skills add vercel-labs/agent-skills --skill vercel-react-best-practices",
+          "outputLabel": "One-liner",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger .sh",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "Collez des lignes npx skills add pour voir le one-liner.",
+          "commandsTemplate": "{n} commandes",
+          "charsTemplate": "{n} car."
         }
       }
     }

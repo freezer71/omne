@@ -49,7 +49,8 @@
       "encode": "Encoding tools",
       "qr": "QR & barcodes",
       "color": "Color tools",
-      "utility": "Utilities"
+      "utility": "Utilities",
+      "dev": "Developer tools"
     },
     "comingSoon": "Coming soon"
   },
@@ -3043,6 +3044,112 @@
           "removeFile": "Remove",
           "scanning": "Scanning…",
           "scanError": "Couldn't read that image."
+        }
+      }
+    },
+    "dev": {
+      "skills-browse": {
+        "name": "Browse & install skills",
+        "description": "Search skills.sh from your browser, pick the ones you want, and get a single shell one-liner that installs them all.",
+        "seo": {
+          "title": "Browse & install skills.sh skills — npx skills add builder",
+          "description": "Search the skills.sh catalog, multi-select skills, and copy a single shell one-liner. Works with Claude Code, Cursor, Codex, Gemini CLI, Copilot.",
+          "keywords": [
+            "skills.sh search",
+            "browse claude code skills",
+            "install multiple skills one liner",
+            "skills.sh installer",
+            "agent skills catalog"
+          ],
+          "ogTitle": "Browse skills · skills.sh"
+        },
+        "ui": {
+          "searchLabel": "Search skills.sh",
+          "searchPlaceholder": "Type at least 2 characters (e.g. ffmpeg, react, design)",
+          "searchHint": "Type 2 or more characters to search the skills.sh catalog.",
+          "loading": "Searching…",
+          "searchError": "Couldn't reach skills.sh. Try again in a moment.",
+          "noResults": "No skills match that query.",
+          "resultsLabel": "Results",
+          "installsTemplate": "{n} installs",
+          "selectedLabel": "Selected",
+          "selectedEmpty": "Pick skills from the results to add them here.",
+          "clearSelected": "Clear",
+          "globalLabel": "Global",
+          "globalHint": "-g",
+          "agentsLabel": "Agents",
+          "agentClaudeCode": "Claude Code",
+          "agentCursor": "Cursor",
+          "agentCodex": "Codex",
+          "agentGeminiCli": "Gemini CLI",
+          "agentCopilot": "Copilot",
+          "agentAll": "All (*)",
+          "yesLabel": "Skip prompts",
+          "yesHint": "-y",
+          "copyLabel": "Copy (no symlink)",
+          "copyHint": "--copy",
+          "fullDepthLabel": "Full depth",
+          "fullDepthHint": "--full-depth",
+          "styleLabel": "Output style",
+          "styleMultiline": "Multi-line",
+          "styleSingle": "Single line",
+          "outputLabel": "One-liner",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download .sh",
+          "empty": "Select skills above to generate the install command.",
+          "commandsTemplate": "{n} selected",
+          "charsTemplate": "{n} chars",
+          "privacyNote": "Search queries are proxied through omne's server to skills.sh. No personal data is sent.",
+          "viewSkill": "View"
+        }
+      },
+      "skills": {
+        "name": "Skills installer builder",
+        "description": "Paste npx skills add commands, pick agents and flags, and get a single shell one-liner to install them all at once.",
+        "seo": {
+          "title": "Skills Installer Builder — Combine npx skills add into one command",
+          "description": "Paste multiple npx skills add lines, pick agents and flags, and copy a single shell one-liner. 100% local in your browser, no upload.",
+          "keywords": [
+            "npx skills add one liner",
+            "install claude code skills",
+            "skills.sh cli builder",
+            "cursor skills installer",
+            "agent skills install command"
+          ],
+          "ogTitle": "Skills installer · 100% local"
+        },
+        "ui": {
+          "optionsLabel": "Options",
+          "globalLabel": "Global",
+          "globalHint": "-g",
+          "agentsLabel": "Agents",
+          "agentClaudeCode": "Claude Code",
+          "agentCursor": "Cursor",
+          "agentCodex": "Codex",
+          "agentGeminiCli": "Gemini CLI",
+          "agentCopilot": "Copilot",
+          "agentAll": "All (*)",
+          "yesLabel": "Skip prompts",
+          "yesHint": "-y",
+          "copyLabel": "Copy (no symlink)",
+          "copyHint": "--copy",
+          "fullDepthLabel": "Full depth",
+          "fullDepthHint": "--full-depth",
+          "styleLabel": "Output style",
+          "styleMultiline": "Multi-line",
+          "styleSingle": "Single line",
+          "inputLabel": "Paste npx skills add lines",
+          "inputPlaceholder": "npx skills add anthropics/skills --skill frontend-design\nnpx skills add vercel-labs/agent-skills --skill vercel-react-best-practices",
+          "outputLabel": "One-liner",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download .sh",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Paste some npx skills add lines to see the one-liner.",
+          "commandsTemplate": "{n} commands",
+          "charsTemplate": "{n} chars"
         }
       }
     }

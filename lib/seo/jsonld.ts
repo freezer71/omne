@@ -46,6 +46,8 @@ function applicationCategory(category: ToolCategory): string {
     case 'utility':
     case 'json':
       return 'UtilitiesApplication';
+    case 'dev':
+      return 'DeveloperApplication';
     case 'image':
     case 'video':
     case 'audio':
