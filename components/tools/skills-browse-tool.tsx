@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { downloadBlob } from '@/lib/file-utils';
@@ -18,6 +18,12 @@ import {
   type SearchResponse,
   type SkillResult,
 } from '@/lib/tools/implementations/skills-browse';
+import {
+  FEED_TYPES,
+  type FeedResponse,
+  type FeedSkill,
+  type FeedType,
+} from '@/lib/tools/implementations/skills-feed';
 
 type Messages = {
   searchLabel: string;
@@ -58,7 +64,25 @@ type Messages = {
   charsTemplate: string;
   privacyNote: string;
   viewSkill: string;
+  discoverHint: string;
+  tabAllTime: string;
+  tabTrending: string;
+  tabHot: string;
+  feedLoading: string;
+  feedError: string;
+  feedRetry: string;
+  installsYesterdayTemplate: string;
+  changeTemplate: string;
+  officialBadge: string;
 };
+
+function tabLabel(t: FeedType, m: Messages): string {
+  switch (t) {
+    case 'all-time': return m.tabAllTime;
+    case 'trending': return m.tabTrending;
+    case 'hot': return m.tabHot;
+  }
+}
 
 function agentLabel(agent: Agent, m: Messages): string {
   switch (agent) {
@@ -101,7 +125,30 @@ export function SkillsBrowseTool(messages: Messages) {
   const [fullDepth, setFullDepth] = useState(false);
   const [style, setStyle] = useState<OutputStyle>('multiline');
 
+  const [feedType, setFeedType] = useState<FeedType>('all-time');
+  const [feedSkills, setFeedSkills] = useState<FeedSkill[]>([]);
+  const [feedLoading, setFeedLoading] = useState(false);
+  const [feedError, setFeedError] = useState<string | null>(null);
+  const [feedRetryCount, setFeedRetryCount] = useState(0);
+
   const abortRef = useRef<AbortController | null>(null);
+  const feedAbortRef = useRef<AbortController | null>(null);
+  const tabRefs = useRef<Partial<Record<FeedType, HTMLButtonElement | null>>>({});
+  const showDiscover = debouncedQuery.length < 2;
+
+  const onTabsKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'Home' && e.key !== 'End') return;
+    e.preventDefault();
+    const idx = FEED_TYPES.indexOf(feedType);
+    let next = idx;
+    if (e.key === 'ArrowLeft') next = (idx - 1 + FEED_TYPES.length) % FEED_TYPES.length;
+    else if (e.key === 'ArrowRight') next = (idx + 1) % FEED_TYPES.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = FEED_TYPES.length - 1;
+    const nextType = FEED_TYPES[next]!;
+    setFeedType(nextType);
+    requestAnimationFrame(() => tabRefs.current[nextType]?.focus());
+  };
 
   useEffect(() => {
     const h = window.setTimeout(() => setDebouncedQuery(query.trim()), 300);
@@ -139,6 +186,37 @@ export function SkillsBrowseTool(messages: Messages) {
       });
     return () => ctrl.abort();
   }, [debouncedQuery, messages.searchError]);
+
+  useEffect(() => {
+    feedAbortRef.current?.abort();
+    if (!showDiscover) {
+      setFeedLoading(false);
+      return;
+    }
+    const ctrl = new AbortController();
+    feedAbortRef.current = ctrl;
+    setFeedLoading(true);
+    setFeedError(null);
+    fetch(`/api/skills-feed?type=${encodeURIComponent(feedType)}`, {
+      signal: ctrl.signal,
+    })
+      .then(async (r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return (await r.json()) as FeedResponse;
+      })
+      .then((data) => {
+        if (ctrl.signal.aborted) return;
+        setFeedSkills(Array.isArray(data.skills) ? data.skills : []);
+        setFeedLoading(false);
+      })
+      .catch((err) => {
+        if (ctrl.signal.aborted || err?.name === 'AbortError') return;
+        setFeedSkills([]);
+        setFeedError(messages.feedError);
+        setFeedLoading(false);
+      });
+    return () => ctrl.abort();
+  }, [showDiscover, feedType, feedRetryCount, messages.feedError]);
 
   const opts: SkillsOptions = useMemo(
     () => ({ global, agents, yes, copy, fullDepth, style }),
@@ -242,18 +320,131 @@ export function SkillsBrowseTool(messages: Messages) {
           />
           <p className="text-[11px] text-text-faint">{messages.privacyNote}</p>
 
-          <Card className="flex max-h-[26rem] min-h-[18rem] flex-col overflow-y-auto px-1 py-1">
-            {loading ? (
+          {showDiscover ? (
+            <div
+              role="tablist"
+              aria-label={messages.discoverHint}
+              className="flex flex-wrap gap-1"
+              onKeyDown={onTabsKeyDown}
+            >
+              {FEED_TYPES.map((t) => {
+                const active = feedType === t;
+                return (
+                  <button
+                    key={t}
+                    ref={(el) => {
+                      tabRefs.current[t] = el;
+                    }}
+                    type="button"
+                    role="tab"
+                    id={`skills-feed-tab-${t}`}
+                    aria-selected={active}
+                    aria-controls="skills-feed-panel"
+                    tabIndex={active ? 0 : -1}
+                    onClick={() => setFeedType(t)}
+                    className={`rounded-md border px-3 py-1.5 text-xs transition-colors ${
+                      active
+                        ? 'border-accent bg-surface-hover text-text-primary'
+                        : 'border-border bg-surface text-text-muted hover:border-border-strong'
+                    }`}
+                  >
+                    {tabLabel(t, messages)}
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
+
+          <Card
+            id={showDiscover ? 'skills-feed-panel' : undefined}
+            role={showDiscover ? 'tabpanel' : undefined}
+            aria-labelledby={showDiscover ? `skills-feed-tab-${feedType}` : undefined}
+            aria-live={showDiscover ? 'polite' : undefined}
+            className="flex max-h-[26rem] min-h-[18rem] flex-col overflow-y-auto px-1 py-1"
+          >
+            {showDiscover ? (
+              feedLoading ? (
+                <div className="flex h-full min-h-[16rem] items-center justify-center text-sm text-text-faint">
+                  {messages.feedLoading}
+                </div>
+              ) : feedError ? (
+                <div role="alert" className="flex h-full min-h-[16rem] flex-col items-center justify-center gap-3 px-3 text-sm text-text-muted">
+                  <span>{feedError}</span>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    type="button"
+                    onClick={() => setFeedRetryCount((n) => n + 1)}
+                  >
+                    {messages.feedRetry}
+                  </Button>
+                </div>
+              ) : feedSkills.length === 0 ? (
+                <div className="flex h-full min-h-[16rem] items-center justify-center text-sm text-text-faint">
+                  {messages.noResults}
+                </div>
+              ) : (
+                <ul className="flex flex-col">
+                  {feedSkills.map((s) => {
+                    const checked = isSelected(s);
+                    return (
+                      <li
+                        key={s.id}
+                        className={`group flex items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors ${
+                          checked ? 'bg-surface-hover' : 'hover:bg-surface-hover'
+                        }`}
+                      >
+                        <label className="flex min-w-0 flex-1 cursor-pointer items-center gap-3">
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => toggleSkill(s)}
+                            className="size-4 accent-accent"
+                          />
+                          <span className="min-w-0 flex-1">
+                            <span className="flex items-center gap-2">
+                              <span className="block truncate font-mono text-sm text-text-primary">{s.name}</span>
+                              {s.isOfficial ? (
+                                <span className="shrink-0 rounded border border-border bg-surface px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-text-muted">
+                                  {messages.officialBadge}
+                                </span>
+                              ) : null}
+                            </span>
+                            <span className="block truncate text-xs text-text-faint">{s.source}</span>
+                          </span>
+                          <span className="flex shrink-0 flex-col items-end gap-0.5 font-mono text-xs text-text-muted">
+                            <span>{tpl(messages.installsTemplate, { n: formatInstalls(s.installs) })}</span>
+                            {feedType === 'hot' && typeof s.change === 'number' ? (
+                              <span
+                                aria-label={tpl(messages.changeTemplate, { n: formatInstalls(s.change) })}
+                                className="text-[11px] text-accent"
+                              >
+                                +{formatInstalls(s.change)}
+                              </span>
+                            ) : null}
+                          </span>
+                        </label>
+                        <a
+                          href={`https://skills.sh/${s.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="shrink-0 rounded-md border border-border bg-surface px-2 py-1 text-xs text-text-muted opacity-0 transition-opacity hover:border-border-strong hover:bg-surface-hover hover:text-text-primary focus-visible:opacity-100 group-hover:opacity-100"
+                          title={`skills.sh/${s.id}`}
+                        >
+                          {messages.viewSkill}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )
+            ) : loading ? (
               <div className="flex h-full min-h-[16rem] items-center justify-center text-sm text-text-faint">
                 {messages.loading}
               </div>
             ) : error ? (
               <div role="alert" className="flex h-full min-h-[16rem] items-center justify-center px-3 text-sm text-text-muted">
                 {error}
-              </div>
-            ) : debouncedQuery.length < 2 ? (
-              <div className="flex h-full min-h-[16rem] items-center justify-center px-3 text-center text-sm text-text-faint">
-                {messages.searchHint}
               </div>
             ) : results.length === 0 ? (
               <div className="flex h-full min-h-[16rem] items-center justify-center text-sm text-text-faint">

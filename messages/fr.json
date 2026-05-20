@@ -3050,18 +3050,19 @@
     "dev": {
       "skills-browse": {
         "name": "Explorer et installer des skills",
-        "description": "Cherchez dans le catalogue skills.sh depuis votre navigateur, sélectionnez ceux qui vous intéressent, et obtenez un one-liner shell qui les installe tous.",
+        "description": "Découvrez les skills les plus populaires de skills.sh (depuis toujours, tendance 24 h ou en vogue), cherchez dans le catalogue, sélectionnez ceux qui vous intéressent et obtenez un one-liner shell qui les installe tous.",
         "seo": {
-          "title": "Explorer et installer des skills skills.sh — générateur npx skills add",
-          "description": "Cherchez dans le catalogue skills.sh, multi-sélectionnez des skills, copiez un one-liner shell. Fonctionne avec Claude Code, Cursor, Codex, Gemini CLI, Copilot.",
+          "title": "Explorer et installer des skills skills.sh — top tendance + générateur npx skills add",
+          "description": "Découvrez les skills populaires et tendances de skills.sh — classements depuis toujours, 24 h et en vogue — cherchez, multi-sélectionnez et copiez un one-liner shell. Fonctionne avec Claude Code, Cursor, Codex, Gemini CLI, Copilot.",
           "keywords": [
             "recherche skills.sh",
-            "explorer skills claude code",
+            "skills.sh tendances",
+            "skills claude code populaires",
             "installer plusieurs skills one liner",
             "installateur skills.sh",
             "catalogue agent skills"
           ],
-          "ogTitle": "Explorer skills · skills.sh"
+          "ogTitle": "Découvrir et installer des skills · skills.sh"
         },
         "ui": {
           "searchLabel": "Chercher dans skills.sh",
@@ -3100,8 +3101,18 @@
           "empty": "Sélectionnez des skills ci-dessus pour générer la commande d'installation.",
           "commandsTemplate": "{n} sélectionnés",
           "charsTemplate": "{n} car.",
-          "privacyNote": "Les requêtes de recherche sont relayées par le serveur omne vers skills.sh. Aucune donnée personnelle n'est envoyée.",
-          "viewSkill": "Voir"
+          "privacyNote": "La découverte et la recherche sont relayées par le serveur omne vers skills.sh. Aucune donnée personnelle n'est envoyée.",
+          "viewSkill": "Voir",
+          "discoverHint": "Découvrir les skills populaires",
+          "tabAllTime": "Depuis toujours",
+          "tabTrending": "Tendance 24 h",
+          "tabHot": "En vogue",
+          "feedLoading": "Chargement des skills populaires…",
+          "feedError": "La découverte est temporairement indisponible.",
+          "feedRetry": "Réessayer",
+          "installsYesterdayTemplate": "{n} hier",
+          "changeTemplate": "+{n} depuis hier",
+          "officialBadge": "Officiel"
         }
       },
       "skills": {

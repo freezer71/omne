@@ -3050,18 +3050,19 @@
     "dev": {
       "skills-browse": {
         "name": "Browse & install skills",
-        "description": "Search skills.sh from your browser, pick the ones you want, and get a single shell one-liner that installs them all.",
+        "description": "Discover the top skills on skills.sh by all-time, 24h trending, or hot — search the catalog, pick what you want, and get a single shell one-liner that installs them all.",
         "seo": {
-          "title": "Browse & install skills.sh skills — npx skills add builder",
-          "description": "Search the skills.sh catalog, multi-select skills, and copy a single shell one-liner. Works with Claude Code, Cursor, Codex, Gemini CLI, Copilot.",
+          "title": "Browse & install skills.sh skills — top trending + npx skills add builder",
+          "description": "Discover popular and trending skills from skills.sh — all-time, 24h, and hot rankings — search the catalog, multi-select, and copy a single shell one-liner. Works with Claude Code, Cursor, Codex, Gemini CLI, Copilot.",
           "keywords": [
             "skills.sh search",
-            "browse claude code skills",
+            "skills.sh trending skills",
+            "popular claude code skills",
             "install multiple skills one liner",
             "skills.sh installer",
             "agent skills catalog"
           ],
-          "ogTitle": "Browse skills · skills.sh"
+          "ogTitle": "Discover & install skills · skills.sh"
         },
         "ui": {
           "searchLabel": "Search skills.sh",
@@ -3100,8 +3101,18 @@
           "empty": "Select skills above to generate the install command.",
           "commandsTemplate": "{n} selected",
           "charsTemplate": "{n} chars",
-          "privacyNote": "Search queries are proxied through omne's server to skills.sh. No personal data is sent.",
-          "viewSkill": "View"
+          "privacyNote": "Discovery and search are proxied through omne's server to skills.sh. No personal data is sent.",
+          "viewSkill": "View",
+          "discoverHint": "Discover popular skills",
+          "tabAllTime": "All Time",
+          "tabTrending": "Trending 24h",
+          "tabHot": "Hot",
+          "feedLoading": "Loading top skills…",
+          "feedError": "Discovery is temporarily unavailable.",
+          "feedRetry": "Try again",
+          "installsYesterdayTemplate": "{n} yesterday",
+          "changeTemplate": "+{n} since yesterday",
+          "officialBadge": "Official"
         }
       },
       "skills": {
