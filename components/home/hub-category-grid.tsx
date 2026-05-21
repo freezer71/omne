@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import { CategoryIcon } from '@/components/command-palette/category-icons';
+import type { Locale } from '@/lib/i18n/config';
 import { tpl } from '@/lib/tpl';
 import type { SearchableTool } from '@/lib/tools/search';
 import type { ToolCategory } from '@/lib/tools/types';
@@ -9,6 +11,7 @@ type CountTpl = {
 };
 
 type Props = {
+  locale: Locale;
   title: string;
   subtitle: string;
   tools: readonly SearchableTool[];
@@ -18,6 +21,7 @@ type Props = {
 };
 
 export function HubCategoryGrid({
+  locale,
   title,
   subtitle,
   tools,
@@ -42,9 +46,9 @@ export function HubCategoryGrid({
         {groups.map(({ cat, count }) => {
           const countLabel = tpl(count === 1 ? countTpl.singular : countTpl.plural, { n: count });
           return (
-            <a
+            <Link
               key={cat}
-              href={`#cat-${cat}`}
+              href={`/${locale}/${cat}`}
               className="group flex items-center gap-3 rounded-lg border border-border bg-surface p-4 transition-colors hover:border-border-strong hover:bg-surface-hover focus:outline-none focus-visible:border-accent"
             >
               <CategoryIcon
@@ -57,7 +61,7 @@ export function HubCategoryGrid({
                 </span>
                 <span className="truncate text-xs text-text-faint">{countLabel}</span>
               </div>
-            </a>
+            </Link>
           );
         })}
       </div>

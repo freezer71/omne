@@ -3,7 +3,7 @@
     "siteName": "omne",
     "tagline": "Privacy-first toolkit.",
     "seo": {
-      "title": "omne — Free Privacy-First Browser Tools for PDF, Image, Video, Passwords",
+      "title": "omne — Free Privacy-First Browser Tools (PDF, Image, Video)",
       "description": "Free online tools that run entirely in your browser. Merge PDFs, convert images, trim videos, generate passwords — no upload, no signup, no tracking.",
       "keywords": [
         "pdf tools",
@@ -313,7 +313,7 @@
         "name": "Extract images from PDF",
         "description": "Pull every embedded image out of a PDF and download them individually or as a ZIP.",
         "seo": {
-          "title": "Extract Images from PDF — Save Embedded Photos & Figures Free",
+          "title": "Extract Images from PDF — Save Embedded Photos & Figures",
           "description": "Pull every embedded image out of a PDF and save them as lossless PNG. No upload — runs entirely in your browser.",
           "keywords": [
             "extract images from pdf",
@@ -446,8 +446,8 @@
         "name": "Split video",
         "description": "Cut a video into equal parts — 2 to 10 segments, or by fixed segment duration.",
         "seo": {
-          "title": "Split Video Online — Cut a Video Into Parts, Free, In-Browser",
-          "description": "Free online video splitter. Cut any MP4, WebM, MOV or MKV into 2–10 equal parts, or by segment duration. 100% in your browser via FFmpeg WebAssembly — no upload, no signup, no watermark.",
+          "title": "Split Video Online — Cut a Video Into Equal Parts, Free",
+          "description": "Free online video splitter. Cut any MP4, WebM, MOV or MKV into 2–10 equal parts, or by segment duration. 100% in your browser via FFmpeg — no upload.",
           "keywords": [
             "split video online",
             "split video into parts",
@@ -493,7 +493,7 @@
         "name": "Merge videos",
         "description": "Concatenate two or more videos into a single file. Reorder before merging.",
         "seo": {
-          "title": "Merge Videos Online — Free Concatenate MP4, WebM, MOV in Browser",
+          "title": "Merge Videos Online — Free MP4, WebM, MOV Concatenator",
           "description": "Join two or more videos into one — reorder, then merge. MP4, WebM, MOV, MKV. 100% in your browser — no upload, no watermark, no signup.",
           "keywords": [
             "merge videos online",
@@ -681,7 +681,7 @@
         "name": "Extract video frames",
         "description": "Export frames from a video as PNG or JPG images at a chosen frame rate.",
         "seo": {
-          "title": "Extract Video Frames Online — Free Video to PNG/JPG in Browser",
+          "title": "Extract Video Frames — Free Video to PNG/JPG in Browser",
           "description": "Export frames from any video as PNG or JPG, one every N seconds. Bulk download as a ZIP. 100% in your browser — no upload, no signup.",
           "keywords": [
             "extract video frames online",
@@ -751,8 +751,8 @@
         "name": "Short Studio",
         "description": "Split a long video into numbered shorts with an auto-incrementing watermark — optionally cropped to 9:16 for TikTok, Reels and YouTube Shorts.",
         "seo": {
-          "title": "Short Studio — Split a Video into Numbered Shorts (Free, Local)",
-          "description": "Free browser tool to split a long video into numbered shorts with an auto-incrementing watermark. 9:16 vertical option for TikTok, Reels and YouTube. Nothing is uploaded.",
+          "title": "Short Studio — Split a Video into Numbered Shorts (Free)",
+          "description": "Free browser tool to split a long video into numbered shorts with an auto-incrementing watermark. 9:16 vertical for TikTok, Reels and YouTube.",
           "keywords": [
             "split video into shorts online",
             "tiktok shorts splitter",
@@ -857,8 +857,8 @@
         "name": "Edit audio tags & cover",
         "description": "Change MP3, FLAC, M4A or OGG tags — title, artist, album, year — and embed an album cover.",
         "seo": {
-          "title": "Edit MP3 Tags & Album Cover Online — Free, In-Browser ID3 Editor",
-          "description": "Free online MP3 tag editor. Edit ID3v2 metadata — title, artist, album, year, genre — and embed an album cover. Works with FLAC, M4A and OGG too. 100% in your browser, no upload.",
+          "title": "Edit MP3 Tags & Cover Art — Free In-Browser ID3 Editor",
+          "description": "Edit ID3v2 metadata — title, artist, album, year, genre — and embed cover art. Works with MP3, FLAC, M4A and OGG. 100% in your browser, no upload.",
           "keywords": [
             "edit mp3 tags online",
             "id3 tag editor free",
@@ -899,7 +899,7 @@
         "description": "Convert between MP3, WAV, FLAC, AAC, Opus and M4A with a bitrate of your choice.",
         "seo": {
           "title": "Convert Audio Online — MP3, WAV, FLAC, AAC, Opus, M4A Free",
-          "description": "Free online audio converter. Convert MP3, WAV, FLAC, AAC, Opus and M4A with the bitrate you want. 100% in-browser via FFmpeg WebAssembly — no upload, no signup.",
+          "description": "Free online audio converter. Convert between MP3, WAV, FLAC, AAC, Opus and M4A at the bitrate you want. 100% in-browser via FFmpeg, no upload.",
           "keywords": [
             "convert mp3 to wav online",
             "audio converter free",
@@ -936,7 +936,7 @@
         "name": "Extract audio from video",
         "description": "Pull the soundtrack out of an MP4, MOV, WebM or MKV file as MP3, WAV, M4A or FLAC.",
         "seo": {
-          "title": "Extract Audio from Video Online — MP4 to MP3 Free, In-Browser",
+          "title": "Extract Audio from Video — MP4 to MP3, In-Browser",
           "description": "Free online MP4 to MP3 extractor. Pull the audio out of MP4, MOV, WebM or MKV files as MP3, WAV, M4A or FLAC. 100% in your browser — no upload, no signup.",
           "keywords": [
             "mp4 to mp3 online free",
@@ -1040,7 +1040,7 @@
         "description": "Adjust gain in decibels, normalize loudness to EBU R128 (-16 LUFS), or apply fade in / fade out.",
         "seo": {
           "title": "Normalize Audio Online — MP3 Volume Booster & Fade Free",
-          "description": "Free online audio loudness tool. Boost or cut volume in decibels, normalize to EBU R128 (-16 LUFS), or apply fade in / fade out. 100% in your browser — no upload.",
+          "description": "Boost or cut volume in decibels, normalize to EBU R128 (-16 LUFS), or apply fade in / fade out. 100% in your browser — no upload.",
           "keywords": [
             "normalize audio online",
             "mp3 volume booster",
@@ -1138,7 +1138,7 @@
         "name": "Resize image",
         "description": "Scale an image to a new width and height — with live preview.",
         "seo": {
-          "title": "Resize Image Online — Free In-Browser Resizer with Live Preview",
+          "title": "Resize Image Online — Free In-Browser with Live Preview",
           "description": "Resize PNG, JPG, or WebP to any width and height with a live canvas preview. Lock aspect ratio or use a scale slider. No upload, no signup.",
           "keywords": [
             "resize image",
@@ -1334,8 +1334,8 @@
         "name": "Favicon from SVG",
         "description": "Generate a full favicon bundle from a single SVG: favicon.ico, apple-touch-icon, Android Chrome icons, and a webmanifest snippet — in one ZIP.",
         "seo": {
-          "title": "Favicon Generator from SVG — Free .ico, PNG & Web Manifest Bundle",
-          "description": "Turn a single SVG into a complete favicon set: favicon.ico (16/32/48), apple-touch-icon, android-chrome 192/512, and site.webmanifest — bundled as a ZIP. 100% local.",
+          "title": "Favicon Generator from SVG — .ico, PNG & Web Manifest",
+          "description": "Turn a single SVG into a complete favicon set: favicon.ico (16/32/48), apple-touch-icon, android-chrome 192/512, and site.webmanifest — bundled as a ZIP.",
           "keywords": [
             "favicon generator",
             "svg to favicon",
@@ -1365,8 +1365,8 @@
         "name": "SVG editor",
         "description": "Edit SVG markup, dimensions, viewBox, colors, and transforms — with live preview. A panel-based editor that keeps your source clean.",
         "seo": {
-          "title": "SVG Editor Online — Free Code & Color Editor with Live Preview",
-          "description": "Edit SVG markup, recolor fills and strokes with a picker, tweak viewBox, rotate, scale, and translate — all with a live sandboxed preview. No upload, runs in your browser.",
+          "title": "SVG Editor Online — Code & Color Editor, Live Preview",
+          "description": "Edit SVG markup, recolor fills and strokes with a picker, tweak viewBox, rotate, scale, and translate — with a live sandboxed preview. 100% local.",
           "keywords": [
             "svg editor online",
             "edit svg",
@@ -1414,7 +1414,7 @@
         "name": "SVG to PNG / JPG / WebP",
         "description": "Rasterize any SVG to a high-quality PNG, JPG, or WebP at the exact size you want — with live preview.",
         "seo": {
-          "title": "SVG to PNG Online — Free High-Quality SVG Rasterizer (PNG, JPG, WebP)",
+          "title": "SVG to PNG Online — Free Rasterizer (PNG, JPG, WebP)",
           "description": "Convert SVG to PNG, JPG, or WebP at any resolution. Live canvas preview, transparent background, 1×/2×/4× presets. No upload — runs in your browser.",
           "keywords": [
             "svg to png",
@@ -1452,8 +1452,8 @@
         "name": "SVG to Data URL",
         "description": "Convert any SVG markup into a base64 or URL-encoded data URI — with a live thumbnail preview.",
         "seo": {
-          "title": "SVG to Data URL Online — Free Base64 & URL-Encoded SVG Encoder",
-          "description": "Paste an SVG and instantly get a base64 data URI and a CSS-friendly URL-encoded data URI. Live preview, byte counts, one-click copy. No upload, runs in your browser.",
+          "title": "SVG to Data URL — Free Base64 & URL-Encoded Encoder",
+          "description": "Paste an SVG and instantly get a base64 data URI and a CSS-friendly URL-encoded data URI. Live preview, byte counts, one-click copy. 100% in browser.",
           "keywords": [
             "svg to data url",
             "svg to base64",
@@ -1483,8 +1483,8 @@
         "name": "Generate password",
         "description": "Create a strong random password — fully customizable, generated locally with crypto-grade randomness.",
         "seo": {
-          "title": "Generate Strong Password — Free, Local, Cryptographically Secure",
-          "description": "Create strong random passwords with custom length, character sets, and ambiguous-character exclusion. Crypto-grade randomness, generated locally in your browser.",
+          "title": "Strong Password Generator — Free, Local, Crypto-Secure",
+          "description": "Create strong random passwords with custom length, character sets and ambiguous-character exclusion. Crypto-grade randomness, generated locally.",
           "keywords": [
             "password generator",
             "strong password",
@@ -1526,7 +1526,7 @@
         "name": "Generate passphrase",
         "description": "Diceware-style passphrase — random words easy to remember, hard to guess.",
         "seo": {
-          "title": "Passphrase Generator — Free Diceware-Style Memorable Passwords",
+          "title": "Passphrase Generator — Diceware-Style, Memorable, Free",
           "description": "Generate diceware-style passphrases — random words easy to remember, hard to guess. Customizable separator and capitalization. 100% local in your browser.",
           "keywords": [
             "passphrase generator",
@@ -1564,7 +1564,7 @@
         "description": "Compute SHA-1, SHA-256, SHA-384, or SHA-512 of any text — output as hex or base64.",
         "seo": {
           "title": "Hash Text Online — SHA-1, SHA-256, SHA-384, SHA-512 Free",
-          "description": "Compute the SHA-1, SHA-256, SHA-384, or SHA-512 hash of any text, in hex or base64. Free, instant, and 100% in your browser — your text never leaves your device.",
+          "description": "Compute the SHA-1, SHA-256, SHA-384 or SHA-512 hash of any text, in hex or base64. Free, instant, and 100% in your browser — your text never leaves.",
           "keywords": [
             "sha256 online",
             "sha512 online",
@@ -1677,7 +1677,7 @@
         "name": "JSON Formatter",
         "description": "Beautify, minify, sort keys, validate — with live preview.",
         "seo": {
-          "title": "JSON Formatter Online — Free Pretty-Print, Minify, Sort Keys, Validate",
+          "title": "JSON Formatter — Pretty-Print, Minify, Sort Keys, Validate",
           "description": "Format, minify and sort-keys any JSON with a live preview and inline syntax validation. 100% in your browser — no upload, no signup.",
           "keywords": [
             "json formatter online",
@@ -1913,7 +1913,7 @@
         "name": "JSON Schema",
         "description": "Validate JSON against a schema, or generate a schema from a sample document.",
         "seo": {
-          "title": "JSON Schema Online — Validate & Generate (Draft 2020-12 / 07)",
+          "title": "JSON Schema Online — Validate & Generate (2020-12 / 07)",
           "description": "Validate any JSON against a JSON Schema (Ajv, draft 2020-12 or 07) or infer a schema from a sample. Errors listed by path. 100% in your browser.",
           "keywords": [
             "json schema generator",
@@ -1960,8 +1960,8 @@
         "name": "Case Converter",
         "description": "Convert text between upper, lower, title, sentence, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, and dot.case.",
         "seo": {
-          "title": "Case Converter Online — Free Snake, Camel, Kebab, Pascal, Title",
-          "description": "Convert text to UPPERCASE, lowercase, Title Case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE and dot.case. 100% in your browser — no upload, no signup.",
+          "title": "Case Converter — Snake, Camel, Kebab, Pascal, Title Case",
+          "description": "Convert text to UPPERCASE, lowercase, Title Case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE and dot.case. 100% in your browser.",
           "keywords": [
             "convert text to snake case online",
             "case converter online no upload",
@@ -2002,7 +2002,7 @@
         "description": "Count words, characters, lines, paragraphs and sentences — with reading and speaking time estimates.",
         "seo": {
           "title": "Word Counter Online — Live Words, Characters, Reading Time",
-          "description": "Live count of words, characters (with and without spaces), lines, paragraphs, sentences, and estimated reading & speaking time. 100% in your browser — no upload.",
+          "description": "Live count of words, characters (with and without spaces), lines, paragraphs, sentences, and estimated reading & speaking time. 100% in browser.",
           "keywords": [
             "word counter online",
             "character counter live",
@@ -2033,8 +2033,8 @@
         "name": "Lorem Ipsum Generator",
         "description": "Generate Lorem Ipsum placeholder text — words, sentences, or paragraphs, optionally HTML-wrapped.",
         "seo": {
-          "title": "Lorem Ipsum Generator — Free Placeholder Text in Words, Sentences, Paragraphs",
-          "description": "Generate Lorem Ipsum placeholder text by words, sentences or paragraphs. Optional HTML <p> wrapping, optional Lorem-ipsum start. 100% in your browser — no upload.",
+          "title": "Lorem Ipsum Generator — Free Placeholder Text Tool",
+          "description": "Generate Lorem Ipsum placeholder text by words, sentences or paragraphs. Optional HTML <p> wrapping, optional Lorem-ipsum start. 100% in your browser.",
           "keywords": [
             "lorem ipsum generator",
             "generate placeholder text",
@@ -2223,7 +2223,7 @@
         "name": "Escape / Unescape",
         "description": "Escape or unescape strings for HTML, XML, JavaScript and JSON — handles entities, unicode escapes and special characters.",
         "seo": {
-          "title": "Escape Online — Free HTML, XML, JavaScript and JSON Escape / Unescape",
+          "title": "Escape Online — HTML, XML, JavaScript and JSON Escape",
           "description": "Escape or unescape strings for HTML, XML, JavaScript and JSON. Handles named entities, numeric refs, unicode escapes. 100% in your browser — no upload.",
           "keywords": [
             "html escape online",
@@ -2260,7 +2260,7 @@
         "name": "Whitespace Cleaner",
         "description": "Clean whitespace in any text — trim lines, collapse spaces, remove blank lines, convert tabs and normalize CRLF / LF line endings.",
         "seo": {
-          "title": "Whitespace Cleaner Online — Free Trim, Collapse Spaces, Normalize Line Endings",
+          "title": "Whitespace Cleaner — Trim, Collapse, Normalize Endings",
           "description": "Trim trailing spaces, collapse multiple spaces, remove blank lines, convert tabs and normalize CRLF/LF/CR line endings. 100% in your browser — no upload.",
           "keywords": [
             "whitespace cleaner online",
@@ -2331,8 +2331,8 @@
         "name": "Find & Replace",
         "description": "Find and replace in any text — literal or regular expression mode, case sensitive, whole word, with live preview and match count.",
         "seo": {
-          "title": "Find and Replace Online — Free Text Search & Replace with Regex",
-          "description": "Search and replace in any text. Literal or regular expression mode, case sensitive, whole word match, replace all or step through. 100% in your browser — no upload.",
+          "title": "Find and Replace — Free Text Search & Replace with Regex",
+          "description": "Search and replace in any text. Literal or regular expression mode, case sensitive, whole word match, replace all or step through. 100% in your browser.",
           "keywords": [
             "find and replace online",
             "text find replace tool",
@@ -2369,8 +2369,8 @@
         "name": "Base64 Encoder / Decoder",
         "description": "Encode text or files to Base64 — or decode Base64 back to text and binary files. Standard and URL-safe alphabets.",
         "seo": {
-          "title": "Base64 Encoder & Decoder Online — Files, Data URI, URL-safe (No Upload)",
-          "description": "Encode and decode Base64 in your browser. Convert text or files (PNG, JPG, PDF…) to Base64, build data: URIs, decode back to the original binary. URL-safe & MIME line-wrap supported. No upload, no signup.",
+          "title": "Base64 Encoder & Decoder — Files, Data URI, URL-safe",
+          "description": "Encode and decode Base64 in your browser. Convert text or files (PNG, JPG, PDF…) to Base64, build data: URIs, decode back. URL-safe & MIME line-wrap.",
           "keywords": [
             "base64 encode online no upload",
             "base64 decoder online private",
@@ -2412,8 +2412,8 @@
         "name": "URL Encoder / Decoder",
         "description": "Percent-encode or decode URLs and query parameters. Choose between component, full URI, or form (x-www-form-urlencoded) variants.",
         "seo": {
-          "title": "URL Encoder / Decoder Online — encodeURIComponent vs encodeURI vs Form",
-          "description": "Percent-encode and decode URLs and parameters live in your browser. Switch between encodeURIComponent, encodeURI, and application/x-www-form-urlencoded. 100% local — no upload, no signup.",
+          "title": "URL Encoder / Decoder — encodeURIComponent vs encodeURI",
+          "description": "Percent-encode and decode URLs and parameters live. Switch between encodeURIComponent, encodeURI and application/x-www-form-urlencoded. 100% local.",
           "keywords": [
             "url encode online",
             "url decode online no upload",
@@ -2450,8 +2450,8 @@
         "name": "JWT Decoder",
         "description": "Decode a JSON Web Token to inspect its header, payload, and signature — entirely in your browser. Signatures are NOT verified.",
         "seo": {
-          "title": "JWT Decoder Online — Inspect Header, Payload, Claims (No Upload, No Verify)",
-          "description": "Paste a JWT to inspect its header and payload locally in your browser. iat / exp / nbf are rendered as human dates with status. The signature is shown but not verified — your tokens never leave your device.",
+          "title": "JWT Decoder — Inspect Header, Payload, Claims (No Upload)",
+          "description": "Paste a JWT to inspect its header and payload locally. iat / exp / nbf rendered as dates with status. Signature is shown but not verified. No upload.",
           "keywords": [
             "decode jwt online private",
             "jwt decoder no upload",
@@ -2531,7 +2531,7 @@
         "description": "Encode special characters to HTML entities (named, numeric or hex) or decode entities back to characters.",
         "seo": {
           "title": "HTML Entities Encoder / Decoder — Free Online, No Upload",
-          "description": "Convert any character to its HTML entity (named, numeric or hex) and decode entities back. Supports accents, symbols and emoji. 100% in your browser — no upload.",
+          "description": "Convert any character to its HTML entity (named, numeric or hex) and decode entities back. Supports accents, symbols and emoji. 100% in browser.",
           "keywords": [
             "html entities encoder",
             "html entities decoder",
@@ -2566,7 +2566,7 @@
         "name": "Binary Encoder / Decoder",
         "description": "Convert text to its UTF-8 binary representation (8 bits per byte) — and back.",
         "seo": {
-          "title": "Text to Binary Online — Free Binary Encoder / Decoder, No Upload",
+          "title": "Text to Binary — Free Binary Encoder / Decoder",
           "description": "Convert any text to binary (UTF-8, 8 bits per byte) and back. 100% in your browser — no upload, no signup, no tracking.",
           "keywords": [
             "text to binary online",
@@ -2639,8 +2639,8 @@
         "name": "Color Converter",
         "description": "Convert any CSS color between HEX, RGB, HSL, HSV and OKLCH. Paste a color in any common format — everything is computed locally in your browser.",
         "seo": {
-          "title": "Color Converter Online — HEX · RGB · HSL · HSV · OKLCH (No Upload)",
-          "description": "Convert colors between HEX, RGB, HSL, HSV and OKLCH instantly. Paste a hex code, an rgb()/hsl()/oklch() string or a CSS named color — every conversion runs in your browser, no signup, no tracking.",
+          "title": "Color Converter — HEX, RGB, HSL, HSV, OKLCH (No Upload)",
+          "description": "Convert colors between HEX, RGB, HSL, HSV and OKLCH instantly. Paste a hex code, an rgb()/hsl()/oklch() string or a CSS named color. 100% in browser.",
           "keywords": [
             "color converter hex rgb hsl oklch",
             "hex to rgb online",
@@ -2675,8 +2675,8 @@
         "name": "Contrast Checker",
         "description": "Check WCAG color contrast between two colors. Get the ratio plus AA / AAA verdicts for normal and large text — everything runs locally in your browser.",
         "seo": {
-          "title": "WCAG Contrast Checker Online — AA / AAA Color Ratio (No Upload)",
-          "description": "Pick a foreground and a background to see their contrast ratio with WCAG 2 AA / AAA verdicts for normal and large text. Live preview at multiple sizes. 100% in your browser, no signup, no tracking.",
+          "title": "WCAG Contrast Checker — AA / AAA Ratio, No Upload",
+          "description": "Pick a foreground and background to see their contrast ratio with WCAG 2 AA / AAA verdicts for normal and large text. Live preview at multiple sizes.",
           "keywords": [
             "wcag contrast checker online",
             "color contrast ratio tool",
@@ -2713,8 +2713,8 @@
         "name": "Palette from Image",
         "description": "Extract the dominant colors from an image. Pick k-means or median-cut, choose 2–16 swatches, then copy as CSS variables or JSON. Your image never leaves your browser.",
         "seo": {
-          "title": "Extract Color Palette from Image — Free, In-Browser (No Upload)",
-          "description": "Drop a PNG, JPG or WebP and extract its dominant colors with k-means or median-cut. Copy as CSS variables, JSON, or download the palette as a PNG. Every pixel stays in your browser — no upload, no signup.",
+          "title": "Extract Color Palette from Image — Free, In-Browser",
+          "description": "Drop a PNG, JPG or WebP and extract its dominant colors with k-means or median-cut. Copy as CSS variables, JSON, or download the palette as a PNG. Local.",
           "keywords": [
             "extract color palette from image online",
             "image to color palette free",
@@ -2749,7 +2749,7 @@
         "name": "CSS Gradient Builder",
         "description": "Build linear, radial or conic CSS gradients with multiple color stops, custom angle and live preview. Copy the CSS in one click.",
         "seo": {
-          "title": "CSS Gradient Builder Online — Free Linear, Radial & Conic Generator",
+          "title": "CSS Gradient Builder — Linear, Radial & Conic, Free",
           "description": "Build beautiful CSS gradients with multiple stops, angle and type. Copy the CSS in one click. 100% in your browser — no upload, no signup.",
           "keywords": [
             "css gradient generator",
@@ -2840,7 +2840,7 @@
         "name": "Color Blindness Simulator",
         "description": "Simulate how a color or image looks to people with protanopia, deuteranopia, tritanopia or full achromatopsia.",
         "seo": {
-          "title": "Color Blindness Simulator Online — Free Daltonism / CVD Check",
+          "title": "Color Blindness Simulator — Daltonism / CVD Check, Free",
           "description": "Check colors and images for color-vision deficiencies — protanopia, deuteranopia, tritanopia, achromatopsia. 100% in your browser — no upload.",
           "keywords": [
             "color blindness simulator",
@@ -2875,8 +2875,8 @@
         "name": "QR Code Generator",
         "description": "Generate QR codes for text, links, Wi-Fi networks and contact cards. Pick colors, size and error-correction level — everything is rendered locally in your browser.",
         "seo": {
-          "title": "Free QR Code Generator — Text, URL, Wi-Fi, vCard (No Signup, No Upload)",
-          "description": "Free online QR code generator. Encode plain text, links, Wi-Fi credentials or contact (vCard) details. Customize colors, size and error-correction. Download as PNG or SVG. 100% in your browser — no signup, no tracking.",
+          "title": "QR Code Generator — Text, URL, Wi-Fi, vCard, No Signup",
+          "description": "Encode plain text, links, Wi-Fi credentials or contact (vCard) details. Customize colors, size and error correction. Download as PNG or SVG. 100% local.",
           "keywords": [
             "qr code generator wifi vcard",
             "free qr code generator no signup",
@@ -2938,8 +2938,8 @@
         "name": "QR Code Scanner",
         "description": "Scan a QR code with your camera or by dropping an image. The video stream and decoding stay on your device — nothing is uploaded.",
         "seo": {
-          "title": "QR Code Scanner Online — Camera or Image, 100% Private (No App)",
-          "description": "Free online QR code reader. Scan with your webcam or drop a PNG/JPG/WebP image. Decode URLs, Wi-Fi credentials, vCards and text — every byte stays in your browser, no signup, no tracking, no app to install.",
+          "title": "QR Code Scanner — Camera or Image, 100% Private",
+          "description": "Scan with your webcam or drop a PNG/JPG/WebP image. Decode URLs, Wi-Fi credentials, vCards and text — every byte stays in your browser, no app to install.",
           "keywords": [
             "qr code scanner online camera",
             "scan qr code from image",
@@ -3029,7 +3029,7 @@
         "name": "Barcode Scanner",
         "description": "Decode barcodes from an image — Code 128, EAN-13, EAN-8, ITF, Data Matrix and more. Uses the browser's native BarcodeDetector API.",
         "seo": {
-          "title": "Barcode Scanner Online — Free Decode EAN, Code 128 from Image",
+          "title": "Barcode Scanner — Decode EAN, Code 128 from Image",
           "description": "Decode any barcode from an image in your browser — EAN, Code 128, Code 39, ITF, Data Matrix and more. 100% local, no upload, no signup.",
           "keywords": [
             "barcode scanner online",
@@ -3062,8 +3062,8 @@
         "name": "Browse & install skills",
         "description": "Discover the top skills on skills.sh by all-time, 24h trending, or hot — search the catalog, pick what you want, and get a single shell one-liner that installs them all.",
         "seo": {
-          "title": "Browse & install skills.sh skills — top trending + npx skills add builder",
-          "description": "Discover popular and trending skills from skills.sh — all-time, 24h, and hot rankings — search the catalog, multi-select, and copy a single shell one-liner. Works with Claude Code, Cursor, Codex, Gemini CLI, Copilot.",
+          "title": "Browse & install skills.sh skills — trending + builder",
+          "description": "Discover popular and trending skills from skills.sh — all-time, 24h and hot rankings. Search, multi-select, and copy a single shell one-liner. Multi-CLI.",
           "keywords": [
             "skills.sh search",
             "skills.sh trending skills",
@@ -3129,7 +3129,7 @@
         "name": "Skills installer builder",
         "description": "Paste npx skills add commands, pick agents and flags, and get a single shell one-liner to install them all at once.",
         "seo": {
-          "title": "Skills Installer Builder — Combine npx skills add into one command",
+          "title": "Skills Installer — Combine npx skills add into one",
           "description": "Paste multiple npx skills add lines, pick agents and flags, and copy a single shell one-liner. 100% local in your browser, no upload.",
           "keywords": [
             "npx skills add one liner",
@@ -3195,6 +3195,235 @@
       "whatWeLoad": "What your browser downloads",
       "whatWeDoNot": "What we never do",
       "aiModels": "AI models (background removal)"
+    }
+  },
+  "categories": {
+    "pdf": {
+      "name": "PDF tools",
+      "intro": "Free in-browser tools to merge, split, rotate, watermark and convert PDFs. Drop a file, see a live preview, download — nothing is ever uploaded.",
+      "seo": {
+        "title": "Free PDF Tools — Merge, Split, Rotate, Watermark Online",
+        "description": "Free in-browser PDF toolkit: merge, split, rotate, watermark, convert to images, extract embedded photos. Your files never leave your device.",
+        "keywords": [
+          "pdf tools",
+          "free pdf editor online",
+          "merge pdf",
+          "split pdf",
+          "rotate pdf",
+          "pdf to image",
+          "pdf watermark",
+          "browser pdf tools",
+          "pdf converter no upload"
+        ],
+        "ogTitle": "PDF tools · 100% local"
+      }
+    },
+    "video": {
+      "name": "Video tools",
+      "intro": "Convert, trim, split, merge, compress, resize, mute or watermark videos — MP4, WebM, MOV, MKV — powered by FFmpeg WebAssembly. Runs in your browser.",
+      "seo": {
+        "title": "Free Video Tools — Convert, Trim, Compress, Resize MP4",
+        "description": "In-browser video toolkit: convert MP4/WebM/MOV, trim, split, merge, compress, resize, mute, watermark, extract frames. FFmpeg WebAssembly, no upload.",
+        "keywords": [
+          "video tools",
+          "online video editor",
+          "convert mp4",
+          "trim video",
+          "compress video",
+          "resize video",
+          "video watermark",
+          "ffmpeg browser",
+          "split video online"
+        ],
+        "ogTitle": "Video tools · 100% local"
+      }
+    },
+    "audio": {
+      "name": "Audio tools",
+      "intro": "Convert, trim, merge, normalize audio and edit MP3 tags entirely in your browser. MP3, WAV, FLAC, AAC, M4A and Opus supported.",
+      "seo": {
+        "title": "Free Audio Tools — Convert, Trim, Tag, Normalize MP3",
+        "description": "In-browser audio toolkit: convert MP3/WAV/FLAC/AAC, trim, merge, normalize loudness, extract from video, edit ID3 tags and cover art. No upload.",
+        "keywords": [
+          "audio tools",
+          "convert mp3",
+          "trim mp3",
+          "merge mp3",
+          "id3 tag editor",
+          "normalize audio",
+          "extract audio from video",
+          "free audio editor online"
+        ],
+        "ogTitle": "Audio tools · 100% local"
+      }
+    },
+    "image": {
+      "name": "Image tools",
+      "intro": "Convert, compress, resize, crop, rotate and remove the background from images — PNG, JPG, WebP, AVIF — with a live canvas preview, in your browser.",
+      "seo": {
+        "title": "Free Image Tools — Convert, Compress, Resize & Crop",
+        "description": "In-browser image toolkit: convert PNG/JPG/WebP, compress, resize, crop, rotate, flip, remove background. Live preview, no upload, no signup.",
+        "keywords": [
+          "image tools",
+          "convert image online",
+          "compress image",
+          "resize image",
+          "crop image",
+          "remove background",
+          "image converter",
+          "free image editor"
+        ],
+        "ogTitle": "Image tools · 100% local"
+      }
+    },
+    "svg": {
+      "name": "SVG tools",
+      "intro": "View, optimize, edit, rasterize, encode and turn SVG into a favicon pack — directly in your browser with a sandboxed preview.",
+      "seo": {
+        "title": "Free SVG Tools — View, Optimize, Edit, Convert to PNG",
+        "description": "In-browser SVG toolkit: viewer, SVGO optimizer with live diff, code editor with color picker, SVG to PNG/JPG/WebP, Data URL encoder, favicon pack.",
+        "keywords": [
+          "svg tools",
+          "svg optimizer",
+          "svg editor",
+          "svg to png",
+          "svg viewer",
+          "svg favicon generator",
+          "svgo online",
+          "svg to data url"
+        ],
+        "ogTitle": "SVG tools · 100% local"
+      }
+    },
+    "password": {
+      "name": "Password tools",
+      "intro": "Generate cryptographically secure passwords and passphrases, hash text, validate bcrypt, and estimate password strength — all locally.",
+      "seo": {
+        "title": "Free Password Tools — Generate, Hash, bcrypt, Strength",
+        "description": "Local password toolkit: strong random generator, diceware passphrases, SHA-1/256/384/512 hashes, bcrypt hash & verify, entropy strength check.",
+        "keywords": [
+          "password tools",
+          "password generator",
+          "passphrase generator",
+          "bcrypt online",
+          "sha256 hash",
+          "password strength checker",
+          "diceware"
+        ],
+        "ogTitle": "Password tools · 100% local"
+      }
+    },
+    "json": {
+      "name": "JSON tools",
+      "intro": "Format, validate, query, tabulate, diff, convert to CSV and build JSON Schemas — all interactively in your browser.",
+      "seo": {
+        "title": "Free JSON Tools — Format, Validate, Query, Diff, Schema",
+        "description": "In-browser JSON toolkit: formatter, interactive tree viewer, JSONPath query tester, table view, JSON↔CSV, side-by-side diff, JSON Schema validator.",
+        "keywords": [
+          "json tools",
+          "json formatter",
+          "json validator",
+          "jsonpath tester",
+          "json to csv",
+          "json diff",
+          "json schema validator",
+          "json viewer"
+        ],
+        "ogTitle": "JSON tools · 100% local"
+      }
+    },
+    "text": {
+      "name": "Text tools",
+      "intro": "Convert case, count words, generate Lorem Ipsum, diff and slugify text, build regex, sort lines, clean whitespace, escape and preview Markdown — locally.",
+      "seo": {
+        "title": "Free Text Tools — Case, Count, Diff, Regex, Slug, Markdown",
+        "description": "In-browser text toolkit: case converter, word counter, Lorem Ipsum, diff, regex tester, slugify, sort lines, whitespace cleaner, escape, Markdown.",
+        "keywords": [
+          "text tools",
+          "case converter",
+          "word counter",
+          "lorem ipsum",
+          "text diff",
+          "regex tester",
+          "slugify",
+          "markdown preview",
+          "find and replace"
+        ],
+        "ogTitle": "Text tools · 100% local"
+      }
+    },
+    "encode": {
+      "name": "Encoding tools",
+      "intro": "Encode and decode Base64, URLs, JWT, hex, HTML entities, binary and Morse — text or files — all without uploading anywhere.",
+      "seo": {
+        "title": "Free Encoding Tools — Base64, URL, JWT, Hex, Morse",
+        "description": "In-browser encoding toolkit: Base64 (files & data URIs), URL encoder, JWT decoder, hex, HTML entities, binary, Morse. 100% local, no upload.",
+        "keywords": [
+          "encoding tools",
+          "base64 encoder",
+          "url encoder",
+          "jwt decoder",
+          "hex encoder",
+          "html entities",
+          "text to binary",
+          "morse translator"
+        ],
+        "ogTitle": "Encoding tools · 100% local"
+      }
+    },
+    "color": {
+      "name": "Color tools",
+      "intro": "Convert color codes, check WCAG contrast, extract palettes from images, build CSS gradients, generate shades, mix colors and simulate colorblindness.",
+      "seo": {
+        "title": "Free Color Tools — Converter, Contrast, Palette, Gradient",
+        "description": "In-browser color toolkit: HEX/RGB/HSL/HSV/OKLCH converter, WCAG contrast, palette extractor, CSS gradient builder, shades, blender, daltonism check.",
+        "keywords": [
+          "color tools",
+          "color converter",
+          "wcag contrast checker",
+          "color palette generator",
+          "css gradient builder",
+          "color shades",
+          "color blindness simulator"
+        ],
+        "ogTitle": "Color tools · 100% local"
+      }
+    },
+    "qr": {
+      "name": "QR & barcodes",
+      "intro": "Generate and scan QR codes and barcodes — Code 128, EAN-13, EAN-8 — directly in your browser, via webcam or image drop.",
+      "seo": {
+        "title": "Free QR Code & Barcode Tools — Generate & Scan in Browser",
+        "description": "In-browser QR & barcode toolkit: QR code generator (text, URL, Wi-Fi, vCard), QR scanner via webcam, Code 128 / EAN-13 / EAN-8 generator and scanner.",
+        "keywords": [
+          "qr code generator",
+          "qr scanner",
+          "barcode generator",
+          "barcode scanner online",
+          "ean 13 generator",
+          "code 128 generator",
+          "wifi qr code"
+        ],
+        "ogTitle": "QR & barcodes · 100% local"
+      }
+    },
+    "dev": {
+      "name": "Developer tools",
+      "intro": "Browse skills.sh, multi-select and copy a single shell one-liner to install agent skills across Claude Code, Cursor, Codex, Gemini CLI and Copilot.",
+      "seo": {
+        "title": "Free Developer Tools — skills.sh Browser & Installer",
+        "description": "Discover trending skills.sh skills and build a single npx skills add one-liner for Claude Code, Cursor, Codex, Gemini CLI, Copilot. 100% local.",
+        "keywords": [
+          "developer tools",
+          "skills.sh",
+          "npx skills add",
+          "claude code skills",
+          "cursor agent skills",
+          "ai agent skills",
+          "skill installer"
+        ],
+        "ogTitle": "Developer tools · 100% local"
+      }
     }
   }
 }

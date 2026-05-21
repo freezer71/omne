@@ -4,6 +4,9 @@ import { TOOLS } from '@/lib/tools/registry';
 import { locales } from '@/lib/i18n/config';
 import { SITE_URL } from '@/lib/seo/site';
 
+const populatedCategories = new Set(TOOLS.map((t) => t.category));
+const entriesPerLocale = 2 + populatedCategories.size + TOOLS.length;
+
 async function getBody(): Promise<string> {
   return GET().text();
 }
@@ -22,11 +25,17 @@ describe('sitemap.xml route handler', () => {
     expect(body).toContain('xmlns:xhtml="http://www.w3.org/1999/xhtml"');
   });
 
-  it('emits one <url> entry per locale × (home + privacy + each tool)', async () => {
+  it('emits one <url> entry per locale × (home + privacy + each category + each tool)', async () => {
     const body = await getBody();
     const matches = body.match(/<url>/g) ?? [];
-    const expected = locales.length * (2 + TOOLS.length);
-    expect(matches.length).toBe(expected);
+    expect(matches.length).toBe(locales.length * entriesPerLocale);
+  });
+
+  it('includes a category page for a populated category', async () => {
+    const body = await getBody();
+    expect(body).toContain(`<loc>${SITE_URL}/en/pdf</loc>`);
+    expect(body).toContain(`<loc>${SITE_URL}/fr/pdf</loc>`);
+    expect(body).toContain('<priority>0.7</priority>');
   });
 
   it('includes both locales for a representative tool URL', async () => {
@@ -41,8 +50,7 @@ describe('sitemap.xml route handler', () => {
     expect(body).toContain('hreflang="fr"');
     expect(body).toContain('hreflang="x-default"');
     const enAlts = body.match(/hreflang="en"/g) ?? [];
-    const expectedPerLocale = 2 + TOOLS.length;
-    expect(enAlts.length).toBe(locales.length * expectedPerLocale);
+    expect(enAlts.length).toBe(locales.length * entriesPerLocale);
   });
 
   it('renders priorities matching the registry status mapping', async () => {

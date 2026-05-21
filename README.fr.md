@@ -109,6 +109,8 @@ Source de vérité : [`lib/tools/registry.ts`](./lib/tools/registry.ts). Le site
 - **`proxy.ts`** à la racine remplace l'ancien `middleware.ts`. Il détecte `Accept-Language` et redirige les chemins nus vers `/[locale]/...`.
 - Toutes les routes vivent sous `app/[locale]/...`. Il n'y a **pas** de `app/layout.tsx` — le seul layout racine est `app/[locale]/layout.tsx`.
 - `params` est une **Promesse** dans chaque page, layout et `generateMetadata` : `const { locale } = await params;` est obligatoire.
+- Les pages de catégorie localisées vivent à `app/[locale]/[category]/page.tsx` (`/en/pdf`, `/fr/image`, …). Elles sont pré-rendues pour chaque catégorie peuplée, avec leur propre metadata, image OpenGraph, fil d'Ariane et JSON-LD `CollectionPage`.
+- Une page 404 localisée à `app/[locale]/not-found.tsx` rattrape les chemins non reconnus sous `/[locale]/...`, détecte la langue via `Accept-Language` et suggère des outils populaires. Le manifest PWA (`app/manifest.ts`) et le viewport `theme-color` sont émis automatiquement.
 
 ### Anatomie d'un outil
 
@@ -119,7 +121,7 @@ Chaque outil suit le même squelette en 5 fichiers + une entrée de registre :
 3. **Page** — `app/[locale]/<catégorie>/<id>/page.tsx` (Server Component)
 4. **OpenGraph image** — `app/[locale]/<catégorie>/<id>/opengraph-image.tsx`
 5. **Entrée registre** — `lib/tools/registry.ts`
-6. **Traductions** — clés `tools.<catégorie>.<id>` dans **les deux** `messages/{en,fr}.json` (bloc `seo` inclus, parité testée en CI)
+6. **Traductions** — clés `tools.<catégorie>.<id>` dans **les deux** `messages/{en,fr}.json` (bloc `seo` inclus, parité testée en CI). Une nouvelle catégorie nécessite aussi un bloc `categories.<catégorie>` (`name`, `intro`, `seo`) pour sa landing page.
 
 **Aperçu temps réel obligatoire** : tout outil doit afficher un résultat live qui reflète les paramètres courants — un debounce de ~150-250 ms sur l'effet, pas de bouton "Apply" avant l'aperçu. Pour les pipelines lourds (ffmpeg, pdf.js, remove-bg), rendre un proxy léger (résolution réduite, première page/frame).
 
@@ -155,14 +157,17 @@ npx playwright test tests/e2e/<nom>.spec.ts --project=chromium
 
 ```
 omne/
-├── app/[locale]/         # Pages (Server Components) par catégorie/outil
+├── app/
+│   ├── [locale]/         # Pages (Server Components) par catégorie/outil + not-found.tsx
+│   └── manifest.ts       # Manifest PWA (icônes, thème, start_url)
 ├── components/tools/     # Composants client de chaque outil
 ├── lib/
 │   ├── tools/
 │   │   ├── implementations/  # Logique pure (testable hors DOM)
 │   │   ├── registry.ts       # Source de vérité du catalogue
-│   │   ├── metadata.ts       # SEO / OG / hreflang
 │   │   └── mime-router.ts    # Routage par type MIME au drop
+│   ├── seo/                  # metadata, JSON-LD (WebApplication, CollectionPage, BreadcrumbList)
+│   └── og/                   # Template + builder d'image OG (hub / privacy / tool / category)
 │   ├── i18n/             # Dictionnaires côté serveur (server-only)
 │   ├── ffmpeg-loader.ts  # Singleton ffmpeg.wasm
 │   └── file-utils.ts     # downloadBlob, outputName, etc.

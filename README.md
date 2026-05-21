@@ -109,6 +109,8 @@ Source of truth: [`lib/tools/registry.ts`](./lib/tools/registry.ts). The sitemap
 - **`proxy.ts`** at the project root replaces the old `middleware.ts` convention. It sniffs `Accept-Language` and 307-redirects bare paths into `/[locale]/...`.
 - All routes live under `app/[locale]/...`. There is **no** `app/layout.tsx` — the only root layout is `app/[locale]/layout.tsx`.
 - `params` is a **Promise** in every page, layout and `generateMetadata`: `const { locale } = await params;` is mandatory.
+- Per-locale category landing pages live at `app/[locale]/[category]/page.tsx` (`/en/pdf`, `/fr/image`, …). They're prerendered for every populated category, with their own metadata, OpenGraph image, breadcrumb and `CollectionPage` JSON-LD.
+- A localized 404 at `app/[locale]/not-found.tsx` catches unmatched paths under `/[locale]/...`, picks language via `Accept-Language`, and suggests popular tools. The PWA manifest (`app/manifest.ts`) and `theme-color` viewport are emitted automatically.
 
 ### Anatomy of a tool
 
@@ -119,7 +121,7 @@ Each tool follows the same 5-file skeleton plus one registry entry:
 3. **Page** — `app/[locale]/<category>/<id>/page.tsx` (Server Component)
 4. **OpenGraph image** — `app/[locale]/<category>/<id>/opengraph-image.tsx`
 5. **Registry entry** — `lib/tools/registry.ts`
-6. **Translations** — `tools.<category>.<id>` keys in **both** `messages/{en,fr}.json` (`seo` block included, parity checked in CI)
+6. **Translations** — `tools.<category>.<id>` keys in **both** `messages/{en,fr}.json` (`seo` block included, parity checked in CI). A new category also needs a `categories.<category>` block (`name`, `intro`, `seo`) for its landing page.
 
 **Real-time preview is mandatory**: every tool must render a live result that reflects the current parameters — drive it from a ~150–250 ms debounced effect, no "Apply" button before the preview shows. For heavy pipelines (ffmpeg, pdf.js, remove-bg), render a lightweight proxy (lower resolution, first page/frame).
 
@@ -155,14 +157,17 @@ npx playwright test tests/e2e/<name>.spec.ts --project=chromium
 
 ```
 omne/
-├── app/[locale]/         # Pages (Server Components) per category/tool
+├── app/
+│   ├── [locale]/         # Pages (Server Components) per category/tool + not-found.tsx
+│   └── manifest.ts       # PWA Web App Manifest (icons, theme, start_url)
 ├── components/tools/     # Client components for each tool
 ├── lib/
 │   ├── tools/
 │   │   ├── implementations/  # Pure logic (testable outside the DOM)
 │   │   ├── registry.ts       # Source of truth for the catalog
-│   │   ├── metadata.ts       # SEO / OG / hreflang
 │   │   └── mime-router.ts    # MIME-based routing on drop
+│   ├── seo/                  # metadata, JSON-LD (WebApplication, CollectionPage, BreadcrumbList)
+│   └── og/                   # OG image template + builder (hub / privacy / tool / category)
 │   ├── i18n/             # Server-side dictionaries (server-only)
 │   ├── ffmpeg-loader.ts  # Singleton ffmpeg.wasm
 │   └── file-utils.ts     # downloadBlob, outputName, etc.

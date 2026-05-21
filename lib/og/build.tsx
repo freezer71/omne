@@ -40,8 +40,19 @@ type ToolInput = {
   category: ToolCategory;
   id: string;
 };
+type CategoryInput = {
+  kind: 'category';
+  locale: Locale;
+  category: ToolCategory;
+};
 
-export type OgInput = HubInput | PrivacyInput | ToolInput;
+export type OgInput = HubInput | PrivacyInput | ToolInput | CategoryInput;
+
+type CategoryDictNode = {
+  name?: string;
+  intro?: string;
+  seo?: { title?: string; description?: string; ogTitle?: string };
+};
 
 function privacyBadge(locale: Locale): string {
   return locale === 'fr' ? '100 % local · aucun envoi' : '100% local · no upload';
@@ -59,6 +70,7 @@ export async function buildOgImage(input: OgInput): Promise<ImageResponse> {
     privacy?: PrivacyDictNode;
     hub?: { categories?: Record<string, string> };
     tools?: Record<string, Record<string, ToolDictNode>>;
+    categories?: Record<string, CategoryDictNode>;
   };
 
   let title: string;
@@ -73,6 +85,11 @@ export async function buildOgImage(input: OgInput): Promise<ImageResponse> {
     const privacy = dict.privacy ?? {};
     title = privacy.seo?.ogTitle ?? privacy.title ?? 'Privacy';
     description = privacy.leadParagraph ?? '';
+  } else if (input.kind === 'category') {
+    const node = dict.categories?.[input.category];
+    const label = dict.hub?.categories?.[input.category] ?? input.category;
+    title = node?.seo?.ogTitle ?? node?.name ?? label;
+    description = node?.intro ?? node?.seo?.description ?? '';
   } else {
     const tool = getTool(input.category, input.id);
     const node = dict.tools?.[input.category]?.[input.id];

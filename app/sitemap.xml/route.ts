@@ -1,5 +1,6 @@
 import { locales, type Locale } from '@/lib/i18n/config';
 import { TOOLS } from '@/lib/tools/registry';
+import { TOOL_CATEGORIES, type ToolCategory } from '@/lib/tools/types';
 import { localizedUrl } from '@/lib/seo/site';
 
 export const dynamic = 'force-static';
@@ -31,9 +32,20 @@ type Entry = {
 
 function buildEntries(): Entry[] {
   const entries: Entry[] = [];
+  const populatedCategories = new Set<ToolCategory>(TOOLS.map((t) => t.category));
   for (const locale of locales) {
     entries.push({ path: '/', locale, changefreq: 'weekly', priority: 1 });
     entries.push({ path: '/privacy', locale, changefreq: 'yearly', priority: 0.4 });
+    for (const category of TOOL_CATEGORIES) {
+      if (populatedCategories.has(category)) {
+        entries.push({
+          path: `/${category}`,
+          locale,
+          changefreq: 'weekly',
+          priority: 0.7,
+        });
+      }
+    }
     for (const tool of TOOLS) {
       entries.push({
         path: tool.href,

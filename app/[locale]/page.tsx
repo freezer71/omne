@@ -79,6 +79,7 @@ export default async function HubPage({
         tools={featured}
       />
       <HubCategoryGrid
+        locale={locale}
         title={dict.home.categoryGrid.title}
         subtitle={dict.home.categoryGrid.subtitle}
         tools={tools}

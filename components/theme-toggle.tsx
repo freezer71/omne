@@ -36,7 +36,7 @@ export function ThemeToggle({ labelLight, labelDark, srLabel }: Props) {
 
   const btn = (active: boolean) =>
     cn(
-      'h-7 px-3 rounded text-xs font-medium transition-colors duration-150',
+      'h-7 px-2 sm:px-3 rounded text-xs font-medium transition-colors duration-150',
       active
         ? 'bg-surface-elevated text-text-primary'
         : 'text-text-muted hover:text-text-primary',

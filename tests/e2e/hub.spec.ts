@@ -24,9 +24,11 @@ test.describe('hub page', () => {
     await expect(page.getByRole('link', { name: /trim video/i })).toHaveAttribute('href', '/en/video/trim');
   });
 
-  test('shows the privacy badge in the header', async ({ page }) => {
+  test('shows the privacy claim in the footer', async ({ page }) => {
     await page.goto('/en');
-    await expect(page.getByText(/100% local · no upload/i)).toBeVisible();
+    await expect(
+      page.locator('footer').getByText(/100% local · no upload/i),
+    ).toBeVisible();
   });
 
   test('header lets the user switch to French and updates the URL', async ({ page }) => {

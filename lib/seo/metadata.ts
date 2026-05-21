@@ -115,6 +115,37 @@ export async function buildHubMetadata(locale: Locale): Promise<Metadata> {
   return commonMetadata({ locale, path: '/', title, description, keywords, ogTitle });
 }
 
+export async function buildCategoryMetadata(
+  category: ToolCategory,
+  locale: Locale,
+): Promise<Metadata> {
+  const dict = await getDictionary(locale);
+  const dictTree = dict as unknown as DictTree;
+  const categoryNode = (dictTree['categories'] as DictTree | undefined)?.[category] as
+    | { name?: string }
+    | undefined;
+  const hubCategories = ((dictTree['hub'] as DictTree | undefined)?.['categories'] ?? {}) as Record<
+    string,
+    string
+  >;
+  const fallbackName = categoryNode?.name ?? hubCategories[category] ?? category;
+  const seo = readSeo(dictTree, ['categories', category, 'seo']);
+
+  const title = seo?.title ?? fallbackName;
+  const description = seo?.description ?? '';
+  const keywords = seo?.keywords ?? [];
+  const ogTitle = seo?.ogTitle ?? title;
+
+  return commonMetadata({
+    locale,
+    path: `/${category}`,
+    title,
+    description,
+    keywords,
+    ogTitle,
+  });
+}
+
 export async function buildPrivacyMetadata(locale: Locale): Promise<Metadata> {
   const dict = await getDictionary(locale);
   const dictTree = dict as unknown as DictTree;

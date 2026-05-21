@@ -15,14 +15,14 @@ type Props = {
 export function Header({ locale, dict }: Props) {
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-bg/80 backdrop-blur-md">
-      <div className="mx-auto flex h-12 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
-        <div className="flex items-center gap-6">
+      <div className="mx-auto flex h-12 max-w-5xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           <Link href={`/${locale}`} aria-label={dict.meta.siteName}>
             <Logo />
           </Link>
           <Link
             href={`/${locale}/privacy`}
-            className="text-sm text-text-muted hover:text-text-primary transition-colors"
+            className="hidden sm:inline text-sm text-text-muted hover:text-text-primary transition-colors"
           >
             {dict.nav.privacy}
           </Link>
@@ -31,15 +31,14 @@ export function Header({ locale, dict }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={dict.nav.githubAriaLabel}
-            className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-text-primary transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-text-primary transition-colors"
           >
             <GithubIcon size={16} />
-            <span className="hidden sm:inline">{dict.nav.github}</span>
+            <span>{dict.nav.github}</span>
           </Link>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <PaletteButton labelOpen={dict.palette.open} shortcut={dict.palette.shortcut} />
-          <PrivacyBadge label={dict.badge.privacy} />
           <LocaleSwitcher
             currentLocale={locale}
             labelEn={dict.locale.en}
@@ -54,17 +53,5 @@ export function Header({ locale, dict }: Props) {
         </div>
       </div>
     </header>
-  );
-}
-
-function PrivacyBadge({ label }: { label: string }) {
-  return (
-    <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-2.5 py-1 text-xs text-text-muted">
-      <span
-        aria-hidden
-        className="inline-block h-1.5 w-1.5 rounded-full bg-success"
-      />
-      {label}
-    </span>
   );
 }
