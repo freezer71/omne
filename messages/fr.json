@@ -28,7 +28,17 @@
   "common": {
     "backHome": "Accueil",
     "previewLoading": "Chargement",
-    "previewError": "Aperçu impossible"
+    "previewError": "Aperçu impossible",
+    "footer": {
+      "howItWorksTitle": "Comment ça marche",
+      "howItWorksStep1": "Déposez votre fichier ou collez votre contenu dans l'outil ci-dessus.",
+      "howItWorksStep2": "Ajustez les options — chaque changement met à jour l'aperçu instantanément.",
+      "howItWorksStep3": "Téléchargez le résultat. Votre fichier ne quitte jamais votre navigateur.",
+      "privacyTitle": "Vos fichiers ne quittent jamais cette page",
+      "privacyBody": "Chaque conversion s'exécute entièrement dans votre navigateur via WebAssembly. Pas d'upload, pas de traitement serveur, pas d'analytics, pas de cookies. Ouvrez DevTools → Network pendant l'opération et vous verrez zéro trafic sortant.",
+      "relatedTitle": "Outils connexes",
+      "keywordsTitle": "Sujets couverts"
+    }
   },
   "badge": {
     "privacy": "100 % local · aucun envoi"

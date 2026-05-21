@@ -28,7 +28,17 @@
   "common": {
     "backHome": "Home",
     "previewLoading": "Loading",
-    "previewError": "Can't preview"
+    "previewError": "Can't preview",
+    "footer": {
+      "howItWorksTitle": "How it works",
+      "howItWorksStep1": "Drop your file or paste your content into the tool above.",
+      "howItWorksStep2": "Adjust the options — every change updates the preview instantly.",
+      "howItWorksStep3": "Download the result. Your file never leaves your browser.",
+      "privacyTitle": "Your files never leave this page",
+      "privacyBody": "Every conversion runs entirely in your browser using WebAssembly. There is no upload, no server-side processing, no analytics, and no cookies. Open DevTools → Network during the operation and you will see zero outbound traffic.",
+      "relatedTitle": "Related tools",
+      "keywordsTitle": "Topics covered"
+    }
   },
   "badge": {
     "privacy": "100% local · no upload"

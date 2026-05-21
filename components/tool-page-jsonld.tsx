@@ -4,6 +4,7 @@ import { getTool } from '@/lib/tools/registry';
 import type { ToolCategory } from '@/lib/tools/types';
 import { toolJsonLd } from '@/lib/seo/jsonld';
 import { JsonLd } from './json-ld';
+import { ToolFooterSeo } from './tool-footer-seo';
 
 type Props = {
   category: ToolCategory;
@@ -15,5 +16,10 @@ export async function ToolPageJsonLd({ category, id, locale }: Props) {
   const tool = getTool(category, id);
   if (!tool) return null;
   const data = await toolJsonLd(tool, locale);
-  return <JsonLd data={data} id={`omne-jsonld-${category}-${id}`} />;
+  return (
+    <>
+      <JsonLd data={data} id={`omne-jsonld-${category}-${id}`} />
+      <ToolFooterSeo category={category} id={id} locale={locale} />
+    </>
+  );
 }
