@@ -11,7 +11,7 @@ const applePath = resolve(root, 'app/apple-icon.png');
 
 const svg = await readFile(svgPath);
 
-const ICO_SIZES = [16, 32, 48];
+const ICO_SIZES = [16, 32, 48, 64, 96, 128];
 const pngs = await Promise.all(
   ICO_SIZES.map((size) =>
     sharp(svg, { density: 384 })
