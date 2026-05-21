@@ -1,10 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-const { execMock, writeMock, readMock, deleteMock } = vi.hoisted(() => ({
+const {
+  execMock, writeMock, readMock, deleteMock,
+  mountMock, unmountMock, createDirMock, deleteDirMock,
+} = vi.hoisted(() => ({
   execMock: vi.fn(),
   writeMock: vi.fn(),
   readMock: vi.fn(),
   deleteMock: vi.fn(),
+  mountMock: vi.fn(),
+  unmountMock: vi.fn(),
+  createDirMock: vi.fn(),
+  deleteDirMock: vi.fn(),
 }));
 
 vi.mock('@/lib/ffmpeg-loader', () => ({
@@ -12,10 +19,18 @@ vi.mock('@/lib/ffmpeg-loader', () => ({
     writeFile: writeMock,
     readFile: readMock,
     deleteFile: deleteMock,
+    mount: mountMock,
+    unmount: unmountMock,
+    createDir: createDirMock,
+    deleteDir: deleteDirMock,
     exec: execMock,
     on: () => {},
     off: () => {},
   })),
+}));
+
+vi.mock('@ffmpeg/ffmpeg', () => ({
+  FFFSType: { WORKERFS: 'WORKERFS' },
 }));
 
 vi.mock('@ffmpeg/util', () => ({
@@ -41,6 +56,14 @@ beforeEach(() => {
   readMock.mockResolvedValue(new Uint8Array([0x00, 0x01]));
   deleteMock.mockReset();
   deleteMock.mockResolvedValue(undefined);
+  mountMock.mockReset();
+  mountMock.mockResolvedValue(true);
+  unmountMock.mockReset();
+  unmountMock.mockResolvedValue(true);
+  createDirMock.mockReset();
+  createDirMock.mockResolvedValue(true);
+  deleteDirMock.mockReset();
+  deleteDirMock.mockResolvedValue(true);
 });
 
 const defaults = {
@@ -94,32 +117,54 @@ describe('renderTemplate', () => {
   });
 });
 
+const cutArgs = (i: number) => execMock.mock.calls[i * 2]![0] as string[];
+const encArgs = (i: number) => execMock.mock.calls[i * 2 + 1]![0] as string[];
+
 describe('generateShorts', () => {
-  it('writes the input + font once, runs FFmpeg N times and reads N outputs', async () => {
+  it('mounts the input via WORKERFS, writes the font once, runs FFmpeg 2*N times and reads N outputs', async () => {
     const file = new File([new Uint8Array([0])], 'movie.mp4', { type: 'video/mp4' });
     const result = await generateShorts(file, { mode: 'parts', parts: 3, totalDuration: 30, ...defaults });
-    expect(writeMock).toHaveBeenCalledTimes(2);
-    expect(writeMock.mock.calls.map((c) => c[0]).sort()).toEqual(['input.mp4', 'wm-font.ttf']);
-    expect(execMock).toHaveBeenCalledTimes(3);
+    expect(createDirMock).toHaveBeenCalledWith('/wm-input');
+    expect(mountMock).toHaveBeenCalledTimes(1);
+    const [fsType, mountOpts, mountPoint] = mountMock.mock.calls[0]!;
+    expect(fsType).toBe('WORKERFS');
+    expect(mountPoint).toBe('/wm-input');
+    expect(mountOpts.blobs[0].name).toBe('input.mp4');
+    expect(mountOpts.blobs[0].data).toBe(file);
+    expect(writeMock).toHaveBeenCalledTimes(1);
+    expect(writeMock.mock.calls[0]![0]).toBe('wm-font.ttf');
+    expect(execMock).toHaveBeenCalledTimes(6);
     expect(readMock).toHaveBeenCalledTimes(3);
     expect(result).toHaveLength(3);
     expect(result[0]).toBeInstanceOf(Uint8Array);
   });
 
-  it('emits -ss / -t and a -vf drawtext filter with the rendered counter', async () => {
+  it('stage 1 cuts the source with -c copy at each boundary', async () => {
     const file = new File([new Uint8Array([0])], 'movie.mp4', { type: 'video/mp4' });
     await generateShorts(file, { mode: 'parts', parts: 2, totalDuration: 10, ...defaults });
-    const first = execMock.mock.calls[0]![0] as string[];
-    const second = execMock.mock.calls[1]![0] as string[];
-    expect(first[first.indexOf('-ss') + 1]).toBe('0');
-    expect(first[first.indexOf('-t') + 1]).toBe('5');
-    expect(second[second.indexOf('-ss') + 1]).toBe('5');
-    expect(second[second.indexOf('-t') + 1]).toBe('5');
-    const vfFirst = first[first.indexOf('-vf') + 1]!;
-    const vfSecond = second[second.indexOf('-vf') + 1]!;
-    expect(vfFirst).toContain('drawtext=');
-    expect(vfFirst).toContain("text='1/2'");
-    expect(vfSecond).toContain("text='2/2'");
+    const cut0 = cutArgs(0);
+    const cut1 = cutArgs(1);
+    expect(cut0[cut0.indexOf('-ss') + 1]).toBe('0');
+    expect(cut0[cut0.indexOf('-t') + 1]).toBe('5');
+    expect(cut0[cut0.indexOf('-c') + 1]).toBe('copy');
+    expect(cut0[cut0.indexOf('-i') + 1]).toBe('/wm-input/input.mp4');
+    expect(cut0).not.toContain('-vf');
+    expect(cut1[cut1.indexOf('-ss') + 1]).toBe('5');
+    expect(cut1[cut1.indexOf('-t') + 1]).toBe('5');
+  });
+
+  it('stage 2 applies drawtext with the rendered counter per segment', async () => {
+    const file = new File([new Uint8Array([0])], 'movie.mp4', { type: 'video/mp4' });
+    await generateShorts(file, { mode: 'parts', parts: 2, totalDuration: 10, ...defaults });
+    const enc0 = encArgs(0);
+    const enc1 = encArgs(1);
+    expect(enc0[enc0.indexOf('-i') + 1]).toBe('wm-chunk-1.mp4');
+    expect(enc1[enc1.indexOf('-i') + 1]).toBe('wm-chunk-2.mp4');
+    const vf0 = enc0[enc0.indexOf('-vf') + 1]!;
+    const vf1 = enc1[enc1.indexOf('-vf') + 1]!;
+    expect(vf0).toContain('drawtext=');
+    expect(vf0).toContain("text='1/2'");
+    expect(vf1).toContain("text='2/2'");
   });
 
   it('writes a font ttf into MEMFS and references it via fontfile in drawtext', async () => {
@@ -127,7 +172,7 @@ describe('generateShorts', () => {
     await generateShorts(file, { mode: 'parts', parts: 2, totalDuration: 10, ...defaults, fontFamily: 'anton' });
     const fontWrite = writeMock.mock.calls.find((c) => c[0] === 'wm-font.ttf');
     expect(fontWrite).toBeDefined();
-    const args = execMock.mock.calls[0]![0] as string[];
+    const args = encArgs(0);
     const vf = args[args.indexOf('-vf') + 1]!;
     expect(vf).toContain('fontfile=wm-font.ttf');
   });
@@ -135,7 +180,7 @@ describe('generateShorts', () => {
   it('passes the chosen fontColor as 0xRRGGBB to drawtext', async () => {
     const file = new File([new Uint8Array([0])], 'movie.mp4', { type: 'video/mp4' });
     await generateShorts(file, { mode: 'parts', parts: 2, totalDuration: 10, ...defaults, fontColor: '#ff3b30' });
-    const args = execMock.mock.calls[0]![0] as string[];
+    const args = encArgs(0);
     const vf = args[args.indexOf('-vf') + 1]!;
     expect(vf).toContain('fontcolor=0xFF3B30@');
   });
@@ -166,7 +211,7 @@ describe('generateShorts', () => {
       await generateShorts(file, {
         mode: 'parts', parts: 2, totalDuration: 10, ...defaults, position: pos,
       });
-      const args = execMock.mock.calls[0]![0] as string[];
+      const args = encArgs(0);
       const vf = args[args.indexOf('-vf') + 1]!;
       expect(vf).toContain(`:x=${expX}:`);
       expect(vf).toContain(`:y=${expY}:`);
@@ -179,7 +224,7 @@ describe('generateShorts', () => {
       mode: 'parts', parts: 2, totalDuration: 10, ...defaults,
       position: 'custom', customX: 25, customY: 75,
     });
-    const args = execMock.mock.calls[0]![0] as string[];
+    const args = encArgs(0);
     const vf = args[args.indexOf('-vf') + 1]!;
     expect(vf).toContain(':x=iw*0.2500-tw/2:');
     expect(vf).toContain(':y=ih*0.7500-th/2:');
@@ -212,38 +257,47 @@ describe('generateShorts', () => {
   it('prepends crop+scale to the filter chain when vertical is enabled', async () => {
     const file = new File([new Uint8Array([0])], 'movie.mp4', { type: 'video/mp4' });
     await generateShorts(file, { mode: 'parts', parts: 2, totalDuration: 10, ...defaults, vertical: true });
-    const args = execMock.mock.calls[0]![0] as string[];
+    const args = encArgs(0);
     const vf = args[args.indexOf('-vf') + 1]!;
     expect(vf.startsWith('crop=ih*9/16:ih')).toBe(true);
     expect(vf).toContain('scale=1080:1920');
     expect(vf).toContain('drawtext=');
   });
 
-  it('re-encodes video with libx264 ultrafast and copies audio', async () => {
+  it('re-encodes video with libx264 ultrafast, audio as stereo AAC and limits threads', async () => {
     const file = new File([new Uint8Array([0])], 'movie.mp4', { type: 'video/mp4' });
     await generateShorts(file, { mode: 'parts', parts: 2, totalDuration: 10, ...defaults });
-    const args = execMock.mock.calls[0]![0] as string[];
-    expect(args).toContain('-c:v');
+    const args = encArgs(0);
     expect(args[args.indexOf('-c:v') + 1]).toBe('libx264');
-    expect(args).toContain('-preset');
     expect(args[args.indexOf('-preset') + 1]).toBe('ultrafast');
-    expect(args).toContain('-c:a');
-    expect(args[args.indexOf('-c:a') + 1]).toBe('copy');
+    expect(args[args.indexOf('-c:a') + 1]).toBe('aac');
+    expect(args[args.indexOf('-b:a') + 1]).toBe('128k');
+    expect(args[args.indexOf('-ac') + 1]).toBe('2');
+    expect(args[args.indexOf('-threads') + 1]).toBe('2');
   });
 
   it('always outputs .mp4 files', async () => {
     const file = new File([new Uint8Array([0])], 'movie.webm', { type: 'video/webm' });
     await generateShorts(file, { mode: 'parts', parts: 2, totalDuration: 10, ...defaults });
-    const a0 = execMock.mock.calls[0]![0] as string[];
-    const a1 = execMock.mock.calls[1]![0] as string[];
-    expect(a0[a0.length - 1]).toMatch(/\.mp4$/);
-    expect(a1[a1.length - 1]).toMatch(/\.mp4$/);
+    for (const call of execMock.mock.calls) {
+      const args = call[0] as string[];
+      expect(args[args.length - 1]).toMatch(/\.mp4$/);
+    }
   });
 
-  it('cleans up the input, font and every output in MEMFS', async () => {
+  it('unmounts the input dir, removes the font, chunks and outputs', async () => {
     const file = new File([new Uint8Array([0])], 'movie.mp4', { type: 'video/mp4' });
     await generateShorts(file, { mode: 'parts', parts: 3, totalDuration: 30, ...defaults });
-    expect(deleteMock).toHaveBeenCalledTimes(5);
+    expect(unmountMock).toHaveBeenCalledWith('/wm-input');
+    expect(deleteDirMock).toHaveBeenCalledWith('/wm-input');
+    const paths = deleteMock.mock.calls.map((c) => c[0]);
+    expect(paths).toContain('wm-font.ttf');
+    expect(paths).toContain('wm-chunk-1.mp4');
+    expect(paths).toContain('wm-chunk-2.mp4');
+    expect(paths).toContain('wm-chunk-3.mp4');
+    expect(paths).toContain('short_1.mp4');
+    expect(paths).toContain('short_2.mp4');
+    expect(paths).toContain('short_3.mp4');
   });
 
   it('throws when textTemplate is blank', async () => {
@@ -290,7 +344,7 @@ describe('generateShorts', () => {
       ...defaults,
       textTemplate: "100% 'safe'",
     });
-    const args = execMock.mock.calls[0]![0] as string[];
+    const args = encArgs(0);
     const vf = args[args.indexOf('-vf') + 1]!;
     expect(vf).toContain("100\\%");
     expect(vf).toContain("\\'safe\\'");

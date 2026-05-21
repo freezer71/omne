@@ -254,7 +254,8 @@ export function ShortStudioTool(messages: Messages) {
       const result = await generateShorts(file, opts);
       setSegments(result);
       setProgress(null);
-    } catch (_err) {
+    } catch (err) {
+      console.error('[short-studio] generate failed:', err);
       setError(messages.error);
       setProgress(null);
     } finally {

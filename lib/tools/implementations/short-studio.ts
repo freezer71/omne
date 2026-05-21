@@ -1,4 +1,5 @@
 import { fetchFile } from '@ffmpeg/util';
+import type { FFFSType } from '@ffmpeg/ffmpeg';
 import { getFfmpeg } from '@/lib/ffmpeg-loader';
 import { computeBoundaries, MAX_SEGMENTS } from './video-split';
 
@@ -56,13 +57,21 @@ type FfmpegLike = {
   writeFile: (n: string, d: Uint8Array) => Promise<void>;
   readFile: (n: string) => Promise<Uint8Array | string>;
   deleteFile: (n: string) => Promise<void>;
-  on: (e: string, h: (p: { progress: number }) => void) => void;
-  off: (e: string, h: (p: { progress: number }) => void) => void;
+  mount: (
+    fsType: FFFSType,
+    options: { blobs?: Array<{ name: string; data: Blob }>; files?: File[] },
+    mountPoint: string,
+  ) => Promise<boolean>;
+  unmount: (mountPoint: string) => Promise<boolean>;
+  createDir: (path: string) => Promise<boolean>;
+  deleteDir: (path: string) => Promise<boolean>;
+  on: (e: string, h: (p: { progress: number } | { type?: string; message: string }) => void) => void;
+  off: (e: string, h: (p: { progress: number } | { type?: string; message: string }) => void) => void;
 } & { [k: string]: unknown };
 
-async function runFfmpegCommand(ffmpeg: FfmpegLike, args: string[]): Promise<unknown> {
+async function runFfmpegCommand(ffmpeg: FfmpegLike, args: string[]): Promise<number> {
   const method = 'ex' + 'ec';
-  const fn = ffmpeg[method] as (a: string[]) => Promise<unknown>;
+  const fn = ffmpeg[method] as (a: string[]) => Promise<number>;
   return fn.call(ffmpeg, args);
 }
 
@@ -172,6 +181,8 @@ export async function generateShorts(
 
   const inputExt = inferExtension(input);
   const inputName = `input.${inputExt}`;
+  const inputDir = '/wm-input';
+  const inputPath = `${inputDir}/${inputName}`;
   const outputNames = boundaries.map((_, i) => `short_${i + 1}.mp4`);
 
   const ffmpeg = (await getFfmpeg()) as unknown as FfmpegLike;
@@ -182,12 +193,29 @@ export async function generateShorts(
     progressHandler = ({ progress }) => {
       options.onProgress!(currentIndex + 1, boundaries.length, progress);
     };
-    ffmpeg.on('progress', progressHandler);
+    ffmpeg.on('progress', progressHandler as never);
   }
 
+  const logBuffer: string[] = [];
+  const logHandler = (e: { progress: number } | { type?: string; message: string }) => {
+    if ('message' in e && typeof e.message === 'string') {
+      logBuffer.push(e.message);
+      if (logBuffer.length > 80) logBuffer.shift();
+    }
+  };
+  ffmpeg.on('log', logHandler as never);
+
+  let mounted = false;
+  let dirCreated = false;
   try {
-    const inputBytes = await fetchFile(input);
-    await ffmpeg.writeFile(inputName, inputBytes);
+    await ffmpeg.createDir(inputDir);
+    dirCreated = true;
+    await ffmpeg.mount(
+      'WORKERFS' as FFFSType,
+      { blobs: [{ name: inputName, data: input }] },
+      inputDir,
+    );
+    mounted = true;
     await loadFontIntoFfmpeg(ffmpeg, options.fontFamily);
 
     const segments: Uint8Array[] = [];
@@ -207,29 +235,70 @@ export async function generateShorts(
         options.fontColor,
       );
       const outName = outputNames[i]!;
+      const chunkName = `wm-chunk-${i + 1}.mp4`;
+
+      logBuffer.length = 0;
+      let cutExit: number;
       try {
-        await runFfmpegCommand(ffmpeg, [
+        cutExit = await runFfmpegCommand(ffmpeg, [
           '-ss', String(start),
-          '-i', inputName,
+          '-i', inputPath,
           '-t', String(duration),
+          '-map', '0:v:0',
+          '-map', '0:a:0?',
+          '-c', 'copy',
+          '-avoid_negative_ts', 'make_zero',
+          chunkName,
+        ]);
+      } catch (err) {
+        const tail = logBuffer.slice(-10).join('\n');
+        throw new Error(`Short Studio failed at segment ${i + 1} (cut): ${(err as Error).message ?? err}\n${tail}`);
+      }
+      if (cutExit !== 0) {
+        const tail = logBuffer.slice(-15).join('\n');
+        throw new Error(`Short Studio failed at segment ${i + 1} (cut): ffmpeg exit ${cutExit}\n${tail}`);
+      }
+
+      logBuffer.length = 0;
+      let encExit: number;
+      try {
+        encExit = await runFfmpegCommand(ffmpeg, [
+          '-i', chunkName,
           '-vf', vf,
           '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '23',
-          '-c:a', 'copy',
+          '-c:a', 'aac', '-b:a', '128k', '-ac', '2',
+          '-threads', '2',
           outName,
         ]);
       } catch (err) {
-        throw new Error(`Short Studio failed at segment ${i + 1}: ${(err as Error).message ?? err}`);
+        const tail = logBuffer.slice(-10).join('\n');
+        try { await ffmpeg.deleteFile(chunkName); } catch { /* ignore */ }
+        throw new Error(`Short Studio failed at segment ${i + 1} (encode): ${(err as Error).message ?? err}\n${tail}`);
       }
+      if (encExit !== 0) {
+        const tail = logBuffer.slice(-15).join('\n');
+        try { await ffmpeg.deleteFile(chunkName); } catch { /* ignore */ }
+        throw new Error(`Short Studio failed at segment ${i + 1} (encode): ffmpeg exit ${encExit}\n${tail}`);
+      }
+
       const data = await ffmpeg.readFile(outName);
       segments.push(data instanceof Uint8Array ? data : new Uint8Array(data as never));
+      try { await ffmpeg.deleteFile(chunkName); } catch { /* ignore */ }
+      try { await ffmpeg.deleteFile(outName); } catch { /* ignore */ }
     }
     return segments;
   } finally {
-    try { await ffmpeg.deleteFile(inputName); } catch { /* ignore */ }
+    if (mounted) {
+      try { await ffmpeg.unmount(inputDir); } catch { /* ignore */ }
+    }
+    if (dirCreated) {
+      try { await ffmpeg.deleteDir(inputDir); } catch { /* ignore */ }
+    }
     try { await ffmpeg.deleteFile(FONT_MEMFS); } catch { /* ignore */ }
     for (const out of outputNames) {
       try { await ffmpeg.deleteFile(out); } catch { /* ignore */ }
     }
-    if (progressHandler) ffmpeg.off('progress', progressHandler);
+    if (progressHandler) ffmpeg.off('progress', progressHandler as never);
+    ffmpeg.off('log', logHandler as never);
   }
 }
