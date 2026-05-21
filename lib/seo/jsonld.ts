@@ -125,7 +125,6 @@ export async function siteJsonLd(locale: Locale): Promise<JsonLd> {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: meta.siteName ?? SITE_NAME,
-    alternateName: 'omne toolkit',
     description,
     url: homeUrl,
     inLanguage: locales.map(localeTag),

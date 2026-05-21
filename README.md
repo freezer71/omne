@@ -140,6 +140,7 @@ Full details in [`CLAUDE.md`](./CLAUDE.md).
 | `npm run test:ui` | Vitest UI |
 | `npm run test:e2e` | Playwright (chromium + webkit) |
 | `npm run test:all` | Vitest then Playwright |
+| `npm run favicons` | Regenerate `app/favicon.ico` (16/32/48) + `app/apple-icon.png` (180×180) from `app/icon.svg` |
 
 Run a single test:
 
