@@ -58,7 +58,10 @@ export default async function HubPage({
   ];
 
   return (
-    <main className="relative mx-auto flex w-full max-w-5xl flex-1 flex-col gap-16 px-4 sm:px-6 py-12 sm:py-16">
+    <main
+      id="main-content"
+      className="relative mx-auto flex w-full max-w-5xl flex-1 flex-col gap-16 px-4 sm:px-6 py-12 sm:py-16"
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] [background:radial-gradient(ellipse_60%_60%_at_50%_0%,color-mix(in_srgb,var(--text-primary)_8%,transparent),transparent_70%)]"

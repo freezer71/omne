@@ -61,7 +61,10 @@ export default async function NotFound() {
     .filter((x): x is NonNullable<typeof x> => x !== null);
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-4 sm:px-6 py-16 sm:py-24">
+    <main
+      id="main-content"
+      className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-4 sm:px-6 py-16 sm:py-24"
+    >
       <header className="grid gap-3">
         <p className="text-xs font-medium uppercase tracking-wider text-text-faint">
           {t.eyebrow}

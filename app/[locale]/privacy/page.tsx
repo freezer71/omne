@@ -26,7 +26,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const isEn = locale === 'en';
 
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-10 px-4 sm:px-6 py-12 sm:py-20">
+    <main
+      id="main-content"
+      className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-10 px-4 sm:px-6 py-12 sm:py-20"
+    >
       <nav className="text-sm">
         <Link href={`/${locale}`} className="text-text-muted hover:text-text-primary transition-colors">
           ← {dict.common.backHome}

@@ -21,8 +21,9 @@ type Messages = {
   removeFile: string;
 };
 
+// Transparent-checkerboard pattern via CSS vars (theme-aware via [data-theme]).
 const CHECKERED_BG_CLASS =
-  'bg-[length:16px_16px] bg-[linear-gradient(45deg,#1a1a1a_25%,transparent_25%,transparent_75%,#1a1a1a_75%),linear-gradient(45deg,#1a1a1a_25%,transparent_25%,transparent_75%,#1a1a1a_75%)] [background-position:0_0,8px_8px] dark:bg-[linear-gradient(45deg,#2a2a2a_25%,transparent_25%,transparent_75%,#2a2a2a_75%),linear-gradient(45deg,#2a2a2a_25%,transparent_25%,transparent_75%,#2a2a2a_75%)]';
+  'bg-[length:16px_16px] bg-[linear-gradient(45deg,var(--checker-1)_25%,transparent_25%,transparent_75%,var(--checker-1)_75%),linear-gradient(45deg,var(--checker-1)_25%,transparent_25%,transparent_75%,var(--checker-1)_75%)] [background-position:0_0,8px_8px]';
 
 export function ImageRemoveBgTool(messages: Messages) {
   const inputId = useId();

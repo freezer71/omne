@@ -27,6 +27,7 @@ export function ToolShell({
 }: Props) {
   return (
     <main
+      id="main-content"
       className={cn(
         'mx-auto flex w-full flex-1 flex-col gap-8 px-4 sm:px-6 py-10 sm:py-16',
         wide ? 'max-w-6xl' : 'max-w-3xl',

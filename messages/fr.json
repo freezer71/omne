@@ -26,6 +26,7 @@
     "githubAriaLabel": "Voir le code source sur GitHub"
   },
   "common": {
+    "skipToContent": "Aller au contenu",
     "backHome": "Accueil",
     "previewLoading": "Chargement",
     "previewError": "Aperçu impossible",

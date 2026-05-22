@@ -77,7 +77,10 @@ export default async function CategoryPage({
   ]);
 
   return (
-    <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-12 px-4 sm:px-6 py-12 sm:py-16">
+    <main
+      id="main-content"
+      className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-12 px-4 sm:px-6 py-12 sm:py-16"
+    >
       <nav aria-label="Breadcrumb" className="text-xs text-text-faint">
         <ol className="flex items-center gap-2">
           <li>

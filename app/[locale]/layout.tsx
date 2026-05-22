@@ -96,6 +96,12 @@ export default async function LocaleLayout({
       </head>
       <body className="min-h-full flex flex-col">
         <PaletteProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-surface-elevated focus:px-3 focus:py-2 focus:text-sm focus:text-text-primary focus:shadow-md focus:outline-2 focus:outline-accent"
+          >
+            {dict.common.skipToContent}
+          </a>
           <Header locale={locale} dict={dict} />
           {children}
           <Footer locale={locale} dict={dict} categoryOrder={TOOL_CATEGORIES} />
