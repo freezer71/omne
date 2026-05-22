@@ -3112,7 +3112,7 @@
           "empty": "Select skills above to generate the install command.",
           "commandsTemplate": "{n} selected",
           "charsTemplate": "{n} chars",
-          "privacyNote": "Discovery and search are proxied through omne's server to skills.sh. No personal data is sent.",
+          "privacyNote": "Heads up: this is the only omne tool that makes a network request. Your search query is proxied through omne to skills.sh — both see your IP and the text you type. No files are involved. See the Privacy page for details.",
           "viewSkill": "View",
           "discoverHint": "Discover popular skills",
           "tabAllTime": "All Time",
@@ -3195,7 +3195,8 @@
     "sections": {
       "whatWeLoad": "What your browser downloads",
       "whatWeDoNot": "What we never do",
-      "aiModels": "AI models (background removal)"
+      "aiModels": "AI models (background removal)",
+      "devTools": "Developer tools (Skills browser)"
     }
   },
   "categories": {

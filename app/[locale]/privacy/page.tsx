@@ -84,6 +84,29 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
       <section className="flex flex-col gap-3">
         <h2 className="text-sm font-medium uppercase tracking-wider text-text-faint">
+          {dict.privacy.sections.devTools}
+        </h2>
+        <ul className="flex flex-col gap-2 text-sm text-text-primary leading-relaxed">
+          <li>
+            {isEn
+              ? 'The “Skills browser” (under Dev tools) lets you search and discover Claude Code skills hosted on skills.sh. When you type in its search box or open a feed tab, omne forwards the request to skills.sh through a small proxy on our server, then renders the response.'
+              : 'Le « navigateur de Skills » (catégorie outils dev) permet de rechercher et découvrir les skills Claude Code hébergés sur skills.sh. Lorsque vous tapez dans sa barre de recherche ou ouvrez un onglet de feed, omne relaie la requête vers skills.sh via un petit proxy sur notre serveur, puis affiche la réponse.'}
+          </li>
+          <li>
+            {isEn
+              ? 'This is the only omne tool that makes a network request while you use it. Your query (the text you type) and your IP address are seen by both omne’s server and skills.sh. No files are involved — the Skills browser does not accept any file input.'
+              : 'C’est le seul outil d’omne qui fait une requête réseau pendant que vous l’utilisez. Votre requête (le texte tapé) et votre adresse IP sont vues à la fois par le serveur d’omne et par skills.sh. Aucun fichier n’est en jeu — le navigateur de Skills n’accepte aucun fichier en entrée.'}
+          </li>
+          <li>
+            {isEn
+              ? 'If you want zero contact with skills.sh, simply don’t open the Skills browser. Every conversion tool (PDF, image, video, audio, text, …) stays fully offline after the first page load.'
+              : 'Si vous voulez aucun contact avec skills.sh, n’ouvrez simplement pas le navigateur de Skills. Tous les outils de conversion (PDF, image, vidéo, audio, texte, …) restent entièrement hors ligne après le premier chargement de la page.'}
+          </li>
+        </ul>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-sm font-medium uppercase tracking-wider text-text-faint">
           {dict.privacy.sections.whatWeDoNot}
         </h2>
         <ul className="flex flex-col gap-2 text-sm text-text-primary leading-relaxed">
@@ -99,8 +122,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           </li>
           <li>
             {isEn
-              ? 'You can verify this: open DevTools → Network while you use any tool. No request leaves omne while processing.'
-              : 'Vous pouvez le vérifier : ouvrez DevTools → Réseau pendant que vous utilisez un outil. Aucune requête ne sort d’omne pendant le traitement.'}
+              ? 'You can verify this: open DevTools → Network while you convert a file. No request leaves omne during conversion. (The two exceptions above — the Hugging Face model fetch and the Skills browser proxy — only fire when you explicitly open those specific tools.)'
+              : 'Vous pouvez le vérifier : ouvrez DevTools → Réseau pendant la conversion d’un fichier. Aucune requête ne sort d’omne pendant la conversion. (Les deux exceptions ci-dessus — le téléchargement du modèle Hugging Face et le proxy du navigateur de Skills — ne se déclenchent que lorsque vous ouvrez explicitement ces outils précis.)'}
           </li>
         </ul>
       </section>

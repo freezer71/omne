@@ -3112,7 +3112,7 @@
           "empty": "Sélectionnez des skills ci-dessus pour générer la commande d'installation.",
           "commandsTemplate": "{n} sélectionnés",
           "charsTemplate": "{n} car.",
-          "privacyNote": "La découverte et la recherche sont relayées par le serveur omne vers skills.sh. Aucune donnée personnelle n'est envoyée.",
+          "privacyNote": "À noter : c'est le seul outil d'omne qui fait une requête réseau. Votre requête de recherche est relayée par omne vers skills.sh — les deux voient votre IP et le texte tapé. Aucun fichier n'est en jeu. Voir la page Confidentialité pour le détail.",
           "viewSkill": "Voir",
           "discoverHint": "Découvrir les skills populaires",
           "tabAllTime": "Depuis toujours",
@@ -3195,7 +3195,8 @@
     "sections": {
       "whatWeLoad": "Ce que votre navigateur télécharge",
       "whatWeDoNot": "Ce que nous ne faisons jamais",
-      "aiModels": "Modèles IA (détourage)"
+      "aiModels": "Modèles IA (détourage)",
+      "devTools": "Outils dev (navigateur de Skills)"
     }
   },
   "categories": {
