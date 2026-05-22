@@ -4,6 +4,7 @@ import type { NextConfig } from "next";
 // - default-src 'self': everything from the same origin by default.
 // - script-src / style-src 'unsafe-inline': required by Next.js runtime (no nonces yet).
 // - img-src data: blob:: tools render preview images from local blobs/data URLs.
+// - media-src blob:: video/audio tools preview converted output via blob URLs.
 // - connect-src exceptions:
 //     * huggingface.co + cdn-lfs.huggingface.co: image-remove-bg fetches RMBG-1.4 model
 //     * www.skills.sh: dev/skills-browse proxy (documented exception to "no backend" claim)
@@ -14,6 +15,7 @@ const CSP = [
   "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
+  "media-src 'self' blob:",
   "font-src 'self'",
   "connect-src 'self' https://huggingface.co https://cdn-lfs.huggingface.co https://www.skills.sh",
   "worker-src 'self' blob:",
