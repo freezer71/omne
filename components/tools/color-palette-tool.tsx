@@ -279,7 +279,7 @@ export function ColorPaletteTool(messages: Messages) {
             />
             <div className="flex flex-col items-center gap-2">
               {previewUrl && (
-                /* eslint-disable-next-line @next/next/no-img-element */
+                 
                 <img
                   src={previewUrl}
                   alt={messages.previewLabel}

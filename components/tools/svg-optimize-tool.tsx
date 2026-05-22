@@ -50,15 +50,28 @@ export function SvgOptimizeTool(messages: Messages) {
 
   const optionsKey = `${precision}|${cleanupIds}|${removeViewBox}|${multipass}`;
 
-  useEffect(() => {
+  // Reset the optimized output + sizes synchronously when markup is emptied
+  // or when the user changes options/markup (so the user never sees stale
+  // output while the debounced rerun is pending). Replaces the inline
+  // setState-in-effect path. The sentinel initial value (`__init__`) makes
+  // the first render with markup also flip `busy` on, mirroring the original
+  // effect's setBusy(true) on every run.
+  const runKey = `${markup}|${optionsKey}`;
+  const [trackedRunKey, setTrackedRunKey] = useState<string>('__init__');
+  if (trackedRunKey !== runKey) {
+    setTrackedRunKey(runKey);
     if (!hasMarkup) {
       setOptimized('');
       setBefore(0);
       setAfter(0);
-      return;
+    } else {
+      setBusy(true);
     }
+  }
+
+  useEffect(() => {
+    if (!hasMarkup) return;
     let cancelled = false;
-    setBusy(true);
     const handle = setTimeout(() => {
       void optimizeSvg(markup, { precision, cleanupIds, removeViewBox, multipass })
         .then((r) => {

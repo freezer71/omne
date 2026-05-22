@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { rotateVideo, type RotateTransform } from '@/lib/tools/implementations/video-rotate';
@@ -166,13 +166,8 @@ export function VideoRotateTool(messages: Messages) {
 }
 
 function RotatePreview({ file, transform }: { file: File; transform: RotateTransform }) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    const u = URL.createObjectURL(file);
-    setUrl(u);
-    return () => URL.revokeObjectURL(u);
-  }, [file]);
-  if (!url) return null;
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
+  useEffect(() => () => URL.revokeObjectURL(url), [url]);
   return (
     <div className="flex items-center justify-center overflow-hidden rounded-md border border-border bg-black p-4">
       <video src={url} controls className="max-h-72 transition-transform duration-200" style={{ transform: PREVIEW_TRANSFORM[transform] }} />

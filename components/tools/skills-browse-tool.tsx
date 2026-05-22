@@ -155,18 +155,28 @@ export function SkillsBrowseTool(messages: Messages) {
     return () => window.clearTimeout(h);
   }, [query]);
 
-  useEffect(() => {
-    abortRef.current?.abort();
+  // Reset search state synchronously when the debounced query changes —
+  // either clearing results (query too short) or flipping into the loading
+  // state before the fetch effect runs. Render-phase tracked state replaces
+  // the inline setState-in-effect branches.
+  const [trackedDebouncedQuery, setTrackedDebouncedQuery] = useState<string>(debouncedQuery);
+  if (trackedDebouncedQuery !== debouncedQuery) {
+    setTrackedDebouncedQuery(debouncedQuery);
     if (debouncedQuery.length < 2) {
       setResults([]);
       setLoading(false);
       setError(null);
-      return;
+    } else {
+      setLoading(true);
+      setError(null);
     }
+  }
+
+  useEffect(() => {
+    abortRef.current?.abort();
+    if (debouncedQuery.length < 2) return;
     const ctrl = new AbortController();
     abortRef.current = ctrl;
-    setLoading(true);
-    setError(null);
     fetch(`/api/skills-search?q=${encodeURIComponent(debouncedQuery)}&limit=50`, {
       signal: ctrl.signal,
     })
@@ -187,16 +197,26 @@ export function SkillsBrowseTool(messages: Messages) {
     return () => ctrl.abort();
   }, [debouncedQuery, messages.searchError]);
 
-  useEffect(() => {
-    feedAbortRef.current?.abort();
+  // Same pattern for the discover feed: when the tab/retry/visibility
+  // changes, set the loading/error state during render, then run the fetch
+  // in a clean useEffect.
+  const feedKey = `${showDiscover ? '1' : '0'}|${feedType}|${feedRetryCount}`;
+  const [trackedFeedKey, setTrackedFeedKey] = useState<string>(feedKey);
+  if (trackedFeedKey !== feedKey) {
+    setTrackedFeedKey(feedKey);
     if (!showDiscover) {
       setFeedLoading(false);
-      return;
+    } else {
+      setFeedLoading(true);
+      setFeedError(null);
     }
+  }
+
+  useEffect(() => {
+    feedAbortRef.current?.abort();
+    if (!showDiscover) return;
     const ctrl = new AbortController();
     feedAbortRef.current = ctrl;
-    setFeedLoading(true);
-    setFeedError(null);
     fetch(`/api/skills-feed?type=${encodeURIComponent(feedType)}`, {
       signal: ctrl.signal,
     })

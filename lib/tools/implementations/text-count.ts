@@ -18,7 +18,6 @@ export const SPEAKING_WPM = 150;
 function codePointCount(input: string): number {
   let count = 0;
   // for...of on a string iterates code points.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   for (const _ of input) count++;
   return count;
 }

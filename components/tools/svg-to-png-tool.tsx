@@ -66,16 +66,21 @@ export function SvgToPngTool(messages: Messages) {
   const ratio = natural ? natural.w / natural.h : 1;
   const hasMarkup = markup.trim().length > 0;
 
-  useEffect(() => {
+  // Recompute the SVG's natural size whenever the markup changes. This is a
+  // pure derivation of `markup`, so we do it during render with a tracked-
+  // markup guard instead of inside useEffect.
+  const [trackedMarkupForSize, setTrackedMarkupForSize] = useState<string>('');
+  if (trackedMarkupForSize !== markup) {
+    setTrackedMarkupForSize(markup);
     if (!hasMarkup) {
       setNatural(null);
-      return;
+    } else {
+      const size = svgNaturalSize(markup);
+      setNatural({ w: size.width, h: size.height });
+      setWidth(Math.round(size.width));
+      setHeight(Math.round(size.height));
     }
-    const size = svgNaturalSize(markup);
-    setNatural({ w: size.width, h: size.height });
-    setWidth(Math.round(size.width));
-    setHeight(Math.round(size.height));
-  }, [markup, hasMarkup]);
+  }
 
   useEffect(() => {
     if (!hasMarkup || width <= 0 || height <= 0) return;

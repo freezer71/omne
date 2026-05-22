@@ -229,7 +229,7 @@ export function PdfExtractImagesTool(messages: PdfExtractImagesMessages) {
                       className="group relative flex flex-col gap-1.5"
                     >
                       <div className="relative aspect-square overflow-hidden rounded-md border border-border bg-bg">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        { }
                         <img
                           src={img.url}
                           alt={label}

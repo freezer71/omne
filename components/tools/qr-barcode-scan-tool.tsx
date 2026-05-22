@@ -28,17 +28,22 @@ export function QrBarcodeScanTool(messages: Messages) {
   const [results, setResults] = useState<BarcodeScanResult[]>([]);
   const [scanning, setScanning] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [available, setAvailable] = useState(true);
+  const [available] = useState<boolean>(() => isBarcodeDetectorAvailable());
   const [dragging, setDragging] = useState(false);
 
-  useEffect(() => { setAvailable(isBarcodeDetectorAvailable()); }, []);
+  // Reset scan state synchronously when the input file changes, so the
+  // subsequent effect can run its async work without a setState-in-effect.
+  const [trackedFile, setTrackedFile] = useState<File | null>(file);
+  if (trackedFile !== file) {
+    setTrackedFile(file);
+    setResults([]);
+    setError(null);
+    setScanning(file !== null);
+  }
 
   useEffect(() => {
     if (!file) return;
     let cancelled = false;
-    setScanning(true);
-    setError(null);
-    setResults([]);
     scanBarcodeFromFile(file)
       .then((r) => { if (!cancelled) { setResults(r); if (r.length === 0) setError(messages.noResults); } })
       .catch(() => { if (!cancelled) setError(messages.scanError); })
@@ -70,7 +75,7 @@ export function QrBarcodeScanTool(messages: Messages) {
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+            { }
             <img src={URL.createObjectURL(file)} alt={file.name} className="max-h-64 w-full rounded-md border border-border object-contain" />
             <div className="flex items-center justify-between">
               <p className="truncate text-sm text-text-muted">{file.name}</p>

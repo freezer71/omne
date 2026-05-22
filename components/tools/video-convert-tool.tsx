@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { convertVideo, type VideoFormat } from '@/lib/tools/implementations/video-convert';
@@ -232,13 +232,8 @@ export function VideoConvertTool(messages: Messages) {
 }
 
 function VideoPreview({ file }: { file: File }) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    const objectUrl = URL.createObjectURL(file);
-    setUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [file]);
-  if (!url) return null;
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
+  useEffect(() => () => URL.revokeObjectURL(url), [url]);
   return (
     <video
       src={url}

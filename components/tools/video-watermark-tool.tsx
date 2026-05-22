@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { watermarkVideo, type WatermarkPosition } from '@/lib/tools/implementations/video-watermark';
@@ -194,13 +194,8 @@ export function VideoWatermarkTool(messages: Messages) {
 }
 
 function WatermarkPreview({ file, text, position, fontSize, opacity }: { file: File; text: string; position: WatermarkPosition; fontSize: number; opacity: number }) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    const u = URL.createObjectURL(file);
-    setUrl(u);
-    return () => URL.revokeObjectURL(u);
-  }, [file]);
-  if (!url) return null;
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
+  useEffect(() => () => URL.revokeObjectURL(url), [url]);
   return (
     <div className="relative w-full max-h-72 overflow-hidden rounded-md border border-border bg-black">
       <video src={url} controls className="w-full max-h-72" />

@@ -16,7 +16,7 @@ describe('getMatchRanges', () => {
   it('handles diacritics in haystack', () => {
     const ranges = getMatchRanges('Détourer une image', 'detourer');
     expect(ranges).toHaveLength(1);
-    const [s, e] = ranges[0];
+    const [s, e] = ranges[0]!;
     expect('Détourer une image'.slice(s, e)).toBe('Détourer');
   });
 

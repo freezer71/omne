@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { mkdtempSync, rmSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { copyFfmpegAssets } from '@/scripts/copy-ffmpeg.mjs';
@@ -12,7 +12,7 @@ describe('copyFfmpegAssets', () => {
     srcRoot = mkdtempSync(join(tmpdir(), 'omne-src-'));
     destDir = mkdtempSync(join(tmpdir(), 'omne-dest-'));
     const umdDir = join(srcRoot, 'umd');
-    require('node:fs').mkdirSync(umdDir, { recursive: true });
+    mkdirSync(umdDir, { recursive: true });
     writeFileSync(join(umdDir, 'ffmpeg-core.js'), 'JS_CORE');
     writeFileSync(join(umdDir, 'ffmpeg-core.wasm'), Buffer.from([0x00, 0x61, 0x73, 0x6d]));
   });

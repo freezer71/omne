@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { speedVideo } from '@/lib/tools/implementations/video-speed';
@@ -164,13 +164,8 @@ export function VideoSpeedTool(messages: Messages) {
 }
 
 function SpeedPreview({ file, speed, videoRef }: { file: File; speed: number; videoRef: React.RefObject<HTMLVideoElement | null> }) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    const u = URL.createObjectURL(file);
-    setUrl(u);
-    return () => URL.revokeObjectURL(u);
-  }, [file]);
-  if (!url) return null;
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
+  useEffect(() => () => URL.revokeObjectURL(url), [url]);
   return (
     <video
       ref={videoRef}

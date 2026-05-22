@@ -46,6 +46,14 @@ export function ImageResizeTool(messages: Messages) {
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
 
+  // React 19 "adjust state during rendering" — clears the cached natural size as soon as
+  // the input file changes, so we don't need to call setNatural(null) inside the effect.
+  const [trackedFile, setTrackedFile] = useState<File | null>(file);
+  if (trackedFile !== file) {
+    setTrackedFile(file);
+    setNatural(null);
+  }
+
   const ratio = natural ? natural.w / natural.h : 1;
   const canResize = file !== null && !busy && width > 0 && height > 0;
   const scalePercent = natural ? Math.round((width / natural.w) * 100) : 100;
@@ -59,10 +67,7 @@ export function ImageResizeTool(messages: Messages) {
   };
 
   useEffect(() => {
-    if (!file) {
-      setNatural(null);
-      return;
-    }
+    if (!file) return;
     let cancelled = false;
     const url = URL.createObjectURL(file);
     const img = new Image();

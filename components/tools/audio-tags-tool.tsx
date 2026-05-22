@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import {
@@ -420,25 +420,23 @@ function TextField({
 }
 
 function AudioPreview({ file }: { file: File }) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    const objectUrl = URL.createObjectURL(file);
-    setUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [file]);
-  if (!url) return null;
+  // Derive the object URL from `file` directly so we don't have to setUrl in an
+  // effect (which would violate react-hooks/set-state-in-effect). Revocation
+  // still runs as an effect cleanup keyed on the same URL.
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
+  useEffect(() => () => URL.revokeObjectURL(url), [url]);
   return <audio src={url} controls className="w-full" preload="metadata" />;
 }
 
 function CoverPreview({ cover }: { cover: AudioCover }) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
+  // Derive the object URL from `cover` directly so we don't have to setUrl in
+  // an effect (which would violate react-hooks/set-state-in-effect).
+  // Revocation still runs as an effect cleanup keyed on the same URL.
+  const url = useMemo(() => {
     const blob = new Blob([new Uint8Array(cover.bytes) as BlobPart], { type: cover.mime });
-    const objectUrl = URL.createObjectURL(blob);
-    setUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
+    return URL.createObjectURL(blob);
   }, [cover]);
-  if (!url) return null;
-  /* eslint-disable-next-line @next/next/no-img-element */
+  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+   
   return <img src={url} alt="" className="h-full w-full object-cover" />;
 }

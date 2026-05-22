@@ -24,8 +24,8 @@ describe('recent tools storage', () => {
     recordRecentTool('pdf', 'merge');
     const recent = getRecentTools();
     expect(recent).toHaveLength(2);
-    expect(recent[0].id).toBe('merge');
-    expect(recent[1].id).toBe('resize');
+    expect(recent[0]!.id).toBe('merge');
+    expect(recent[1]!.id).toBe('resize');
   });
 
   it('caps stored entries at 20', () => {

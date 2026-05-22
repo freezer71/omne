@@ -89,6 +89,9 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* Must run before paint to avoid theme flash. Served as a static file
+            (not inlined) per CLAUDE.md security-hook constraint. */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="/theme-init.js" />
       </head>
       <body className="min-h-full flex flex-col">

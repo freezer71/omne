@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import JSZip from 'jszip';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -42,7 +42,6 @@ export function VideoFramesTool(messages: Messages) {
   const [fps, setFps] = useState('1');
   const [format, setFormat] = useState<FrameFormat>('png');
   const [frames, setFrames] = useState<FrameResult[]>([]);
-  const [previews, setPreviews] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -56,11 +55,11 @@ export function VideoFramesTool(messages: Messages) {
     return () => window.clearInterval(id);
   }, [busy]);
 
-  useEffect(() => {
-    const urls = frames.map((f) => URL.createObjectURL(new Blob([new Uint8Array(f.bytes)], { type: format === 'png' ? 'image/png' : 'image/jpeg' })));
-    setPreviews(urls);
-    return () => urls.forEach((u) => URL.revokeObjectURL(u));
-  }, [frames, format]);
+  const previews = useMemo(
+    () => frames.map((f) => URL.createObjectURL(new Blob([new Uint8Array(f.bytes)], { type: format === 'png' ? 'image/png' : 'image/jpeg' }))),
+    [frames, format],
+  );
+  useEffect(() => () => previews.forEach((u) => URL.revokeObjectURL(u)), [previews]);
 
   let etaSeconds: number | null = null;
   if (busy && startedAt !== null && progress > 0.02) {
@@ -177,7 +176,7 @@ export function VideoFramesTool(messages: Messages) {
         <>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {previews.map((url, i) => (
-              // eslint-disable-next-line @next/next/no-img-element
+               
               <img key={url} src={url} alt={`frame ${i + 1}`} className="aspect-video w-full rounded-md border border-border object-cover" />
             ))}
           </div>
@@ -192,12 +191,7 @@ export function VideoFramesTool(messages: Messages) {
 }
 
 function VideoPreview({ file }: { file: File }) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    const u = URL.createObjectURL(file);
-    setUrl(u);
-    return () => URL.revokeObjectURL(u);
-  }, [file]);
-  if (!url) return null;
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
+  useEffect(() => () => URL.revokeObjectURL(url), [url]);
   return <video src={url} controls className="w-full max-h-72 rounded-md border border-border bg-black" />;
 }

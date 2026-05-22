@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 import { cn } from '@/lib/cn';
 
 type Theme = 'light' | 'dark';
@@ -17,15 +17,28 @@ function readCurrentTheme(): Theme {
   return document.documentElement.dataset['theme'] === 'light' ? 'light' : 'dark';
 }
 
-export function ThemeToggle({ labelLight, labelDark, srLabel }: Props) {
-  const [theme, setTheme] = useState<Theme>(() => readCurrentTheme());
+function subscribeToTheme(callback: () => void): () => void {
+  if (typeof document === 'undefined') return () => {};
+  const observer = new MutationObserver(callback);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  });
+  return () => observer.disconnect();
+}
 
-  useEffect(() => {
-    setTheme(readCurrentTheme());
-  }, []);
+function getServerTheme(): Theme {
+  return 'dark';
+}
+
+export function ThemeToggle({ labelLight, labelDark, srLabel }: Props) {
+  // Subscribe to <html data-theme> mutations so the toggle stays in sync with
+  // the value written by /theme-init.js (pre-paint) and by `apply()` below.
+  // Using useSyncExternalStore avoids the react-hooks/set-state-in-effect
+  // violation that an effect-driven re-hydration would trigger.
+  const theme = useSyncExternalStore(subscribeToTheme, readCurrentTheme, getServerTheme);
 
   const apply = (next: Theme) => {
-    setTheme(next);
     document.documentElement.dataset['theme'] = next;
     try {
       localStorage.setItem(STORAGE_KEY, next);

@@ -776,13 +776,8 @@ function ShortPreview({
   previewLabel: string;
   onDurationChange: (duration: number) => void;
 }) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    const objectUrl = URL.createObjectURL(file);
-    setUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [file]);
-  if (!url) return null;
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
+  useEffect(() => () => URL.revokeObjectURL(url), [url]);
   return (
     <div className="flex flex-col gap-1.5">
       <span className="text-xs text-text-muted">{previewLabel}</span>

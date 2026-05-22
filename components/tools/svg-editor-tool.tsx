@@ -121,13 +121,20 @@ export function SvgEditorTool(messages: Messages) {
     node.replaceChildren(imported);
   }, [sanitized]);
 
-  // Recompute colors + read root state when markup changes
-  useEffect(() => {
+  // Reset derived state synchronously when markup is emptied (so we don't
+  // need a setState-in-effect for that branch).
+  const [trackedHasMarkup, setTrackedHasMarkup] = useState<boolean>(hasMarkup);
+  if (trackedHasMarkup !== hasMarkup) {
+    setTrackedHasMarkup(hasMarkup);
     if (!hasMarkup) {
       setColors([]);
       setError(null);
-      return;
     }
+  }
+
+  // Recompute colors + read root state when markup changes (debounced).
+  useEffect(() => {
+    if (!hasMarkup) return;
     const handle = setTimeout(() => {
       const { doc, error: parseError } = parseSvgDoc(markup);
       if (parseError || !doc) {

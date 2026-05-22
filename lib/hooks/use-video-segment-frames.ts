@@ -7,17 +7,24 @@ export function useVideoSegmentFrames(
   boundaries: Array<[number, number]> | null,
   boundariesKey: string | null,
 ): (ImageBitmap | null)[] {
-  const [frames, setFrames] = useState<(ImageBitmap | null)[]>([]);
   const N = boundaries?.length ?? 0;
+  const initialFrames = (): (ImageBitmap | null)[] =>
+    !file || !boundaries || N < 2 ? [] : (Array(N).fill(null) as (ImageBitmap | null)[]);
+  const [frames, setFrames] = useState<(ImageBitmap | null)[]>(initialFrames);
+  const [trackedKey, setTrackedKey] = useState<{ file: File | null; key: string | null }>({
+    file,
+    key: boundariesKey,
+  });
+
+  if (trackedKey.file !== file || trackedKey.key !== boundariesKey) {
+    setTrackedKey({ file, key: boundariesKey });
+    setFrames(initialFrames());
+  }
 
   useEffect(() => {
-    if (!file || !boundaries || N < 2) {
-      setFrames([]);
-      return;
-    }
+    if (!file || !boundaries || N < 2) return;
     let cancelled = false;
     const buf: (ImageBitmap | null)[] = Array(N).fill(null);
-    setFrames(buf.slice());
 
     const url = URL.createObjectURL(file);
     const video = document.createElement('video');

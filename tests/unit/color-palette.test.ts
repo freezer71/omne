@@ -84,11 +84,11 @@ describe('extractPaletteKmeans', () => {
     const palette = extractPaletteKmeans(buf, 2, { seed: 42 });
     expect(palette).toHaveLength(2);
     // Sorted by descending pixel count.
-    expect(palette[0].count).toBe(30);
-    expect(palette[1].count).toBe(10);
+    expect(palette[0]!.count).toBe(30);
+    expect(palette[1]!.count).toBe(10);
     // Coverage roughly matches.
-    expect(palette[0].coverage).toBeCloseTo(0.75, 5);
-    expect(palette[1].coverage).toBeCloseTo(0.25, 5);
+    expect(palette[0]!.coverage).toBeCloseTo(0.75, 5);
+    expect(palette[1]!.coverage).toBeCloseTo(0.25, 5);
   });
 
   it('skips transparent pixels', () => {
@@ -102,7 +102,7 @@ describe('extractPaletteKmeans', () => {
     const buf = buildRgba([[[10, 20, 30], 4]]);
     const palette = extractPaletteKmeans(buf, 0);
     expect(palette).toHaveLength(1);
-    expect(palette[0].count).toBe(4);
+    expect(palette[0]!.count).toBe(4);
   });
 
   it('returns a palette where coverages sum to ~1', () => {
@@ -172,7 +172,7 @@ describe('extractPaletteMedianCut', () => {
     const buf = buildRgba([[[123, 45, 67], 16]]);
     const palette = extractPaletteMedianCut(buf, 6);
     expect(palette).toHaveLength(1);
-    expect(palette[0].count).toBe(16);
+    expect(palette[0]!.count).toBe(16);
   });
 });
 

@@ -35,10 +35,19 @@ export function PdfThumbnail({
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [trackedInput, setTrackedInput] = useState({ file, pageIndex, maxWidth });
+
+  if (
+    trackedInput.file !== file ||
+    trackedInput.pageIndex !== pageIndex ||
+    trackedInput.maxWidth !== maxWidth
+  ) {
+    setTrackedInput({ file, pageIndex, maxWidth });
+    setState('loading');
+  }
 
   useEffect(() => {
     let cancelled = false;
-    setState('loading');
     (async () => {
       try {
         const pdfjsLib = await import('pdfjs-dist');

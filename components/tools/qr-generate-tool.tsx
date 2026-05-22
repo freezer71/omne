@@ -589,7 +589,7 @@ export function QrGenerateTool(messages: Messages) {
                 {error}
               </p>
             ) : dataUrl ? (
-              /* eslint-disable-next-line @next/next/no-img-element */
+               
               <img
                 src={dataUrl}
                 alt={messages.previewLabel}

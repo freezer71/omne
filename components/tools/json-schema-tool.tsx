@@ -91,21 +91,42 @@ export function JsonSchemaTool(messages: Messages) {
   const [generated, setGenerated] = useState('');
   const [generateError, setGenerateError] = useState<ParseResult | null>(null);
 
-  useEffect(() => {
+  // Render-phase tracked state replaces three "reset" useEffects that
+  // synchronously cleared validation/generate state when mode or inputs
+  // became empty.
+  const [trackedMode, setTrackedMode] = useState<Mode>(mode);
+  if (trackedMode !== mode) {
+    setTrackedMode(mode);
     setValidation(null);
     setValidateError(null);
     setGenerateError(null);
     setGenerated('');
-  }, [mode]);
+  }
 
-  // Validate mode effect
-  useEffect(() => {
-    if (mode !== 'validate') return;
-    if (!data || !schema) {
+  const validateEmpty = !data || !schema;
+  const [validateEmptyTracked, setValidateEmptyTracked] = useState<boolean>(validateEmpty);
+  if (mode === 'validate' && validateEmptyTracked !== validateEmpty) {
+    setValidateEmptyTracked(validateEmpty);
+    if (validateEmpty) {
       setValidation(null);
       setValidateError(null);
-      return;
     }
+  }
+
+  const generateEmpty = !sample;
+  const [generateEmptyTracked, setGenerateEmptyTracked] = useState<boolean>(generateEmpty);
+  if (mode === 'generate' && generateEmptyTracked !== generateEmpty) {
+    setGenerateEmptyTracked(generateEmpty);
+    if (generateEmpty) {
+      setGenerated('');
+      setGenerateError(null);
+    }
+  }
+
+  // Validate mode effect — async work only; sync resets handled above.
+  useEffect(() => {
+    if (mode !== 'validate') return;
+    if (!data || !schema) return;
     let cancelled = false;
     const handle = window.setTimeout(() => {
       void (async () => {
@@ -126,14 +147,10 @@ export function JsonSchemaTool(messages: Messages) {
     };
   }, [mode, data, schema, draft]);
 
-  // Generate mode effect
+  // Generate mode effect — async work only; sync resets handled above.
   useEffect(() => {
     if (mode !== 'generate') return;
-    if (!sample) {
-      setGenerated('');
-      setGenerateError(null);
-      return;
-    }
+    if (!sample) return;
     let cancelled = false;
     const handle = window.setTimeout(() => {
       const out = generateSchemaFromSample(sample, draft);

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cropVideo } from '@/lib/tools/implementations/video-crop';
@@ -163,13 +163,8 @@ export function VideoCropTool(messages: Messages) {
 }
 
 function CropPreview({ file, onMeta, crop, dims }: { file: File; onMeta: (w: number, h: number) => void; crop: { x: number; y: number; w: number; h: number }; dims: { w: number; h: number } }) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    const u = URL.createObjectURL(file);
-    setUrl(u);
-    return () => URL.revokeObjectURL(u);
-  }, [file]);
-  if (!url) return null;
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
+  useEffect(() => () => URL.revokeObjectURL(url), [url]);
   const showOverlay = dims.w > 0 && dims.h > 0;
   return (
     <div className="relative w-full max-h-72 overflow-hidden rounded-md border border-border bg-black">

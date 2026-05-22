@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import {
@@ -284,13 +284,11 @@ function AudioPreview({
   file: File;
   onDuration: (d: number) => void;
 }) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    const objectUrl = URL.createObjectURL(file);
-    setUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [file]);
-  if (!url) return null;
+  // Derive the object URL from `file` directly so we don't have to setUrl in an
+  // effect (which would violate react-hooks/set-state-in-effect). Revocation
+  // still runs as an effect cleanup keyed on the same URL.
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
+  useEffect(() => () => URL.revokeObjectURL(url), [url]);
   return (
     <audio
       src={url}

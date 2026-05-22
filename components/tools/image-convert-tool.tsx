@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import {
@@ -271,12 +271,12 @@ export function ImageConvertTool(messages: Messages) {
 }
 
 function FallbackImage({ file }: { file: File }) {
-  const [url, setUrl] = useState<string | null>(null);
+  // Derive the object URL from the file via useMemo to avoid setState in an effect;
+  // a cleanup-only effect revokes the URL when the file changes or the component unmounts.
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
   useEffect(() => {
-    const objectUrl = URL.createObjectURL(file);
-    setUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [file]);
+    return () => URL.revokeObjectURL(url);
+  }, [url]);
   if (!url) return null;
   return (
     <img

@@ -153,7 +153,7 @@ function Node({
         keyLabel={parentKey}
         valueLabel={
           <span className="text-sky-700 dark:text-sky-300">
-            "{matcher(value) ? <mark className="bg-yellow-300/40 px-0.5">{value}</mark> : value}"
+            &quot;{matcher(value) ? <mark className="bg-yellow-300/40 px-0.5">{value}</mark> : value}&quot;
           </span>
         }
         matcher={matcher}

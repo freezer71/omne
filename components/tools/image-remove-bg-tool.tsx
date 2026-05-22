@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { removeBackground } from '@/lib/tools/implementations/image-remove-bg';
@@ -34,21 +34,21 @@ export function ImageRemoveBgTool(messages: Messages) {
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [resultBytes, setResultBytes] = useState<Uint8Array | null>(null);
-  const [resultUrl, setResultUrl] = useState<string | null>(null);
+
+  // Derive the result object URL from the bytes via useMemo to avoid setState in an effect;
+  // a cleanup-only effect revokes the URL when the bytes change or the component unmounts.
+  const resultUrl = useMemo(() => {
+    if (!resultBytes) return null;
+    const blob = new Blob([new Uint8Array(resultBytes) as BlobPart], { type: 'image/png' });
+    return URL.createObjectURL(blob);
+  }, [resultBytes]);
+  useEffect(() => {
+    if (!resultUrl) return;
+    return () => URL.revokeObjectURL(resultUrl);
+  }, [resultUrl]);
 
   const hasResult = resultBytes !== null && resultUrl !== null;
   const canRun = file !== null && !busy && !hasResult;
-
-  useEffect(() => {
-    if (!resultBytes) {
-      setResultUrl(null);
-      return;
-    }
-    const blob = new Blob([new Uint8Array(resultBytes) as BlobPart], { type: 'image/png' });
-    const url = URL.createObjectURL(blob);
-    setResultUrl(url);
-    return () => URL.revokeObjectURL(url);
-  }, [resultBytes]);
 
   const resetResult = () => {
     setResultBytes(null);
@@ -212,12 +212,12 @@ export function ImageRemoveBgTool(messages: Messages) {
 }
 
 function SourcePreview({ file }: { file: File }) {
-  const [url, setUrl] = useState<string | null>(null);
+  // Derive the object URL from the file via useMemo to avoid setState in an effect;
+  // a cleanup-only effect revokes the URL when the file changes or the component unmounts.
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
   useEffect(() => {
-    const objectUrl = URL.createObjectURL(file);
-    setUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [file]);
+    return () => URL.revokeObjectURL(url);
+  }, [url]);
   if (!url) return null;
   return (
     <img

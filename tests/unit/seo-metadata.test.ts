@@ -38,7 +38,7 @@ describe('buildToolMetadata', () => {
 
   it('configures openGraph with siteName, type, url, locale', async () => {
     const meta = await buildToolMetadata('video', 'convert', 'en');
-    expect(meta.openGraph?.type).toBe('website');
+    expect((meta.openGraph as { type?: string }).type).toBe('website');
     expect(meta.openGraph?.siteName).toBe('omne');
     expect((meta.openGraph as { locale?: string }).locale).toBe('en_US');
     expect((meta.openGraph as { url?: string }).url).toBe(`${SITE_URL}/en/video/convert`);
@@ -46,7 +46,7 @@ describe('buildToolMetadata', () => {
 
   it('configures twitter as summary_large_image', async () => {
     const meta = await buildToolMetadata('password', 'generate', 'en');
-    expect(meta.twitter?.card).toBe('summary_large_image');
+    expect((meta.twitter as { card?: string }).card).toBe('summary_large_image');
   });
 
   it('returns {} for an unknown tool', async () => {

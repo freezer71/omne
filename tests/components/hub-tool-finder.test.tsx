@@ -53,6 +53,7 @@ const categoryLabels = {
   encode: 'Encoding tools',
   qr: 'QR & barcodes',
   color: 'Color tools',
+  dev: 'Dev tools',
   utility: 'Utilities',
 } as const;
 

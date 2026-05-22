@@ -90,7 +90,7 @@ export function SvgToDataUrlTool(messages: Messages) {
           <div className="flex flex-col items-center gap-2">
             <span className="text-xs text-text-muted">{messages.previewLabel}</span>
             {/* Using <img> for SVG data URL preview is intentional — Next/Image rejects data: URIs */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+            { }
             <img
               src={result.base64}
               alt=""

@@ -90,7 +90,7 @@ export function PdfWatermarkPreview({
                     {overlay.text}
                   </span>
                 ) : overlay.imageUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
+                   
                   <img
                     src={overlay.imageUrl}
                     alt=""

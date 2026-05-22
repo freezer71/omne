@@ -21,7 +21,7 @@ describe('inspectSvg', () => {
     expect(info.height).toBe(24);
     expect(info.viewBox).toBe('0 0 24 24');
     expect(info.elementCount).toBe(4); // svg + g + rect + circle
-    expect(info.rootAttrs.xmlns).toBe('http://www.w3.org/2000/svg');
+    expect(info.rootAttrs['xmlns']).toBe('http://www.w3.org/2000/svg');
     expect(info.bytes).toBeGreaterThan(0);
   });
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/cn';
@@ -71,17 +71,26 @@ export function JsonCsvTool(messages: Messages) {
   const [headers, setHeaders] = useState(true);
   const quote: CsvQuote = '"';
 
-  useEffect(() => {
+  // Reset input when the mode changes (clearing the textarea), and
+  // auto-detect the CSV delimiter when switching to / typing CSV input.
+  // Both are derivations of mode/input, so we run them during render with a
+  // tracked-state guard instead of inside useEffect.
+  const [trackedMode, setTrackedMode] = useState<Mode>(mode);
+  const [trackedInput, setTrackedInput] = useState<string>(input);
+  if (trackedMode !== mode) {
+    // Mode change: clear input. Skip delimiter detection this render because
+    // `input` still holds the previous mode's text; the next render (with the
+    // cleared input) will reconcile both trackers.
+    setTrackedMode(mode);
+    setTrackedInput('');
     setInput('');
-  }, [mode]);
-
-  useEffect(() => {
+  } else if (trackedInput !== input) {
+    setTrackedInput(input);
     if (mode === 'csv-to-json' && input) {
       const detected = detectDelimiter(input);
       if (detected !== delimiter) setDelimiter(detected);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mode, input]);
+  }
 
   const onChangeInput = useCallback((value: string) => {
     setInput(value);

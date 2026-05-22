@@ -8,28 +8,27 @@ type State = {
   error: boolean;
 };
 
+type Result = { pageCount: number | null; error: boolean } | null;
+
 export function usePdfPageCount(file: File | null): State {
-  const [state, setState] = useState<State>({
-    pageCount: null,
-    loading: file !== null,
-    error: false,
-  });
+  const [result, setResult] = useState<Result>(null);
+  const [trackedFile, setTrackedFile] = useState<File | null>(file);
+
+  if (trackedFile !== file) {
+    setTrackedFile(file);
+    setResult(null);
+  }
 
   useEffect(() => {
-    if (!file) {
-      setState({ pageCount: null, loading: false, error: false });
-      return;
-    }
+    if (!file) return;
     let cancelled = false;
-    setState({ pageCount: null, loading: true, error: false });
     (async () => {
       try {
         const { PDFDocument } = await import('pdf-lib');
         const doc = await PDFDocument.load(await file.arrayBuffer());
-        if (cancelled) return;
-        setState({ pageCount: doc.getPageCount(), loading: false, error: false });
+        if (!cancelled) setResult({ pageCount: doc.getPageCount(), error: false });
       } catch {
-        if (!cancelled) setState({ pageCount: null, loading: false, error: true });
+        if (!cancelled) setResult({ pageCount: null, error: true });
       }
     })();
     return () => {
@@ -37,5 +36,9 @@ export function usePdfPageCount(file: File | null): State {
     };
   }, [file]);
 
-  return state;
+  return {
+    pageCount: result?.pageCount ?? null,
+    loading: file !== null && result === null,
+    error: result?.error ?? false,
+  };
 }

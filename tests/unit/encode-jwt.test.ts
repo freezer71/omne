@@ -77,7 +77,7 @@ describe('decodeJwt', () => {
       .replace(/\+/g, '-')
       .replace(/\//g, '_');
     const r = decodeJwt(`eyJhbGciOiJub25lIn0.${payload}.s`);
-    expect(r.payload.name).toBe('café');
+    expect(r.payload['name']).toBe('café');
   });
 });
 

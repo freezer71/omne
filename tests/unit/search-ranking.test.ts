@@ -49,12 +49,12 @@ describe('searchTools', () => {
 
   it('matches exact name first', () => {
     const out = searchTools(tools, 'Merge PDFs');
-    expect(out[0].tool.id).toBe('merge');
+    expect(out[0]!.tool.id).toBe('merge');
   });
 
   it('ranks name prefix above keyword-only match', () => {
     const out = searchTools(tools, 'merge');
-    expect(out[0].tool.id).toBe('merge');
+    expect(out[0]!.tool.id).toBe('merge');
   });
 
   it('tolerates one-character typos via fuzzy', () => {
@@ -75,9 +75,9 @@ describe('searchTools', () => {
 
   it('returns highlight ranges over the name for matched query', () => {
     const out = searchTools(tools, 'merge');
-    const top = out[0];
+    const top = out[0]!;
     expect(top.nameRanges.length).toBeGreaterThan(0);
-    const [start, end] = top.nameRanges[0];
+    const [start, end] = top.nameRanges[0]!;
     expect(top.tool.name.slice(start, end).toLowerCase()).toBe('merge');
   });
 
@@ -105,6 +105,6 @@ describe('searchTools', () => {
 
   it('filterTools returns just the tools, in ranked order', () => {
     const out = filterTools(tools, 'pdf');
-    expect(out[0].category).toBe('pdf');
+    expect(out[0]!.category).toBe('pdf');
   });
 });

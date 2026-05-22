@@ -84,7 +84,6 @@ export function QrBarcodeGenerateTool(messages: Messages) {
       <div className="flex flex-col gap-1.5">
         <label className="text-xs text-text-muted">{messages.preview}</label>
         {result.valid && result.svg ? (
-          // eslint-disable-next-line @next/next/no-img-element
           <Card className="flex items-center justify-center p-6">
             <img src={`data:image/svg+xml;utf8,${encodeURIComponent(result.svg)}`} alt={messages.preview} className="max-w-full" />
           </Card>
