@@ -1259,6 +1259,40 @@
           "error": "Could not remove the background.",
           "removeFile": "Remove"
         }
+      },
+      "from-clipboard": {
+        "name": "Paste image from clipboard",
+        "description": "Paste an image straight from your clipboard — screenshot, copy from a webpage — and save it as PNG, JPG or WebP.",
+        "seo": {
+          "title": "Paste Image from Clipboard — Save Screenshots as PNG / JPG / WebP",
+          "description": "Paste any image from your clipboard (screenshot, copied image) and download it as PNG, JPG or WebP. 100% in-browser — nothing uploaded.",
+          "keywords": [
+            "paste image from clipboard",
+            "save screenshot as jpg",
+            "clipboard to image online",
+            "screenshot to webp",
+            "paste screenshot save",
+            "clipboard image converter",
+            "screenshot to png free"
+          ],
+          "ogTitle": "Paste from clipboard · 100% local"
+        },
+        "ui": {
+          "pasteButton": "Paste from clipboard",
+          "empty": "Press Cmd/Ctrl + V or click the button to paste an image.",
+          "downloadButton": "Download",
+          "format": "Output format",
+          "formatPng": "PNG",
+          "formatJpeg": "JPG",
+          "formatWebp": "WebP",
+          "previewLabel": "Preview",
+          "previewSummary": "{format} · {size}",
+          "busy": "Reading clipboard…",
+          "errorEmpty": "Your clipboard doesn't contain an image.",
+          "errorPermission": "Clipboard access was denied. Try Cmd/Ctrl + V instead.",
+          "errorGeneric": "Could not read that image.",
+          "replace": "Replace"
+        }
       }
     },
     "svg": {

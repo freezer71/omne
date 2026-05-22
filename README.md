@@ -73,7 +73,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **PDF** | Merge · Split · Rotate · Watermark · PDF → images · Extract images · Images → PDF |
 | **Video** | Convert (MP4 / WebM / GIF) · Trim · Split · Merge · Compress · Resize · Mute · Crop · Rotate / flip · Extract frames · Watermark · Speed · Short Studio (split + numbered watermark, optional 9:16) |
 | **Audio** | Convert · Extract (from video) · Trim · Merge · Volume / normalize / fades · ID3 tags |
-| **Image** | Convert · Compress · Resize · Crop · Rotate / flip · Remove background (local AI, *beta*) |
+| **Image** | Convert · Compress · Resize · Crop · Rotate / flip · Remove background (local AI, *beta*) · Paste from clipboard |
 | **SVG** | Viewer · Editor · Optimize (SVGO) · → PNG / JPG / WebP · → Data URL · Favicon generator |
 | **Password** | Generate · Passphrase (Diceware) · Hash (SHA) · bcrypt · Strength meter |
 | **JSON** | Format · Tree · JSONPath · Table · CSV ↔ JSON · Diff · Schema (AJV) |

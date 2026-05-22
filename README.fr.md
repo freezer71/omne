@@ -73,7 +73,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **PDF** | Fusionner · Diviser · Pivoter · Filigrane · PDF → images · Extraire les images · Images → PDF |
 | **Vidéo** | Convertir (MP4 / WebM / GIF) · Découper · Diviser · Fusionner · Compresser · Redimensionner · Couper le son · Recadrer · Pivoter / miroir · Extraire frames · Filigrane · Vitesse · Short Studio (découpe + filigrane numéroté, option 9:16) |
 | **Audio** | Convertir · Extraire (depuis vidéo) · Découper · Fusionner · Volume / normaliser / fondus · Tags ID3 |
-| **Image** | Convertir · Compresser · Redimensionner · Recadrer · Pivoter / miroir · Détourer (IA locale, *beta*) |
+| **Image** | Convertir · Compresser · Redimensionner · Recadrer · Pivoter / miroir · Détourer (IA locale, *beta*) · Coller depuis le presse-papier |
 | **SVG** | Aperçu · Éditeur · Optimiser (SVGO) · → PNG / JPG / WebP · → Data URL · Générateur de favicon |
 | **Mot de passe** | Générer · Phrase de passe (Diceware) · Hash (SHA) · bcrypt · Vérificateur de force |
 | **JSON** | Formater · Arborescence · JSONPath · Tableau · CSV ↔ JSON · Diff · Schéma (AJV) |

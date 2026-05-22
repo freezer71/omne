@@ -1259,6 +1259,40 @@
           "error": "Impossible de retirer l'arrière-plan.",
           "removeFile": "Retirer"
         }
+      },
+      "from-clipboard": {
+        "name": "Coller depuis le presse-papier",
+        "description": "Collez une image directement depuis votre presse-papier — capture d'écran, image copiée d'un site — et téléchargez-la en PNG, JPG ou WebP.",
+        "seo": {
+          "title": "Coller une image depuis le presse-papier — Capture en PNG / JPG / WebP",
+          "description": "Collez n'importe quelle image depuis votre presse-papier (capture d'écran, image copiée) et téléchargez-la en PNG, JPG ou WebP. 100 % dans le navigateur — aucun upload.",
+          "keywords": [
+            "coller image presse-papier",
+            "enregistrer capture ecran jpg",
+            "capture d'écran en jpg",
+            "presse-papier vers image",
+            "convertir capture écran",
+            "screenshot en png en ligne",
+            "coller image en ligne"
+          ],
+          "ogTitle": "Coller depuis le presse-papier · 100 % local"
+        },
+        "ui": {
+          "pasteButton": "Coller depuis le presse-papier",
+          "empty": "Appuyez sur Cmd/Ctrl + V ou cliquez sur le bouton pour coller une image.",
+          "downloadButton": "Télécharger",
+          "format": "Format de sortie",
+          "formatPng": "PNG",
+          "formatJpeg": "JPG",
+          "formatWebp": "WebP",
+          "previewLabel": "Aperçu",
+          "previewSummary": "{format} · {size}",
+          "busy": "Lecture du presse-papier…",
+          "errorEmpty": "Votre presse-papier ne contient pas d'image.",
+          "errorPermission": "L'accès au presse-papier a été refusé. Utilisez Cmd/Ctrl + V à la place.",
+          "errorGeneric": "Impossible de lire cette image.",
+          "replace": "Remplacer"
+        }
       }
     },
     "svg": {

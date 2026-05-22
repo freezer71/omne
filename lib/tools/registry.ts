@@ -336,6 +336,19 @@ export const TOOLS: readonly ToolMeta[] = [
     status: 'beta',
   },
   {
+    id: 'from-clipboard',
+    category: 'image',
+    href: '/image/from-clipboard',
+    i18nKey: 'tools.image.from-clipboard',
+    keywords: [
+      'clipboard', 'paste', 'screenshot', 'capture',
+      'presse-papier', 'coller', 'capture d\'ecran', 'capture-ecran',
+      'cmd+v', 'ctrl+v',
+    ],
+    acceptedMime: [],
+    status: 'stable',
+  },
+  {
     id: 'to-data-url',
     category: 'svg',
     href: '/svg/to-data-url',

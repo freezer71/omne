@@ -3,7 +3,7 @@ import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/regis
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(81);
+    expect(TOOLS).toHaveLength(82);
   });
 
   it('exposes the 6 audio tools', () => {
@@ -62,9 +62,11 @@ describe('TOOLS registry', () => {
     ]);
   });
 
-  it('exposes the 6 image tools', () => {
+  it('exposes the 7 image tools', () => {
     const image = TOOLS.filter((t) => t.category === 'image').map((t) => t.id).sort();
-    expect(image).toEqual(['compress', 'convert', 'crop', 'remove-bg', 'resize', 'rotate-flip']);
+    expect(image).toEqual([
+      'compress', 'convert', 'crop', 'from-clipboard', 'remove-bg', 'resize', 'rotate-flip',
+    ]);
   });
 
   it('every tool href matches /<category>/<id>', () => {
@@ -87,11 +89,12 @@ describe('TOOLS registry', () => {
     // (e.g. `color/convert`, `color/contrast`, `qr/generate`) while another
     // in the same category accepts files (e.g. `color/palette`, `qr/scan`).
     const MIXED_CATEGORIES = new Set(['color', 'qr']);
+    // Tools that take input from somewhere other than a file/drop (e.g. clipboard).
+    const NON_FILE_TOOLS = new Set(['image:from-clipboard']);
     for (const t of TOOLS) {
       if (TEXT_ONLY_CATEGORIES.has(t.category)) {
         expect(t.acceptedMime).toEqual([]);
-      } else if (MIXED_CATEGORIES.has(t.category)) {
-        // No constraint — depends on the individual tool.
+      } else if (MIXED_CATEGORIES.has(t.category) || NON_FILE_TOOLS.has(`${t.category}:${t.id}`)) {
         expect(Array.isArray(t.acceptedMime)).toBe(true);
       } else {
         expect(t.acceptedMime.length).toBeGreaterThan(0);
@@ -119,7 +122,7 @@ describe('toolsByCategory', () => {
     const grouped = toolsByCategory();
     expect(grouped.pdf?.length).toBe(7);
     expect(grouped.video?.length).toBe(13);
-    expect(grouped.image?.length).toBe(6);
+    expect(grouped.image?.length).toBe(7);
   });
 });
 
