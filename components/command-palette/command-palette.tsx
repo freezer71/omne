@@ -3,7 +3,7 @@
 import { Command } from 'cmdk';
 import * as RadixDialog from '@radix-ui/react-dialog';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react';
 import { usePalette } from './palette-context';
 import { CategoryIcon } from './category-icons';
 import { PaletteQuickActions, type QuickActionLabels } from './palette-quick-actions';
@@ -66,7 +66,8 @@ export function CommandPalette({
     [setOpen],
   );
 
-  const trimmed = query.trim();
+  const deferredQuery = useDeferredValue(query);
+  const trimmed = deferredQuery.trim();
   const hasQuery = trimmed.length > 0;
 
   const ranked = useMemo(() => searchTools(tools, trimmed), [tools, trimmed]);

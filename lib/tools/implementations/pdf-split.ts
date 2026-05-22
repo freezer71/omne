@@ -1,4 +1,4 @@
-import { PDFDocument } from 'pdf-lib';
+import type { PDFDocument } from 'pdf-lib';
 
 type PdfInput = Uint8Array | ArrayBuffer | File;
 
@@ -16,8 +16,13 @@ function rangeName(start: number, end: number): string {
   return start === end ? `page-${start}` : `pages-${start}-${end}`;
 }
 
-async function extractRange(src: PDFDocument, start: number, end: number): Promise<Uint8Array> {
-  const out = await PDFDocument.create();
+async function extractRange(
+  PDFDocumentClass: typeof PDFDocument,
+  src: PDFDocument,
+  start: number,
+  end: number,
+): Promise<Uint8Array> {
+  const out = await PDFDocumentClass.create();
   const indices = [];
   for (let i = start - 1; i <= end - 1; i++) indices.push(i);
   const pages = await out.copyPages(src, indices);
@@ -27,7 +32,8 @@ async function extractRange(src: PDFDocument, start: number, end: number): Promi
 
 export async function splitPdf(input: PdfInput, mode: SplitMode): Promise<SplitPart[]> {
   const bytes = await toBytes(input);
-  const src = await PDFDocument.load(bytes);
+  const { PDFDocument: PDFDocumentClass } = await import('pdf-lib');
+  const src = await PDFDocumentClass.load(bytes);
   const total = src.getPageCount();
 
   let ranges: [number, number][];
@@ -44,7 +50,7 @@ export async function splitPdf(input: PdfInput, mode: SplitMode): Promise<SplitP
     }
     parts.push({
       name: rangeName(start, end),
-      bytes: await extractRange(src, start, end),
+      bytes: await extractRange(PDFDocumentClass, src, start, end),
     });
   }
   return parts;
@@ -53,14 +59,15 @@ export async function splitPdf(input: PdfInput, mode: SplitMode): Promise<SplitP
 export async function extractPages(input: PdfInput, pages: number[]): Promise<Uint8Array> {
   if (pages.length === 0) throw new Error('extractPages requires at least one page');
   const bytes = await toBytes(input);
-  const src = await PDFDocument.load(bytes);
+  const { PDFDocument: PDFDocumentClass } = await import('pdf-lib');
+  const src = await PDFDocumentClass.load(bytes);
   const total = src.getPageCount();
   for (const p of pages) {
     if (p < 1 || p > total) {
       throw new Error(`Page ${p} out of bounds (1-${total})`);
     }
   }
-  const out = await PDFDocument.create();
+  const out = await PDFDocumentClass.create();
   const indices = pages.map((p) => p - 1);
   const copied = await out.copyPages(src, indices);
   for (const page of copied) out.addPage(page);

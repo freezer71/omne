@@ -1,5 +1,3 @@
-import { PDFDocument } from 'pdf-lib';
-
 type ImageInput = Uint8Array | ArrayBuffer | File;
 
 type DetectedFormat = 'png' | 'jpg';
@@ -19,6 +17,7 @@ async function toBytes(input: ImageInput): Promise<{ bytes: Uint8Array; mime?: s
 export async function imagesToPdf(inputs: ImageInput[]): Promise<Uint8Array> {
   if (inputs.length === 0) throw new Error('imagesToPdf requires at least one image');
 
+  const { PDFDocument } = await import('pdf-lib');
   const doc = await PDFDocument.create();
   for (const input of inputs) {
     const { bytes, mime } = await toBytes(input);

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useDeferredValue, useMemo, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { ToolCard } from '@/components/tool-card';
 import { searchTools, type RankedResult, type SearchableTool } from '@/lib/tools/search';
@@ -43,7 +43,8 @@ export function HubToolFinder({
   subtitle,
 }: Props) {
   const [query, setQuery] = useState('');
-  const trimmed = query.trim();
+  const deferredQuery = useDeferredValue(query);
+  const trimmed = deferredQuery.trim();
   const ranked = useMemo<RankedResult[]>(
     () => searchTools(tools, trimmed),
     [tools, trimmed],

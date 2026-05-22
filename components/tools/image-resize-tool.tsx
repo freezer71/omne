@@ -36,6 +36,8 @@ export function ImageResizeTool(messages: Messages) {
   const scaleId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+  // Cached decoded source image — created once per file, reused on every width/height change.
+  const sourceImgRef = useRef<HTMLImageElement | null>(null);
 
   const [file, setFile] = useState<File | null>(null);
   const [natural, setNatural] = useState<{ w: number; h: number } | null>(null);
@@ -66,22 +68,25 @@ export function ImageResizeTool(messages: Messages) {
     setError(null);
   };
 
+  // Load the source image exactly once per file. The decoded <img> is cached on a ref so
+  // dragging the width/height sliders reuses it without re-fetching the blob.
   useEffect(() => {
-    if (!file) return;
+    if (!file) {
+      sourceImgRef.current = null;
+      return;
+    }
     let cancelled = false;
     const url = URL.createObjectURL(file);
     const img = new Image();
     img.onload = () => {
-      if (cancelled) {
-        URL.revokeObjectURL(url);
-        return;
-      }
+      URL.revokeObjectURL(url);
+      if (cancelled) return;
+      sourceImgRef.current = img;
       const w = img.naturalWidth || 800;
       const h = img.naturalHeight || 600;
       setNatural({ w, h });
       setWidth(w);
       setHeight(h);
-      URL.revokeObjectURL(url);
     };
     img.onerror = () => URL.revokeObjectURL(url);
     img.src = url;
@@ -90,35 +95,21 @@ export function ImageResizeTool(messages: Messages) {
     };
   }, [file]);
 
+  // Redraw the canvas whenever dimensions change. Uses the cached source image,
+  // so this effect is cheap on slider drag (no blob re-fetch, no Image decode).
   useEffect(() => {
     if (!file || width <= 0 || height <= 0) return;
-    let cancelled = false;
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => {
-      if (cancelled) {
-        URL.revokeObjectURL(url);
-        return;
-      }
-      const canvas = previewCanvasRef.current;
-      if (canvas) {
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = 'high';
-          ctx.drawImage(img, 0, 0, width, height);
-        }
-      }
-      URL.revokeObjectURL(url);
-    };
-    img.onerror = () => URL.revokeObjectURL(url);
-    img.src = url;
-    return () => {
-      cancelled = true;
-    };
-  }, [file, width, height]);
+    const img = sourceImgRef.current;
+    const canvas = previewCanvasRef.current;
+    if (!img || !canvas) return;
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(img, 0, 0, width, height);
+  }, [file, natural, width, height]);
 
   const updateWidth = (next: number) => {
     setWidth(next);

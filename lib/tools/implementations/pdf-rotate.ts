@@ -1,5 +1,3 @@
-import { PDFDocument, degrees } from 'pdf-lib';
-
 export type RotationAngle = 90 | 180 | 270 | 360;
 
 export type RotateOptions =
@@ -35,6 +33,7 @@ export async function rotatePdf(input: PdfInput, options: RotateOptions): Promis
     throw new Error('Empty PDF input');
   }
 
+  const { PDFDocument, degrees } = await import('pdf-lib');
   const doc = await PDFDocument.load(bytes);
   const pages = doc.getPages();
 

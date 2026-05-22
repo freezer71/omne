@@ -1,5 +1,3 @@
-import { PDFDocument, StandardFonts, degrees, rgb } from 'pdf-lib';
-
 type PdfInput = Uint8Array | ArrayBuffer | File;
 type ImageInput = Uint8Array | ArrayBuffer | File;
 
@@ -60,6 +58,7 @@ export async function watermarkPdf(input: PdfInput, options: WatermarkOptions): 
   const opacity = clamp01(options.opacity);
   const angle = options.angle;
 
+  const { PDFDocument, StandardFonts, degrees, rgb } = await import('pdf-lib');
   const doc = await PDFDocument.load(bytes);
   const pages = doc.getPages();
 

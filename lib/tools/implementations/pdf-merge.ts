@@ -1,5 +1,3 @@
-import { PDFDocument } from 'pdf-lib';
-
 type PdfInput = Uint8Array | ArrayBuffer | File;
 
 async function toBytes(input: PdfInput): Promise<Uint8Array> {
@@ -12,6 +10,7 @@ export async function mergePdfs(inputs: PdfInput[]): Promise<Uint8Array> {
   if (inputs.length === 0) {
     throw new Error('mergePdfs requires at least one PDF');
   }
+  const { PDFDocument } = await import('pdf-lib');
 
   const out = await PDFDocument.create();
   for (const input of inputs) {
