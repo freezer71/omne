@@ -16,7 +16,7 @@ export function HighlightedText({ text, ranges, className, markClassName }: Prop
   const parts: React.ReactNode[] = [];
   let cursor = 0;
   for (let i = 0; i < ranges.length; i++) {
-    const [start, end] = ranges[i];
+    const [start, end] = ranges[i]!;
     if (start > cursor) parts.push(<Fragment key={`p${i}`}>{text.slice(cursor, start)}</Fragment>);
     parts.push(
       <mark
