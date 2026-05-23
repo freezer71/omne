@@ -12,11 +12,18 @@ const INPUT_NAME = 'input.bin';
 function buildArgs(format: VideoFormat, input: string, output: string): string[] {
   switch (format) {
     case 'webm':
+      // libvpx (VP8) instead of libvpx-vp9: VP9 in ffmpeg.wasm core-mt reliably
+      // OOMs during encoding even at 1080p, because lookahead × pthread workers
+      // × frame references exhausts the linear memory budget. VP8 is much more
+      // memory-efficient, ~5× faster to encode, fully supported in browsers as
+      // WebM, with a ~30% bitrate cost we accept for reliability.
+      // Cap to 1080p so the per-frame buffer fits comfortably in heap.
       return [
         '-i', input,
-        '-c:v', 'libvpx-vp9', '-b:v', '1M',
-        '-row-mt', '1', '-cpu-used', '8', '-deadline', 'realtime',
-        '-c:a', 'libopus',
+        '-vf', 'scale=1920:1080:force_original_aspect_ratio=decrease',
+        '-c:v', 'libvpx', '-b:v', '1M',
+        '-cpu-used', '5',
+        '-c:a', 'libopus', '-b:a', '128k',
         output,
       ];
     case 'gif':

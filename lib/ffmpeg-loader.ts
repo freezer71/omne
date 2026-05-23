@@ -17,11 +17,26 @@ export async function getFfmpeg(): Promise<FFmpeg> {
 
   const ffmpeg = new FFmpeg();
   loading = (async () => {
+    // Forward ffmpeg stdout/stderr to the browser console in development so we
+    // can diagnose stalls (silent decode failures, slow encoder phases, etc.).
+    // Stripped from production via the NODE_ENV check.
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[ffmpeg-loader] attaching log/progress handlers, loading core…');
+      ffmpeg.on('log', ({ type, message }: { type: string; message: string }) => {
+        console.log(`[ffmpeg:${type}]`, message);
+      });
+      ffmpeg.on('progress', ({ progress, time }: { progress: number; time: number }) => {
+        console.log(`[ffmpeg:progress] ${(progress * 100).toFixed(1)}% (t=${time}us)`);
+      });
+    }
     await ffmpeg.load({
       coreURL: '/ffmpeg/ffmpeg-core.js',
       wasmURL: '/ffmpeg/ffmpeg-core.wasm',
       workerURL: '/ffmpeg/ffmpeg-core.worker.js',
     });
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[ffmpeg-loader] core loaded');
+    }
     instance = ffmpeg;
     return ffmpeg;
   })();
