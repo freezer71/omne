@@ -30,6 +30,7 @@ const messages = {
   removeFile: 'Remove',
   etaLabel: '~{remaining} remaining',
   etaCalculating: 'Estimating remaining time…',
+  largeFileWarning: 'Large file warning.',
 };
 
 function videoFile(name = 'clip.mp4', type = 'video/mp4'): File {

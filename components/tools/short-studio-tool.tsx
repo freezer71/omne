@@ -3,6 +3,7 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
 import {
   generateShorts,
   renderTemplate,
@@ -13,6 +14,7 @@ import {
 } from '@/lib/tools/implementations/short-studio';
 import { computeBoundaries, MAX_SEGMENTS, type SplitMode } from '@/lib/tools/implementations/video-split';
 import { useVideoSegmentFrames } from '@/lib/hooks/use-video-segment-frames';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { downloadBlob, formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
@@ -72,6 +74,7 @@ type Messages = {
   downloadAllZip: string;
   downloadSegment: string;
   segmentsReady: string;
+  largeFileWarning: string;
 };
 
 const FONT_CSS: Record<FontFamily, string> = {
@@ -367,6 +370,7 @@ export function ShortStudioTool(messages: Messages) {
                 {messages.removeFile}
               </Button>
             </div>
+            <HeavyFileWarning bytes={file.size} message={messages.largeFileWarning} />
           </div>
         )}
       </Card>
@@ -776,8 +780,8 @@ function ShortPreview({
   previewLabel: string;
   onDurationChange: (duration: number) => void;
 }) {
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  const url = useBlobUrl(file);
+  if (!url) return null;
   return (
     <div className="flex flex-col gap-1.5">
       <span className="text-xs text-text-muted">{previewLabel}</span>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import {
@@ -8,6 +8,7 @@ import {
   type RotateAngle,
 } from '@/lib/tools/implementations/image-rotate';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
 
 type Messages = {
@@ -213,12 +214,7 @@ function RotatedPreview({
   flipH: boolean;
   flipV: boolean;
 }) {
-  // Derive the object URL from the file via useMemo to avoid setState in an effect;
-  // a cleanup-only effect revokes the URL when the file changes or the component unmounts.
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => {
-    return () => URL.revokeObjectURL(url);
-  }, [url]);
+  const url = useBlobUrl(file);
   if (!url) return null;
   const transforms: string[] = [];
   if (angle !== 0) transforms.push(`rotate(${angle}deg)`);

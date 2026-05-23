@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { removeBackground } from '@/lib/tools/implementations/image-remove-bg';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
 
 type Messages = {
@@ -36,17 +37,11 @@ export function ImageRemoveBgTool(messages: Messages) {
   const [dragging, setDragging] = useState(false);
   const [resultBytes, setResultBytes] = useState<Uint8Array | null>(null);
 
-  // Derive the result object URL from the bytes via useMemo to avoid setState in an effect;
-  // a cleanup-only effect revokes the URL when the bytes change or the component unmounts.
-  const resultUrl = useMemo(() => {
+  const resultBlob = useMemo(() => {
     if (!resultBytes) return null;
-    const blob = new Blob([new Uint8Array(resultBytes) as BlobPart], { type: 'image/png' });
-    return URL.createObjectURL(blob);
+    return new Blob([new Uint8Array(resultBytes) as BlobPart], { type: 'image/png' });
   }, [resultBytes]);
-  useEffect(() => {
-    if (!resultUrl) return;
-    return () => URL.revokeObjectURL(resultUrl);
-  }, [resultUrl]);
+  const resultUrl = useBlobUrl(resultBlob);
 
   const hasResult = resultBytes !== null && resultUrl !== null;
   const canRun = file !== null && !busy && !hasResult;
@@ -213,12 +208,7 @@ export function ImageRemoveBgTool(messages: Messages) {
 }
 
 function SourcePreview({ file }: { file: File }) {
-  // Derive the object URL from the file via useMemo to avoid setState in an effect;
-  // a cleanup-only effect revokes the URL when the file changes or the component unmounts.
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => {
-    return () => URL.revokeObjectURL(url);
-  }, [url]);
+  const url = useBlobUrl(file);
   if (!url) return null;
   return (
     <img

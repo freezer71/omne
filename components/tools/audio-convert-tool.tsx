@@ -1,14 +1,16 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
 import {
   audioMimeForFormat,
   convertAudio,
   type AudioConvertFormat,
 } from '@/lib/tools/implementations/audio-convert';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -31,6 +33,7 @@ type Messages = {
   estimatedSizeLabel: string;
   etaLabel: string;
   etaCalculating: string;
+  largeFileWarning: string;
 };
 
 const FORMATS: AudioConvertFormat[] = ['mp3', 'wav', 'flac', 'aac', 'opus', 'm4a'];
@@ -214,6 +217,7 @@ export function AudioConvertTool(messages: Messages) {
                 {messages.removeFile}
               </Button>
             </div>
+            <HeavyFileWarning bytes={file.size} message={messages.largeFileWarning} />
           </div>
         )}
       </Card>
@@ -284,11 +288,8 @@ function AudioPreview({
   file: File;
   onDuration: (d: number) => void;
 }) {
-  // Derive the object URL from `file` directly so we don't have to setUrl in an
-  // effect (which would violate react-hooks/set-state-in-effect). Revocation
-  // still runs as an effect cleanup keyed on the same URL.
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  const url = useBlobUrl(file);
+  if (!url) return null;
   return (
     <audio
       src={url}

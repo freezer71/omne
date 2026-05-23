@@ -18,6 +18,11 @@ export function outputName(
   return `${action}-${middle}.${extension}`;
 }
 
+// Files larger than this should warn users that in-browser ffmpeg.wasm processing
+// may fail (OOM) or be very slow. The 150 MB threshold is empirical: 200 MB
+// inputs reliably OOM during VP9 encoding on the multi-thread ffmpeg-core build.
+export const LARGE_FILE_BYTES = 150 * 1024 * 1024;
+
 const UNITS = ['B', 'KB', 'MB', 'GB', 'TB'];
 
 export function formatBytes(bytes: number): string {

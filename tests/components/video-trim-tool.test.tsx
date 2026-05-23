@@ -32,6 +32,7 @@ const messages = {
   pauseLabel: 'Pause',
   muteLabel: 'Mute',
   unmuteLabel: 'Unmute',
+  largeFileWarning: 'Large file warning.',
 };
 
 function setVideoDuration(d: number) {

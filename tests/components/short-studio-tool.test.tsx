@@ -76,6 +76,7 @@ const messages = {
   downloadAllZip: 'Download all (ZIP)',
   downloadSegment: 'Download {name}',
   segmentsReady: '{n} shorts ready',
+  largeFileWarning: 'Large file warning.',
 };
 
 function setVideoDuration(d: number) {

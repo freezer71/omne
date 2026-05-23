@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import {
@@ -14,6 +14,7 @@ import {
 } from '@/lib/tools/implementations/audio-tags';
 import { canvasToBytes, createCanvas, get2dContext, loadImageBitmap } from '@/lib/image-utils';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
 
 type Messages = {
@@ -420,23 +421,18 @@ function TextField({
 }
 
 function AudioPreview({ file }: { file: File }) {
-  // Derive the object URL from `file` directly so we don't have to setUrl in an
-  // effect (which would violate react-hooks/set-state-in-effect). Revocation
-  // still runs as an effect cleanup keyed on the same URL.
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  const url = useBlobUrl(file);
+  if (!url) return null;
   return <audio src={url} controls className="w-full" preload="metadata" />;
 }
 
 function CoverPreview({ cover }: { cover: AudioCover }) {
-  // Derive the object URL from `cover` directly so we don't have to setUrl in
-  // an effect (which would violate react-hooks/set-state-in-effect).
-  // Revocation still runs as an effect cleanup keyed on the same URL.
-  const url = useMemo(() => {
-    const blob = new Blob([new Uint8Array(cover.bytes) as BlobPart], { type: cover.mime });
-    return URL.createObjectURL(blob);
-  }, [cover]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
-   
+  const blob = useMemo(
+    () => new Blob([new Uint8Array(cover.bytes) as BlobPart], { type: cover.mime }),
+    [cover],
+  );
+  const url = useBlobUrl(blob);
+  if (!url) return null;
+
   return <img src={url} alt="" className="h-full w-full object-cover" />;
 }

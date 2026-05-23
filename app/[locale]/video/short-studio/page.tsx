@@ -28,7 +28,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         backHomeLabel={dict.common.backHome}
         wide
       >
-        <ShortStudioTool {...tool.ui} />
+        <ShortStudioTool {...tool.ui} largeFileWarning={dict.common.largeFileWarning} />
       </ToolShell>
       <ToolPageJsonLd category="video" id="short-studio" locale={locale} />
     </>

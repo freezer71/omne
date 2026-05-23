@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
 import { speedVideo } from '@/lib/tools/implementations/video-speed';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -20,6 +22,7 @@ type Messages = {
   removeFile: string;
   etaLabel: string;
   etaCalculating: string;
+  largeFileWarning: string;
 };
 
 function formatRemaining(seconds: number): string {
@@ -115,6 +118,7 @@ export function VideoSpeedTool(messages: Messages) {
               </div>
               <Button variant="subtle" size="sm" onClick={() => setFile(null)} aria-label={messages.removeFile}>{messages.removeFile}</Button>
             </div>
+            <HeavyFileWarning bytes={file.size} message={messages.largeFileWarning} />
           </div>
         )}
       </Card>
@@ -164,8 +168,8 @@ export function VideoSpeedTool(messages: Messages) {
 }
 
 function SpeedPreview({ file, speed, videoRef }: { file: File; speed: number; videoRef: React.RefObject<HTMLVideoElement | null> }) {
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  const url = useBlobUrl(file);
+  if (!url) return null;
   return (
     <video
       ref={videoRef}

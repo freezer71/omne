@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
 import { trimAudio } from '@/lib/tools/implementations/audio-trim';
 import { downloadBlob, formatBytes, outputName, stripExtension } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { Waveform } from '@/components/audio-waveform';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
@@ -21,6 +23,7 @@ type Messages = {
   error: string;
   removeFile: string;
   clipDurationLabel: string;
+  largeFileWarning: string;
 };
 
 function extOf(name: string): string {
@@ -147,6 +150,7 @@ export function AudioTrimTool(messages: Messages) {
                 {messages.removeFile}
               </Button>
             </div>
+            <HeavyFileWarning bytes={file.size} message={messages.largeFileWarning} />
 
             <AudioWithMeta
               file={file}
@@ -242,11 +246,8 @@ function AudioWithMeta({
   end: number;
   onDuration: (d: number) => void;
 }) {
-  // Derive the object URL from `file` directly so we don't have to setUrl in an
-  // effect (which would violate react-hooks/set-state-in-effect). Revocation
-  // still runs as an effect cleanup keyed on the same URL.
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  const url = useBlobUrl(file);
+  if (!url) return null;
   return (
     <audio
       ref={audioRef}

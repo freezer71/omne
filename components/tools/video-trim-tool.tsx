@@ -1,10 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
 import { trimVideo } from '@/lib/tools/implementations/video-trim';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -25,6 +27,7 @@ type Messages = {
   pauseLabel: string;
   muteLabel: string;
   unmuteLabel: string;
+  largeFileWarning: string;
 };
 
 function formatClock(seconds: number): string {
@@ -255,6 +258,7 @@ export function VideoTrimTool(messages: Messages) {
               </div>
               <Button variant="subtle" size="sm" onClick={() => setFile(null)} aria-label={messages.removeFile}>{messages.removeFile}</Button>
             </div>
+            <HeavyFileWarning bytes={file.size} message={messages.largeFileWarning} />
           </div>
         )}
       </Card>
@@ -489,8 +493,8 @@ function VideoPreview({
   onPlayStateChange: (playing: boolean) => void;
   onMutedChange: (muted: boolean) => void;
 }) {
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  const url = useBlobUrl(file);
+  if (!url) return null;
   return (
     <video
       ref={videoRef}

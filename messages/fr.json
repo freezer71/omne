@@ -30,6 +30,7 @@
     "backHome": "Accueil",
     "previewLoading": "Chargement",
     "previewError": "Aperçu impossible",
+    "largeFileWarning": "Fichier volumineux — la conversion peut échouer ou être lente dans le navigateur. Essayez un fichier plus court ou compressez-le avant.",
     "footer": {
       "howItWorksTitle": "Comment ça marche",
       "howItWorksStep1": "Déposez votre fichier ou collez votre contenu dans l'outil ci-dessus.",

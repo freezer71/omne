@@ -48,6 +48,7 @@ export default async function Page({
           error={tool.ui.error}
           removeFile={tool.ui.removeFile}
           clipDurationLabel={tool.ui.clipDurationLabel}
+          largeFileWarning={dict.common.largeFileWarning}
         />
       </ToolShell>
       <ToolPageJsonLd category="audio" id="trim" locale={locale} />

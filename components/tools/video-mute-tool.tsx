@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
 import { muteVideo } from '@/lib/tools/implementations/video-mute';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -17,6 +19,7 @@ type Messages = {
   removeFile: string;
   etaLabel: string;
   etaCalculating: string;
+  largeFileWarning: string;
 };
 
 function inferExtension(name: string): string {
@@ -109,6 +112,7 @@ export function VideoMuteTool(messages: Messages) {
               </div>
               <Button variant="subtle" size="sm" onClick={() => setFile(null)} aria-label={messages.removeFile}>{messages.removeFile}</Button>
             </div>
+            <HeavyFileWarning bytes={file.size} message={messages.largeFileWarning} />
           </div>
         )}
       </Card>
@@ -133,7 +137,7 @@ export function VideoMuteTool(messages: Messages) {
 }
 
 function VideoPreview({ file }: { file: File }) {
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  const url = useBlobUrl(file);
+  if (!url) return null;
   return <video src={url} controls className="w-full max-h-72 rounded-md border border-border bg-black" />;
 }

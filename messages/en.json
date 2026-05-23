@@ -30,6 +30,7 @@
     "backHome": "Home",
     "previewLoading": "Loading",
     "previewError": "Can't preview",
+    "largeFileWarning": "Large file — in-browser conversion may fail or be slow. Try a shorter clip or compress the file first.",
     "footer": {
       "howItWorksTitle": "How it works",
       "howItWorksStep1": "Drop your file or paste your content into the tool above.",

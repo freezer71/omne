@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       categoryLabel={dict.hub.categories.video}
       backHomeLabel={dict.common.backHome}
     >
-      <VideoTrimTool {...tool.ui} />
+      <VideoTrimTool {...tool.ui} largeFileWarning={dict.common.largeFileWarning} />
     </ToolShell>
       <ToolPageJsonLd category="video" id="trim" locale={locale} />
     </>

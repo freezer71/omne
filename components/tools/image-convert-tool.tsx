@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import {
@@ -8,6 +8,7 @@ import {
   type ImageTargetFormat,
 } from '@/lib/tools/implementations/image-convert';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -271,12 +272,7 @@ export function ImageConvertTool(messages: Messages) {
 }
 
 function FallbackImage({ file }: { file: File }) {
-  // Derive the object URL from the file via useMemo to avoid setState in an effect;
-  // a cleanup-only effect revokes the URL when the file changes or the component unmounts.
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => {
-    return () => URL.revokeObjectURL(url);
-  }, [url]);
+  const url = useBlobUrl(file);
   if (!url) return null;
   return (
     <img

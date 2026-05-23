@@ -49,6 +49,7 @@ const messages = {
   estimatedSegments: '≈ {n} segments',
   tooManySegmentsError: '{n} segments would be created — max is {max}. Increase the duration.',
   invalidInputError: 'Enter a positive duration.',
+  largeFileWarning: 'Large file warning.',
 };
 
 function setVideoDuration(d: number) {

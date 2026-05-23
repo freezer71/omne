@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { imagesToPdf } from '@/lib/tools/implementations/images-to-pdf';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -132,12 +133,8 @@ export function ImagesToPdfTool(messages: Messages) {
 }
 
 function ImageThumb({ file }: { file: File }) {
-  // Derive the object URL from the file via useMemo instead of setting state in an effect.
-  // The cleanup effect handles revocation when the file changes or the component unmounts.
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => {
-    return () => URL.revokeObjectURL(url);
-  }, [url]);
+  const url = useBlobUrl(file);
+  if (!url) return null;
   return (
     <div className="h-16 w-16 shrink-0 overflow-hidden rounded border border-border bg-bg flex items-center justify-center">
       <img src={url} alt="" className="h-full w-full object-cover" />

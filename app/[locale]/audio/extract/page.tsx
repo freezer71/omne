@@ -53,6 +53,7 @@ export default async function Page({
           estimatedSizeLabel={tool.ui.estimatedSizeLabel}
           etaLabel={tool.ui.etaLabel}
           etaCalculating={tool.ui.etaCalculating}
+          largeFileWarning={dict.common.largeFileWarning}
         />
       </ToolShell>
       <ToolPageJsonLd category="audio" id="extract" locale={locale} />

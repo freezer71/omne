@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
 import { rotateVideo, type RotateTransform } from '@/lib/tools/implementations/video-rotate';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -23,6 +25,7 @@ type Messages = {
   removeFile: string;
   etaLabel: string;
   etaCalculating: string;
+  largeFileWarning: string;
 };
 
 const TRANSFORMS: RotateTransform[] = ['rotate90', 'rotate180', 'rotate270', 'flipH', 'flipV'];
@@ -128,6 +131,7 @@ export function VideoRotateTool(messages: Messages) {
               </div>
               <Button variant="subtle" size="sm" onClick={() => setFile(null)} aria-label={messages.removeFile}>{messages.removeFile}</Button>
             </div>
+            <HeavyFileWarning bytes={file.size} message={messages.largeFileWarning} />
           </div>
         )}
       </Card>
@@ -166,8 +170,8 @@ export function VideoRotateTool(messages: Messages) {
 }
 
 function RotatePreview({ file, transform }: { file: File; transform: RotateTransform }) {
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  const url = useBlobUrl(file);
+  if (!url) return null;
   return (
     <div className="flex items-center justify-center overflow-hidden rounded-md border border-border bg-black p-4">
       <video src={url} controls className="max-h-72 transition-transform duration-200" style={{ transform: PREVIEW_TRANSFORM[transform] }} />

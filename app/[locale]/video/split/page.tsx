@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       categoryLabel={dict.hub.categories.video}
       backHomeLabel={dict.common.backHome}
     >
-      <VideoSplitTool {...tool.ui} />
+      <VideoSplitTool {...tool.ui} largeFileWarning={dict.common.largeFileWarning} />
     </ToolShell>
       <ToolPageJsonLd category="video" id="split" locale={locale} />
     </>

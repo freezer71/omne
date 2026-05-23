@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
 import { convertVideo, type VideoFormat } from '@/lib/tools/implementations/video-convert';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -23,6 +25,7 @@ type Messages = {
   removeFile: string;
   etaLabel: string;
   etaCalculating: string;
+  largeFileWarning: string;
 };
 
 function formatRemaining(seconds: number): string {
@@ -187,6 +190,7 @@ export function VideoConvertTool(messages: Messages) {
                 {messages.removeFile}
               </Button>
             </div>
+            <HeavyFileWarning bytes={file.size} message={messages.largeFileWarning} />
           </div>
         )}
       </Card>
@@ -232,8 +236,8 @@ export function VideoConvertTool(messages: Messages) {
 }
 
 function VideoPreview({ file }: { file: File }) {
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  const url = useBlobUrl(file);
+  if (!url) return null;
   return (
     <video
       src={url}

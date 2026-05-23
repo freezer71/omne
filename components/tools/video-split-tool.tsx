@@ -3,6 +3,7 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
 import {
   splitVideo,
   computeBoundaries,
@@ -11,6 +12,7 @@ import {
   type SplitOptions,
 } from '@/lib/tools/implementations/video-split';
 import { useVideoSegmentFrames } from '@/lib/hooks/use-video-segment-frames';
+import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { downloadBlob, formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
@@ -43,6 +45,7 @@ type Messages = {
   tooManySegmentsError: string;
   invalidInputError: string;
   estimatedSegments: string;
+  largeFileWarning: string;
 };
 
 function inferExtension(name: string): string {
@@ -278,6 +281,7 @@ export function VideoSplitTool(messages: Messages) {
                 {messages.removeFile}
               </Button>
             </div>
+            <HeavyFileWarning bytes={file.size} message={messages.largeFileWarning} />
           </div>
         )}
       </Card>
@@ -482,8 +486,8 @@ function VideoPreview({
   videoRef: React.RefObject<HTMLVideoElement | null>;
   onDurationChange: (duration: number) => void;
 }) {
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  const url = useBlobUrl(file);
+  if (!url) return null;
   return (
     <video
       ref={videoRef}
