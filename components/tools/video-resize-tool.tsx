@@ -104,7 +104,8 @@ export function VideoResizeTool(messages: Messages) {
       const mime = result.ext === 'webm' ? 'video/webm' : 'video/mp4';
       const blob = new Blob([new Uint8Array(result.data)], { type: mime });
       downloadBlob(blob, outputName('resized', [file.name], result.ext));
-    } catch (_err) {
+    } catch (err) {
+      console.error('[video-resize]', err);
       setError(messages.error);
     } finally {
       setBusy(false);
