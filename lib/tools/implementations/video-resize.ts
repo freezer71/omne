@@ -51,10 +51,35 @@ export function buildScaleFilter(options: ResizeOptions): string {
   return `scale=${w}:${h}`;
 }
 
-export async function resizeVideo(input: File, options: ResizeOptions): Promise<Uint8Array> {
+function inferExtension(input: File): string {
+  const dot = input.name.lastIndexOf('.');
+  if (dot > 0) return input.name.slice(dot + 1).toLowerCase();
+  return 'mp4';
+}
+
+function buildCodecArgs(ext: string, scaleFilter: string): string[] {
+  if (ext === 'webm') {
+    return [
+      '-vf', scaleFilter,
+      '-c:v', 'libvpx', '-b:v', '1M',
+      '-cpu-used', '5',
+      '-c:a', 'libopus', '-b:a', '128k',
+    ];
+  }
+  return [
+    '-vf', scaleFilter,
+    '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '23',
+    '-c:a', 'aac', '-b:a', '128k',
+  ];
+}
+
+export type ResizeResult = { data: Uint8Array; ext: string };
+
+export async function resizeVideo(input: File, options: ResizeOptions): Promise<ResizeResult> {
   const ffmpeg = (await getFfmpeg()) as unknown as FfmpegLike;
-  const inputName = 'input.mp4';
-  const outputName = 'resized.mp4';
+  const ext = inferExtension(input);
+  const inputName = `input.${ext}`;
+  const outputName = `resized.${ext}`;
 
   let progressHandler: ((e: { progress: number }) => void) | undefined;
   if (options.onProgress) {
@@ -68,17 +93,15 @@ export async function resizeVideo(input: File, options: ResizeOptions): Promise<
     try {
       await runFfmpegCommand(ffmpeg, [
         '-i', inputName,
-        '-vf', buildScaleFilter(options),
-        '-c:v', 'mpeg4',
-        '-q:v', '5',
-        '-c:a', 'copy',
+        ...buildCodecArgs(ext, buildScaleFilter(options)),
         outputName,
       ]);
     } catch (err) {
       throw new Error(`Video resize failed: ${(err as Error).message ?? err}`);
     }
     const data = await ffmpeg.readFile(outputName);
-    return data instanceof Uint8Array ? data : new Uint8Array(data as never);
+    const raw = data instanceof Uint8Array ? data : new Uint8Array(data as never);
+    return { data: raw, ext };
   } finally {
     try { await ffmpeg.deleteFile(inputName); } catch { /* ignore */ }
     try { await ffmpeg.deleteFile(outputName); } catch { /* ignore */ }

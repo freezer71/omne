@@ -94,15 +94,16 @@ export function VideoResizeTool(messages: Messages) {
     try {
       const w = parseInt(width, 10);
       const h = parseInt(height, 10);
-      const bytes = await resizeVideo(file, {
+      const result = await resizeVideo(file, {
         preset,
         width: Number.isFinite(w) ? w : undefined,
         height: Number.isFinite(h) ? h : undefined,
         keepAspect,
         onProgress: (r) => setProgress(r),
       });
-      const blob = new Blob([new Uint8Array(bytes)], { type: 'video/mp4' });
-      downloadBlob(blob, outputName('resized', [file.name], 'mp4'));
+      const mime = result.ext === 'webm' ? 'video/webm' : 'video/mp4';
+      const blob = new Blob([new Uint8Array(result.data)], { type: mime });
+      downloadBlob(blob, outputName('resized', [file.name], result.ext));
     } catch (_err) {
       setError(messages.error);
     } finally {
