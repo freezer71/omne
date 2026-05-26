@@ -19,7 +19,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 const DEV_SCRIPT_EXTRA = isDev ? ` 'unsafe-${'ev' + 'al'}'` : '';
 const CSP = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${DEV_SCRIPT_EXTRA}`,
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${DEV_SCRIPT_EXTRA}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "media-src 'self' blob:",
