@@ -15,6 +15,10 @@ type ToolDictEntry = {
   name?: string;
   description?: string;
   seo?: { keywords?: string[] };
+  content?: {
+    howItWorks?: string[];
+    features?: string[];
+  };
 };
 
 export async function ToolFooterSeo({ category, id, locale }: Props) {
@@ -25,7 +29,15 @@ export async function ToolFooterSeo({ category, id, locale }: Props) {
   const f = dict.common.footer;
   const toolsByCat = (dict.tools as unknown as Record<string, Record<string, ToolDictEntry>>);
   const currentDict = toolsByCat[category]?.[id];
+  const content = currentDict?.content;
   const keywords = currentDict?.seo?.keywords ?? [];
+
+  const howItWorksSteps = content?.howItWorks ?? [
+    f.howItWorksStep1,
+    f.howItWorksStep2,
+    f.howItWorksStep3,
+  ];
+  const features = content?.features;
 
   const sameCategory = toolsByCategory()[category] ?? [];
   const related = sameCategory.filter((t) => t.id !== id).slice(0, 4);
@@ -35,12 +47,23 @@ export async function ToolFooterSeo({ category, id, locale }: Props) {
       className="mx-auto w-full max-w-3xl px-4 sm:px-6 pb-16 grid gap-12"
       aria-label="More information about this tool"
     >
+      {features && features.length > 0 && (
+        <article className="grid gap-3">
+          <h2 className="text-lg font-medium text-text-primary">{f.featuresTitle}</h2>
+          <ul className="grid gap-2 list-disc pl-5 text-sm text-text-muted leading-relaxed">
+            {features.map((feat, i) => (
+              <li key={i}>{feat}</li>
+            ))}
+          </ul>
+        </article>
+      )}
+
       <article className="grid gap-3">
         <h2 className="text-lg font-medium text-text-primary">{f.howItWorksTitle}</h2>
         <ol className="grid gap-2 list-decimal pl-5 text-sm text-text-muted leading-relaxed">
-          <li>{f.howItWorksStep1}</li>
-          <li>{f.howItWorksStep2}</li>
-          <li>{f.howItWorksStep3}</li>
+          {howItWorksSteps.map((step, i) => (
+            <li key={i}>{step}</li>
+          ))}
         </ol>
       </article>
 

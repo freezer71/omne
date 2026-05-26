@@ -121,7 +121,7 @@ Each tool follows the same 5-file skeleton plus one registry entry:
 3. **Page** — `app/[locale]/<category>/<id>/page.tsx` (Server Component)
 4. **OpenGraph image** — `app/[locale]/<category>/<id>/opengraph-image.tsx`
 5. **Registry entry** — `lib/tools/registry.ts`
-6. **Translations** — `tools.<category>.<id>` keys in **both** `messages/{en,fr}.json` (`seo` block included, parity checked in CI). A new category also needs a `categories.<category>` block (`name`, `intro`, `seo`) for its landing page.
+6. **Translations** — `tools.<category>.<id>` keys in **both** `messages/{en,fr}.json` (`seo` block included, parity checked in CI). An optional `content` block (`howItWorks` + `features` arrays) provides tool-specific copy for the SEO footer. A new category also needs a `categories.<category>` block (`name`, `intro`, `seo`) for its landing page.
 
 **Real-time preview is mandatory**: every tool must render a live result that reflects the current parameters — drive it from a ~150–250 ms debounced effect, no "Apply" button before the preview shows. For heavy pipelines (ffmpeg, pdf.js, remove-bg), render a lightweight proxy (lower resolution, first page/frame).
 

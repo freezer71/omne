@@ -39,7 +39,8 @@
       "privacyTitle": "Vos fichiers ne quittent jamais cette page",
       "privacyBody": "Chaque conversion s'exécute entièrement dans votre navigateur via WebAssembly. Pas d'upload, pas de traitement serveur, pas d'analytics, pas de cookies. Ouvrez DevTools → Network pendant l'opération et vous verrez zéro trafic sortant.",
       "relatedTitle": "Outils connexes",
-      "keywordsTitle": "Sujets couverts"
+      "keywordsTitle": "Sujets couverts",
+      "featuresTitle": "Fonctionnalités"
     }
   },
   "badge": {
@@ -152,6 +153,18 @@
       "merge": {
         "name": "Fusionner des PDFs",
         "description": "Combinez plusieurs PDFs en un seul. Les pages s'affichent pour voir ce que vous fusionnez.",
+        "content": {
+          "howItWorks": [
+            "Sélectionnez plusieurs fichiers PDF depuis votre appareil ou glissez-les dans la zone de dépôt.",
+            "Réorganisez l'ordre des documents par glisser-déposer grâce aux vignettes de chaque page.",
+            "Cliquez sur Fusionner pour obtenir un PDF unique, prêt à télécharger."
+          ],
+          "features": [
+            "Réordonnement par glisser-déposer avec aperçu miniature de chaque fichier",
+            "Aucune limite de taille ni de nombre de fichiers — la seule contrainte est la mémoire de votre navigateur",
+            "Fusion entièrement hors-ligne : vos documents restent sur votre appareil"
+          ]
+        },
         "seo": {
           "title": "Fusionner des PDF en ligne — Gratuit, dans le navigateur",
           "description": "Fusionnez plusieurs fichiers PDF en un seul document, gratuitement et instantanément. Tout se passe dans votre navigateur — aucun envoi, aucune inscription.",
@@ -183,6 +196,18 @@
       "split": {
         "name": "Découper un PDF",
         "description": "Sélectionnez les pages, téléchargez-les une à une ou en un seul PDF.",
+        "content": {
+          "howItWorks": [
+            "Déposez un PDF dans l'outil pour afficher les vignettes de chaque page.",
+            "Cochez les pages que vous souhaitez conserver ou exclure.",
+            "Téléchargez les pages sélectionnées une à une ou regroupées dans un nouveau PDF."
+          ],
+          "features": [
+            "Vignettes page par page pour visualiser le contenu avant extraction",
+            "Export individuel (une page = un fichier) ou extraction groupée en un seul PDF",
+            "Aucune limite de pages — fonctionne aussi bien sur 5 que sur 500 pages"
+          ]
+        },
         "seo": {
           "title": "Découper un PDF en ligne — Extraire des pages gratuitement",
           "description": "Extracteur de pages PDF gratuit. Choisissez les pages voulues et téléchargez-les une à une ou en un seul PDF — entièrement dans votre navigateur.",
@@ -213,6 +238,18 @@
       "rotate": {
         "name": "Faire pivoter un PDF",
         "description": "Pivotez chaque page indépendamment — cliquez sur ↻ pour cycler de 90°.",
+        "content": {
+          "howItWorks": [
+            "Déposez votre PDF pour afficher chaque page sous forme de vignette.",
+            "Cliquez sur le bouton de rotation de chaque page pour appliquer 90°, 180° ou 270°.",
+            "Téléchargez le PDF corrigé avec les orientations souhaitées."
+          ],
+          "features": [
+            "Rotation indépendante page par page ou en lot sur l'ensemble du document",
+            "Incréments de 90° dans le sens horaire — un clic pour chaque quart de tour",
+            "Rotation par lots : appliquez 90°, 180° ou 270° à toutes les pages en un clic"
+          ]
+        },
         "seo": {
           "title": "Faire pivoter un PDF en ligne — Gratuit, dans le navigateur",
           "description": "Pivotez chaque page d'un PDF de 90°, 180° ou 270°, indépendamment ou toutes en même temps. Tout dans votre navigateur — aucun envoi, aucune inscription.",
@@ -284,6 +321,18 @@
       "to-images": {
         "name": "PDF en images",
         "description": "Cliquez sur une page pour la télécharger, ou récupérez tout en ZIP.",
+        "content": {
+          "howItWorks": [
+            "Déposez un fichier PDF pour afficher l'aperçu de chaque page.",
+            "Choisissez le format de sortie (PNG, JPG ou WebP) et la résolution souhaitée.",
+            "Téléchargez une page individuellement ou récupérez l'ensemble en un seul ZIP."
+          ],
+          "features": [
+            "Export en PNG, JPG ou WebP avec qualité ajustable",
+            "Résolution personnalisable en DPI pour des images nettes même à l'impression",
+            "Téléchargement groupé en ZIP d'un seul clic"
+          ]
+        },
         "seo": {
           "title": "PDF en JPG / PNG — Convertir les pages PDF en images",
           "description": "Convertissez chaque page d'un PDF en image PNG ou JPG. Téléchargez une page seule ou toutes en ZIP — entièrement dans votre navigateur, sans envoi.",
@@ -346,6 +395,18 @@
       "from-images": {
         "name": "Images en PDF",
         "description": "Combinez des images en un seul PDF.",
+        "content": {
+          "howItWorks": [
+            "Sélectionnez vos images (PNG, JPG, WebP) depuis votre appareil ou glissez-les dans la zone.",
+            "Réorganisez l'ordre des pages par glisser-déposer selon vos besoins.",
+            "Téléchargez le PDF généré, chaque image occupant une page entière."
+          ],
+          "features": [
+            "Accepte les formats PNG, JPG et WebP sans conversion préalable",
+            "Réordonnement par glisser-déposer pour maîtriser l'agencement des pages",
+            "Dimensionnement automatique des pages adapté à chaque image"
+          ]
+        },
         "seo": {
           "title": "JPG / PNG en PDF — Convertir des images en PDF en ligne",
           "description": "Combinez des images PNG, JPG ou WebP en un seul fichier PDF. Tout se passe dans votre navigateur — aucun envoi, aucune inscription, aucun filigrane.",
@@ -424,6 +485,18 @@
       "convert": {
         "name": "Convertir une vidéo",
         "description": "Changez le format vidéo — MP4, WebM, MOV, GIF.",
+        "content": {
+          "howItWorks": [
+            "Déposez votre vidéo dans l'outil — MP4, WebM, MOV ou tout autre format courant.",
+            "Choisissez le format de sortie parmi MP4, WebM, MOV ou GIF animé.",
+            "Lancez la conversion et téléchargez le fichier converti."
+          ],
+          "features": [
+            "Prise en charge de MP4, WebM, MOV et GIF animé en entrée et en sortie",
+            "Conversion locale via FFmpeg WebAssembly — aucune dépendance serveur",
+            "Préservation de la qualité d'origine grâce aux codecs natifs"
+          ]
+        },
         "seo": {
           "title": "Convertir une vidéo en ligne — MP4, WebM, MOV, GIF, gratuit",
           "description": "Convertisseur vidéo gratuit. Changez votre vidéo en MP4, WebM, MOV ou GIF animé. 100 % dans le navigateur via FFmpeg WebAssembly — aucun envoi.",
@@ -458,6 +531,18 @@
       "trim": {
         "name": "Découper une vidéo",
         "description": "Extrayez un clip d'une vidéo.",
+        "content": {
+          "howItWorks": [
+            "Déposez une vidéo pour afficher la timeline avec un aperçu visuel.",
+            "Définissez les points de début et de fin en faisant glisser les poignées de la timeline.",
+            "Exportez le clip découpé dans le format d'origine."
+          ],
+          "features": [
+            "Navigation image par image pour un découpage à la frame près",
+            "Timeline visuelle avec forme d'onde pour repérer facilement les passages",
+            "Conservation du codec et de la qualité d'origine"
+          ]
+        },
         "seo": {
           "title": "Couper une vidéo en ligne — Découper un clip MP4, gratuit",
           "description": "Découpeur vidéo gratuit. Extrayez un clip d'un fichier MP4, WebM, MOV ou MKV — entièrement dans votre navigateur. Aucun envoi, aucune inscription.",
@@ -572,6 +657,18 @@
       "compress": {
         "name": "Compresser une vidéo",
         "description": "Réduisez la taille d'une vidéo avec trois préréglages de qualité (haute / moyenne / basse).",
+        "content": {
+          "howItWorks": [
+            "Déposez votre vidéo dans l'outil pour analyser sa taille actuelle.",
+            "Choisissez un préréglage de qualité : haute, moyenne ou basse.",
+            "Téléchargez la vidéo compressée avec l'estimation de la réduction affichée."
+          ],
+          "features": [
+            "Trois préréglages de qualité pour trouver le juste équilibre taille/qualité",
+            "Estimation de la taille du fichier en temps réel avant la compression",
+            "Encodage H.264 pour une compatibilité maximale"
+          ]
+        },
         "seo": {
           "title": "Compresser une vidéo en ligne — Réduire un MP4, gratuit",
           "description": "Compressez n'importe quel MP4, WebM, MOV ou MKV avec trois préréglages — haute, moyenne, basse. 100% dans le navigateur — aucun upload.",
@@ -946,6 +1043,18 @@
       "convert": {
         "name": "Convertir un fichier audio",
         "description": "Convertissez entre MP3, WAV, FLAC, AAC, Opus et M4A avec le bitrate de votre choix.",
+        "content": {
+          "howItWorks": [
+            "Déposez un fichier audio — MP3, WAV, FLAC, AAC, Opus ou M4A.",
+            "Sélectionnez le format de sortie et ajustez le bitrate si nécessaire.",
+            "Téléchargez le fichier converti, prêt à l'emploi."
+          ],
+          "features": [
+            "Prise en charge de MP3, WAV, FLAC, AAC, Opus et M4A en entrée comme en sortie",
+            "Bitrate ajustable pour maîtriser le rapport qualité/taille",
+            "Conservation des métadonnées (tags ID3, pochette) quand le format le permet"
+          ]
+        },
         "seo": {
           "title": "Convertir un audio — MP3, WAV, FLAC, AAC, Opus, M4A",
           "description": "Convertisseur audio gratuit. Convertissez MP3, WAV, FLAC, AAC, Opus et M4A au bitrate désiré. 100 % dans le navigateur via FFmpeg WebAssembly — aucun envoi.",
@@ -1020,6 +1129,18 @@
       "trim": {
         "name": "Découper un audio",
         "description": "Coupez une section d'un MP3, WAV, FLAC, M4A, OGG ou Opus avec une waveform interactive.",
+        "content": {
+          "howItWorks": [
+            "Déposez un fichier audio pour afficher sa forme d'onde interactive.",
+            "Faites glisser les poignées de la waveform pour définir le début et la fin du clip.",
+            "Exportez la sélection dans le format d'origine ou un autre format."
+          ],
+          "features": [
+            "Forme d'onde visuelle pour repérer précisément les passages à garder",
+            "Découpe à l'échantillon près pour un résultat propre et sans artefact",
+            "Compatible avec tous les formats courants : MP3, WAV, FLAC, M4A, OGG, Opus"
+          ]
+        },
         "seo": {
           "title": "Découper un MP3 en ligne — Couper de la musique, gratuit",
           "description": "Découpeur MP3 gratuit. Coupez une section d'un MP3, WAV, FLAC, M4A ou OGG avec une waveform interactive. 100 % dans votre navigateur — aucun envoi.",
@@ -1051,6 +1172,18 @@
       "merge": {
         "name": "Fusionner des audios",
         "description": "Concaténez plusieurs fichiers audio en un seul — idéal pour assembler enregistrements, podcasts ou playlists.",
+        "content": {
+          "howItWorks": [
+            "Sélectionnez plusieurs fichiers audio depuis votre appareil ou glissez-les dans la zone.",
+            "Réorganisez l'ordre des pistes par glisser-déposer.",
+            "Fusionnez le tout en un seul fichier et téléchargez le résultat."
+          ],
+          "features": [
+            "Accepte différents formats en entrée — MP3, WAV, FLAC, M4A et plus",
+            "Réordonnement par glisser-déposer pour maîtriser l'enchaînement des pistes",
+            "Jonction transparente sans blanc ni artefact entre les fichiers"
+          ]
+        },
         "seo": {
           "title": "Fusionner des MP3 — Joindre des audios, gratuit",
           "description": "Outil de fusion MP3 gratuit. Concaténez plusieurs fichiers MP3, WAV, FLAC ou M4A en un seul. 100 % dans votre navigateur — aucun envoi.",
@@ -1122,6 +1255,18 @@
       "convert": {
         "name": "Convertir une image",
         "description": "Changez le format d'image — PNG, JPG ou WebP.",
+        "content": {
+          "howItWorks": [
+            "Déposez une image PNG, JPG ou WebP dans l'outil.",
+            "Choisissez le format de sortie et ajustez la qualité si besoin.",
+            "Téléchargez l'image convertie avec un aperçu en direct du résultat."
+          ],
+          "features": [
+            "Conversion entre PNG, JPG et WebP dans tous les sens",
+            "Curseur de qualité pour maîtriser le poids du fichier",
+            "Aperçu en direct qui reflète instantanément chaque réglage"
+          ]
+        },
         "seo": {
           "title": "Convertir une image en ligne — PNG ↔ JPG ↔ WebP gratuit",
           "description": "Convertisseur d'image gratuit. Convertissez PNG, JPG ou WebP dans tous les sens, avec aperçu en direct. 100 % dans le navigateur — aucun envoi.",
@@ -1154,6 +1299,18 @@
       "compress": {
         "name": "Compresser une image",
         "description": "Réduisez le poids d'une image en la ré-encodant avec une qualité moindre.",
+        "content": {
+          "howItWorks": [
+            "Déposez une image pour afficher l'original et sa taille en octets.",
+            "Ajustez le curseur de qualité et observez le résultat en direct.",
+            "Téléchargez l'image compressée une fois satisfait du compromis qualité/poids."
+          ],
+          "features": [
+            "Comparaison visuelle avant/après pour juger la perte de qualité",
+            "Affichage en temps réel de la taille du fichier et du taux de réduction",
+            "Curseur de qualité pour un contrôle fin du niveau de compression"
+          ]
+        },
         "seo": {
           "title": "Compresser une image — Compresseur JPG / WebP, gratuit",
           "description": "Réduisez le poids d'une image JPG ou WebP avec un curseur de qualité et un aperçu avant/après en direct. Dans votre navigateur — aucun envoi.",
@@ -1186,6 +1343,18 @@
       "resize": {
         "name": "Redimensionner une image",
         "description": "Adaptez la taille d'une image à une nouvelle largeur et hauteur — avec aperçu en direct.",
+        "content": {
+          "howItWorks": [
+            "Déposez une image pour afficher ses dimensions actuelles.",
+            "Saisissez la nouvelle largeur et hauteur en pixels ou utilisez le curseur d'échelle.",
+            "Téléchargez l'image redimensionnée avec un aperçu canvas en direct."
+          ],
+          "features": [
+            "Redimensionnement en pixels ou en pourcentage de l'original",
+            "Verrouillage des proportions pour éviter toute déformation",
+            "Aperçu canvas en direct qui se met à jour à chaque modification"
+          ]
+        },
         "seo": {
           "title": "Redimensionner une image — Aperçu canvas en direct",
           "description": "Redimensionnez vos images PNG, JPG ou WebP à toute largeur et hauteur avec aperçu canvas en direct. Proportions verrouillables ou curseur d'échelle.",
@@ -1381,6 +1550,18 @@
       "optimize": {
         "name": "Optimiseur SVG",
         "description": "Minifiez et nettoyez votre SVG avec SVGO — retire métadonnées, arrondit les chemins, supprime les IDs inutilisés — avec aperçu avant/après.",
+        "content": {
+          "howItWorks": [
+            "Collez votre code SVG ou déposez un fichier .svg dans l'outil.",
+            "L'optimisation SVGO s'applique automatiquement avec les réglages choisis.",
+            "Téléchargez le SVG optimisé ou copiez le code nettoyé."
+          ],
+          "features": [
+            "Moteur SVGO intégré : suppression des métadonnées, arrondi des chemins, nettoyage des IDs",
+            "Comparaison avant/après avec affichage du gain en octets",
+            "Suppression automatique des attributs inutiles et des commentaires"
+          ]
+        },
         "seo": {
           "title": "Optimiseur SVG en ligne — SVGO avec diff live",
           "description": "Optimisez et minifiez le SVG avec SVGO directement dans votre navigateur. Précision, nettoyage des IDs. Aperçu avant/après et économies en octets.",
@@ -1496,6 +1677,18 @@
       "to-png": {
         "name": "SVG vers PNG / JPG / WebP",
         "description": "Rastérisez n'importe quel SVG en PNG, JPG ou WebP haute qualité à la taille exacte voulue — avec aperçu live.",
+        "content": {
+          "howItWorks": [
+            "Déposez un fichier SVG ou collez son code source dans l'éditeur.",
+            "Choisissez le format (PNG, JPG ou WebP) et la résolution de sortie.",
+            "Téléchargez l'image rastérisée avec un aperçu en direct."
+          ],
+          "features": [
+            "Résolution personnalisable avec préréglages 1×, 2× et 4×",
+            "Trois formats de sortie : PNG (avec transparence), JPG et WebP",
+            "Aperçu en direct qui reflète la taille et le format sélectionnés"
+          ]
+        },
         "seo": {
           "title": "SVG vers PNG — Convertisseur gratuit (PNG, JPG, WebP)",
           "description": "Convertissez un SVG en PNG, JPG ou WebP à n'importe quelle résolution. Aperçu canvas live, fond transparent, presets 1×/2×/4×. 100 % navigateur, aucun envoi.",
@@ -1759,6 +1952,18 @@
       "format": {
         "name": "Formatter JSON",
         "description": "Embellir, compresser, trier les clés, valider — avec aperçu en direct.",
+        "content": {
+          "howItWorks": [
+            "Collez ou tapez votre JSON dans le champ d'entrée.",
+            "Choisissez l'action souhaitée : embellir, compresser, trier les clés ou valider.",
+            "Copiez le résultat ou téléchargez-le en un clic."
+          ],
+          "features": [
+            "Quatre actions en un outil : embellir, compresser, trier les clés et valider la syntaxe",
+            "Coloration syntaxique et retour d'erreur instantané",
+            "Résultat mis à jour en temps réel à chaque frappe"
+          ]
+        },
         "seo": {
           "title": "Formatter JSON — Embellir, compresser, trier, valider",
           "description": "Formattez, compressez et triez les clés de n'importe quel JSON avec aperçu en direct et validation de syntaxe. 100 % dans votre navigateur — aucun envoi.",
@@ -1798,6 +2003,18 @@
       "tree": {
         "name": "Visionneuse JSON",
         "description": "Explorez le JSON comme un arbre interactif — déplier, replier, rechercher, copier les chemins.",
+        "content": {
+          "howItWorks": [
+            "Collez du JSON dans le champ d'entrée pour le parser automatiquement.",
+            "Explorez l'arbre interactif en dépliant et repliant les nœuds.",
+            "Copiez le chemin (JSONPath) ou la valeur de n'importe quel nœud."
+          ],
+          "features": [
+            "Déplier/replier tous les nœuds d'un clic pour naviguer dans les structures profondes",
+            "Copie du chemin JSONPath d'un nœud pour l'utiliser dans du code ou des requêtes",
+            "Recherche intégrée pour retrouver clés et valeurs dans l'arborescence"
+          ]
+        },
         "seo": {
           "title": "Visionneuse JSON en ligne — Gratuit, interactif, recherche",
           "description": "Visualisez n'importe quel JSON sous forme d'arbre interactif. Dépliez, repliez, recherchez clés et valeurs, copiez les chemins. Dans le navigateur.",
@@ -2957,6 +3174,18 @@
       "generate": {
         "name": "Générateur QR Code",
         "description": "Générez des QR codes pour du texte, des liens, des réseaux Wi-Fi ou des cartes de contact. Choisissez les couleurs, la taille et le niveau de correction d'erreur — tout est rendu localement dans votre navigateur.",
+        "content": {
+          "howItWorks": [
+            "Saisissez le contenu à encoder : texte libre, URL, identifiants Wi-Fi ou contact vCard.",
+            "Personnalisez les couleurs, la taille et le niveau de correction d'erreur.",
+            "Téléchargez le QR code en PNG ou SVG, prêt à imprimer ou partager."
+          ],
+          "features": [
+            "Quatre types de contenu : texte, URL, Wi-Fi et vCard",
+            "Personnalisation complète : couleurs, taille, marge et niveau de correction",
+            "Export en PNG haute résolution ou en SVG vectoriel"
+          ]
+        },
         "seo": {
           "title": "Générateur QR Code — Texte, URL, Wi-Fi, vCard",
           "description": "Encodez du texte, des liens, des identifiants Wi-Fi ou des contacts (vCard). Personnalisez couleurs, taille et correction d'erreur. PNG ou SVG, 100 % local.",
@@ -3020,6 +3249,18 @@
       "scan": {
         "name": "Lecteur QR Code",
         "description": "Scannez un QR code avec votre caméra ou en déposant une image. Le flux vidéo et le décodage restent sur votre appareil — rien n'est envoyé.",
+        "content": {
+          "howItWorks": [
+            "Autorisez l'accès à la caméra ou déposez une image contenant un QR code.",
+            "Le décodage s'effectue en temps réel dès qu'un QR est détecté.",
+            "Copiez le contenu décodé — lien, texte, identifiants Wi-Fi ou contact."
+          ],
+          "features": [
+            "Scan en temps réel via la caméra avec détection instantanée",
+            "Décodage depuis une image (PNG, JPG, WebP) en alternative à la caméra",
+            "Reconnaissance immédiate : le résultat apparaît dès la détection du QR"
+          ]
+        },
         "seo": {
           "title": "Lecteur QR Code — Caméra ou image, 100 % privé",
           "description": "Scannez un QR code via webcam ou en déposant un PNG/JPG/WebP. Décodez liens, identifiants Wi-Fi, vCards et texte — chaque octet reste dans le navigateur.",

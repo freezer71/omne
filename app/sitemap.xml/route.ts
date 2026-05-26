@@ -26,7 +26,6 @@ function priorityFor(status: string): number {
 type Entry = {
   path: string;
   locale: Locale;
-  changefreq: 'weekly' | 'monthly' | 'yearly';
   priority: number;
 };
 
@@ -34,14 +33,13 @@ function buildEntries(): Entry[] {
   const entries: Entry[] = [];
   const populatedCategories = new Set<ToolCategory>(TOOLS.map((t) => t.category));
   for (const locale of locales) {
-    entries.push({ path: '/', locale, changefreq: 'weekly', priority: 1 });
-    entries.push({ path: '/privacy', locale, changefreq: 'yearly', priority: 0.4 });
+    entries.push({ path: '/', locale, priority: 1 });
+    entries.push({ path: '/privacy', locale, priority: 0.4 });
     for (const category of TOOL_CATEGORIES) {
       if (populatedCategories.has(category)) {
         entries.push({
           path: `/${category}`,
           locale,
-          changefreq: 'weekly',
           priority: 0.7,
         });
       }
@@ -50,7 +48,6 @@ function buildEntries(): Entry[] {
       entries.push({
         path: tool.href,
         locale,
-        changefreq: 'monthly',
         priority: priorityFor(tool.status),
       });
     }
@@ -58,7 +55,7 @@ function buildEntries(): Entry[] {
   return entries;
 }
 
-function renderUrl(entry: Entry, lastmod: string): string {
+function renderUrl(entry: Entry): string {
   const loc = xmlEscape(localizedUrl(entry.locale, entry.path));
   const alts = locales
     .map(
@@ -72,21 +69,18 @@ function renderUrl(entry: Entry, lastmod: string): string {
     `    <loc>${loc}</loc>`,
     alts,
     xdef,
-    `    <lastmod>${lastmod}</lastmod>`,
-    `    <changefreq>${entry.changefreq}</changefreq>`,
     `    <priority>${entry.priority.toFixed(1)}</priority>`,
     '  </url>',
   ].join('\n');
 }
 
 export function GET(): Response {
-  const lastmod = new Date().toISOString();
   const body =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
     buildEntries()
-      .map((e) => renderUrl(e, lastmod))
+      .map((e) => renderUrl(e))
       .join('\n') +
     `\n</urlset>\n`;
 

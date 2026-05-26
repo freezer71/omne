@@ -105,12 +105,15 @@ export async function toolJsonLd(
   locale: Locale,
 ): Promise<JsonLd> {
   const dict = await getDictionary(locale);
-  const tree = dict as unknown as Record<string, Record<string, Record<string, { name: string; description: string; seo?: { title?: string; description?: string } }>>>;
+  const tree = dict as unknown as Record<string, Record<string, Record<string, { name: string; description: string; seo?: { title?: string; description?: string }; content?: { features?: string[] } }>>>;
   const node = tree['tools']?.[tool.category]?.[tool.id];
   const seo = node?.seo;
   const name = seo?.title ?? node?.name ?? tool.id;
   const description = seo?.description ?? node?.description ?? '';
   const url = localizedUrl(locale, tool.href);
+
+  const dictFeatures = node?.content?.features ?? [];
+  const mimeFeatures = featureListFromMime(tool.acceptedMime, locale);
 
   return {
     '@context': 'https://schema.org',
@@ -128,7 +131,7 @@ export async function toolJsonLd(
       price: '0',
       priceCurrency: 'USD',
     },
-    featureList: featureListFromMime(tool.acceptedMime, locale),
+    featureList: [...dictFeatures, ...mimeFeatures],
     author: organizationSchema(),
   };
 }
@@ -159,6 +162,7 @@ export async function toolBreadcrumbJsonLd(
         '@type': 'ListItem',
         position: 2,
         name: categoryLabel,
+        item: localizedUrl(locale, `/${tool.category}`),
       },
       {
         '@type': 'ListItem',

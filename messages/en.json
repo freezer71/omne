@@ -39,7 +39,8 @@
       "privacyTitle": "Your files never leave this page",
       "privacyBody": "Every conversion runs entirely in your browser using WebAssembly. There is no upload, no server-side processing, no analytics, and no cookies. Open DevTools → Network during the operation and you will see zero outbound traffic.",
       "relatedTitle": "Related tools",
-      "keywordsTitle": "Topics covered"
+      "keywordsTitle": "Topics covered",
+      "featuresTitle": "Features"
     }
   },
   "badge": {
@@ -152,6 +153,18 @@
       "merge": {
         "name": "Merge PDFs",
         "description": "Combine multiple PDFs into one. Pages are shown so you can see what you're merging.",
+        "content": {
+          "howItWorks": [
+            "Drop two or more PDF files onto the tool — each file's pages appear as thumbnails.",
+            "Drag the files to reorder them and review the page thumbnails to confirm the merge order.",
+            "Click Merge PDFs to combine them into a single document, then download the result."
+          ],
+          "features": [
+            "Reorder files with drag-and-drop before merging so pages end up in the right sequence.",
+            "Page thumbnails let you visually confirm every page before the merge happens.",
+            "Handles large multi-page PDFs by processing them entirely with pdf-lib in the browser."
+          ]
+        },
         "seo": {
           "title": "Merge PDF Files Online — Free, Private, In-Browser",
           "description": "Free online PDF merger. Combine multiple PDF files into one document in seconds. 100% in your browser — no upload, no signup, no tracking.",
@@ -183,6 +196,18 @@
       "split": {
         "name": "Split PDF",
         "description": "Pick the pages you want, download them one by one or as a single PDF.",
+        "content": {
+          "howItWorks": [
+            "Drop a PDF and all its pages appear as clickable thumbnails.",
+            "Click the pages you want to keep — selected pages are highlighted in the grid.",
+            "Download each selected page individually or extract them all into a single new PDF."
+          ],
+          "features": [
+            "Visual page picker with thumbnails so you always know which pages you're extracting.",
+            "Download individual pages one at a time or batch them into a single extracted PDF.",
+            "Works with scanned documents, text-heavy reports and mixed-layout PDFs alike."
+          ]
+        },
         "seo": {
           "title": "Split PDF Online — Extract Pages Free, In-Browser",
           "description": "Free online PDF splitter. Pick the pages you want and extract them as a single PDF or download them one by one — all in your browser.",
@@ -213,6 +238,18 @@
       "rotate": {
         "name": "Rotate PDF",
         "description": "Rotate each page independently — click the ↻ on a page to cycle 90°.",
+        "content": {
+          "howItWorks": [
+            "Drop a PDF to see every page as a thumbnail with a rotation button overlay.",
+            "Click the rotation icon on any page to cycle it through 90°, 180° and 270° clockwise.",
+            "Use the bulk buttons to rotate all pages at once, then download the corrected PDF."
+          ],
+          "features": [
+            "Per-page rotation lets you fix individual pages without affecting the rest of the document.",
+            "Bulk rotation buttons apply 90°, 180° or 270° to every page in one click.",
+            "Reset button reverts all rotations so you can start over without re-uploading."
+          ]
+        },
         "seo": {
           "title": "Rotate PDF Pages Online — Free, In-Browser PDF Rotator",
           "description": "Free online PDF rotator. Rotate any page 90°, 180°, or 270° individually, or every page at once. Runs in your browser — no upload, no signup.",
@@ -284,6 +321,18 @@
       "to-images": {
         "name": "PDF to images",
         "description": "Click a page to download it as an image, or grab all of them as a ZIP.",
+        "content": {
+          "howItWorks": [
+            "Drop a PDF and every page is rendered as a high-resolution image thumbnail.",
+            "Choose PNG or JPG as the output format using the format toggle.",
+            "Click any page to download it individually, or grab every page as a ZIP archive."
+          ],
+          "features": [
+            "Renders pages at full resolution using the pdf.js engine for sharp, print-quality images.",
+            "Choose between PNG (lossless) and JPG (smaller file size) per your needs.",
+            "Bulk ZIP download packages every page image into a single archive for easy handling."
+          ]
+        },
         "seo": {
           "title": "PDF to JPG / PNG — Convert PDF Pages to Images Free",
           "description": "Convert every page of a PDF to PNG or JPG images. Download a single page or all of them as a ZIP — entirely in your browser, no upload required.",
@@ -346,6 +395,18 @@
       "from-images": {
         "name": "Images to PDF",
         "description": "Combine images into a single PDF.",
+        "content": {
+          "howItWorks": [
+            "Drop or select PNG, JPG or WebP images — each one appears as a preview card.",
+            "Drag images to set the page order and review thumbnails before combining.",
+            "Click Combine into PDF to produce a single PDF with one image per page, then download."
+          ],
+          "features": [
+            "Supports PNG, JPG and WebP inputs and fits each image to its own PDF page.",
+            "Drag-and-drop reordering lets you arrange pages exactly how you want them.",
+            "Preview thumbnails show each future page so you can verify the layout before combining."
+          ]
+        },
         "seo": {
           "title": "JPG / PNG to PDF — Convert Images to PDF Online Free",
           "description": "Combine PNG, JPG, or WebP images into a single PDF document. Works directly in your browser — no upload, no signup, no watermark.",
@@ -424,6 +485,18 @@
       "convert": {
         "name": "Convert video",
         "description": "Change video format — MP4, WebM, MOV, GIF.",
+        "content": {
+          "howItWorks": [
+            "Drop a video file — MP4, WebM, MOV or MKV — to load it into the converter.",
+            "Pick the target format: MP4, WebM, MOV or animated GIF from the output selector.",
+            "Hit Convert and FFmpeg WebAssembly re-encodes the video in your browser, then download."
+          ],
+          "features": [
+            "Supports MP4, WebM, MOV and animated GIF as output formats.",
+            "Preserves the original video's resolution and frame rate during conversion.",
+            "Real-time progress bar with estimated remaining time so you know when it will finish."
+          ]
+        },
         "seo": {
           "title": "Convert Video Online — MP4, WebM, MOV, GIF Free",
           "description": "Free online video converter. Change your video to MP4, WebM, MOV, or animated GIF. 100% in-browser via FFmpeg WebAssembly — no upload, no signup.",
@@ -458,6 +531,18 @@
       "trim": {
         "name": "Trim video",
         "description": "Cut a clip out of a video file.",
+        "content": {
+          "howItWorks": [
+            "Drop a video to load it into the interactive timeline with a playback preview.",
+            "Drag the start and end handles on the timeline to select the exact clip range.",
+            "Click Trim and FFmpeg cuts the segment without re-encoding the entire file."
+          ],
+          "features": [
+            "Visual timeline with draggable handles makes it easy to set precise in and out points.",
+            "Built-in video player lets you preview the selected clip before cutting.",
+            "Mute/unmute toggle and playback controls help you verify audio before trimming."
+          ]
+        },
         "seo": {
           "title": "Trim Video Online — Cut Clips Free, In-Browser",
           "description": "Free online video trimmer. Cut a clip from any MP4, WebM, MOV, or MKV file — entirely in your browser. No upload, no signup, no watermark.",
@@ -572,6 +657,18 @@
       "compress": {
         "name": "Compress video",
         "description": "Reduce a video's file size with three quality presets (high / medium / low).",
+        "content": {
+          "howItWorks": [
+            "Drop any MP4, WebM, MOV or MKV video into the compressor.",
+            "Choose a quality preset — High keeps most detail, Medium balances size and quality, Low maximizes compression.",
+            "Click Compress to re-encode the video at a lower bitrate, then download the smaller file."
+          ],
+          "features": [
+            "Three quality presets (High, Medium, Low) give you predictable size-vs-quality trade-offs.",
+            "Accepts MP4, WebM, MOV and MKV inputs and outputs in the same format.",
+            "Progress indicator with estimated time remaining tracks the compression in real time."
+          ]
+        },
         "seo": {
           "title": "Compress Video Online — Free Reduce MP4 Size in Browser",
           "description": "Shrink any MP4, WebM, MOV or MKV with three quality presets — high, medium, low. 100% in your browser — no upload, no signup, no watermark.",
@@ -946,6 +1043,18 @@
       "convert": {
         "name": "Convert audio",
         "description": "Convert between MP3, WAV, FLAC, AAC, Opus and M4A with a bitrate of your choice.",
+        "content": {
+          "howItWorks": [
+            "Drop an audio file — MP3, WAV, FLAC, AAC, Opus or M4A — to load it.",
+            "Select the target format and optionally adjust the output bitrate.",
+            "Click Convert and FFmpeg WebAssembly transcodes the audio, then download the result."
+          ],
+          "features": [
+            "Six output formats: MP3, WAV, FLAC, AAC, Opus and M4A cover every common use case.",
+            "Configurable bitrate lets you balance file size and audio quality.",
+            "Estimated output file size is shown before conversion so you know what to expect."
+          ]
+        },
         "seo": {
           "title": "Convert Audio Online — MP3, WAV, FLAC, AAC, Opus, M4A Free",
           "description": "Free online audio converter. Convert between MP3, WAV, FLAC, AAC, Opus and M4A at the bitrate you want. 100% in-browser via FFmpeg, no upload.",
@@ -1020,6 +1129,18 @@
       "trim": {
         "name": "Trim audio",
         "description": "Cut a section out of an MP3, WAV, FLAC, M4A, OGG or Opus file with a scrubbable waveform.",
+        "content": {
+          "howItWorks": [
+            "Drop an audio file to visualize it as a scrubbable waveform.",
+            "Drag the start and end markers on the waveform to select the section you want to keep.",
+            "Click Trim & download to cut the clip — use the precise-cut toggle for sample-accurate results."
+          ],
+          "features": [
+            "Interactive waveform display lets you see the audio shape and pick cut points visually.",
+            "Precise-cut mode re-encodes the audio for exact sample-level accuracy.",
+            "Supports MP3, WAV, FLAC, M4A, OGG and Opus inputs."
+          ]
+        },
         "seo": {
           "title": "Trim MP3 Online — Free Audio Cutter, In-Browser",
           "description": "Free online MP3 cutter. Trim a section out of any MP3, WAV, FLAC, M4A or OGG file with a scrubbable waveform. 100% in your browser — no upload.",
@@ -1051,6 +1172,18 @@
       "merge": {
         "name": "Merge audio files",
         "description": "Concatenate multiple audio files into one — perfect for joining recordings, podcasts or playlists.",
+        "content": {
+          "howItWorks": [
+            "Drop two or more audio files — MP3, WAV, FLAC or M4A — onto the tool.",
+            "Drag files to reorder them and pick an output format and bitrate.",
+            "Click Merge & download to concatenate them into a single audio file."
+          ],
+          "features": [
+            "Drag-and-drop reordering lets you arrange tracks in the exact playback sequence.",
+            "Choose from MP3, WAV, FLAC or M4A output with configurable bitrate.",
+            "Total file size indicator helps you gauge the combined output before merging."
+          ]
+        },
         "seo": {
           "title": "Merge MP3 Files Online — Free Audio Joiner, In-Browser",
           "description": "Free online MP3 merger. Concatenate multiple MP3, WAV, FLAC or M4A files into one in seconds. 100% in your browser — no upload, no signup.",
@@ -1122,6 +1255,18 @@
       "convert": {
         "name": "Convert image",
         "description": "Change image format — PNG, JPG, or WebP.",
+        "content": {
+          "howItWorks": [
+            "Drop a PNG, JPG or WebP image to load it with a live preview.",
+            "Select the target format — PNG, JPG or WebP — from the format picker.",
+            "The preview updates instantly so you can check quality, then download the converted file."
+          ],
+          "features": [
+            "Converts between PNG, JPG and WebP in any direction with a single click.",
+            "Live preview shows the output image and its file size before downloading.",
+            "Canvas-based conversion handles transparency correctly when switching formats."
+          ]
+        },
         "seo": {
           "title": "Convert Image Online — PNG ↔ JPG ↔ WebP Free",
           "description": "Free online image converter. Convert PNG, JPG, or WebP in both directions, with a live preview. 100% in your browser — no upload, no signup.",
@@ -1154,6 +1299,18 @@
       "compress": {
         "name": "Compress image",
         "description": "Shrink an image by re-encoding it at a lower quality.",
+        "content": {
+          "howItWorks": [
+            "Drop a PNG, JPG or WebP image to see a live before/after comparison.",
+            "Drag the quality slider to control the compression level — the preview updates in real time.",
+            "Download the compressed image once you're satisfied with the size-to-quality ratio."
+          ],
+          "features": [
+            "Quality slider with live before/after preview and file-size comparison.",
+            "Choose JPG or WebP as the output codec for optimal compression.",
+            "Shows the exact byte savings and compression ratio so you know how much space you saved."
+          ]
+        },
         "seo": {
           "title": "Compress Image Online — Free JPG / WebP Compressor",
           "description": "Reduce the file size of JPG and WebP images with a quality slider and live before/after preview. Runs in your browser — no upload, no signup.",
@@ -1186,6 +1343,18 @@
       "resize": {
         "name": "Resize image",
         "description": "Scale an image to a new width and height — with live preview.",
+        "content": {
+          "howItWorks": [
+            "Drop a PNG, JPG or WebP image to see it in the live canvas preview.",
+            "Set the target width and height, or use the scale slider — lock aspect ratio to avoid distortion.",
+            "The preview updates instantly; download when the dimensions look right."
+          ],
+          "features": [
+            "Scale slider and explicit width/height inputs give you full control over output dimensions.",
+            "Lock-aspect-ratio toggle prevents stretching or squashing the image.",
+            "Live canvas preview reflects every change in real time so you see the exact result."
+          ]
+        },
         "seo": {
           "title": "Resize Image Online — Free In-Browser with Live Preview",
           "description": "Resize PNG, JPG, or WebP to any width and height with a live canvas preview. Lock aspect ratio or use a scale slider. No upload, no signup.",
@@ -1381,6 +1550,18 @@
       "optimize": {
         "name": "SVG optimizer",
         "description": "Minify and clean up your SVG with SVGO — strip metadata, round paths, remove unused IDs — with a before/after preview.",
+        "content": {
+          "howItWorks": [
+            "Paste SVG markup or drop an .svg file to run SVGO optimization instantly.",
+            "Tweak float precision, ID cleanup, viewBox removal and multipass toggles to fine-tune output.",
+            "Review the before/after preview and byte savings, then download or copy the optimized SVG."
+          ],
+          "features": [
+            "Powered by SVGO with configurable precision, ID cleanup and multipass options.",
+            "Live before/after preview shows the visual result alongside exact byte savings.",
+            "Strips metadata, rounds path coordinates and removes unused definitions to minimize file size."
+          ]
+        },
         "seo": {
           "title": "SVG Optimizer Online — Free SVGO Minifier with Live Diff",
           "description": "Optimize and minify SVG with SVGO directly in your browser. Configure precision, ID cleanup, viewBox removal. Live before/after preview and byte savings.",
@@ -1496,6 +1677,18 @@
       "to-png": {
         "name": "SVG to PNG / JPG / WebP",
         "description": "Rasterize any SVG to a high-quality PNG, JPG, or WebP at the exact size you want — with live preview.",
+        "content": {
+          "howItWorks": [
+            "Paste SVG markup or drop an .svg file to see a live rasterized preview.",
+            "Set the output dimensions with width/height fields or use 1x, 2x, 4x scale presets.",
+            "Pick PNG, JPG or WebP as the output format, then download the rasterized image."
+          ],
+          "features": [
+            "Rasterize at any resolution — 1x, 2x and 4x presets or custom pixel dimensions.",
+            "Supports PNG (with transparency), JPG and WebP output formats.",
+            "Transparent background option (PNG only) preserves your SVG's alpha channel."
+          ]
+        },
         "seo": {
           "title": "SVG to PNG Online — Free Rasterizer (PNG, JPG, WebP)",
           "description": "Convert SVG to PNG, JPG, or WebP at any resolution. Live canvas preview, transparent background, 1×/2×/4× presets. No upload — runs in your browser.",
@@ -1759,6 +1952,18 @@
       "format": {
         "name": "JSON Formatter",
         "description": "Beautify, minify, sort keys, validate — with live preview.",
+        "content": {
+          "howItWorks": [
+            "Paste or type any JSON into the input pane — syntax errors are flagged inline as you type.",
+            "Choose indent size (2 spaces, 4 spaces, tab), toggle minify or sort-keys mode.",
+            "The formatted output updates live; copy it to clipboard or download as a .json file."
+          ],
+          "features": [
+            "Real-time validation highlights syntax errors with line and column numbers.",
+            "Sort-keys mode alphabetizes every object's keys for consistent, diff-friendly output.",
+            "Minify mode strips all whitespace to produce the smallest possible JSON string."
+          ]
+        },
         "seo": {
           "title": "JSON Formatter — Pretty-Print, Minify, Sort Keys, Validate",
           "description": "Format, minify and sort-keys any JSON with a live preview and inline syntax validation. 100% in your browser — no upload, no signup.",
@@ -1798,6 +2003,18 @@
       "tree": {
         "name": "JSON Tree Viewer",
         "description": "Explore JSON as an interactive tree — expand, collapse, search, copy paths.",
+        "content": {
+          "howItWorks": [
+            "Paste any JSON to render it as a collapsible, navigable tree structure.",
+            "Expand or collapse nodes, search for keys or string values with the search bar.",
+            "Click any node to copy its JSONPath or value to the clipboard."
+          ],
+          "features": [
+            "Interactive tree with expand/collapse at every level for deep inspection of nested data.",
+            "Full-text search across keys and string values highlights matches instantly.",
+            "One-click copy of any node's JSONPath or value speeds up debugging workflows."
+          ]
+        },
         "seo": {
           "title": "JSON Tree Viewer Online — Free, Interactive, Searchable",
           "description": "Visualize any JSON as an interactive tree. Expand, collapse, search keys and values, copy paths or values. 100% in your browser — no upload.",
@@ -2957,6 +3174,18 @@
       "generate": {
         "name": "QR Code Generator",
         "description": "Generate QR codes for text, links, Wi-Fi networks and contact cards. Pick colors, size and error-correction level — everything is rendered locally in your browser.",
+        "content": {
+          "howItWorks": [
+            "Select what to encode — plain text, a URL, Wi-Fi credentials or a vCard contact.",
+            "Fill in the fields and customize foreground/background colors, size and error-correction level.",
+            "The QR code renders live as you type; download it as PNG or SVG when ready."
+          ],
+          "features": [
+            "Four payload types: plain text, URL, Wi-Fi network (SSID + password) and vCard contact card.",
+            "Custom foreground and background colors plus four error-correction levels (L, M, Q, H).",
+            "Download as crisp PNG or scalable SVG, or copy the data URI for embedding in code."
+          ]
+        },
         "seo": {
           "title": "QR Code Generator — Text, URL, Wi-Fi, vCard, No Signup",
           "description": "Encode plain text, links, Wi-Fi credentials or contact (vCard) details. Customize colors, size and error correction. Download as PNG or SVG. 100% local.",
@@ -3020,6 +3249,18 @@
       "scan": {
         "name": "QR Code Scanner",
         "description": "Scan a QR code with your camera or by dropping an image. The video stream and decoding stay on your device — nothing is uploaded.",
+        "content": {
+          "howItWorks": [
+            "Choose Camera to scan with your webcam, or Image to drop a photo of a QR code.",
+            "Point the camera at a QR code or drop an image — decoding happens instantly on-device.",
+            "The decoded payload appears with type detection: URL, Wi-Fi, vCard or plain text."
+          ],
+          "features": [
+            "Camera mode uses the webcam feed for real-time scanning without installing an app.",
+            "Image mode accepts PNG, JPG or WebP photos of QR codes for offline decoding.",
+            "Automatic payload detection recognizes URLs, Wi-Fi credentials and vCard contacts."
+          ]
+        },
         "seo": {
           "title": "QR Code Scanner — Camera or Image, 100% Private",
           "description": "Scan with your webcam or drop a PNG/JPG/WebP image. Decode URLs, Wi-Fi credentials, vCards and text — every byte stays in your browser, no app to install.",

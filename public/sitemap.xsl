@@ -138,8 +138,6 @@
               <thead>
                 <tr>
                   <th>URL</th>
-                  <th>Last modified</th>
-                  <th>Change freq.</th>
                   <th>Priority</th>
                   <th>Alternates</th>
                 </tr>
@@ -153,8 +151,6 @@
                         <xsl:value-of select="sm:loc"/>
                       </a>
                     </td>
-                    <td class="num"><xsl:value-of select="substring(sm:lastmod, 1, 10)"/></td>
-                    <td class="num"><xsl:value-of select="sm:changefreq"/></td>
                     <td class="num"><xsl:value-of select="sm:priority"/></td>
                     <td class="alts">
                       <xsl:for-each select="xhtml:link[@rel='alternate']">

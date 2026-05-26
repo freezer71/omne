@@ -121,7 +121,7 @@ Chaque outil suit le même squelette en 5 fichiers + une entrée de registre :
 3. **Page** — `app/[locale]/<catégorie>/<id>/page.tsx` (Server Component)
 4. **OpenGraph image** — `app/[locale]/<catégorie>/<id>/opengraph-image.tsx`
 5. **Entrée registre** — `lib/tools/registry.ts`
-6. **Traductions** — clés `tools.<catégorie>.<id>` dans **les deux** `messages/{en,fr}.json` (bloc `seo` inclus, parité testée en CI). Une nouvelle catégorie nécessite aussi un bloc `categories.<catégorie>` (`name`, `intro`, `seo`) pour sa landing page.
+6. **Traductions** — clés `tools.<catégorie>.<id>` dans **les deux** `messages/{en,fr}.json` (bloc `seo` inclus, parité testée en CI). Un bloc `content` optionnel (`howItWorks` + `features`, tableaux) fournit du texte spécifique à l'outil pour le footer SEO. Une nouvelle catégorie nécessite aussi un bloc `categories.<catégorie>` (`name`, `intro`, `seo`) pour sa landing page.
 
 **Aperçu temps réel obligatoire** : tout outil doit afficher un résultat live qui reflète les paramètres courants — un debounce de ~150-250 ms sur l'effet, pas de bouton "Apply" avant l'aperçu. Pour les pipelines lourds (ffmpeg, pdf.js, remove-bg), rendre un proxy léger (résolution réduite, première page/frame).
 
