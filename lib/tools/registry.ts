@@ -40,6 +40,18 @@ export const TOOLS: readonly ToolMeta[] = [
     status: 'stable',
   },
   {
+    id: 'resize',
+    category: 'pdf',
+    href: '/pdf/resize',
+    i18nKey: 'tools.pdf.resize',
+    keywords: [
+      'resize', 'page size', 'a4', 'letter', 'a3', 'a5', 'legal',
+      'scale', 'dimensions', 'redimensionner', 'taille page',
+    ],
+    acceptedMime: ['application/pdf'],
+    status: 'stable',
+  },
+  {
     id: 'to-images',
     category: 'pdf',
     href: '/pdf/to-images',

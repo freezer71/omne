@@ -371,6 +371,53 @@
           "previewLabel": "Aperçu",
           "previewPageLabelTemplate": "Page {n}"
         }
+      },
+      "resize": {
+        "name": "Redimensionner un PDF",
+        "description": "Modifiez la taille des pages d'un PDF — A4, Lettre, A3 ou dimensions personnalisées — avec mise à l'échelle du contenu.",
+        "seo": {
+          "title": "Redimensionner un PDF en ligne — Changer la taille des pages gratuitement",
+          "description": "Redimensionnez les pages d'un PDF en A4, Lettre, A3, Légal ou dimensions personnalisées avec mise à l'échelle du contenu. Tout dans votre navigateur — aucun envoi.",
+          "keywords": [
+            "redimensionner pdf",
+            "changer taille page pdf",
+            "pdf a4 vers lettre",
+            "pdf lettre vers a4",
+            "convertir taille page pdf",
+            "mise à l'échelle pdf",
+            "redimensionner pdf gratuit"
+          ],
+          "ogTitle": "Redimensionner un PDF · 100% local"
+        },
+        "ui": {
+          "selectButton": "Sélectionner un PDF",
+          "empty": "Déposez un PDF ici ou utilisez le bouton ci-dessous.",
+          "resizeButton": "Redimensionner",
+          "pageLabelTemplate": "Page {n}",
+          "removeFile": "Retirer",
+          "busy": "Redimensionnement…",
+          "error": "Impossible de redimensionner ce PDF.",
+          "pageSizeLabel": "Format de page",
+          "presetA3": "A3",
+          "presetA4": "A4",
+          "presetA5": "A5",
+          "presetLetter": "Lettre",
+          "presetLegal": "Légal",
+          "presetCustom": "Personnalisé",
+          "widthLabel": "Largeur",
+          "heightLabel": "Hauteur",
+          "unitMm": "mm",
+          "unitInch": "po",
+          "orientationLabel": "Orientation",
+          "orientationPortrait": "Portrait",
+          "orientationLandscape": "Paysage",
+          "fitModeLabel": "Ajustement du contenu",
+          "fitModeFit": "Ajuster",
+          "fitModeFill": "Remplir",
+          "fitModeStretch": "Étirer",
+          "currentSizeTemplate": "Actuel : {w} × {h} {unit}",
+          "targetSizeTemplate": "Cible : {w} × {h} {unit}"
+        }
       }
     },
     "video": {

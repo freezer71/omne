@@ -371,6 +371,53 @@
           "previewLabel": "Preview",
           "previewPageLabelTemplate": "Page {n}"
         }
+      },
+      "resize": {
+        "name": "Resize PDF",
+        "description": "Change the page size of a PDF — A4, Letter, A3 or custom dimensions — with content scaling.",
+        "seo": {
+          "title": "Resize PDF Pages Online — Change Page Size Free, In-Browser",
+          "description": "Free online PDF page resizer. Change PDF page size to A4, Letter, A3, Legal, or custom dimensions with content scaling. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "resize pdf",
+            "change pdf page size",
+            "pdf a4 to letter",
+            "pdf letter to a4",
+            "pdf page size converter",
+            "scale pdf pages",
+            "resize pdf online free"
+          ],
+          "ogTitle": "Resize PDF · 100% local"
+        },
+        "ui": {
+          "selectButton": "Select a PDF",
+          "empty": "Drop a PDF here or use the button below.",
+          "resizeButton": "Resize",
+          "pageLabelTemplate": "Page {n}",
+          "removeFile": "Remove",
+          "busy": "Resizing…",
+          "error": "Could not resize that PDF.",
+          "pageSizeLabel": "Page size",
+          "presetA3": "A3",
+          "presetA4": "A4",
+          "presetA5": "A5",
+          "presetLetter": "Letter",
+          "presetLegal": "Legal",
+          "presetCustom": "Custom",
+          "widthLabel": "Width",
+          "heightLabel": "Height",
+          "unitMm": "mm",
+          "unitInch": "in",
+          "orientationLabel": "Orientation",
+          "orientationPortrait": "Portrait",
+          "orientationLandscape": "Landscape",
+          "fitModeLabel": "Content fitting",
+          "fitModeFit": "Fit",
+          "fitModeFill": "Fill",
+          "fitModeStretch": "Stretch",
+          "currentSizeTemplate": "Current: {w} × {h} {unit}",
+          "targetSizeTemplate": "Target: {w} × {h} {unit}"
+        }
       }
     },
     "video": {
