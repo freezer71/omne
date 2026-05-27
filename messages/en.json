@@ -1481,18 +1481,18 @@
         "name": "Paste image from clipboard",
         "description": "Paste an image straight from your clipboard — screenshot, copy from a webpage — and save it as PNG, JPG or WebP.",
         "seo": {
-          "title": "Paste Image from Clipboard — Save Screenshots as PNG / JPG / WebP",
-          "description": "Paste any image from your clipboard (screenshot, copied image) and download it as PNG, JPG or WebP. 100% in-browser — nothing uploaded.",
+          "title": "Clipboard to Image Online — Paste & Save as PNG, JPG, WebP Free",
+          "description": "Paste any image from your clipboard and save it as PNG, JPG, or WebP. Clipboard to PNG, clipboard to JPG — free, instant, 100% in-browser. Nothing uploaded.",
           "keywords": [
+            "clipboard to image",
+            "clipboard to png",
+            "clipboard to jpg",
             "paste image from clipboard",
             "save screenshot as jpg",
-            "clipboard to image online",
-            "screenshot to webp",
-            "paste screenshot save",
             "clipboard image converter",
             "screenshot to png free"
           ],
-          "ogTitle": "Paste from clipboard · 100% local"
+          "ogTitle": "Clipboard to image · 100% local"
         },
         "ui": {
           "pasteButton": "Paste from clipboard",
@@ -1844,11 +1844,11 @@
           "keywords": [
             "sha256 online",
             "sha512 online",
-            "sha-256 generator",
-            "hash text",
+            "text to sha256",
+            "hash text online",
             "text to sha",
-            "online sha calculator",
-            "free hash tool"
+            "sha256 base64",
+            "hash to text"
           ],
           "ogTitle": "Hash text · 100% local"
         },

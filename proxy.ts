@@ -23,7 +23,7 @@ export function proxy(request: NextRequest) {
   const locale = detectLocale(request);
   const url = request.nextUrl.clone();
   url.pathname = `/${locale}${pathname === '/' ? '' : pathname}`;
-  return NextResponse.redirect(url);
+  return NextResponse.redirect(url, 301);
 }
 
 export const config = {

@@ -547,13 +547,13 @@
           "title": "Couper une vidéo en ligne — Découper un clip MP4, gratuit",
           "description": "Découpeur vidéo gratuit. Extrayez un clip d'un fichier MP4, WebM, MOV ou MKV — entièrement dans votre navigateur. Aucun envoi, aucune inscription.",
           "keywords": [
-            "couper vidéo",
-            "découper vidéo",
-            "decouper video",
-            "trim video",
-            "raccourcir vidéo",
-            "découpeur vidéo en ligne",
-            "video cutter gratuit"
+            "couper une vidéo en ligne",
+            "couper video en ligne gratuit",
+            "découper vidéo en ligne",
+            "découpeur vidéo gratuit",
+            "couper une vidéo gratuitement",
+            "couper video mp4",
+            "raccourcir vidéo en ligne"
           ],
           "ogTitle": "Couper une vidéo · 100% local"
         },
@@ -763,15 +763,15 @@
         "name": "Recadrer une vidéo",
         "description": "Recadrez une zone rectangulaire d'une vidéo. Ajustez position et taille avant d'exporter.",
         "seo": {
-          "title": "Recadrer une vidéo en ligne — Rogner les bords MP4, gratuit",
-          "description": "Recadrez n'importe quelle vidéo sur une zone rectangulaire. Position et taille ajustables. 100% dans le navigateur — aucun upload.",
+          "title": "Recadrer une vidéo en ligne — Rogner une vidéo MP4 gratuitement",
+          "description": "Recadrez ou rognez une vidéo MP4, WebM, MOV sur une zone précise. Position et taille ajustables. 100% dans le navigateur — aucun upload.",
           "keywords": [
-            "recadrer vidéo en ligne",
+            "recadrer une vidéo en ligne",
+            "rogner une vidéo en ligne",
             "rogner vidéo gratuit",
-            "découper bords vidéo",
-            "recadrer mp4 en ligne",
-            "video crop sans upload",
-            "recadrer vidéo sans filigrane"
+            "recadrer video mp4",
+            "recadrer vidéo gratuitement",
+            "rogner vidéo en ligne gratuit"
           ],
           "ogTitle": "Recadrer · 100% local"
         },
@@ -971,15 +971,15 @@
         "name": "Changer la vitesse d'une vidéo",
         "description": "Accélérez ou ralentissez une vidéo de 0.25× à 4×, en conservant la hauteur de l'audio.",
         "seo": {
-          "title": "Vitesse d'une vidéo — Ralenti & accéléré 0.25× à 4×",
-          "description": "Accélérez ou ralentissez n'importe quelle vidéo de 0.25× à 4×. 100% dans le navigateur — aucun upload, aucune inscription, aucun filigrane.",
+          "title": "Ralentir une vidéo en ligne — Accélérer ou ralentir gratuitement",
+          "description": "Ralentissez ou accélérez une vidéo de 0.25× à 4×. Ralenti et accéléré en ligne, 100% dans le navigateur — aucun upload, aucun filigrane.",
           "keywords": [
-            "changer vitesse vidéo en ligne",
-            "ralenti vidéo en ligne",
+            "ralentir une vidéo en ligne",
+            "ralentir video en ligne",
             "accélérer vidéo en ligne",
-            "vitesse de lecture vidéo gratuit",
-            "avance rapide vidéo",
-            "ralentir mp4 en ligne"
+            "ralentir une vidéo gratuit",
+            "changer vitesse vidéo",
+            "avance rapide vidéo en ligne"
           ],
           "ogTitle": "Vitesse · 100% local"
         },
@@ -1142,16 +1142,16 @@
           ]
         },
         "seo": {
-          "title": "Découper un MP3 en ligne — Couper de la musique, gratuit",
-          "description": "Découpeur MP3 gratuit. Coupez une section d'un MP3, WAV, FLAC, M4A ou OGG avec une waveform interactive. 100 % dans votre navigateur — aucun envoi.",
+          "title": "Couper un MP3 en ligne — Découper de la musique gratuitement",
+          "description": "Coupez un MP3, WAV, FLAC, M4A ou OGG en ligne avec une waveform interactive. Couper une musique gratuitement, 100 % dans votre navigateur — aucun envoi.",
           "keywords": [
-            "découper mp3",
-            "couper musique en ligne",
-            "mp3 cutter gratuit",
-            "raccourcir mp3",
-            "découper audio",
-            "découpeur mp3 sans inscription",
-            "couper un audio dans le navigateur"
+            "couper mp3 en ligne",
+            "couper une musique",
+            "découper mp3 en ligne",
+            "couper un mp3 gratuit",
+            "couper audio mp3",
+            "couper musique mp3",
+            "découpeur mp3 en ligne"
           ],
           "ogTitle": "Découper un audio · 100% local"
         },
@@ -1386,16 +1386,16 @@
         "name": "Pivoter & retourner",
         "description": "Pivotez par paliers de 90° et inversez horizontalement ou verticalement.",
         "seo": {
-          "title": "Pivoter et retourner une image — En ligne, gratuit",
-          "description": "Pivotez vos images par paliers de 90° et retournez-les horizontalement ou verticalement. PNG, JPG, WebP — instantanément, dans le navigateur.",
+          "title": "Retourner une image en ligne — Pivoter, inverser une photo gratuitement",
+          "description": "Retournez, pivotez ou inversez une image ou photo en ligne. PNG, JPG, WebP — instantanément dans le navigateur, aucun upload.",
           "keywords": [
-            "pivoter image",
-            "retourner image",
-            "miroir image",
-            "rotation image en ligne",
-            "flip horizontal",
-            "flip vertical",
-            "rotation image gratuite"
+            "retourner une image",
+            "inverser image en ligne",
+            "retourner une photo",
+            "pivoter image en ligne",
+            "retourner photo en ligne",
+            "miroir image en ligne",
+            "inverser photo gratuit"
           ],
           "ogTitle": "Pivoter & retourner · 100% local"
         },
@@ -1421,12 +1421,12 @@
           "title": "Rogner une image en ligne — Gratuit, dans le navigateur",
           "description": "Rognez n'importe quelle image PNG, JPG ou WebP selon un rectangle précis. Glissez pour définir la zone avec un aperçu en direct — dans votre navigateur.",
           "keywords": [
-            "rogner image",
-            "recadrer image",
-            "image crop en ligne",
-            "rogner png jpg webp",
-            "outil de rognage gratuit",
-            "couper image"
+            "rogner une image en ligne",
+            "rogner image en ligne",
+            "recadrer image en ligne",
+            "rogner une photo",
+            "rogner jpg en ligne",
+            "outil de rognage gratuit"
           ],
           "ogTitle": "Rogner une image · 100% local"
         },
