@@ -1,5 +1,5 @@
 import { fetchFile } from '@ffmpeg/util';
-import { getFfmpeg } from '@/lib/ffmpeg-loader';
+import { getTypedFfmpeg, runFfmpegCommand } from '@/lib/ffmpeg-loader';
 
 export type SplitMode = 'parts' | 'duration';
 
@@ -13,20 +13,6 @@ export type SplitOptions = {
 
 export const MAX_SEGMENTS = 10;
 export const MIN_SEGMENT_DURATION = 0.1;
-
-type FfmpegLike = {
-  writeFile: (n: string, d: Uint8Array) => Promise<void>;
-  readFile: (n: string) => Promise<Uint8Array | string>;
-  deleteFile: (n: string) => Promise<void>;
-  on: (e: string, h: (p: { progress: number }) => void) => void;
-  off: (e: string, h: (p: { progress: number }) => void) => void;
-} & { [k: string]: unknown };
-
-async function runFfmpegCommand(ffmpeg: FfmpegLike, args: string[]): Promise<unknown> {
-  const method = 'ex' + 'ec';
-  const fn = ffmpeg[method] as (a: string[]) => Promise<unknown>;
-  return fn.call(ffmpeg, args);
-}
 
 function inferExtension(input: File | Uint8Array): string {
   if (input instanceof File) {
@@ -89,7 +75,7 @@ export async function splitVideo(
   const inputName = `input.${extension}`;
   const outputNames = boundaries.map((_, i) => `part_${i + 1}.${extension}`);
 
-  const ffmpeg = (await getFfmpeg()) as unknown as FfmpegLike;
+  const ffmpeg = await getTypedFfmpeg();
 
   let progressHandler: ((e: { progress: number }) => void) | undefined;
   let currentIndex = 0;

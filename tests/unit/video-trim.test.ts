@@ -8,7 +8,7 @@ const { execMock, writeMock, readMock, deleteMock } = vi.hoisted(() => ({
 }));
 
 vi.mock('@/lib/ffmpeg-loader', () => ({
-  getFfmpeg: vi.fn(async () => ({
+  getTypedFfmpeg: vi.fn(async () => ({
     writeFile: writeMock,
     readFile: readMock,
     deleteFile: deleteMock,
@@ -16,6 +16,7 @@ vi.mock('@/lib/ffmpeg-loader', () => ({
     on: () => {},
     off: () => {},
   })),
+  runFfmpegCommand: vi.fn(async (_ffmpeg: unknown, args: string[]) => execMock(args)),
 }));
 
 vi.mock('@ffmpeg/util', () => ({

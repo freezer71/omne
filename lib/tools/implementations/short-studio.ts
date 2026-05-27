@@ -1,6 +1,6 @@
 import { fetchFile } from '@ffmpeg/util';
 import type { FFFSType } from '@ffmpeg/ffmpeg';
-import { getFfmpeg } from '@/lib/ffmpeg-loader';
+import { getTypedFfmpeg, type FfmpegLike } from '@/lib/ffmpeg-loader';
 import { computeBoundaries, MAX_SEGMENTS } from './video-split';
 
 export type ShortStudioMode = 'parts' | 'duration';
@@ -53,10 +53,7 @@ export function hexToFfmpegColor(hex: string): string {
   return `0x${match[1]!.toUpperCase()}`;
 }
 
-type FfmpegLike = {
-  writeFile: (n: string, d: Uint8Array) => Promise<void>;
-  readFile: (n: string) => Promise<Uint8Array | string>;
-  deleteFile: (n: string) => Promise<void>;
+type StudioFfmpeg = FfmpegLike & {
   mount: (
     fsType: FFFSType,
     options: { blobs?: Array<{ name: string; data: Blob }>; files?: File[] },
@@ -65,11 +62,9 @@ type FfmpegLike = {
   unmount: (mountPoint: string) => Promise<boolean>;
   createDir: (path: string) => Promise<boolean>;
   deleteDir: (path: string) => Promise<boolean>;
-  on: (e: string, h: (p: { progress: number } | { type?: string; message: string }) => void) => void;
-  off: (e: string, h: (p: { progress: number } | { type?: string; message: string }) => void) => void;
-} & { [k: string]: unknown };
+};
 
-async function runFfmpegCommand(ffmpeg: FfmpegLike, args: string[]): Promise<number> {
+async function runStudioCommand(ffmpeg: StudioFfmpeg, args: string[]): Promise<number> {
   const method = 'ex' + 'ec';
   const fn = ffmpeg[method] as (a: string[]) => Promise<number>;
   return fn.call(ffmpeg, args);
@@ -160,7 +155,7 @@ function validateOptions(options: ShortStudioOptions): void {
   }
 }
 
-async function loadFontIntoFfmpeg(ffmpeg: FfmpegLike, fontFamily: FontFamily): Promise<void> {
+async function loadFontIntoFfmpeg(ffmpeg: StudioFfmpeg, fontFamily: FontFamily): Promise<void> {
   const url = `/fonts/${FONT_FILES[fontFamily]}`;
   const bytes = await fetchFile(url);
   await ffmpeg.writeFile(FONT_MEMFS, bytes);
@@ -185,7 +180,7 @@ export async function generateShorts(
   const inputPath = `${inputDir}/${inputName}`;
   const outputNames = boundaries.map((_, i) => `short_${i + 1}.mp4`);
 
-  const ffmpeg = (await getFfmpeg()) as unknown as FfmpegLike;
+  const ffmpeg = (await getTypedFfmpeg()) as StudioFfmpeg;
 
   let progressHandler: ((e: { progress: number }) => void) | undefined;
   let currentIndex = 0;
@@ -240,7 +235,7 @@ export async function generateShorts(
       logBuffer.length = 0;
       let cutExit: number;
       try {
-        cutExit = await runFfmpegCommand(ffmpeg, [
+        cutExit = await runStudioCommand(ffmpeg, [
           '-ss', String(start),
           '-i', inputPath,
           '-t', String(duration),
@@ -262,7 +257,7 @@ export async function generateShorts(
       logBuffer.length = 0;
       let encExit: number;
       try {
-        encExit = await runFfmpegCommand(ffmpeg, [
+        encExit = await runStudioCommand(ffmpeg, [
           '-i', chunkName,
           '-vf', vf,
           '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '23',

@@ -1,5 +1,5 @@
 import { fetchFile } from '@ffmpeg/util';
-import { getFfmpeg } from '@/lib/ffmpeg-loader';
+import { getTypedFfmpeg, runFfmpegCommand } from '@/lib/ffmpeg-loader';
 
 export type CompressQuality = 'high' | 'medium' | 'low';
 
@@ -7,20 +7,6 @@ export type CompressOptions = {
   quality: CompressQuality;
   onProgress?: (ratio: number) => void;
 };
-
-type FfmpegLike = {
-  writeFile: (n: string, d: Uint8Array) => Promise<void>;
-  readFile: (n: string) => Promise<Uint8Array | string>;
-  deleteFile: (n: string) => Promise<void>;
-  on: (e: string, h: (p: { progress: number }) => void) => void;
-  off: (e: string, h: (p: { progress: number }) => void) => void;
-} & { [k: string]: unknown };
-
-async function runFfmpegCommand(ffmpeg: FfmpegLike, args: string[]): Promise<unknown> {
-  const method = 'ex' + 'ec';
-  const fn = ffmpeg[method] as (a: string[]) => Promise<unknown>;
-  return fn.call(ffmpeg, args);
-}
 
 // mpeg4 q:v is 1..31, lower = better quality. Audio bitrate paired.
 const QUALITY_PRESETS: Record<CompressQuality, { qv: number; abr: string }> = {
@@ -33,7 +19,7 @@ export async function compressVideo(
   input: File,
   options: CompressOptions,
 ): Promise<Uint8Array> {
-  const ffmpeg = (await getFfmpeg()) as unknown as FfmpegLike;
+  const ffmpeg = await getTypedFfmpeg();
   const inputName = 'input.mp4';
   const outputName = 'compressed.mp4';
 

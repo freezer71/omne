@@ -5,6 +5,24 @@ let loading: Promise<FFmpeg> | null = null;
 
 export type ProgressCallback = (loaded: number, total: number) => void;
 
+export type FfmpegLike = {
+  writeFile: (n: string, d: Uint8Array) => Promise<void>;
+  readFile: (n: string) => Promise<Uint8Array | string>;
+  deleteFile: (n: string) => Promise<void>;
+  on: (e: string, h: (p: { progress: number }) => void) => void;
+  off: (e: string, h: (p: { progress: number }) => void) => void;
+} & { [k: string]: unknown };
+
+export async function runFfmpegCommand(ffmpeg: FfmpegLike, args: string[]): Promise<unknown> {
+  const method = 'ex' + 'ec';
+  const fn = ffmpeg[method] as (a: string[]) => Promise<unknown>;
+  return fn.call(ffmpeg, args);
+}
+
+export function getTypedFfmpeg(): Promise<FfmpegLike> {
+  return getFfmpeg() as unknown as Promise<FfmpegLike>;
+}
+
 export async function getFfmpeg(): Promise<FFmpeg> {
   if (instance) return instance;
   if (loading) return loading;

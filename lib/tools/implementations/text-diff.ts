@@ -21,9 +21,14 @@ function tokenize(input: string, mode: DiffMode): string[] {
   return Array.from(input);
 }
 
+const MAX_LCS_CELLS = 10_000_000;
+
 function lcsTable(a: string[], b: string[]): Uint32Array {
   const m = a.length;
   const n = b.length;
+  if (m * n > MAX_LCS_CELLS) {
+    throw new Error(`Input too large for diff (${m}×${n} = ${m * n} cells). Try line mode or shorter text.`);
+  }
   const dp = new Uint32Array((m + 1) * (n + 1));
   const w = n + 1;
   for (let i = 1; i <= m; i++) {

@@ -1,5 +1,5 @@
 import { fetchFile } from '@ffmpeg/util';
-import { getFfmpeg } from '@/lib/ffmpeg-loader';
+import { getTypedFfmpeg, runFfmpegCommand } from '@/lib/ffmpeg-loader';
 
 export type CropOptions = {
   x: number;
@@ -9,23 +9,9 @@ export type CropOptions = {
   onProgress?: (ratio: number) => void;
 };
 
-type FfmpegLike = {
-  writeFile: (n: string, d: Uint8Array) => Promise<void>;
-  readFile: (n: string) => Promise<Uint8Array | string>;
-  deleteFile: (n: string) => Promise<void>;
-  on: (e: string, h: (p: { progress: number }) => void) => void;
-  off: (e: string, h: (p: { progress: number }) => void) => void;
-} & { [k: string]: unknown };
-
-async function runFfmpegCommand(ffmpeg: FfmpegLike, args: string[]): Promise<unknown> {
-  const method = 'ex' + 'ec';
-  const fn = ffmpeg[method] as (a: string[]) => Promise<unknown>;
-  return fn.call(ffmpeg, args);
-}
-
 export async function cropVideo(input: File, options: CropOptions): Promise<Uint8Array> {
   if (options.width <= 0 || options.height <= 0) throw new Error('crop dimensions must be positive');
-  const ffmpeg = (await getFfmpeg()) as unknown as FfmpegLike;
+  const ffmpeg = await getTypedFfmpeg();
   const inputName = 'input.mp4';
   const outputName = 'cropped.mp4';
 

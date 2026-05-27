@@ -1,25 +1,11 @@
 import { fetchFile } from '@ffmpeg/util';
-import { getFfmpeg } from '@/lib/ffmpeg-loader';
+import { getTypedFfmpeg, runFfmpegCommand } from '@/lib/ffmpeg-loader';
 
 export type SpeedOptions = {
   speed: number;
   keepAudio: boolean;
   onProgress?: (ratio: number) => void;
 };
-
-type FfmpegLike = {
-  writeFile: (n: string, d: Uint8Array) => Promise<void>;
-  readFile: (n: string) => Promise<Uint8Array | string>;
-  deleteFile: (n: string) => Promise<void>;
-  on: (e: string, h: (p: { progress: number }) => void) => void;
-  off: (e: string, h: (p: { progress: number }) => void) => void;
-} & { [k: string]: unknown };
-
-async function runFfmpegCommand(ffmpeg: FfmpegLike, args: string[]): Promise<unknown> {
-  const method = 'ex' + 'ec';
-  const fn = ffmpeg[method] as (a: string[]) => Promise<unknown>;
-  return fn.call(ffmpeg, args);
-}
 
 // atempo accepts [0.5, 2.0]. For extreme speeds we chain it.
 export function buildAtempoChain(speed: number): string {
@@ -41,7 +27,7 @@ export function buildAtempoChain(speed: number): string {
 
 export async function speedVideo(input: File, options: SpeedOptions): Promise<Uint8Array> {
   if (options.speed <= 0) throw new Error('speed must be > 0');
-  const ffmpeg = (await getFfmpeg()) as unknown as FfmpegLike;
+  const ffmpeg = await getTypedFfmpeg();
   const inputName = 'input.mp4';
   const outputName = 'speed.mp4';
 

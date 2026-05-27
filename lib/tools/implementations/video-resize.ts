@@ -1,5 +1,5 @@
 import { fetchFile } from '@ffmpeg/util';
-import { getFfmpeg } from '@/lib/ffmpeg-loader';
+import { getTypedFfmpeg, runFfmpegCommand } from '@/lib/ffmpeg-loader';
 
 export type ResizePreset = '480p' | '720p' | '1080p' | 'custom';
 
@@ -10,20 +10,6 @@ export type ResizeOptions = {
   keepAspect: boolean;
   onProgress?: (ratio: number) => void;
 };
-
-type FfmpegLike = {
-  writeFile: (n: string, d: Uint8Array) => Promise<void>;
-  readFile: (n: string) => Promise<Uint8Array | string>;
-  deleteFile: (n: string) => Promise<void>;
-  on: (e: string, h: (p: { progress: number }) => void) => void;
-  off: (e: string, h: (p: { progress: number }) => void) => void;
-} & { [k: string]: unknown };
-
-async function runFfmpegCommand(ffmpeg: FfmpegLike, args: string[]): Promise<unknown> {
-  const method = 'ex' + 'ec';
-  const fn = ffmpeg[method] as (a: string[]) => Promise<unknown>;
-  return fn.call(ffmpeg, args);
-}
 
 const PRESET_DIMS: Record<Exclude<ResizePreset, 'custom'>, { w: number; h: number }> = {
   '480p': { w: 854, h: 480 },
@@ -76,7 +62,7 @@ function buildCodecArgs(ext: string, scaleFilter: string): string[] {
 export type ResizeResult = { data: Uint8Array; ext: string };
 
 export async function resizeVideo(input: File, options: ResizeOptions): Promise<ResizeResult> {
-  const ffmpeg = (await getFfmpeg()) as unknown as FfmpegLike;
+  const ffmpeg = await getTypedFfmpeg();
   const ext = inferExtension(input);
   const inputName = `input.${ext}`;
   const outputName = `resized.${ext}`;

@@ -46,21 +46,25 @@ const COVER_JPEG_QUALITY = 0.85;
 
 async function normalizeCover(file: File): Promise<AudioCover> {
   const bitmap = await loadImageBitmap(file);
-  const longestSide = Math.max(bitmap.width, bitmap.height);
-  if (longestSide <= MAX_COVER_SIDE && (file.type === 'image/jpeg' || file.type === 'image/png')) {
-    return {
-      bytes: new Uint8Array(await file.arrayBuffer()),
-      mime: file.type,
-    };
+  try {
+    const longestSide = Math.max(bitmap.width, bitmap.height);
+    if (longestSide <= MAX_COVER_SIDE && (file.type === 'image/jpeg' || file.type === 'image/png')) {
+      return {
+        bytes: new Uint8Array(await file.arrayBuffer()),
+        mime: file.type,
+      };
+    }
+    const scale = longestSide > MAX_COVER_SIDE ? MAX_COVER_SIDE / longestSide : 1;
+    const targetW = Math.round(bitmap.width * scale);
+    const targetH = Math.round(bitmap.height * scale);
+    const canvas = createCanvas(targetW, targetH);
+    const ctx = get2dContext(canvas);
+    ctx.drawImage(bitmap, 0, 0, targetW, targetH);
+    const bytes = await canvasToBytes(canvas, 'image/jpeg', COVER_JPEG_QUALITY);
+    return { bytes, mime: 'image/jpeg' };
+  } finally {
+    bitmap.close();
   }
-  const scale = longestSide > MAX_COVER_SIDE ? MAX_COVER_SIDE / longestSide : 1;
-  const targetW = Math.round(bitmap.width * scale);
-  const targetH = Math.round(bitmap.height * scale);
-  const canvas = createCanvas(targetW, targetH);
-  const ctx = get2dContext(canvas);
-  ctx.drawImage(bitmap, 0, 0, targetW, targetH);
-  const bytes = await canvasToBytes(canvas, 'image/jpeg', COVER_JPEG_QUALITY);
-  return { bytes, mime: 'image/jpeg' };
 }
 
 function emptyTags(): AudioTags {

@@ -1,5 +1,5 @@
 import { fetchFile } from '@ffmpeg/util';
-import { getFfmpeg } from '@/lib/ffmpeg-loader';
+import { getTypedFfmpeg, runFfmpegCommand } from '@/lib/ffmpeg-loader';
 
 export type FrameFormat = 'png' | 'jpg';
 
@@ -14,24 +14,9 @@ export type FrameResult = {
   bytes: Uint8Array;
 };
 
-type FfmpegLike = {
-  writeFile: (n: string, d: Uint8Array) => Promise<void>;
-  readFile: (n: string) => Promise<Uint8Array | string>;
-  deleteFile: (n: string) => Promise<void>;
-  listDir: (path: string) => Promise<Array<{ name: string; isDir: boolean }>>;
-  on: (e: string, h: (p: { progress: number }) => void) => void;
-  off: (e: string, h: (p: { progress: number }) => void) => void;
-} & { [k: string]: unknown };
-
-async function runFfmpegCommand(ffmpeg: FfmpegLike, args: string[]): Promise<unknown> {
-  const method = 'ex' + 'ec';
-  const fn = ffmpeg[method] as (a: string[]) => Promise<unknown>;
-  return fn.call(ffmpeg, args);
-}
-
 export async function extractFrames(input: File, options: FramesOptions): Promise<FrameResult[]> {
   if (options.fps <= 0 || options.fps > 60) throw new Error('fps must be between 0 and 60');
-  const ffmpeg = (await getFfmpeg()) as unknown as FfmpegLike;
+  const ffmpeg = await getTypedFfmpeg();
   const inputName = 'input.mp4';
   const pattern = options.format === 'png' ? 'frame-%04d.png' : 'frame-%04d.jpg';
 

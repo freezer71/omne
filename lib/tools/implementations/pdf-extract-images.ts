@@ -1,3 +1,6 @@
+import { canvasToBytes } from '@/lib/image-utils';
+import { configurePdfjsWorker } from '@/lib/pdfjs-loader';
+
 export type ExtractedImageFormat = 'png';
 
 export type ExtractedImage = {
@@ -29,29 +32,9 @@ type PagePartial = {
   cleanup?(): void;
 };
 
-let workerConfigured = false;
-
-async function configureWorker(pdfjsLib: typeof import('pdfjs-dist')) {
-  if (workerConfigured) return;
-  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdfjs/pdf.worker.min.mjs';
-  workerConfigured = true;
-}
-
 async function toBytes(input: File | Uint8Array): Promise<Uint8Array> {
   if (input instanceof Uint8Array) return input;
   return new Uint8Array(await input.arrayBuffer());
-}
-
-function canvasToBytes(canvas: HTMLCanvasElement): Promise<Uint8Array> {
-  return new Promise((resolve, reject) => {
-    canvas.toBlob(async (blob) => {
-      if (!blob) {
-        reject(new Error('Failed to encode image'));
-        return;
-      }
-      resolve(new Uint8Array(await blob.arrayBuffer()));
-    }, 'image/png');
-  });
 }
 
 function resolveImage(page: PagePartial, name: string): Promise<PdfImageObject | null> {
@@ -119,7 +102,7 @@ export async function extractPdfImages(
   options: ExtractOptions = {},
 ): Promise<ExtractedImage[]> {
   const pdfjsLib = await import('pdfjs-dist');
-  await configureWorker(pdfjsLib);
+  await configurePdfjsWorker(pdfjsLib);
   const OPS = pdfjsLib.OPS;
 
   const bytes = await toBytes(input);
@@ -154,7 +137,7 @@ export async function extractPdfImages(
         if (!canvas) continue;
 
         try {
-          const imgBytes = await canvasToBytes(canvas);
+          const imgBytes = await canvasToBytes(canvas, 'image/png');
           imageIndex++;
           const extracted: ExtractedImage = {
             pageIndex: pageNum,
