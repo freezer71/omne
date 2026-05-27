@@ -60,7 +60,7 @@ export function ColorBlenderTool(messages: Messages) {
 
       <label className="flex flex-col gap-1.5 text-xs text-text-muted">
         {messages.ratioLabel} ({Math.round(ratio * 100)}%)
-        <input type="range" min="0" max="1" step="0.01" value={ratio} onChange={(e) => setRatio(parseFloat(e.target.value))} className="accent-accent" />
+        <input type="range" min="0" max="1" step="0.01" value={ratio} onChange={(e) => setRatio(parseFloat(e.target.value))} className="accent-accent" aria-label={messages.ratioLabel} />
       </label>
 
       <div className="flex flex-col gap-1.5">

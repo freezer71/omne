@@ -134,7 +134,7 @@ export function VideoSpeedTool(messages: Messages) {
             </button>
           ))}
         </div>
-        <input type="range" min="0.25" max="4" step="0.05" value={speed} onChange={(e) => setSpeed(parseFloat(e.target.value))} className="accent-accent" />
+        <input type="range" min="0.25" max="4" step="0.05" value={speed} onChange={(e) => setSpeed(parseFloat(e.target.value))} aria-label={messages.speedLabel} className="accent-accent" />
       </div>
 
       <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-text-muted">

@@ -66,7 +66,7 @@ export function ColorGradientTool(messages: Messages) {
           <div key={i} className="flex items-center gap-3">
             <input type="color" value={s.color} onChange={(e) => updateStop(i, { color: e.target.value })} className="h-9 w-12 cursor-pointer rounded-md border border-border bg-surface" />
             <input value={s.color} onChange={(e) => updateStop(i, { color: e.target.value })} className="h-9 w-32 rounded-md border border-border bg-surface px-2 font-mono text-sm text-text-primary" />
-            <input type="range" min="0" max="100" value={s.position} onChange={(e) => updateStop(i, { position: parseInt(e.target.value, 10) })} className="flex-1 accent-accent" />
+            <input type="range" min="0" max="100" value={s.position} onChange={(e) => updateStop(i, { position: parseInt(e.target.value, 10) })} className="flex-1 accent-accent" aria-label={`${messages.stopsLabel} ${i + 1}`} />
             <span className="w-12 text-right font-mono text-xs text-text-faint">{s.position}%</span>
             <Button variant="subtle" size="sm" type="button" onClick={() => removeStop(i)} disabled={stops.length <= 2}>{messages.removeStop}</Button>
           </div>

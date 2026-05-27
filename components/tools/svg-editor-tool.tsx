@@ -533,6 +533,7 @@ function SliderRow({
         value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
         className="h-2 w-full"
+        aria-label={label}
       />
     </label>
   );

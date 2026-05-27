@@ -170,11 +170,11 @@ export function VideoWatermarkTool(messages: Messages) {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <label className="flex flex-col gap-1.5 text-xs text-text-muted">
           {messages.fontSizeLabel} ({fontSize})
-          <input type="range" min="12" max="100" value={fontSize} onChange={(e) => setFontSize(parseInt(e.target.value, 10))} className="accent-accent" />
+          <input type="range" min="12" max="100" value={fontSize} onChange={(e) => setFontSize(parseInt(e.target.value, 10))} className="accent-accent" aria-label={messages.fontSizeLabel} />
         </label>
         <label className="flex flex-col gap-1.5 text-xs text-text-muted">
           {messages.opacityLabel} ({Math.round(opacity * 100)}%)
-          <input type="range" min="0.1" max="1" step="0.05" value={opacity} onChange={(e) => setOpacity(parseFloat(e.target.value))} className="accent-accent" />
+          <input type="range" min="0.1" max="1" step="0.05" value={opacity} onChange={(e) => setOpacity(parseFloat(e.target.value))} className="accent-accent" aria-label={messages.opacityLabel} />
         </label>
       </div>
 

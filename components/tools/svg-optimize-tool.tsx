@@ -158,6 +158,7 @@ export function SvgOptimizeTool(messages: Messages) {
                 value={precision}
                 onChange={(e) => setPrecision(parseInt(e.target.value, 10))}
                 className="w-32"
+                aria-label={messages.precisionLabel}
               />
               <span className="font-mono text-[11px] text-text-faint">{precision}</span>
             </label>
