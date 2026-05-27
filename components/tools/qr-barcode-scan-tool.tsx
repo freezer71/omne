@@ -70,7 +70,7 @@ export function QrBarcodeScanTool(messages: Messages) {
         {!file ? (
           <div className="flex flex-col items-center justify-center gap-3 text-center">
             <p className="text-text-muted">{messages.empty}</p>
-            <input ref={inputRef} type="file" accept="image/*" className="sr-only" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
+            <input ref={inputRef} type="file" accept="image/*" className="sr-only" aria-label={messages.selectButton} onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
             <Button variant="ghost" size="sm" type="button" onClick={() => inputRef.current?.click()}>{messages.selectButton}</Button>
           </div>
         ) : (

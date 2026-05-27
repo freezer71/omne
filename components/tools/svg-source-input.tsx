@@ -46,6 +46,7 @@ export function SvgSourceInput({ markup, onMarkupChange, onPickFiles, messages, 
         type="file"
         accept="image/svg+xml,.svg"
         className="sr-only"
+        aria-label={messages.selectButton}
         onChange={(e) => onPickFiles(e.target.files)}
       />
       <div className="flex flex-col gap-3">
