@@ -17,8 +17,16 @@ import {
 } from '@/lib/seo/site';
 import '../globals.css';
 
-const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
-const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+  display: 'optional',
+});
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+  display: 'optional',
+});
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
