@@ -1,4 +1,5 @@
 import type { PDFDocument } from 'pdf-lib';
+import { stripPageActions } from '@/lib/tools/pdf-sanitize';
 
 type PdfInput = Uint8Array | ArrayBuffer | File;
 
@@ -26,7 +27,10 @@ async function extractRange(
   const indices = [];
   for (let i = start - 1; i <= end - 1; i++) indices.push(i);
   const pages = await out.copyPages(src, indices);
-  for (const p of pages) out.addPage(p);
+  for (const p of pages) {
+    stripPageActions(p);
+    out.addPage(p);
+  }
   return out.save();
 }
 
@@ -70,7 +74,10 @@ export async function extractPages(input: PdfInput, pages: number[]): Promise<Ui
   const out = await PDFDocumentClass.create();
   const indices = pages.map((p) => p - 1);
   const copied = await out.copyPages(src, indices);
-  for (const page of copied) out.addPage(page);
+  for (const page of copied) {
+    stripPageActions(page);
+    out.addPage(page);
+  }
   return out.save();
 }
 

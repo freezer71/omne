@@ -1,3 +1,5 @@
+import { stripPageActions } from '@/lib/tools/pdf-sanitize';
+
 type PdfInput = Uint8Array | ArrayBuffer | File;
 
 async function toBytes(input: PdfInput): Promise<Uint8Array> {
@@ -18,6 +20,7 @@ export async function mergePdfs(inputs: PdfInput[]): Promise<Uint8Array> {
     const src = await PDFDocument.load(bytes);
     const pages = await out.copyPages(src, src.getPageIndices());
     for (const page of pages) {
+      stripPageActions(page);
       out.addPage(page);
     }
   }
