@@ -48,6 +48,13 @@ export default async function Page({
           error={tool.ui.error}
           removeFile={tool.ui.removeFile}
           clipDurationLabel={tool.ui.clipDurationLabel}
+          timelineLabel={tool.ui.timelineLabel}
+          startHandleLabel={tool.ui.startHandleLabel}
+          endHandleLabel={tool.ui.endHandleLabel}
+          playLabel={tool.ui.playLabel}
+          pauseLabel={tool.ui.pauseLabel}
+          muteLabel={tool.ui.muteLabel}
+          unmuteLabel={tool.ui.unmuteLabel}
           largeFileWarning={dict.common.largeFileWarning}
         />
       </ToolShell>

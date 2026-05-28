@@ -79,4 +79,35 @@ describe('trimAudio', () => {
     await trimAudio(file(), { startSec: 0, endSec: 1 });
     expect(deleteMock).toHaveBeenCalledTimes(2);
   });
+
+  it('extracts audio from .mp4 to trimmed.m4a with AAC re-encode (no -c copy)', async () => {
+    const mp4 = new File([new Uint8Array([0])], 'screen.mp4', { type: 'video/mp4' });
+    await trimAudio(mp4, { startSec: 1, endSec: 3, precise: false });
+    const args = execMock.mock.calls[0]![0] as string[];
+    expect(args).not.toContain('copy');
+    expect(args).toContain('-c:a');
+    expect(args[args.indexOf('-c:a') + 1]).toBe('aac');
+    expect(args).toContain('-vn');
+    expect(args).toContain('-f');
+    expect(args[args.indexOf('-f') + 1]).toBe('mp4');
+    expect(args[args.length - 1]).toBe('trimmed.m4a');
+    expect(args).toContain('input.mp4');
+  });
+
+  it('extracts audio from .mov to trimmed.m4a', async () => {
+    const mov = new File([new Uint8Array([0])], 'clip.mov', { type: 'video/quicktime' });
+    await trimAudio(mov, { startSec: 0, endSec: 5 });
+    const args = execMock.mock.calls[0]![0] as string[];
+    expect(args[args.length - 1]).toBe('trimmed.m4a');
+    expect(args).toContain('input.mov');
+    expect(args).toContain('aac');
+  });
+
+  it('extracts audio from .webm to trimmed.m4a', async () => {
+    const webm = new File([new Uint8Array([0])], 'recording.webm', { type: 'video/webm' });
+    await trimAudio(webm, { startSec: 0, endSec: 2 });
+    const args = execMock.mock.calls[0]![0] as string[];
+    expect(args[args.length - 1]).toBe('trimmed.m4a');
+    expect(args).toContain('input.webm');
+  });
 });

@@ -32,17 +32,7 @@ export async function decodeWaveform(file: File, buckets = 800): Promise<Wavefor
   }
 }
 
-export function Waveform({
-  file,
-  startSec,
-  endSec,
-  duration,
-}: {
-  file: File;
-  startSec: number;
-  endSec: number;
-  duration: number;
-}) {
+export function Waveform({ file, className }: { file: File; className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [data, setData] = useState<WaveformData | null>(null);
 
@@ -74,29 +64,17 @@ export function Waveform({
     ctx.scale(dpr, dpr);
     ctx.clearRect(0, 0, cssWidth, cssHeight);
 
-    const total = duration > 0 ? duration : data.duration;
-    const startRatio = total > 0 ? Math.max(0, Math.min(1, startSec / total)) : 0;
-    const endRatio = total > 0 ? Math.max(0, Math.min(1, endSec / total)) : 1;
-
     const buckets = data.peaks.length;
     const barWidth = cssWidth / buckets;
     const mid = cssHeight / 2;
+    ctx.fillStyle = 'rgba(120, 120, 120, 0.55)';
 
     for (let i = 0; i < buckets; i++) {
-      const ratio = i / buckets;
-      const inSelection = ratio >= startRatio && ratio <= endRatio;
-      ctx.fillStyle = inSelection ? 'rgba(94, 106, 210, 0.85)' : 'rgba(120, 120, 120, 0.35)';
       const peak = data.peaks[i]!;
       const h = Math.max(1, peak * cssHeight);
       ctx.fillRect(i * barWidth, mid - h / 2, Math.max(1, barWidth - 0.5), h);
     }
-  }, [data, startSec, endSec, duration]);
+  }, [data]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="h-20 w-full rounded-md border border-border bg-surface"
-      style={{ display: 'block' }}
-    />
-  );
+  return <canvas ref={canvasRef} className={className} style={{ display: 'block' }} />;
 }

@@ -8,14 +8,26 @@ export type AudioTrimOptions = {
   onProgress?: ((ratio: number) => void) | undefined;
 };
 
-function inferExtension(input: File | Uint8Array): string {
-  if (input instanceof File) {
-    const dot = input.name.lastIndexOf('.');
-    if (dot > 0) {
-      const ext = input.name.slice(dot + 1).toLowerCase();
-      if (['mp3', 'wav', 'flac', 'm4a', 'aac', 'ogg', 'oga', 'opus'].includes(ext)) return ext;
-    }
-  }
+const AUDIO_EXTS = ['mp3', 'wav', 'flac', 'm4a', 'aac', 'ogg', 'oga', 'opus'] as const;
+const VIDEO_EXTS = ['mp4', 'mov', 'm4v', 'webm', 'mkv'] as const;
+
+function extOfName(name: string): string {
+  const dot = name.lastIndexOf('.');
+  return dot > 0 ? name.slice(dot + 1).toLowerCase() : '';
+}
+
+export function isVideoInputName(name: string): boolean {
+  return (VIDEO_EXTS as readonly string[]).includes(extOfName(name));
+}
+
+// Returns the output extension we should produce for a given input. Audio
+// containers passthrough; video containers are extracted to .m4a (AAC).
+// Anything unknown falls back to mp3 to preserve previous behavior.
+export function inferOutputExtension(input: File | Uint8Array): string {
+  if (!(input instanceof File)) return 'mp3';
+  const ext = extOfName(input.name);
+  if ((AUDIO_EXTS as readonly string[]).includes(ext)) return ext;
+  if ((VIDEO_EXTS as readonly string[]).includes(ext)) return 'm4a';
   return 'mp3';
 }
 
@@ -26,6 +38,7 @@ function buildArgs(
   endSec: number,
   precise: boolean,
   ext: string,
+  forceMp4Container: boolean,
 ): string[] {
   if (precise) {
     const codecFor: Record<string, string[]> = {
@@ -44,6 +57,7 @@ function buildArgs(
       '-to', String(endSec),
       '-vn',
       ...(codecFor[ext] ?? ['-c:a', 'libmp3lame']),
+      ...(forceMp4Container ? ['-f', 'mp4'] : []),
       output,
     ];
   }
@@ -64,9 +78,18 @@ export async function trimAudio(
   if (options.startSec < 0) throw new Error('start time cannot be negative');
   if (options.endSec <= options.startSec) throw new Error('end time must be after start');
 
-  const ext = inferExtension(input);
-  const inputName = `input.${ext}`;
-  const outName = `trimmed.${ext}`;
+  // Keep the original container extension on the input filename so ffmpeg's
+  // demuxer sniffer picks the right format. The output extension drives the
+  // codec choice.
+  const inputExt = input instanceof File ? extOfName(input.name) || 'bin' : 'bin';
+  const outputExt = inferOutputExtension(input);
+  const inputName = `input.${inputExt}`;
+  const outName = `trimmed.${outputExt}`;
+
+  // Stream-copy doesn't work when extracting audio from a video container into
+  // an audio-only container — force re-encode for video inputs.
+  const videoInput = input instanceof File && isVideoInputName(input.name);
+  const precise = videoInput ? true : options.precise ?? false;
 
   const ffmpeg = await getTypedFfmpeg();
 
@@ -82,7 +105,15 @@ export async function trimAudio(
     try {
       await runFfmpegCommand(
         ffmpeg,
-        buildArgs(inputName, outName, options.startSec, options.endSec, options.precise ?? false, ext),
+        buildArgs(
+          inputName,
+          outName,
+          options.startSec,
+          options.endSec,
+          precise,
+          outputExt,
+          videoInput && outputExt === 'm4a',
+        ),
       );
     } catch (err) {
       throw new Error(`Audio trim failed: ${(err as Error).message ?? err}`);

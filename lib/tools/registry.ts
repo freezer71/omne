@@ -260,6 +260,7 @@ export const TOOLS: readonly ToolMeta[] = [
     acceptedMime: [
       'audio/mpeg', 'audio/wav', 'audio/x-wav', 'audio/flac', 'audio/x-flac',
       'audio/mp4', 'audio/x-m4a', 'audio/aac', 'audio/ogg', 'audio/opus',
+      'video/mp4', 'video/quicktime', 'video/webm', 'video/x-matroska',
     ],
     status: 'stable',
   },

@@ -1166,7 +1166,14 @@
           "busy": "Découpage…",
           "error": "Impossible de découper ce fichier.",
           "removeFile": "Retirer",
-          "clipDurationLabel": "Durée du clip : {duration}s"
+          "clipDurationLabel": "Durée du clip : {duration}s",
+          "timelineLabel": "Plage de découpe",
+          "startHandleLabel": "Début de la découpe",
+          "endHandleLabel": "Fin de la découpe",
+          "playLabel": "Lire",
+          "pauseLabel": "Pause",
+          "muteLabel": "Couper le son",
+          "unmuteLabel": "Activer le son"
         }
       },
       "merge": {

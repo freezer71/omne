@@ -1166,7 +1166,14 @@
           "busy": "Trimming…",
           "error": "Could not trim that file.",
           "removeFile": "Remove",
-          "clipDurationLabel": "Clip duration: {duration}s"
+          "clipDurationLabel": "Clip duration: {duration}s",
+          "timelineLabel": "Trim range",
+          "startHandleLabel": "Trim start",
+          "endHandleLabel": "Trim end",
+          "playLabel": "Play",
+          "pauseLabel": "Pause",
+          "muteLabel": "Mute",
+          "unmuteLabel": "Unmute"
         }
       },
       "merge": {
