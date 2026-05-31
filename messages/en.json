@@ -281,6 +281,18 @@
       "watermark": {
         "name": "Watermark PDF",
         "description": "Stamp every page of a PDF with text or a logo — diagonal, semi-transparent, in your browser.",
+        "content": {
+          "howItWorks": [
+            "Load your PDF, then choose a Text or Image watermark.",
+            "Type your text (e.g. CONFIDENTIAL) or pick a PNG/JPG logo, then set size, opacity, and angle.",
+            "Watch the diagonal stamp in the preview, then click Add watermark to download."
+          ],
+          "features": [
+            "Stamps text or a logo image across every page at once, centered and diagonal by default.",
+            "Fine-tunes opacity and tilt angle for a subtle background mark or a bold CONFIDENTIAL overlay.",
+            "Applies the watermark in your browser, so unsigned drafts and private contracts stay on your machine."
+          ]
+        },
         "seo": {
           "title": "Add Watermark to PDF Online Free — Text or Logo, In-Browser",
           "description": "Add a text or image watermark to every page of a PDF. Diagonal, transparent, customizable opacity and size. 100% in your browser — no upload, no signup.",
@@ -363,6 +375,18 @@
       "extract-images": {
         "name": "Extract images from PDF",
         "description": "Pull every embedded image out of a PDF and download them individually or as a ZIP.",
+        "content": {
+          "howItWorks": [
+            "Drop a PDF in, or tap \"Select a PDF\" to choose a file.",
+            "Wait while every embedded image is pulled from each page.",
+            "Download a single picture, or grab them all at once as a ZIP."
+          ],
+          "features": [
+            "Recovers the original raster images embedded on each page and saves them as lossless PNG.",
+            "Labels every extracted image with its page number so you know exactly where it came from.",
+            "Reads the PDF entirely in your browser, so confidential scans and reports never leave your device."
+          ]
+        },
         "seo": {
           "title": "Extract Images from PDF — Save Embedded Photos & Figures",
           "description": "Pull every embedded image out of a PDF and save them as lossless PNG. No upload — runs entirely in your browser.",
@@ -436,6 +460,18 @@
       "resize": {
         "name": "Resize PDF",
         "description": "Change the page size of a PDF — A4, Letter, A3 or custom dimensions — with content scaling.",
+        "content": {
+          "howItWorks": [
+            "Add your PDF, then pick a page size — A4, Letter, A3, A5, Legal, or custom.",
+            "Set orientation, units (mm or inches), and how content fits: Fit, Fill, or Stretch.",
+            "Check the live page preview, then click Resize to download the rebuilt PDF."
+          ],
+          "features": [
+            "Converts between standard formats like A4 and US Letter, or any custom width and height you type.",
+            "Scales the existing page content to the new size with Fit, Fill, or Stretch fitting modes.",
+            "Rebuilds the PDF locally in your browser — nothing is uploaded to a server."
+          ]
+        },
         "seo": {
           "title": "Resize PDF Pages Online — Change Page Size Free, In-Browser",
           "description": "Free online PDF page resizer. Change PDF page size to A4, Letter, A3, Legal, or custom dimensions with content scaling. 100% in your browser — no upload, no signup.",
@@ -579,6 +615,18 @@
       "split": {
         "name": "Split video",
         "description": "Cut a video into equal parts — 2 to 10 segments, or by fixed segment duration.",
+        "content": {
+          "howItWorks": [
+            "Drop a video — MP4, WebM, MOV or MKV — into the splitter.",
+            "Choose Equal parts (2 to 10) or By segment duration in seconds; the preview shows each segment.",
+            "Click Split, then download every segment individually or all at once as a ZIP."
+          ],
+          "features": [
+            "Cut into 2–10 equal parts, or into fixed-length chunks where the last segment may be shorter.",
+            "Per-segment frame previews let you check the cut points before exporting.",
+            "Break a long recording into chapters or upload-sized pieces — split locally, never uploaded."
+          ]
+        },
         "seo": {
           "title": "Split Video Online — Cut a Video Into Equal Parts, Free",
           "description": "Free online video splitter. Cut any MP4, WebM, MOV or MKV into 2–10 equal parts, or by segment duration. 100% in your browser via FFmpeg — no upload.",
@@ -626,6 +674,18 @@
       "merge": {
         "name": "Merge videos",
         "description": "Concatenate two or more videos into a single file. Reorder before merging.",
+        "content": {
+          "howItWorks": [
+            "Add two or more videos — MP4, WebM, MOV or MKV — using the button or by dropping them in.",
+            "Reorder the clips with the move-up and move-down controls to set the final sequence.",
+            "Click Merge to concatenate them into one continuous file, then download."
+          ],
+          "features": [
+            "Joins MP4, WebM, MOV and MKV clips end to end into a single output file.",
+            "Drag-free reordering with up/down buttons lets you fix the playback order before merging.",
+            "Stitch together highlight reels, lessons or scene takes locally — nothing is uploaded."
+          ]
+        },
         "seo": {
           "title": "Merge Videos Online — Free MP4, WebM, MOV Concatenator",
           "description": "Join two or more videos into one — reorder, then merge. MP4, WebM, MOV, MKV. 100% in your browser — no upload, no watermark, no signup.",
@@ -700,6 +760,18 @@
       "resize": {
         "name": "Resize video",
         "description": "Change a video's resolution to 480p, 720p, 1080p or custom dimensions. Keep aspect ratio with padding.",
+        "content": {
+          "howItWorks": [
+            "Drop a video — MP4, WebM, MOV or MKV — into the resizer.",
+            "Pick a 480p, 720p or 1080p preset, or choose Custom and type the exact width and height.",
+            "Optionally tick Keep aspect ratio to letterbox, then click Resize and download."
+          ],
+          "features": [
+            "One-click 480p, 720p and 1080p presets plus a custom width × height in pixels.",
+            "Keep-aspect-ratio mode adds letterbox padding so the frame is never stretched or distorted.",
+            "Downscale clips for email, web upload limits or faster sharing — rescaled in-browser, never uploaded."
+          ]
+        },
         "seo": {
           "title": "Resize Video Online — Free Scale MP4 to 720p, 1080p, Custom",
           "description": "Resize any video to 480p, 720p, 1080p or a custom resolution. Optional aspect-ratio preservation. 100% in your browser — no upload, no signup.",
@@ -735,6 +807,18 @@
       "mute": {
         "name": "Mute video",
         "description": "Remove the audio track from a video while keeping the original quality.",
+        "content": {
+          "howItWorks": [
+            "Drop an MP4, WebM, MOV or MKV video into the muter.",
+            "Preview confirms the clip; the audio track is removed without touching the video.",
+            "Click Mute to strip the sound, then download the silent file."
+          ],
+          "features": [
+            "Removes the audio track entirely while keeping the original video quality and resolution.",
+            "Ideal for silencing background noise, removing copyrighted music before reposting, or prepping B-roll.",
+            "Audio is stripped on your device with FFmpeg WebAssembly — no upload, no signup, no watermark."
+          ]
+        },
         "seo": {
           "title": "Mute Video Online — Free Remove Audio from MP4 in Browser",
           "description": "Strip the audio track from any MP4, WebM, MOV or MKV. 100% in your browser — no upload, no signup, no watermark.",
@@ -762,6 +846,18 @@
       "crop": {
         "name": "Crop video",
         "description": "Crop a rectangular region of a video. Adjust position and size before exporting.",
+        "content": {
+          "howItWorks": [
+            "Drop an MP4, WebM, MOV or MKV to load it into the preview pane.",
+            "Set the X, Y, width and height in pixels — the accent rectangle shows the crop region live on the frame.",
+            "Click Crop and FFmpeg WebAssembly exports just the selected rectangle in your browser, then download."
+          ],
+          "features": [
+            "Pixel-precise X/Y position and width/height fields with a live rectangle overlaid on the video frame.",
+            "Reframe a landscape clip to a square or portrait region, or cut away black bars and unwanted edges.",
+            "Your video is cropped entirely on-device — no upload, no watermark, nothing sent to a server."
+          ]
+        },
         "seo": {
           "title": "Crop Video Online — Free Trim Video Edges in Browser",
           "description": "Crop any video to a rectangular region. Drag handles to set position and size. 100% in your browser — no upload, no signup, no watermark.",
@@ -793,6 +889,18 @@
       "rotate": {
         "name": "Rotate / Flip video",
         "description": "Rotate a video by 90, 180 or 270 degrees, or flip it horizontally or vertically.",
+        "content": {
+          "howItWorks": [
+            "Drop an MP4, WebM, MOV or MKV video to load it into the preview.",
+            "Choose a transform: rotate 90°, 180° or 270° clockwise, or flip horizontally or vertically.",
+            "Click Apply and FFmpeg re-encodes the rotated clip in your browser, then download."
+          ],
+          "features": [
+            "Rotate by 90°, 180° or 270° to fix footage shot sideways or upside down on a phone.",
+            "Horizontal and vertical flip create mirror effects or correct front-camera selfie reversal.",
+            "Every transform runs locally with FFmpeg WebAssembly — no upload and no watermark."
+          ]
+        },
         "seo": {
           "title": "Rotate Video Online — Free Flip MP4 90/180/270 in Browser",
           "description": "Rotate any video by 90, 180 or 270 degrees or flip it horizontally/vertically. 100% in your browser — no upload, no signup.",
@@ -826,6 +934,18 @@
       "frames": {
         "name": "Extract video frames",
         "description": "Export frames from a video as PNG or JPG images at a chosen frame rate.",
+        "content": {
+          "howItWorks": [
+            "Drop a video — MP4, WebM, MOV or MKV — into the frame extractor.",
+            "Set the frames-per-second rate (e.g. 1 for one still every second) and pick PNG or JPG output.",
+            "Click Extract to grab the still images, then download them all in a single ZIP."
+          ],
+          "features": [
+            "Export still frames as lossless PNG or lighter JPG at any rate from a fraction of a frame up to 60 fps.",
+            "Turn a clip into thumbnails, contact sheets or a sequence of screenshots for documentation and design.",
+            "Frames are decoded in-browser with FFmpeg WebAssembly — the video never leaves your device."
+          ]
+        },
         "seo": {
           "title": "Extract Video Frames — Free Video to PNG/JPG in Browser",
           "description": "Export frames from any video as PNG or JPG, one every N seconds. Bulk download as a ZIP. 100% in your browser — no upload, no signup.",
@@ -859,6 +979,18 @@
       "watermark": {
         "name": "Watermark video",
         "description": "Overlay a text watermark on a video. Choose corner position, color and opacity.",
+        "content": {
+          "howItWorks": [
+            "Drop an MP4, WebM, MOV or MKV video, then type your watermark text.",
+            "Pick a position — a corner or center — and adjust the font size and opacity to taste.",
+            "Click Apply to burn the text overlay into the video, then download."
+          ],
+          "features": [
+            "Overlay any text in a corner or dead center, with adjustable font size and opacity.",
+            "Brand clips with a handle, copyright line or @username before posting to social.",
+            "The overlay is rendered in-browser with FFmpeg WebAssembly — your video is never uploaded."
+          ]
+        },
         "seo": {
           "title": "Add Watermark to Video Online — Free Text Overlay in Browser",
           "description": "Overlay a text watermark on any video. Position, color and opacity controls. 100% in your browser — no upload, no signup.",
@@ -896,6 +1028,18 @@
       "short-studio": {
         "name": "Short Studio",
         "description": "Split a long video into numbered shorts with an auto-incrementing watermark — optionally cropped to 9:16 for TikTok, Reels and YouTube Shorts.",
+        "content": {
+          "howItWorks": [
+            "Drop a long video, then choose to split into equal parts (2–10) or by a fixed segment duration.",
+            "Write a counter text template like Episode {n}/{N}, pick the font, position, color and opacity, and optionally force 9:16 vertical.",
+            "Click Generate shorts to render every numbered clip, then download them all as a ZIP."
+          ],
+          "features": [
+            "Splits one video into a numbered series, stamping an auto-incrementing {n}/{N} watermark on each clip.",
+            "Optional Force 9:16 vertical crops to a centered 1080×1920 frame for TikTok, Reels and YouTube Shorts.",
+            "Style the counter with Inter, Anton, Lora or JetBrains Mono in any of nine positions or a custom spot you click."
+          ]
+        },
         "seo": {
           "title": "Short Studio — Split a Video into Numbered Shorts (Free)",
           "description": "Free browser tool to split a long video into numbered shorts with an auto-incrementing watermark. 9:16 vertical for TikTok, Reels and YouTube.",
@@ -970,6 +1114,18 @@
       "speed": {
         "name": "Change video speed",
         "description": "Speed up or slow down a video from 0.25× to 4×, keeping the audio in pitch.",
+        "content": {
+          "howItWorks": [
+            "Drop an MP4, WebM, MOV or MKV video into the speed tool.",
+            "Drag the speed slider from 0.25× to 4× (or pick a preset like 0.5×, 2× or 4×) and choose to keep or mute the audio.",
+            "Click Apply to re-time the clip, then download."
+          ],
+          "features": [
+            "Slow down to 0.25× for smooth slow-motion or speed up to 4× for fast-forward and time-lapse looks.",
+            "Keep-audio mode preserves the original pitch so sped-up or slowed voices still sound natural.",
+            "Re-timing happens in-browser with FFmpeg WebAssembly — no upload, no signup, no watermark."
+          ]
+        },
         "seo": {
           "title": "Change Video Speed Online — Free Slow Motion & Fast Forward",
           "description": "Speed up or slow down any video from 0.25× to 4×. 100% in your browser — no upload, no signup, no watermark.",
@@ -1002,6 +1158,18 @@
       "tags": {
         "name": "Edit audio tags & cover",
         "description": "Change MP3, FLAC, M4A or OGG tags — title, artist, album, year — and embed an album cover.",
+        "content": {
+          "howItWorks": [
+            "Select an MP3, FLAC, M4A or OGG file — the tool reads its existing tags and fills the fields.",
+            "Edit title, artist, album, album artist, year, genre, track and comment, then drop in an album cover image.",
+            "Click Apply tags & download to write the metadata and save the tagged file."
+          ],
+          "features": [
+            "Edits ID3v2 fields including title, artist, album, album artist, year, genre, track number and comment.",
+            "Embeds, replaces or removes embedded album cover art from a dropped or chosen image.",
+            "Works on MP3, FLAC, M4A and OGG entirely in-browser, so your tracks are never uploaded to a server."
+          ]
+        },
         "seo": {
           "title": "Edit MP3 Tags & Cover Art — Free In-Browser ID3 Editor",
           "description": "Edit ID3v2 metadata — title, artist, album, year, genre — and embed cover art. Works with MP3, FLAC, M4A and OGG. 100% in your browser, no upload.",
@@ -1093,6 +1261,18 @@
       "extract": {
         "name": "Extract audio from video",
         "description": "Pull the soundtrack out of an MP4, MOV, WebM or MKV file as MP3, WAV, M4A or FLAC.",
+        "content": {
+          "howItWorks": [
+            "Drop an MP4, MOV, WebM or MKV video onto the page, or pick one with the button.",
+            "Choose an output format — MP3, WAV, M4A or FLAC — and a bitrate (96 to 320 kbps for MP3/M4A).",
+            "Watch the estimated size, then click Extract audio to save the soundtrack to your device."
+          ],
+          "features": [
+            "Demuxes the audio track from MP4, MOV, WebM and MKV files without re-encoding the video.",
+            "Exports lossy MP3 or M4A at 96, 128, 192, 256 or 320 kbps, or lossless WAV and FLAC.",
+            "The whole extraction runs in your browser via WebAssembly — your video never leaves your machine."
+          ]
+        },
         "seo": {
           "title": "Extract Audio from Video — MP4 to MP3, In-Browser",
           "description": "Free online MP4 to MP3 extractor. Pull the audio out of MP4, MOV, WebM or MKV files as MP3, WAV, M4A or FLAC. 100% in your browser — no upload, no signup.",
@@ -1227,6 +1407,18 @@
       "volume": {
         "name": "Volume, normalize & fade",
         "description": "Adjust gain in decibels, normalize loudness to EBU R128 (-16 LUFS), or apply fade in / fade out.",
+        "content": {
+          "howItWorks": [
+            "Drop in an audio file, then drag the Gain slider from −20 dB to +20 dB to boost or cut volume.",
+            "Or tick Normalize loudness to retarget the whole track to the EBU R128 standard of −16 LUFS.",
+            "Add a fade in and fade out of up to 15 seconds, then click Apply & download."
+          ],
+          "features": [
+            "Adjusts gain in precise 1 dB steps across a −20 to +20 dB range, with a live filter preview.",
+            "Normalizes perceived loudness to the EBU R128 broadcast target of −16 LUFS for consistent levels.",
+            "Applies fade in and fade out curves up to 15 seconds, all processed locally with nothing uploaded."
+          ]
+        },
         "seo": {
           "title": "Normalize Audio Online — MP3 Volume Booster & Fade Free",
           "description": "Boost or cut volume in decibels, normalize to EBU R128 (-16 LUFS), or apply fade in / fade out. 100% in your browser — no upload.",
@@ -1392,6 +1584,18 @@
       "rotate-flip": {
         "name": "Rotate & flip",
         "description": "Rotate by 90° steps and flip horizontally or vertically.",
+        "content": {
+          "howItWorks": [
+            "Drop a PNG, JPG or WebP image into the tool.",
+            "Tap Rotate 90°, 180° or 270° to turn it, and toggle Flip horizontal or Flip vertical to mirror it.",
+            "Watch the live preview, then click Apply to download the transformed image."
+          ],
+          "features": [
+            "Rotate by 90° steps and mirror an image horizontally or vertically, alone or combined.",
+            "A live preview reflects every rotation and flip before you commit, with a Reset to start over.",
+            "Output keeps the original PNG, JPG or WebP format and is processed locally — no upload required."
+          ]
+        },
         "seo": {
           "title": "Rotate & Flip Image Online — Free In-Browser",
           "description": "Rotate images by 90° steps and flip horizontally or vertically. Works on PNG, JPG, WebP — instantly, in your browser, no upload required.",
@@ -1424,6 +1628,18 @@
       "crop": {
         "name": "Crop image",
         "description": "Cut a rectangular region out of an image.",
+        "content": {
+          "howItWorks": [
+            "Drop a PNG, JPG or WebP image into the tool.",
+            "Drag a rectangle directly on the image, or type exact X, Y, Width and Height in source pixels.",
+            "Check the live crop preview, then click Crop to download the cut-out region."
+          ],
+          "features": [
+            "Set the crop region by dragging on the image or by entering precise pixel coordinates.",
+            "A live canvas preview shows the exact rectangle you'll get before you download.",
+            "The cropped file keeps its original PNG, JPG or WebP format and is processed 100% in your browser, never uploaded."
+          ]
+        },
         "seo": {
           "title": "Crop Image Online — Free In-Browser Image Cropper",
           "description": "Crop any PNG, JPG, or WebP image to a precise rectangle. Drag to set the region with a live preview — all in your browser, no upload.",
@@ -1456,6 +1672,18 @@
       "remove-bg": {
         "name": "Remove background",
         "description": "AI-powered background removal — gives you a transparent PNG with live preview.",
+        "content": {
+          "howItWorks": [
+            "Drop a PNG, JPG or WebP photo into the tool.",
+            "Click Remove background and let the AI model run — the first use downloads the model, then it's cached.",
+            "Preview the cut-out on the transparency checkerboard, then download the transparent PNG."
+          ],
+          "features": [
+            "AI detaches the subject from its background and outputs a ready-to-use transparent PNG.",
+            "The RMBG-1.4 model runs entirely in your browser, so your photo never leaves your device — unlike cloud removers.",
+            "The ~44 MB model downloads once from huggingface.co and is cached, so later cut-outs need no network."
+          ]
+        },
         "seo": {
           "title": "Remove Image Background — Free, In-Browser AI Cutout",
           "description": "AI-powered background removal that runs 100% in your browser. Drop a photo, get a transparent PNG. Your image never leaves your device.",
@@ -1487,6 +1715,18 @@
       "from-clipboard": {
         "name": "Paste image from clipboard",
         "description": "Paste an image straight from your clipboard — screenshot, copy from a webpage — and save it as PNG, JPG or WebP.",
+        "content": {
+          "howItWorks": [
+            "Copy a screenshot or any image, then press Cmd/Ctrl + V on the page or click Paste from clipboard.",
+            "Pick the output format — PNG, JPG or WebP — and watch the live preview update.",
+            "Click Download to save the pasted image as a file."
+          ],
+          "features": [
+            "Turns a clipboard screenshot or a copied web image into a real PNG, JPG or WebP file.",
+            "Live preview shows the result and its file size as you switch formats.",
+            "Reads the clipboard locally in your browser — the pasted image is never uploaded anywhere."
+          ]
+        },
         "seo": {
           "title": "Clipboard to Image Online — Paste & Save as PNG, JPG, WebP Free",
           "description": "Paste any image from your clipboard and save it as PNG, JPG, or WebP. Clipboard to PNG, clipboard to JPG — free, instant, 100% in-browser. Nothing uploaded.",
@@ -1523,6 +1763,18 @@
       "viewer": {
         "name": "SVG viewer",
         "description": "Drop or paste any SVG to preview it live, inspect its dimensions, and read its source — safely sandboxed.",
+        "content": {
+          "howItWorks": [
+            "Paste SVG markup or drop a .svg file onto the card.",
+            "View the live render in the sandboxed preview pane.",
+            "Read the inspector for width, height, viewBox, element count and size, then copy the source."
+          ],
+          "features": [
+            "Renders any SVG in a sandboxed preview that strips scripts, so untrusted files open safely.",
+            "Inspects intrinsic width, height, viewBox, element count and byte size at a glance.",
+            "Shows the formatted source markup alongside the render with one-click copy."
+          ]
+        },
         "seo": {
           "title": "SVG Viewer Online — Open, Inspect & Preview SVG Files Free",
           "description": "Open any SVG instantly in a sandboxed preview, inspect width, height, viewBox and element count, and copy the source. Runs 100% locally — no upload.",
@@ -1604,6 +1856,18 @@
       "favicon": {
         "name": "Favicon from SVG",
         "description": "Generate a full favicon bundle from a single SVG: favicon.ico, apple-touch-icon, Android Chrome icons, and a webmanifest snippet — in one ZIP.",
+        "content": {
+          "howItWorks": [
+            "Paste SVG markup or drop a .svg file to use as the source icon.",
+            "Type an app name for the site.webmanifest and check the tab and apple-touch previews.",
+            "Click download to get a ZIP with every favicon size ready to drop into your site."
+          ],
+          "features": [
+            "Generates favicon.ico (16/32/48), apple-touch-icon at 180px, and android-chrome icons at 192 and 512px from one SVG.",
+            "Bundles a ready-to-use site.webmanifest snippet wired to the 192 and 512 PNGs with your app name.",
+            "Delivers the whole set as a single ZIP, with live tab (16px) and apple-touch previews before you export."
+          ]
+        },
         "seo": {
           "title": "Favicon Generator from SVG — .ico, PNG & Web Manifest",
           "description": "Turn a single SVG into a complete favicon set: favicon.ico (16/32/48), apple-touch-icon, android-chrome 192/512, and site.webmanifest — bundled as a ZIP.",
@@ -1635,6 +1899,18 @@
       "editor": {
         "name": "SVG editor",
         "description": "Edit SVG markup, dimensions, viewBox, colors, and transforms — with live preview. A panel-based editor that keeps your source clean.",
+        "content": {
+          "howItWorks": [
+            "Paste SVG markup or drop a .svg file to load it into the source panel.",
+            "Edit dimensions and viewBox, click a detected color to recolor every matching fill or stroke, and set rotate, scale or translate values.",
+            "Watch the live preview update, then format the source and download the .svg or copy it."
+          ],
+          "features": [
+            "Recolor any artwork by picking from the detected fill and stroke colors and remapping them in one click.",
+            "Adjust width, height, viewBox and preserveAspectRatio, then rotate, scale or translate the whole graphic around its center.",
+            "A sandboxed live preview with a transparent or solid background and an optional bounds overlay reflects every edit instantly."
+          ]
+        },
         "seo": {
           "title": "SVG Editor Online — Code & Color Editor, Live Preview",
           "description": "Edit SVG markup, recolor fills and strokes with a picker, tweak viewBox, rotate, scale, and translate — with a live sandboxed preview. 100% local.",
@@ -1734,6 +2010,18 @@
       "to-data-url": {
         "name": "SVG to Data URL",
         "description": "Convert any SVG markup into a base64 or URL-encoded data URI — with a live thumbnail preview.",
+        "content": {
+          "howItWorks": [
+            "Paste SVG markup or drop a .svg file into the encoder.",
+            "Read off the base64 data URI and the URL-encoded data URI, comparing their byte sizes.",
+            "Click copy on the encoding you need and paste it into your CSS or HTML."
+          ],
+          "features": [
+            "Produces both a base64 data:image/svg+xml URI and a CSS-friendly URL-encoded data:image/svg+xml;utf8 URI.",
+            "Inline an icon as a CSS background-image or src without an extra HTTP request.",
+            "Shows the byte count for each encoding plus a live thumbnail so you can pick the smaller one."
+          ]
+        },
         "seo": {
           "title": "SVG to Data URL — Free Base64 & URL-Encoded Encoder",
           "description": "Paste an SVG and instantly get a base64 data URI and a CSS-friendly URL-encoded data URI. Live preview, byte counts, one-click copy. 100% in browser.",
@@ -1765,6 +2053,18 @@
       "generate": {
         "name": "Generate password",
         "description": "Create a strong random password — fully customizable, generated locally with crypto-grade randomness.",
+        "content": {
+          "howItWorks": [
+            "Set the length slider and tick the character classes you want — uppercase, lowercase, digits, symbols.",
+            "Toggle \"exclude ambiguous\" to drop look-alikes like 0/O and 1/l/I, and pick how many to make (1, 5, 10 or 25).",
+            "Watch the strength and entropy update live, then copy a password or download them all as a .txt."
+          ],
+          "features": [
+            "Draws every character from crypto.getRandomValues with rejection sampling, so the output is unbiased and unpredictable.",
+            "Generates up to 25 passwords at once and shows their strength rating and bits of entropy as you tune the settings.",
+            "Runs entirely in your browser — no password is ever sent to a server, unlike sketchy online generators."
+          ]
+        },
         "seo": {
           "title": "Strong Password Generator — Free, Local, Crypto-Secure",
           "description": "Create strong random passwords with custom length, character sets and ambiguous-character exclusion. Crypto-grade randomness, generated locally.",
@@ -1808,6 +2108,18 @@
       "passphrase": {
         "name": "Generate passphrase",
         "description": "Diceware-style passphrase — random words easy to remember, hard to guess.",
+        "content": {
+          "howItWorks": [
+            "Choose the number of words, then pick a separator — space, hyphen, dot or underscore.",
+            "Optionally capitalize each word and append a random digit for a bit more entropy.",
+            "Read the strength and entropy estimate, hit Regenerate until you like it, then copy the passphrase."
+          ],
+          "features": [
+            "Builds diceware-style passphrases from a curated 256-word list, giving exactly 8 bits of entropy per word.",
+            "Produces phrases that are easy to remember and type yet hard to brute-force, ideal for master passwords.",
+            "Words are picked with crypto-grade randomness in your browser, so nothing about the passphrase ever leaves your device."
+          ]
+        },
         "seo": {
           "title": "Passphrase Generator — Diceware-Style, Memorable, Free",
           "description": "Generate diceware-style passphrases — random words easy to remember, hard to guess. Customizable separator and capitalization. 100% local in your browser.",
@@ -1845,6 +2157,18 @@
       "hash": {
         "name": "Hash text",
         "description": "Compute SHA-1, SHA-256, SHA-384, or SHA-512 of any text — output as hex or base64.",
+        "content": {
+          "howItWorks": [
+            "Type or paste any text into the input box.",
+            "Pick the algorithm — SHA-1, SHA-256, SHA-384 or SHA-512 — and the output format, hex or base64.",
+            "The digest appears instantly below as you type; click Copy to grab it."
+          ],
+          "features": [
+            "Computes SHA-1, SHA-256, SHA-384 and SHA-512 digests using the browser's native Web Crypto (crypto.subtle.digest).",
+            "Outputs the hash as lowercase hex or base64, handy for checksums, fingerprints and comparing values.",
+            "Your text is hashed locally and never uploaded, so even sensitive strings stay on your machine."
+          ]
+        },
         "seo": {
           "title": "Hash Text Online — SHA-1, SHA-256, SHA-384, SHA-512 Free",
           "description": "Compute the SHA-1, SHA-256, SHA-384 or SHA-512 hash of any text, in hex or base64. Free, instant, and 100% in your browser — your text never leaves.",
@@ -1879,6 +2203,18 @@
       "bcrypt": {
         "name": "bcrypt hash & verify",
         "description": "Hash a password with bcrypt (salt + rounds), or verify a password against an existing hash.",
+        "content": {
+          "howItWorks": [
+            "Pick Hash mode and type the password you want to protect.",
+            "Set the rounds (cost factor) — 10 is a solid default; higher is safer but slower — then click Hash.",
+            "Switch to Verify mode to test a password against an existing $2a$/$2b$ hash and see Match or No match."
+          ],
+          "features": [
+            "Hashes passwords with bcrypt, generating a fresh random salt and a configurable cost factor from 4 to 14.",
+            "Verify mode compares a candidate password against any existing bcrypt hash and rejects malformed inputs.",
+            "Everything runs client-side and reports the compute time in milliseconds — your password never leaves the browser."
+          ]
+        },
         "seo": {
           "title": "bcrypt Hash & Verify Online — Free, In-Browser bcrypt Tool",
           "description": "Hash a password with bcrypt (salt + cost factor) or verify a password against an existing bcrypt hash. Runs locally — no password ever leaves your device.",
@@ -1919,6 +2255,18 @@
       "strength": {
         "name": "Check password strength",
         "description": "Estimate the entropy of a password and detect common weaknesses — all in your browser.",
+        "content": {
+          "howItWorks": [
+            "Type or paste a password into the field — use Show to reveal it if needed.",
+            "Read the strength rating, estimated entropy in bits, length and number of character classes.",
+            "Check the issues list for sequences, repeats, common words or too-short warnings, then strengthen accordingly."
+          ],
+          "features": [
+            "Estimates entropy from the password's length and character-class size, then rates it from Very weak to Very strong.",
+            "Flags weak structure — sequential runs (abc, 123), repeated characters and common patterns like \"password\" or \"qwerty\".",
+            "Analyses the password entirely in your browser, so you can safely test a real password without it ever being sent anywhere."
+          ]
+        },
         "seo": {
           "title": "Check Password Strength Online — Free, Local Entropy Meter",
           "description": "Estimate the entropy of a password and detect common weaknesses (sequences, repeats, common words). 100% in your browser — your password never leaves it.",
@@ -2059,6 +2407,18 @@
       "query": {
         "name": "JSON Query",
         "description": "Filter and extract from any JSON using JSONPath — with live preview.",
+        "content": {
+          "howItWorks": [
+            "Paste any JSON into the input pane — syntax errors are flagged inline as you type.",
+            "Write a JSONPath expression such as $.users[*].name, $..price, or $.items[?(@.x>10)] in the path field.",
+            "Matching values appear live in the results pane with a match count; copy them or pick a built-in example to start."
+          ],
+          "features": [
+            "Runs full JSONPath via jsonpath-plus — recursive descent ($..), wildcards ([*]), and filter expressions ([?(@.field>10)]).",
+            "Re-evaluates the expression on every keystroke and shows how many nodes matched, with a no-match notice when none do.",
+            "A practical jq-style way to pull a single field out of a large API response or pasted log payload."
+          ]
+        },
         "seo": {
           "title": "JSON Query Online — Free JSONPath Tester with Live Preview",
           "description": "Filter, extract, and explore JSON with JSONPath expressions ($..price, $.users[*].name, $.items[?(@.x>10)]). Live preview, 100% in your browser.",
@@ -2100,6 +2460,18 @@
       "table": {
         "name": "JSON to Table",
         "description": "Turn an array of objects into a sortable, filterable table — with CSV export.",
+        "content": {
+          "howItWorks": [
+            "Paste a JSON array of objects, e.g. [{...}, {...}] — non-array input is flagged so you know to fix it.",
+            "The array renders as a table whose columns are the union of every object's keys; click a header to sort.",
+            "Search globally, filter any column, page through rows, then export the result as CSV or JSON."
+          ],
+          "features": [
+            "Turns an array of objects into a sortable grid, tolerating rows with missing or differing keys.",
+            "Offers global search, per-column filtering, and pagination for working through large record sets.",
+            "Exports the current table straight to CSV or JSON — handy for moving an API list into a spreadsheet."
+          ]
+        },
         "seo": {
           "title": "JSON to Table — Sort, Filter, and Export Any JSON Array",
           "description": "Render any JSON array of objects as an interactive table. Sort, filter per column, search globally, export to CSV. 100% in your browser — no upload.",
@@ -2138,6 +2510,18 @@
       "csv": {
         "name": "JSON ↔ CSV",
         "description": "Convert JSON arrays to CSV and back — with delimiter and quote options.",
+        "content": {
+          "howItWorks": [
+            "Pick a direction: JSON → CSV to flatten an array of objects, or CSV → JSON to parse spreadsheet text into records.",
+            "Set the delimiter (comma, semicolon, tab, or pipe) and toggle whether the first row holds column headers.",
+            "Watch the converted output update live, then copy it or download the .csv / .json file."
+          ],
+          "features": [
+            "Converts both ways — a JSON array of objects to CSV rows, and raw CSV back into typed JSON records.",
+            "Auto-detects the delimiter when parsing CSV, so semicolon and tab files import without manual setup.",
+            "Handles comma, semicolon, tab, and pipe delimiters plus a header-row toggle for European and TSV exports."
+          ]
+        },
         "seo": {
           "title": "JSON to CSV / CSV to JSON Converter — Free, In-Browser",
           "description": "Convert any JSON array of objects to CSV or CSV to JSON. Choose delimiter (comma, semicolon, tab, pipe), quote character, header row. 100% in your browser.",
@@ -2183,6 +2567,18 @@
       "diff": {
         "name": "JSON Diff",
         "description": "Compare two JSON documents side-by-side — added, removed, and changed values are highlighted.",
+        "content": {
+          "howItWorks": [
+            "Paste the first JSON document into Version A and the second into Version B.",
+            "Both parse on the fly and render as side-by-side trees, with added, removed, and changed values highlighted in place.",
+            "Read the summary line — added, removed, and changed counts — to see exactly what shifted between the two."
+          ],
+          "features": [
+            "Compares two JSON documents key by key and value by value, down through nested objects and arrays.",
+            "Colour-codes each difference — additions, removals, and changed values — across the paired Tree A / Tree B view.",
+            "Ideal for spotting drift between two API responses, config snapshots, or before/after fixture files."
+          ]
+        },
         "seo": {
           "title": "JSON Diff Online — Compare Two JSON Files Side by Side",
           "description": "Compare two JSON documents and see what's added, removed, and changed — side by side, with colored highlights. 100% in your browser, no upload.",
@@ -2219,6 +2615,18 @@
       "schema": {
         "name": "JSON Schema",
         "description": "Validate JSON against a schema, or generate a schema from a sample document.",
+        "content": {
+          "howItWorks": [
+            "Choose Validate to check data against a schema, or Generate to infer a schema from a sample document.",
+            "Pick the draft — draft-07 or 2020-12 — then paste your JSON data and schema (or just a representative sample to infer from).",
+            "Read the verdict live: a match confirmation, or each validation error listed by its instance path."
+          ],
+          "features": [
+            "Validates JSON against a JSON Schema with Ajv, supporting both draft-07 and draft 2020-12.",
+            "Lists every failure with its exact path and message instead of stopping at the first error.",
+            "Infers a starter JSON Schema from a sample document, so you can bootstrap contracts from real API payloads."
+          ]
+        },
         "seo": {
           "title": "JSON Schema Online — Validate & Generate (2020-12 / 07)",
           "description": "Validate any JSON against a JSON Schema (Ajv, draft 2020-12 or 07) or infer a schema from a sample. Errors listed by path. 100% in your browser.",
@@ -2266,6 +2674,18 @@
       "case": {
         "name": "Case Converter",
         "description": "Convert text between upper, lower, title, sentence, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, and dot.case.",
+        "content": {
+          "howItWorks": [
+            "Paste or type your text into the input box — nothing is uploaded and there is no file to drop.",
+            "Pick a case from the menu: UPPER, lower, Title, Sentence, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE or dot.case.",
+            "The converted text updates live; copy it or download it as a .txt file."
+          ],
+          "features": [
+            "Ten case styles in one tool, including programmer-friendly camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE and dot.case.",
+            "Live conversion with a character count, so you can reformat variable names, headings or slugs as you type.",
+            "Runs entirely in your browser — paste sensitive code or copy results without anything leaving your device."
+          ]
+        },
         "seo": {
           "title": "Case Converter — Snake, Camel, Kebab, Pascal, Title Case",
           "description": "Convert text to UPPERCASE, lowercase, Title Case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE and dot.case. 100% in your browser.",
@@ -2307,6 +2727,18 @@
       "count": {
         "name": "Word & Character Counter",
         "description": "Count words, characters, lines, paragraphs and sentences — with reading and speaking time estimates.",
+        "content": {
+          "howItWorks": [
+            "Paste or type your text into the box above — there is nothing to upload and no file to drop.",
+            "Every metric updates live as you type: words, characters (with and without spaces), lines, paragraphs and sentences.",
+            "Read the reading-time and speaking-time estimates, then keep writing or copy your text out — it never leaves your browser."
+          ],
+          "features": [
+            "Live word, character, line, paragraph and sentence counts that update on every keystroke, with no length limit.",
+            "Separate \"with spaces\" and \"without spaces\" character totals — ideal for staying under tweet, X post or SEO meta-description limits.",
+            "Reading-time (~200 words per minute) and speaking-time (~130 words per minute) estimates for essays, blog posts, scripts and presentations."
+          ]
+        },
         "seo": {
           "title": "Word Counter Online — Live Words, Characters, Reading Time",
           "description": "Live count of words, characters (with and without spaces), lines, paragraphs, sentences, and estimated reading & speaking time. 100% in browser.",
@@ -2339,6 +2771,18 @@
       "lorem": {
         "name": "Lorem Ipsum Generator",
         "description": "Generate Lorem Ipsum placeholder text — words, sentences, or paragraphs, optionally HTML-wrapped.",
+        "content": {
+          "howItWorks": [
+            "Choose whether to generate words, sentences or paragraphs and set how many you need.",
+            "Optionally start with the classic \"Lorem ipsum…\" opening and wrap each paragraph in <p> tags.",
+            "Copy the placeholder text or download it — regenerate any time for fresh filler."
+          ],
+          "features": [
+            "Generate by words, sentences or paragraphs, with an exact count so the placeholder fits your layout.",
+            "Optional HTML <p> wrapping and the classic \"Lorem ipsum dolor sit amet\" opening for realistic mockups.",
+            "Instant, unlimited generation in your browser — perfect for designs, templates and content tests."
+          ]
+        },
         "seo": {
           "title": "Lorem Ipsum Generator — Free Placeholder Text Tool",
           "description": "Generate Lorem Ipsum placeholder text by words, sentences or paragraphs. Optional HTML <p> wrapping, optional Lorem-ipsum start. 100% in your browser.",
@@ -2371,6 +2815,18 @@
       "diff": {
         "name": "Text Diff",
         "description": "Compare two text snippets side by side. Line, word, or character diff with additions and deletions highlighted.",
+        "content": {
+          "howItWorks": [
+            "Paste the original text on the left and the changed text on the right.",
+            "Choose line, word or character granularity — additions and deletions are highlighted instantly.",
+            "Read the additions, deletions and unchanged counts, or swap the two sides to flip the comparison."
+          ],
+          "features": [
+            "Line, word or character-level diff so you can spot anything from a reworded sentence to a single typo.",
+            "Colour-coded additions and deletions with running counts, plus a toggle to hide unchanged lines.",
+            "Both texts are compared locally in your browser — paste contracts, code or drafts with nothing uploaded."
+          ]
+        },
         "seo": {
           "title": "Text Diff Online — Free Compare Two Texts Side by Side",
           "description": "Compare two texts line-by-line, word-by-word or character-by-character. Highlights additions and deletions. 100% in your browser — no upload, no signup.",
@@ -2407,6 +2863,18 @@
       "regex": {
         "name": "Regex Tester",
         "description": "Test JavaScript regular expressions live with match highlighting, capture groups, named groups and find-and-replace.",
+        "content": {
+          "howItWorks": [
+            "Type a JavaScript regular expression and toggle the flags you need — global, ignore-case, multiline, dotAll, unicode or sticky.",
+            "Paste your test text below; matches are highlighted live and capture groups are listed.",
+            "Add a replacement string to preview the substituted output, then copy the result."
+          ],
+          "features": [
+            "Live match highlighting with numbered and named capture groups for JavaScript RegExp.",
+            "Full flag support (g, i, m, s, u, y) plus a find-and-replace preview with substitution patterns.",
+            "Test and debug patterns entirely in your browser — instant feedback, nothing uploaded."
+          ]
+        },
         "seo": {
           "title": "Regex Tester Online — Free JavaScript RegExp Match & Replace",
           "description": "Build and test JavaScript regular expressions with live highlighting, capture groups and replace preview. 100% in your browser — no upload, no signup.",
@@ -2450,6 +2918,18 @@
       "slugify": {
         "name": "Slugify",
         "description": "Convert any text into a clean URL slug — strip accents, collapse separators, lowercase, with optional hyphen, underscore or dot separator.",
+        "content": {
+          "howItWorks": [
+            "Paste a title, heading or any phrase into the box above.",
+            "Choose your separator — hyphen, underscore or dot — and toggle lowercase, accent removal and separator collapsing.",
+            "The clean URL slug updates live; copy it straight into your CMS or routes."
+          ],
+          "features": [
+            "Turns titles into clean, URL-safe slugs by stripping accents and diacritics and collapsing repeated separators.",
+            "Pick hyphen, underscore or dot separators, with optional lowercasing — ideal for SEO-friendly URLs and filenames.",
+            "Generated locally in your browser, so unpublished titles and headlines stay private."
+          ]
+        },
         "seo": {
           "title": "Slugify Online — Free URL Slug Generator with Accent Removal",
           "description": "Turn titles, headlines or sentences into URL-safe slugs. Strips accents, lowercases, collapses separators. 100% in your browser — no upload, no signup.",
@@ -2486,6 +2966,18 @@
       "sort-lines": {
         "name": "Sort Lines",
         "description": "Sort lines alphabetically, naturally, numerically, by length, reverse or shuffle. Optionally trim, deduplicate or remove blank lines.",
+        "content": {
+          "howItWorks": [
+            "Paste your list — one item per line — into the input box.",
+            "Pick a sort: alphabetical, natural, numeric, by length, reversed or shuffled, ascending or descending.",
+            "Optionally trim, remove duplicates or drop blank lines, then copy or download the sorted list."
+          ],
+          "features": [
+            "Six sort modes — alphabetical, natural, numeric, by length, reverse and random shuffle — with ascending or descending order.",
+            "Clean up while you sort: trim whitespace, remove duplicate lines and drop blanks, with optional case sensitivity.",
+            "Handles long lists entirely in your browser — no upload, no row limit."
+          ]
+        },
         "seo": {
           "title": "Sort Lines Online — Free Alphabetical, Numeric, Natural Sort",
           "description": "Sort any list of lines alphabetically, numerically, by length, reverse or shuffle. Dedupe, trim and remove blanks. 100% in your browser — no upload.",
@@ -2529,6 +3021,18 @@
       "escape": {
         "name": "Escape / Unescape",
         "description": "Escape or unescape strings for HTML, XML, JavaScript and JSON — handles entities, unicode escapes and special characters.",
+        "content": {
+          "howItWorks": [
+            "Paste the string you need to escape or unescape into the box above.",
+            "Pick the target syntax — HTML, XML, JavaScript or JSON — and whether to escape or unescape.",
+            "The result updates live with special characters, entities and unicode escapes handled; copy or download it."
+          ],
+          "features": [
+            "Escapes and unescapes for HTML, XML, JavaScript and JSON, including named entities and \\uXXXX unicode sequences.",
+            "Two-way conversion: encode special characters for safe embedding, or decode them back to readable text.",
+            "Processes your strings entirely in the browser — safe for API keys, tokens or any sensitive payload."
+          ]
+        },
         "seo": {
           "title": "Escape Online — HTML, XML, JavaScript and JSON Escape",
           "description": "Escape or unescape strings for HTML, XML, JavaScript and JSON. Handles named entities, numeric refs, unicode escapes. 100% in your browser — no upload.",
@@ -2566,6 +3070,18 @@
       "whitespace": {
         "name": "Whitespace Cleaner",
         "description": "Clean whitespace in any text — trim lines, collapse spaces, remove blank lines, convert tabs and normalize CRLF / LF line endings.",
+        "content": {
+          "howItWorks": [
+            "Paste the text you want to clean into the box above.",
+            "Toggle the fixes you need — trim lines, collapse repeated spaces, remove blank lines, convert tabs to spaces.",
+            "Pick the line endings (LF, CRLF or CR); the cleaned text updates live for you to copy or download."
+          ],
+          "features": [
+            "Trim leading and trailing spaces, collapse repeated spaces, convert tabs to spaces and remove blank lines in one pass.",
+            "Normalize line endings between Unix (LF), Windows (CRLF) and classic Mac (CR) to fix cross-platform files.",
+            "Cleans text entirely in your browser with a live preview — nothing uploaded, no size limit."
+          ]
+        },
         "seo": {
           "title": "Whitespace Cleaner — Trim, Collapse, Normalize Endings",
           "description": "Trim trailing spaces, collapse multiple spaces, remove blank lines, convert tabs and normalize CRLF/LF/CR line endings. 100% in your browser — no upload.",
@@ -2606,6 +3122,18 @@
       "markdown": {
         "name": "Markdown Preview",
         "description": "Live Markdown preview with side-by-side editor. Supports headings, lists, links, code blocks, emphasis, blockquotes and tables.",
+        "content": {
+          "howItWorks": [
+            "Type or paste Markdown into the editor on the left.",
+            "The formatted preview renders live on the right — headings, lists, links, code blocks, blockquotes and tables.",
+            "Toggle the HTML view to copy the generated HTML, or download your work."
+          ],
+          "features": [
+            "Side-by-side live preview covering headings, lists, links, emphasis, code blocks, blockquotes and tables.",
+            "One-click HTML export so you can paste clean markup into a CMS, email or static site.",
+            "Your Markdown is rendered locally in the browser — drafts and notes never leave your device."
+          ]
+        },
         "seo": {
           "title": "Markdown Preview Online — Free Live Editor & HTML Export",
           "description": "Write Markdown and see the rendered HTML side by side. Headings, lists, links, code, tables, emphasis and blockquotes. 100% in your browser — no upload.",
@@ -2637,6 +3165,18 @@
       "find-replace": {
         "name": "Find & Replace",
         "description": "Find and replace in any text — literal or regular expression mode, case sensitive, whole word, with live preview and match count.",
+        "content": {
+          "howItWorks": [
+            "Paste your text, then type what to find and what to replace it with.",
+            "Switch on regular-expression, case-sensitive or whole-word matching as needed.",
+            "Watch the live preview and match count update, then copy or download the result."
+          ],
+          "features": [
+            "Literal or full regular-expression search, with case-sensitive and whole-word options for precise matches.",
+            "Live preview and a running match count show exactly what will change before you commit.",
+            "Find and replace across large texts entirely in your browser — no upload, no length limit."
+          ]
+        },
         "seo": {
           "title": "Find and Replace — Free Text Search & Replace with Regex",
           "description": "Search and replace in any text. Literal or regular expression mode, case sensitive, whole word match, replace all or step through. 100% in your browser.",
@@ -2675,6 +3215,18 @@
       "base64": {
         "name": "Base64 Encoder / Decoder",
         "description": "Encode text or files to Base64 — or decode Base64 back to text and binary files. Standard and URL-safe alphabets.",
+        "content": {
+          "howItWorks": [
+            "Pick Encode or Decode, then choose Text or File as the source.",
+            "Type or paste text, or drop a PNG, JPG or PDF to encode its bytes.",
+            "Toggle URL-safe, 76-char MIME wrap or a data: URI prefix, then copy or download."
+          ],
+          "features": [
+            "Encodes both pasted text and binary files into Base64 without uploading anything.",
+            "Wraps output in a data: URI so you can paste an image straight into CSS or HTML.",
+            "Decoding sniffs PNG, JPG, GIF, WebP, PDF and ZIP signatures to give you a real file back."
+          ]
+        },
         "seo": {
           "title": "Base64 Encoder & Decoder — Files, Data URI, URL-safe",
           "description": "Encode and decode Base64 in your browser. Convert text or files (PNG, JPG, PDF…) to Base64, build data: URIs, decode back. URL-safe & MIME line-wrap.",
@@ -2718,6 +3270,18 @@
       "url": {
         "name": "URL Encoder / Decoder",
         "description": "Percent-encode or decode URLs and query parameters. Choose between component, full URI, or form (x-www-form-urlencoded) variants.",
+        "content": {
+          "howItWorks": [
+            "Set the mode to Encode or Decode.",
+            "Choose Component, Full URI or Form depending on what you're escaping.",
+            "Paste a URL or query value and copy the percent-encoded result as you type."
+          ],
+          "features": [
+            "Switches between encodeURIComponent, encodeURI and x-www-form-urlencoded for the right escaping.",
+            "Component mode safely escapes a single query parameter without touching reserved characters.",
+            "Form mode turns spaces into '+' so the output matches HTML form submissions exactly."
+          ]
+        },
         "seo": {
           "title": "URL Encoder / Decoder — encodeURIComponent vs encodeURI",
           "description": "Percent-encode and decode URLs and parameters live. Switch between encodeURIComponent, encodeURI and application/x-www-form-urlencoded. 100% local.",
@@ -2756,6 +3320,18 @@
       "jwt": {
         "name": "JWT Decoder",
         "description": "Decode a JSON Web Token to inspect its header, payload, and signature — entirely in your browser. Signatures are NOT verified.",
+        "content": {
+          "howItWorks": [
+            "Paste a JWT in the header.payload.signature form into the token box.",
+            "Read the decoded header and payload, with iat, exp and nbf shown as readable dates.",
+            "Check the status badge — Valid, Expired or Not yet valid — and copy any part you need."
+          ],
+          "features": [
+            "Decodes the header and payload and renders the raw signature, all in your browser.",
+            "The token is decoded entirely on your device and never sent to a server.",
+            "Inspects standard claims and flags expired or not-yet-valid tokens without verifying the signature."
+          ]
+        },
         "seo": {
           "title": "JWT Decoder — Inspect Header, Payload, Claims (No Upload)",
           "description": "Paste a JWT to inspect its header and payload locally. iat / exp / nbf rendered as dates with status. Signature is shown but not verified. No upload.",
@@ -2797,6 +3373,18 @@
       "hex": {
         "name": "Hex Encoder / Decoder",
         "description": "Encode any text into hex (UTF-8 byte sequence) or decode a hex string back to text. Separator and case configurable.",
+        "content": {
+          "howItWorks": [
+            "Choose Encode to go from text to hex, or Decode for the reverse.",
+            "Paste your text or hex string into the input.",
+            "Pick a separator (none, space, dash or colon) and toggle uppercase, then copy the result."
+          ],
+          "features": [
+            "Converts text to its UTF-8 byte sequence in hexadecimal, and parses hex back to text.",
+            "Formats bytes with space, dash or colon separators for readable dumps and MAC-style strings.",
+            "Outputs lowercase or uppercase hex to match the format your tooling expects."
+          ]
+        },
         "seo": {
           "title": "Hex Encoder / Decoder Online — Free Text ↔ Hex Converter",
           "description": "Convert text to hex (UTF-8) and back. Choose separator, uppercase/lowercase. 100% in your browser — no upload, no signup, no tracking.",
@@ -2836,6 +3424,18 @@
       "html-entities": {
         "name": "HTML Entities Encoder / Decoder",
         "description": "Encode special characters to HTML entities (named, numeric or hex) or decode entities back to characters.",
+        "content": {
+          "howItWorks": [
+            "Select Encode to escape characters or Decode to turn entities back into text.",
+            "Paste the characters or HTML entities you want to convert.",
+            "Choose Named, Numeric or Hex output, then copy the escaped result."
+          ],
+          "features": [
+            "Escapes special characters like <, > and & into safe HTML entities, and decodes them back.",
+            "Outputs named (&amp;), numeric (&#38;) or hex (&#x26;) references to suit your template.",
+            "Handles accents, symbols and emoji so any character survives inside HTML markup."
+          ]
+        },
         "seo": {
           "title": "HTML Entities Encoder / Decoder — Free Online, No Upload",
           "description": "Convert any character to its HTML entity (named, numeric or hex) and decode entities back. Supports accents, symbols and emoji. 100% in browser.",
@@ -2872,6 +3472,18 @@
       "binary": {
         "name": "Binary Encoder / Decoder",
         "description": "Convert text to its UTF-8 binary representation (8 bits per byte) — and back.",
+        "content": {
+          "howItWorks": [
+            "Choose Encode for text to binary, or Decode to read binary back to text.",
+            "Paste your text or a string of 0s and 1s into the input.",
+            "Pick a separator between bytes (none, space or dash), then copy the output."
+          ],
+          "features": [
+            "Converts any text to its UTF-8 binary form, eight bits per byte, and back again.",
+            "Separates each byte with a space or dash to keep long bit strings readable.",
+            "Handles accented and non-Latin characters correctly via their multi-byte UTF-8 encoding."
+          ]
+        },
         "seo": {
           "title": "Text to Binary — Free Binary Encoder / Decoder",
           "description": "Convert any text to binary (UTF-8, 8 bits per byte) and back. 100% in your browser — no upload, no signup, no tracking.",
@@ -2909,6 +3521,18 @@
       "morse": {
         "name": "Morse Code Encoder / Decoder",
         "description": "Translate text to Morse code (international) and back. Optional audio playback through your speakers.",
+        "content": {
+          "howItWorks": [
+            "Select Encode for text to Morse, or Decode to translate dots and dashes back.",
+            "Paste your text or Morse string into the input.",
+            "Press Play to hear the code through your speakers, then copy or download the result."
+          ],
+          "features": [
+            "Translates text to international Morse code and decodes dots and dashes back to letters.",
+            "Plays the encoded message as audio beeps through the Web Audio API right in the browser.",
+            "Handles letters, digits and spacing so full messages round-trip without loss."
+          ]
+        },
         "seo": {
           "title": "Morse Code Translator Online — Free Encode & Decode + Audio",
           "description": "Convert text to international Morse code and back, with optional audio playback. 100% in your browser — no upload, no signup.",
@@ -2945,6 +3569,18 @@
       "convert": {
         "name": "Color Converter",
         "description": "Convert any CSS color between HEX, RGB, HSL, HSV and OKLCH. Paste a color in any common format — everything is computed locally in your browser.",
+        "content": {
+          "howItWorks": [
+            "Paste a color as HEX, rgb(), hsl(), oklch() or a CSS name.",
+            "Read every other format instantly in the result list.",
+            "Click Copy next to the notation you need."
+          ],
+          "features": [
+            "Converts between HEX, RGB, HSL, HSV and OKLCH in one pass.",
+            "Accepts CSS named colors and reports the closest name for any input.",
+            "Handles alpha and previews transparency over a checker pattern."
+          ]
+        },
         "seo": {
           "title": "Color Converter — HEX, RGB, HSL, HSV, OKLCH (No Upload)",
           "description": "Convert colors between HEX, RGB, HSL, HSV and OKLCH instantly. Paste a hex code, an rgb()/hsl()/oklch() string or a CSS named color. 100% in browser.",
@@ -2981,6 +3617,18 @@
       "contrast": {
         "name": "Contrast Checker",
         "description": "Check WCAG color contrast between two colors. Get the ratio plus AA / AAA verdicts for normal and large text — everything runs locally in your browser.",
+        "content": {
+          "howItWorks": [
+            "Pick a foreground (text) and a background color.",
+            "Read the contrast ratio computed live.",
+            "Use Swap to test the reverse pairing, or tweak until AA/AAA pass."
+          ],
+          "features": [
+            "Reports the exact WCAG 2 contrast ratio with AA and AAA verdicts.",
+            "Grades normal and large text separately so you know which threshold you clear.",
+            "Live preview renders the pair at small, body, bold and large sizes."
+          ]
+        },
         "seo": {
           "title": "WCAG Contrast Checker — AA / AAA Ratio, No Upload",
           "description": "Pick a foreground and background to see their contrast ratio with WCAG 2 AA / AAA verdicts for normal and large text. Live preview at multiple sizes.",
@@ -3019,6 +3667,18 @@
       "palette": {
         "name": "Palette from Image",
         "description": "Extract the dominant colors from an image. Pick k-means or median-cut, choose 2–16 swatches, then copy as CSS variables or JSON. Your image never leaves your browser.",
+        "content": {
+          "howItWorks": [
+            "Drop a PNG, JPG or WebP image.",
+            "Pick k-means or median-cut and set 2 to 16 swatches.",
+            "Copy the palette as CSS variables or JSON, or download it as a PNG."
+          ],
+          "features": [
+            "Extracts dominant colors with your choice of k-means or median-cut clustering.",
+            "Shows each swatch's coverage percentage across the image.",
+            "Exports straight to CSS custom properties, JSON or a PNG strip."
+          ]
+        },
         "seo": {
           "title": "Extract Color Palette from Image — Free, In-Browser",
           "description": "Drop a PNG, JPG or WebP and extract its dominant colors with k-means or median-cut. Copy as CSS variables, JSON, or download the palette as a PNG. Local.",
@@ -3055,6 +3715,18 @@
       "gradient": {
         "name": "CSS Gradient Builder",
         "description": "Build linear, radial or conic CSS gradients with multiple color stops, custom angle and live preview. Copy the CSS in one click.",
+        "content": {
+          "howItWorks": [
+            "Choose a linear, radial or conic gradient.",
+            "Add color stops and set the angle to taste.",
+            "Copy the generated CSS in one click."
+          ],
+          "features": [
+            "Builds linear, radial and conic gradients from a single panel.",
+            "Supports multiple color stops and a custom angle with a live preview.",
+            "Emits clean, copy-ready CSS you can drop straight into a stylesheet."
+          ]
+        },
         "seo": {
           "title": "CSS Gradient Builder — Linear, Radial & Conic, Free",
           "description": "Build beautiful CSS gradients with multiple stops, angle and type. Copy the CSS in one click. 100% in your browser — no upload, no signup.",
@@ -3087,6 +3759,18 @@
       "shades": {
         "name": "Tints, Shades & Tones",
         "description": "Generate tints (toward white), shades (toward black) and tones (toward gray) from any base color. Great for design systems.",
+        "content": {
+          "howItWorks": [
+            "Enter a base color.",
+            "Switch between tints, shades and tones.",
+            "Set the count, then copy a single swatch or the whole palette."
+          ],
+          "features": [
+            "Generates tints toward white, shades toward black and tones toward gray.",
+            "Produces 2 to 20 evenly stepped variations from any base color.",
+            "Ideal for building monochromatic ramps and design-system color scales."
+          ]
+        },
         "seo": {
           "title": "Tints & Shades Generator Online — Free Color Variations Tool",
           "description": "Generate tints, shades and tones from any base color. Copy individual swatches or the whole palette. 100% in your browser — no upload.",
@@ -3115,6 +3799,18 @@
       "blender": {
         "name": "Color Blender",
         "description": "Mix any two colors in RGB, HSL or OKLCH space with a ratio slider. Also generates an interpolation scale.",
+        "content": {
+          "howItWorks": [
+            "Set color A and color B in any CSS format.",
+            "Pick the mixing space — RGB, HSL or OKLCH.",
+            "Drag the ratio slider to weight the blend, then copy the result."
+          ],
+          "features": [
+            "Mixes two colors in RGB, HSL or perceptual OKLCH space for smoother midpoints.",
+            "A ratio slider weights the blend continuously between the two endpoints.",
+            "Outputs a full interpolation scale you can copy as ready-made design-system steps."
+          ]
+        },
         "seo": {
           "title": "Color Blender Online — Free RGB · HSL · OKLCH Color Mixer",
           "description": "Mix any two colors in RGB, HSL or OKLCH space. Live preview, ratio slider, full interpolation scale. 100% in your browser — no upload.",
@@ -3146,6 +3842,18 @@
       "blindness": {
         "name": "Color Blindness Simulator",
         "description": "Simulate how a color or image looks to people with protanopia, deuteranopia, tritanopia or full achromatopsia.",
+        "content": {
+          "howItWorks": [
+            "Switch between color mode and image mode.",
+            "Enter a color or drop a PNG/JPG to test.",
+            "Pick the deficiency to compare original against the simulated view."
+          ],
+          "features": [
+            "Simulates protanopia, deuteranopia, tritanopia and full achromatopsia.",
+            "Works on a single swatch or a whole image, side by side with the original.",
+            "Helps you check whether UI states and charts stay legible for color-vision deficiencies."
+          ]
+        },
         "seo": {
           "title": "Color Blindness Simulator — Daltonism / CVD Check, Free",
           "description": "Check colors and images for color-vision deficiencies — protanopia, deuteranopia, tritanopia, achromatopsia. 100% in your browser — no upload.",
@@ -3326,6 +4034,18 @@
       "barcode-generate": {
         "name": "Barcode Generator",
         "description": "Generate Code 128, EAN-13 and EAN-8 barcodes as SVG. Adjust height, module width and label.",
+        "content": {
+          "howItWorks": [
+            "Pick a symbology — Code 128, EAN-13 or EAN-8 — and type your value or digits.",
+            "Tune the bar height, module width, quiet-zone margin and bar/background colors.",
+            "Watch the barcode update live, then download it as SVG or copy the SVG markup."
+          ],
+          "features": [
+            "Encodes Code 128 (full ASCII), plus retail EAN-13 and EAN-8 product codes.",
+            "Auto-computes the EAN check digit and flags invalid input for the chosen format.",
+            "Outputs vector SVG with an optional human-readable caption — sharp at any print size for labels and packaging."
+          ]
+        },
         "seo": {
           "title": "Barcode Generator Online — Free Code 128, EAN-13, EAN-8 SVG",
           "description": "Create Code 128, EAN-13 and EAN-8 barcodes as crisp SVG. Adjust height, module width and label. 100% in your browser — no upload, no signup.",
@@ -3359,6 +4079,18 @@
       "barcode-scan": {
         "name": "Barcode Scanner",
         "description": "Decode barcodes from an image — Code 128, EAN-13, EAN-8, ITF, Data Matrix and more. Uses the browser's native BarcodeDetector API.",
+        "content": {
+          "howItWorks": [
+            "Drop a barcode image or click to select a PNG, JPG or WebP from your device.",
+            "The native BarcodeDetector reads it instantly — the format and decoded value appear.",
+            "Copy the decoded value to use it in your inventory, catalog or shipping workflow."
+          ],
+          "features": [
+            "Decodes EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, Codabar, ITF, Data Matrix, Aztec, PDF417 and QR codes.",
+            "Reads from a still image — handy for checking a label photo or a screenshot of a code.",
+            "Runs on the browser's built-in BarcodeDetector API, so the picture is decoded on your device and never uploaded."
+          ]
+        },
         "seo": {
           "title": "Barcode Scanner — Decode EAN, Code 128 from Image",
           "description": "Decode any barcode from an image in your browser — EAN, Code 128, Code 39, ITF, Data Matrix and more. 100% local, no upload, no signup.",
@@ -3392,6 +4124,18 @@
       "skills-browse": {
         "name": "Browse & install skills",
         "description": "Discover the top skills on skills.sh by all-time, 24h trending, or hot — search the catalog, pick what you want, and get a single shell one-liner that installs them all.",
+        "content": {
+          "howItWorks": [
+            "Browse the All Time, Trending 24h and Hot tabs, or type 2+ characters to search the live skills.sh catalog.",
+            "Tick the skills you want from the results — each shows its source, install count and an Official badge where applicable.",
+            "Set the agents, flags and output style, then copy the generated one-liner or download it as install-skills.sh."
+          ],
+          "features": [
+            "Discovers popular skills by all-time installs, 24-hour trending and hot movers with their install counts and daily change.",
+            "Multi-selects across searches and tabs, then turns the whole basket into one npx skills add command chain.",
+            "Each result links straight to its skills.sh page, and the same agent and flag options apply to every selected skill."
+          ]
+        },
         "seo": {
           "title": "Browse & install skills.sh skills — trending + builder",
           "description": "Discover popular and trending skills from skills.sh — all-time, 24h and hot rankings. Search, multi-select, and copy a single shell one-liner. Multi-CLI.",
@@ -3459,6 +4203,18 @@
       "skills": {
         "name": "Skills installer builder",
         "description": "Paste npx skills add commands, pick agents and flags, and get a single shell one-liner to install them all at once.",
+        "content": {
+          "howItWorks": [
+            "Paste your npx skills add lines into the input — each line, or shorthand like anthropics/skills@web-design, is parsed and deduplicated.",
+            "Toggle the agent chips (Claude Code, Cursor, Codex, Gemini CLI, Copilot or All) and flags like Global -g, Skip prompts -y, Copy --copy or Full depth.",
+            "Pick multi-line or single-line output, then copy the combined one-liner or download it as install-skills.sh."
+          ],
+          "features": [
+            "Merges many npx skills add commands into one shell line joined with && so a fresh machine is set up in a single paste.",
+            "Applies your chosen agents and flags uniformly to every command, including --agent '*' to target every supported CLI at once.",
+            "Recognises npx, skills, add and -s/--skill tokens, preserves unknown flags, and drops # comment lines and duplicates."
+          ]
+        },
         "seo": {
           "title": "Skills Installer — Combine npx skills add into one",
           "description": "Paste multiple npx skills add lines, pick agents and flags, and copy a single shell one-liner. 100% local in your browser, no upload.",

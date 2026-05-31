@@ -281,6 +281,18 @@
       "watermark": {
         "name": "Filigrane PDF",
         "description": "Apposez un texte ou un logo en filigrane sur chaque page d'un PDF — diagonal, semi-transparent, dans votre navigateur.",
+        "content": {
+          "howItWorks": [
+            "Chargez votre PDF, puis choisissez un filigrane Texte ou Image.",
+            "Saisissez votre texte (ex. CONFIDENTIEL) ou choisissez un logo PNG/JPG, puis réglez taille, opacité et angle.",
+            "Observez le tampon diagonal dans l'aperçu, puis cliquez sur Ajouter le filigrane pour télécharger."
+          ],
+          "features": [
+            "Appose un texte ou un logo sur toutes les pages d'un coup, centré et en diagonale par défaut.",
+            "Ajuste l'opacité et l'angle d'inclinaison pour une marque discrète en fond ou un net « CONFIDENTIEL ».",
+            "Applique le filigrane dans votre navigateur : brouillons non signés et contrats privés restent sur votre machine."
+          ]
+        },
         "seo": {
           "title": "Ajouter un filigrane à un PDF — Texte ou logo, gratuit",
           "description": "Ajoutez un filigrane texte ou image sur chaque page d'un PDF. Diagonal, transparent, opacité et taille ajustables. Dans votre navigateur, sans envoi.",
@@ -363,6 +375,18 @@
       "extract-images": {
         "name": "Extraire les images d'un PDF",
         "description": "Récupérez toutes les images intégrées d'un PDF et téléchargez-les individuellement ou en ZIP.",
+        "content": {
+          "howItWorks": [
+            "Déposez un PDF ou cliquez sur « Sélectionner un PDF » pour choisir un fichier.",
+            "Patientez pendant que chaque image intégrée est extraite, page par page.",
+            "Téléchargez une image isolée ou récupérez-les toutes d'un coup en ZIP."
+          ],
+          "features": [
+            "Récupère les images matricielles d'origine intégrées à chaque page et les enregistre en PNG sans perte.",
+            "Indique le numéro de page de chaque image extraite pour savoir précisément d'où elle vient.",
+            "Lit le PDF entièrement dans votre navigateur : vos scans et rapports confidentiels ne quittent jamais votre appareil."
+          ]
+        },
         "seo": {
           "title": "Extraire les images d'un PDF — Récupérer photos et figures",
           "description": "Extrayez toutes les images intégrées d'un PDF en PNG sans perte. Sans envoi — tout se passe dans votre navigateur.",
@@ -436,6 +460,18 @@
       "resize": {
         "name": "Redimensionner un PDF",
         "description": "Modifiez la taille des pages d'un PDF — A4, Lettre, A3 ou dimensions personnalisées — avec mise à l'échelle du contenu.",
+        "content": {
+          "howItWorks": [
+            "Ajoutez votre PDF, puis choisissez un format — A4, Lettre, A3, A5, Légal ou personnalisé.",
+            "Réglez l'orientation, l'unité (mm ou pouces) et l'ajustement du contenu : Ajuster, Remplir ou Étirer.",
+            "Vérifiez l'aperçu en direct, puis cliquez sur Redimensionner pour télécharger le PDF recomposé."
+          ],
+          "features": [
+            "Convertit entre formats standards comme A4 et Lettre US, ou vers toute largeur et hauteur saisies sur mesure.",
+            "Met le contenu existant à l'échelle du nouveau format avec les modes Ajuster, Remplir ou Étirer.",
+            "Reconstruit le PDF localement dans votre navigateur — rien n'est envoyé vers un serveur."
+          ]
+        },
         "seo": {
           "title": "Redimensionner un PDF en ligne — Changer la taille des pages gratuitement",
           "description": "Redimensionnez les pages d'un PDF en A4, Lettre, A3, Légal ou dimensions personnalisées avec mise à l'échelle du contenu. Tout dans votre navigateur — aucun envoi.",
@@ -579,6 +615,18 @@
       "split": {
         "name": "Diviser une vidéo",
         "description": "Découpez une vidéo en parties égales — de 2 à 10 segments, ou selon une durée fixe.",
+        "content": {
+          "howItWorks": [
+            "Déposez une vidéo — MP4, WebM, MOV ou MKV — dans l'outil de découpe.",
+            "Choisissez Parts égales (2 à 10) ou Par durée de segment en secondes ; l'aperçu montre chaque segment.",
+            "Cliquez sur Découper, puis téléchargez chaque segment séparément ou tous d'un coup dans un ZIP."
+          ],
+          "features": [
+            "Découpez en 2 à 10 parts égales, ou en tronçons de durée fixe dont le dernier segment peut être plus court.",
+            "Les aperçus image par segment permettent de vérifier les points de coupe avant l'export.",
+            "Divisez un long enregistrement en chapitres ou en morceaux à la bonne taille — découpé en local, jamais envoyé."
+          ]
+        },
         "seo": {
           "title": "Diviser une vidéo en ligne — Découper en plusieurs parties",
           "description": "Découpez une vidéo MP4, WebM, MOV ou MKV en 2 à 10 parties égales, ou par durée de segment. 100 % dans votre navigateur, sans envoi.",
@@ -626,6 +674,18 @@
       "merge": {
         "name": "Fusionner des vidéos",
         "description": "Concaténez deux vidéos ou plus en un seul fichier. Réordonnez avant de fusionner.",
+        "content": {
+          "howItWorks": [
+            "Ajoutez deux vidéos ou plus — MP4, WebM, MOV ou MKV — avec le bouton ou en les glissant-déposant.",
+            "Réorganisez les clips avec les boutons monter et descendre pour définir l'ordre final.",
+            "Cliquez sur Fusionner pour les enchaîner en un seul fichier continu, puis téléchargez."
+          ],
+          "features": [
+            "Enchaîne bout à bout des clips MP4, WebM, MOV et MKV en un seul fichier de sortie.",
+            "La réorganisation par boutons monter/descendre permet de corriger l'ordre de lecture avant la fusion.",
+            "Assemblez vos montages, leçons ou prises de scène en local — rien n'est envoyé en ligne."
+          ]
+        },
         "seo": {
           "title": "Fusionner des vidéos — Concaténer MP4, WebM, MOV",
           "description": "Joignez plusieurs vidéos en une seule — réordonnez, puis fusionnez. MP4, WebM, MOV, MKV. 100% dans le navigateur — aucun upload, aucune inscription.",
@@ -700,6 +760,18 @@
       "resize": {
         "name": "Redimensionner une vidéo",
         "description": "Modifiez la résolution d'une vidéo : 480p, 720p, 1080p ou dimensions personnalisées. Conservation du ratio possible (letterbox).",
+        "content": {
+          "howItWorks": [
+            "Déposez une vidéo — MP4, WebM, MOV ou MKV — dans l'outil de redimensionnement.",
+            "Choisissez un préréglage 480p, 720p ou 1080p, ou sélectionnez Personnalisé et saisissez la largeur et la hauteur exactes.",
+            "Cochez éventuellement Conserver le ratio pour ajouter des bandes, puis cliquez sur Redimensionner et téléchargez."
+          ],
+          "features": [
+            "Préréglages 480p, 720p et 1080p en un clic, plus une largeur × hauteur personnalisée en pixels.",
+            "Le mode conservation du ratio ajoute des bandes (letterbox) afin que l'image ne soit jamais étirée ni déformée.",
+            "Réduisez vos clips pour l'e-mail, les limites d'envoi web ou un partage plus rapide — redimensionnés dans le navigateur, jamais envoyés."
+          ]
+        },
         "seo": {
           "title": "Redimensionner une vidéo en ligne — 720p, 1080p, sur mesure",
           "description": "Redimensionnez n'importe quelle vidéo en 480p, 720p, 1080p ou sur mesure. Conservation du ratio en option. 100% dans le navigateur — aucun upload.",
@@ -735,6 +807,18 @@
       "mute": {
         "name": "Couper le son d'une vidéo",
         "description": "Supprime la piste audio d'une vidéo tout en conservant la qualité originale.",
+        "content": {
+          "howItWorks": [
+            "Déposez une vidéo MP4, WebM, MOV ou MKV dans l'outil de mise en sourdine.",
+            "L'aperçu confirme le clip ; la piste audio est retirée sans toucher à l'image.",
+            "Cliquez sur Couper le son pour supprimer l'audio, puis téléchargez le fichier silencieux."
+          ],
+          "features": [
+            "Supprime entièrement la piste audio tout en conservant la qualité et la résolution d'origine de la vidéo.",
+            "Idéal pour faire taire un bruit de fond, retirer une musique protégée avant de republier ou préparer des plans d'illustration.",
+            "L'audio est retiré sur votre appareil avec FFmpeg WebAssembly — aucun envoi, aucune inscription, aucun filigrane."
+          ]
+        },
         "seo": {
           "title": "Couper le son d'une vidéo — Supprimer l'audio MP4",
           "description": "Retirez la piste audio de n'importe quelle MP4, WebM, MOV ou MKV. 100% dans le navigateur — aucun upload, aucune inscription.",
@@ -762,6 +846,18 @@
       "crop": {
         "name": "Recadrer une vidéo",
         "description": "Recadrez une zone rectangulaire d'une vidéo. Ajustez position et taille avant d'exporter.",
+        "content": {
+          "howItWorks": [
+            "Déposez un fichier MP4, WebM, MOV ou MKV pour le charger dans l'aperçu.",
+            "Réglez les valeurs X, Y, largeur et hauteur en pixels — le rectangle d'accentuation montre la zone de recadrage en direct sur l'image.",
+            "Cliquez sur Recadrer : FFmpeg WebAssembly exporte uniquement le rectangle sélectionné dans votre navigateur, puis téléchargez."
+          ],
+          "features": [
+            "Champs X/Y et largeur/hauteur au pixel près, avec un rectangle affiché en direct sur l'image de la vidéo.",
+            "Recadrez un plan paysage en carré ou en portrait, ou supprimez les bandes noires et les bords indésirables.",
+            "Votre vidéo est recadrée intégralement sur votre appareil — aucun envoi, aucun filigrane, rien transmis à un serveur."
+          ]
+        },
         "seo": {
           "title": "Recadrer une vidéo en ligne — Rogner une vidéo MP4 gratuitement",
           "description": "Recadrez ou rognez une vidéo MP4, WebM, MOV sur une zone précise. Position et taille ajustables. 100% dans le navigateur — aucun upload.",
@@ -793,6 +889,18 @@
       "rotate": {
         "name": "Pivoter / Retourner une vidéo",
         "description": "Pivotez une vidéo de 90, 180 ou 270 degrés, ou retournez-la horizontalement ou verticalement.",
+        "content": {
+          "howItWorks": [
+            "Déposez une vidéo MP4, WebM, MOV ou MKV pour la charger dans l'aperçu.",
+            "Choisissez une transformation : rotation de 90°, 180° ou 270° dans le sens horaire, ou retournement horizontal ou vertical.",
+            "Cliquez sur Appliquer : FFmpeg ré-encode le clip pivoté dans votre navigateur, puis téléchargez."
+          ],
+          "features": [
+            "Pivotez de 90°, 180° ou 270° pour corriger une vidéo filmée de travers ou à l'envers sur un téléphone.",
+            "Les retournements horizontal et vertical créent des effets miroir ou corrigent l'inversion d'un selfie pris à la caméra avant.",
+            "Chaque transformation s'exécute en local avec FFmpeg WebAssembly — aucun envoi et aucun filigrane."
+          ]
+        },
         "seo": {
           "title": "Pivoter une vidéo en ligne — Retourner MP4 90/180/270",
           "description": "Pivotez n'importe quelle vidéo de 90, 180 ou 270 degrés ou retournez-la horizontalement/verticalement. 100% dans le navigateur — aucun upload.",
@@ -826,6 +934,18 @@
       "frames": {
         "name": "Extraire les frames",
         "description": "Exportez les frames d'une vidéo en PNG ou JPG, avec un taux d'images par seconde au choix.",
+        "content": {
+          "howItWorks": [
+            "Déposez une vidéo — MP4, WebM, MOV ou MKV — dans l'extracteur d'images.",
+            "Définissez le nombre d'images par seconde (par ex. 1 pour une image chaque seconde) et choisissez la sortie PNG ou JPG.",
+            "Cliquez sur Extraire pour récupérer les images fixes, puis téléchargez-les toutes dans un seul ZIP."
+          ],
+          "features": [
+            "Exportez des images fixes en PNG sans perte ou en JPG plus léger, à n'importe quelle cadence jusqu'à 60 i/s.",
+            "Transformez un clip en vignettes, planche-contact ou suite de captures pour la documentation et le design.",
+            "Les images sont décodées dans le navigateur avec FFmpeg WebAssembly — la vidéo ne quitte jamais votre appareil."
+          ]
+        },
         "seo": {
           "title": "Extraire les frames d'une vidéo — En PNG ou JPG",
           "description": "Exportez les frames d'une vidéo en PNG ou JPG, une toutes les N secondes. Téléchargement groupé en ZIP. 100% dans le navigateur — aucun upload.",
@@ -859,6 +979,18 @@
       "watermark": {
         "name": "Filigraner une vidéo",
         "description": "Apposez un filigrane texte sur une vidéo. Choisissez position, couleur et opacité.",
+        "content": {
+          "howItWorks": [
+            "Déposez une vidéo MP4, WebM, MOV ou MKV, puis saisissez votre texte de filigrane.",
+            "Choisissez une position — un coin ou le centre — et ajustez la taille de police et l'opacité à votre goût.",
+            "Cliquez sur Appliquer pour incruster le texte dans la vidéo, puis téléchargez."
+          ],
+          "features": [
+            "Superposez n'importe quel texte dans un coin ou au centre, avec taille de police et opacité réglables.",
+            "Marquez vos clips d'un pseudo, d'une mention de copyright ou d'un @nom avant publication sur les réseaux.",
+            "L'incrustation est rendue dans le navigateur avec FFmpeg WebAssembly — votre vidéo n'est jamais envoyée."
+          ]
+        },
         "seo": {
           "title": "Ajouter un filigrane à une vidéo — Texte en superposition",
           "description": "Apposez un filigrane texte sur n'importe quelle vidéo. Position, couleur et opacité ajustables. 100% dans le navigateur — aucun upload.",
@@ -896,6 +1028,18 @@
       "short-studio": {
         "name": "Short Studio",
         "description": "Découpez une vidéo longue en shorts numérotés avec un filigrane compteur incrémenté — option recadrage 9:16 pour TikTok, Reels et YouTube Shorts.",
+        "content": {
+          "howItWorks": [
+            "Déposez une vidéo longue, puis choisissez de la découper en parts égales (2 à 10) ou par durée de segment fixe.",
+            "Écrivez un modèle de compteur comme Épisode {n}/{N}, choisissez la police, la position, la couleur et l'opacité, et forcez éventuellement le format vertical 9:16.",
+            "Cliquez sur Générer les shorts pour produire chaque clip numéroté, puis téléchargez-les tous dans un ZIP."
+          ],
+          "features": [
+            "Découpe une vidéo en série numérotée et appose un filigrane {n}/{N} qui s'incrémente automatiquement sur chaque clip.",
+            "L'option Forcer le vertical 9:16 recadre au centre en 1080×1920 pour TikTok, Reels et YouTube Shorts.",
+            "Habillez le compteur en Inter, Anton, Lora ou JetBrains Mono, dans l'une des neuf positions ou un emplacement personnalisé au clic."
+          ]
+        },
         "seo": {
           "title": "Short Studio — Découper une vidéo en shorts numérotés",
           "description": "Découpez une vidéo longue en shorts numérotés avec compteur en filigrane. Option vertical 9:16 pour TikTok, Reels et YouTube. Dans le navigateur.",
@@ -970,6 +1114,18 @@
       "speed": {
         "name": "Changer la vitesse d'une vidéo",
         "description": "Accélérez ou ralentissez une vidéo de 0.25× à 4×, en conservant la hauteur de l'audio.",
+        "content": {
+          "howItWorks": [
+            "Déposez une vidéo MP4, WebM, MOV ou MKV dans l'outil de vitesse.",
+            "Faites glisser le curseur de vitesse de 0,25× à 4× (ou choisissez un préréglage comme 0,5×, 2× ou 4×) et décidez de conserver ou couper l'audio.",
+            "Cliquez sur Appliquer pour recalculer le rythme du clip, puis téléchargez."
+          ],
+          "features": [
+            "Ralentissez à 0,25× pour un ralenti fluide ou accélérez jusqu'à 4× pour un effet avance rapide ou time-lapse.",
+            "Le mode conservation de l'audio préserve la hauteur d'origine : les voix accélérées ou ralenties restent naturelles.",
+            "Le recalcul du rythme se fait dans le navigateur avec FFmpeg WebAssembly — aucun envoi, aucune inscription, aucun filigrane."
+          ]
+        },
         "seo": {
           "title": "Ralentir une vidéo en ligne — Accélérer ou ralentir gratuitement",
           "description": "Ralentissez ou accélérez une vidéo de 0.25× à 4×. Ralenti et accéléré en ligne, 100% dans le navigateur — aucun upload, aucun filigrane.",
@@ -1002,6 +1158,18 @@
       "tags": {
         "name": "Modifier les tags et la pochette",
         "description": "Modifiez les tags MP3, FLAC, M4A ou OGG — titre, artiste, album, année — et intégrez une pochette d'album.",
+        "content": {
+          "howItWorks": [
+            "Sélectionnez un fichier MP3, FLAC, M4A ou OGG — l'outil lit les tags existants et remplit les champs.",
+            "Modifiez le titre, l'artiste, l'album, l'artiste de l'album, l'année, le genre, la piste et le commentaire, puis ajoutez une pochette.",
+            "Cliquez sur Appliquer et télécharger pour écrire les métadonnées et enregistrer le fichier."
+          ],
+          "features": [
+            "Modifie les champs ID3v2 : titre, artiste, album, artiste de l'album, année, genre, numéro de piste et commentaire.",
+            "Intègre, remplace ou retire la pochette d'album à partir d'une image déposée ou choisie.",
+            "Fonctionne sur MP3, FLAC, M4A et OGG entièrement dans le navigateur — vos morceaux ne sont jamais envoyés sur un serveur."
+          ]
+        },
         "seo": {
           "title": "Modifier les tags MP3 et pochette — Éditeur ID3 gratuit",
           "description": "Modifiez les métadonnées ID3v2 — titre, artiste, album, année, genre — et ajoutez une pochette. FLAC, M4A et OGG aussi. Sans envoi.",
@@ -1093,6 +1261,18 @@
       "extract": {
         "name": "Extraire l'audio d'une vidéo",
         "description": "Extrayez la piste audio d'un MP4, MOV, WebM ou MKV en MP3, WAV, M4A ou FLAC.",
+        "content": {
+          "howItWorks": [
+            "Déposez une vidéo MP4, MOV, WebM ou MKV sur la page, ou choisissez-en une avec le bouton.",
+            "Sélectionnez le format de sortie — MP3, WAV, M4A ou FLAC — et un bitrate (96 à 320 kbps pour MP3/M4A).",
+            "Vérifiez la taille estimée, puis cliquez sur Extraire l'audio pour enregistrer la piste sonore."
+          ],
+          "features": [
+            "Sépare la piste audio d'un MP4, MOV, WebM ou MKV sans toucher à la vidéo d'origine.",
+            "Exporte en MP3 ou M4A à 96, 128, 192, 256 ou 320 kbps, ou en WAV et FLAC sans perte.",
+            "Toute l'extraction se fait dans le navigateur via WebAssembly : votre vidéo ne quitte jamais votre appareil."
+          ]
+        },
         "seo": {
           "title": "Extraire l'audio d'une vidéo en ligne — MP4 vers MP3 gratuit",
           "description": "Récupérez la piste audio d'une vidéo MP4, MOV, WebM ou MKV en MP3, WAV, M4A ou FLAC. 100 % dans le navigateur, aucun envoi.",
@@ -1227,6 +1407,18 @@
       "volume": {
         "name": "Volume, normalisation et fondu",
         "description": "Ajustez le gain en décibels, normalisez la sonie EBU R128 (-16 LUFS) ou appliquez un fondu en entrée / sortie.",
+        "content": {
+          "howItWorks": [
+            "Déposez un fichier audio, puis glissez le curseur de Gain de −20 dB à +20 dB pour monter ou baisser le volume.",
+            "Ou cochez Normaliser la sonie pour ramener tout le morceau au standard EBU R128 de −16 LUFS.",
+            "Ajoutez un fondu en entrée et en sortie jusqu'à 15 secondes, puis cliquez sur Appliquer et télécharger."
+          ],
+          "features": [
+            "Ajuste le gain par pas précis de 1 dB sur une plage de −20 à +20 dB, avec aperçu du filtre en direct.",
+            "Normalise la sonie perçue à la cible de diffusion EBU R128 de −16 LUFS pour des niveaux homogènes.",
+            "Applique des fondus en entrée et en sortie jusqu'à 15 secondes, le tout traité en local, sans aucun envoi."
+          ]
+        },
         "seo": {
           "title": "Normaliser un audio en ligne — Booster MP3 et fondu gratuits",
           "description": "Augmentez ou réduisez le volume en décibels, normalisez EBU R128 (-16 LUFS) ou appliquez un fondu. 100 % dans votre navigateur.",
@@ -1392,6 +1584,18 @@
       "rotate-flip": {
         "name": "Pivoter & retourner",
         "description": "Pivotez par paliers de 90° et inversez horizontalement ou verticalement.",
+        "content": {
+          "howItWorks": [
+            "Déposez une image PNG, JPG ou WebP dans l'outil.",
+            "Appuyez sur Pivoter 90°, 180° ou 270° pour la tourner, et activez Miroir horizontal ou Miroir vertical pour l'inverser.",
+            "Observez l'aperçu en direct, puis cliquez sur Appliquer pour télécharger l'image transformée."
+          ],
+          "features": [
+            "Pivotez par paliers de 90° et inversez l'image horizontalement ou verticalement, séparément ou combinés.",
+            "Un aperçu en direct reflète chaque rotation et chaque miroir avant validation, avec un bouton Réinitialiser.",
+            "Le résultat conserve le format PNG, JPG ou WebP d'origine et tout est traité localement — aucun envoi."
+          ]
+        },
         "seo": {
           "title": "Retourner une image en ligne — Pivoter, inverser une photo gratuitement",
           "description": "Retournez, pivotez ou inversez une image ou photo en ligne. PNG, JPG, WebP — instantanément dans le navigateur, aucun upload.",
@@ -1424,6 +1628,18 @@
       "crop": {
         "name": "Rogner une image",
         "description": "Découpez une zone rectangulaire dans une image.",
+        "content": {
+          "howItWorks": [
+            "Déposez une image PNG, JPG ou WebP dans l'outil.",
+            "Tracez un rectangle directement sur l'image, ou saisissez les X, Y, largeur et hauteur exacts en pixels source.",
+            "Vérifiez l'aperçu du rognage en direct, puis cliquez sur Rogner pour télécharger la zone découpée."
+          ],
+          "features": [
+            "Définissez la zone en glissant sur l'image ou en entrant des coordonnées précises en pixels.",
+            "Un aperçu canvas en direct montre le rectangle exact que vous obtiendrez avant de télécharger.",
+            "L'image rognée conserve son format PNG, JPG ou WebP d'origine et tout se fait dans votre navigateur, sans aucun envoi."
+          ]
+        },
         "seo": {
           "title": "Rogner une image en ligne — Gratuit, dans le navigateur",
           "description": "Rognez n'importe quelle image PNG, JPG ou WebP selon un rectangle précis. Glissez pour définir la zone avec un aperçu en direct — dans votre navigateur.",
@@ -1456,6 +1672,18 @@
       "remove-bg": {
         "name": "Retirer l'arrière-plan",
         "description": "Détourage par IA — vous obtenez un PNG transparent avec aperçu en direct.",
+        "content": {
+          "howItWorks": [
+            "Déposez une photo PNG, JPG ou WebP dans l'outil.",
+            "Cliquez sur Retirer l'arrière-plan et laissez le modèle d'IA s'exécuter — au premier usage il est téléchargé, puis mis en cache.",
+            "Prévisualisez le détourage sur le damier de transparence, puis téléchargez le PNG transparent."
+          ],
+          "features": [
+            "L'IA détache le sujet de son arrière-plan et produit un PNG transparent prêt à l'emploi.",
+            "Le modèle RMBG-1.4 s'exécute entièrement dans votre navigateur : votre photo ne quitte jamais votre appareil, contrairement aux services en ligne.",
+            "Le modèle (~44 Mo) est téléchargé une seule fois depuis huggingface.co puis mis en cache, sans réseau pour les détourages suivants."
+          ]
+        },
         "seo": {
           "title": "Retirer l'arrière-plan — Détourage IA dans le navigateur",
           "description": "Détourage par IA qui s'exécute 100 % dans votre navigateur. Déposez une photo, obtenez un PNG transparent. Votre image ne quitte jamais votre appareil.",
@@ -1487,6 +1715,18 @@
       "from-clipboard": {
         "name": "Coller depuis le presse-papier",
         "description": "Collez une image directement depuis votre presse-papier — capture d'écran, image copiée d'un site — et téléchargez-la en PNG, JPG ou WebP.",
+        "content": {
+          "howItWorks": [
+            "Copiez une capture d'écran ou une image, puis appuyez sur Cmd/Ctrl + V sur la page ou cliquez sur Coller depuis le presse-papier.",
+            "Choisissez le format de sortie — PNG, JPG ou WebP — et observez l'aperçu se mettre à jour en direct.",
+            "Cliquez sur Télécharger pour enregistrer l'image collée en fichier."
+          ],
+          "features": [
+            "Transforme une capture d'écran ou une image copiée d'un site en véritable fichier PNG, JPG ou WebP.",
+            "L'aperçu en direct affiche le résultat et le poids du fichier au fil des changements de format.",
+            "Le presse-papier est lu localement dans votre navigateur : l'image collée n'est jamais envoyée nulle part."
+          ]
+        },
         "seo": {
           "title": "Coller une image depuis le presse-papier — Capture en PNG / JPG / WebP",
           "description": "Collez n'importe quelle image depuis votre presse-papier (capture d'écran, image copiée) et téléchargez-la en PNG, JPG ou WebP. 100 % dans le navigateur — aucun upload.",
@@ -1523,6 +1763,18 @@
       "viewer": {
         "name": "Visionneuse SVG",
         "description": "Déposez ou collez un SVG pour le prévisualiser, inspecter ses dimensions et lire son code source — en toute sécurité (sandbox).",
+        "content": {
+          "howItWorks": [
+            "Collez votre code SVG ou déposez un fichier .svg sur la carte.",
+            "Visualisez le rendu live dans le panneau d'aperçu en sandbox.",
+            "Consultez l'inspecteur pour width, height, viewBox, nombre d'éléments et taille, puis copiez la source."
+          ],
+          "features": [
+            "Affiche n'importe quel SVG dans un aperçu en sandbox qui retire les scripts, pour ouvrir des fichiers non fiables en sécurité.",
+            "Inspecte d'un coup d'œil les width, height, viewBox, le nombre d'éléments et la taille en octets.",
+            "Présente le code source formaté à côté du rendu, avec copie en un clic."
+          ]
+        },
         "seo": {
           "title": "Visionneuse SVG en ligne — Ouvrir et inspecter un SVG",
           "description": "Ouvrez n'importe quel SVG en aperçu sandbox, inspectez width, height, viewBox et le nombre d'éléments, copiez le code source. 100 % navigateur, aucun envoi.",
@@ -1604,6 +1856,18 @@
       "favicon": {
         "name": "Favicon depuis un SVG",
         "description": "Générez un pack de favicons complet à partir d'un seul SVG : favicon.ico, apple-touch-icon, icônes Android Chrome et un site.webmanifest — dans un ZIP.",
+        "content": {
+          "howItWorks": [
+            "Collez votre code SVG ou déposez un fichier .svg à utiliser comme icône source.",
+            "Saisissez un nom d'app pour le site.webmanifest et vérifiez les aperçus onglet et apple-touch.",
+            "Cliquez sur télécharger pour obtenir un ZIP avec toutes les tailles de favicon prêtes à intégrer."
+          ],
+          "features": [
+            "Génère favicon.ico (16/32/48), apple-touch-icon en 180 px et les icônes android-chrome en 192 et 512 px à partir d'un seul SVG.",
+            "Inclut un site.webmanifest prêt à l'emploi relié aux PNG 192 et 512 avec le nom de votre app.",
+            "Livre l'ensemble dans un seul ZIP, avec aperçus live onglet (16 px) et apple-touch avant l'export."
+          ]
+        },
         "seo": {
           "title": "Favicon depuis SVG — Pack .ico, PNG et manifest",
           "description": "Transformez un SVG en pack favicon complet : favicon.ico (16/32/48), apple-touch-icon, android-chrome 192/512 et site.webmanifest — dans un ZIP. 100 % local.",
@@ -1635,6 +1899,18 @@
       "editor": {
         "name": "Éditeur SVG",
         "description": "Modifiez le code SVG, les dimensions, viewBox, les couleurs et les transformations — avec aperçu live. Un éditeur à panneau qui garde votre source propre.",
+        "content": {
+          "howItWorks": [
+            "Collez votre code SVG ou déposez un fichier .svg pour le charger dans le panneau source.",
+            "Modifiez les dimensions et le viewBox, cliquez sur une couleur détectée pour recolorer chaque fill ou stroke correspondant, et réglez rotation, échelle ou translation.",
+            "Suivez l'aperçu live qui se met à jour, puis formatez la source et téléchargez le .svg ou copiez-le."
+          ],
+          "features": [
+            "Recolorez n'importe quel dessin en choisissant parmi les couleurs fill et stroke détectées et en les remplaçant d'un clic.",
+            "Ajustez width, height, viewBox et preserveAspectRatio, puis faites pivoter, mettez à l'échelle ou translatez l'ensemble du graphique autour de son centre.",
+            "Un aperçu live en sandbox, avec fond transparent ou uni et calque de limites optionnel, reflète chaque modification immédiatement."
+          ]
+        },
         "seo": {
           "title": "Éditeur SVG en ligne — Code et couleurs avec aperçu",
           "description": "Éditez le code SVG, recolorez les fills et strokes, ajustez viewBox, rotation, échelle, translation — avec aperçu sandbox live. 100 % navigateur.",
@@ -1734,6 +2010,18 @@
       "to-data-url": {
         "name": "SVG vers Data URL",
         "description": "Convertissez n'importe quel SVG en data URI base64 ou URL-encodée — avec aperçu miniature live.",
+        "content": {
+          "howItWorks": [
+            "Collez votre code SVG ou déposez un fichier .svg dans l'encodeur.",
+            "Lisez la data URI base64 et la data URI URL-encodée et comparez leur poids en octets.",
+            "Cliquez sur copier pour l'encodage voulu et collez-le dans votre CSS ou votre HTML."
+          ],
+          "features": [
+            "Produit à la fois une data URI base64 data:image/svg+xml et une data URI URL-encodée data:image/svg+xml;utf8 compatible CSS.",
+            "Intégrez une icône en background-image CSS ou en src sans requête HTTP supplémentaire.",
+            "Affiche le nombre d'octets de chaque encodage et une miniature live pour choisir le plus léger."
+          ]
+        },
         "seo": {
           "title": "SVG vers Data URL en ligne — Encodeur base64 et URL gratuit",
           "description": "Collez un SVG et obtenez instantanément une data URI base64 et une data URI URL-encodée prête pour le CSS. Aperçu live, comptage des octets.",
@@ -1765,6 +2053,18 @@
       "generate": {
         "name": "Générer un mot de passe",
         "description": "Créez un mot de passe aléatoire solide — entièrement personnalisable, généré localement avec un tirage cryptographique.",
+        "content": {
+          "howItWorks": [
+            "Réglez le curseur de longueur et cochez les jeux de caractères voulus — majuscules, minuscules, chiffres, symboles.",
+            "Activez « exclure les ambigus » pour retirer les sosies comme 0/O et 1/l/I, puis choisissez combien en générer (1, 5, 10 ou 25).",
+            "Suivez la force et l'entropie qui se mettent à jour en direct, puis copiez un mot de passe ou téléchargez-les tous en .txt."
+          ],
+          "features": [
+            "Chaque caractère est tiré via crypto.getRandomValues avec échantillonnage par rejet, pour un résultat non biaisé et imprévisible.",
+            "Génère jusqu'à 25 mots de passe d'un coup et affiche leur note de force et leurs bits d'entropie au fil des réglages.",
+            "Tout se passe dans votre navigateur — aucun mot de passe n'est envoyé à un serveur, contrairement aux générateurs en ligne douteux."
+          ]
+        },
         "seo": {
           "title": "Générer un mot de passe — Local, cryptographiquement sûr",
           "description": "Mots de passe aléatoires solides avec longueur, jeux de caractères et exclusion des caractères ambigus paramétrables. Tirage crypto-sûr, généré localement.",
@@ -1808,6 +2108,18 @@
       "passphrase": {
         "name": "Générer une passphrase",
         "description": "Style diceware — des mots aléatoires faciles à retenir, difficiles à deviner.",
+        "content": {
+          "howItWorks": [
+            "Choisissez le nombre de mots, puis sélectionnez un séparateur — espace, tiret, point ou underscore.",
+            "Au choix, capitalisez chaque mot et ajoutez un chiffre aléatoire pour un peu plus d'entropie.",
+            "Consultez l'estimation de force et d'entropie, cliquez sur Régénérer jusqu'à satisfaction, puis copiez la passphrase."
+          ],
+          "features": [
+            "Construit des passphrases style diceware à partir d'une liste choisie de 256 mots, soit exactement 8 bits d'entropie par mot.",
+            "Produit des phrases faciles à retenir et à taper mais difficiles à forcer, idéales comme mots de passe maîtres.",
+            "Les mots sont tirés avec un aléa cryptographique dans votre navigateur, donc rien de la passphrase ne quitte votre appareil."
+          ]
+        },
         "seo": {
           "title": "Générateur de passphrase — Style diceware, mémorisable",
           "description": "Générez des passphrases style diceware — des mots aléatoires faciles à retenir, difficiles à deviner. Séparateur et capitalisation paramétrables. 100 % local.",
@@ -1845,6 +2157,18 @@
       "hash": {
         "name": "Hasher du texte",
         "description": "Calcule le SHA-1, SHA-256, SHA-384 ou SHA-512 d'un texte — sortie en hex ou base64.",
+        "content": {
+          "howItWorks": [
+            "Tapez ou collez n'importe quel texte dans le champ de saisie.",
+            "Choisissez l'algorithme — SHA-1, SHA-256, SHA-384 ou SHA-512 — et le format de sortie, hex ou base64.",
+            "L'empreinte apparaît instantanément en dessous au fil de la saisie ; cliquez sur Copier pour la récupérer."
+          ],
+          "features": [
+            "Calcule les empreintes SHA-1, SHA-256, SHA-384 et SHA-512 via le Web Crypto natif du navigateur (crypto.subtle.digest).",
+            "Restitue le hash en hex minuscule ou en base64, pratique pour les sommes de contrôle, empreintes et comparaisons.",
+            "Votre texte est hashé localement et jamais envoyé, donc même les chaînes sensibles restent sur votre machine."
+          ]
+        },
         "seo": {
           "title": "Hasher du texte — SHA-1, SHA-256, SHA-384, SHA-512",
           "description": "Calculez l'empreinte SHA-1, SHA-256, SHA-384 ou SHA-512 d'un texte, en hex ou base64. Gratuit, instantané, 100 % dans votre navigateur.",
@@ -1879,6 +2203,18 @@
       "bcrypt": {
         "name": "Hash & vérification bcrypt",
         "description": "Hashez un mot de passe avec bcrypt (sel + rounds) ou vérifiez-le contre un hash existant.",
+        "content": {
+          "howItWorks": [
+            "Choisissez le mode Hasher et tapez le mot de passe à protéger.",
+            "Réglez les rounds (facteur de coût) — 10 est un bon défaut ; plus haut est plus sûr mais plus lent — puis cliquez sur Hasher.",
+            "Passez en mode Vérifier pour tester un mot de passe contre un hash $2a$/$2b$ existant et voir Correspondance ou non."
+          ],
+          "features": [
+            "Hashe les mots de passe avec bcrypt, en générant un sel aléatoire frais et un facteur de coût réglable de 4 à 14.",
+            "Le mode Vérifier compare un mot de passe candidat à un hash bcrypt existant et rejette les entrées mal formées.",
+            "Tout s'exécute côté client et le temps de calcul est affiché en millisecondes — votre mot de passe ne quitte jamais le navigateur."
+          ]
+        },
         "seo": {
           "title": "bcrypt en ligne — Hash & vérification dans le navigateur",
           "description": "Hashez un mot de passe avec bcrypt (sel + facteur de coût) ou vérifiez-le contre un hash bcrypt existant. Tout local — il ne quitte jamais votre appareil.",
@@ -1919,6 +2255,18 @@
       "strength": {
         "name": "Évaluer la force d'un mot de passe",
         "description": "Estime l'entropie d'un mot de passe et détecte les faiblesses courantes — tout dans votre navigateur.",
+        "content": {
+          "howItWorks": [
+            "Tapez ou collez un mot de passe dans le champ — utilisez Afficher pour le révéler au besoin.",
+            "Lisez la note de force, l'entropie estimée en bits, la longueur et le nombre de classes de caractères.",
+            "Consultez la liste des problèmes (suites, répétitions, mots courants, trop court) puis renforcez en conséquence."
+          ],
+          "features": [
+            "Estime l'entropie à partir de la longueur et de la taille du jeu de caractères, puis note le mot de passe de Très faible à Très fort.",
+            "Signale les structures faibles — suites (abc, 123), caractères répétés et motifs courants comme « password » ou « qwerty ».",
+            "Analyse le mot de passe entièrement dans votre navigateur, pour tester un vrai mot de passe sans qu'il soit envoyé où que ce soit."
+          ]
+        },
         "seo": {
           "title": "Force d'un mot de passe — Calculateur d'entropie en ligne",
           "description": "Estimez l'entropie d'un mot de passe et détectez les faiblesses courantes (suites, répétitions, mots communs). Dans votre navigateur, il ne le quitte jamais.",
@@ -2059,6 +2407,18 @@
       "query": {
         "name": "Requête JSON",
         "description": "Filtrez et extrayez n'importe quel JSON avec JSONPath — avec aperçu en direct.",
+        "content": {
+          "howItWorks": [
+            "Collez un JSON dans la zone de saisie — les erreurs de syntaxe sont signalées en ligne pendant la frappe.",
+            "Écrivez une expression JSONPath comme $.users[*].name, $..price ou $.items[?(@.x>10)] dans le champ de chemin.",
+            "Les valeurs correspondantes s'affichent en direct avec leur nombre ; copiez-les ou partez d'un exemple intégré."
+          ],
+          "features": [
+            "Exécute du JSONPath complet via jsonpath-plus : descente récursive ($..), jokers ([*]) et expressions de filtre ([?(@.champ>10)]).",
+            "Réévalue l'expression à chaque frappe et indique le nombre de nœuds trouvés, avec un message quand aucun ne correspond.",
+            "Une alternative pratique à jq pour extraire un champ précis d'une grosse réponse d'API ou d'un log collé."
+          ]
+        },
         "seo": {
           "title": "Requête JSON — Testeur JSONPath avec aperçu en direct",
           "description": "Filtrez, extrayez et explorez du JSON avec JSONPath ($..price, $.users[*].name, $.items[?(@.x>10)]). Aperçu en direct, dans votre navigateur.",
@@ -2100,6 +2460,18 @@
       "table": {
         "name": "JSON en tableau",
         "description": "Transformez un tableau d'objets JSON en table interactive — triable, filtrable, exportable en CSV.",
+        "content": {
+          "howItWorks": [
+            "Collez un tableau JSON d'objets, par ex. [{...}, {...}] — une entrée qui n'est pas un tableau est signalée.",
+            "Le tableau s'affiche avec des colonnes formées de l'union des clés de chaque objet ; cliquez sur un en-tête pour trier.",
+            "Recherchez globalement, filtrez chaque colonne, parcourez les pages, puis exportez en CSV ou JSON."
+          ],
+          "features": [
+            "Transforme un tableau d'objets en grille triable, en tolérant les lignes aux clés manquantes ou différentes.",
+            "Propose une recherche globale, un filtrage par colonne et une pagination pour parcourir de grands ensembles de données.",
+            "Exporte le tableau courant directement en CSV ou JSON — pratique pour basculer une liste d'API vers un tableur."
+          ]
+        },
         "seo": {
           "title": "JSON en tableau — Trier, filtrer, exporter en CSV",
           "description": "Affichez n'importe quel tableau JSON d'objets sous forme de table interactive. Triez, filtrez par colonne, recherchez, exportez en CSV. 100 % local.",
@@ -2138,6 +2510,18 @@
       "csv": {
         "name": "JSON ↔ CSV",
         "description": "Convertissez des tableaux JSON en CSV et inversement — options de séparateur et de guillemets.",
+        "content": {
+          "howItWorks": [
+            "Choisissez le sens : JSON → CSV pour aplatir un tableau d'objets, ou CSV → JSON pour transformer un texte tableur en enregistrements.",
+            "Réglez le séparateur (virgule, point-virgule, tabulation ou barre verticale) et indiquez si la première ligne contient les en-têtes.",
+            "Le résultat se met à jour en direct ; copiez-le ou téléchargez le fichier .csv ou .json."
+          ],
+          "features": [
+            "Convertit dans les deux sens : un tableau d'objets JSON vers des lignes CSV, et un CSV brut vers des enregistrements JSON typés.",
+            "Détecte automatiquement le séparateur à l'import CSV, pour traiter les fichiers à point-virgule ou tabulation sans réglage.",
+            "Gère les séparateurs virgule, point-virgule, tabulation et barre verticale, avec une option d'en-têtes pour les exports européens et TSV."
+          ]
+        },
         "seo": {
           "title": "JSON ↔ CSV — Convertisseur gratuit, dans le navigateur",
           "description": "Convertissez un tableau JSON d'objets en CSV ou inversement. Choisissez séparateur (virgule, point-virgule, tab, pipe), guillemet, en-tête. 100 % navigateur.",
@@ -2183,6 +2567,18 @@
       "diff": {
         "name": "Diff JSON",
         "description": "Comparez deux documents JSON côte à côte — ajouts, suppressions et changements surlignés.",
+        "content": {
+          "howItWorks": [
+            "Collez le premier document JSON dans Version A et le second dans Version B.",
+            "Les deux s'analysent à la volée et s'affichent en arbres côte à côte, avec les valeurs ajoutées, supprimées et modifiées surlignées sur place.",
+            "Lisez la ligne de synthèse — nombre d'ajouts, de suppressions et de modifications — pour voir précisément ce qui a changé."
+          ],
+          "features": [
+            "Compare deux documents JSON clé par clé et valeur par valeur, jusque dans les objets et tableaux imbriqués.",
+            "Met en couleur chaque différence — ajouts, suppressions et valeurs modifiées — dans la vue jumelée Arbre A / Arbre B.",
+            "Parfait pour repérer les écarts entre deux réponses d'API, deux instantanés de configuration ou deux fixtures avant/après."
+          ]
+        },
         "seo": {
           "title": "Diff JSON en ligne — Comparer deux fichiers JSON côte à côte",
           "description": "Comparez deux documents JSON et voyez ce qui a été ajouté, supprimé ou modifié — côte à côte, surligné. 100 % dans votre navigateur, aucun envoi.",
@@ -2219,6 +2615,18 @@
       "schema": {
         "name": "Schéma JSON",
         "description": "Validez un JSON contre un schéma, ou générez un schéma depuis un échantillon.",
+        "content": {
+          "howItWorks": [
+            "Choisissez Valider pour confronter des données à un schéma, ou Générer pour déduire un schéma à partir d'un échantillon.",
+            "Sélectionnez le brouillon — draft-07 ou 2020-12 — puis collez vos données et votre schéma (ou un simple échantillon représentatif).",
+            "Lisez le verdict en direct : confirmation de conformité, ou chaque erreur de validation listée par son chemin."
+          ],
+          "features": [
+            "Valide un JSON face à un JSON Schema avec Ajv, en prenant en charge draft-07 et draft 2020-12.",
+            "Liste chaque échec avec son chemin exact et son message, au lieu de s'arrêter à la première erreur.",
+            "Déduit un schéma JSON de départ à partir d'un échantillon, pour amorcer des contrats depuis de vraies données d'API."
+          ]
+        },
         "seo": {
           "title": "Schéma JSON — Valider et générer (Draft 2020-12 / 07)",
           "description": "Validez du JSON contre un JSON Schema (Ajv, draft 2020-12 ou 07) ou inférez un schéma depuis un échantillon. Erreurs listées par chemin. 100 % navigateur.",
@@ -2266,6 +2674,18 @@
       "case": {
         "name": "Convertisseur de casse",
         "description": "Convertissez du texte en MAJUSCULES, minuscules, Casse titre, casse phrase, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE et dot.case.",
+        "content": {
+          "howItWorks": [
+            "Collez ou saisissez votre texte dans le champ — rien n'est téléversé, aucun fichier à déposer.",
+            "Choisissez une casse dans le menu : MAJUSCULES, minuscules, Titre, Phrase, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE ou dot.case.",
+            "Le texte converti se met à jour en direct ; copiez-le ou téléchargez-le en fichier .txt."
+          ],
+          "features": [
+            "Dix styles de casse réunis, dont les formats développeur camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE et dot.case.",
+            "Conversion en direct avec compteur de caractères, pour reformater noms de variables, titres ou slugs à la frappe.",
+            "Tout s'exécute dans votre navigateur — collez du code sensible ou copiez le résultat sans que rien ne quitte votre appareil."
+          ]
+        },
         "seo": {
           "title": "Convertisseur de casse — snake_case, camelCase, kebab",
           "description": "Convertissez du texte en MAJUSCULES, minuscules, Casse titre, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE et dot.case. 100 % navigateur.",
@@ -2307,6 +2727,18 @@
       "count": {
         "name": "Compteur de mots et caractères",
         "description": "Comptez mots, caractères, lignes, paragraphes et phrases — avec estimation du temps de lecture et de prise de parole.",
+        "content": {
+          "howItWorks": [
+            "Collez ou saisissez votre texte dans le champ ci-dessus — rien à téléverser, aucun fichier à déposer.",
+            "Chaque mesure se met à jour en direct à la frappe : mots, caractères (avec et sans espaces), lignes, paragraphes et phrases.",
+            "Consultez les estimations de temps de lecture et de prise de parole, puis continuez à écrire ou copiez votre texte — il ne quitte jamais votre navigateur."
+          ],
+          "features": [
+            "Comptage en direct des mots, caractères, lignes, paragraphes et phrases à chaque frappe, sans limite de longueur.",
+            "Totaux de caractères « avec espaces » et « sans espaces » séparés — idéal pour rester sous les limites d'un tweet, d'un post X ou d'une méta-description SEO.",
+            "Estimations du temps de lecture (~200 mots/minute) et de prise de parole (~130 mots/minute) pour les dissertations, articles, scripts et présentations."
+          ]
+        },
         "seo": {
           "title": "Compteur de mots — Caractères, temps de lecture en direct",
           "description": "Comptez en direct mots, caractères (avec et sans espaces), lignes, paragraphes, phrases, temps de lecture et de prise de parole. 100 % navigateur.",
@@ -2339,6 +2771,18 @@
       "lorem": {
         "name": "Générateur Lorem Ipsum",
         "description": "Générez du faux texte Lorem Ipsum — mots, phrases ou paragraphes, avec option d'enveloppement HTML.",
+        "content": {
+          "howItWorks": [
+            "Choisissez de générer des mots, des phrases ou des paragraphes et indiquez la quantité voulue.",
+            "Au choix, commencez par le classique « Lorem ipsum… » et enveloppez chaque paragraphe dans des balises <p>.",
+            "Copiez le faux texte ou téléchargez-le — régénérez à volonté pour un nouveau remplissage."
+          ],
+          "features": [
+            "Génération par mots, phrases ou paragraphes, avec un nombre exact pour que le texte s'adapte à votre maquette.",
+            "Enveloppement HTML <p> optionnel et ouverture classique « Lorem ipsum dolor sit amet » pour des maquettes réalistes.",
+            "Génération instantanée et illimitée dans le navigateur — idéal pour designs, gabarits et tests de contenu."
+          ]
+        },
         "seo": {
           "title": "Générateur Lorem Ipsum — Mots, phrases, paragraphes",
           "description": "Générez du texte Lorem Ipsum en mots, phrases ou paragraphes. Option d'enveloppement HTML <p>, option de démarrage Lorem ipsum. 100 % navigateur.",
@@ -2371,6 +2815,18 @@
       "diff": {
         "name": "Diff de texte",
         "description": "Comparez deux textes côte à côte. Diff ligne par ligne, mot par mot ou caractère par caractère, avec ajouts et suppressions surlignés.",
+        "content": {
+          "howItWorks": [
+            "Collez le texte d'origine à gauche et le texte modifié à droite.",
+            "Choisissez la granularité ligne, mot ou caractère — ajouts et suppressions sont surlignés instantanément.",
+            "Lisez le nombre d'ajouts, de suppressions et de lignes inchangées, ou intervertissez les deux côtés."
+          ],
+          "features": [
+            "Comparaison par ligne, mot ou caractère pour repérer aussi bien une phrase reformulée qu'une simple coquille.",
+            "Ajouts et suppressions en couleur avec compteurs, plus une option pour masquer les lignes inchangées.",
+            "Les deux textes sont comparés localement dans votre navigateur — collez contrats, code ou brouillons sans aucun upload."
+          ]
+        },
         "seo": {
           "title": "Diff de texte — Comparer deux textes côte à côte",
           "description": "Comparez deux textes ligne par ligne, mot à mot ou caractère par caractère. Ajouts et suppressions surlignés. 100% dans le navigateur — aucun upload.",
@@ -2407,6 +2863,18 @@
       "regex": {
         "name": "Testeur de regex",
         "description": "Testez des expressions régulières JavaScript en direct avec coloration des correspondances, groupes de capture, groupes nommés et recherche/remplacement.",
+        "content": {
+          "howItWorks": [
+            "Saisissez une expression régulière JavaScript et activez les drapeaux voulus — global, insensible à la casse, multiligne, dotAll, unicode ou sticky.",
+            "Collez votre texte de test en dessous ; les correspondances sont surlignées en direct et les groupes de capture listés.",
+            "Ajoutez une chaîne de remplacement pour prévisualiser la substitution, puis copiez le résultat."
+          ],
+          "features": [
+            "Surlignage des correspondances en direct, avec groupes de capture numérotés et nommés pour les RegExp JavaScript.",
+            "Prise en charge complète des drapeaux (g, i, m, s, u, y) et aperçu de rechercher-remplacer avec motifs de substitution.",
+            "Testez et déboguez vos motifs entièrement dans le navigateur — retour instantané, aucun upload."
+          ]
+        },
         "seo": {
           "title": "Testeur regex en ligne — Tester JavaScript RegExp, gratuit",
           "description": "Construisez et testez vos regex JavaScript avec surlignage en direct, groupes de capture et aperçu du remplacement. 100 % dans le navigateur.",
@@ -2450,6 +2918,18 @@
       "slugify": {
         "name": "Slugify",
         "description": "Convertit n'importe quel texte en slug URL — retire les accents, fusionne les séparateurs, met en minuscules. Séparateur tiret, souligné ou point au choix.",
+        "content": {
+          "howItWorks": [
+            "Collez un titre, un intertitre ou n'importe quelle phrase dans le champ ci-dessus.",
+            "Choisissez le séparateur — tiret, tiret bas ou point — et activez minuscules, suppression des accents et fusion des séparateurs.",
+            "Le slug d'URL propre se met à jour en direct ; copiez-le directement dans votre CMS ou vos routes."
+          ],
+          "features": [
+            "Transforme les titres en slugs propres et compatibles URL en retirant accents et diacritiques et en fusionnant les séparateurs répétés.",
+            "Séparateur au choix (tiret, tiret bas ou point), avec minuscules optionnelles — idéal pour des URLs et noms de fichiers optimisés SEO.",
+            "Généré localement dans votre navigateur : vos titres non publiés restent privés."
+          ]
+        },
         "seo": {
           "title": "Slugify — Générateur de slug URL (sans accents)",
           "description": "Transformez titres ou phrases en slugs URL. Supprime les accents, met en minuscules, fusionne les séparateurs. 100% dans le navigateur — aucun upload.",
@@ -2486,6 +2966,18 @@
       "sort-lines": {
         "name": "Trier les lignes",
         "description": "Triez les lignes par ordre alphabétique, naturel, numérique, par longueur, en sens inverse ou aléatoire. Options pour rogner, dédupliquer et supprimer les lignes vides.",
+        "content": {
+          "howItWorks": [
+            "Collez votre liste — un élément par ligne — dans le champ de saisie.",
+            "Choisissez un tri : alphabétique, naturel, numérique, par longueur, inversé ou aléatoire, croissant ou décroissant.",
+            "Au besoin, supprimez les espaces, les doublons ou les lignes vides, puis copiez ou téléchargez la liste triée."
+          ],
+          "features": [
+            "Six modes de tri — alphabétique, naturel, numérique, par longueur, inverse et aléatoire — en ordre croissant ou décroissant.",
+            "Nettoyez en triant : suppression des espaces, des doublons et des lignes vides, avec sensibilité à la casse optionnelle.",
+            "Gère de longues listes entièrement dans le navigateur — sans upload ni limite de lignes."
+          ]
+        },
         "seo": {
           "title": "Trier les lignes — Alphabétique, numérique, naturel",
           "description": "Triez n'importe quelle liste de lignes : alphabétique, numérique, par longueur, inverse, aléatoire. Déduplication et rognage. 100 % navigateur.",
@@ -2529,6 +3021,18 @@
       "escape": {
         "name": "Échapper / Désechapper",
         "description": "Échappez ou désechappez des chaînes pour HTML, XML, JavaScript et JSON — gère les entités, les échappements unicode et les caractères spéciaux.",
+        "content": {
+          "howItWorks": [
+            "Collez la chaîne à échapper ou déséchapper dans le champ ci-dessus.",
+            "Choisissez la syntaxe cible — HTML, XML, JavaScript ou JSON — et le sens : échapper ou déséchapper.",
+            "Le résultat se met à jour en direct (entités, séquences unicode, caractères spéciaux) ; copiez-le ou téléchargez-le."
+          ],
+          "features": [
+            "Échappement et déséchappement pour HTML, XML, JavaScript et JSON, entités nommées et séquences unicode \\uXXXX comprises.",
+            "Conversion bidirectionnelle : encodez les caractères spéciaux pour une insertion sûre, ou décodez-les en texte lisible.",
+            "Vos chaînes sont traitées entièrement dans le navigateur — sûr pour des clés d'API, des jetons ou tout contenu sensible."
+          ]
+        },
         "seo": {
           "title": "Échapper en ligne — HTML, XML, JavaScript et JSON, gratuit",
           "description": "Échappez ou désechappez des chaînes pour HTML, XML, JavaScript et JSON. Entités nommées, références numériques, échappements unicode. 100 % navigateur.",
@@ -2566,6 +3070,18 @@
       "whitespace": {
         "name": "Nettoyeur d'espaces",
         "description": "Nettoyez les espaces blancs : rogner les lignes, fusionner les espaces, supprimer les lignes vides, convertir les tabulations et normaliser CRLF / LF.",
+        "content": {
+          "howItWorks": [
+            "Collez le texte à nettoyer dans le champ ci-dessus.",
+            "Activez les corrections voulues — supprimer les espaces de bord, fusionner les espaces répétés, retirer les lignes vides, convertir les tabulations en espaces.",
+            "Choisissez les fins de ligne (LF, CRLF ou CR) ; le texte nettoyé se met à jour en direct pour copie ou téléchargement."
+          ],
+          "features": [
+            "Supprime les espaces de début et de fin, fusionne les espaces répétés, convertit les tabulations en espaces et retire les lignes vides en une passe.",
+            "Normalise les fins de ligne entre Unix (LF), Windows (CRLF) et Mac classique (CR) pour corriger les fichiers multiplateformes.",
+            "Nettoie le texte entièrement dans le navigateur avec un aperçu en direct — aucun upload, sans limite de taille."
+          ]
+        },
         "seo": {
           "title": "Nettoyeur d'espaces — Rogner, fusionner, normaliser",
           "description": "Rognez les espaces de fin, fusionnez les espaces multiples, supprimez les lignes vides, convertissez les tabs et normalisez CRLF/LF/CR. 100 % navigateur.",
@@ -2606,6 +3122,18 @@
       "markdown": {
         "name": "Aperçu Markdown",
         "description": "Aperçu Markdown en direct avec éditeur côte à côte. Supporte titres, listes, liens, blocs de code, emphase, citations et tableaux.",
+        "content": {
+          "howItWorks": [
+            "Saisissez ou collez du Markdown dans l'éditeur à gauche.",
+            "L'aperçu formaté s'affiche en direct à droite — titres, listes, liens, blocs de code, citations et tableaux.",
+            "Affichez la vue HTML pour copier le HTML généré, ou téléchargez votre travail."
+          ],
+          "features": [
+            "Aperçu en direct côte à côte : titres, listes, liens, emphase, blocs de code, citations et tableaux.",
+            "Export HTML en un clic pour coller un balisage propre dans un CMS, un e-mail ou un site statique.",
+            "Votre Markdown est rendu localement dans le navigateur — brouillons et notes ne quittent jamais votre appareil."
+          ]
+        },
         "seo": {
           "title": "Aperçu Markdown — Éditeur live & export HTML",
           "description": "Écrivez du Markdown et voyez le HTML rendu côte à côte. Titres, listes, liens, code, tableaux, emphase et citations. 100% dans le navigateur — aucun upload.",
@@ -2637,6 +3165,18 @@
       "find-replace": {
         "name": "Rechercher & Remplacer",
         "description": "Recherchez et remplacez dans un texte — mode littéral ou expression régulière, sensibilité à la casse, mot entier, avec aperçu live et compteur de correspondances.",
+        "content": {
+          "howItWorks": [
+            "Collez votre texte, puis saisissez ce qu'il faut chercher et son remplacement.",
+            "Activez selon le besoin le mode expression régulière, la sensibilité à la casse ou le mot entier.",
+            "Suivez l'aperçu en direct et le nombre de correspondances, puis copiez ou téléchargez le résultat."
+          ],
+          "features": [
+            "Recherche littérale ou par expression régulière complète, avec options sensible à la casse et mot entier.",
+            "Aperçu en direct et compteur de correspondances montrent exactement ce qui changera avant validation.",
+            "Cherchez-remplacez dans de longs textes entièrement dans le navigateur — sans upload ni limite de taille."
+          ]
+        },
         "seo": {
           "title": "Rechercher et remplacer — Texte avec regex, gratuit",
           "description": "Recherchez et remplacez dans n'importe quel texte. Mode littéral ou regex, sensible à la casse, mot entier, remplacer tout ou un par un. 100 % navigateur.",
@@ -2675,6 +3215,18 @@
       "base64": {
         "name": "Encodeur / décodeur Base64",
         "description": "Encodez du texte ou des fichiers en Base64 — ou décodez du Base64 vers le texte ou le fichier binaire d'origine. Alphabets standard et URL-safe.",
+        "content": {
+          "howItWorks": [
+            "Choisissez Encoder ou Décoder, puis la source Texte ou Fichier.",
+            "Saisissez ou collez du texte, ou déposez un PNG, JPG ou PDF à encoder.",
+            "Activez URL-safe, le retour à la ligne MIME (76 car.) ou le préfixe data:, puis copiez ou téléchargez."
+          ],
+          "features": [
+            "Encode aussi bien le texte collé que des fichiers binaires en Base64, sans aucun envoi.",
+            "Génère une URI data: pour coller une image directement dans du CSS ou du HTML.",
+            "Au décodage, reconnaît les signatures PNG, JPG, GIF, WebP, PDF et ZIP pour reconstituer le fichier."
+          ]
+        },
         "seo": {
           "title": "Encodeur Base64 — Fichiers, Data URI, URL-safe",
           "description": "Encodez et décodez du Base64. Convertissez texte ou fichiers (PNG, JPG, PDF…), créez des URI data:, ou décodez vers le binaire. URL-safe inclus, sans envoi.",
@@ -2718,6 +3270,18 @@
       "url": {
         "name": "Encodeur / décodeur d'URL",
         "description": "Encodez ou décodez des URL et paramètres en percent-encoding. Choisissez entre component, URI complète, ou formulaire (x-www-form-urlencoded).",
+        "content": {
+          "howItWorks": [
+            "Réglez le mode sur Encoder ou Décoder.",
+            "Choisissez Composant, URI complète ou Formulaire selon ce que vous échappez.",
+            "Collez une URL ou une valeur de paramètre et copiez le résultat percent-encodé au fil de la saisie."
+          ],
+          "features": [
+            "Bascule entre encodeURIComponent, encodeURI et x-www-form-urlencoded pour le bon échappement.",
+            "Le mode Composant échappe un seul paramètre de requête sans toucher aux caractères réservés.",
+            "Le mode Formulaire convertit les espaces en « + » pour coller exactement aux envois de formulaire HTML."
+          ]
+        },
         "seo": {
           "title": "Encodeur URL — encodeURIComponent, encodeURI, form",
           "description": "Encodez et décodez des URL et paramètres en direct. Basculez entre encodeURIComponent, encodeURI et application/x-www-form-urlencoded. 100 % local.",
@@ -2756,6 +3320,18 @@
       "jwt": {
         "name": "Décodeur JWT",
         "description": "Décodez un JSON Web Token pour inspecter son en-tête, sa charge utile et sa signature — entièrement dans votre navigateur. Les signatures NE sont PAS vérifiées.",
+        "content": {
+          "howItWorks": [
+            "Collez un JWT au format header.payload.signature dans le champ token.",
+            "Lisez l'en-tête et la charge utile décodés, avec iat, exp et nbf affichés en dates lisibles.",
+            "Vérifiez le badge de statut — Valide, Expiré ou Pas encore valide — et copiez la partie voulue."
+          ],
+          "features": [
+            "Décode l'en-tête et la charge utile et affiche la signature brute, entièrement dans le navigateur.",
+            "Le token est décodé sur votre appareil et n'est jamais envoyé à un serveur.",
+            "Analyse les claims standards et signale les tokens expirés ou pas encore valides, sans vérifier la signature."
+          ]
+        },
         "seo": {
           "title": "Décodeur JWT — Inspecter en-tête, payload, claims",
           "description": "Collez un JWT pour inspecter son en-tête et sa charge utile localement. iat / exp / nbf en dates lisibles. Signature affichée mais pas vérifiée. Sans envoi.",
@@ -2797,6 +3373,18 @@
       "hex": {
         "name": "Encodeur / décodeur Hex",
         "description": "Encodez du texte en hex (séquence UTF-8) ou décodez une chaîne hex vers du texte. Séparateur et casse au choix.",
+        "content": {
+          "howItWorks": [
+            "Choisissez Encoder pour passer du texte au hex, ou Décoder pour l'inverse.",
+            "Collez votre texte ou votre chaîne hexadécimale dans l'entrée.",
+            "Choisissez un séparateur (aucun, espace, tiret ou deux-points) et activez les majuscules, puis copiez."
+          ],
+          "features": [
+            "Convertit le texte en sa séquence d'octets UTF-8 en hexadécimal, et reconstruit le texte depuis du hex.",
+            "Formate les octets avec espace, tiret ou deux-points pour des dumps lisibles ou des adresses MAC.",
+            "Produit du hex en minuscules ou en majuscules selon le format attendu par vos outils."
+          ]
+        },
         "seo": {
           "title": "Encodeur / Décodeur Hex en ligne — Texte ↔ Hex, gratuit",
           "description": "Convertissez du texte en hex (UTF-8) et inversement. Choisissez le séparateur et la casse. 100% dans le navigateur — aucun upload.",
@@ -2836,6 +3424,18 @@
       "html-entities": {
         "name": "Encodeur / décodeur d'entités HTML",
         "description": "Encodez les caractères spéciaux en entités HTML (nommées, numériques ou hex) ou décodez les entités vers leurs caractères.",
+        "content": {
+          "howItWorks": [
+            "Sélectionnez Encoder pour échapper des caractères ou Décoder pour reconvertir des entités.",
+            "Collez les caractères ou les entités HTML à convertir.",
+            "Choisissez la sortie Nommée, Numérique ou Hex, puis copiez le résultat échappé."
+          ],
+          "features": [
+            "Échappe les caractères spéciaux comme <, > et & en entités HTML sûres, et les décode en sens inverse.",
+            "Produit des références nommées (&amp;), numériques (&#38;) ou hex (&#x26;) selon votre gabarit.",
+            "Gère accents, symboles et emoji pour qu'aucun caractère ne casse dans le balisage HTML."
+          ]
+        },
         "seo": {
           "title": "Entités HTML — Encodeur / Décodeur, sans envoi",
           "description": "Convertissez n'importe quel caractère en son entité HTML (nommée, numérique ou hex) et décodez les entités. Accents, symboles et emoji. 100 % navigateur.",
@@ -2872,6 +3472,18 @@
       "binary": {
         "name": "Encodeur / décodeur binaire",
         "description": "Convertit du texte en représentation binaire UTF-8 (8 bits par octet) — et inversement.",
+        "content": {
+          "howItWorks": [
+            "Choisissez Encoder pour du texte vers binaire, ou Décoder pour relire le binaire en texte.",
+            "Collez votre texte ou une suite de 0 et de 1 dans l'entrée.",
+            "Choisissez un séparateur entre octets (aucun, espace ou tiret), puis copiez la sortie."
+          ],
+          "features": [
+            "Convertit n'importe quel texte en binaire UTF-8, huit bits par octet, et inversement.",
+            "Sépare chaque octet par un espace ou un tiret pour garder les longues chaînes de bits lisibles.",
+            "Gère correctement les caractères accentués et non latins via leur encodage UTF-8 multi-octets."
+          ]
+        },
         "seo": {
           "title": "Texte vers binaire — Encodeur / Décodeur, gratuit",
           "description": "Convertissez n'importe quel texte en binaire (UTF-8, 8 bits par octet) et inversement. 100% dans le navigateur — aucun upload.",
@@ -2909,6 +3521,18 @@
       "morse": {
         "name": "Encodeur / décodeur Morse",
         "description": "Traduisez du texte en code Morse international et inversement. Lecture audio optionnelle via les haut-parleurs.",
+        "content": {
+          "howItWorks": [
+            "Sélectionnez Encoder pour du texte vers Morse, ou Décoder pour retraduire les points et traits.",
+            "Collez votre texte ou votre chaîne Morse dans l'entrée.",
+            "Appuyez sur Lire pour entendre le code via vos haut-parleurs, puis copiez ou téléchargez."
+          ],
+          "features": [
+            "Traduit le texte en code Morse international et redécode les points et traits en lettres.",
+            "Joue le message encodé en bips audio via la Web Audio API, directement dans le navigateur.",
+            "Gère lettres, chiffres et espacements pour que les messages complets se reconvertissent sans perte."
+          ]
+        },
         "seo": {
           "title": "Traducteur Morse — Encoder / Décoder + audio",
           "description": "Convertissez du texte en code Morse international et inversement, avec lecture audio. 100% dans le navigateur — aucun upload.",
@@ -2945,6 +3569,18 @@
       "convert": {
         "name": "Convertisseur de couleur",
         "description": "Convertissez n'importe quelle couleur CSS entre HEX, RGB, HSL, HSV et OKLCH. Collez une couleur dans n'importe quel format — tout est calculé localement dans votre navigateur.",
+        "content": {
+          "howItWorks": [
+            "Collez une couleur en HEX, rgb(), hsl(), oklch() ou un nom CSS.",
+            "Lisez instantanément tous les autres formats dans la liste de résultats.",
+            "Cliquez sur Copier à côté de la notation dont vous avez besoin."
+          ],
+          "features": [
+            "Convertit entre HEX, RVB, HSL, HSV et OKLCH en une seule passe.",
+            "Accepte les noms de couleurs CSS et indique le nom le plus proche pour toute entrée.",
+            "Gère l'alpha et prévisualise la transparence sur un motif en damier."
+          ]
+        },
         "seo": {
           "title": "Convertisseur de couleur — HEX, RGB, HSL, HSV, OKLCH",
           "description": "Convertissez vos couleurs entre HEX, RGB, HSL, HSV et OKLCH instantanément. Collez un code hex, rgb(), hsl(), oklch() ou un nom CSS. 100 % navigateur.",
@@ -2981,6 +3617,18 @@
       "contrast": {
         "name": "Vérificateur de contraste",
         "description": "Vérifiez le contraste WCAG entre deux couleurs. Obtenez le ratio et les verdicts AA / AAA pour texte normal et grand — tout s'exécute localement dans votre navigateur.",
+        "content": {
+          "howItWorks": [
+            "Choisissez une couleur de premier plan (texte) et une couleur de fond.",
+            "Lisez le rapport de contraste calculé en direct.",
+            "Utilisez Inverser pour tester l'association inverse, ou ajustez jusqu'à valider AA/AAA."
+          ],
+          "features": [
+            "Affiche le rapport de contraste WCAG 2 exact avec les verdicts AA et AAA.",
+            "Note séparément le texte normal et le grand texte pour savoir quel seuil vous franchissez.",
+            "L'aperçu en direct rend la paire en tailles petite, courante, grasse et grande."
+          ]
+        },
         "seo": {
           "title": "Contraste WCAG — Ratio AA / AAA, sans envoi",
           "description": "Choisissez une couleur de texte et un fond pour obtenir leur ratio de contraste avec les verdicts WCAG 2 AA / AAA. Aperçu en direct à plusieurs tailles.",
@@ -3019,6 +3667,18 @@
       "palette": {
         "name": "Palette depuis une image",
         "description": "Extrayez les couleurs dominantes d'une image. Choisissez k-means ou median-cut, de 2 à 16 nuances, puis copiez la palette en variables CSS ou JSON. Votre image ne quitte jamais votre navigateur.",
+        "content": {
+          "howItWorks": [
+            "Déposez une image PNG, JPG ou WebP.",
+            "Choisissez k-means ou median-cut et réglez de 2 à 16 échantillons.",
+            "Copiez la palette en variables CSS ou JSON, ou téléchargez-la en PNG."
+          ],
+          "features": [
+            "Extrait les couleurs dominantes au choix par clustering k-means ou median-cut.",
+            "Affiche le pourcentage de couverture de chaque échantillon dans l'image.",
+            "Exporte directement en propriétés CSS personnalisées, JSON ou bande PNG."
+          ]
+        },
         "seo": {
           "title": "Extraire la palette d'une image — Couleurs dominantes",
           "description": "Déposez un PNG, JPG ou WebP et extrayez ses couleurs dominantes avec k-means ou median-cut. Copiez en CSS, JSON, ou téléchargez la palette en PNG. Local.",
@@ -3055,6 +3715,18 @@
       "gradient": {
         "name": "Générateur de dégradé CSS",
         "description": "Créez des dégradés CSS linéaires, radiaux ou coniques avec plusieurs points de couleur, angle personnalisé et aperçu en direct. CSS copiable en un clic.",
+        "content": {
+          "howItWorks": [
+            "Choisissez un dégradé linéaire, radial ou conique.",
+            "Ajoutez des arrêts de couleur et réglez l'angle à votre goût.",
+            "Copiez le CSS généré en un clic."
+          ],
+          "features": [
+            "Construit des dégradés linéaires, radiaux et coniques depuis un seul panneau.",
+            "Gère plusieurs arrêts de couleur et un angle personnalisé avec aperçu en direct.",
+            "Produit un CSS propre, prêt à coller directement dans une feuille de style."
+          ]
+        },
         "seo": {
           "title": "Générateur de dégradé CSS — Linéaire, radial, conique",
           "description": "Construisez de beaux dégradés CSS avec plusieurs stops, angle et type. CSS copiable en un clic. 100% dans le navigateur — aucun upload.",
@@ -3087,6 +3759,18 @@
       "shades": {
         "name": "Teintes, nuances et tons",
         "description": "Générez teintes (vers blanc), nuances (vers noir) et tons (vers gris) à partir d'une couleur de base. Idéal pour les design systems.",
+        "content": {
+          "howItWorks": [
+            "Saisissez une couleur de base.",
+            "Basculez entre teintes, ombres et tons.",
+            "Réglez le nombre, puis copiez un échantillon ou toute la palette."
+          ],
+          "features": [
+            "Génère des teintes vers le blanc, des ombres vers le noir et des tons vers le gris.",
+            "Produit de 2 à 20 variations régulièrement espacées depuis n'importe quelle couleur de base.",
+            "Idéal pour bâtir des rampes monochromatiques et des échelles de couleur de design system."
+          ]
+        },
         "seo": {
           "title": "Générateur de teintes & nuances — Variations couleur",
           "description": "Générez teintes, nuances et tons à partir d'une couleur de base. Copiez les swatches ou la palette entière. 100% dans le navigateur — aucun upload.",
@@ -3115,6 +3799,18 @@
       "blender": {
         "name": "Mélangeur de couleurs",
         "description": "Mélangez deux couleurs dans l'espace RGB, HSL ou OKLCH avec un curseur de ratio. Génère également une échelle d'interpolation.",
+        "content": {
+          "howItWorks": [
+            "Saisissez la couleur A et la couleur B dans n'importe quel format CSS.",
+            "Choisissez l'espace de mélange : RVB, HSL ou OKLCH.",
+            "Faites glisser le curseur de ratio pour pondérer le mélange, puis copiez le résultat."
+          ],
+          "features": [
+            "Mélange deux couleurs en RVB, HSL ou OKLCH perceptuel pour des points médians plus fluides.",
+            "Un curseur de ratio pondère le mélange en continu entre les deux extrémités.",
+            "Produit une échelle d'interpolation complète à copier comme paliers prêts pour un design system."
+          ]
+        },
         "seo": {
           "title": "Mélangeur de couleurs en ligne — RGB · HSL · OKLCH, gratuit",
           "description": "Mélangez deux couleurs en RGB, HSL ou OKLCH. Aperçu live, curseur de ratio, échelle d'interpolation complète. 100% dans le navigateur — aucun upload.",
@@ -3146,6 +3842,18 @@
       "blindness": {
         "name": "Simulateur de daltonisme",
         "description": "Simulez comment une couleur ou une image est perçue par les personnes daltoniennes — protanopie, deutéranopie, tritanopie, achromatopsie.",
+        "content": {
+          "howItWorks": [
+            "Basculez entre le mode couleur et le mode image.",
+            "Saisissez une couleur ou déposez un PNG/JPG à tester.",
+            "Choisissez le trouble pour comparer l'original à la vue simulée."
+          ],
+          "features": [
+            "Simule la protanopie, la deutéranopie, la tritanopie et l'achromatopsie totale.",
+            "Fonctionne sur un seul échantillon ou une image entière, côte à côte avec l'original.",
+            "Vérifie si vos états d'interface et vos graphiques restent lisibles pour les déficiences visuelles."
+          ]
+        },
         "seo": {
           "title": "Simulateur de daltonisme — Vérifier l'accessibilité",
           "description": "Vérifiez couleurs et images face aux déficiences visuelles — protanopie, deutéranopie, tritanopie, achromatopsie. 100% dans le navigateur — aucun upload.",
@@ -3326,6 +4034,18 @@
       "barcode-generate": {
         "name": "Générateur de code-barres",
         "description": "Générez des codes-barres Code 128, EAN-13 et EAN-8 en SVG. Ajustez hauteur, largeur de module et libellé.",
+        "content": {
+          "howItWorks": [
+            "Choisissez une symbologie — Code 128, EAN-13 ou EAN-8 — et saisissez votre valeur ou vos chiffres.",
+            "Réglez la hauteur des barres, la largeur de module, la marge et les couleurs avant-plan/arrière-plan.",
+            "Le code-barres se met à jour en direct ; téléchargez-le en SVG ou copiez son code SVG."
+          ],
+          "features": [
+            "Encode le Code 128 (ASCII complet) ainsi que les codes produits EAN-13 et EAN-8 du commerce.",
+            "Calcule automatiquement la clé de contrôle EAN et signale toute valeur invalide pour le format choisi.",
+            "Export en SVG vectoriel avec libellé optionnel — net à n'importe quelle taille d'impression pour étiquettes et emballages."
+          ]
+        },
         "seo": {
           "title": "Générateur de code-barres — Code 128, EAN-13, EAN-8",
           "description": "Créez des codes-barres Code 128, EAN-13 et EAN-8 en SVG net. Hauteur, largeur de module et libellé ajustables. 100% dans le navigateur — aucun upload.",
@@ -3359,6 +4079,18 @@
       "barcode-scan": {
         "name": "Lecteur de code-barres",
         "description": "Décodez les codes-barres depuis une image — Code 128, EAN-13, EAN-8, ITF, Data Matrix et plus. Utilise l'API native BarcodeDetector du navigateur.",
+        "content": {
+          "howItWorks": [
+            "Déposez une image de code-barres ou choisissez un PNG, JPG ou WebP depuis votre appareil.",
+            "L'API native BarcodeDetector le lit instantanément — le format et la valeur décodée s'affichent.",
+            "Copiez la valeur décodée pour l'utiliser dans votre inventaire, catalogue ou flux d'expédition."
+          ],
+          "features": [
+            "Décode les EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, Codabar, ITF, Data Matrix, Aztec, PDF417 et QR codes.",
+            "Lit depuis une image fixe — pratique pour vérifier la photo d'une étiquette ou la capture d'un code.",
+            "S'appuie sur l'API BarcodeDetector intégrée au navigateur : l'image est décodée sur votre appareil, jamais envoyée."
+          ]
+        },
         "seo": {
           "title": "Lecteur de code-barres — EAN, Code 128 depuis image",
           "description": "Décodez n'importe quel code-barres depuis une image dans votre navigateur — EAN, Code 128, Code 39, ITF, Data Matrix et plus. 100% local, aucun upload.",
@@ -3392,6 +4124,18 @@
       "skills-browse": {
         "name": "Explorer et installer des skills",
         "description": "Découvrez les skills les plus populaires de skills.sh (depuis toujours, tendance 24 h ou en vogue), cherchez dans le catalogue, sélectionnez ceux qui vous intéressent et obtenez un one-liner shell qui les installe tous.",
+        "content": {
+          "howItWorks": [
+            "Parcourez les onglets Depuis toujours, Tendance 24 h et En vogue, ou tapez 2 caractères ou plus pour interroger le catalogue skills.sh.",
+            "Cochez les skills voulus dans les résultats — chacun affiche sa source, son nombre d'installations et un badge Officiel le cas échéant.",
+            "Réglez les agents, les options et le style de sortie, puis copiez le one-liner généré ou téléchargez-le en install-skills.sh."
+          ],
+          "features": [
+            "Révèle les skills populaires par installations cumulées, tendance sur 24 h et progressions du moment, avec leur nombre d'installations et leur évolution.",
+            "Permet une multi-sélection à travers les recherches et les onglets, puis transforme le panier entier en une chaîne de commandes npx skills add.",
+            "Chaque résultat renvoie directement vers sa page skills.sh, et les mêmes options d'agents et d'options s'appliquent à tous les skills choisis."
+          ]
+        },
         "seo": {
           "title": "Explorer les skills skills.sh — Tendance + générateur",
           "description": "Skills populaires et tendances de skills.sh — classements de toujours, 24 h, en vogue. Cherchez, multi-sélectionnez, copiez un one-liner shell. Multi-CLI.",
@@ -3459,6 +4203,18 @@
       "skills": {
         "name": "Installateur de skills",
         "description": "Collez vos commandes npx skills add, choisissez agents et options, et obtenez un one-liner shell pour tout installer d'un coup.",
+        "content": {
+          "howItWorks": [
+            "Collez vos lignes npx skills add — chaque ligne, ou un raccourci comme anthropics/skills@web-design, est analysée et dédupliquée.",
+            "Activez les agents (Claude Code, Cursor, Codex, Gemini CLI, Copilot ou Tous) et les options comme Global -g, Sans confirmation -y, Copier --copy ou Recherche profonde.",
+            "Choisissez une sortie multi-ligne ou sur une seule ligne, puis copiez le one-liner combiné ou téléchargez-le en install-skills.sh."
+          ],
+          "features": [
+            "Fusionne plusieurs commandes npx skills add en une seule ligne shell reliée par && pour équiper une machine neuve d'un seul collage.",
+            "Applique vos agents et options à chaque commande, y compris --agent '*' pour viser tous les CLI compatibles d'un coup.",
+            "Reconnaît les jetons npx, skills, add et -s/--skill, conserve les options inconnues et ignore les lignes # et les doublons."
+          ]
+        },
         "seo": {
           "title": "Installateur de skills — Combiner npx skills add",
           "description": "Collez plusieurs lignes npx skills add, choisissez agents et options, copiez un one-liner shell. 100% local dans votre navigateur, aucun envoi.",
