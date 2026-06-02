@@ -71,7 +71,7 @@ describe('stripPageActions', () => {
     const annotAfter = ctx.lookup(uriAnnotRef) as PDFDict;
     const action = annotAfter.get(PDFName.of('A')) as PDFDict;
     expect(action).toBeDefined();
-    expect((action.get(PDFName.of('S')) as PDFName).encodedName).toBe('/URI');
+    expect((action.get(PDFName.of('S')) as PDFName).asString()).toBe('/URI');
   });
 
   it('removes /AA from annotations', async () => {
@@ -177,7 +177,7 @@ describe('stripPageActions', () => {
         if (action) {
           const actionDict = (action instanceof PDFRef ? result.context.lookup(action) : action) as PDFDict;
           const subtype = actionDict.get(PDFName.of('S')) as PDFName;
-          expect(subtype.encodedName).not.toBe('/JavaScript');
+          expect(subtype.asString()).not.toBe('/JavaScript');
         }
       }
     }

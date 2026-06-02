@@ -149,7 +149,10 @@ describe('resizePdf', () => {
   });
 
   it('accepts ArrayBuffer input', async () => {
-    const buf = a4Pdf.buffer.slice(a4Pdf.byteOffset, a4Pdf.byteOffset + a4Pdf.byteLength);
+    const buf = a4Pdf.buffer.slice(
+      a4Pdf.byteOffset,
+      a4Pdf.byteOffset + a4Pdf.byteLength,
+    ) as ArrayBuffer;
     const result = await resizePdf(buf, {
       widthPt: 612,
       heightPt: 792,
