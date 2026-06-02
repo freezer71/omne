@@ -3,7 +3,7 @@ import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/regis
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(83);
+    expect(TOOLS).toHaveLength(88);
   });
 
   it('exposes the 6 audio tools', () => {
@@ -84,7 +84,7 @@ describe('TOOLS registry', () => {
   });
 
   it('file-driven tools declare at least one accepted MIME; pure-text tools declare none', () => {
-    const TEXT_ONLY_CATEGORIES = new Set(['password', 'text', 'encode', 'dev']);
+    const TEXT_ONLY_CATEGORIES = new Set(['password', 'text', 'reading', 'encode', 'dev']);
     // Some categories are mixed: a tool may operate on text input only
     // (e.g. `color/convert`, `color/contrast`, `qr/generate`) while another
     // in the same category accepts files (e.g. `color/palette`, `qr/scan`).

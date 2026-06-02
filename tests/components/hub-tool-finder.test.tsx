@@ -50,6 +50,7 @@ const categoryLabels = {
   password: 'Password tools',
   json: 'JSON tools',
   text: 'Text tools',
+  reading: 'Reading & accessibility',
   encode: 'Encoding tools',
   qr: 'QR & barcodes',
   color: 'Color tools',

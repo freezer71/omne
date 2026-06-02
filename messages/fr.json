@@ -63,7 +63,8 @@
       "qr": "QR et codes-barres",
       "color": "Outils couleur",
       "utility": "Utilitaires",
-      "dev": "Outils développeur"
+      "dev": "Outils développeur",
+      "reading": "Lecture & accessibilité"
     },
     "comingSoon": "Bientôt disponible"
   },
@@ -4260,6 +4261,301 @@
           "charsTemplate": "{n} car."
         }
       }
+    },
+    "reading": {
+      "focus": {
+        "name": "Lecture facilitée",
+        "description": "Met en gras le début de chaque mot pour guider l'œil et lire plus vite — une aide utile en cas de dyslexie ou de TDAH.",
+        "content": {
+          "howItWorks": [
+            "Collez votre texte ou déposez un fichier .txt ou PDF — il est lu dans votre navigateur et n'est jamais envoyé.",
+            "Réglez l'intensité du focus, la police, la taille et le filtre de couleur ; l'aperçu se met à jour instantanément.",
+            "Téléchargez le résultat en page HTML autonome ou en PDF pour le lire ou l'imprimer partout."
+          ],
+          "features": [
+            "Met en gras les premières lettres de chaque mot — une aide de type « bionic reading » à trois intensités.",
+            "Police OpenDyslexic ou sans-serif épurée, avec taille, interligne et filtre de couleur réglables.",
+            "100% dans votre navigateur — collez des documents privés sans que rien ne quitte votre appareil."
+          ]
+        },
+        "seo": {
+          "title": "Lecture facilitée — Aide à la lecture (gratuit, sans upload)",
+          "description": "Rendez un texte plus facile à lire en mettant en gras le début de chaque mot. Intensité réglable, police OpenDyslexic et filtres de couleur. Gratuit, 100% dans le navigateur.",
+          "keywords": [
+            "lecture facilitée en ligne",
+            "bionic reading français",
+            "mettre en gras début des mots",
+            "lecture rapide texte",
+            "aide à la lecture dyslexie",
+            "lecture facilitée sans upload"
+          ],
+          "ogTitle": "Lecture facilitée · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Texte",
+          "inputPlaceholder": "Collez ou saisissez votre texte ici…",
+          "dropHint": "ou déposez un fichier .txt / PDF",
+          "selectButton": "Choisir un fichier",
+          "clearButton": "Effacer",
+          "sampleButton": "Exemple",
+          "sampleText": "Lire devrait être facile, pas épuisant.\n\nCet exemple montre comment une aide à la lecture guide l'œil d'une ligne à l'autre. Augmentez l'intensité, choisissez une police et un filtre de couleur, puis téléchargez le résultat pour le lire partout.",
+          "charsTemplate": "{n} caractères",
+          "intensityLabel": "Intensité du focus",
+          "intensityLow": "Faible",
+          "intensityMedium": "Moyenne",
+          "intensityHigh": "Forte",
+          "fontLabel": "Police",
+          "fontOpendyslexic": "OpenDyslexic",
+          "fontSans": "Sans-serif",
+          "sizeLabel": "Taille du texte",
+          "lineHeightLabel": "Interligne",
+          "tintLabel": "Filtre de couleur",
+          "tintWhite": "Blanc",
+          "tintCream": "Crème",
+          "tintPeach": "Pêche",
+          "tintMint": "Menthe",
+          "tintSky": "Ciel",
+          "tintGrey": "Gris",
+          "tintDark": "Sombre",
+          "previewLabel": "Aperçu",
+          "empty": "Votre texte en lecture facilitée apparaîtra ici.",
+          "downloadHtml": "Télécharger HTML",
+          "downloadPdf": "Télécharger PDF",
+          "busy": "Traitement…",
+          "error": "Une erreur est survenue. Essayez un autre fichier ou texte."
+        }
+      },
+      "dyslexia-font": {
+        "name": "Mise en forme dyslexie",
+        "description": "Reformatez n'importe quel texte avec la police OpenDyslexic, un espacement généreux et un filtre de couleur apaisant — puis exportez en HTML ou PDF.",
+        "content": {
+          "howItWorks": [
+            "Collez du texte ou déposez un fichier .txt ou PDF pour le réagencer dans votre navigateur.",
+            "Choisissez une police, un filtre de couleur, une taille et les espacements lettres, mots et lignes — l'aperçu est live.",
+            "Téléchargez une page HTML autonome ou un PDF avec la police intégrée, prêt à lire ou imprimer."
+          ],
+          "features": [
+            "OpenDyslexic et d'autres polices lisibles, avec des filtres de couleur crème et de type Irlen.",
+            "Ajustez finement l'espacement des lettres, des mots, l'interligne, l'espacement des paragraphes et la largeur de ligne.",
+            "Export en HTML portable (police intégrée) ou en PDF prêt à imprimer — tout est généré localement."
+          ]
+        },
+        "seo": {
+          "title": "Mise en forme dyslexie — Texte OpenDyslexic en PDF, gratuit",
+          "description": "Reformatez un texte avec la police OpenDyslexic, un large espacement et des filtres de couleur pour une lecture plus facile. Export HTML ou PDF. 100% dans le navigateur, sans upload.",
+          "keywords": [
+            "texte adapté dyslexie",
+            "convertisseur opendyslexic",
+            "augmenter espacement des lettres",
+            "filtre de couleur lecture",
+            "rendre un texte dyslexie",
+            "texte vers pdf opendyslexic"
+          ],
+          "ogTitle": "Mise en forme dyslexie · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Texte",
+          "inputPlaceholder": "Collez ou saisissez votre texte ici…",
+          "dropHint": "ou déposez un fichier .txt / PDF",
+          "selectButton": "Choisir un fichier",
+          "clearButton": "Effacer",
+          "sampleButton": "Exemple",
+          "sampleText": "Lire devrait être facile, pas épuisant.\n\nCet exemple montre comment l'espacement, la police et le filtre de couleur changent l'aspect des mots sur la page. Ajustez les réglages et voyez le texte devenir plus calme et plus clair à lire.",
+          "charsTemplate": "{n} caractères",
+          "fontLabel": "Police",
+          "fontOpendyslexic": "OpenDyslexic",
+          "fontSans": "Sans-serif",
+          "fontSerif": "Serif",
+          "fontMono": "Monospace",
+          "tintLabel": "Filtre de couleur",
+          "tintWhite": "Blanc",
+          "tintCream": "Crème",
+          "tintPeach": "Pêche",
+          "tintMint": "Menthe",
+          "tintSky": "Ciel",
+          "tintGrey": "Gris",
+          "tintDark": "Sombre",
+          "sizeLabel": "Taille du texte",
+          "lineHeightLabel": "Interligne",
+          "letterSpacingLabel": "Espacement des lettres",
+          "wordSpacingLabel": "Espacement des mots",
+          "paragraphSpacingLabel": "Espacement des paragraphes",
+          "lineWidthLabel": "Largeur de ligne",
+          "alignLabel": "Alignement",
+          "alignLeft": "Gauche",
+          "alignJustify": "Justifié",
+          "alignCenter": "Centré",
+          "previewLabel": "Aperçu",
+          "empty": "Votre texte mis en forme apparaîtra ici.",
+          "downloadHtml": "Télécharger HTML",
+          "downloadPdf": "Télécharger PDF",
+          "busy": "Traitement…",
+          "error": "Une erreur est survenue. Essayez un autre fichier ou texte."
+        }
+      },
+      "pdf-dyslexia": {
+        "name": "PDF en police dyslexie (mise en page conservée)",
+        "description": "Remplace la police d'un PDF par OpenDyslexic en conservant les images, les colonnes et la mise en page d'origine.",
+        "content": {
+          "howItWorks": [
+            "Déposez un PDF — il est lu dans votre navigateur, images et mise en page comprises, et rien n'est envoyé.",
+            "Choisissez OpenDyslexic, une couleur de texte et une couleur de fond ; l'aperçu redessine la page en direct.",
+            "Téléchargez un nouveau PDF identique à l'original mais avec une police adaptée à la dyslexie."
+          ],
+          "features": [
+            "Conserve les images, colonnes et positions d'origine — seule la police du texte change.",
+            "Chaque bloc de texte est réajusté à sa largeur d'origine, pour préserver la mise en page.",
+            "S'exécute entièrement dans votre navigateur avec OpenDyslexic intégrée — votre PDF ne quitte jamais votre appareil."
+          ]
+        },
+        "seo": {
+          "title": "PDF en police dyslexie — mise en page & images conservées",
+          "description": "Changez la police d'un PDF en OpenDyslexic en gardant les images, colonnes et mise en page d'origine. Réexport en PDF adapté à la dyslexie. 100% dans le navigateur, sans upload.",
+          "keywords": [
+            "changer la police d'un pdf en opendyslexic",
+            "pdf police dyslexie mise en page",
+            "rendre un pdf dyslexie",
+            "remplacer la police d'un pdf",
+            "pdf opendyslexic",
+            "police accessible pdf"
+          ],
+          "ogTitle": "PDF dyslexie · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choisir un PDF",
+          "dropHint": "Déposez un PDF ici, ou choisissez un fichier",
+          "empty": "Déposez un PDF pour le voir réaffiché avec une police adaptée à la dyslexie.",
+          "loading": "Lecture du PDF…",
+          "fontLabel": "Police",
+          "fontOpendyslexic": "OpenDyslexic",
+          "fontSans": "Sans-serif",
+          "textColorLabel": "Couleur du texte",
+          "bgColorLabel": "Fond",
+          "prevPage": "Précédent",
+          "nextPage": "Suivant",
+          "pageTemplate": "Page {n} / {total}",
+          "previewLabel": "Aperçu",
+          "downloadPdf": "Télécharger PDF",
+          "busy": "Génération du PDF…",
+          "error": "Impossible de lire ce PDF. Il est peut-être scanné (image seule) ou protégé par mot de passe.",
+          "note": "Idéal pour les PDF dont le texte est sélectionnable sur fond uni. Le texte sur photos ou zones colorées peut faire apparaître un cache ; les PDF scannés n'ont pas de texte à convertir.",
+          "exportError": "Impossible de générer le PDF. Certaines pages utilisent peut-être des polices ou des caractères inhabituels — réessayez ou changez de fichier.",
+          "exportModeLabel": "Exporter en",
+          "exportModeVector": "Texte sélectionnable",
+          "exportModeRaster": "Image (plus fluide)",
+          "exportModeHint": "L’image est le mode par défaut pour un défilement fluide — chaque page est aplatie en image. Choisissez Texte sélectionnable pour conserver une vraie couche de texte (lisible par lecteur d’écran), mais c’est plus lourd à faire défiler sur les PDF denses."
+        }
+      },
+      "read-aloud": {
+        "name": "Lecture à voix haute",
+        "description": "Écoutez n'importe quel texte lu à voix haute, à vitesse réglable, avec les voix intégrées à votre appareil — chaque mot est surligné au fil de la lecture.",
+        "content": {
+          "howItWorks": [
+            "Collez du texte ou déposez un fichier .txt ou PDF pour le charger dans le lecteur.",
+            "Choisissez une voix, réglez la vitesse et la hauteur, puis appuyez sur Lire.",
+            "Suivez la lecture pendant que chaque mot est surligné ; mettez en pause, reprenez ou arrêtez à tout moment."
+          ],
+          "features": [
+            "Utilise les voix de synthèse intégrées à votre appareil — les voix locales gardent tout privé.",
+            "Vitesse et hauteur de lecture réglables, avec le mot en cours surligné au fil de la voix.",
+            "Idéal pour la relecture et pour les lecteurs qui assimilent mieux le texte à l'oreille."
+          ]
+        },
+        "seo": {
+          "title": "Lecture à voix haute — Synthèse vocale gratuite dans le navigateur",
+          "description": "Synthèse vocale gratuite qui lit n'importe quel texte à voix haute, à vitesse réglable et avec surlignage des mots, via les voix de votre appareil. Dans votre navigateur.",
+          "keywords": [
+            "synthèse vocale en ligne",
+            "lire un texte à voix haute gratuit",
+            "text to speech navigateur",
+            "écouter un texte",
+            "synthèse vocale dyslexie",
+            "lecture à voix haute sans upload"
+          ],
+          "ogTitle": "Lecture à voix haute · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Texte",
+          "inputPlaceholder": "Collez ou saisissez le texte à lire à voix haute…",
+          "dropHint": "ou déposez un fichier .txt / PDF",
+          "selectButton": "Choisir un fichier",
+          "clearButton": "Effacer",
+          "sampleButton": "Exemple",
+          "sampleText": "Écouter peut rendre un texte difficile plus facile à suivre. Appuyez sur Lire, puis regardez chaque mot s'allumer au fil de la lecture. Réglez la vitesse jusqu'à ce que ce soit confortable.",
+          "charsTemplate": "{n} caractères",
+          "voiceLabel": "Voix",
+          "rateLabel": "Vitesse",
+          "pitchLabel": "Hauteur",
+          "play": "Lire",
+          "pause": "Pause",
+          "resume": "Reprendre",
+          "stop": "Arrêter",
+          "unsupported": "Votre navigateur ne prend pas en charge la synthèse vocale. Essayez une version récente de Chrome, Edge ou Safari.",
+          "onDeviceNote": "Utilise les voix intégrées à votre appareil — le texte reste sur votre appareil.",
+          "remoteWarning": "Votre navigateur ne propose que des voix cloud ; avec celles-ci, le texte peut être envoyé au fournisseur de voix.",
+          "noVoices": "Aucune voix disponible",
+          "error": "Une erreur est survenue. Essayez un autre fichier ou texte."
+        }
+      },
+      "immersive": {
+        "name": "Lecteur immersif",
+        "description": "Lisez phrase par phrase avec une règle de surlignage, un arrière-plan estompé et un filtre de couleur apaisant — concentrez-vous sur une ligne à la fois.",
+        "content": {
+          "howItWorks": [
+            "Collez du texte ou déposez un fichier .txt ou PDF pour le charger dans le lecteur.",
+            "Choisissez une police, une taille et un filtre de couleur, puis activez le mode focus.",
+            "Avancez dans le texte phrase par phrase avec les boutons ou les flèches du clavier."
+          ],
+          "features": [
+            "Surligne la phrase en cours et estompe le reste, comme une règle de lecture.",
+            "Police OpenDyslexic, taille et interligne réglables, et filtres de couleur apaisants.",
+            "Navigation au clavier (flèches) et clic pour sauter — entièrement dans votre navigateur."
+          ]
+        },
+        "seo": {
+          "title": "Lecteur immersif — Règle de lecture & mode focus, gratuit",
+          "description": "Lisez phrase par phrase avec une règle de focus, un texte estompé et des filtres de couleur. Un lecteur immersif adapté à la dyslexie, 100% dans le navigateur, sans upload.",
+          "keywords": [
+            "lecteur immersif en ligne",
+            "règle de lecture outil",
+            "mode focus lecture",
+            "lecture ligne par ligne dyslexie",
+            "lecteur phrase par phrase",
+            "guide de lecture sans upload"
+          ],
+          "ogTitle": "Lecteur immersif · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Texte",
+          "inputPlaceholder": "Collez ou saisissez votre texte ici…",
+          "dropHint": "ou déposez un fichier .txt / PDF",
+          "selectButton": "Choisir un fichier",
+          "clearButton": "Effacer",
+          "sampleButton": "Exemple",
+          "sampleText": "Concentrez-vous sur une phrase à la fois. Le reste de la page s'estompe pour que l'œil ne vagabonde pas.\n\nUtilisez les flèches ou les boutons pour avancer. Choisissez un filtre de couleur et une taille confortable pour lire plus longtemps sans perdre votre place.",
+          "charsTemplate": "{n} caractères",
+          "fontLabel": "Police",
+          "fontOpendyslexic": "OpenDyslexic",
+          "fontSans": "Sans-serif",
+          "fontSerif": "Serif",
+          "tintLabel": "Filtre de couleur",
+          "tintWhite": "Blanc",
+          "tintCream": "Crème",
+          "tintPeach": "Pêche",
+          "tintMint": "Menthe",
+          "tintSky": "Ciel",
+          "tintGrey": "Gris",
+          "tintDark": "Sombre",
+          "sizeLabel": "Taille du texte",
+          "lineHeightLabel": "Interligne",
+          "focusLabel": "Mode focus (surligner une phrase)",
+          "prev": "Précédent",
+          "next": "Suivant",
+          "progressTemplate": "{n} / {total}",
+          "empty": "Votre texte apparaîtra ici, phrase par phrase.",
+          "error": "Une erreur est survenue. Essayez un autre fichier ou texte."
+        }
+      }
     }
   },
   "privacy": {
@@ -4511,6 +4807,24 @@
           "installateur skills"
         ],
         "ogTitle": "Outils développeur · 100 % local"
+      }
+    },
+    "reading": {
+      "name": "Outils de lecture & accessibilité",
+      "intro": "Des outils de lecture adaptés à la dyslexie, qui s'exécutent entièrement dans votre navigateur : reformater un texte avec la police OpenDyslexic et un espacement sur mesure, ajouter une aide à la lecture, écouter par synthèse vocale ou lire phrase par phrase. Rien n'est jamais envoyé.",
+      "seo": {
+        "title": "Outils de lecture & accessibilité — Dyslexie, gratuits",
+        "description": "Outils de lecture gratuits dans le navigateur pour la dyslexie et l'accessibilité : mise en forme OpenDyslexic, aide à la lecture, reformatage de PDF, synthèse vocale et lecteur immersif. Sans upload, sans pistage.",
+        "keywords": [
+          "outils dyslexie en ligne",
+          "outils lecture accessibilité",
+          "opendyslexic",
+          "lecture facilitée",
+          "synthèse vocale",
+          "lecteur immersif",
+          "pdf dyslexie"
+        ],
+        "ogTitle": "Outils de lecture · 100% local"
       }
     }
   }

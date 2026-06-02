@@ -142,6 +142,15 @@ function Utility(props: IconProps) {
   );
 }
 
+function Reading(props: IconProps) {
+  return (
+    <svg {...SVG_PROPS} {...props}>
+      <path d="M12 6.5C10.5 5 8 4.5 5 5v12c3-.5 5.5 0 7 1.5 1.5-1.5 4-2 7-1.5V5c-3-.5-5.5 0-7 1.5Z" />
+      <path d="M12 6.5v12" />
+    </svg>
+  );
+}
+
 const ICONS: Record<ToolCategory, (p: IconProps) => React.ReactElement> = {
   pdf: Pdf,
   video: Video,
@@ -151,6 +160,7 @@ const ICONS: Record<ToolCategory, (p: IconProps) => React.ReactElement> = {
   password: Password,
   json: Json,
   text: Text,
+  reading: Reading,
   encode: Encode,
   qr: Qr,
   color: Color,

@@ -78,6 +78,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **Mot de passe** | Générer · Phrase de passe (Diceware) · Hash (SHA) · bcrypt · Vérificateur de force |
 | **JSON** | Formater · Arborescence · JSONPath · Tableau · CSV ↔ JSON · Diff · Schéma (AJV) |
 | **Texte** | Casse · Compteur · Lorem Ipsum · Diff · Testeur regex · Slugify · Trier les lignes · Échapper/Désechapper · Nettoyeur d'espaces · Aperçu Markdown · Rechercher & Remplacer |
+| **Lecture & accessibilité** | Lecture facilitée (gras de début / « bionic ») · Mise en forme dyslexie (OpenDyslexic + espacement + filtre de couleur → HTML/PDF, ré-agence le texte y compris les PDF) · PDF en police dyslexie (garde images & mise en page, remplace la police sur place) · Lecture à voix haute (synthèse vocale locale) · Lecteur immersif (règle de focus phrase par phrase) |
 | **Encodage** | Base64 · URL · JWT · Hex · Entités HTML · Binaire · Code Morse |
 | **QR** | Générer (WiFi, vCard…) · Scanner (caméra ou image) · Générer code-barres (Code 128 / EAN) · Scanner code-barres |
 | **Couleur** | Convertisseur (hex / rgb / hsl / oklch) · Contraste WCAG · Palette depuis image · Générateur de dégradé · Teintes & nuances · Mélangeur · Simulateur de daltonisme |
@@ -93,7 +94,7 @@ Source de vérité : [`lib/tools/registry.ts`](./lib/tools/registry.ts). Le site
 - **TypeScript** strict
 - **Tailwind v4** — configuration CSS-first (pas de `tailwind.config.js`), tokens dans `@theme inline` de `app/globals.css`
 - **[@ffmpeg/ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm)** pour la vidéo et l'audio — **build multi-thread (`@ffmpeg/core-mt`)** pour paralléliser sur tous les cœurs CPU
-- **[pdf-lib](https://pdf-lib.js.org/)** + **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** pour les PDF
+- **[pdf-lib](https://pdf-lib.js.org/)** + **[@pdf-lib/fontkit](https://github.com/Hopding/fontkit)** + **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** pour les PDF (fontkit intègre la police auto-hébergée **[OpenDyslexic](https://opendyslexic.org/)** dans les PDF de lecture générés)
 - **[@huggingface/transformers](https://huggingface.co/docs/transformers.js)** pour le détourage d'image (modèle ONNX local)
 - **[SVGO](https://github.com/svg/svgo)** pour l'optimisation SVG
 - **[AJV](https://ajv.js.org/)** pour la validation de schémas JSON

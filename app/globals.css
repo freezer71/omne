@@ -22,6 +22,18 @@
   src: url("/fonts/JetBrainsMono-Regular.ttf") format("truetype");
   font-display: swap;
 }
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("/fonts/OpenDyslexic-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("/fonts/OpenDyslexic-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
 
 /* ---------- Design tokens (Vercel / Geist-style) ---------- */
 

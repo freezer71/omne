@@ -4,9 +4,12 @@ import { fileURLToPath } from 'node:url';
 
 const FONTS = [
   { pkg: '@expo-google-fonts/inter', file: '400Regular/Inter_400Regular.ttf', dest: 'Inter-Regular.ttf' },
+  { pkg: '@expo-google-fonts/inter', file: '700Bold/Inter_700Bold.ttf', dest: 'Inter-Bold.ttf' },
   { pkg: '@expo-google-fonts/anton', file: '400Regular/Anton_400Regular.ttf', dest: 'Anton-Regular.ttf' },
   { pkg: '@expo-google-fonts/lora', file: '400Regular/Lora_400Regular.ttf', dest: 'Lora-Regular.ttf' },
   { pkg: '@expo-google-fonts/jetbrains-mono', file: '400Regular/JetBrainsMono_400Regular.ttf', dest: 'JetBrainsMono-Regular.ttf' },
+  { pkg: 'open-dyslexic', file: 'ttf/OpenDyslexic-Regular.ttf', dest: 'OpenDyslexic-Regular.ttf' },
+  { pkg: 'open-dyslexic', file: 'ttf/OpenDyslexic-Bold.ttf', dest: 'OpenDyslexic-Bold.ttf' },
 ];
 
 export async function copyFontAssets(modulesRoot, destDir) {

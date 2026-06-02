@@ -78,6 +78,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **Password** | Generate · Passphrase (Diceware) · Hash (SHA) · bcrypt · Strength meter |
 | **JSON** | Format · Tree · JSONPath · Table · CSV ↔ JSON · Diff · Schema (AJV) |
 | **Text** | Case · Counter · Lorem Ipsum · Diff · Regex tester · Slugify · Sort lines · Escape/Unescape · Whitespace cleaner · Markdown preview · Find & Replace |
+| **Reading & accessibility** | Reading Focus (bold-start / "bionic") · Dyslexia-friendly formatter (OpenDyslexic + spacing + colour overlay → HTML/PDF, reflows text incl. PDFs) · PDF → dyslexia font (keeps images & layout, swaps font in place) · Read aloud (on-device text-to-speech) · Immersive reader (sentence focus ruler) |
 | **Encoding** | Base64 · URL · JWT · Hex · HTML entities · Binary · Morse code |
 | **QR** | Generate (WiFi, vCard…) · Scan (camera or image) · Barcode generate (Code 128 / EAN) · Barcode scan |
 | **Color** | Converter (hex / rgb / hsl / oklch) · WCAG contrast · Palette from image · Gradient builder · Tints & shades · Blender · Color-blindness simulator |
@@ -93,7 +94,7 @@ Source of truth: [`lib/tools/registry.ts`](./lib/tools/registry.ts). The sitemap
 - **TypeScript** (strict)
 - **Tailwind v4** — CSS-first config (no `tailwind.config.js`), tokens in `@theme inline` inside `app/globals.css`
 - **[@ffmpeg/ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm)** for video and audio — **multi-thread build (`@ffmpeg/core-mt`)** to parallelize across CPU cores
-- **[pdf-lib](https://pdf-lib.js.org/)** + **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** for PDFs
+- **[pdf-lib](https://pdf-lib.js.org/)** + **[@pdf-lib/fontkit](https://github.com/Hopding/fontkit)** + **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** for PDFs (fontkit embeds the self-hosted **[OpenDyslexic](https://opendyslexic.org/)** font into generated reading PDFs)
 - **[@huggingface/transformers](https://huggingface.co/docs/transformers.js)** for image background removal (local ONNX model)
 - **[SVGO](https://github.com/svg/svgo)** for SVG optimization
 - **[AJV](https://ajv.js.org/)** for JSON Schema validation

@@ -63,7 +63,8 @@
       "qr": "QR & barcodes",
       "color": "Color tools",
       "utility": "Utilities",
-      "dev": "Developer tools"
+      "dev": "Developer tools",
+      "reading": "Reading & accessibility"
     },
     "comingSoon": "Coming soon"
   },
@@ -4260,6 +4261,301 @@
           "charsTemplate": "{n} chars"
         }
       }
+    },
+    "reading": {
+      "focus": {
+        "name": "Reading Focus",
+        "description": "Bold the start of every word to guide your eye and read faster — a reading aid that helps with dyslexia and ADHD.",
+        "content": {
+          "howItWorks": [
+            "Paste your text, or drop a .txt or PDF file — it is read in your browser and never uploaded.",
+            "Adjust the focus intensity, font, size and colour overlay; the preview updates instantly.",
+            "Download the result as a self-contained HTML page or a PDF to read or print anywhere."
+          ],
+          "features": [
+            "Bolds the leading letters of each word — a bionic-style reading aid with three intensity levels.",
+            "OpenDyslexic or a clean sans-serif font, with adjustable size, line spacing and colour overlay.",
+            "100% in your browser — paste private documents with nothing ever leaving your device."
+          ]
+        },
+        "seo": {
+          "title": "Reading Focus — Bold-Start Reading Aid, Free & No Upload",
+          "description": "Make text easier to read by bolding the start of each word. Adjustable intensity, OpenDyslexic font and colour overlays. Free, 100% in your browser, no upload.",
+          "keywords": [
+            "bionic reading online",
+            "reading focus tool",
+            "bold first letters of words",
+            "speed reading text",
+            "dyslexia reading aid",
+            "free reading focus no upload"
+          ],
+          "ogTitle": "Reading Focus · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Text",
+          "inputPlaceholder": "Paste or type your text here…",
+          "dropHint": "or drop a .txt / PDF file",
+          "selectButton": "Choose file",
+          "clearButton": "Clear",
+          "sampleButton": "Load sample",
+          "sampleText": "Reading should feel easy, not exhausting.\n\nThis short sample shows how a reading focus guides your eye across each line. Turn up the intensity, pick a font and a colour overlay, then download the result to read it anywhere.",
+          "charsTemplate": "{n} chars",
+          "intensityLabel": "Focus intensity",
+          "intensityLow": "Low",
+          "intensityMedium": "Medium",
+          "intensityHigh": "High",
+          "fontLabel": "Font",
+          "fontOpendyslexic": "OpenDyslexic",
+          "fontSans": "Sans-serif",
+          "sizeLabel": "Text size",
+          "lineHeightLabel": "Line spacing",
+          "tintLabel": "Colour overlay",
+          "tintWhite": "White",
+          "tintCream": "Cream",
+          "tintPeach": "Peach",
+          "tintMint": "Mint",
+          "tintSky": "Sky",
+          "tintGrey": "Grey",
+          "tintDark": "Dark",
+          "previewLabel": "Preview",
+          "empty": "Your reading-focus text will appear here.",
+          "downloadHtml": "Download HTML",
+          "downloadPdf": "Download PDF",
+          "busy": "Working…",
+          "error": "Something went wrong. Please try a different file or text."
+        }
+      },
+      "dyslexia-font": {
+        "name": "Dyslexia-Friendly Formatter",
+        "description": "Reformat any text with the OpenDyslexic font, generous spacing and a calming colour overlay — then export it to HTML or PDF.",
+        "content": {
+          "howItWorks": [
+            "Paste text, or drop a .txt or PDF file to reflow it in your browser.",
+            "Choose a font, colour overlay, text size and letter, word and line spacing — the preview updates live.",
+            "Download a self-contained HTML page or a PDF with the font embedded, ready to read or print."
+          ],
+          "features": [
+            "OpenDyslexic and other readable fonts, with cream and Irlen-style colour overlays.",
+            "Fine-tune letter spacing, word spacing, line height, paragraph spacing and line width.",
+            "Export to portable HTML (font embedded) or a print-ready PDF — all generated locally."
+          ]
+        },
+        "seo": {
+          "title": "Dyslexia Font Formatter — OpenDyslexic Text to PDF, Free",
+          "description": "Reformat text with the OpenDyslexic font, wide spacing and colour overlays for easier reading. Export to HTML or PDF. 100% in your browser, no upload.",
+          "keywords": [
+            "dyslexia friendly text",
+            "opendyslexic converter",
+            "increase letter spacing text",
+            "reading colour overlay",
+            "make text dyslexia friendly",
+            "text to opendyslexic pdf"
+          ],
+          "ogTitle": "Dyslexia formatter · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Text",
+          "inputPlaceholder": "Paste or type your text here…",
+          "dropHint": "or drop a .txt / PDF file",
+          "selectButton": "Choose file",
+          "clearButton": "Clear",
+          "sampleButton": "Load sample",
+          "sampleText": "Reading should feel easy, not exhausting.\n\nThis sample shows how spacing, font and colour overlay change the way words look on the page. Adjust the controls and watch the text become calmer and clearer to read.",
+          "charsTemplate": "{n} chars",
+          "fontLabel": "Font",
+          "fontOpendyslexic": "OpenDyslexic",
+          "fontSans": "Sans-serif",
+          "fontSerif": "Serif",
+          "fontMono": "Monospace",
+          "tintLabel": "Colour overlay",
+          "tintWhite": "White",
+          "tintCream": "Cream",
+          "tintPeach": "Peach",
+          "tintMint": "Mint",
+          "tintSky": "Sky",
+          "tintGrey": "Grey",
+          "tintDark": "Dark",
+          "sizeLabel": "Text size",
+          "lineHeightLabel": "Line spacing",
+          "letterSpacingLabel": "Letter spacing",
+          "wordSpacingLabel": "Word spacing",
+          "paragraphSpacingLabel": "Paragraph spacing",
+          "lineWidthLabel": "Line width",
+          "alignLabel": "Alignment",
+          "alignLeft": "Left",
+          "alignJustify": "Justify",
+          "alignCenter": "Center",
+          "previewLabel": "Preview",
+          "empty": "Your formatted text will appear here.",
+          "downloadHtml": "Download HTML",
+          "downloadPdf": "Download PDF",
+          "busy": "Working…",
+          "error": "Something went wrong. Please try a different file or text."
+        }
+      },
+      "pdf-dyslexia": {
+        "name": "PDF to Dyslexia Font (keep layout)",
+        "description": "Swap a PDF's font for OpenDyslexic while keeping the original images, columns and layout intact.",
+        "content": {
+          "howItWorks": [
+            "Drop a PDF — it's read in your browser, images and layout included, and nothing is uploaded.",
+            "Choose OpenDyslexic, a text colour and a background colour; the preview redraws the page live.",
+            "Download a new PDF that looks like the original but with a dyslexia-friendly font."
+          ],
+          "features": [
+            "Keeps the original images, columns and positions — only the text font changes.",
+            "Each text block is refitted to its original width, so the layout stays intact.",
+            "Runs entirely in your browser with OpenDyslexic embedded — your PDF never leaves your device."
+          ]
+        },
+        "seo": {
+          "title": "PDF to Dyslexia Font — Keep Layout & Images, Free",
+          "description": "Change a PDF's font to OpenDyslexic while keeping the original images, columns and layout. Re-export a dyslexia-friendly PDF. 100% in your browser, no upload.",
+          "keywords": [
+            "change pdf font to opendyslexic",
+            "dyslexia font pdf keep layout",
+            "make pdf dyslexia friendly",
+            "replace font in pdf",
+            "opendyslexic pdf",
+            "accessible pdf font"
+          ],
+          "ogTitle": "Dyslexia PDF · 100% local"
+        },
+        "ui": {
+          "selectButton": "Choose PDF",
+          "dropHint": "Drop a PDF here, or choose a file",
+          "empty": "Drop a PDF to see it re-rendered with a dyslexia-friendly font.",
+          "loading": "Reading the PDF…",
+          "fontLabel": "Font",
+          "fontOpendyslexic": "OpenDyslexic",
+          "fontSans": "Sans-serif",
+          "textColorLabel": "Text colour",
+          "bgColorLabel": "Background",
+          "prevPage": "Previous",
+          "nextPage": "Next",
+          "pageTemplate": "Page {n} / {total}",
+          "previewLabel": "Preview",
+          "downloadPdf": "Download PDF",
+          "busy": "Building PDF…",
+          "error": "Could not read that PDF. It may be scanned (image-only) or password-protected.",
+          "note": "Best for PDFs with selectable text on a solid background. Text over photos or coloured areas may show a cover box; scanned PDFs have no text to convert.",
+          "exportError": "Could not generate the PDF. Some pages may use unusual fonts or characters — try again or a different file.",
+          "exportModeLabel": "Export as",
+          "exportModeVector": "Selectable text",
+          "exportModeRaster": "Image (smoother)",
+          "exportModeHint": "Image is the default for smooth scrolling — each page is flattened to a picture. Choose Selectable text to keep a real, screen-reader-friendly text layer, but it can be heavy to scroll on dense PDFs."
+        }
+      },
+      "read-aloud": {
+        "name": "Read Aloud",
+        "description": "Listen to any text read out loud with adjustable speed, using your device's built-in voices — each word is highlighted as it is spoken.",
+        "content": {
+          "howItWorks": [
+            "Paste text, or drop a .txt or PDF file to load it into the reader.",
+            "Pick a voice and adjust the speed and pitch, then press Play.",
+            "Follow along as each word is highlighted; pause, resume or stop at any time."
+          ],
+          "features": [
+            "Uses your device's built-in speech voices — on-device voices keep everything private.",
+            "Adjustable reading speed and pitch, with the current word highlighted as it is spoken.",
+            "Great for proofreading and for readers who absorb text better by listening."
+          ]
+        },
+        "seo": {
+          "title": "Read Aloud — Free Text-to-Speech in Your Browser",
+          "description": "Free text-to-speech that reads any text out loud with adjustable speed and word highlighting, using your device's voices. Runs entirely in your browser.",
+          "keywords": [
+            "text to speech online",
+            "read text aloud free",
+            "tts in browser",
+            "listen to text",
+            "dyslexia text to speech",
+            "read aloud no upload"
+          ],
+          "ogTitle": "Read Aloud · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Text",
+          "inputPlaceholder": "Paste or type the text you want read aloud…",
+          "dropHint": "or drop a .txt / PDF file",
+          "selectButton": "Choose file",
+          "clearButton": "Clear",
+          "sampleButton": "Load sample",
+          "sampleText": "Listening can make hard text easier to follow. Press play, then watch each word light up as it is read aloud. Adjust the speed until it feels comfortable.",
+          "charsTemplate": "{n} chars",
+          "voiceLabel": "Voice",
+          "rateLabel": "Speed",
+          "pitchLabel": "Pitch",
+          "play": "Play",
+          "pause": "Pause",
+          "resume": "Resume",
+          "stop": "Stop",
+          "unsupported": "Your browser does not support speech synthesis. Try a recent version of Chrome, Edge or Safari.",
+          "onDeviceNote": "Using your device's built-in voices — the text stays on your device.",
+          "remoteWarning": "Your browser only offers cloud voices; with these, the text may be sent to the voice provider.",
+          "noVoices": "No voices available",
+          "error": "Something went wrong. Please try a different file or text."
+        }
+      },
+      "immersive": {
+        "name": "Immersive Reader",
+        "description": "Read sentence by sentence with a highlight ruler, dimmed surroundings and a calming colour overlay — focus on one line at a time.",
+        "content": {
+          "howItWorks": [
+            "Paste text, or drop a .txt or PDF file to load it into the reader.",
+            "Choose a font, size and colour overlay, then turn on focus mode.",
+            "Move through the text sentence by sentence with the buttons or your arrow keys."
+          ],
+          "features": [
+            "Highlights the current sentence and dims the rest, like a reading ruler.",
+            "OpenDyslexic font, adjustable size and line spacing, and calming colour overlays.",
+            "Keyboard navigation (arrow keys) and click-to-jump — entirely in your browser."
+          ]
+        },
+        "seo": {
+          "title": "Immersive Reader — Reading Ruler & Focus Mode, Free",
+          "description": "Read sentence by sentence with a focus ruler, dimmed text and colour overlays. A dyslexia-friendly immersive reader that runs 100% in your browser, no upload.",
+          "keywords": [
+            "immersive reader online",
+            "reading ruler tool",
+            "focus mode reading",
+            "line reader dyslexia",
+            "sentence focus reader",
+            "reading guide no upload"
+          ],
+          "ogTitle": "Immersive Reader · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Text",
+          "inputPlaceholder": "Paste or type your text here…",
+          "dropHint": "or drop a .txt / PDF file",
+          "selectButton": "Choose file",
+          "clearButton": "Clear",
+          "sampleButton": "Load sample",
+          "sampleText": "Focus on one sentence at a time. The rest of the page fades back so your eye does not wander.\n\nUse the arrow keys or the buttons to move forward. Pick a colour overlay and a comfortable size to read for longer without losing your place.",
+          "charsTemplate": "{n} chars",
+          "fontLabel": "Font",
+          "fontOpendyslexic": "OpenDyslexic",
+          "fontSans": "Sans-serif",
+          "fontSerif": "Serif",
+          "tintLabel": "Colour overlay",
+          "tintWhite": "White",
+          "tintCream": "Cream",
+          "tintPeach": "Peach",
+          "tintMint": "Mint",
+          "tintSky": "Sky",
+          "tintGrey": "Grey",
+          "tintDark": "Dark",
+          "sizeLabel": "Text size",
+          "lineHeightLabel": "Line spacing",
+          "focusLabel": "Focus mode (highlight one sentence)",
+          "prev": "Previous",
+          "next": "Next",
+          "progressTemplate": "{n} / {total}",
+          "empty": "Your text will appear here, sentence by sentence.",
+          "error": "Something went wrong. Please try a different file or text."
+        }
+      }
     }
   },
   "privacy": {
@@ -4511,6 +4807,24 @@
           "skill installer"
         ],
         "ogTitle": "Developer tools · 100% local"
+      }
+    },
+    "reading": {
+      "name": "Reading & accessibility tools",
+      "intro": "Dyslexia-friendly reading tools that run entirely in your browser: reformat text with the OpenDyslexic font and custom spacing, add a reading focus, listen with text-to-speech, or read sentence by sentence. Nothing is ever uploaded.",
+      "seo": {
+        "title": "Reading & Accessibility Tools — Dyslexia-Friendly, Free",
+        "description": "Free in-browser reading tools for dyslexia and accessibility: OpenDyslexic formatter, reading focus, PDF reformatter, text-to-speech and an immersive reader. No upload, no tracking.",
+        "keywords": [
+          "dyslexia tools online",
+          "reading accessibility tools",
+          "opendyslexic",
+          "bionic reading",
+          "text to speech",
+          "immersive reader",
+          "dyslexia friendly pdf"
+        ],
+        "ogTitle": "Reading tools · 100% local"
       }
     }
   }
