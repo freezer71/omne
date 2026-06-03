@@ -4,7 +4,7 @@ test.describe('/en/reading', () => {
   test('dyslexia-font: loads, previews the sample and enables exports', async ({ page }) => {
     await page.goto('/en/reading/dyslexia-font');
     await expect(
-      page.getByRole('heading', { level: 1, name: /dyslexia-friendly formatter/i }),
+      page.getByRole('heading', { level: 1, name: /text to dyslexia font/i }),
     ).toBeVisible();
 
     await expect(page.getByRole('button', { name: /download pdf/i })).toBeDisabled();
@@ -54,7 +54,7 @@ test.describe('/en/reading', () => {
 
   test('FR locale shows the French category and tool names', async ({ page }) => {
     await page.goto('/fr/reading/focus');
-    await expect(page.getByRole('heading', { level: 1, name: /lecture facilitée/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /lecture guidée/i })).toBeVisible();
   });
 
   test('dyslexia-font: recovers a corrupted PDF text layer with local OCR', async ({ page }) => {

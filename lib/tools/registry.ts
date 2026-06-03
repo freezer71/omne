@@ -709,7 +709,7 @@ export const TOOLS: readonly ToolMeta[] = [
     href: '/reading/focus',
     i18nKey: 'tools.reading.focus',
     keywords: [
-      'bionic reading', 'reading focus', 'bold first letters', 'speed reading', 'dyslexia reading',
+      'bionic reading', 'reading focus', 'guided reading', 'bold first letters', 'speed reading', 'dyslexia reading',
       'lecture rapide', 'lecture facilitée', 'dyslexie', 'lecture guidée',
     ],
     acceptedMime: [],
@@ -721,8 +721,8 @@ export const TOOLS: readonly ToolMeta[] = [
     href: '/reading/dyslexia-font',
     i18nKey: 'tools.reading.dyslexia-font',
     keywords: [
-      'dyslexia font', 'opendyslexic', 'dyslexia friendly', 'readable text', 'letter spacing', 'reading overlay',
-      'police dyslexie', 'texte lisible', 'interligne', 'mise en forme dyslexie',
+      'dyslexia font', 'text to dyslexia font', 'opendyslexic', 'dyslexia friendly', 'readable text', 'letter spacing', 'reading overlay',
+      'police dyslexie', 'texte en police dyslexie', 'texte lisible', 'interligne', 'mise en forme dyslexie',
     ],
     acceptedMime: [],
     status: 'stable',
@@ -733,8 +733,8 @@ export const TOOLS: readonly ToolMeta[] = [
     href: '/reading/pdf-dyslexia',
     i18nKey: 'tools.reading.pdf-dyslexia',
     keywords: [
-      'dyslexia pdf', 'make pdf readable', 'opendyslexic pdf', 'accessible pdf', 'reformat pdf',
-      'pdf dyslexie', 'pdf lisible', 'pdf accessible',
+      'dyslexia pdf', 'pdf to dyslexia font', 'make pdf readable', 'opendyslexic pdf', 'accessible pdf', 'reformat pdf',
+      'pdf dyslexie', 'pdf en police dyslexie', 'pdf lisible', 'pdf accessible',
     ],
     acceptedMime: [],
     status: 'stable',
@@ -757,8 +757,8 @@ export const TOOLS: readonly ToolMeta[] = [
     href: '/reading/immersive',
     i18nKey: 'tools.reading.immersive',
     keywords: [
-      'immersive reader', 'reading ruler', 'focus mode', 'line reader', 'dyslexia reader',
-      'lecteur immersif', 'règle de lecture', 'mode focus', 'lecture concentrée',
+      'immersive reader', 'immersive reading', 'reading ruler', 'focus mode', 'line reader', 'dyslexia reader',
+      'lecteur immersif', 'lecture immersive', 'règle de lecture', 'mode focus', 'lecture concentrée',
     ],
     acceptedMime: [],
     status: 'stable',

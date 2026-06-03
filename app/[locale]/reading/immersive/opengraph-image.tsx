@@ -4,7 +4,7 @@ import { isLocale } from '@/lib/i18n/config';
 export const runtime = 'nodejs';
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = 'omne — Immersive Reader';
+export const alt = 'omne — Immersive Reading';
 
 export default async function Image({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

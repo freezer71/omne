@@ -4264,7 +4264,7 @@
     },
     "reading": {
       "focus": {
-        "name": "Lecture facilitée",
+        "name": "Lecture guidée",
         "description": "Met en gras le début de chaque mot pour guider l'œil et lire plus vite — une aide utile en cas de dyslexie ou de TDAH.",
         "content": {
           "howItWorks": [
@@ -4279,7 +4279,7 @@
           ]
         },
         "seo": {
-          "title": "Lecture facilitée — Aide à la lecture (gratuit, sans upload)",
+          "title": "Lecture guidée — Aide à la lecture (gratuit, sans upload)",
           "description": "Rendez un texte plus facile à lire en mettant en gras le début de chaque mot. Intensité réglable, police OpenDyslexic et filtres de couleur. Gratuit, 100% dans le navigateur.",
           "keywords": [
             "lecture facilitée en ligne",
@@ -4289,7 +4289,7 @@
             "aide à la lecture dyslexie",
             "lecture facilitée sans upload"
           ],
-          "ogTitle": "Lecture facilitée · 100% local"
+          "ogTitle": "Lecture guidée · 100% local"
         },
         "ui": {
           "inputLabel": "Texte",
@@ -4318,7 +4318,7 @@
           "tintGrey": "Gris",
           "tintDark": "Sombre",
           "previewLabel": "Aperçu",
-          "empty": "Votre texte en lecture facilitée apparaîtra ici.",
+          "empty": "Votre texte en lecture guidée apparaîtra ici.",
           "downloadHtml": "Télécharger HTML",
           "downloadPdf": "Télécharger PDF",
           "busy": "Traitement…",
@@ -4332,7 +4332,7 @@
         }
       },
       "dyslexia-font": {
-        "name": "Mise en forme dyslexie",
+        "name": "Texte en police dyslexie",
         "description": "Reformatez n'importe quel texte avec la police OpenDyslexic, un espacement généreux et un filtre de couleur apaisant — puis exportez en HTML ou PDF.",
         "content": {
           "howItWorks": [
@@ -4347,7 +4347,7 @@
           ]
         },
         "seo": {
-          "title": "Mise en forme dyslexie — Texte OpenDyslexic en PDF, gratuit",
+          "title": "Texte en police dyslexie — OpenDyslexic en PDF, gratuit",
           "description": "Reformatez un texte avec la police OpenDyslexic, un large espacement et des filtres de couleur pour une lecture plus facile. Export HTML ou PDF. 100% dans le navigateur, sans upload.",
           "keywords": [
             "texte adapté dyslexie",
@@ -4357,7 +4357,7 @@
             "rendre un texte dyslexie",
             "texte vers pdf opendyslexic"
           ],
-          "ogTitle": "Mise en forme dyslexie · 100% local"
+          "ogTitle": "Texte en police dyslexie · 100% local"
         },
         "ui": {
           "inputLabel": "Texte",
@@ -4406,7 +4406,7 @@
         }
       },
       "pdf-dyslexia": {
-        "name": "PDF en police dyslexie (mise en page conservée)",
+        "name": "PDF en police dyslexie",
         "description": "Remplace la police d'un PDF par OpenDyslexic en conservant les images, les colonnes et la mise en page d'origine.",
         "content": {
           "howItWorks": [
@@ -4431,7 +4431,7 @@
             "pdf opendyslexic",
             "police accessible pdf"
           ],
-          "ogTitle": "PDF dyslexie · 100% local"
+          "ogTitle": "PDF en police dyslexie · 100% local"
         },
         "ui": {
           "selectButton": "Choisir un PDF",
@@ -4456,7 +4456,7 @@
           "exportModeVector": "Texte sélectionnable",
           "exportModeRaster": "Image (plus fluide)",
           "exportModeHint": "L’image est le mode par défaut pour un défilement fluide — chaque page est aplatie en image. Choisissez Texte sélectionnable pour conserver une vraie couche de texte (lisible par lecteur d’écran), mais c’est plus lourd à faire défiler sur les PDF denses.",
-          "corruptWarning": "Attention : le calque texte de ce PDF est corrompu (ligatures cassées), le texte converti hérite donc de caractères erronés. Pour un texte propre, utilisez les outils Police dyslexie ou Lecture facilitée — ils relisent les pages par OCR local."
+          "corruptWarning": "Attention : le calque texte de ce PDF est corrompu (ligatures cassées), le texte converti hérite donc de caractères erronés. Pour un texte propre, utilisez les outils Texte en police dyslexie ou Lecture guidée — ils relisent les pages par OCR local."
         }
       },
       "read-aloud": {
@@ -4517,7 +4517,7 @@
         }
       },
       "immersive": {
-        "name": "Lecteur immersif",
+        "name": "Lecture immersive",
         "description": "Lisez phrase par phrase avec une règle de surlignage, un arrière-plan estompé et un filtre de couleur apaisant — concentrez-vous sur une ligne à la fois.",
         "content": {
           "howItWorks": [
@@ -4532,8 +4532,8 @@
           ]
         },
         "seo": {
-          "title": "Lecteur immersif — Règle de lecture & mode focus, gratuit",
-          "description": "Lisez phrase par phrase avec une règle de focus, un texte estompé et des filtres de couleur. Un lecteur immersif adapté à la dyslexie, 100% dans le navigateur, sans upload.",
+          "title": "Lecture immersive — Règle de lecture & mode focus, gratuit",
+          "description": "Lisez phrase par phrase avec une règle de focus, un texte estompé et des filtres de couleur. Une lecture immersive adaptée à la dyslexie, 100% dans le navigateur, sans upload.",
           "keywords": [
             "lecteur immersif en ligne",
             "règle de lecture outil",
@@ -4542,7 +4542,7 @@
             "lecteur phrase par phrase",
             "guide de lecture sans upload"
           ],
-          "ogTitle": "Lecteur immersif · 100% local"
+          "ogTitle": "Lecture immersive · 100% local"
         },
         "ui": {
           "inputLabel": "Texte",
@@ -4839,7 +4839,7 @@
       "intro": "Des outils de lecture adaptés à la dyslexie, qui s'exécutent entièrement dans votre navigateur : reformater un texte avec la police OpenDyslexic et un espacement sur mesure, ajouter une aide à la lecture, écouter par synthèse vocale ou lire phrase par phrase. Rien n'est jamais envoyé.",
       "seo": {
         "title": "Outils de lecture & accessibilité — Dyslexie, gratuits",
-        "description": "Outils de lecture gratuits dans le navigateur pour la dyslexie et l'accessibilité : mise en forme OpenDyslexic, aide à la lecture, reformatage de PDF, synthèse vocale et lecteur immersif. Sans upload, sans pistage.",
+        "description": "Outils de lecture gratuits dans le navigateur pour la dyslexie et l'accessibilité : mise en forme OpenDyslexic, aide à la lecture, reformatage de PDF, synthèse vocale et lecture immersive. Sans upload, sans pistage.",
         "keywords": [
           "outils dyslexie en ligne",
           "outils lecture accessibilité",
