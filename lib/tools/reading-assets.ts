@@ -128,7 +128,10 @@ export type FontSwapOptions = { font: ReadingFontKey; textColor: string; bgColor
 export async function openPdfDoc(bytes: Uint8Array): Promise<PdfDocLike> {
   const pdfjs = await import('pdfjs-dist');
   await configurePdfjsWorker(pdfjs);
-  return (await pdfjs.getDocument({ data: bytes }).promise) as unknown as PdfDocLike;
+  // pdf.js transfers (detaches) the ArrayBuffer it is given, which would empty
+  // the caller's bytes — pass it a copy so the original stays usable for the
+  // vector export (pdf-lib) afterwards.
+  return (await pdfjs.getDocument({ data: bytes.slice() }).promise) as unknown as PdfDocLike;
 }
 
 export async function extractAllItems(doc: PdfDocLike): Promise<FontSwapItem[][]> {
