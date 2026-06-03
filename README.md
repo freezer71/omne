@@ -27,7 +27,7 @@ These are not feature ideas — they are constraints. Everything in the codebase
 - 🛡️ **Privacy by design.** Files never leave the device. Processing happens in the browser, in WebAssembly when needed. There is no "trust us, we'll delete it later" — there is no server to delete from.
 - 🔍 **Verifiable, not promised.** Open the DevTools Network tab during a conversion: you should see zero outbound requests. If you ever do, that's a bug, not a feature.
 - 🚫 **No tracking, ever.** No analytics, no telemetry, no cookies, no third-party CDN, no fingerprinting. We don't know who you are and we don't want to know.
-- 🧱 **Self-hosted heavy assets.** ffmpeg.wasm, pdf.js worker, the QR scanner and the background-removal ONNX model are all served from this origin so processing doesn't leak metadata to a CDN.
+- 🧱 **Self-hosted heavy assets.** ffmpeg.wasm, pdf.js worker, the QR scanner, the OCR engine (tesseract.js + its language data) and the background-removal ONNX model are all served from this origin so processing doesn't leak metadata to a CDN.
 - 🆓 **No friction.** No signup, no account, no paywall, no rate limit, no "premium tier". Open the page, do the thing, close the tab.
 - 🌍 **Open source, built in the open.** Every line is auditable on [github.com/freezer71/omne](https://github.com/freezer71/omne) — also linked from the site header and footer. If you can't verify a claim by reading the code, the claim doesn't count.
 - 🌗 **Accessible and bilingual.** Light & dark themes with pre-paint anti-flash, English & French at full parity (enforced by CI), and an `⌘K` palette for keyboard users.
@@ -39,7 +39,7 @@ These are not feature ideas — they are constraints. Everything in the codebase
 This is the reason the project exists, not a marketing line:
 
 - Every conversion runs in the browser via Web APIs, WebAssembly and Web Workers.
-- `@ffmpeg/ffmpeg` (video, audio) and `pdfjs-dist` (PDF) are **self-hosted** under `/public/ffmpeg/` and `/public/pdfjs/` — the DevTools Network tab must show **zero** outbound traffic during processing.
+- `@ffmpeg/ffmpeg` (video, audio), `pdfjs-dist` (PDF) and `tesseract.js` (OCR, with its English + French models) are **self-hosted** under `/public/ffmpeg/`, `/public/pdfjs/` and `/public/ocr/` — the DevTools Network tab must show **zero** outbound traffic during processing, OCR included.
 - The app serves `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp` to enable `SharedArrayBuffer` (required by the multi-thread ffmpeg build). Because every asset is same-origin, this hardens the page instead of breaking anything.
 - No external services: no Sentry, no Google Analytics, no tracking pixel, no asset CDN.
 
@@ -52,16 +52,16 @@ Any contribution that would break that promise (server-side processing, telemetr
 Requirements: Node.js 20+.
 
 ```bash
-npm install   # runs the postinstall that copies ffmpeg + pdf.js + qr-scanner into /public
+npm install   # runs the postinstall that copies ffmpeg + pdf.js + qr-scanner + OCR into /public
 npm run dev   # http://localhost:3000
 ```
 
 > ⚠️ `npm run dev` deliberately uses **Webpack** (`next dev --webpack`). Turbopack panics on HMR through `[locale]` dynamic routes. `npm run dev:turbo` exists for spot checks only.
 
-After a clean clone, if ffmpeg/pdf.js features fail, re-run:
+After a clean clone, if ffmpeg/pdf.js/OCR features fail, re-run:
 
 ```bash
-node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs
+node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs && node scripts/copy-ocr.mjs
 ```
 
 ---
@@ -78,7 +78,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **Password** | Generate · Passphrase (Diceware) · Hash (SHA) · bcrypt · Strength meter |
 | **JSON** | Format · Tree · JSONPath · Table · CSV ↔ JSON · Diff · Schema (AJV) |
 | **Text** | Case · Counter · Lorem Ipsum · Diff · Regex tester · Slugify · Sort lines · Escape/Unescape · Whitespace cleaner · Markdown preview · Find & Replace |
-| **Reading & accessibility** | Reading Focus (bold-start / "bionic") · Dyslexia-friendly formatter (OpenDyslexic + spacing + colour overlay → HTML/PDF, reflows text incl. PDFs) · PDF → dyslexia font (keeps images & layout, swaps font in place) · Read aloud (on-device text-to-speech) · Immersive reader (sentence focus ruler) |
+| **Reading & accessibility** | Reading Focus (bold-start / "bionic") · Dyslexia-friendly formatter (OpenDyslexic + spacing + colour overlay → HTML/PDF, reflows text incl. PDFs) · PDF → dyslexia font (keeps images & layout, swaps font in place) · Read aloud (on-device text-to-speech) · Immersive reader (sentence focus ruler) — the text tools auto-detect corrupted PDF text layers (broken ligatures from Pages/Quartz exports) and scanned PDFs, and recover the text with on-device OCR (English + French) |
 | **Encoding** | Base64 · URL · JWT · Hex · HTML entities · Binary · Morse code |
 | **QR** | Generate (WiFi, vCard…) · Scan (camera or image) · Barcode generate (Code 128 / EAN) · Barcode scan |
 | **Color** | Converter (hex / rgb / hsl / oklch) · WCAG contrast · Palette from image · Gradient builder · Tints & shades · Blender · Color-blindness simulator |
@@ -95,6 +95,7 @@ Source of truth: [`lib/tools/registry.ts`](./lib/tools/registry.ts). The sitemap
 - **Tailwind v4** — CSS-first config (no `tailwind.config.js`), tokens in `@theme inline` inside `app/globals.css`
 - **[@ffmpeg/ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm)** for video and audio — **multi-thread build (`@ffmpeg/core-mt`)** to parallelize across CPU cores
 - **[pdf-lib](https://pdf-lib.js.org/)** + **[@pdf-lib/fontkit](https://github.com/Hopding/fontkit)** + **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** for PDFs (fontkit embeds the self-hosted **[OpenDyslexic](https://opendyslexic.org/)** font into generated reading PDFs)
+- **[tesseract.js](https://tesseract.projectnaptha.com/)** for on-device OCR — recovers text from corrupted PDF text layers and scanned PDFs in the reading tools (wasm core + English/French models self-hosted under `/public/ocr/`)
 - **[@huggingface/transformers](https://huggingface.co/docs/transformers.js)** for image background removal (local ONNX model)
 - **[SVGO](https://github.com/svg/svgo)** for SVG optimization
 - **[AJV](https://ajv.js.org/)** for JSON Schema validation
@@ -171,14 +172,16 @@ omne/
 │   └── og/                   # OG image template + builder (hub / privacy / tool / category)
 │   ├── i18n/             # Server-side dictionaries (server-only)
 │   ├── ffmpeg-loader.ts  # Singleton ffmpeg.wasm
+│   ├── ocr-loader.ts     # Singleton tesseract.js worker (self-hosted assets)
 │   └── file-utils.ts     # downloadBlob, outputName, etc.
 ├── messages/{en,fr}.json # Translations (parity enforced in CI)
 ├── public/
 │   ├── ffmpeg/           # ffmpeg-core.js + .wasm (postinstall-copied, gitignored)
 │   ├── pdfjs/            # pdf.worker.min.mjs (same)
+│   ├── ocr/              # tesseract worker + wasm cores + eng/fra traineddata (same)
 │   └── theme-init.js     # Static script to avoid theme flash
 ├── proxy.ts              # /[locale] redirect (replaces middleware.ts)
-├── scripts/              # copy-ffmpeg, copy-pdfjs, copy-qr-scanner
+├── scripts/              # copy-ffmpeg, copy-pdfjs, copy-qr-scanner, copy-ocr
 └── tests/
     ├── unit/             # Vitest (Node env)
     ├── components/       # Vitest (jsdom) + RTL

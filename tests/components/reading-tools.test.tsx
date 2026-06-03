@@ -5,6 +5,13 @@ import userEvent from '@testing-library/user-event';
 const downloadBlobMock = vi.fn();
 const makeReadingPdfMock = vi.fn(async (..._args: unknown[]) => new Uint8Array([0x25, 0x50, 0x44, 0x46]));
 const makeReadingHtmlMock = vi.fn(async (..._args: unknown[]) => '<html></html>');
+const paragraphsFromFileExMock = vi.fn(
+  async (..._args: unknown[]): Promise<{ paragraphs: string[]; source: string; corrupted: boolean }> => ({
+    paragraphs: ['from file'],
+    source: 'text',
+    corrupted: false,
+  }),
+);
 
 vi.mock('@/lib/file-utils', async () => {
   const real = await vi.importActual<typeof import('@/lib/file-utils')>('@/lib/file-utils');
@@ -14,6 +21,7 @@ vi.mock('@/lib/tools/reading-assets', () => ({
   makeReadingPdf: (...args: unknown[]) => makeReadingPdfMock(...args),
   makeReadingHtml: (...args: unknown[]) => makeReadingHtmlMock(...args),
   paragraphsFromFile: vi.fn(async () => ['from file']),
+  paragraphsFromFileEx: (...args: unknown[]) => paragraphsFromFileExMock(...args),
 }));
 
 import en from '../../messages/en.json';
@@ -28,7 +36,19 @@ beforeEach(() => {
   downloadBlobMock.mockReset();
   makeReadingPdfMock.mockClear();
   makeReadingHtmlMock.mockClear();
+  paragraphsFromFileExMock.mockClear();
+  paragraphsFromFileExMock.mockResolvedValue({
+    paragraphs: ['from file'],
+    source: 'text',
+    corrupted: false,
+  });
 });
+
+function pdfFile() {
+  return new File([new Uint8Array([0x25, 0x50, 0x44, 0x46]) as BlobPart], 'doc.pdf', {
+    type: 'application/pdf',
+  });
+}
 
 describe('ReadingDyslexiaTool', () => {
   it('shows the empty state, previews the sample and exports a PDF', async () => {
@@ -75,5 +95,51 @@ describe('ReadAloudTool', () => {
   it('shows the unsupported message when speech synthesis is unavailable', async () => {
     render(<ReadAloudTool {...reading['read-aloud'].ui} />);
     expect(await screen.findByText(reading['read-aloud'].ui.unsupported)).toBeInTheDocument();
+  });
+});
+
+describe('OCR fallback (corrupted PDF text layers)', () => {
+  const ui = reading['dyslexia-font'].ui;
+
+  it('shows the recovered-by-OCR notice and the OCR text', async () => {
+    const user = userEvent.setup();
+    paragraphsFromFileExMock.mockResolvedValue({
+      paragraphs: ['Description des activités'],
+      source: 'ocr',
+      corrupted: true,
+    });
+    const { container } = render(<ReadingDyslexiaTool {...ui} />);
+
+    await user.upload(container.querySelector('input[type="file"]') as HTMLInputElement, pdfFile());
+
+    expect(await screen.findByText(ui.ocrDoneNotice)).toBeInTheDocument();
+    expect(await screen.findByText('Description des activités')).toBeInTheDocument();
+  });
+
+  it('warns when the text layer is corrupt but OCR failed', async () => {
+    const user = userEvent.setup();
+    paragraphsFromFileExMock.mockResolvedValue({
+      paragraphs: ['Descrip(on des ac,vités'],
+      source: 'text',
+      corrupted: true,
+    });
+    const { container } = render(<ReadingDyslexiaTool {...ui} />);
+
+    await user.upload(container.querySelector('input[type="file"]') as HTMLInputElement, pdfFile());
+
+    expect(await screen.findByText(ui.ocrFailedNotice)).toBeInTheDocument();
+  });
+
+  it('offers a manual re-read with OCR for imported PDFs', async () => {
+    const user = userEvent.setup();
+    const { container } = render(<ReadingDyslexiaTool {...ui} />);
+
+    await user.upload(container.querySelector('input[type="file"]') as HTMLInputElement, pdfFile());
+    const forceButton = await screen.findByRole('button', { name: ui.forceOcrLabel });
+
+    paragraphsFromFileExMock.mockClear();
+    await user.click(forceButton);
+    await waitFor(() => expect(paragraphsFromFileExMock).toHaveBeenCalledTimes(1));
+    expect(paragraphsFromFileExMock.mock.calls[0]?.[1]).toMatchObject({ forceOcr: true });
   });
 });

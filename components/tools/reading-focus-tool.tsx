@@ -15,8 +15,10 @@ import {
   type ReadingOptions,
   type ReadingTintKey,
 } from '@/lib/tools/implementations/reading';
-import { makeReadingHtml, makeReadingPdf, paragraphsFromFile } from '@/lib/tools/reading-assets';
+import { makeReadingHtml, makeReadingPdf } from '@/lib/tools/reading-assets';
+import { useParagraphImport } from '@/lib/hooks/use-paragraph-import';
 import { LabeledRange, OptionChips, TintChips } from '@/components/tools/reading/controls';
+import { OcrNotice, type OcrNoticeLabels } from '@/components/tools/reading/ocr-notice';
 import { SourceInput } from '@/components/tools/reading/source-input';
 
 export type ReadingFocusMessages = {
@@ -51,7 +53,7 @@ export type ReadingFocusMessages = {
   downloadPdf: string;
   busy: string;
   error: string;
-};
+} & OcrNoticeLabels;
 
 function BionicText({ paragraph, intensity }: { paragraph: string; intensity: BionicIntensity }) {
   const tokens = paragraph.split(/(\s+)/);
@@ -84,9 +86,9 @@ export function ReadingFocusTool({
     lineHeight: DEFAULT_READING_OPTIONS.lineHeight,
     tint: 'white' as ReadingTintKey,
   });
-  const [busy, setBusy] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const fileImport = useParagraphImport(setText, m.error);
 
   useEffect(() => {
     const handle = window.setTimeout(() => setDebounced(text), 200);
@@ -105,18 +107,6 @@ export function ReadingFocusTool({
     wordSpacingEm: 0.08,
     align: 'left',
   });
-
-  const onFile = async (file: File) => {
-    setBusy(true);
-    setError(null);
-    try {
-      setText((await paragraphsFromFile(file)).join('\n\n'));
-    } catch {
-      setError(m.error);
-    } finally {
-      setBusy(false);
-    }
-  };
 
   const exportAs = async (kind: 'html' | 'pdf') => {
     if (paragraphs.length === 0) return;
@@ -154,10 +144,10 @@ export function ReadingFocusTool({
         <SourceInput
           text={text}
           onText={setText}
-          onFile={onFile}
+          onFile={fileImport.importFile}
           accept="text/plain,.txt,application/pdf,.pdf"
-          busy={busy}
-          error={error}
+          busy={fileImport.busy}
+          error={fileImport.error ?? error}
           onSample={() => setText(m.sampleText)}
           labels={{
             inputLabel: m.inputLabel,
@@ -168,6 +158,14 @@ export function ReadingFocusTool({
             sampleButton: m.sampleButton,
             charsTemplate: m.charsTemplate,
           }}
+        />
+
+        <OcrNotice
+          state={fileImport.ocr}
+          labels={m}
+          canForceOcr={fileImport.canForceOcr}
+          onForceOcr={fileImport.retryWithOcr}
+          busy={fileImport.busy}
         />
 
         <OptionChips<BionicIntensity>

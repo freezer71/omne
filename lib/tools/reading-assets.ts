@@ -3,11 +3,13 @@
 // (Uses fetch/btoa — client-only; never import from a server component.)
 
 import {
+  analyzeTextLayer,
   buildReadingHtml,
   buildReadingPdf,
   bionicHtmlBody,
-  extractPdfParagraphs,
+  extractPdfText,
   fontFaceDataUri,
+  linesToParagraphs,
   plainHtmlBody,
   splitParagraphs,
   READING_FONT_FILES,
@@ -53,12 +55,94 @@ const FONT_FAMILY: Record<ReadingFontKey, string> = {
   mono: 'JetBrains Mono Wm',
 };
 
-/** Read an uploaded .txt or .pdf into reflowed paragraphs. */
-export async function paragraphsFromFile(file: File): Promise<string[]> {
+export type ParagraphsSource = 'text' | 'ocr';
+export type OcrReason = 'corrupt' | 'empty' | 'forced';
+
+export type ParagraphsResult = {
+  paragraphs: string[];
+  /** How the text was produced — drives the UI notice. */
+  source: ParagraphsSource;
+  /** True when the PDF's own text layer looked corrupted or empty (scanned). */
+  corrupted: boolean;
+};
+
+export type ParagraphsOptions = {
+  /** Called once when an OCR pass begins, with why it was triggered. */
+  onOcrStart?: (reason: OcrReason) => void;
+  /** Page-level OCR progress (done pages, total pages). */
+  onProgress?: (done: number, total: number) => void;
+  /** Re-read the pages with OCR even when the text layer looks fine. */
+  forceOcr?: boolean;
+  signal?: AbortSignal;
+};
+
+/**
+ * Read an uploaded .txt or .pdf into reflowed paragraphs. PDFs whose text layer
+ * is corrupted (broken ligature ToUnicode from Pages/Quartz exports) or empty
+ * (scanned documents) are re-read with the local OCR worker; when OCR itself
+ * fails we keep the original text layer rather than returning nothing.
+ */
+export async function paragraphsFromFileEx(
+  file: File,
+  opts: ParagraphsOptions = {},
+): Promise<ParagraphsResult> {
   const bytes = new Uint8Array(await file.arrayBuffer());
   const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
-  if (isPdf) return extractPdfParagraphs(bytes);
-  return splitParagraphs(new TextDecoder().decode(bytes));
+  if (!isPdf) {
+    return {
+      paragraphs: splitParagraphs(new TextDecoder().decode(bytes)),
+      source: 'text',
+      corrupted: false,
+    };
+  }
+  // pdf.js detaches the buffer it receives — each pass gets its own copy.
+  const { paragraphs, pageCount, rawText } = await extractPdfText(bytes.slice());
+  const report = analyzeTextLayer(rawText, pageCount);
+  const corrupted = report.corrupt || report.nearEmpty;
+  if (!opts.forceOcr && !corrupted) return { paragraphs, source: 'text', corrupted: false };
+  try {
+    opts.onOcrStart?.(report.corrupt ? 'corrupt' : report.nearEmpty ? 'empty' : 'forced');
+    const ocrParagraphs = await ocrPdfParagraphs(bytes, opts);
+    return { paragraphs: ocrParagraphs, source: 'ocr', corrupted };
+  } catch {
+    return { paragraphs, source: 'text', corrupted };
+  }
+}
+
+/** Back-compat single-argument form used by callers without OCR UI. */
+export async function paragraphsFromFile(file: File): Promise<string[]> {
+  return (await paragraphsFromFileEx(file)).paragraphs;
+}
+
+/** Render each page and run it through the local OCR worker (eng+fra). */
+async function ocrPdfParagraphs(bytes: Uint8Array, opts: ParagraphsOptions): Promise<string[]> {
+  const pdfjs = await import('pdfjs-dist');
+  await configurePdfjsWorker(pdfjs);
+  const [doc, worker] = await Promise.all([
+    pdfjs.getDocument({ data: bytes }).promise,
+    (await import('@/lib/ocr-loader')).getOcrWorker(),
+  ]);
+  const lines: string[] = [];
+  try {
+    for (let p = 1; p <= doc.numPages; p++) {
+      if (opts.signal?.aborted) throw new Error('OCR aborted');
+      const page = await doc.getPage(p);
+      const viewport = page.getViewport({ scale: 2 });
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.ceil(viewport.width);
+      canvas.height = Math.ceil(viewport.height);
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('Failed to acquire 2D context');
+      await page.render({ canvasContext: ctx, viewport, canvas }).promise;
+      const { data } = await worker.recognize(canvas);
+      lines.push(...data.text.split('\n'));
+      lines.push(''); // page boundary → paragraph break
+      opts.onProgress?.(p, doc.numPages);
+    }
+  } finally {
+    await doc.destroy?.();
+  }
+  return linesToParagraphs(lines);
 }
 
 /** Generate the dyslexia-friendly / bionic PDF, embedding the right self-hosted font. */

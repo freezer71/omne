@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { paragraphsFromFile } from '@/lib/tools/reading-assets';
+import { useParagraphImport } from '@/lib/hooks/use-paragraph-import';
 import { LabeledRange } from '@/components/tools/reading/controls';
+import { OcrNotice, type OcrNoticeLabels } from '@/components/tools/reading/ocr-notice';
 import { SourceInput } from '@/components/tools/reading/source-input';
 
 export type ReadAloudMessages = {
@@ -28,7 +29,7 @@ export type ReadAloudMessages = {
   remoteWarning: string;
   noVoices: string;
   error: string;
-};
+} & OcrNoticeLabels;
 
 type Status = 'idle' | 'speaking' | 'paused';
 
@@ -41,8 +42,7 @@ export function ReadAloudTool(m: ReadAloudMessages) {
   const [pitch, setPitch] = useState(1);
   const [status, setStatus] = useState<Status>('idle');
   const [highlight, setHighlight] = useState<{ start: number; end: number } | null>(null);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const fileImport = useParagraphImport((t) => setText(t), m.error);
 
   useEffect(() => {
     const synth = typeof window !== 'undefined' ? window.speechSynthesis : undefined;
@@ -75,18 +75,6 @@ export function ReadAloudTool(m: ReadAloudMessages) {
     });
   }, [localVoices, voices]);
   const selectedURI = voiceURI || usableVoices[0]?.voiceURI || '';
-
-  const onFile = async (file: File) => {
-    setBusy(true);
-    setError(null);
-    try {
-      setText((await paragraphsFromFile(file)).join('\n\n'));
-    } catch {
-      setError(m.error);
-    } finally {
-      setBusy(false);
-    }
-  };
 
   const stop = () => {
     window.speechSynthesis.cancel();
@@ -149,10 +137,10 @@ export function ReadAloudTool(m: ReadAloudMessages) {
             setText(v);
             if (status !== 'idle') stop();
           }}
-          onFile={onFile}
+          onFile={fileImport.importFile}
           accept="text/plain,.txt,application/pdf,.pdf"
-          busy={busy}
-          error={error}
+          busy={fileImport.busy}
+          error={fileImport.error}
           onSample={() => setText(m.sampleText)}
           labels={{
             inputLabel: m.inputLabel,
@@ -163,6 +151,14 @@ export function ReadAloudTool(m: ReadAloudMessages) {
             sampleButton: m.sampleButton,
             charsTemplate: m.charsTemplate,
           }}
+        />
+
+        <OcrNotice
+          state={fileImport.ocr}
+          labels={m}
+          canForceOcr={fileImport.canForceOcr}
+          onForceOcr={fileImport.retryWithOcr}
+          busy={fileImport.busy}
         />
 
         <div className="flex flex-col gap-1.5">

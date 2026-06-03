@@ -99,6 +99,13 @@ const nextConfig: NextConfig = {
         source: '/qr-scanner/:path*',
         headers: IMMUTABLE_CACHE,
       },
+      // tesseract.js OCR worker + single-file wasm cores + traineddata. The
+      // non-threaded cores need no SharedArrayBuffer, so plain IMMUTABLE_CACHE
+      // is enough (no COOP/COEP on the reading routes).
+      {
+        source: '/ocr/:path*',
+        headers: IMMUTABLE_CACHE,
+      },
       {
         source: '/fonts/:path*',
         headers: IMMUTABLE_CACHE,

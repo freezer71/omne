@@ -68,6 +68,36 @@ describe('PdfFontSwapTool', () => {
     expect(makeFontSwapPdfMock.mock.calls[0]?.[4]).toBe('raster');
   });
 
+  it('warns when the PDF text layer has corrupted ligatures, not on clean text', async () => {
+    const user = userEvent.setup();
+    // Real corruption pattern from a Pages/Quartz export ("ti" → "(", ",", "@").
+    extractAllItemsMock.mockResolvedValueOnce([
+      [
+        {
+          str: 'Descrip(on des ac,vités qui cons@tue l’ar@cle et la conserva@on',
+          x: 1,
+          y: 1,
+          width: 10,
+          height: 10,
+          angle: 0,
+        },
+      ],
+    ]);
+    const { container } = render(<PdfFontSwapTool {...ui} />);
+    await user.upload(container.querySelector('input[type="file"]') as HTMLInputElement, pdfFile());
+
+    expect(await screen.findByText(ui.corruptWarning)).toBeInTheDocument();
+  });
+
+  it('does not warn on a clean text layer', async () => {
+    const user = userEvent.setup();
+    const { container } = render(<PdfFontSwapTool {...ui} />);
+    await user.upload(container.querySelector('input[type="file"]') as HTMLInputElement, pdfFile());
+    await waitFor(() => expect(extractAllItemsMock).toHaveBeenCalledTimes(1));
+
+    expect(screen.queryByText(ui.corruptWarning)).not.toBeInTheDocument();
+  });
+
   it('exports selectable vector text when that mode is chosen', async () => {
     const user = userEvent.setup();
     const { container } = render(<PdfFontSwapTool {...ui} />);

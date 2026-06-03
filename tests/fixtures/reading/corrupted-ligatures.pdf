@@ -1,0 +1,66 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding /ToUnicode 6 0 R >>
+endobj
+5 0 obj
+<< /Length 297 >>
+stream
+BT
+/F1 18 Tf
+72 760 Td
+18 TL
+(Description des activites de traitement) Tj T*
+(Le present document constitue le registre des) Tj T*
+(activites de traitement du site internet.) Tj T*
+(Il decrit pour chaque traitement sa finalite et) Tj T*
+(la duree de conservation des donnees collectees.) Tj T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 374 >>
+stream
+/CIDInit /ProcSet findresource begin
+12 dict begin
+begincmap
+/CIDSystemInfo << /Registry (Adobe) /Ordering (UCS) /Supplement 0 >> def
+/CMapName /Adobe-Identity-UCS def
+/CMapType 2 def
+1 begincodespacerange
+<00> <FF>
+endcodespacerange
+1 beginbfchar
+<74> <0040>
+endbfchar
+1 beginbfrange
+<20> <73> <0020>
+endbfrange
+endcmap
+CMapName currentdict /CMap defineresource pop
+end
+end
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000355 00000 n 
+0000000702 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1127
+%%EOF

@@ -27,7 +27,7 @@ Ce ne sont pas des idées de fonctionnalités — ce sont des contraintes. Tout 
 - 🛡️ **Privacy by design.** Les fichiers ne quittent jamais l'appareil. Le traitement se fait dans le navigateur, en WebAssembly quand nécessaire. Pas de « faites-nous confiance, on supprimera plus tard » — il n'y a aucun serveur à purger.
 - 🔍 **Vérifiable, pas promis.** Ouvrez l'onglet Réseau de DevTools pendant une conversion : zéro requête sortante. Si ce n'est pas le cas, c'est un bug, pas une fonctionnalité.
 - 🚫 **Aucun pistage, jamais.** Pas d'analytics, pas de télémétrie, pas de cookies, pas de CDN tiers, pas de fingerprinting. On ne sait pas qui vous êtes, et on ne veut pas le savoir.
-- 🧱 **Assets lourds auto-hébergés.** ffmpeg.wasm, le worker pdf.js, le scanner QR et le modèle ONNX de détourage sont servis depuis cette origine, pour qu'aucune métadonnée ne fuite vers un CDN.
+- 🧱 **Assets lourds auto-hébergés.** ffmpeg.wasm, le worker pdf.js, le scanner QR, le moteur OCR (tesseract.js + ses données de langue) et le modèle ONNX de détourage sont servis depuis cette origine, pour qu'aucune métadonnée ne fuite vers un CDN.
 - 🆓 **Zéro friction.** Pas d'inscription, pas de compte, pas de paywall, pas de quota, pas de « formule premium ». Vous ouvrez la page, vous faites le truc, vous fermez l'onglet.
 - 🌍 **Open source, à ciel ouvert.** Chaque ligne est auditable sur [github.com/freezer71/omne](https://github.com/freezer71/omne) — lien également présent dans le header et le footer du site. Si une promesse n'est pas vérifiable en lisant le code, elle ne compte pas.
 - 🌗 **Accessible et bilingue.** Thèmes clair & sombre avec anti-flash, français & anglais à parité totale (vérifiée en CI), et palette `⌘K` pour les utilisateurs clavier.
@@ -39,7 +39,7 @@ Ce ne sont pas des idées de fonctionnalités — ce sont des contraintes. Tout 
 C'est la raison d'être du projet, pas un argument marketing :
 
 - Chaque conversion s'exécute dans le navigateur via Web APIs, WebAssembly et Web Workers.
-- `@ffmpeg/ffmpeg` (vidéo, audio) et `pdfjs-dist` (PDF) sont **auto-hébergés** sous `/public/ffmpeg/` et `/public/pdfjs/` — l'onglet Réseau de DevTools doit afficher **zéro** trafic sortant pendant un traitement.
+- `@ffmpeg/ffmpeg` (vidéo, audio), `pdfjs-dist` (PDF) et `tesseract.js` (OCR, avec ses modèles français + anglais) sont **auto-hébergés** sous `/public/ffmpeg/`, `/public/pdfjs/` et `/public/ocr/` — l'onglet Réseau de DevTools doit afficher **zéro** trafic sortant pendant un traitement, OCR compris.
 - L'app sert `Cross-Origin-Opener-Policy: same-origin` et `Cross-Origin-Embedder-Policy: require-corp` pour activer `SharedArrayBuffer` (requis par le build ffmpeg multi-thread). Comme tous les assets sont same-origin, ces en-têtes renforcent la page sans rien casser.
 - Aucun service externe : pas de Sentry, pas de Google Analytics, pas de pixel, pas de CDN d'assets.
 
@@ -52,16 +52,16 @@ Toute contribution qui casserait cette promesse (traitement serveur, télémétr
 Prérequis : Node.js 20+.
 
 ```bash
-npm install   # déclenche le postinstall qui copie ffmpeg + pdf.js + qr-scanner dans /public
+npm install   # déclenche le postinstall qui copie ffmpeg + pdf.js + qr-scanner + OCR dans /public
 npm run dev   # http://localhost:3000
 ```
 
 > ⚠️ `npm run dev` utilise volontairement **Webpack** (`next dev --webpack`). Turbopack plante sur le HMR avec les routes dynamiques `[locale]`. `npm run dev:turbo` existe uniquement pour des vérifications ponctuelles.
 
-Après un clone propre, si les fonctionnalités ffmpeg/pdf.js échouent, relancez :
+Après un clone propre, si les fonctionnalités ffmpeg/pdf.js/OCR échouent, relancez :
 
 ```bash
-node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs
+node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs && node scripts/copy-ocr.mjs
 ```
 
 ---
@@ -78,7 +78,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **Mot de passe** | Générer · Phrase de passe (Diceware) · Hash (SHA) · bcrypt · Vérificateur de force |
 | **JSON** | Formater · Arborescence · JSONPath · Tableau · CSV ↔ JSON · Diff · Schéma (AJV) |
 | **Texte** | Casse · Compteur · Lorem Ipsum · Diff · Testeur regex · Slugify · Trier les lignes · Échapper/Désechapper · Nettoyeur d'espaces · Aperçu Markdown · Rechercher & Remplacer |
-| **Lecture & accessibilité** | Lecture facilitée (gras de début / « bionic ») · Mise en forme dyslexie (OpenDyslexic + espacement + filtre de couleur → HTML/PDF, ré-agence le texte y compris les PDF) · PDF en police dyslexie (garde images & mise en page, remplace la police sur place) · Lecture à voix haute (synthèse vocale locale) · Lecteur immersif (règle de focus phrase par phrase) |
+| **Lecture & accessibilité** | Lecture facilitée (gras de début / « bionic ») · Mise en forme dyslexie (OpenDyslexic + espacement + filtre de couleur → HTML/PDF, ré-agence le texte y compris les PDF) · PDF en police dyslexie (garde images & mise en page, remplace la police sur place) · Lecture à voix haute (synthèse vocale locale) · Lecteur immersif (règle de focus phrase par phrase) — les outils texte détectent automatiquement les calques texte corrompus (ligatures cassées des exports Pages/Quartz) et les PDF scannés, et récupèrent le texte par OCR local (français + anglais) |
 | **Encodage** | Base64 · URL · JWT · Hex · Entités HTML · Binaire · Code Morse |
 | **QR** | Générer (WiFi, vCard…) · Scanner (caméra ou image) · Générer code-barres (Code 128 / EAN) · Scanner code-barres |
 | **Couleur** | Convertisseur (hex / rgb / hsl / oklch) · Contraste WCAG · Palette depuis image · Générateur de dégradé · Teintes & nuances · Mélangeur · Simulateur de daltonisme |
@@ -95,6 +95,7 @@ Source de vérité : [`lib/tools/registry.ts`](./lib/tools/registry.ts). Le site
 - **Tailwind v4** — configuration CSS-first (pas de `tailwind.config.js`), tokens dans `@theme inline` de `app/globals.css`
 - **[@ffmpeg/ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm)** pour la vidéo et l'audio — **build multi-thread (`@ffmpeg/core-mt`)** pour paralléliser sur tous les cœurs CPU
 - **[pdf-lib](https://pdf-lib.js.org/)** + **[@pdf-lib/fontkit](https://github.com/Hopding/fontkit)** + **[pdfjs-dist](https://mozilla.github.io/pdf.js/)** pour les PDF (fontkit intègre la police auto-hébergée **[OpenDyslexic](https://opendyslexic.org/)** dans les PDF de lecture générés)
+- **[tesseract.js](https://tesseract.projectnaptha.com/)** pour l'OCR local — récupère le texte des calques PDF corrompus et des PDF scannés dans les outils de lecture (cœur wasm + modèles français/anglais auto-hébergés sous `/public/ocr/`)
 - **[@huggingface/transformers](https://huggingface.co/docs/transformers.js)** pour le détourage d'image (modèle ONNX local)
 - **[SVGO](https://github.com/svg/svgo)** pour l'optimisation SVG
 - **[AJV](https://ajv.js.org/)** pour la validation de schémas JSON
@@ -171,14 +172,16 @@ omne/
 │   └── og/                   # Template + builder d'image OG (hub / privacy / tool / category)
 │   ├── i18n/             # Dictionnaires côté serveur (server-only)
 │   ├── ffmpeg-loader.ts  # Singleton ffmpeg.wasm
+│   ├── ocr-loader.ts     # Singleton worker tesseract.js (assets auto-hébergés)
 │   └── file-utils.ts     # downloadBlob, outputName, etc.
 ├── messages/{en,fr}.json # Traductions (parité vérifiée en CI)
 ├── public/
 │   ├── ffmpeg/           # ffmpeg-core.js + .wasm (copiés au postinstall, gitignored)
 │   ├── pdfjs/            # pdf.worker.min.mjs (idem)
+│   ├── ocr/              # worker tesseract + cœurs wasm + traineddata fra/eng (idem)
 │   └── theme-init.js     # Script statique pour éviter le flash de thème
 ├── proxy.ts              # Redirection /[locale] (remplace middleware.ts)
-├── scripts/              # copy-ffmpeg, copy-pdfjs, copy-qr-scanner
+├── scripts/              # copy-ffmpeg, copy-pdfjs, copy-qr-scanner, copy-ocr
 └── tests/
     ├── unit/             # Vitest Node
     ├── components/       # Vitest jsdom + RTL

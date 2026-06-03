@@ -14,8 +14,10 @@ import {
   type ReadingOptions,
   type ReadingTintKey,
 } from '@/lib/tools/implementations/reading';
-import { makeReadingHtml, makeReadingPdf, paragraphsFromFile } from '@/lib/tools/reading-assets';
+import { makeReadingHtml, makeReadingPdf } from '@/lib/tools/reading-assets';
+import { useParagraphImport } from '@/lib/hooks/use-paragraph-import';
 import { LabeledRange, OptionChips, TintChips } from '@/components/tools/reading/controls';
+import { OcrNotice, type OcrNoticeLabels } from '@/components/tools/reading/ocr-notice';
 import { SourceInput } from '@/components/tools/reading/source-input';
 
 export type ReadingDyslexiaMessages = {
@@ -56,7 +58,7 @@ export type ReadingDyslexiaMessages = {
   downloadPdf: string;
   busy: string;
   error: string;
-};
+} & OcrNoticeLabels;
 
 export function ReadingDyslexiaTool({
   accept = 'text/plain,.txt,application/pdf,.pdf',
@@ -66,9 +68,9 @@ export function ReadingDyslexiaTool({
   const [text, setText] = useState('');
   const [debounced, setDebounced] = useState('');
   const [options, setOptions] = useState<ReadingOptions>(DEFAULT_READING_OPTIONS);
-  const [busy, setBusy] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const fileImport = useParagraphImport(setText, m.error);
 
   useEffect(() => {
     const handle = window.setTimeout(() => setDebounced(text), 200);
@@ -79,19 +81,6 @@ export function ReadingDyslexiaTool({
 
   const set = <K extends keyof ReadingOptions>(key: K, value: ReadingOptions[K]) =>
     setOptions((prev) => ({ ...prev, [key]: value }));
-
-  const onFile = async (file: File) => {
-    setBusy(true);
-    setError(null);
-    try {
-      const paras = await paragraphsFromFile(file);
-      setText(paras.join('\n\n'));
-    } catch {
-      setError(m.error);
-    } finally {
-      setBusy(false);
-    }
-  };
 
   const onDownloadHtml = async () => {
     if (paragraphs.length === 0) return;
@@ -138,10 +127,10 @@ export function ReadingDyslexiaTool({
         <SourceInput
           text={text}
           onText={setText}
-          onFile={onFile}
+          onFile={fileImport.importFile}
           accept={accept}
-          busy={busy}
-          error={error}
+          busy={fileImport.busy}
+          error={fileImport.error ?? error}
           onSample={() => setText(m.sampleText)}
           labels={{
             inputLabel: m.inputLabel,
@@ -152,6 +141,14 @@ export function ReadingDyslexiaTool({
             sampleButton: m.sampleButton,
             charsTemplate: m.charsTemplate,
           }}
+        />
+
+        <OcrNotice
+          state={fileImport.ocr}
+          labels={m}
+          canForceOcr={fileImport.canForceOcr}
+          onForceOcr={fileImport.retryWithOcr}
+          busy={fileImport.busy}
         />
 
         <OptionChips<ReadingFontKey>

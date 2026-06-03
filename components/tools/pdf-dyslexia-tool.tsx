@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 import { downloadBlob, outputName } from '@/lib/file-utils';
-import type { ReadingFontKey } from '@/lib/tools/implementations/reading';
+import { analyzeTextLayer, type ReadingFontKey } from '@/lib/tools/implementations/reading';
 import type { FontSwapItem } from '@/lib/tools/implementations/pdf-font-swap';
 import {
   extractAllItems,
@@ -43,6 +43,7 @@ export type PdfFontSwapMessages = {
   exportModeRaster: string;
   exportModeHint: string;
   note: string;
+  corruptWarning: string;
 };
 
 const PREVIEW_SCALE = 1.5;
@@ -66,6 +67,7 @@ export function PdfFontSwapTool(m: PdfFontSwapMessages) {
   const [exporting, setExporting] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [corrupted, setCorrupted] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -82,6 +84,7 @@ export function PdfFontSwapTool(m: PdfFontSwapMessages) {
     if (!file) return;
     setLoading(true);
     setError(null);
+    setCorrupted(false);
     try {
       const buf = new Uint8Array(await file.arrayBuffer());
       void docRef.current?.destroy?.();
@@ -99,6 +102,11 @@ export function PdfFontSwapTool(m: PdfFontSwapMessages) {
       setNumPages(doc.numPages);
       setPageNum(1);
       setFileName(file.name);
+      // Broken ligature ToUnicode (Pages/Quartz exports): the swapped-font text
+      // would inherit the corruption — warn and point to the OCR-capable tools.
+      // (Only the corruption signal: sparse-but-clean text layers are fine here.)
+      const joined = allItems.map((p) => p.map((it) => it.str).join(' ')).join('\n');
+      setCorrupted(analyzeTextLayer(joined, allItems.length).corrupt);
     } catch {
       setError(m.error);
     } finally {
@@ -256,6 +264,11 @@ export function PdfFontSwapTool(m: PdfFontSwapMessages) {
         </Button>
 
         <p className="text-xs text-text-faint leading-relaxed">{m.note}</p>
+        {corrupted && (
+          <p role="alert" className="text-xs text-danger leading-relaxed">
+            {m.corruptWarning}
+          </p>
+        )}
         {error && (
           <p role="alert" className="text-xs text-danger">
             {error}

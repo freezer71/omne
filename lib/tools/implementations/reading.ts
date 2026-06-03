@@ -130,6 +130,48 @@ export function linesToParagraphs(lines: string[]): string[] {
 }
 
 // ---------------------------------------------------------------------------
+// Corrupted text-layer detection
+// ---------------------------------------------------------------------------
+// PDFs exported by Pages/Quartz with ligature-bearing fonts (e.g. Calibri) often
+// carry broken ToUnicode CMaps: the "ti" ligature glyph extracts as "(", "," or
+// "@" and "tt" as "b" ("lutte" → "lube"). No pdf.js option can repair this —
+// the text layer itself is wrong, so we detect it and fall back to local OCR.
+//
+// Signature: suspect punctuation glued *between two letters* with no spaces
+// ("ac,vités", "cons@tue", "Descrip(on") — essentially nonexistent in clean
+// prose. The set is conservative: ' ’ - . / & + are excluded because they are
+// legit in glued contexts (don't, e-mail, 3.14, and/or, R&D, C++).
+const GLUED_SUSPECT_RE = /\p{L}[(),@;:#!?]\p{L}/gu;
+
+export type TextLayerReport = {
+  /** Dense glued-punctuation signature → ligature corruption. */
+  corrupt: boolean;
+  /** Number of [letter][suspect punct][letter] matches. */
+  gluedHits: number;
+  /** Glued hits per 1000 characters. */
+  density: number;
+  /** Almost no extractable text (scanned / image-only PDF). */
+  nearEmpty: boolean;
+};
+
+export function analyzeTextLayer(text: string, pageCount = 1): TextLayerReport {
+  const gluedHits = text.match(GLUED_SUSPECT_RE)?.length ?? 0;
+  const density = text.length > 0 ? (gluedHits / text.length) * 1000 : 0;
+  const letters = text.match(/\p{L}/gu)?.length ?? 0;
+  const nearEmpty = letters / Math.max(1, pageCount) < 24;
+  // Both floors must trip: the absolute one rejects a stray "f(x)" or an email,
+  // the density one rejects long clean documents with a handful of legit hits.
+  const corrupt = gluedHits >= 3 && density >= 2;
+  return { corrupt, gluedHits, density, nearEmpty };
+}
+
+/** True when the extracted text cannot be trusted (corrupt ligatures or scanned PDF). */
+export function looksCorruptedTextLayer(text: string, pageCount = 1): boolean {
+  const report = analyzeTextLayer(text, pageCount);
+  return report.corrupt || report.nearEmpty;
+}
+
+// ---------------------------------------------------------------------------
 // Bionic / "reading focus" — bold the leading part of each word
 // ---------------------------------------------------------------------------
 
@@ -373,12 +415,20 @@ export async function buildReadingPdf(input: PdfBuildInput): Promise<Uint8Array>
 // PDF text extraction (for the "PDF → dyslexia-friendly" tool)
 // ---------------------------------------------------------------------------
 
-export async function extractPdfParagraphs(bytes: Uint8Array): Promise<string[]> {
+export type PdfTextExtraction = {
+  paragraphs: string[];
+  pageCount: number;
+  /** Raw extracted text (lines joined), used by the corruption detector. */
+  rawText: string;
+};
+
+export async function extractPdfText(bytes: Uint8Array): Promise<PdfTextExtraction> {
   const pdfjs = await import('pdfjs-dist');
   await configurePdfjsWorker(pdfjs);
   const pdf = await pdfjs.getDocument({ data: bytes }).promise;
+  const pageCount = pdf.numPages;
   const lines: string[] = [];
-  for (let p = 1; p <= pdf.numPages; p++) {
+  for (let p = 1; p <= pageCount; p++) {
     const pageObj = await pdf.getPage(p);
     const content = await pageObj.getTextContent();
     let line = '';
@@ -394,5 +444,9 @@ export async function extractPdfParagraphs(bytes: Uint8Array): Promise<string[]>
     lines.push(''); // page boundary → paragraph break
   }
   await pdf.destroy?.();
-  return linesToParagraphs(lines);
+  return { paragraphs: linesToParagraphs(lines), pageCount, rawText: lines.join('\n') };
+}
+
+export async function extractPdfParagraphs(bytes: Uint8Array): Promise<string[]> {
+  return (await extractPdfText(bytes)).paragraphs;
 }

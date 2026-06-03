@@ -4322,7 +4322,13 @@
           "downloadHtml": "Télécharger HTML",
           "downloadPdf": "Télécharger PDF",
           "busy": "Traitement…",
-          "error": "Une erreur est survenue. Essayez un autre fichier ou texte."
+          "error": "Une erreur est survenue. Essayez un autre fichier ou texte.",
+          "ocrCorruptNotice": "Le calque texte de ce PDF est corrompu (ligatures cassées) — relecture des pages par OCR local…",
+          "ocrEmptyNotice": "Ce PDF n'a pas de texte sélectionnable (document scanné) — lecture des pages par OCR local…",
+          "ocrProgressTemplate": "page {n}/{total}",
+          "ocrDoneNotice": "Texte récupéré par OCR local (français + anglais). Rien n'a quitté votre navigateur ; la précision peut varier.",
+          "ocrFailedNotice": "Le calque texte de ce PDF semble corrompu et l'OCR n'a pas pu s'exécuter — le texte d'origine est affiché et peut contenir des caractères erronés.",
+          "forceOcrLabel": "Relire par OCR"
         }
       },
       "dyslexia-font": {
@@ -4390,7 +4396,13 @@
           "downloadHtml": "Télécharger HTML",
           "downloadPdf": "Télécharger PDF",
           "busy": "Traitement…",
-          "error": "Une erreur est survenue. Essayez un autre fichier ou texte."
+          "error": "Une erreur est survenue. Essayez un autre fichier ou texte.",
+          "ocrCorruptNotice": "Le calque texte de ce PDF est corrompu (ligatures cassées) — relecture des pages par OCR local…",
+          "ocrEmptyNotice": "Ce PDF n'a pas de texte sélectionnable (document scanné) — lecture des pages par OCR local…",
+          "ocrProgressTemplate": "page {n}/{total}",
+          "ocrDoneNotice": "Texte récupéré par OCR local (français + anglais). Rien n'a quitté votre navigateur ; la précision peut varier.",
+          "ocrFailedNotice": "Le calque texte de ce PDF semble corrompu et l'OCR n'a pas pu s'exécuter — le texte d'origine est affiché et peut contenir des caractères erronés.",
+          "forceOcrLabel": "Relire par OCR"
         }
       },
       "pdf-dyslexia": {
@@ -4443,7 +4455,8 @@
           "exportModeLabel": "Exporter en",
           "exportModeVector": "Texte sélectionnable",
           "exportModeRaster": "Image (plus fluide)",
-          "exportModeHint": "L’image est le mode par défaut pour un défilement fluide — chaque page est aplatie en image. Choisissez Texte sélectionnable pour conserver une vraie couche de texte (lisible par lecteur d’écran), mais c’est plus lourd à faire défiler sur les PDF denses."
+          "exportModeHint": "L’image est le mode par défaut pour un défilement fluide — chaque page est aplatie en image. Choisissez Texte sélectionnable pour conserver une vraie couche de texte (lisible par lecteur d’écran), mais c’est plus lourd à faire défiler sur les PDF denses.",
+          "corruptWarning": "Attention : le calque texte de ce PDF est corrompu (ligatures cassées), le texte converti hérite donc de caractères erronés. Pour un texte propre, utilisez les outils Police dyslexie ou Lecture facilitée — ils relisent les pages par OCR local."
         }
       },
       "read-aloud": {
@@ -4494,7 +4507,13 @@
           "onDeviceNote": "Utilise les voix intégrées à votre appareil — le texte reste sur votre appareil.",
           "remoteWarning": "Votre navigateur ne propose que des voix cloud ; avec celles-ci, le texte peut être envoyé au fournisseur de voix.",
           "noVoices": "Aucune voix disponible",
-          "error": "Une erreur est survenue. Essayez un autre fichier ou texte."
+          "error": "Une erreur est survenue. Essayez un autre fichier ou texte.",
+          "ocrCorruptNotice": "Le calque texte de ce PDF est corrompu (ligatures cassées) — relecture des pages par OCR local…",
+          "ocrEmptyNotice": "Ce PDF n'a pas de texte sélectionnable (document scanné) — lecture des pages par OCR local…",
+          "ocrProgressTemplate": "page {n}/{total}",
+          "ocrDoneNotice": "Texte récupéré par OCR local (français + anglais). Rien n'a quitté votre navigateur ; la précision peut varier.",
+          "ocrFailedNotice": "Le calque texte de ce PDF semble corrompu et l'OCR n'a pas pu s'exécuter — le texte d'origine est affiché et peut contenir des caractères erronés.",
+          "forceOcrLabel": "Relire par OCR"
         }
       },
       "immersive": {
@@ -4553,7 +4572,13 @@
           "next": "Suivant",
           "progressTemplate": "{n} / {total}",
           "empty": "Votre texte apparaîtra ici, phrase par phrase.",
-          "error": "Une erreur est survenue. Essayez un autre fichier ou texte."
+          "error": "Une erreur est survenue. Essayez un autre fichier ou texte.",
+          "ocrCorruptNotice": "Le calque texte de ce PDF est corrompu (ligatures cassées) — relecture des pages par OCR local…",
+          "ocrEmptyNotice": "Ce PDF n'a pas de texte sélectionnable (document scanné) — lecture des pages par OCR local…",
+          "ocrProgressTemplate": "page {n}/{total}",
+          "ocrDoneNotice": "Texte récupéré par OCR local (français + anglais). Rien n'a quitté votre navigateur ; la précision peut varier.",
+          "ocrFailedNotice": "Le calque texte de ce PDF semble corrompu et l'OCR n'a pas pu s'exécuter — le texte d'origine est affiché et peut contenir des caractères erronés.",
+          "forceOcrLabel": "Relire par OCR"
         }
       }
     }

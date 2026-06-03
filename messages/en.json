@@ -4322,7 +4322,13 @@
           "downloadHtml": "Download HTML",
           "downloadPdf": "Download PDF",
           "busy": "Working…",
-          "error": "Something went wrong. Please try a different file or text."
+          "error": "Something went wrong. Please try a different file or text.",
+          "ocrCorruptNotice": "This PDF's text layer is corrupted (broken ligatures) — re-reading the pages with on-device OCR…",
+          "ocrEmptyNotice": "This PDF has no selectable text (scanned document) — reading the pages with on-device OCR…",
+          "ocrProgressTemplate": "page {n}/{total}",
+          "ocrDoneNotice": "Text recovered with on-device OCR (English + French). Nothing left your browser; accuracy may vary.",
+          "ocrFailedNotice": "This PDF's text layer looks corrupted, and OCR could not run — the original text is shown and may contain wrong characters.",
+          "forceOcrLabel": "Re-read with OCR"
         }
       },
       "dyslexia-font": {
@@ -4390,7 +4396,13 @@
           "downloadHtml": "Download HTML",
           "downloadPdf": "Download PDF",
           "busy": "Working…",
-          "error": "Something went wrong. Please try a different file or text."
+          "error": "Something went wrong. Please try a different file or text.",
+          "ocrCorruptNotice": "This PDF's text layer is corrupted (broken ligatures) — re-reading the pages with on-device OCR…",
+          "ocrEmptyNotice": "This PDF has no selectable text (scanned document) — reading the pages with on-device OCR…",
+          "ocrProgressTemplate": "page {n}/{total}",
+          "ocrDoneNotice": "Text recovered with on-device OCR (English + French). Nothing left your browser; accuracy may vary.",
+          "ocrFailedNotice": "This PDF's text layer looks corrupted, and OCR could not run — the original text is shown and may contain wrong characters.",
+          "forceOcrLabel": "Re-read with OCR"
         }
       },
       "pdf-dyslexia": {
@@ -4443,7 +4455,8 @@
           "exportModeLabel": "Export as",
           "exportModeVector": "Selectable text",
           "exportModeRaster": "Image (smoother)",
-          "exportModeHint": "Image is the default for smooth scrolling — each page is flattened to a picture. Choose Selectable text to keep a real, screen-reader-friendly text layer, but it can be heavy to scroll on dense PDFs."
+          "exportModeHint": "Image is the default for smooth scrolling — each page is flattened to a picture. Choose Selectable text to keep a real, screen-reader-friendly text layer, but it can be heavy to scroll on dense PDFs.",
+          "corruptWarning": "Heads-up: this PDF's text layer is corrupted (broken ligatures), so the swapped text inherits wrong characters. For clean text, use the Dyslexia-friendly or Reading focus tools — they re-read the pages with on-device OCR."
         }
       },
       "read-aloud": {
@@ -4494,7 +4507,13 @@
           "onDeviceNote": "Using your device's built-in voices — the text stays on your device.",
           "remoteWarning": "Your browser only offers cloud voices; with these, the text may be sent to the voice provider.",
           "noVoices": "No voices available",
-          "error": "Something went wrong. Please try a different file or text."
+          "error": "Something went wrong. Please try a different file or text.",
+          "ocrCorruptNotice": "This PDF's text layer is corrupted (broken ligatures) — re-reading the pages with on-device OCR…",
+          "ocrEmptyNotice": "This PDF has no selectable text (scanned document) — reading the pages with on-device OCR…",
+          "ocrProgressTemplate": "page {n}/{total}",
+          "ocrDoneNotice": "Text recovered with on-device OCR (English + French). Nothing left your browser; accuracy may vary.",
+          "ocrFailedNotice": "This PDF's text layer looks corrupted, and OCR could not run — the original text is shown and may contain wrong characters.",
+          "forceOcrLabel": "Re-read with OCR"
         }
       },
       "immersive": {
@@ -4553,7 +4572,13 @@
           "next": "Next",
           "progressTemplate": "{n} / {total}",
           "empty": "Your text will appear here, sentence by sentence.",
-          "error": "Something went wrong. Please try a different file or text."
+          "error": "Something went wrong. Please try a different file or text.",
+          "ocrCorruptNotice": "This PDF's text layer is corrupted (broken ligatures) — re-reading the pages with on-device OCR…",
+          "ocrEmptyNotice": "This PDF has no selectable text (scanned document) — reading the pages with on-device OCR…",
+          "ocrProgressTemplate": "page {n}/{total}",
+          "ocrDoneNotice": "Text recovered with on-device OCR (English + French). Nothing left your browser; accuracy may vary.",
+          "ocrFailedNotice": "This PDF's text layer looks corrupted, and OCR could not run — the original text is shown and may contain wrong characters.",
+          "forceOcrLabel": "Re-read with OCR"
         }
       }
     }

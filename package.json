@@ -15,7 +15,7 @@
     "test:e2e": "playwright test",
     "test:all": "npm run test && npm run test:e2e",
     "favicons": "node scripts/generate-favicons.mjs",
-    "postinstall": "node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs && node scripts/copy-fonts.mjs"
+    "postinstall": "node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs && node scripts/copy-fonts.mjs && node scripts/copy-ocr.mjs"
   },
   "dependencies": {
     "@ffmpeg/core-mt": "^0.12.10",
@@ -40,7 +40,9 @@
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "server-only": "^0.0.1",
-    "svgo": "^4.0.1"
+    "svgo": "^4.0.1",
+    "tesseract.js": "^7.0.0",
+    "tesseract.js-core": "^7.0.0"
   },
   "devDependencies": {
     "@expo-google-fonts/anton": "^0.4.2",
@@ -49,6 +51,8 @@
     "@expo-google-fonts/lora": "^0.4.2",
     "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
+    "@tesseract.js-data/eng": "^1.0.0",
+    "@tesseract.js-data/fra": "^1.0.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",

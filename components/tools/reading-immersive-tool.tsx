@@ -10,8 +10,9 @@ import {
   type ReadingFontKey,
   type ReadingTintKey,
 } from '@/lib/tools/implementations/reading';
-import { paragraphsFromFile } from '@/lib/tools/reading-assets';
+import { useParagraphImport } from '@/lib/hooks/use-paragraph-import';
 import { LabeledRange, OptionChips, TintChips } from '@/components/tools/reading/controls';
+import { OcrNotice, type OcrNoticeLabels } from '@/components/tools/reading/ocr-notice';
 import { SourceInput } from '@/components/tools/reading/source-input';
 import { tpl } from '@/lib/tpl';
 
@@ -44,7 +45,7 @@ export type ImmersiveMessages = {
   progressTemplate: string;
   empty: string;
   error: string;
-};
+} & OcrNoticeLabels;
 
 export function ImmersiveReaderTool(m: ImmersiveMessages) {
   const [text, setText] = useState('');
@@ -54,9 +55,11 @@ export function ImmersiveReaderTool(m: ImmersiveMessages) {
   const [lineHeight, setLineHeight] = useState(2);
   const [focusMode, setFocusMode] = useState(true);
   const [index, setIndex] = useState(0);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const activeRef = useRef<HTMLSpanElement>(null);
+  const fileImport = useParagraphImport((t) => {
+    setText(t);
+    setIndex(0);
+  }, m.error);
 
   const sentences = useMemo(() => splitSentences(text), [text]);
   const safeIndex = Math.min(index, Math.max(0, sentences.length - 1));
@@ -64,19 +67,6 @@ export function ImmersiveReaderTool(m: ImmersiveMessages) {
   useEffect(() => {
     activeRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }, [safeIndex]);
-
-  const onFile = async (file: File) => {
-    setBusy(true);
-    setError(null);
-    try {
-      setText((await paragraphsFromFile(file)).join('\n\n'));
-      setIndex(0);
-    } catch {
-      setError(m.error);
-    } finally {
-      setBusy(false);
-    }
-  };
 
   const step = (delta: number) =>
     setIndex((i) => {
@@ -124,10 +114,10 @@ export function ImmersiveReaderTool(m: ImmersiveMessages) {
             setText(v);
             setIndex(0);
           }}
-          onFile={onFile}
+          onFile={fileImport.importFile}
           accept="text/plain,.txt,application/pdf,.pdf"
-          busy={busy}
-          error={error}
+          busy={fileImport.busy}
+          error={fileImport.error}
           onSample={() => {
             setText(m.sampleText);
             setIndex(0);
@@ -141,6 +131,14 @@ export function ImmersiveReaderTool(m: ImmersiveMessages) {
             sampleButton: m.sampleButton,
             charsTemplate: m.charsTemplate,
           }}
+        />
+
+        <OcrNotice
+          state={fileImport.ocr}
+          labels={m}
+          canForceOcr={fileImport.canForceOcr}
+          onForceOcr={fileImport.retryWithOcr}
+          busy={fileImport.busy}
         />
 
         <OptionChips<ReadingFontKey>
