@@ -22,12 +22,16 @@ const messages = {
   styleLabel: 'Output style',
   styleMultiline: 'Multi-line',
   styleSingle: 'Single line',
+  shellLabel: 'Shell',
+  shellBash: 'Bash',
+  shellPowershell: 'PowerShell',
+  shellCmd: 'CMD',
   inputLabel: 'Paste lines',
   inputPlaceholder: 'npx skills add ...',
   outputLabel: 'One-liner',
   copy: 'Copy',
   copied: 'Copied',
-  download: 'Download .sh',
+  download: 'Download {ext}',
   clear: 'Clear',
   loadSample: 'Load sample',
   empty: 'Paste some lines.',
@@ -119,6 +123,34 @@ describe('SkillsTool', () => {
       const out = screen.getByText(/npx skills add/);
       expect(out.textContent).not.toContain(' && \\');
       expect(out.textContent).toMatch(/&&/);
+    });
+  });
+
+  it('switches the joiner and download extension when PowerShell is selected', async () => {
+    render(<SkillsTool {...messages} />);
+    expect(screen.getByText('Download .sh')).toBeInTheDocument();
+
+    fireEvent.change(screen.getByPlaceholderText('npx skills add ...'), {
+      target: { value: 'a/b --skill x\nc/d --skill y' },
+    });
+    vi.advanceTimersByTime(250);
+
+    fireEvent.click(screen.getByText('PowerShell'));
+    vi.advanceTimersByTime(50);
+
+    await waitFor(() => {
+      const out = screen.getByText(/npx skills add/);
+      expect(out.textContent).not.toContain('&&');
+      expect(screen.getByText('Download .ps1')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByText('CMD'));
+    vi.advanceTimersByTime(50);
+
+    await waitFor(() => {
+      const out = screen.getByText(/npx skills add/);
+      expect(out.textContent).toContain(' && ^');
+      expect(screen.getByText('Download .cmd')).toBeInTheDocument();
     });
   });
 

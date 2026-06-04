@@ -23,9 +23,17 @@ test.describe('/en/dev/skills', () => {
       ].join('\n'),
     );
 
-    const preview = page.locator('[data-tool-category="dev"]').getByText(/npx skills add/);
+    const preview = page.getByTestId('skills-output');
     await expect(preview).toContainText('--skill frontend-design', { timeout: 5_000 });
     await expect(preview).toContainText('--skill vercel-react-best-practices');
+    await expect(preview).toContainText(' && \\');
+
+    // Switching shells re-joins the same commands with a Windows-safe separator.
+    await page.getByText('PowerShell', { exact: true }).click();
+    await expect(preview).not.toContainText('&&');
+    await expect(page.getByRole('button', { name: 'Download .ps1' })).toBeVisible();
+
+    await page.getByText('Bash', { exact: true }).click();
     await expect(preview).toContainText(' && \\');
 
     await page.getByRole('button', { name: 'Copy', exact: true }).click();
@@ -115,7 +123,7 @@ test.describe('/en/dev/skills-browse — discovery tabs', () => {
       .first();
     await findSkillsRow.locator('input[type="checkbox"]').check();
 
-    const preview = page.locator('[data-tool-category="dev"]').getByText(/npx skills add/);
+    const preview = page.getByTestId('skills-output');
     await expect(preview).toContainText('vercel-labs/skills', { timeout: 5_000 });
     await expect(preview).toContainText('--skill find-skills');
   });

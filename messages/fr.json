@@ -4129,7 +4129,7 @@
           "howItWorks": [
             "Parcourez les onglets Depuis toujours, Tendance 24 h et En vogue, ou tapez 2 caractères ou plus pour interroger le catalogue skills.sh.",
             "Cochez les skills voulus dans les résultats — chacun affiche sa source, son nombre d'installations et un badge Officiel le cas échéant.",
-            "Réglez les agents, les options et le style de sortie, puis copiez le one-liner généré ou téléchargez-le en install-skills.sh."
+            "Réglez les agents, les options, le shell (Bash, PowerShell ou CMD) et le style de sortie, puis copiez le one-liner généré ou téléchargez-le en script d'installation prêt à exécuter."
           ],
           "features": [
             "Révèle les skills populaires par installations cumulées, tendance sur 24 h et progressions du moment, avec leur nombre d'installations et leur évolution.",
@@ -4180,10 +4180,14 @@
           "styleLabel": "Style de sortie",
           "styleMultiline": "Multi-ligne",
           "styleSingle": "Une ligne",
+          "shellLabel": "Shell",
+          "shellBash": "Bash",
+          "shellPowershell": "PowerShell",
+          "shellCmd": "CMD",
           "outputLabel": "One-liner",
           "copy": "Copier",
           "copied": "Copié",
-          "download": "Télécharger .sh",
+          "download": "Télécharger {ext}",
           "empty": "Sélectionnez des skills ci-dessus pour générer la commande d'installation.",
           "commandsTemplate": "{n} sélectionnés",
           "charsTemplate": "{n} car.",
@@ -4208,17 +4212,17 @@
           "howItWorks": [
             "Collez vos lignes npx skills add — chaque ligne, ou un raccourci comme anthropics/skills@web-design, est analysée et dédupliquée.",
             "Activez les agents (Claude Code, Cursor, Codex, Gemini CLI, Copilot ou Tous) et les options comme Global -g, Sans confirmation -y, Copier --copy ou Recherche profonde.",
-            "Choisissez une sortie multi-ligne ou sur une seule ligne, puis copiez le one-liner combiné ou téléchargez-le en install-skills.sh."
+            "Choisissez votre shell (Bash, PowerShell ou CMD) et une sortie multi-ligne ou sur une seule ligne, puis copiez le one-liner combiné ou téléchargez-le en script d'installation prêt à exécuter."
           ],
           "features": [
-            "Fusionne plusieurs commandes npx skills add en une seule ligne shell reliée par && pour équiper une machine neuve d'un seul collage.",
+            "Fusionne plusieurs commandes npx skills add en une seule ligne reliée par le bon séparateur selon votre shell — Bash, PowerShell ou CMD — pour équiper une machine neuve d'un seul collage.",
             "Applique vos agents et options à chaque commande, y compris --agent '*' pour viser tous les CLI compatibles d'un coup.",
             "Reconnaît les jetons npx, skills, add et -s/--skill, conserve les options inconnues et ignore les lignes # et les doublons."
           ]
         },
         "seo": {
           "title": "Installateur de skills — Combiner npx skills add",
-          "description": "Collez plusieurs lignes npx skills add, choisissez agents et options, copiez un one-liner shell. 100% local dans votre navigateur, aucun envoi.",
+          "description": "Collez plusieurs lignes npx skills add, choisissez agents et options, copiez un one-liner pour Bash, PowerShell ou CMD. 100% local dans votre navigateur, aucun envoi.",
           "keywords": [
             "npx skills add one liner",
             "installer skills claude code",
@@ -4248,12 +4252,16 @@
           "styleLabel": "Style de sortie",
           "styleMultiline": "Multi-ligne",
           "styleSingle": "Une ligne",
+          "shellLabel": "Shell",
+          "shellBash": "Bash",
+          "shellPowershell": "PowerShell",
+          "shellCmd": "CMD",
           "inputLabel": "Collez vos lignes npx skills add",
           "inputPlaceholder": "npx skills add anthropics/skills --skill frontend-design\nnpx skills add vercel-labs/agent-skills --skill vercel-react-best-practices",
           "outputLabel": "One-liner",
           "copy": "Copier",
           "copied": "Copié",
-          "download": "Télécharger .sh",
+          "download": "Télécharger {ext}",
           "clear": "Effacer",
           "loadSample": "Exemple",
           "empty": "Collez des lignes npx skills add pour voir le one-liner.",

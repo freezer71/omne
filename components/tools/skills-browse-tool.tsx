@@ -8,9 +8,13 @@ import { tpl } from '@/lib/tpl';
 import { CopyButton } from '@/components/tools/json/copy-button';
 import {
   AGENTS,
+  SHELLS,
+  SCRIPT_EXTENSIONS,
   buildOneLiner,
+  buildScript,
   type Agent,
   type OutputStyle,
+  type Shell,
   type SkillsOptions,
 } from '@/lib/tools/implementations/skills';
 import {
@@ -55,6 +59,10 @@ type Messages = {
   styleLabel: string;
   styleMultiline: string;
   styleSingle: string;
+  shellLabel: string;
+  shellBash: string;
+  shellPowershell: string;
+  shellCmd: string;
   outputLabel: string;
   copy: string;
   copied: string;
@@ -95,6 +103,14 @@ function agentLabel(agent: Agent, m: Messages): string {
   }
 }
 
+function shellLabel(shell: Shell, m: Messages): string {
+  switch (shell) {
+    case 'bash': return m.shellBash;
+    case 'powershell': return m.shellPowershell;
+    case 'cmd': return m.shellCmd;
+  }
+}
+
 const chipClass = (active: boolean) =>
   `flex cursor-pointer items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs transition-colors ${
     active
@@ -124,6 +140,7 @@ export function SkillsBrowseTool(messages: Messages) {
   const [copy, setCopy] = useState(false);
   const [fullDepth, setFullDepth] = useState(false);
   const [style, setStyle] = useState<OutputStyle>('multiline');
+  const [shell, setShell] = useState<Shell>('bash');
 
   const [feedType, setFeedType] = useState<FeedType>('all-time');
   const [feedSkills, setFeedSkills] = useState<FeedSkill[]>([]);
@@ -239,8 +256,8 @@ export function SkillsBrowseTool(messages: Messages) {
   }, [showDiscover, feedType, feedRetryCount, messages.feedError]);
 
   const opts: SkillsOptions = useMemo(
-    () => ({ global, agents, yes, copy, fullDepth, style }),
-    [global, agents, yes, copy, fullDepth, style],
+    () => ({ global, agents, yes, copy, fullDepth, style, shell }),
+    [global, agents, yes, copy, fullDepth, style, shell],
   );
 
   const output = useMemo(() => buildOneLiner(toCommands(selected), opts), [selected, opts]);
@@ -266,12 +283,9 @@ export function SkillsBrowseTool(messages: Messages) {
   };
 
   const onDownload = () => {
-    if (!output) return;
-    const content = output.endsWith('\n') ? output : `${output}\n`;
-    downloadBlob(
-      new Blob([`#!/usr/bin/env bash\nset -euo pipefail\n\n${content}`], { type: 'application/x-sh' }),
-      'install-skills.sh',
-    );
+    const script = buildScript(toCommands(selected), opts);
+    if (!script) return;
+    downloadBlob(new Blob([script.content], { type: script.mime }), script.filename);
   };
 
   return (
@@ -320,6 +334,23 @@ export function SkillsBrowseTool(messages: Messages) {
                 className="sr-only"
               />
               {value === 'multiline' ? messages.styleMultiline : messages.styleSingle}
+            </label>
+          ))}
+        </fieldset>
+
+        <fieldset className="flex items-center gap-2 text-xs">
+          <legend className="px-1 text-text-muted">{messages.shellLabel}</legend>
+          {SHELLS.map((value) => (
+            <label key={value} className={chipClass(shell === value)}>
+              <input
+                type="radio"
+                name="shell"
+                value={value}
+                checked={shell === value}
+                onChange={() => setShell(value)}
+                className="sr-only"
+              />
+              {shellLabel(value, messages)}
             </label>
           ))}
         </fieldset>
@@ -559,14 +590,16 @@ export function SkillsBrowseTool(messages: Messages) {
             </span>
           </div>
           {output ? (
-            <Card className="min-h-[12rem] whitespace-pre-wrap break-all px-3 py-2 font-mono text-sm text-text-primary">{output}</Card>
+            <Card data-testid="skills-output" className="min-h-[12rem] whitespace-pre-wrap break-all px-3 py-2 font-mono text-sm text-text-primary">{output}</Card>
           ) : (
             <Card className="flex min-h-[12rem] items-center justify-center px-3 py-2 text-sm text-text-faint">{messages.empty}</Card>
           )}
 
           <div className="flex flex-wrap items-center justify-end gap-2 pt-1">
             <CopyButton text={output} copyLabel={messages.copy} copiedLabel={messages.copied} disabled={!output} />
-            <Button size="sm" onClick={onDownload} disabled={!output} type="button">{messages.download}</Button>
+            <Button size="sm" onClick={onDownload} disabled={!output} type="button">
+              {tpl(messages.download, { ext: SCRIPT_EXTENSIONS[shell] })}
+            </Button>
           </div>
         </div>
       </div>

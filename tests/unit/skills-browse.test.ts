@@ -9,6 +9,7 @@ const defaults: SkillsOptions = {
   copy: false,
   fullDepth: false,
   style: 'multiline',
+  shell: 'bash',
 };
 
 const ffmpeg: SkillResult = {

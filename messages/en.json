@@ -4129,7 +4129,7 @@
           "howItWorks": [
             "Browse the All Time, Trending 24h and Hot tabs, or type 2+ characters to search the live skills.sh catalog.",
             "Tick the skills you want from the results — each shows its source, install count and an Official badge where applicable.",
-            "Set the agents, flags and output style, then copy the generated one-liner or download it as install-skills.sh."
+            "Set the agents, flags, shell (Bash, PowerShell or CMD) and output style, then copy the generated one-liner or download it as a ready-to-run install script."
           ],
           "features": [
             "Discovers popular skills by all-time installs, 24-hour trending and hot movers with their install counts and daily change.",
@@ -4180,10 +4180,14 @@
           "styleLabel": "Output style",
           "styleMultiline": "Multi-line",
           "styleSingle": "Single line",
+          "shellLabel": "Shell",
+          "shellBash": "Bash",
+          "shellPowershell": "PowerShell",
+          "shellCmd": "CMD",
           "outputLabel": "One-liner",
           "copy": "Copy",
           "copied": "Copied",
-          "download": "Download .sh",
+          "download": "Download {ext}",
           "empty": "Select skills above to generate the install command.",
           "commandsTemplate": "{n} selected",
           "charsTemplate": "{n} chars",
@@ -4208,17 +4212,17 @@
           "howItWorks": [
             "Paste your npx skills add lines into the input — each line, or shorthand like anthropics/skills@web-design, is parsed and deduplicated.",
             "Toggle the agent chips (Claude Code, Cursor, Codex, Gemini CLI, Copilot or All) and flags like Global -g, Skip prompts -y, Copy --copy or Full depth.",
-            "Pick multi-line or single-line output, then copy the combined one-liner or download it as install-skills.sh."
+            "Pick your shell (Bash, PowerShell or CMD) and multi-line or single-line output, then copy the combined one-liner or download it as a ready-to-run install script."
           ],
           "features": [
-            "Merges many npx skills add commands into one shell line joined with && so a fresh machine is set up in a single paste.",
+            "Merges many npx skills add commands into one line joined with the right separator for your shell — Bash, PowerShell or CMD — so a fresh machine is set up in a single paste.",
             "Applies your chosen agents and flags uniformly to every command, including --agent '*' to target every supported CLI at once.",
             "Recognises npx, skills, add and -s/--skill tokens, preserves unknown flags, and drops # comment lines and duplicates."
           ]
         },
         "seo": {
           "title": "Skills Installer — Combine npx skills add into one",
-          "description": "Paste multiple npx skills add lines, pick agents and flags, and copy a single shell one-liner. 100% local in your browser, no upload.",
+          "description": "Paste multiple npx skills add lines, pick agents and flags, and copy a single one-liner for Bash, PowerShell or CMD. 100% local in your browser, no upload.",
           "keywords": [
             "npx skills add one liner",
             "install claude code skills",
@@ -4248,12 +4252,16 @@
           "styleLabel": "Output style",
           "styleMultiline": "Multi-line",
           "styleSingle": "Single line",
+          "shellLabel": "Shell",
+          "shellBash": "Bash",
+          "shellPowershell": "PowerShell",
+          "shellCmd": "CMD",
           "inputLabel": "Paste npx skills add lines",
           "inputPlaceholder": "npx skills add anthropics/skills --skill frontend-design\nnpx skills add vercel-labs/agent-skills --skill vercel-react-best-practices",
           "outputLabel": "One-liner",
           "copy": "Copy",
           "copied": "Copied",
-          "download": "Download .sh",
+          "download": "Download {ext}",
           "clear": "Clear",
           "loadSample": "Load sample",
           "empty": "Paste some npx skills add lines to see the one-liner.",

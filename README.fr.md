@@ -82,7 +82,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **Encodage** | Base64 · URL · JWT · Hex · Entités HTML · Binaire · Code Morse |
 | **QR** | Générer (WiFi, vCard…) · Scanner (caméra ou image) · Générer code-barres (Code 128 / EAN) · Scanner code-barres |
 | **Couleur** | Convertisseur (hex / rgb / hsl / oklch) · Contraste WCAG · Palette depuis image · Générateur de dégradé · Teintes & nuances · Mélangeur · Simulateur de daltonisme |
-| **Développeur** | Créer un installateur de skills (parse `npx skills add`) · Explorer et installer des skills (recherche dans le catalogue skills.sh, découverte du top par Depuis toujours / Tendance 24 h / En vogue, installation multiple en un one-liner) |
+| **Développeur** | Créer un installateur de skills (parse `npx skills add`) · Explorer et installer des skills (recherche dans le catalogue skills.sh, découverte du top par Depuis toujours / Tendance 24 h / En vogue, installation multiple en un one-liner) — les deux produisent une sortie Bash, PowerShell ou CMD et téléchargent un script prêt à exécuter `.sh` / `.ps1` / `.cmd` |
 
 Source de vérité : [`lib/tools/registry.ts`](./lib/tools/registry.ts). Le sitemap, les cartes de la page d'accueil et le routage MIME en sont dérivés.
 

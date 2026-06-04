@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   buildOneLiner,
+  buildScript,
   parseInput,
   type ParsedCommand,
   type SkillsOptions,
@@ -13,6 +14,7 @@ const defaults: SkillsOptions = {
   copy: false,
   fullDepth: false,
   style: 'multiline',
+  shell: 'bash',
 };
 
 describe('parseInput', () => {
@@ -155,5 +157,70 @@ describe('buildOneLiner', () => {
   it('omits --skill when the parsed command has none', () => {
     const cmds: ParsedCommand[] = [{ source: 'owner/repo', skills: [], extraFlags: [] }];
     expect(buildOneLiner(cmds, defaults)).toBe('npx skills add owner/repo');
+  });
+
+  it("joins multiline powershell commands with a bare newline (no && in PS 5.1)", () => {
+    const out = buildOneLiner(twoCmds, { ...defaults, shell: 'powershell' });
+    expect(out.split('\n')).toHaveLength(2);
+    expect(out).not.toContain('&&');
+    expect(out).not.toContain('\\');
+  });
+
+  it("joins single-line powershell commands with '; '", () => {
+    const out = buildOneLiner(twoCmds, { ...defaults, shell: 'powershell', style: 'single' });
+    expect(out).not.toContain('\n');
+    expect(out.split('; ')).toHaveLength(2);
+    expect(out).not.toContain('&&');
+  });
+
+  it("joins multiline cmd commands with ' && ^\\n'", () => {
+    const out = buildOneLiner(twoCmds, { ...defaults, shell: 'cmd' });
+    expect(out.split(' && ^\n')).toHaveLength(2);
+  });
+
+  it("joins single-line cmd commands with ' && '", () => {
+    const out = buildOneLiner(twoCmds, { ...defaults, shell: 'cmd', style: 'single' });
+    expect(out).not.toContain('\n');
+    expect(out.split(' && ')).toHaveLength(2);
+  });
+
+  it("double-quotes the * agent for cmd, single-quotes it elsewhere", () => {
+    expect(buildOneLiner(oneCmd, { ...defaults, agents: ['*'], shell: 'cmd' })).toContain('--agent "*"');
+    expect(buildOneLiner(oneCmd, { ...defaults, agents: ['*'], shell: 'powershell' })).toContain("--agent '*'");
+    expect(buildOneLiner(oneCmd, { ...defaults, agents: ['*'] })).toContain("--agent '*'");
+  });
+});
+
+describe('buildScript', () => {
+  const twoCmds: ParsedCommand[] = [
+    { source: 'anthropics/skills', skills: ['frontend-design'], extraFlags: [] },
+    { source: 'vercel-labs/agent-skills', skills: ['vercel-react-best-practices'], extraFlags: [] },
+  ];
+
+  it('returns null for no commands', () => {
+    expect(buildScript([], defaults)).toBeNull();
+  });
+
+  it('builds an install-skills.sh with set -euo pipefail for bash', () => {
+    const script = buildScript(twoCmds, defaults)!;
+    expect(script.filename).toBe('install-skills.sh');
+    expect(script.content).toContain('#!/usr/bin/env bash');
+    expect(script.content).toContain('set -euo pipefail');
+    expect(script.content).toContain('npx skills add anthropics/skills --skill frontend-design');
+    expect(script.content.endsWith('\n')).toBe(true);
+  });
+
+  it('builds an install-skills.ps1 with a $LASTEXITCODE guard per command', () => {
+    const script = buildScript(twoCmds, { ...defaults, shell: 'powershell' })!;
+    expect(script.filename).toBe('install-skills.ps1');
+    expect(script.content).toContain("$ErrorActionPreference = 'Stop'");
+    expect(script.content.match(/if \(\$LASTEXITCODE -ne 0\) \{ exit \$LASTEXITCODE \}/g)).toHaveLength(2);
+  });
+
+  it('builds an install-skills.cmd that calls npx (cmd shim) and exits on failure', () => {
+    const script = buildScript(twoCmds, { ...defaults, shell: 'cmd' })!;
+    expect(script.filename).toBe('install-skills.cmd');
+    expect(script.content).toContain('@echo off');
+    expect(script.content.match(/^call npx skills add .+ \|\| exit \/b 1$/gm)).toHaveLength(2);
   });
 });
