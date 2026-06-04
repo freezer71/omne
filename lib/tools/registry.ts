@@ -17,7 +17,7 @@ export const TOOLS: readonly ToolMeta[] = [
     category: 'pdf',
     href: '/pdf/split',
     i18nKey: 'tools.pdf.split',
-    keywords: ['split', 'extract', 'pages', 'pdf', 'decouper', 'découper'],
+    keywords: ['split', 'extract', 'pages', 'pdf', 'decouper', 'découper', 'diviser'],
     acceptedMime: ['application/pdf'],
     status: 'stable',
   },
@@ -452,7 +452,7 @@ export const TOOLS: readonly ToolMeta[] = [
     i18nKey: 'tools.password.passphrase',
     keywords: [
       'passphrase', 'diceware', 'words', 'memorable',
-      'phrase', 'mots', 'memorisable', 'mémorisable',
+      'phrase de passe', 'phrase', 'mots', 'memorisable', 'mémorisable',
     ],
     acceptedMime: [],
     status: 'stable',
@@ -493,8 +493,8 @@ export const TOOLS: readonly ToolMeta[] = [
     href: '/json/format',
     i18nKey: 'tools.json.format',
     keywords: [
-      'json', 'format', 'formatter', 'beautify', 'pretty print', 'minify',
-      'sort keys', 'validate', 'embellir', 'compresser', 'valider',
+      'json', 'format', 'formatter', 'formatage', 'beautify', 'pretty print', 'minify',
+      'sort keys', 'validate', 'formater', 'embellir', 'compresser', 'valider',
     ],
     acceptedMime: ['application/json'],
     status: 'stable',

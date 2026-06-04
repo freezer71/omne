@@ -195,7 +195,7 @@
         }
       },
       "split": {
-        "name": "Découper un PDF",
+        "name": "Diviser un PDF",
         "description": "Sélectionnez les pages, téléchargez-les une à une ou en un seul PDF.",
         "content": {
           "howItWorks": [
@@ -210,7 +210,7 @@
           ]
         },
         "seo": {
-          "title": "Découper un PDF en ligne — Extraire des pages gratuitement",
+          "title": "Diviser un PDF en ligne — Extraire des pages gratuitement",
           "description": "Extracteur de pages PDF gratuit. Choisissez les pages voulues et téléchargez-les une à une ou en un seul PDF — entièrement dans votre navigateur.",
           "keywords": [
             "découper pdf",
@@ -221,7 +221,7 @@
             "diviser pdf",
             "extracteur pdf gratuit"
           ],
-          "ogTitle": "Découper un PDF · 100% local"
+          "ogTitle": "Diviser un PDF · 100% local"
         },
         "ui": {
           "selectButton": "Sélectionner un PDF",
@@ -280,7 +280,7 @@
         }
       },
       "watermark": {
-        "name": "Filigrane PDF",
+        "name": "Filigraner un PDF",
         "description": "Apposez un texte ou un logo en filigrane sur chaque page d'un PDF — diagonal, semi-transparent, dans votre navigateur.",
         "content": {
           "howItWorks": [
@@ -306,7 +306,7 @@
             "watermark pdf",
             "filigrane confidentiel pdf"
           ],
-          "ogTitle": "Filigrane PDF · 100% local"
+          "ogTitle": "Filigraner un PDF · 100% local"
         },
         "ui": {
           "selectButton": "Sélectionner un PDF",
@@ -888,7 +888,7 @@
         }
       },
       "rotate": {
-        "name": "Pivoter / Retourner une vidéo",
+        "name": "Faire pivoter / retourner une vidéo",
         "description": "Pivotez une vidéo de 90, 180 ou 270 degrés, ou retournez-la horizontalement ou verticalement.",
         "content": {
           "howItWorks": [
@@ -933,7 +933,7 @@
         }
       },
       "frames": {
-        "name": "Extraire les frames",
+        "name": "Extraire les frames d'une vidéo",
         "description": "Exportez les frames d'une vidéo en PNG ou JPG, avec un taux d'images par seconde au choix.",
         "content": {
           "howItWorks": [
@@ -1225,7 +1225,7 @@
           ]
         },
         "seo": {
-          "title": "Convertir un audio — MP3, WAV, FLAC, AAC, Opus, M4A",
+          "title": "Convertir un fichier audio — MP3, WAV, FLAC, AAC, Opus, M4A",
           "description": "Convertisseur audio gratuit. Convertissez MP3, WAV, FLAC, AAC, Opus et M4A au bitrate désiré. 100 % dans le navigateur via FFmpeg WebAssembly — aucun envoi.",
           "keywords": [
             "convertir mp3 en wav",
@@ -1236,7 +1236,7 @@
             "convertisseur mp3 sans inscription",
             "convertir fichier audio navigateur"
           ],
-          "ogTitle": "Convertir un audio · 100% local"
+          "ogTitle": "Convertir un fichier audio · 100% local"
         },
         "ui": {
           "selectButton": "Sélectionner un fichier audio",
@@ -1308,7 +1308,7 @@
         }
       },
       "trim": {
-        "name": "Découper un audio",
+        "name": "Découper un fichier audio",
         "description": "Coupez une section d'un MP3, WAV, FLAC, M4A, OGG ou Opus avec une waveform interactive.",
         "content": {
           "howItWorks": [
@@ -1334,7 +1334,7 @@
             "couper musique mp3",
             "découpeur mp3 en ligne"
           ],
-          "ogTitle": "Découper un audio · 100% local"
+          "ogTitle": "Découper un fichier audio · 100% local"
         },
         "ui": {
           "selectButton": "Sélectionner un fichier audio",
@@ -1358,7 +1358,7 @@
         }
       },
       "merge": {
-        "name": "Fusionner des audios",
+        "name": "Fusionner des fichiers audio",
         "description": "Concaténez plusieurs fichiers audio en un seul — idéal pour assembler enregistrements, podcasts ou playlists.",
         "content": {
           "howItWorks": [
@@ -1373,7 +1373,7 @@
           ]
         },
         "seo": {
-          "title": "Fusionner des MP3 — Joindre des audios, gratuit",
+          "title": "Fusionner des MP3 — Joindre des fichiers audio, gratuit",
           "description": "Outil de fusion MP3 gratuit. Concaténez plusieurs fichiers MP3, WAV, FLAC ou M4A en un seul. 100 % dans votre navigateur — aucun envoi.",
           "keywords": [
             "fusionner mp3 en ligne",
@@ -1384,7 +1384,7 @@
             "merge mp3 navigateur",
             "concaténer audio"
           ],
-          "ogTitle": "Fusionner des audios · 100% local"
+          "ogTitle": "Fusionner des fichiers audio · 100% local"
         },
         "ui": {
           "selectButton": "Ajouter des fichiers audio",
@@ -1421,7 +1421,7 @@
           ]
         },
         "seo": {
-          "title": "Normaliser un audio en ligne — Booster MP3 et fondu gratuits",
+          "title": "Normaliser un fichier audio en ligne — Booster MP3 et fondu gratuits",
           "description": "Augmentez ou réduisez le volume en décibels, normalisez EBU R128 (-16 LUFS) ou appliquez un fondu. 100 % dans votre navigateur.",
           "keywords": [
             "normaliser audio en ligne",
@@ -1583,7 +1583,7 @@
         }
       },
       "rotate-flip": {
-        "name": "Pivoter & retourner",
+        "name": "Faire pivoter & retourner une image",
         "description": "Pivotez par paliers de 90° et inversez horizontalement ou verticalement.",
         "content": {
           "howItWorks": [
@@ -1609,7 +1609,7 @@
             "miroir image en ligne",
             "inverser photo gratuit"
           ],
-          "ogTitle": "Pivoter & retourner · 100% local"
+          "ogTitle": "Faire pivoter & retourner · 100% local"
         },
         "ui": {
           "selectButton": "Sélectionner une image",
@@ -1714,36 +1714,36 @@
         }
       },
       "from-clipboard": {
-        "name": "Coller depuis le presse-papier",
-        "description": "Collez une image directement depuis votre presse-papier — capture d'écran, image copiée d'un site — et téléchargez-la en PNG, JPG ou WebP.",
+        "name": "Coller une image depuis le presse-papiers",
+        "description": "Collez une image directement depuis votre presse-papiers — capture d'écran, image copiée d'un site — et téléchargez-la en PNG, JPG ou WebP.",
         "content": {
           "howItWorks": [
-            "Copiez une capture d'écran ou une image, puis appuyez sur Cmd/Ctrl + V sur la page ou cliquez sur Coller depuis le presse-papier.",
+            "Copiez une capture d'écran ou une image, puis appuyez sur Cmd/Ctrl + V sur la page ou cliquez sur Coller depuis le presse-papiers.",
             "Choisissez le format de sortie — PNG, JPG ou WebP — et observez l'aperçu se mettre à jour en direct.",
             "Cliquez sur Télécharger pour enregistrer l'image collée en fichier."
           ],
           "features": [
             "Transforme une capture d'écran ou une image copiée d'un site en véritable fichier PNG, JPG ou WebP.",
             "L'aperçu en direct affiche le résultat et le poids du fichier au fil des changements de format.",
-            "Le presse-papier est lu localement dans votre navigateur : l'image collée n'est jamais envoyée nulle part."
+            "Le presse-papiers est lu localement dans votre navigateur : l'image collée n'est jamais envoyée nulle part."
           ]
         },
         "seo": {
-          "title": "Coller une image depuis le presse-papier — Capture en PNG / JPG / WebP",
-          "description": "Collez n'importe quelle image depuis votre presse-papier (capture d'écran, image copiée) et téléchargez-la en PNG, JPG ou WebP. 100 % dans le navigateur — aucun upload.",
+          "title": "Coller une image depuis le presse-papiers — Capture en PNG / JPG / WebP",
+          "description": "Collez n'importe quelle image depuis votre presse-papiers (capture d'écran, image copiée) et téléchargez-la en PNG, JPG ou WebP. 100 % dans le navigateur — aucun upload.",
           "keywords": [
-            "coller image presse-papier",
+            "coller image presse-papiers",
             "enregistrer capture ecran jpg",
             "capture d'écran en jpg",
-            "presse-papier vers image",
+            "presse-papiers vers image",
             "convertir capture écran",
             "screenshot en png en ligne",
             "coller image en ligne"
           ],
-          "ogTitle": "Coller depuis le presse-papier · 100 % local"
+          "ogTitle": "Coller depuis le presse-papiers · 100 % local"
         },
         "ui": {
-          "pasteButton": "Coller depuis le presse-papier",
+          "pasteButton": "Coller depuis le presse-papiers",
           "empty": "Appuyez sur Cmd/Ctrl + V ou cliquez sur le bouton pour coller une image.",
           "downloadButton": "Télécharger",
           "format": "Format de sortie",
@@ -1752,9 +1752,9 @@
           "formatWebp": "WebP",
           "previewLabel": "Aperçu",
           "previewSummary": "{format} · {size}",
-          "busy": "Lecture du presse-papier…",
-          "errorEmpty": "Votre presse-papier ne contient pas d'image.",
-          "errorPermission": "L'accès au presse-papier a été refusé. Utilisez Cmd/Ctrl + V à la place.",
+          "busy": "Lecture du presse-papiers…",
+          "errorEmpty": "Votre presse-papiers ne contient pas d'image.",
+          "errorPermission": "L'accès au presse-papiers a été refusé. Utilisez Cmd/Ctrl + V à la place.",
           "errorGeneric": "Impossible de lire cette image.",
           "replace": "Remplacer"
         }
@@ -1959,7 +1959,7 @@
         }
       },
       "to-png": {
-        "name": "SVG vers PNG / JPG / WebP",
+        "name": "SVG en PNG / JPG / WebP",
         "description": "Rastérisez n'importe quel SVG en PNG, JPG ou WebP haute qualité à la taille exacte voulue — avec aperçu live.",
         "content": {
           "howItWorks": [
@@ -1974,7 +1974,7 @@
           ]
         },
         "seo": {
-          "title": "SVG vers PNG — Convertisseur gratuit (PNG, JPG, WebP)",
+          "title": "SVG en PNG — Convertisseur gratuit (PNG, JPG, WebP)",
           "description": "Convertissez un SVG en PNG, JPG ou WebP à n'importe quelle résolution. Aperçu canvas live, fond transparent, presets 1×/2×/4×. 100 % navigateur, aucun envoi.",
           "keywords": [
             "svg vers png",
@@ -2009,7 +2009,7 @@
         }
       },
       "to-data-url": {
-        "name": "SVG vers Data URL",
+        "name": "SVG en Data URL",
         "description": "Convertissez n'importe quel SVG en data URI base64 ou URL-encodée — avec aperçu miniature live.",
         "content": {
           "howItWorks": [
@@ -2024,7 +2024,7 @@
           ]
         },
         "seo": {
-          "title": "SVG vers Data URL en ligne — Encodeur base64 et URL gratuit",
+          "title": "SVG en Data URL en ligne — Encodeur base64 et URL gratuit",
           "description": "Collez un SVG et obtenez instantanément une data URI base64 et une data URI URL-encodée prête pour le CSS. Aperçu live, comptage des octets.",
           "keywords": [
             "svg en data url",
@@ -2107,22 +2107,22 @@
         }
       },
       "passphrase": {
-        "name": "Générer une passphrase",
+        "name": "Générer une phrase de passe",
         "description": "Style diceware — des mots aléatoires faciles à retenir, difficiles à deviner.",
         "content": {
           "howItWorks": [
             "Choisissez le nombre de mots, puis sélectionnez un séparateur — espace, tiret, point ou underscore.",
             "Au choix, capitalisez chaque mot et ajoutez un chiffre aléatoire pour un peu plus d'entropie.",
-            "Consultez l'estimation de force et d'entropie, cliquez sur Régénérer jusqu'à satisfaction, puis copiez la passphrase."
+            "Consultez l'estimation de force et d'entropie, cliquez sur Régénérer jusqu'à satisfaction, puis copiez la phrase de passe."
           ],
           "features": [
-            "Construit des passphrases style diceware à partir d'une liste choisie de 256 mots, soit exactement 8 bits d'entropie par mot.",
+            "Construit des phrases de passe style diceware à partir d'une liste choisie de 256 mots, soit exactement 8 bits d'entropie par mot.",
             "Produit des phrases faciles à retenir et à taper mais difficiles à forcer, idéales comme mots de passe maîtres.",
-            "Les mots sont tirés avec un aléa cryptographique dans votre navigateur, donc rien de la passphrase ne quitte votre appareil."
+            "Les mots sont tirés avec un aléa cryptographique dans votre navigateur, donc rien de la phrase de passe ne quitte votre appareil."
           ]
         },
         "seo": {
-          "title": "Générateur de passphrase — Style diceware, mémorisable",
+          "title": "Générateur de phrase de passe — Style diceware, mémorisable",
           "description": "Générez des passphrases style diceware — des mots aléatoires faciles à retenir, difficiles à deviner. Séparateur et capitalisation paramétrables. 100 % local.",
           "keywords": [
             "générateur passphrase",
@@ -2132,7 +2132,7 @@
             "passphrase sécurisée",
             "générateur passphrase gratuit"
           ],
-          "ogTitle": "Générer une passphrase · 100% local"
+          "ogTitle": "Générer une phrase de passe · 100% local"
         },
         "ui": {
           "wordCountLabel": "Nombre de mots",
@@ -2202,7 +2202,7 @@
         }
       },
       "bcrypt": {
-        "name": "Hash & vérification bcrypt",
+        "name": "Hasher & vérifier en bcrypt",
         "description": "Hashez un mot de passe avec bcrypt (sel + rounds) ou vérifiez-le contre un hash existant.",
         "content": {
           "howItWorks": [
@@ -2306,7 +2306,7 @@
     },
     "json": {
       "format": {
-        "name": "Formatter JSON",
+        "name": "Formatage JSON",
         "description": "Embellir, compresser, trier les clés, valider — avec aperçu en direct.",
         "content": {
           "howItWorks": [
@@ -2321,7 +2321,7 @@
           ]
         },
         "seo": {
-          "title": "Formatter JSON — Embellir, compresser, trier, valider",
+          "title": "Formatage JSON — Embellir, compresser, trier, valider",
           "description": "Formattez, compressez et triez les clés de n'importe quel JSON avec aperçu en direct et validation de syntaxe. 100 % dans votre navigateur — aucun envoi.",
           "keywords": [
             "formatter json en ligne",
@@ -2332,7 +2332,7 @@
             "trier clés json",
             "formatter json gratuit"
           ],
-          "ogTitle": "Formatter JSON · 100% local"
+          "ogTitle": "Formatage JSON · 100% local"
         },
         "ui": {
           "inputLabel": "Entrée",
@@ -3020,8 +3020,8 @@
         }
       },
       "escape": {
-        "name": "Échapper / Désechapper",
-        "description": "Échappez ou désechappez des chaînes pour HTML, XML, JavaScript et JSON — gère les entités, les échappements unicode et les caractères spéciaux.",
+        "name": "Échapper / Déséchapper",
+        "description": "Échappez ou déséchappez des chaînes pour HTML, XML, JavaScript et JSON — gère les entités, les échappements unicode et les caractères spéciaux.",
         "content": {
           "howItWorks": [
             "Collez la chaîne à échapper ou déséchapper dans le champ ci-dessus.",
@@ -3036,7 +3036,7 @@
         },
         "seo": {
           "title": "Échapper en ligne — HTML, XML, JavaScript et JSON, gratuit",
-          "description": "Échappez ou désechappez des chaînes pour HTML, XML, JavaScript et JSON. Entités nommées, références numériques, échappements unicode. 100 % navigateur.",
+          "description": "Échappez ou déséchappez des chaînes pour HTML, XML, JavaScript et JSON. Entités nommées, références numériques, échappements unicode. 100 % navigateur.",
           "keywords": [
             "échapper html en ligne",
             "échapper chaîne javascript",
@@ -3050,14 +3050,14 @@
         "ui": {
           "mode": "Mode",
           "modeEscape": "Échapper",
-          "modeUnescape": "Désechapper",
+          "modeUnescape": "Déséchapper",
           "kind": "Cible",
           "kindHtml": "HTML",
           "kindJs": "JavaScript",
           "kindJson": "JSON",
           "kindXml": "XML",
           "inputLabel": "Entrée",
-          "inputPlaceholder": "Collez le texte à échapper ou désechapper…",
+          "inputPlaceholder": "Collez le texte à échapper ou déséchapper…",
           "outputLabel": "Sortie",
           "copy": "Copier",
           "copied": "Copié",
@@ -3888,7 +3888,7 @@
     },
     "qr": {
       "generate": {
-        "name": "Générateur QR Code",
+        "name": "Générateur de QR code",
         "description": "Générez des QR codes pour du texte, des liens, des réseaux Wi-Fi ou des cartes de contact. Choisissez les couleurs, la taille et le niveau de correction d'erreur — tout est rendu localement dans votre navigateur.",
         "content": {
           "howItWorks": [
@@ -3903,7 +3903,7 @@
           ]
         },
         "seo": {
-          "title": "Générateur QR Code — Texte, URL, Wi-Fi, vCard",
+          "title": "Générateur de QR code — Texte, URL, Wi-Fi, vCard",
           "description": "Encodez du texte, des liens, des identifiants Wi-Fi ou des contacts (vCard). Personnalisez couleurs, taille et correction d'erreur. PNG ou SVG, 100 % local.",
           "keywords": [
             "générer qr code en ligne",
@@ -3963,7 +3963,7 @@
         }
       },
       "scan": {
-        "name": "Lecteur QR Code",
+        "name": "Lecteur de QR code",
         "description": "Scannez un QR code avec votre caméra ou en déposant une image. Le flux vidéo et le décodage restent sur votre appareil — rien n'est envoyé.",
         "content": {
           "howItWorks": [
@@ -3978,7 +3978,7 @@
           ]
         },
         "seo": {
-          "title": "Lecteur QR Code — Caméra ou image, 100 % privé",
+          "title": "Lecteur de QR code — Caméra ou image, 100 % privé",
           "description": "Scannez un QR code via webcam ou en déposant un PNG/JPG/WebP. Décodez liens, identifiants Wi-Fi, vCards et texte — chaque octet reste dans le navigateur.",
           "keywords": [
             "scan qr en ligne sans app",
@@ -4202,7 +4202,7 @@
         }
       },
       "skills": {
-        "name": "Installateur de skills",
+        "name": "Créer un installateur de skills",
         "description": "Collez vos commandes npx skills add, choisissez agents et options, et obtenez un one-liner shell pour tout installer d'un coup.",
         "content": {
           "howItWorks": [
@@ -4690,7 +4690,7 @@
       "intro": "Visualisez, optimisez, éditez, rasterisez, encodez et transformez un SVG en pack favicon — directement dans votre navigateur avec un aperçu sandbox.",
       "seo": {
         "title": "Outils SVG — Visionneuse, SVGO, éditeur, conversion PNG",
-        "description": "Boîte à outils SVG : visionneuse, optimiseur SVGO avec diff live, éditeur code et couleurs, SVG vers PNG/JPG/WebP, Data URL, pack favicon.",
+        "description": "Boîte à outils SVG : visionneuse, optimiseur SVGO avec diff live, éditeur code et couleurs, SVG en PNG/JPG/WebP, Data URL, pack favicon.",
         "keywords": [
           "outils svg",
           "optimiseur svg",
@@ -4706,7 +4706,7 @@
     },
     "password": {
       "name": "Outils mots de passe",
-      "intro": "Générez des mots de passe et passphrases cryptographiquement sûrs, hashez du texte, validez du bcrypt et estimez la force d'un mot de passe — localement.",
+      "intro": "Générez des mots de passe et phrases de passe cryptographiquement sûrs, hashez du texte, validez du bcrypt et estimez la force d'un mot de passe — localement.",
       "seo": {
         "title": "Outils mot de passe — Générateur, hash, bcrypt, force",
         "description": "Boîte à outils mot de passe : générateur fort, passphrase diceware, SHA-1/256/384/512, bcrypt hash & vérification, estimation d'entropie.",
@@ -4726,7 +4726,7 @@
       "name": "Outils JSON",
       "intro": "Formattez, validez, requêtez, tabulez, comparez, convertissez en CSV et construisez des JSON Schemas — interactivement dans votre navigateur.",
       "seo": {
-        "title": "Outils JSON — Formatter, valider, JSONPath, diff, schema",
+        "title": "Outils JSON — Formater, valider, JSONPath, diff, schema",
         "description": "Boîte à outils JSON : formateur, arbre interactif, testeur JSONPath, vue table, JSON↔CSV, diff côte à côte, validateur JSON Schema.",
         "keywords": [
           "outils json",

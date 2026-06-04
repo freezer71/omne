@@ -888,7 +888,7 @@
         }
       },
       "rotate": {
-        "name": "Rotate / Flip video",
+        "name": "Rotate / flip video",
         "description": "Rotate a video by 90, 180 or 270 degrees, or flip it horizontally or vertically.",
         "content": {
           "howItWorks": [
@@ -1583,7 +1583,7 @@
         }
       },
       "rotate-flip": {
-        "name": "Rotate & flip",
+        "name": "Rotate & flip image",
         "description": "Rotate by 90° steps and flip horizontally or vertically.",
         "content": {
           "howItWorks": [
@@ -1609,7 +1609,7 @@
             "vertical flip",
             "free image rotator"
           ],
-          "ogTitle": "Rotate & flip · 100% local"
+          "ogTitle": "Rotate & flip image · 100% local"
         },
         "ui": {
           "selectButton": "Select an image",
@@ -2202,7 +2202,7 @@
         }
       },
       "bcrypt": {
-        "name": "bcrypt hash & verify",
+        "name": "Hash & verify with bcrypt",
         "description": "Hash a password with bcrypt (salt + rounds), or verify a password against an existing hash.",
         "content": {
           "howItWorks": [
@@ -2306,7 +2306,7 @@
     },
     "json": {
       "format": {
-        "name": "JSON Formatter",
+        "name": "JSON formatter",
         "description": "Beautify, minify, sort keys, validate — with live preview.",
         "content": {
           "howItWorks": [
@@ -2332,7 +2332,7 @@
             "sort json keys",
             "free json formatter"
           ],
-          "ogTitle": "JSON Formatter · 100% local"
+          "ogTitle": "JSON formatter · 100% local"
         },
         "ui": {
           "inputLabel": "Input",
@@ -2357,7 +2357,7 @@
         }
       },
       "tree": {
-        "name": "JSON Tree Viewer",
+        "name": "JSON tree viewer",
         "description": "Explore JSON as an interactive tree — expand, collapse, search, copy paths.",
         "content": {
           "howItWorks": [
@@ -2382,7 +2382,7 @@
             "explore json",
             "free json viewer"
           ],
-          "ogTitle": "JSON Tree Viewer · 100% local"
+          "ogTitle": "JSON tree viewer · 100% local"
         },
         "ui": {
           "inputLabel": "Input",
@@ -2406,7 +2406,7 @@
         }
       },
       "query": {
-        "name": "JSON Query",
+        "name": "JSON query",
         "description": "Filter and extract from any JSON using JSONPath — with live preview.",
         "content": {
           "howItWorks": [
@@ -2431,7 +2431,7 @@
             "extract json",
             "jq alternative online"
           ],
-          "ogTitle": "JSON Query · 100% local"
+          "ogTitle": "JSON query · 100% local"
         },
         "ui": {
           "inputLabel": "JSON",
@@ -2459,7 +2459,7 @@
         }
       },
       "table": {
-        "name": "JSON to Table",
+        "name": "JSON to table",
         "description": "Turn an array of objects into a sortable, filterable table — with CSV export.",
         "content": {
           "howItWorks": [
@@ -2484,7 +2484,7 @@
             "json grid",
             "json sort filter"
           ],
-          "ogTitle": "JSON Table · 100% local"
+          "ogTitle": "JSON table · 100% local"
         },
         "ui": {
           "inputLabel": "Input JSON",
@@ -2566,7 +2566,7 @@
         }
       },
       "diff": {
-        "name": "JSON Diff",
+        "name": "JSON diff",
         "description": "Compare two JSON documents side-by-side — added, removed, and changed values are highlighted.",
         "content": {
           "howItWorks": [
@@ -2591,7 +2591,7 @@
             "diff json",
             "json change tracker"
           ],
-          "ogTitle": "JSON Diff · 100% local"
+          "ogTitle": "JSON diff · 100% local"
         },
         "ui": {
           "inputALabel": "Version A",
@@ -2614,7 +2614,7 @@
         }
       },
       "schema": {
-        "name": "JSON Schema",
+        "name": "JSON schema",
         "description": "Validate JSON against a schema, or generate a schema from a sample document.",
         "content": {
           "howItWorks": [
@@ -2639,7 +2639,7 @@
             "ajv online",
             "draft 2020-12"
           ],
-          "ogTitle": "JSON Schema · 100% local"
+          "ogTitle": "JSON schema · 100% local"
         },
         "ui": {
           "modeValidate": "Validate",
@@ -2673,7 +2673,7 @@
     },
     "text": {
       "case": {
-        "name": "Case Converter",
+        "name": "Case converter",
         "description": "Convert text between upper, lower, title, sentence, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, and dot.case.",
         "content": {
           "howItWorks": [
@@ -2699,7 +2699,7 @@
             "uppercase lowercase converter",
             "free case converter"
           ],
-          "ogTitle": "Case Converter · 100% local"
+          "ogTitle": "Case converter · 100% local"
         },
         "ui": {
           "inputLabel": "Input",
@@ -2726,7 +2726,7 @@
         }
       },
       "count": {
-        "name": "Word & Character Counter",
+        "name": "Word & character counter",
         "description": "Count words, characters, lines, paragraphs and sentences — with reading and speaking time estimates.",
         "content": {
           "howItWorks": [
@@ -2751,7 +2751,7 @@
             "live word count",
             "free character counter"
           ],
-          "ogTitle": "Word Counter · 100% local"
+          "ogTitle": "Word counter · 100% local"
         },
         "ui": {
           "inputLabel": "Input",
@@ -2770,7 +2770,7 @@
         }
       },
       "lorem": {
-        "name": "Lorem Ipsum Generator",
+        "name": "Lorem Ipsum generator",
         "description": "Generate Lorem Ipsum placeholder text — words, sentences, or paragraphs, optionally HTML-wrapped.",
         "content": {
           "howItWorks": [
@@ -2814,7 +2814,7 @@
         }
       },
       "diff": {
-        "name": "Text Diff",
+        "name": "Text diff",
         "description": "Compare two text snippets side by side. Line, word, or character diff with additions and deletions highlighted.",
         "content": {
           "howItWorks": [
@@ -2839,7 +2839,7 @@
             "side by side text compare",
             "no upload diff tool"
           ],
-          "ogTitle": "Text Diff · 100% local"
+          "ogTitle": "Text diff · 100% local"
         },
         "ui": {
           "leftLabel": "Original",
@@ -2862,7 +2862,7 @@
         }
       },
       "regex": {
-        "name": "Regex Tester",
+        "name": "Regex tester",
         "description": "Test JavaScript regular expressions live with match highlighting, capture groups, named groups and find-and-replace.",
         "content": {
           "howItWorks": [
@@ -2887,7 +2887,7 @@
             "regex replace tool",
             "free regex builder"
           ],
-          "ogTitle": "Regex Tester · 100% local"
+          "ogTitle": "Regex tester · 100% local"
         },
         "ui": {
           "patternLabel": "Pattern",
@@ -2965,7 +2965,7 @@
         }
       },
       "sort-lines": {
-        "name": "Sort Lines",
+        "name": "Sort lines",
         "description": "Sort lines alphabetically, naturally, numerically, by length, reverse or shuffle. Optionally trim, deduplicate or remove blank lines.",
         "content": {
           "howItWorks": [
@@ -2990,7 +2990,7 @@
             "shuffle lines tool",
             "numeric line sort"
           ],
-          "ogTitle": "Sort Lines · 100% local"
+          "ogTitle": "Sort lines · 100% local"
         },
         "ui": {
           "inputLabel": "Input",
@@ -3020,7 +3020,7 @@
         }
       },
       "escape": {
-        "name": "Escape / Unescape",
+        "name": "Escape / unescape",
         "description": "Escape or unescape strings for HTML, XML, JavaScript and JSON — handles entities, unicode escapes and special characters.",
         "content": {
           "howItWorks": [
@@ -3069,7 +3069,7 @@
         }
       },
       "whitespace": {
-        "name": "Whitespace Cleaner",
+        "name": "Whitespace cleaner",
         "description": "Clean whitespace in any text — trim lines, collapse spaces, remove blank lines, convert tabs and normalize CRLF / LF line endings.",
         "content": {
           "howItWorks": [
@@ -3121,7 +3121,7 @@
         }
       },
       "markdown": {
-        "name": "Markdown Preview",
+        "name": "Markdown preview",
         "description": "Live Markdown preview with side-by-side editor. Supports headings, lists, links, code blocks, emphasis, blockquotes and tables.",
         "content": {
           "howItWorks": [
@@ -3146,7 +3146,7 @@
             "md to html converter",
             "free markdown viewer"
           ],
-          "ogTitle": "Markdown Preview · 100% local"
+          "ogTitle": "Markdown preview · 100% local"
         },
         "ui": {
           "inputLabel": "Markdown",
@@ -3164,7 +3164,7 @@
         }
       },
       "find-replace": {
-        "name": "Find & Replace",
+        "name": "Find & replace",
         "description": "Find and replace in any text — literal or regular expression mode, case sensitive, whole word, with live preview and match count.",
         "content": {
           "howItWorks": [
@@ -3189,7 +3189,7 @@
             "free text editor replace",
             "no upload find replace"
           ],
-          "ogTitle": "Find & Replace · 100% local"
+          "ogTitle": "Find & replace · 100% local"
         },
         "ui": {
           "inputLabel": "Input",
@@ -3214,7 +3214,7 @@
     },
     "encode": {
       "base64": {
-        "name": "Base64 Encoder / Decoder",
+        "name": "Base64 encoder / decoder",
         "description": "Encode text or files to Base64 — or decode Base64 back to text and binary files. Standard and URL-safe alphabets.",
         "content": {
           "howItWorks": [
@@ -3239,7 +3239,7 @@
             "url safe base64",
             "free base64 converter"
           ],
-          "ogTitle": "Base64 Encoder/Decoder · 100% local"
+          "ogTitle": "Base64 encoder/decoder · 100% local"
         },
         "ui": {
           "mode": "Mode",
@@ -3269,7 +3269,7 @@
         }
       },
       "url": {
-        "name": "URL Encoder / Decoder",
+        "name": "URL encoder / decoder",
         "description": "Percent-encode or decode URLs and query parameters. Choose between component, full URI, or form (x-www-form-urlencoded) variants.",
         "content": {
           "howItWorks": [
@@ -3294,7 +3294,7 @@
             "x-www-form-urlencoded encoder",
             "free url encoder decoder"
           ],
-          "ogTitle": "URL Encoder/Decoder · 100% local"
+          "ogTitle": "URL encoder/decoder · 100% local"
         },
         "ui": {
           "mode": "Mode",
@@ -3319,7 +3319,7 @@
         }
       },
       "jwt": {
-        "name": "JWT Decoder",
+        "name": "JWT decoder",
         "description": "Decode a JSON Web Token to inspect its header, payload, and signature — entirely in your browser. Signatures are NOT verified.",
         "content": {
           "howItWorks": [
@@ -3344,7 +3344,7 @@
             "json web token decoder",
             "jwt iat exp viewer"
           ],
-          "ogTitle": "JWT Decoder · 100% local"
+          "ogTitle": "JWT decoder · 100% local"
         },
         "ui": {
           "inputLabel": "Token",
@@ -3372,7 +3372,7 @@
         }
       },
       "hex": {
-        "name": "Hex Encoder / Decoder",
+        "name": "Hex encoder / decoder",
         "description": "Encode any text into hex (UTF-8 byte sequence) or decode a hex string back to text. Separator and case configurable.",
         "content": {
           "howItWorks": [
@@ -3423,7 +3423,7 @@
         }
       },
       "html-entities": {
-        "name": "HTML Entities Encoder / Decoder",
+        "name": "HTML entities encoder / decoder",
         "description": "Encode special characters to HTML entities (named, numeric or hex) or decode entities back to characters.",
         "content": {
           "howItWorks": [
@@ -3448,7 +3448,7 @@
             "named entities to characters",
             "free html entities tool"
           ],
-          "ogTitle": "HTML Entities · 100% local"
+          "ogTitle": "HTML entities · 100% local"
         },
         "ui": {
           "mode": "Mode",
@@ -3471,7 +3471,7 @@
         }
       },
       "binary": {
-        "name": "Binary Encoder / Decoder",
+        "name": "Binary encoder / decoder",
         "description": "Convert text to its UTF-8 binary representation (8 bits per byte) — and back.",
         "content": {
           "howItWorks": [
@@ -3520,7 +3520,7 @@
         }
       },
       "morse": {
-        "name": "Morse Code Encoder / Decoder",
+        "name": "Morse code encoder / decoder",
         "description": "Translate text to Morse code (international) and back. Optional audio playback through your speakers.",
         "content": {
           "howItWorks": [
@@ -3568,7 +3568,7 @@
     },
     "color": {
       "convert": {
-        "name": "Color Converter",
+        "name": "Color converter",
         "description": "Convert any CSS color between HEX, RGB, HSL, HSV and OKLCH. Paste a color in any common format — everything is computed locally in your browser.",
         "content": {
           "howItWorks": [
@@ -3594,7 +3594,7 @@
             "online color picker no upload",
             "hex to hsl converter"
           ],
-          "ogTitle": "Color Converter · 100% local"
+          "ogTitle": "Color converter · 100% local"
         },
         "ui": {
           "inputLabel": "Color",
@@ -3616,7 +3616,7 @@
         }
       },
       "contrast": {
-        "name": "Contrast Checker",
+        "name": "Contrast checker",
         "description": "Check WCAG color contrast between two colors. Get the ratio plus AA / AAA verdicts for normal and large text — everything runs locally in your browser.",
         "content": {
           "howItWorks": [
@@ -3641,7 +3641,7 @@
             "wcag color ratio calculator",
             "free contrast checker no upload"
           ],
-          "ogTitle": "Contrast Checker · 100% local"
+          "ogTitle": "Contrast checker · 100% local"
         },
         "ui": {
           "foregroundLabel": "Foreground (text)",
@@ -3666,7 +3666,7 @@
         }
       },
       "palette": {
-        "name": "Palette from Image",
+        "name": "Palette from image",
         "description": "Extract the dominant colors from an image. Pick k-means or median-cut, choose 2–16 swatches, then copy as CSS variables or JSON. Your image never leaves your browser.",
         "content": {
           "howItWorks": [
@@ -3691,7 +3691,7 @@
             "kmeans color palette generator",
             "image palette generator online"
           ],
-          "ogTitle": "Palette Extractor · 100% local"
+          "ogTitle": "Palette extractor · 100% local"
         },
         "ui": {
           "selectButton": "Select image",
@@ -3714,7 +3714,7 @@
         }
       },
       "gradient": {
-        "name": "CSS Gradient Builder",
+        "name": "CSS gradient builder",
         "description": "Build linear, radial or conic CSS gradients with multiple color stops, custom angle and live preview. Copy the CSS in one click.",
         "content": {
           "howItWorks": [
@@ -3758,7 +3758,7 @@
         }
       },
       "shades": {
-        "name": "Tints, Shades & Tones",
+        "name": "Tints, shades & tones",
         "description": "Generate tints (toward white), shades (toward black) and tones (toward gray) from any base color. Great for design systems.",
         "content": {
           "howItWorks": [
@@ -3798,7 +3798,7 @@
         }
       },
       "blender": {
-        "name": "Color Blender",
+        "name": "Color blender",
         "description": "Mix any two colors in RGB, HSL or OKLCH space with a ratio slider. Also generates an interpolation scale.",
         "content": {
           "howItWorks": [
@@ -3823,7 +3823,7 @@
             "color interpolation tool",
             "blend two colors online"
           ],
-          "ogTitle": "Color Blender · 100% local"
+          "ogTitle": "Color blender · 100% local"
         },
         "ui": {
           "colorALabel": "Color A",
@@ -3841,7 +3841,7 @@
         }
       },
       "blindness": {
-        "name": "Color Blindness Simulator",
+        "name": "Color blindness simulator",
         "description": "Simulate how a color or image looks to people with protanopia, deuteranopia, tritanopia or full achromatopsia.",
         "content": {
           "howItWorks": [
@@ -3866,7 +3866,7 @@
             "color vision deficiency tool",
             "accessibility color check"
           ],
-          "ogTitle": "Color Blindness · 100% local"
+          "ogTitle": "Color blindness · 100% local"
         },
         "ui": {
           "mode": "Mode",
@@ -3888,7 +3888,7 @@
     },
     "qr": {
       "generate": {
-        "name": "QR Code Generator",
+        "name": "QR code generator",
         "description": "Generate QR codes for text, links, Wi-Fi networks and contact cards. Pick colors, size and error-correction level — everything is rendered locally in your browser.",
         "content": {
           "howItWorks": [
@@ -3914,7 +3914,7 @@
             "qr code generator no upload",
             "custom color qr code"
           ],
-          "ogTitle": "QR Code Generator · 100% local"
+          "ogTitle": "QR code generator · 100% local"
         },
         "ui": {
           "modeLabel": "What to encode",
@@ -3963,7 +3963,7 @@
         }
       },
       "scan": {
-        "name": "QR Code Scanner",
+        "name": "QR code scanner",
         "description": "Scan a QR code with your camera or by dropping an image. The video stream and decoding stay on your device — nothing is uploaded.",
         "content": {
           "howItWorks": [
@@ -3988,7 +3988,7 @@
             "qr code scanner browser",
             "decode qr code online"
           ],
-          "ogTitle": "QR Code Scanner · 100% local"
+          "ogTitle": "QR code scanner · 100% local"
         },
         "ui": {
           "sourceLabel": "Source",
@@ -4033,7 +4033,7 @@
         }
       },
       "barcode-generate": {
-        "name": "Barcode Generator",
+        "name": "Barcode generator",
         "description": "Generate Code 128, EAN-13 and EAN-8 barcodes as SVG. Adjust height, module width and label.",
         "content": {
           "howItWorks": [
@@ -4078,7 +4078,7 @@
         }
       },
       "barcode-scan": {
-        "name": "Barcode Scanner",
+        "name": "Barcode scanner",
         "description": "Decode barcodes from an image — Code 128, EAN-13, EAN-8, ITF, Data Matrix and more. Uses the browser's native BarcodeDetector API.",
         "content": {
           "howItWorks": [
@@ -4103,7 +4103,7 @@
             "code 128 reader",
             "free barcode decoder"
           ],
-          "ogTitle": "Barcode Scanner · 100% local"
+          "ogTitle": "Barcode scanner · 100% local"
         },
         "ui": {
           "selectButton": "Select an image",
@@ -4202,7 +4202,7 @@
         }
       },
       "skills": {
-        "name": "Skills installer builder",
+        "name": "Build a skills installer",
         "description": "Paste npx skills add commands, pick agents and flags, and get a single shell one-liner to install them all at once.",
         "content": {
           "howItWorks": [

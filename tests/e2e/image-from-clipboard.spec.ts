@@ -11,7 +11,7 @@ test.describe('/en/image/from-clipboard', () => {
   test('FR route is reachable', async ({ page }) => {
     await page.goto('/fr/image/from-clipboard');
     await expect(
-      page.getByRole('heading', { level: 1, name: /coller depuis le presse-papier/i }),
+      page.getByRole('heading', { level: 1, name: /coller une image depuis le presse-papiers/i }),
     ).toBeVisible();
   });
 

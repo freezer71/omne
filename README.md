@@ -82,7 +82,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **Encoding** | Base64 · URL · JWT · Hex · HTML entities · Binary · Morse code |
 | **QR** | Generate (WiFi, vCard…) · Scan (camera or image) · Barcode generate (Code 128 / EAN) · Barcode scan |
 | **Color** | Converter (hex / rgb / hsl / oklch) · WCAG contrast · Palette from image · Gradient builder · Tints & shades · Blender · Color-blindness simulator |
-| **Developer** | Skills installer builder (parse `npx skills add` commands) · Browse & install skills (search the skills.sh catalog, discover top skills by All Time / Trending 24h / Hot, and install multiple in one one-liner) |
+| **Developer** | Build a skills installer (parse `npx skills add` commands) · Browse & install skills (search the skills.sh catalog, discover top skills by All Time / Trending 24h / Hot, and install multiple in one one-liner) |
 
 Source of truth: [`lib/tools/registry.ts`](./lib/tools/registry.ts). The sitemap, the home page cards and MIME-based drop routing all derive from it.
 
