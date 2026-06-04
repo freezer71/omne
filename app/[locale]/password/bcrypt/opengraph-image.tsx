@@ -4,7 +4,7 @@ import { isLocale } from '@/lib/i18n/config';
 export const runtime = 'nodejs';
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = 'omne — Hash & Verify with bcrypt';
+export const alt = 'omne — Hash & verify with bcrypt';
 
 export default async function Image({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
