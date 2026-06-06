@@ -5,6 +5,7 @@ import { getToolMetadata } from '@/lib/tools/metadata';
 import { ToolShell } from '@/components/tool-shell';
 import { ToolPageJsonLd } from '@/components/tool-page-jsonld';
 import { ImageRemoveBgTool } from '@/components/tools/image-remove-bg-tool';
+import { EnsureCrossOriginIsolated } from '@/components/ensure-cross-origin-isolated';
 
 export async function generateMetadata({
   params,
@@ -28,6 +29,8 @@ export default async function Page({
 
   return (
     <>
+    {/* /image/remove-bg is COOP/COEP-isolated (FFMPEG_ROUTES in next.config.ts) */}
+    <EnsureCrossOriginIsolated />
     <ToolShell
       locale={locale}
       category="image"

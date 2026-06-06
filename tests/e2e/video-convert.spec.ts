@@ -33,4 +33,25 @@ test.describe('/en/video/convert', () => {
     await expect(select.locator('option[value="mov"]')).toHaveCount(1);
     await expect(select.locator('option[value="gif"]')).toHaveCount(1);
   });
+
+  test('direct navigation is cross-origin isolated (COOP/COEP headers)', async ({ page }) => {
+    await page.goto('/en/video/convert');
+    expect(await page.evaluate(() => globalThis.crossOriginIsolated)).toBe(true);
+  });
+
+  test('client-side navigation from the hub becomes isolated via the reload guard', async ({ page }) => {
+    // COOP/COEP are document headers: an SPA <Link> navigation keeps the
+    // non-isolated hub document, which used to break ffmpeg-mt. The
+    // EnsureCrossOriginIsolated guard must reload once to pick them up.
+    await page.goto('/en');
+    expect(await page.evaluate(() => globalThis.crossOriginIsolated)).toBe(false);
+    await page.locator('a[href="/en/video/convert"]').first().click();
+    await page.waitForURL('**/en/video/convert');
+    await expect
+      .poll(
+        () => page.evaluate(() => globalThis.crossOriginIsolated).catch(() => false),
+        { timeout: 15_000 },
+      )
+      .toBe(true);
+  });
 });
