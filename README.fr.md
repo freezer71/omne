@@ -27,7 +27,7 @@ Ce ne sont pas des idées de fonctionnalités — ce sont des contraintes. Tout 
 - 🛡️ **Privacy by design.** Les fichiers ne quittent jamais l'appareil. Le traitement se fait dans le navigateur, en WebAssembly quand nécessaire. Pas de « faites-nous confiance, on supprimera plus tard » — il n'y a aucun serveur à purger.
 - 🔍 **Vérifiable, pas promis.** Ouvrez l'onglet Réseau de DevTools pendant une conversion : zéro requête sortante. Si ce n'est pas le cas, c'est un bug, pas une fonctionnalité.
 - 🚫 **Aucun pistage, jamais.** Pas d'analytics, pas de télémétrie, pas de cookies, pas de CDN tiers, pas de fingerprinting. On ne sait pas qui vous êtes, et on ne veut pas le savoir.
-- 🧱 **Assets lourds auto-hébergés.** ffmpeg.wasm, le worker pdf.js, le scanner QR, le moteur OCR (tesseract.js + ses données de langue) et le modèle ONNX de détourage sont servis depuis cette origine, pour qu'aucune métadonnée ne fuite vers un CDN.
+- 🧱 **Assets lourds auto-hébergés.** ffmpeg.wasm, le worker pdf.js, le scanner QR, le moteur OCR (tesseract.js + ses données de langue) et le runtime ONNX (onnxruntime-web) sont servis depuis cette origine, pour qu'aucune métadonnée ne fuite vers un CDN. Seule exception documentée : les *poids du modèle* de détourage RMBG-1.4 (~44 Mo) sont récupérés une seule fois depuis Hugging Face au premier usage, puis mis en cache par le navigateur — votre image, elle, ne quitte jamais l'appareil (voir la page confidentialité de l'app).
 - 🆓 **Zéro friction.** Pas d'inscription, pas de compte, pas de paywall, pas de quota, pas de « formule premium ». Vous ouvrez la page, vous faites le truc, vous fermez l'onglet.
 - 🌍 **Open source, à ciel ouvert.** Chaque ligne est auditable sur [github.com/freezer71/omne](https://github.com/freezer71/omne) — lien également présent dans le header et le footer du site. Si une promesse n'est pas vérifiable en lisant le code, elle ne compte pas.
 - 🌗 **Accessible et bilingue.** Thèmes clair & sombre avec anti-flash, français & anglais à parité totale (vérifiée en CI), et palette `⌘K` pour les utilisateurs clavier.
@@ -52,16 +52,16 @@ Toute contribution qui casserait cette promesse (traitement serveur, télémétr
 Prérequis : Node.js 20+.
 
 ```bash
-npm install   # déclenche le postinstall qui copie ffmpeg + pdf.js + qr-scanner + OCR dans /public
+npm install   # déclenche le postinstall qui copie ffmpeg + pdf.js + qr-scanner + polices + OCR + runtime ONNX dans /public
 npm run dev   # http://localhost:3000
 ```
 
 > ⚠️ `npm run dev` utilise volontairement **Webpack** (`next dev --webpack`). Turbopack plante sur le HMR avec les routes dynamiques `[locale]`. `npm run dev:turbo` existe uniquement pour des vérifications ponctuelles.
 
-Après un clone propre, si les fonctionnalités ffmpeg/pdf.js/OCR échouent, relancez :
+Après un clone propre, si les fonctionnalités ffmpeg/pdf.js/OCR/détourage échouent, relancez :
 
 ```bash
-node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs && node scripts/copy-ocr.mjs
+node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs && node scripts/copy-fonts.mjs && node scripts/copy-ocr.mjs && node scripts/copy-ort.mjs
 ```
 
 ---
@@ -179,9 +179,10 @@ omne/
 │   ├── ffmpeg/           # ffmpeg-core.js + .wasm (copiés au postinstall, gitignored)
 │   ├── pdfjs/            # pdf.worker.min.mjs (idem)
 │   ├── ocr/              # worker tesseract + cœurs wasm + traineddata fra/eng (idem)
+│   ├── ort/              # runtime wasm onnxruntime-web pour le détourage (idem)
 │   └── theme-init.js     # Script statique pour éviter le flash de thème
 ├── proxy.ts              # Redirection /[locale] (remplace middleware.ts)
-├── scripts/              # copy-ffmpeg, copy-pdfjs, copy-qr-scanner, copy-ocr
+├── scripts/              # copy-ffmpeg, copy-pdfjs, copy-qr-scanner, copy-fonts, copy-ocr, copy-ort
 └── tests/
     ├── unit/             # Vitest Node
     ├── components/       # Vitest jsdom + RTL

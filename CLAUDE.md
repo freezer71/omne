@@ -15,7 +15,7 @@ This Next.js 16 codebase uses conventions that differ from earlier versions — 
 - `npm run test:e2e` — Playwright (chromium + webkit). It starts `npm run dev` itself via `webServer` and reuses an existing one locally; in CI it spawns its own.
 - `npm run test:all` — vitest + playwright sequentially.
 - Single test: `npx vitest run path/to/file.test.ts -t "test name"`, or `npx playwright test tests/e2e/<name>.spec.ts --project=chromium`.
-- `postinstall` runs `scripts/copy-ffmpeg.mjs` and `scripts/copy-pdfjs.mjs`, which copy the ffmpeg-core wasm/js and pdf.js worker out of `node_modules` into `public/ffmpeg/` and `public/pdfjs/` (both gitignored). If those files go missing after a clean clone, re-run `npm install` or `node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs`.
+- `postinstall` runs the `scripts/copy-*.mjs` scripts (ffmpeg, pdfjs, qr-scanner, fonts, ocr, ort), which copy vendored heavy assets (ffmpeg-core wasm/js, pdf.js worker, QR scanner, PDF fonts, tesseract OCR cores, onnxruntime-web wasm) out of `node_modules` into `public/<name>/` (all gitignored). If those files go missing after a clean clone, re-run `npm install` or the individual `node scripts/copy-<name>.mjs`.
 
 ## Architecture
 

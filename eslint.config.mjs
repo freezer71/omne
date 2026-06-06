@@ -29,6 +29,7 @@ const eslintConfig = defineConfig([
     "public/pdfjs/**",
     "public/qr-scanner/**",
     "public/ocr/**",
+    "public/ort/**",
   ]),
 ]);
 

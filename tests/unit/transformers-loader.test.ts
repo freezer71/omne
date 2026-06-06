@@ -4,7 +4,11 @@ const { autoModelMock, autoProcessorMock, RawImageMock, env } = vi.hoisted(() =>
   autoModelMock: vi.fn(),
   autoProcessorMock: vi.fn(),
   RawImageMock: { fromBlob: vi.fn(), fromURL: vi.fn(), fromTensor: vi.fn() },
-  env: { allowLocalModels: true, useBrowserCache: false },
+  env: {
+    allowLocalModels: true,
+    useBrowserCache: false,
+    backends: { onnx: { wasm: { wasmPaths: undefined as string | undefined } } },
+  },
 }));
 
 vi.mock('@huggingface/transformers', () => ({
@@ -27,6 +31,7 @@ beforeEach(() => {
   autoProcessorMock.mockResolvedValue(vi.fn());
   env.allowLocalModels = true;
   env.useBrowserCache = false;
+  env.backends.onnx.wasm.wasmPaths = undefined;
   _resetBackgroundRemover();
 });
 
@@ -43,6 +48,13 @@ describe('getBackgroundRemover', () => {
     await getBackgroundRemover();
     expect(env.allowLocalModels).toBe(false);
     expect(env.useBrowserCache).toBe(true);
+  });
+
+  it('points the onnxruntime wasm runtime at the self-hosted /ort/ assets', async () => {
+    // Without this, onnxruntime-web fetches its wasm from cdn.jsdelivr.net,
+    // which the CSP blocks (and which would break the no-third-party-CDN promise).
+    await getBackgroundRemover();
+    expect(env.backends.onnx.wasm.wasmPaths).toBe('/ort/');
   });
 
   it('reuses the same bundle across calls (singleton)', async () => {

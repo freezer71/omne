@@ -27,7 +27,7 @@ These are not feature ideas — they are constraints. Everything in the codebase
 - 🛡️ **Privacy by design.** Files never leave the device. Processing happens in the browser, in WebAssembly when needed. There is no "trust us, we'll delete it later" — there is no server to delete from.
 - 🔍 **Verifiable, not promised.** Open the DevTools Network tab during a conversion: you should see zero outbound requests. If you ever do, that's a bug, not a feature.
 - 🚫 **No tracking, ever.** No analytics, no telemetry, no cookies, no third-party CDN, no fingerprinting. We don't know who you are and we don't want to know.
-- 🧱 **Self-hosted heavy assets.** ffmpeg.wasm, pdf.js worker, the QR scanner, the OCR engine (tesseract.js + its language data) and the background-removal ONNX model are all served from this origin so processing doesn't leak metadata to a CDN.
+- 🧱 **Self-hosted heavy assets.** ffmpeg.wasm, pdf.js worker, the QR scanner, the OCR engine (tesseract.js + its language data) and the ONNX runtime (onnxruntime-web) are all served from this origin so processing doesn't leak metadata to a CDN. The one documented exception: the RMBG-1.4 background-removal *model weights* (~44 MB) are fetched once from Hugging Face on first use, then cached by the browser — your image itself never leaves the device (see the in-app privacy page).
 - 🆓 **No friction.** No signup, no account, no paywall, no rate limit, no "premium tier". Open the page, do the thing, close the tab.
 - 🌍 **Open source, built in the open.** Every line is auditable on [github.com/freezer71/omne](https://github.com/freezer71/omne) — also linked from the site header and footer. If you can't verify a claim by reading the code, the claim doesn't count.
 - 🌗 **Accessible and bilingual.** Light & dark themes with pre-paint anti-flash, English & French at full parity (enforced by CI), and an `⌘K` palette for keyboard users.
@@ -52,16 +52,16 @@ Any contribution that would break that promise (server-side processing, telemetr
 Requirements: Node.js 20+.
 
 ```bash
-npm install   # runs the postinstall that copies ffmpeg + pdf.js + qr-scanner + OCR into /public
+npm install   # runs the postinstall that copies ffmpeg + pdf.js + qr-scanner + fonts + OCR + ONNX runtime into /public
 npm run dev   # http://localhost:3000
 ```
 
 > ⚠️ `npm run dev` deliberately uses **Webpack** (`next dev --webpack`). Turbopack panics on HMR through `[locale]` dynamic routes. `npm run dev:turbo` exists for spot checks only.
 
-After a clean clone, if ffmpeg/pdf.js/OCR features fail, re-run:
+After a clean clone, if ffmpeg/pdf.js/OCR/background-removal features fail, re-run:
 
 ```bash
-node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs && node scripts/copy-ocr.mjs
+node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs && node scripts/copy-fonts.mjs && node scripts/copy-ocr.mjs && node scripts/copy-ort.mjs
 ```
 
 ---
@@ -179,9 +179,10 @@ omne/
 │   ├── ffmpeg/           # ffmpeg-core.js + .wasm (postinstall-copied, gitignored)
 │   ├── pdfjs/            # pdf.worker.min.mjs (same)
 │   ├── ocr/              # tesseract worker + wasm cores + eng/fra traineddata (same)
+│   ├── ort/              # onnxruntime-web wasm runtime for remove-bg (same)
 │   └── theme-init.js     # Static script to avoid theme flash
 ├── proxy.ts              # /[locale] redirect (replaces middleware.ts)
-├── scripts/              # copy-ffmpeg, copy-pdfjs, copy-qr-scanner, copy-ocr
+├── scripts/              # copy-ffmpeg, copy-pdfjs, copy-qr-scanner, copy-fonts, copy-ocr, copy-ort
 └── tests/
     ├── unit/             # Vitest (Node env)
     ├── components/       # Vitest (jsdom) + RTL

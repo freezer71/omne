@@ -15,7 +15,7 @@
     "test:e2e": "playwright test",
     "test:all": "npm run test && npm run test:e2e",
     "favicons": "node scripts/generate-favicons.mjs",
-    "postinstall": "node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs && node scripts/copy-fonts.mjs && node scripts/copy-ocr.mjs"
+    "postinstall": "node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy-qr-scanner.mjs && node scripts/copy-fonts.mjs && node scripts/copy-ocr.mjs && node scripts/copy-ort.mjs"
   },
   "dependencies": {
     "@ffmpeg/core-mt": "^0.12.10",

@@ -9,6 +9,9 @@ import type { NextConfig } from "next";
 // - media-src blob:: video/audio tools preview converted output via blob URLs.
 // - connect-src exceptions:
 //     * huggingface.co + cdn-lfs.huggingface.co: image-remove-bg fetches RMBG-1.4 model
+//     * *.xethub.hf.co: HF 302-redirects LFS downloads to its Xet storage backend
+//       (cas-bridge.xethub.hf.co today; wildcard covers transfer./cas-server. and
+//       future regional variants — all Hugging Face infrastructure)
 //     * www.skills.sh: dev/skills-browse proxy (documented exception to "no backend" claim)
 // - worker-src blob:: pdf.js and ffmpeg workers are spawned from blob URLs.
 // - frame-ancestors 'none': disallow embedding to prevent clickjacking.
@@ -24,7 +27,7 @@ const CSP = [
   "img-src 'self' data: blob:",
   "media-src 'self' blob:",
   "font-src 'self'",
-  "connect-src 'self' https://huggingface.co https://cdn-lfs.huggingface.co https://www.skills.sh",
+  "connect-src 'self' https://huggingface.co https://cdn-lfs.huggingface.co https://*.xethub.hf.co https://www.skills.sh",
   "worker-src 'self' blob:",
   "frame-src 'self'",
   "object-src 'none'",
@@ -94,6 +97,13 @@ const nextConfig: NextConfig = {
       {
         source: '/pdfjs/:path*',
         headers: IMMUTABLE_CACHE,
+      },
+      // onnxruntime-web wasm runtime (remove-bg). The threaded backend spawns
+      // a worker that needs SharedArrayBuffer on the COEP-isolated remove-bg
+      // route, so these get COEP like /ffmpeg/* (ignored for non-worker loads).
+      {
+        source: '/ort/:path*',
+        headers: ISOLATED_WORKER_ASSET,
       },
       {
         source: '/qr-scanner/:path*',

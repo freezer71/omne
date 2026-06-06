@@ -44,6 +44,11 @@ export async function getBackgroundRemover(
     const mod = await import('@huggingface/transformers');
     mod.env.allowLocalModels = false;
     mod.env.useBrowserCache = true;
+    // onnxruntime-web defaults to fetching its wasm runtime from
+    // cdn.jsdelivr.net — blocked by our CSP and contrary to the privacy
+    // promise. Point it at the postinstall-copied assets (scripts/copy-ort.mjs).
+    const onnxWasm = mod.env.backends.onnx?.wasm;
+    if (onnxWasm) onnxWasm.wasmPaths = '/ort/';
 
     const baseOpts = onProgress
       ? {
