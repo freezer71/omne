@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { HighlightedText } from '@/components/ui/highlighted-text';
-import { CategoryIcon } from '@/components/command-palette/category-icons';
+import { ToolIcon } from '@/components/command-palette/category-icons';
 import { cn } from '@/lib/cn';
 import type { Range } from '@/lib/tools/highlight';
 import type { ToolMeta, ToolCategory } from '@/lib/tools/types';
@@ -35,8 +35,9 @@ export function ToolCard({
     >
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2 min-w-0">
-          <CategoryIcon
+          <ToolIcon
             category={tool.category as ToolCategory}
+            id={tool.id}
             className="h-4 w-4 shrink-0 text-text-faint"
           />
           <HighlightedText

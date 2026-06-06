@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const downloadBlobMock = vi.fn();
@@ -65,6 +65,41 @@ describe('ReadingDyslexiaTool', () => {
     await user.click(pdfButton);
     await waitFor(() => expect(makeReadingPdfMock).toHaveBeenCalledTimes(1));
     expect(downloadBlobMock).toHaveBeenCalled();
+  });
+
+  it('enters and leaves the fullscreen reading mode (CSS fallback in jsdom)', async () => {
+    const ui = reading['dyslexia-font'].ui;
+    const user = userEvent.setup();
+    render(<ReadingDyslexiaTool {...ui} />);
+
+    const enterButton = screen.getByRole('button', { name: ui.fullscreen });
+    expect(enterButton).toBeDisabled();
+
+    await user.click(screen.getByRole('button', { name: ui.sampleButton }));
+    await waitFor(() => expect(enterButton).toBeEnabled());
+
+    // jsdom has no Element.requestFullscreen — the hook falls back to fixed positioning.
+    await user.click(enterButton);
+    const exitButton = await screen.findByRole('button', { name: ui.fullscreenExit });
+    const preview = screen.getByLabelText(ui.previewLabel);
+    expect(preview.className).toContain('fixed inset-0');
+
+    // A+ / A− adjust the type size without leaving the reading mode (default 19px).
+    const textColumn = within(preview).getByText(/Reading should feel easy/).parentElement as HTMLElement;
+    expect(textColumn.style.fontSize).toBe('19px');
+    await user.click(screen.getByRole('button', { name: ui.fontLarger }));
+    expect(textColumn.style.fontSize).toBe('21px');
+    await user.click(screen.getByRole('button', { name: ui.fontSmaller }));
+    expect(textColumn.style.fontSize).toBe('19px');
+
+    await user.click(exitButton);
+    expect(screen.queryByRole('button', { name: ui.fullscreenExit })).not.toBeInTheDocument();
+
+    // Esc also leaves the fallback mode.
+    await user.click(enterButton);
+    await screen.findByRole('button', { name: ui.fullscreenExit });
+    await user.keyboard('{Escape}');
+    expect(screen.queryByRole('button', { name: ui.fullscreenExit })).not.toBeInTheDocument();
   });
 });
 

@@ -94,7 +94,8 @@ export function TintChips({
   onChange,
 }: {
   legend: string;
-  value: ReadingTintKey;
+  /** `null` when the current colours don't match any preset (custom colours). */
+  value: ReadingTintKey | null;
   labels: Record<ReadingTintKey, string>;
   onChange: (value: ReadingTintKey) => void;
 }) {

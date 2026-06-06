@@ -151,6 +151,72 @@ function Reading(props: IconProps) {
   );
 }
 
+// --- Per-tool icons -------------------------------------------------------
+// Tools whose card deserves a more specific glyph than the category icon.
+
+function ReadingFocus(props: IconProps) {
+  // Guided reading: an eye, guided along the line.
+  return (
+    <svg {...SVG_PROPS} {...props}>
+      <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+function ReadingDyslexiaFont(props: IconProps) {
+  // Typography: a type/T glyph with its baseline.
+  return (
+    <svg {...SVG_PROPS} {...props}>
+      <path d="M5 7V4h14v3" />
+      <path d="M12 4v16" />
+      <path d="M9 20h6" />
+    </svg>
+  );
+}
+
+function ReadingPdfDyslexia(props: IconProps) {
+  // A document whose glyphs are swapped: page outline + letter A.
+  return (
+    <svg {...SVG_PROPS} {...props}>
+      <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+      <path d="M14 3v5h5" />
+      <path d="m9.5 17 2.5-6 2.5 6" />
+      <path d="M10.4 15.2h3.2" />
+    </svg>
+  );
+}
+
+function ReadingReadAloud(props: IconProps) {
+  // Text-to-speech: a speaker with sound waves.
+  return (
+    <svg {...SVG_PROPS} {...props}>
+      <path d="M11 5 6 9H3v6h3l5 4z" />
+      <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+      <path d="M18.5 5.5a9.5 9.5 0 0 1 0 13" />
+    </svg>
+  );
+}
+
+function ReadingImmersive(props: IconProps) {
+  // Sentence focus ruler: dimmed lines around the highlighted one.
+  return (
+    <svg {...SVG_PROPS} {...props}>
+      <path d="M6 5h12" />
+      <rect x="3" y="9.5" width="18" height="5" rx="1.5" />
+      <path d="M6 19h12" />
+    </svg>
+  );
+}
+
+const TOOL_ICONS: Record<string, (p: IconProps) => React.ReactElement> = {
+  'reading/focus': ReadingFocus,
+  'reading/dyslexia-font': ReadingDyslexiaFont,
+  'reading/pdf-dyslexia': ReadingPdfDyslexia,
+  'reading/read-aloud': ReadingReadAloud,
+  'reading/immersive': ReadingImmersive,
+};
+
 const ICONS: Record<ToolCategory, (p: IconProps) => React.ReactElement> = {
   pdf: Pdf,
   video: Video,
@@ -175,5 +241,17 @@ type CategoryIconProps = {
 
 export function CategoryIcon({ category, className }: CategoryIconProps) {
   const Icon = ICONS[category];
+  return <Icon className={className} />;
+}
+
+type ToolIconProps = {
+  category: ToolCategory;
+  id: string;
+  className?: string;
+};
+
+/** Tool-specific glyph when one exists, otherwise the category icon. */
+export function ToolIcon({ category, id, className }: ToolIconProps) {
+  const Icon = TOOL_ICONS[`${category}/${id}`] ?? ICONS[category];
   return <Icon className={className} />;
 }

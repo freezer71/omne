@@ -15,7 +15,9 @@ import {
   type ReadingTintKey,
 } from '@/lib/tools/implementations/reading';
 import { makeReadingHtml, makeReadingPdf } from '@/lib/tools/reading-assets';
+import { cn } from '@/lib/cn';
 import { useParagraphImport } from '@/lib/hooks/use-paragraph-import';
+import { useFullscreen, useIdleHide } from '@/lib/hooks/use-fullscreen';
 import { LabeledRange, OptionChips, TintChips } from '@/components/tools/reading/controls';
 import { OcrNotice, type OcrNoticeLabels } from '@/components/tools/reading/ocr-notice';
 import { SourceInput } from '@/components/tools/reading/source-input';
@@ -54,6 +56,11 @@ export type ReadingDyslexiaMessages = {
   alignCenter: string;
   previewLabel: string;
   empty: string;
+  fullscreen: string;
+  fullscreenExit: string;
+  fullscreenHint: string;
+  fontSmaller: string;
+  fontLarger: string;
   downloadHtml: string;
   downloadPdf: string;
   busy: string;
@@ -71,6 +78,14 @@ export function ReadingDyslexiaTool({
   const [exporting, setExporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileImport = useParagraphImport(setText, m.error);
+  const {
+    ref: fullscreenRef,
+    active: fullscreenActive,
+    enter: enterFullscreen,
+    exit: exitFullscreen,
+    fallbackClass: fullscreenFallbackClass,
+  } = useFullscreen<HTMLDivElement>();
+  const controlsVisible = useIdleHide(fullscreenActive);
 
   useEffect(() => {
     const handle = window.setTimeout(() => setDebounced(text), 200);
@@ -238,6 +253,9 @@ export function ReadingDyslexiaTool({
         <div className="flex items-center justify-between">
           <span className="text-xs text-text-muted">{m.previewLabel}</span>
           <span className="flex gap-2">
+            <Button size="sm" variant="subtle" type="button" disabled={paragraphs.length === 0} onClick={enterFullscreen}>
+              {m.fullscreen}
+            </Button>
             <Button size="sm" variant="subtle" type="button" disabled={paragraphs.length === 0 || exporting} onClick={onDownloadHtml}>
               {m.downloadHtml}
             </Button>
@@ -253,10 +271,50 @@ export function ReadingDyslexiaTool({
           </Card>
         ) : (
           <div
-            className="min-h-[28rem] overflow-auto rounded-lg border border-border p-6"
+            ref={fullscreenRef}
+            className={cn(
+              fullscreenActive
+                ? 'overflow-auto px-6 py-16'
+                : 'min-h-[28rem] overflow-auto rounded-lg border border-border p-6',
+              fullscreenFallbackClass,
+            )}
             style={{ background: tint.bg, color: tint.fg }}
             aria-label={m.previewLabel}
           >
+            {fullscreenActive && (
+              <div
+                className={cn(
+                  'fixed bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-border bg-surface/95 px-3 py-1.5 shadow-lg backdrop-blur transition-opacity duration-300',
+                  controlsVisible ? 'opacity-100' : 'pointer-events-none opacity-0',
+                )}
+              >
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  type="button"
+                  aria-label={m.fontSmaller}
+                  disabled={options.fontSizePt <= 12}
+                  onClick={() => set('fontSizePt', Math.max(12, options.fontSizePt - 2))}
+                >
+                  A−
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  type="button"
+                  aria-label={m.fontLarger}
+                  disabled={options.fontSizePt >= 36}
+                  onClick={() => set('fontSizePt', Math.min(36, options.fontSizePt + 2))}
+                >
+                  A+
+                </Button>
+                <span aria-hidden className="h-4 w-px bg-border" />
+                <span className="px-1 text-xs text-text-faint">{m.fullscreenHint}</span>
+                <Button size="sm" variant="ghost" type="button" onClick={exitFullscreen}>
+                  {m.fullscreenExit}
+                </Button>
+              </div>
+            )}
             <div
               style={{
                 maxWidth: `${options.maxWidthCh}ch`,

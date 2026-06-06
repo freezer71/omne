@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const downloadBlobMock = vi.fn();
 const openPdfDocMock = vi.fn(async (..._a: unknown[]) => ({
   numPages: 2,
-  getPage: async () => ({}),
+  getPage: async () => ({ getViewport: () => ({ width: 612, height: 792 }) }),
   destroy: async () => {},
 }));
 const extractAllItemsMock = vi.fn(async (..._a: unknown[]) => [
@@ -96,6 +96,52 @@ describe('PdfFontSwapTool', () => {
     await waitFor(() => expect(extractAllItemsMock).toHaveBeenCalledTimes(1));
 
     expect(screen.queryByText(ui.corruptWarning)).not.toBeInTheDocument();
+  });
+
+  it('offers all four fonts and tint presets that drive the colour pickers', async () => {
+    const user = userEvent.setup();
+    render(<PdfFontSwapTool {...ui} />);
+
+    // Same font palette as the text tool.
+    expect(screen.getByRole('radio', { name: ui.fontSerif })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: ui.fontMono })).toBeInTheDocument();
+
+    // Picking a tint preset fills both colour pickers (peach: #fbeee0 / #1f1a14).
+    const textInput = screen.getByLabelText(ui.textColorLabel, { selector: 'input' }) as HTMLInputElement;
+    const bgInput = screen.getByLabelText(ui.bgColorLabel, { selector: 'input' }) as HTMLInputElement;
+    await user.click(screen.getByRole('button', { name: ui.tintPeach }));
+    expect(bgInput.value).not.toBe('#ffffff');
+    expect(textInput.value).not.toBe('#1a1a1a');
+    expect(screen.getByRole('button', { name: ui.tintPeach })).toHaveAttribute('aria-pressed', 'true');
+
+    // Touching a picker afterwards deselects the preset (custom colours).
+    fireEvent.change(bgInput, { target: { value: '#123456' } });
+    expect(screen.getByRole('button', { name: ui.tintPeach })).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  it('reads fullscreen with keyboard page turning (CSS fallback in jsdom)', async () => {
+    const user = userEvent.setup();
+    const { container } = render(<PdfFontSwapTool {...ui} />);
+
+    const enterButton = screen.getByRole('button', { name: ui.fullscreen });
+    expect(enterButton).toBeDisabled();
+
+    await user.upload(container.querySelector('input[type="file"]') as HTMLInputElement, pdfFile());
+    await waitFor(() => expect(enterButton).toBeEnabled());
+
+    // jsdom has no Element.requestFullscreen — the hook falls back to fixed positioning.
+    await user.click(enterButton);
+    const exitButton = await screen.findByRole('button', { name: ui.fullscreenExit });
+
+    // Arrow keys turn pages while reading fullscreen.
+    expect(screen.getAllByText('Page 1 / 2').length).toBeGreaterThan(0);
+    await user.keyboard('{ArrowRight}');
+    await waitFor(() => expect(screen.getAllByText('Page 2 / 2').length).toBeGreaterThan(0));
+    await user.keyboard('{ArrowLeft}');
+    await waitFor(() => expect(screen.getAllByText('Page 1 / 2').length).toBeGreaterThan(0));
+
+    await user.click(exitButton);
+    expect(screen.queryByRole('button', { name: ui.fullscreenExit })).not.toBeInTheDocument();
   });
 
   it('exports selectable vector text when that mode is chosen', async () => {

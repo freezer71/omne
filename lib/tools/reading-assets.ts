@@ -48,7 +48,7 @@ function toBase64(bytes: Uint8Array): string {
   return btoa(binary);
 }
 
-const FONT_FAMILY: Record<ReadingFontKey, string> = {
+export const FONT_FAMILY: Record<ReadingFontKey, string> = {
   opendyslexic: 'OpenDyslexic',
   sans: 'Inter Wm',
   serif: 'Lora Wm',
@@ -242,7 +242,8 @@ export async function renderFontSwapPreview(
   // Cancel any in-flight render: pdf.js throws if two renders share a canvas.
   taskBox?.current?.cancel();
   const page = await doc.getPage(pageNum);
-  const viewport = page.getViewport({ scale });
+  const renderScale = scale;
+  const viewport = page.getViewport({ scale: renderScale });
   canvas.width = Math.ceil(viewport.width);
   canvas.height = Math.ceil(viewport.height);
   const ctx = canvas.getContext('2d');
@@ -261,18 +262,18 @@ export async function renderFontSwapPreview(
     const pt = viewport.convertToViewportPoint(it.x, it.y);
     const vx = pt[0] ?? 0;
     const vy = pt[1] ?? 0;
-    const targetPx = it.height * scale;
+    const targetPx = it.height * renderScale;
     if (targetPx < 1) continue;
     ctx.font = `${targetPx}px "${family}"`;
     const natural = ctx.measureText(it.str).width;
-    const fit = fitSize(natural, targetPx, it.width * scale);
+    const fit = fitSize(natural, targetPx, it.width * renderScale);
     const ascent = targetPx * 0.82;
     const descent = targetPx * 0.28;
     ctx.save();
     ctx.translate(vx, vy);
     ctx.rotate(-it.angle);
     ctx.fillStyle = opts.bgColor;
-    ctx.fillRect(0, -ascent, it.width * scale, ascent + descent);
+    ctx.fillRect(0, -ascent, it.width * renderScale, ascent + descent);
     ctx.font = `${fit}px "${family}"`;
     ctx.fillStyle = opts.textColor;
     ctx.fillText(it.str, 0, 0);

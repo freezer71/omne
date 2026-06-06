@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CategoryIcon } from '@/components/command-palette/category-icons';
+import { ToolIcon } from '@/components/command-palette/category-icons';
 import type { Locale } from '@/lib/i18n/config';
 import type { SearchableTool } from '@/lib/tools/search';
 import type { ToolCategory } from '@/lib/tools/types';
@@ -28,8 +28,9 @@ export function HubFeatured({ locale, title, subtitle, tools }: Props) {
             href={`/${locale}${tool.href}`}
             className="group flex flex-col gap-2 rounded-lg border border-border bg-surface p-5 transition-colors hover:border-border-strong hover:bg-surface-hover focus:outline-none focus-visible:border-accent"
           >
-            <CategoryIcon
+            <ToolIcon
               category={tool.category as ToolCategory}
+              id={tool.id}
               className="h-5 w-5 text-text-faint transition-colors group-hover:text-text-primary"
             />
             <h3 className="text-base font-medium text-text-primary">{tool.name}</h3>

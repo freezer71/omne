@@ -1,24 +1,29 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 import { downloadBlob, outputName } from '@/lib/file-utils';
-import { analyzeTextLayer, type ReadingFontKey } from '@/lib/tools/implementations/reading';
+import {
+  analyzeTextLayer,
+  READING_TINTS,
+  type ReadingFontKey,
+  type ReadingTintKey,
+} from '@/lib/tools/implementations/reading';
 import type { FontSwapItem } from '@/lib/tools/implementations/pdf-font-swap';
 import {
   extractAllItems,
   makeFontSwapPdf,
   openPdfDoc,
-  renderFontSwapPreview,
   type FontSwapExportMode,
   type FontSwapOptions,
   type PdfDocLike,
-  type RenderTaskLike,
 } from '@/lib/tools/reading-assets';
-import { OptionChips } from '@/components/tools/reading/controls';
+import { OptionChips, TintChips } from '@/components/tools/reading/controls';
+import { PdfScrollReader } from '@/components/tools/reading/pdf-scroll-reader';
+import { useFullscreen, useIdleHide } from '@/lib/hooks/use-fullscreen';
 
 export type PdfFontSwapMessages = {
   selectButton: string;
@@ -28,12 +33,25 @@ export type PdfFontSwapMessages = {
   fontLabel: string;
   fontOpendyslexic: string;
   fontSans: string;
+  fontSerif: string;
+  fontMono: string;
+  tintLabel: string;
+  tintWhite: string;
+  tintCream: string;
+  tintPeach: string;
+  tintMint: string;
+  tintSky: string;
+  tintGrey: string;
+  tintDark: string;
   textColorLabel: string;
   bgColorLabel: string;
   prevPage: string;
   nextPage: string;
   pageTemplate: string;
   previewLabel: string;
+  fullscreen: string;
+  fullscreenExit: string;
+  fullscreenHint: string;
   downloadPdf: string;
   busy: string;
   error: string;
@@ -46,16 +64,14 @@ export type PdfFontSwapMessages = {
   corruptWarning: string;
 };
 
-const PREVIEW_SCALE = 1.5;
-
 export function PdfFontSwapTool(m: PdfFontSwapMessages) {
   const fileRef = useRef<HTMLInputElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const docRef = useRef<PdfDocLike | null>(null);
-  const renderTaskRef = useRef<RenderTaskLike | null>(null);
 
   const [fileName, setFileName] = useState<string | null>(null);
   const [bytes, setBytes] = useState<Uint8Array | null>(null);
+  // Mirrors docRef for rendering paths (reading a ref during render is not allowed).
+  const [pdfDoc, setPdfDoc] = useState<PdfDocLike | null>(null);
   const [pages, setPages] = useState<FontSwapItem[][]>([]);
   const [numPages, setNumPages] = useState(0);
   const [pageNum, setPageNum] = useState(1);
@@ -68,17 +84,50 @@ export function PdfFontSwapTool(m: PdfFontSwapMessages) {
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [corrupted, setCorrupted] = useState(false);
+  const {
+    ref: fullscreenRef,
+    active: fullscreenActive,
+    enter: enterFullscreen,
+    exit: exitFullscreen,
+    fallbackClass: fullscreenFallbackClass,
+  } = useFullscreen<HTMLDivElement>();
+  const controlsVisible = useIdleHide(fullscreenActive);
+
+  // Page jumps from the keyboard while reading fullscreen. Vertical keys
+  // (PageUp/Down, space, ↑↓) are left to the scroller's native behaviour.
+  useEffect(() => {
+    if (!fullscreenActive || numPages <= 1) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') setPageNum((n) => Math.max(1, n - 1));
+      else if (e.key === 'ArrowRight') setPageNum((n) => Math.min(numPages, n + 1));
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [fullscreenActive, numPages]);
 
   useEffect(() => {
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps -- cancel whatever render is active at unmount, not a snapshot
-      renderTaskRef.current?.cancel();
       void docRef.current?.destroy?.();
       docRef.current = null;
     };
   }, []);
 
-  const opts: FontSwapOptions = { font, textColor, bgColor };
+  // Memoised: the scroll reader invalidates its painted pages when this changes.
+  const opts: FontSwapOptions = useMemo(() => ({ font, textColor, bgColor }), [font, textColor, bgColor]);
+
+  // Which tint preset matches the current colours (null = custom colours).
+  const activeTint: ReadingTintKey | null = useMemo(() => {
+    const keys = Object.keys(READING_TINTS) as ReadingTintKey[];
+    return keys.find((k) => READING_TINTS[k].fg === textColor && READING_TINTS[k].bg === bgColor) ?? null;
+  }, [textColor, bgColor]);
+
+  // Debounced for the live preview, so dragging a colour picker doesn't
+  // re-render pages on every input event (the export uses `opts` directly).
+  const [previewOpts, setPreviewOpts] = useState<FontSwapOptions>(opts);
+  useEffect(() => {
+    const handle = window.setTimeout(() => setPreviewOpts(opts), 200);
+    return () => window.clearTimeout(handle);
+  }, [opts]);
 
   const onFile = async (file: File | undefined) => {
     if (!file) return;
@@ -97,6 +146,7 @@ export function PdfFontSwapTool(m: PdfFontSwapMessages) {
         return;
       }
       docRef.current = doc;
+      setPdfDoc(doc);
       setBytes(buf);
       setPages(allItems);
       setNumPages(doc.numPages);
@@ -113,39 +163,6 @@ export function PdfFontSwapTool(m: PdfFontSwapMessages) {
       setLoading(false);
     }
   };
-
-  // Faithful live preview: render the current page with the swapped font overlaid.
-  useEffect(() => {
-    const doc = docRef.current;
-    const canvas = canvasRef.current;
-    if (!doc || !canvas || pages.length === 0) return;
-    const handle = window.setTimeout(async () => {
-      try {
-        if (typeof document !== 'undefined' && document.fonts?.load) {
-          await document.fonts.load(`16px "${font === 'sans' ? 'Inter Wm' : 'OpenDyslexic'}"`);
-        }
-        // Preview render failures (e.g. cancelled renders) are non-fatal and
-        // are handled inside renderFontSwapPreview — never surface them as the
-        // "could not read the PDF" load error.
-        await renderFontSwapPreview(
-          doc,
-          pageNum,
-          canvas,
-          pages[pageNum - 1] ?? [],
-          { font, textColor, bgColor },
-          PREVIEW_SCALE,
-          renderTaskRef,
-        );
-      } catch {
-        /* ignore transient preview errors */
-      }
-    }, 250);
-    return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps -- cancel the in-flight render, not a snapshot
-      renderTaskRef.current?.cancel();
-      window.clearTimeout(handle);
-    };
-  }, [pages, pageNum, font, textColor, bgColor]);
 
   const onDownload = async () => {
     const doc = docRef.current;
@@ -206,7 +223,27 @@ export function PdfFontSwapTool(m: PdfFontSwapMessages) {
           options={[
             { value: 'opendyslexic', label: m.fontOpendyslexic },
             { value: 'sans', label: m.fontSans },
+            { value: 'serif', label: m.fontSerif },
+            { value: 'mono', label: m.fontMono },
           ]}
+        />
+
+        <TintChips
+          legend={m.tintLabel}
+          value={activeTint}
+          labels={{
+            white: m.tintWhite,
+            cream: m.tintCream,
+            peach: m.tintPeach,
+            mint: m.tintMint,
+            sky: m.tintSky,
+            grey: m.tintGrey,
+            dark: m.tintDark,
+          }}
+          onChange={(key) => {
+            setTextColor(READING_TINTS[key].fg);
+            setBgColor(READING_TINTS[key].bg);
+          }}
         />
 
         <div className="grid grid-cols-2 gap-4">
@@ -276,14 +313,67 @@ export function PdfFontSwapTool(m: PdfFontSwapMessages) {
         )}
       </div>
 
-      <div className="min-h-[28rem] overflow-auto rounded-lg border border-border bg-surface p-4" aria-label={m.previewLabel}>
-        {loading ? (
-          <Card className="flex min-h-[26rem] items-center justify-center text-sm text-text-muted">{m.loading}</Card>
-        ) : bytes ? (
-          <canvas ref={canvasRef} className="mx-auto h-auto max-w-full rounded border border-border" />
-        ) : (
-          <Card className="flex min-h-[26rem] items-center justify-center text-sm text-text-faint">{m.empty}</Card>
-        )}
+      <div className="flex flex-col gap-1.5">
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-text-muted">{m.previewLabel}</span>
+          <Button size="sm" variant="subtle" type="button" disabled={!bytes || loading} onClick={enterFullscreen}>
+            {m.fullscreen}
+          </Button>
+        </div>
+        <div
+          ref={fullscreenRef}
+          className={cn(
+            fullscreenActive
+              ? 'flex items-center justify-center overflow-hidden bg-surface'
+              : pdfDoc && pages.length > 0 && !loading
+                ? 'h-[34rem] overflow-hidden rounded-lg border border-border bg-surface'
+                : 'min-h-[28rem] grow overflow-auto rounded-lg border border-border bg-surface p-4',
+            fullscreenFallbackClass,
+          )}
+          aria-label={m.previewLabel}
+        >
+          {fullscreenActive && (
+            <div
+              className={cn(
+                'fixed bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-border bg-surface/95 px-3 py-1.5 shadow-lg backdrop-blur transition-opacity duration-300',
+                controlsVisible ? 'opacity-100' : 'pointer-events-none opacity-0',
+              )}
+            >
+              {numPages > 1 && (
+                <>
+                  <Button size="sm" variant="ghost" type="button" disabled={pageNum <= 1} onClick={() => setPageNum((n) => Math.max(1, n - 1))}>
+                    {m.prevPage}
+                  </Button>
+                  <span className="px-1 font-mono text-xs text-text-muted">
+                    {tpl(m.pageTemplate, { n: pageNum, total: numPages })}
+                  </span>
+                  <Button size="sm" variant="ghost" type="button" disabled={pageNum >= numPages} onClick={() => setPageNum((n) => Math.min(numPages, n + 1))}>
+                    {m.nextPage}
+                  </Button>
+                  <span aria-hidden className="h-4 w-px bg-border" />
+                </>
+              )}
+              <span className="px-1 text-xs text-text-faint">{m.fullscreenHint}</span>
+              <Button size="sm" variant="ghost" type="button" onClick={exitFullscreen}>
+                {m.fullscreenExit}
+              </Button>
+            </div>
+          )}
+          {loading ? (
+            <Card className="flex min-h-[26rem] items-center justify-center text-sm text-text-muted">{m.loading}</Card>
+          ) : pdfDoc && pages.length > 0 ? (
+            <PdfScrollReader
+              doc={pdfDoc}
+              pages={pages}
+              opts={previewOpts}
+              page={pageNum}
+              onPageSeen={setPageNum}
+              autoFocus={fullscreenActive}
+            />
+          ) : (
+            <Card className="flex min-h-[26rem] items-center justify-center text-sm text-text-faint">{m.empty}</Card>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -15,6 +15,23 @@ test.describe('/en/reading', () => {
     await expect(page.getByRole('button', { name: /download html/i })).toBeEnabled();
   });
 
+  test('dyslexia-font: reads fullscreen and exits with Escape', async ({ page }) => {
+    await page.goto('/en/reading/dyslexia-font');
+    await page.getByRole('button', { name: /load sample/i }).click();
+    await expect(page.getByText(/Reading should feel easy/i)).toBeVisible();
+
+    await page.getByRole('button', { name: /read fullscreen/i }).click();
+    await expect(page.getByRole('button', { name: /exit fullscreen/i })).toBeVisible();
+    // Native fullscreen promoted the preview, or the CSS fallback pinned it — either way it reads directly.
+    const mode = await page.evaluate(() =>
+      document.fullscreenElement !== null ? 'native' : 'fallback',
+    );
+    expect(['native', 'fallback']).toContain(mode);
+
+    await page.keyboard.press('Escape');
+    await expect(page.getByRole('button', { name: /exit fullscreen/i })).toBeHidden();
+  });
+
   test('focus: shows bold word-heads in the preview', async ({ page }) => {
     await page.goto('/en/reading/focus');
     await page.getByRole('button', { name: /load sample/i }).click();
@@ -52,6 +69,29 @@ test.describe('/en/reading', () => {
     await expect(page.getByText(/could not generate the pdf/i)).toHaveCount(0);
   });
 
+  test('pdf-dyslexia: fullscreen reads pages with continuous scrolling', async ({ page }) => {
+    await page.goto('/en/reading/pdf-dyslexia');
+    await page.locator('input[type="file"]').setInputFiles('tests/fixtures/reading/multipage.pdf');
+    const enterButton = page.getByRole('button', { name: /read fullscreen/i });
+    await expect(enterButton).toBeEnabled({ timeout: 15_000 });
+    await enterButton.click();
+
+    await expect(page.getByRole('button', { name: /exit fullscreen/i })).toBeVisible();
+    await expect(page.getByText('Page 1 / 4').first()).toBeVisible();
+
+    // Wheel-scrolling through the stacked pages updates the page indicator.
+    await page.mouse.move(720, 450);
+    await page.mouse.wheel(0, 4000);
+    await expect(page.getByText(/Page [34] \/ 4/).first()).toBeVisible();
+
+    // Arrow keys still jump page by page.
+    await page.keyboard.press('ArrowLeft');
+    await expect(page.getByText(/Page [23] \/ 4/).first()).toBeVisible();
+
+    await page.keyboard.press('Escape');
+    await expect(page.getByRole('button', { name: /exit fullscreen/i })).toBeHidden();
+  });
+
   test('FR locale shows the French category and tool names', async ({ page }) => {
     await page.goto('/fr/reading/focus');
     await expect(page.getByRole('heading', { level: 1, name: /lecture guidée/i })).toBeVisible();
@@ -83,7 +123,11 @@ test.describe('/en/reading', () => {
       timeout: 150_000,
     });
     // …and the preview shows the real words, not the corrupted extraction.
-    await expect(page.getByText(/Description des activites/i)).toBeVisible();
+    // Scoped to the preview pane: the OCR text also lands in the textarea
+    // immediately, while the preview renders after the input debounce.
+    await expect(
+      page.getByLabel('Preview', { exact: true }).getByText(/Description des activites/i),
+    ).toBeVisible();
 
     expect(externalRequests).toEqual([]);
   });

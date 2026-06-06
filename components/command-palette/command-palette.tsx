@@ -5,7 +5,7 @@ import * as RadixDialog from '@radix-ui/react-dialog';
 import { useRouter } from 'next/navigation';
 import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react';
 import { usePalette } from './palette-context';
-import { CategoryIcon } from './category-icons';
+import { ToolIcon } from './category-icons';
 import { PaletteQuickActions, type QuickActionLabels } from './palette-quick-actions';
 import { HighlightedText } from '@/components/ui/highlighted-text';
 import { useRecentTools } from '@/components/use-recent-tools';
@@ -269,7 +269,7 @@ function ToolItem({ value, tool, query, onSelect, badgeBeta, badgeSoon }: ToolIt
       onSelect={onSelect}
       className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm text-text-primary aria-selected:bg-surface-hover data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50"
     >
-      <CategoryIcon category={tool.category as ToolCategory} className="h-4 w-4 shrink-0 text-text-faint" />
+      <ToolIcon category={tool.category as ToolCategory} id={tool.id} className="h-4 w-4 shrink-0 text-text-faint" />
       <div className="flex min-w-0 flex-1 flex-col">
         <HighlightedText
           text={tool.name}
