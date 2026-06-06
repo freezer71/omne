@@ -5,6 +5,11 @@ import { localizedUrl } from '@/lib/seo/site';
 
 export const dynamic = 'force-static';
 
+// Evaluated at build time (the route is force-static): content only changes
+// via deploys, so the deploy date is an honest <lastmod> that nudges Google
+// to re-crawl after content updates.
+const LASTMOD = new Date().toISOString().slice(0, 10);
+
 const XML_ESCAPE: Record<string, string> = {
   '&': '&amp;',
   '<': '&lt;',
@@ -67,6 +72,7 @@ function renderUrl(entry: Entry): string {
   return [
     '  <url>',
     `    <loc>${loc}</loc>`,
+    `    <lastmod>${LASTMOD}</lastmod>`,
     alts,
     xdef,
     `    <priority>${entry.priority.toFixed(1)}</priority>`,

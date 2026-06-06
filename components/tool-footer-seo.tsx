@@ -2,7 +2,7 @@ import 'server-only';
 import Link from 'next/link';
 import type { Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
-import { getTool, toolsByCategory } from '@/lib/tools/registry';
+import { getTool, relatedTools } from '@/lib/tools/registry';
 import type { ToolCategory } from '@/lib/tools/types';
 
 type Props = {
@@ -39,8 +39,7 @@ export async function ToolFooterSeo({ category, id, locale }: Props) {
   ];
   const features = content?.features;
 
-  const sameCategory = toolsByCategory()[category] ?? [];
-  const related = sameCategory.filter((t) => t.id !== id).slice(0, 4);
+  const related = relatedTools(category, id);
 
   return (
     <section

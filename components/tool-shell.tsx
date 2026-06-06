@@ -41,7 +41,12 @@ export function ToolShell({
           {backHomeLabel}
         </Link>
         <span aria-hidden className="text-text-faint">/</span>
-        <span className="text-text-faint">{categoryLabel}</span>
+        <Link
+          href={`/${locale}/${category}`}
+          className="text-text-faint hover:text-text-primary transition-colors"
+        >
+          {categoryLabel}
+        </Link>
       </nav>
 
       <header className="flex flex-col gap-2">

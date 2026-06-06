@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { TOOLS, getTool, toolsByCategory, toolsForMime } from '@/lib/tools/registry';
+import { TOOLS, getTool, relatedTools, toolsByCategory, toolsForMime } from '@/lib/tools/registry';
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
@@ -123,6 +123,53 @@ describe('toolsByCategory', () => {
     expect(grouped.pdf?.length).toBe(8);
     expect(grouped.video?.length).toBe(13);
     expect(grouped.image?.length).toBe(7);
+  });
+});
+
+describe('relatedTools', () => {
+  it('returns the tools right after the given one in registry order', () => {
+    const video = toolsByCategory().video!;
+    const first = video[0]!;
+    const related = relatedTools('video', first.id);
+    expect(related.map((t) => t.id)).toEqual(video.slice(1, 5).map((t) => t.id));
+  });
+
+  it('wraps around at the end of the category', () => {
+    const video = toolsByCategory().video!;
+    const last = video[video.length - 1]!;
+    const related = relatedTools('video', last.id);
+    expect(related.map((t) => t.id)).toEqual(video.slice(0, 4).map((t) => t.id));
+  });
+
+  it('never includes the tool itself and never repeats an id', () => {
+    for (const tool of TOOLS) {
+      const related = relatedTools(tool.category, tool.id);
+      const ids = related.map((t) => t.id);
+      expect(ids).not.toContain(tool.id);
+      expect(new Set(ids).size).toBe(ids.length);
+    }
+  });
+
+  it('spreads incoming links evenly across a category', () => {
+    const video = toolsByCategory().video!;
+    const incoming = new Map<string, number>();
+    for (const tool of video) {
+      for (const r of relatedTools('video', tool.id)) {
+        incoming.set(r.id, (incoming.get(r.id) ?? 0) + 1);
+      }
+    }
+    // With a rotating window every tool receives exactly `count` links.
+    for (const tool of video) {
+      expect(incoming.get(tool.id)).toBe(4);
+    }
+  });
+
+  it('returns all the others when the category has few tools', () => {
+    const reading = toolsByCategory().reading ?? [];
+    if (reading.length > 0 && reading.length <= 5) {
+      const related = relatedTools('reading', reading[0]!.id);
+      expect(related.length).toBe(reading.length - 1);
+    }
   });
 });
 

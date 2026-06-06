@@ -581,8 +581,8 @@
           ]
         },
         "seo": {
-          "title": "Couper une vidéo en ligne — Découper un clip MP4, gratuit",
-          "description": "Découpeur vidéo gratuit. Extrayez un clip d'un fichier MP4, WebM, MOV ou MKV — entièrement dans votre navigateur. Aucun envoi, aucune inscription.",
+          "title": "Couper une vidéo en ligne gratuitement — sans upload",
+          "description": "Coupez ou découpez une vidéo MP4, WebM, MOV ou MKV directement dans le navigateur — même les gros fichiers, sans upload ni inscription. Gratuit, sans filigrane.",
           "keywords": [
             "couper une vidéo en ligne",
             "couper video en ligne gratuit",
@@ -590,7 +590,8 @@
             "découpeur vidéo gratuit",
             "couper une vidéo gratuitement",
             "couper video mp4",
-            "raccourcir vidéo en ligne"
+            "raccourcir vidéo en ligne",
+            "couper une grosse vidéo en ligne sans upload"
           ],
           "ogTitle": "Couper une vidéo · 100% local"
         },
@@ -1598,11 +1599,11 @@
           ]
         },
         "seo": {
-          "title": "Retourner une image en ligne — Pivoter, inverser une photo gratuitement",
-          "description": "Retournez, pivotez ou inversez une image ou photo en ligne. PNG, JPG, WebP — instantanément dans le navigateur, aucun upload.",
+          "title": "Inverser une image en ligne — retourner, pivoter, gratuit",
+          "description": "Retournez, pivotez ou inversez une image ou photo en ligne gratuitement. PNG, JPG, WebP — miroir horizontal ou vertical, dans le navigateur, sans upload.",
           "keywords": [
             "retourner une image",
-            "inverser image en ligne",
+            "inverser une image en ligne",
             "retourner une photo",
             "pivoter image en ligne",
             "retourner photo en ligne",
@@ -2180,7 +2181,8 @@
             "hasher texte",
             "texte vers sha",
             "calculateur sha en ligne",
-            "outil hash gratuit"
+            "outil hash gratuit",
+            "texte vers sha256"
           ],
           "ogTitle": "Hasher du texte · 100% local"
         },

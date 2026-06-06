@@ -44,6 +44,12 @@ describe('sitemap.xml route handler', () => {
     expect(body).toContain(`<loc>${SITE_URL}/fr/pdf/merge</loc>`);
   });
 
+  it('emits a W3C-date <lastmod> on every entry', async () => {
+    const body = await getBody();
+    const lastmods = body.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) ?? [];
+    expect(lastmods.length).toBe(locales.length * entriesPerLocale);
+  });
+
   it('emits hreflang alternates including x-default for each entry', async () => {
     const body = await getBody();
     expect(body).toContain('hreflang="en"');

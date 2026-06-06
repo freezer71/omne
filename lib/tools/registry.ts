@@ -1007,3 +1007,19 @@ export function toolsByCategory(): Partial<Record<ToolCategory, ToolMeta[]>> {
 export function toolsForMime(mime: string): ToolMeta[] {
   return TOOLS.filter((t) => t.acceptedMime.includes(mime));
 }
+
+/**
+ * Up to `count` other tools from the same category, starting right after
+ * `id` in registry order and wrapping around. The rotating window spreads
+ * internal links evenly across the category — a fixed `slice(0, count)`
+ * would concentrate every page's "related" links on the same first tools.
+ */
+export function relatedTools(category: ToolCategory, id: string, count = 4): ToolMeta[] {
+  const sameCategory = toolsByCategory()[category] ?? [];
+  const others = sameCategory.filter((t) => t.id !== id);
+  if (others.length <= count) return others;
+  // After removing the current tool, the tool that followed it sits at the
+  // current tool's own index — so the window starts there.
+  const start = Math.max(0, sameCategory.findIndex((t) => t.id === id));
+  return Array.from({ length: count }, (_, i) => others[(start + i) % others.length]!);
+}

@@ -590,7 +590,8 @@
             "video cutter free",
             "clip video online",
             "shorten video",
-            "trim video no upload"
+            "trim video no upload",
+            "trim large video online no upload"
           ],
           "ogTitle": "Trim video · 100% local"
         },
@@ -1729,7 +1730,7 @@
           ]
         },
         "seo": {
-          "title": "Clipboard to Image Online — Paste & Save as PNG, JPG, WebP Free",
+          "title": "Clipboard to PNG / JPG Online — Paste & Save Image Free",
           "description": "Paste any image from your clipboard and save it as PNG, JPG, or WebP. Clipboard to PNG, clipboard to JPG — free, instant, 100% in-browser. Nothing uploaded.",
           "keywords": [
             "clipboard to image",
@@ -2122,8 +2123,8 @@
           ]
         },
         "seo": {
-          "title": "Passphrase Generator — Diceware-Style, Memorable, Free",
-          "description": "Generate diceware-style passphrases — random words easy to remember, hard to guess. Customizable separator and capitalization. 100% local in your browser.",
+          "title": "Passphrase Generator — Diceware, Memorable, Free Online",
+          "description": "Generate a diceware-style passphrase — random words easy to remember, hard to guess. Pick word count, separator and capitalization. 100% local, no upload.",
           "keywords": [
             "passphrase generator",
             "diceware passphrase",
@@ -2171,16 +2172,17 @@
           ]
         },
         "seo": {
-          "title": "Hash Text Online — SHA-1, SHA-256, SHA-384, SHA-512 Free",
-          "description": "Compute the SHA-1, SHA-256, SHA-384 or SHA-512 hash of any text, in hex or base64. Free, instant, and 100% in your browser — your text never leaves.",
+          "title": "Text to SHA-256 Online — Hash Text, Hex or Base64 Free",
+          "description": "Type any text or password and get its SHA-256, SHA-512, SHA-1 or SHA-384 hash in hex or base64. Free, instant, 100% in-browser. Nothing is uploaded.",
           "keywords": [
-            "sha256 online",
-            "sha512 online",
             "text to sha256",
             "hash text online",
+            "sha256 online",
+            "sha512 online",
             "text to sha",
+            "password hash to text",
             "sha256 base64",
-            "hash to text"
+            "hash text"
           ],
           "ogTitle": "Hash text · 100% local"
         },
