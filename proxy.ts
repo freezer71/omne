@@ -23,7 +23,11 @@ export function proxy(request: NextRequest) {
   const locale = detectLocale(request);
   const url = request.nextUrl.clone();
   url.pathname = `/${locale}${pathname === '/' ? '' : pathname}`;
-  return NextResponse.redirect(url, 301);
+  const response = NextResponse.redirect(url, 301);
+  // The redirect target depends on Accept-Language — declare it so shared
+  // caches never serve one visitor's locale redirect to another.
+  response.headers.set('Vary', 'Accept-Language');
+  return response;
 }
 
 export const config = {

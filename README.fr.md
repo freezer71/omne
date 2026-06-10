@@ -145,6 +145,7 @@ Détails complets dans [`CLAUDE.md`](./CLAUDE.md).
 | `npm run test:e2e` | Playwright (chromium + webkit) |
 | `npm run test:all` | Vitest puis Playwright |
 | `npm run favicons` | Régénère `app/favicon.ico` (16/32/48) + `app/apple-icon.png` (180×180) depuis `app/icon.svg` |
+| `npm run lastmod` | Régénère `lib/seo/lastmod.json` (dates `<lastmod>` du sitemap par page, dérivées de l'historique git) — à lancer après un changement de contenu puis committer le résultat |
 
 Lancer un seul test :
 

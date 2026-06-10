@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const PORT = 3000;
+const PORT = Number(process.env['PORT'] ?? 3000);
 const IS_CI = Boolean(process.env['CI']);
 
 export default defineConfig({

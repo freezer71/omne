@@ -3,6 +3,7 @@ import { GET } from '@/app/sitemap.xml/route';
 import { TOOLS } from '@/lib/tools/registry';
 import { locales } from '@/lib/i18n/config';
 import { SITE_URL } from '@/lib/seo/site';
+import { lastmodFor } from '@/lib/seo/lastmod';
 
 const populatedCategories = new Set(TOOLS.map((t) => t.category));
 const entriesPerLocale = 2 + populatedCategories.size + TOOLS.length;
@@ -48,6 +49,16 @@ describe('sitemap.xml route handler', () => {
     const body = await getBody();
     const lastmods = body.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) ?? [];
     expect(lastmods.length).toBe(locales.length * entriesPerLocale);
+  });
+
+  it('emits the per-path lastmod from lib/seo/lastmod.json, shared across locales', async () => {
+    const body = await getBody();
+    const expected = lastmodFor('/pdf/merge');
+    expect(expected).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    for (const locale of locales) {
+      const block = body.split('<url>').find((b) => b.includes(`<loc>${SITE_URL}/${locale}/pdf/merge</loc>`));
+      expect(block).toContain(`<lastmod>${expected}</lastmod>`);
+    }
   });
 
   it('emits hreflang alternates including x-default for each entry', async () => {

@@ -2,13 +2,9 @@ import { locales, type Locale } from '@/lib/i18n/config';
 import { TOOLS } from '@/lib/tools/registry';
 import { TOOL_CATEGORIES, type ToolCategory } from '@/lib/tools/types';
 import { localizedUrl } from '@/lib/seo/site';
+import { lastmodFor } from '@/lib/seo/lastmod';
 
 export const dynamic = 'force-static';
-
-// Evaluated at build time (the route is force-static): content only changes
-// via deploys, so the deploy date is an honest <lastmod> that nudges Google
-// to re-crawl after content updates.
-const LASTMOD = new Date().toISOString().slice(0, 10);
 
 const XML_ESCAPE: Record<string, string> = {
   '&': '&amp;',
@@ -69,10 +65,13 @@ function renderUrl(entry: Entry): string {
     )
     .join('\n');
   const xdef = `    <xhtml:link rel="alternate" hreflang="x-default" href="${xmlEscape(localizedUrl('en', entry.path))}"/>`;
+  // Omitting <lastmod> is valid per the sitemap protocol — more honest than an
+  // invented date when a path is missing from lib/seo/lastmod.json.
+  const lastmod = lastmodFor(entry.path);
   return [
     '  <url>',
     `    <loc>${loc}</loc>`,
-    `    <lastmod>${LASTMOD}</lastmod>`,
+    ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
     alts,
     xdef,
     `    <priority>${entry.priority.toFixed(1)}</priority>`,
