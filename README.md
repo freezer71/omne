@@ -14,7 +14,7 @@
 
 ---
 
-**omne** is a collection of 89 online tools — PDF, video, audio, image, SVG, passwords, JSON, text, encoding, QR codes, colors, developer utilities — that run **entirely client-side**. No backend, no analytics, no third-party CDN, no cookies. Your files never leave the tab.
+**omne** is a collection of 89 online tools — PDF, video, audio, image, SVG, passwords, JSON, text, encoding, QR codes, colors, developer utilities — that run **entirely client-side**. No analytics, no third-party CDN, no cookies, no server-side file processing — your files never leave the tab. The two narrow, documented exceptions (a skills.sh search proxy and a one-time AI model download) are covered in [the privacy-first promise](#the-privacy-first-promise) and on the in-app privacy page.
 
 Bilingual **English / French**, light / dark mode, `⌘K` command palette.
 
@@ -25,7 +25,7 @@ Bilingual **English / French**, light / dark mode, `⌘K` command palette.
 These are not feature ideas — they are constraints. Everything in the codebase has to honor them.
 
 - 🛡️ **Privacy by design.** Files never leave the device. Processing happens in the browser, in WebAssembly when needed. There is no "trust us, we'll delete it later" — there is no server to delete from.
-- 🔍 **Verifiable, not promised.** Open the DevTools Network tab during a conversion: you should see zero outbound requests. If you ever do, that's a bug, not a feature.
+- 🔍 **Verifiable, not promised.** Open the DevTools Network tab during a conversion: you should see zero outbound requests. The only two sanctioned exceptions — the Skills browser's search proxy and the one-time background-removal model download — are documented below and on the in-app privacy page; anything else is a bug, not a feature.
 - 🚫 **No tracking, ever.** No analytics, no telemetry, no cookies, no third-party CDN, no fingerprinting. We don't know who you are and we don't want to know.
 - 🧱 **Self-hosted heavy assets.** ffmpeg.wasm, pdf.js worker, the QR scanner, the OCR engine (tesseract.js + its language data) and the ONNX runtime (onnxruntime-web) are all served from this origin so processing doesn't leak metadata to a CDN. The one documented exception: the RMBG-1.4 background-removal *model weights* (~44 MB) are fetched once from Hugging Face on first use, then cached by the browser — your image itself never leaves the device (see the in-app privacy page).
 - 🆓 **No friction.** No signup, no account, no paywall, no rate limit, no "premium tier". Open the page, do the thing, close the tab.
@@ -42,8 +42,9 @@ This is the reason the project exists, not a marketing line:
 - `@ffmpeg/ffmpeg` (video, audio), `pdfjs-dist` (PDF) and `tesseract.js` (OCR, with its English + French models) are **self-hosted** under `/public/ffmpeg/`, `/public/pdfjs/` and `/public/ocr/` — the DevTools Network tab must show **zero** outbound traffic during processing, OCR included.
 - The app serves `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp` to enable `SharedArrayBuffer` (required by the multi-thread ffmpeg build). Because every asset is same-origin, this hardens the page instead of breaking anything.
 - No external services: no Sentry, no Google Analytics, no tracking pixel, no asset CDN.
+- Two documented exceptions, both opt-in and file-free: the **Skills browser** (`/dev/skills-browse`) is the only tool that makes network requests at runtime — it relays your search to skills.sh through two same-origin proxy routes (`app/api/skills-search`, `app/api/skills-feed`); and the **background remover** fetches its RMBG-1.4 model (~44 MB) once from Hugging Face, then your browser caches it. Both are flagged `network` in `lib/tools/registry.ts`, disclosed in their own UI and footer, and detailed on the in-app privacy page.
 
-Any contribution that would break that promise (server-side processing, telemetry, remote asset loads) is out of scope.
+Any contribution that would break that promise (server-side file processing, telemetry, undocumented remote loads) is out of scope. A new network-touching feature is only acceptable with the same treatment as the exceptions above: a `network` flag in the registry, in-UI disclosure, and privacy-page documentation.
 
 ---
 

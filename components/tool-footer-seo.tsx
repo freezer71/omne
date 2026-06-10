@@ -27,6 +27,13 @@ export async function ToolFooterSeo({ category, id, locale }: Props) {
 
   const dict = await getDictionary(locale);
   const f = dict.common.footer;
+  const privacyTitle = tool.network === 'proxy' ? f.privacyTitleProxy : f.privacyTitle;
+  const privacyBody =
+    tool.network === 'proxy'
+      ? f.privacyBodyProxy
+      : tool.network === 'model-download'
+        ? f.privacyBodyModelDownload
+        : f.privacyBody;
   const toolsByCat = (dict.tools as unknown as Record<string, Record<string, ToolDictEntry>>);
   const currentDict = toolsByCat[category]?.[id];
   const content = currentDict?.content;
@@ -67,8 +74,16 @@ export async function ToolFooterSeo({ category, id, locale }: Props) {
       </article>
 
       <article className="grid gap-2 rounded-lg border border-border bg-surface p-5">
-        <h2 className="text-base font-medium text-text-primary">{f.privacyTitle}</h2>
-        <p className="text-sm text-text-muted leading-relaxed">{f.privacyBody}</p>
+        <h2 className="text-base font-medium text-text-primary">{privacyTitle}</h2>
+        <p className="text-sm text-text-muted leading-relaxed">{privacyBody}</p>
+        {tool.network && (
+          <Link
+            href={`/${locale}/privacy`}
+            className="justify-self-start text-sm text-text-muted underline underline-offset-4 hover:text-text-primary transition-colors"
+          >
+            {f.privacyLearnMore}
+          </Link>
+        )}
       </article>
 
       {related.length > 0 && (

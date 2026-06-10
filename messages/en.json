@@ -40,7 +40,11 @@
       "privacyBody": "Every conversion runs entirely in your browser using WebAssembly. There is no upload, no server-side processing, no analytics, and no cookies. Open DevTools → Network during the operation and you will see zero outbound traffic.",
       "relatedTitle": "Related tools",
       "keywordsTitle": "Topics covered",
-      "featuresTitle": "Features"
+      "featuresTitle": "Features",
+      "privacyTitleProxy": "This tool talks to skills.sh",
+      "privacyBodyProxy": "Unlike every other omne tool, this one makes network requests while you use it: your search query is relayed through omne's server to skills.sh, and both see your IP address and the text you type. No files are involved — this tool accepts no file input. Every other tool on omne still runs entirely in your browser.",
+      "privacyBodyModelDownload": "Your image is processed entirely in your browser — it is never uploaded. The only network request is a one-time ~44 MB download of the AI model from huggingface.co on first use; your browser caches it, and later runs need no network at all. No analytics, no cookies.",
+      "privacyLearnMore": "See the privacy page for details."
     }
   },
   "badge": {
@@ -131,7 +135,7 @@
     },
     "howItWorks": {
       "title": "How it works",
-      "subtitle": "Three steps, zero servers.",
+      "subtitle": "Three steps, zero uploads.",
       "step1Title": "Drop a file",
       "step1Body": "Or pick one from your device. Everything stays in this tab.",
       "step2Title": "Tweak live",

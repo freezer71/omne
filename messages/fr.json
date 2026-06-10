@@ -40,7 +40,11 @@
       "privacyBody": "Chaque conversion s'exécute entièrement dans votre navigateur via WebAssembly. Pas d'upload, pas de traitement serveur, pas d'analytics, pas de cookies. Ouvrez DevTools → Network pendant l'opération et vous verrez zéro trafic sortant.",
       "relatedTitle": "Outils connexes",
       "keywordsTitle": "Sujets couverts",
-      "featuresTitle": "Fonctionnalités"
+      "featuresTitle": "Fonctionnalités",
+      "privacyTitleProxy": "Cet outil communique avec skills.sh",
+      "privacyBodyProxy": "Contrairement à tous les autres outils d'omne, celui-ci effectue des requêtes réseau pendant que vous l'utilisez : votre recherche est relayée via le serveur d'omne vers skills.sh, et les deux voient votre adresse IP et le texte tapé. Aucun fichier n'est en jeu — cet outil n'accepte aucun fichier en entrée. Tous les autres outils d'omne s'exécutent toujours entièrement dans votre navigateur.",
+      "privacyBodyModelDownload": "Votre image est traitée entièrement dans votre navigateur — elle n'est jamais envoyée. La seule requête réseau est le téléchargement unique du modèle d'IA (~44 Mo) depuis huggingface.co au premier usage ; votre navigateur le met en cache et les usages suivants ne nécessitent plus aucun réseau. Pas d'analytics, pas de cookies.",
+      "privacyLearnMore": "Voir la page Confidentialité pour le détail."
     }
   },
   "badge": {
@@ -131,7 +135,7 @@
     },
     "howItWorks": {
       "title": "Comment ça marche",
-      "subtitle": "Trois étapes, aucun serveur.",
+      "subtitle": "Trois étapes, zéro envoi.",
       "step1Title": "Déposez un fichier",
       "step1Body": "Ou choisissez-en un. Tout reste dans cet onglet.",
       "step2Title": "Réglez en direct",

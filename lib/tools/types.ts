@@ -3,6 +3,9 @@ export type ToolCategory = (typeof TOOL_CATEGORIES)[number];
 
 export type ToolStatus = 'stable' | 'beta' | 'soon';
 
+/** Sanctioned network behavior. Absent = strictly zero runtime network traffic. */
+export type ToolNetwork = 'proxy' | 'model-download';
+
 export type ToolMeta = {
   id: string;
   category: ToolCategory;
@@ -11,6 +14,7 @@ export type ToolMeta = {
   keywords: string[];
   acceptedMime: string[];
   status: ToolStatus;
+  network?: ToolNetwork;
 };
 
 export function isToolCategory(value: string): value is ToolCategory {

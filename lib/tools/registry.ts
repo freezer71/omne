@@ -347,6 +347,7 @@ export const TOOLS: readonly ToolMeta[] = [
     keywords: ['image', 'remove', 'background', 'bg', 'detourer', 'détourer', 'transparent', 'ai', 'ia'],
     acceptedMime: IMG_MIMES,
     status: 'beta',
+    network: 'model-download',
   },
   {
     id: 'from-clipboard',
@@ -1002,6 +1003,7 @@ export const TOOLS: readonly ToolMeta[] = [
     ],
     acceptedMime: [],
     status: 'stable',
+    network: 'proxy',
   },
 ] as const;
 

@@ -14,7 +14,7 @@
 
 ---
 
-**omne** est une collection de 89 outils en ligne — PDF, vidéo, audio, image, SVG, mots de passe, JSON, texte, encodage, QR codes, couleurs, utilitaires développeur — qui tournent **entièrement côté client**. Pas de backend, pas d'analytics, pas de CDN tiers, pas de cookies. Vos fichiers ne quittent jamais l'onglet.
+**omne** est une collection de 89 outils en ligne — PDF, vidéo, audio, image, SVG, mots de passe, JSON, texte, encodage, QR codes, couleurs, utilitaires développeur — qui tournent **entièrement côté client**. Pas d'analytics, pas de CDN tiers, pas de cookies, pas de traitement de fichiers côté serveur — vos fichiers ne quittent jamais l'onglet. Les deux exceptions documentées, volontairement étroites (un proxy de recherche skills.sh et un téléchargement unique de modèle d'IA), sont décrites dans [la promesse privacy-first](#la-promesse-privacy-first) et sur la page confidentialité de l'app.
 
 Bilingue **français / anglais**, mode clair / sombre, raccourci `⌘K` pour la palette de commandes.
 
@@ -25,7 +25,7 @@ Bilingue **français / anglais**, mode clair / sombre, raccourci `⌘K` pour la 
 Ce ne sont pas des idées de fonctionnalités — ce sont des contraintes. Tout le code doit les respecter.
 
 - 🛡️ **Privacy by design.** Les fichiers ne quittent jamais l'appareil. Le traitement se fait dans le navigateur, en WebAssembly quand nécessaire. Pas de « faites-nous confiance, on supprimera plus tard » — il n'y a aucun serveur à purger.
-- 🔍 **Vérifiable, pas promis.** Ouvrez l'onglet Réseau de DevTools pendant une conversion : zéro requête sortante. Si ce n'est pas le cas, c'est un bug, pas une fonctionnalité.
+- 🔍 **Vérifiable, pas promis.** Ouvrez l'onglet Réseau de DevTools pendant une conversion : zéro requête sortante. Les deux seules exceptions sanctionnées — le proxy de recherche du navigateur de Skills et le téléchargement unique du modèle de détourage — sont documentées ci-dessous et sur la page confidentialité de l'app ; tout le reste est un bug, pas une fonctionnalité.
 - 🚫 **Aucun pistage, jamais.** Pas d'analytics, pas de télémétrie, pas de cookies, pas de CDN tiers, pas de fingerprinting. On ne sait pas qui vous êtes, et on ne veut pas le savoir.
 - 🧱 **Assets lourds auto-hébergés.** ffmpeg.wasm, le worker pdf.js, le scanner QR, le moteur OCR (tesseract.js + ses données de langue) et le runtime ONNX (onnxruntime-web) sont servis depuis cette origine, pour qu'aucune métadonnée ne fuite vers un CDN. Seule exception documentée : les *poids du modèle* de détourage RMBG-1.4 (~44 Mo) sont récupérés une seule fois depuis Hugging Face au premier usage, puis mis en cache par le navigateur — votre image, elle, ne quitte jamais l'appareil (voir la page confidentialité de l'app).
 - 🆓 **Zéro friction.** Pas d'inscription, pas de compte, pas de paywall, pas de quota, pas de « formule premium ». Vous ouvrez la page, vous faites le truc, vous fermez l'onglet.
@@ -42,8 +42,9 @@ C'est la raison d'être du projet, pas un argument marketing :
 - `@ffmpeg/ffmpeg` (vidéo, audio), `pdfjs-dist` (PDF) et `tesseract.js` (OCR, avec ses modèles français + anglais) sont **auto-hébergés** sous `/public/ffmpeg/`, `/public/pdfjs/` et `/public/ocr/` — l'onglet Réseau de DevTools doit afficher **zéro** trafic sortant pendant un traitement, OCR compris.
 - L'app sert `Cross-Origin-Opener-Policy: same-origin` et `Cross-Origin-Embedder-Policy: require-corp` pour activer `SharedArrayBuffer` (requis par le build ffmpeg multi-thread). Comme tous les assets sont same-origin, ces en-têtes renforcent la page sans rien casser.
 - Aucun service externe : pas de Sentry, pas de Google Analytics, pas de pixel, pas de CDN d'assets.
+- Deux exceptions documentées, toutes deux opt-in et sans fichier : le **navigateur de Skills** (`/dev/skills-browse`) est le seul outil qui fait des requêtes réseau au runtime — il relaie votre recherche vers skills.sh via deux routes proxy same-origin (`app/api/skills-search`, `app/api/skills-feed`) ; et le **détourage d'image** télécharge une seule fois son modèle RMBG-1.4 (~44 Mo) depuis Hugging Face, ensuite mis en cache par le navigateur. Les deux sont flaggés `network` dans `lib/tools/registry.ts`, signalés dans leur UI et leur footer, et détaillés sur la page confidentialité de l'app.
 
-Toute contribution qui casserait cette promesse (traitement serveur, télémétrie, ressource distante) sort du périmètre.
+Toute contribution qui casserait cette promesse (traitement de fichiers côté serveur, télémétrie, ressource distante non documentée) sort du périmètre. Une nouvelle fonctionnalité touchant au réseau n'est acceptable qu'avec le même traitement que les exceptions ci-dessus : flag `network` dans le registry, signalement dans l'UI et documentation sur la page confidentialité.
 
 ---
 

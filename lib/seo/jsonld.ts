@@ -85,17 +85,22 @@ function localeTag(locale: Locale): string {
   return locale === 'en' ? 'en-US' : 'fr-FR';
 }
 
-function privacyClaim(locale: Locale): string {
+function privacyClaim(locale: Locale, network?: ToolMeta['network']): string {
+  if (network === 'proxy') {
+    return locale === 'fr'
+      ? 'Interroge le catalogue skills.sh en direct via un proxy côté serveur — aucun fichier en jeu.'
+      : 'Searches the live skills.sh catalog via a server-side proxy — no files involved.';
+  }
   return locale === 'fr'
     ? 'Exécution 100 % locale dans le navigateur — aucun fichier envoyé.'
     : 'Runs 100% locally in the browser — no file uploaded.';
 }
 
-function featureListFromMime(mime: string[], locale: Locale): string[] {
+function featureListFromMime(mime: string[], locale: Locale, network?: ToolMeta['network']): string[] {
   const labels = Array.from(new Set(mime.map((m) => MIME_LABEL[m] ?? m).filter(Boolean)));
-  if (labels.length === 0) return [privacyClaim(locale)];
+  if (labels.length === 0) return [privacyClaim(locale, network)];
   const prefix = locale === 'fr' ? 'Formats pris en charge :' : 'Supported formats:';
-  return [`${prefix} ${labels.join(', ')}`, privacyClaim(locale)];
+  return [`${prefix} ${labels.join(', ')}`, privacyClaim(locale, network)];
 }
 
 export type JsonLd = Record<string, unknown>;
@@ -113,7 +118,7 @@ export async function toolJsonLd(
   const url = localizedUrl(locale, tool.href);
 
   const dictFeatures = node?.content?.features ?? [];
-  const mimeFeatures = featureListFromMime(tool.acceptedMime, locale);
+  const mimeFeatures = featureListFromMime(tool.acceptedMime, locale, tool.network);
 
   return {
     '@context': 'https://schema.org',
