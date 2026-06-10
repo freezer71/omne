@@ -14,7 +14,7 @@
 
 ---
 
-**omne** is a collection of 83+ online tools — PDF, video, audio, image, SVG, passwords, JSON, text, encoding, QR codes, colors, developer utilities — that run **entirely client-side**. No backend, no analytics, no third-party CDN, no cookies. Your files never leave the tab.
+**omne** is a collection of 89 online tools — PDF, video, audio, image, SVG, passwords, JSON, text, encoding, QR codes, colors, developer utilities — that run **entirely client-side**. No backend, no analytics, no third-party CDN, no cookies. Your files never leave the tab.
 
 Bilingual **English / French**, light / dark mode, `⌘K` command palette.
 
@@ -73,7 +73,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **PDF** | Merge · Split · Rotate · Resize · Watermark · PDF → images · Extract images · Images → PDF |
 | **Video** | Convert (MP4 / WebM / GIF) · Trim · Split · Merge · Compress · Resize · Mute · Crop · Rotate / flip · Extract frames · Watermark · Speed · Short Studio (split + numbered watermark, optional 9:16) |
 | **Audio** | Convert · Extract (from video) · Trim · Merge · Volume / normalize / fades · ID3 tags |
-| **Image** | Convert · Compress · Resize · Crop · Rotate / flip · Remove background (local AI, *beta*) · Paste from clipboard |
+| **Image** | Convert · Compress · Resize · Crop · Rotate / flip · Remove background (local AI, *beta*) · Paste from clipboard · Banner maker (color background + text & image layers, size presets) |
 | **SVG** | Viewer · Editor · Optimize (SVGO) · → PNG / JPG / WebP · → Data URL · Favicon generator |
 | **Password** | Generate · Passphrase (Diceware) · Hash (SHA) · bcrypt · Strength meter |
 | **JSON** | Format · Tree · JSONPath · Table · CSV ↔ JSON · Diff · Schema (AJV) |

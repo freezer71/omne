@@ -1759,6 +1759,74 @@
           "errorGeneric": "Impossible de lire cette image.",
           "replace": "Remplacer"
         }
+      },
+      "banner-maker": {
+        "name": "Créateur de bannière",
+        "description": "Créez des bannières et visuels — fond coloré, calques de texte et d'images, avec aperçu en direct.",
+        "content": {
+          "howItWorks": [
+            "Choisissez un format prédéfini (carré, story, 16:9, image OG, bannière X) ou des dimensions personnalisées avec verrou de ratio.",
+            "Choisissez une couleur de fond, puis ajoutez des calques de texte et d'images — glissez-les directement sur l'aperçu pour les positionner.",
+            "Ajustez la police, la taille, la couleur et l'ordre des calques ; téléchargez le résultat en PNG, JPEG ou WebP."
+          ],
+          "features": [
+            "Formats prédéfinis pour les réseaux sociaux, plus résolution et ratio entièrement personnalisables.",
+            "Plusieurs calques de texte et d'images avec positionnement par glisser-déposer et gestion de l'ordre.",
+            "Aperçu en direct sur canvas, identique au pixel près au fichier téléchargé.",
+            "Tout est rendu dans votre navigateur — vos images et textes ne quittent jamais votre appareil."
+          ]
+        },
+        "seo": {
+          "title": "Créer une Bannière en Ligne — Texte sur Image, Gratuit",
+          "description": "Créez bannières et visuels pour réseaux sociaux dans votre navigateur : fond coloré, calques de texte et d'images, glisser-déposer, formats prédéfinis ou dimensions sur mesure. Gratuit, sans inscription.",
+          "keywords": [
+            "créer une bannière en ligne",
+            "ajouter du texte sur une image",
+            "créateur de visuels réseaux sociaux",
+            "générateur d'image og",
+            "miniature youtube en ligne",
+            "créateur de bannière gratuit"
+          ],
+          "ogTitle": "Créateur de bannière · 100 % local"
+        },
+        "ui": {
+          "presetLabel": "Format prédéfini",
+          "presetSquare": "Carré",
+          "presetLandscape": "Paysage 16:9",
+          "presetStory": "Story 9:16",
+          "presetHd": "HD 720p",
+          "presetOg": "Image OG",
+          "presetXBanner": "Bannière X",
+          "presetCustom": "Personnalisé…",
+          "widthLabel": "Largeur (px)",
+          "heightLabel": "Hauteur (px)",
+          "lockAspect": "Verrouiller le ratio",
+          "backgroundLabel": "Couleur de fond",
+          "addText": "Ajouter du texte",
+          "addImage": "Ajouter une image",
+          "selectImage": "Sélectionner une image",
+          "layersTitle": "Calques",
+          "noLayers": "Aucun calque — ajoutez du texte ou une image.",
+          "textLayerDefault": "Votre texte",
+          "textLabel": "Texte",
+          "fontFamilyLabel": "Police",
+          "fontSans": "Sans-serif",
+          "fontSerif": "Serif",
+          "fontMono": "Monospace",
+          "fontSizeLabel": "Taille du texte",
+          "fontColorLabel": "Couleur du texte",
+          "boldLabel": "Gras",
+          "imageScaleLabel": "Échelle de l'image",
+          "moveUp": "Monter",
+          "moveDown": "Descendre",
+          "removeLayer": "Supprimer le calque",
+          "dragHint": "Glissez les éléments sur l'aperçu pour les positionner.",
+          "formatLabel": "Format",
+          "downloadButton": "Télécharger",
+          "busy": "Rendu…",
+          "error": "Impossible de créer cette image.",
+          "previewLabel": "Aperçu"
+        }
       }
     },
     "svg": {

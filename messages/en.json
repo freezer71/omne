@@ -1759,6 +1759,74 @@
           "errorGeneric": "Could not read that image.",
           "replace": "Replace"
         }
+      },
+      "banner-maker": {
+        "name": "Banner maker",
+        "description": "Create banners and social images — solid background, text and image layers, with a live preview.",
+        "content": {
+          "howItWorks": [
+            "Pick a size preset (square, story, 16:9, OG image, X banner) or set custom dimensions with an aspect-ratio lock.",
+            "Choose a background color, then add text and image layers — drag them right on the preview to position them.",
+            "Adjust font, size, color and layer order; download the result as PNG, JPEG or WebP."
+          ],
+          "features": [
+            "Social-media size presets plus fully custom resolution and aspect ratio.",
+            "Multiple text and image layers with drag-and-drop positioning and z-order control.",
+            "Live canvas preview that matches the downloaded file pixel for pixel.",
+            "Everything renders in your browser — your images and text never leave your device."
+          ]
+        },
+        "seo": {
+          "title": "Banner Maker Online — Create Social Images with Text, Free",
+          "description": "Create banners and social images online: color background, text and image layers, drag-and-drop, size and ratio presets or custom dimensions. Free, no signup, no upload.",
+          "keywords": [
+            "banner maker online",
+            "add text to image online",
+            "social media image maker",
+            "og image generator",
+            "youtube thumbnail maker",
+            "free banner creator"
+          ],
+          "ogTitle": "Banner maker · 100% local"
+        },
+        "ui": {
+          "presetLabel": "Size preset",
+          "presetSquare": "Square",
+          "presetLandscape": "Landscape 16:9",
+          "presetStory": "Story 9:16",
+          "presetHd": "HD 720p",
+          "presetOg": "OG image",
+          "presetXBanner": "X banner",
+          "presetCustom": "Custom…",
+          "widthLabel": "Width (px)",
+          "heightLabel": "Height (px)",
+          "lockAspect": "Lock aspect ratio",
+          "backgroundLabel": "Background color",
+          "addText": "Add text",
+          "addImage": "Add image",
+          "selectImage": "Select an image",
+          "layersTitle": "Layers",
+          "noLayers": "No layers yet — add text or an image.",
+          "textLayerDefault": "Your text",
+          "textLabel": "Text",
+          "fontFamilyLabel": "Font",
+          "fontSans": "Sans-serif",
+          "fontSerif": "Serif",
+          "fontMono": "Monospace",
+          "fontSizeLabel": "Font size",
+          "fontColorLabel": "Text color",
+          "boldLabel": "Bold",
+          "imageScaleLabel": "Image scale",
+          "moveUp": "Move up",
+          "moveDown": "Move down",
+          "removeLayer": "Remove layer",
+          "dragHint": "Drag elements on the preview to position them.",
+          "formatLabel": "Format",
+          "downloadButton": "Download",
+          "busy": "Rendering…",
+          "error": "Could not create that image.",
+          "previewLabel": "Preview"
+        }
       }
     },
     "svg": {

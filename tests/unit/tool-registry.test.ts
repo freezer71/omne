@@ -3,7 +3,7 @@ import { TOOLS, getTool, relatedTools, toolsByCategory, toolsForMime } from '@/l
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(88);
+    expect(TOOLS).toHaveLength(89);
   });
 
   it('exposes the 6 audio tools', () => {
@@ -62,10 +62,10 @@ describe('TOOLS registry', () => {
     ]);
   });
 
-  it('exposes the 7 image tools', () => {
+  it('exposes the 8 image tools', () => {
     const image = TOOLS.filter((t) => t.category === 'image').map((t) => t.id).sort();
     expect(image).toEqual([
-      'compress', 'convert', 'crop', 'from-clipboard', 'remove-bg', 'resize', 'rotate-flip',
+      'banner-maker', 'compress', 'convert', 'crop', 'from-clipboard', 'remove-bg', 'resize', 'rotate-flip',
     ]);
   });
 
@@ -90,7 +90,7 @@ describe('TOOLS registry', () => {
     // in the same category accepts files (e.g. `color/palette`, `qr/scan`).
     const MIXED_CATEGORIES = new Set(['color', 'qr']);
     // Tools that take input from somewhere other than a file/drop (e.g. clipboard).
-    const NON_FILE_TOOLS = new Set(['image:from-clipboard']);
+    const NON_FILE_TOOLS = new Set(['image:from-clipboard', 'image:banner-maker']);
     for (const t of TOOLS) {
       if (TEXT_ONLY_CATEGORIES.has(t.category)) {
         expect(t.acceptedMime).toEqual([]);
@@ -122,7 +122,7 @@ describe('toolsByCategory', () => {
     const grouped = toolsByCategory();
     expect(grouped.pdf?.length).toBe(8);
     expect(grouped.video?.length).toBe(13);
-    expect(grouped.image?.length).toBe(7);
+    expect(grouped.image?.length).toBe(8);
   });
 });
 

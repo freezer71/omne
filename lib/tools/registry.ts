@@ -362,6 +362,19 @@ export const TOOLS: readonly ToolMeta[] = [
     status: 'stable',
   },
   {
+    id: 'banner-maker',
+    category: 'image',
+    href: '/image/banner-maker',
+    i18nKey: 'tools.image.banner-maker',
+    keywords: [
+      'banner', 'banner maker', 'social media', 'cover', 'thumbnail',
+      'add text to image', 'text on image', 'og image', 'compose',
+      'bannière', 'créer bannière', 'ajouter texte', 'texte sur image', 'visuel',
+    ],
+    acceptedMime: [],
+    status: 'stable',
+  },
+  {
     id: 'to-data-url',
     category: 'svg',
     href: '/svg/to-data-url',

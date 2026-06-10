@@ -14,7 +14,7 @@
 
 ---
 
-**omne** est une collection de plus de 83 outils en ligne — PDF, vidéo, audio, image, SVG, mots de passe, JSON, texte, encodage, QR codes, couleurs, utilitaires développeur — qui tournent **entièrement côté client**. Pas de backend, pas d'analytics, pas de CDN tiers, pas de cookies. Vos fichiers ne quittent jamais l'onglet.
+**omne** est une collection de 89 outils en ligne — PDF, vidéo, audio, image, SVG, mots de passe, JSON, texte, encodage, QR codes, couleurs, utilitaires développeur — qui tournent **entièrement côté client**. Pas de backend, pas d'analytics, pas de CDN tiers, pas de cookies. Vos fichiers ne quittent jamais l'onglet.
 
 Bilingue **français / anglais**, mode clair / sombre, raccourci `⌘K` pour la palette de commandes.
 
@@ -73,7 +73,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **PDF** | Fusionner · Diviser · Pivoter · Redimensionner · Filigraner · PDF → images · Extraire les images · Images → PDF |
 | **Vidéo** | Convertir (MP4 / WebM / GIF) · Découper · Diviser · Fusionner · Compresser · Redimensionner · Couper le son · Recadrer · Pivoter / miroir · Extraire frames · Filigraner · Vitesse · Short Studio (découpe + filigrane numéroté, option 9:16) |
 | **Audio** | Convertir · Extraire (depuis vidéo) · Découper · Fusionner · Volume / normaliser / fondus · Tags ID3 |
-| **Image** | Convertir · Compresser · Redimensionner · Recadrer · Pivoter / miroir · Détourer (IA locale, *beta*) · Coller depuis le presse-papiers |
+| **Image** | Convertir · Compresser · Redimensionner · Recadrer · Pivoter / miroir · Détourer (IA locale, *beta*) · Coller depuis le presse-papiers · Créateur de bannière (fond coloré + calques texte & image, formats prédéfinis) |
 | **SVG** | Aperçu · Éditeur · Optimiser (SVGO) · → PNG / JPG / WebP · → Data URL · Générateur de favicon |
 | **Mot de passe** | Générer · Phrase de passe (Diceware) · Hash (SHA) · bcrypt · Vérificateur de force |
 | **JSON** | Formater · Arborescence · JSONPath · Tableau · CSV ↔ JSON · Diff · Schéma (AJV) |
