@@ -2,10 +2,10 @@ import 'server-only';
 import { ImageResponse } from 'next/og';
 import type { Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionary';
-import { getTool } from '@/lib/tools/registry';
+import { getTool, TOOLS, toolsByCategory } from '@/lib/tools/registry';
 import type { ToolCategory } from '@/lib/tools/types';
 import { SITE_NAME } from '@/lib/seo/site';
-import { OgTemplate, type OgTemplateData } from './template';
+import { OgTemplate, type OgTemplateData, type IconSpec, type OgVariant } from './template';
 
 export const OG_SIZE = { width: 1200, height: 630 } as const;
 export const OG_CONTENT_TYPE = 'image/png';
@@ -76,20 +76,31 @@ export async function buildOgImage(input: OgInput): Promise<ImageResponse> {
   let title: string;
   let description: string;
   let category: string | undefined;
+  let variant: OgVariant;
+  let gridIcons: IconSpec[] | undefined;
+  let heroIcon: IconSpec | undefined;
 
   if (input.kind === 'hub') {
     const meta = dict.meta ?? {};
     title = meta.seo?.ogTitle ?? meta.siteName ?? SITE_NAME;
     description = meta.tagline ?? '';
+    variant = 'hub';
+    gridIcons = TOOLS.map((t) => ({ category: t.category, id: t.id }));
   } else if (input.kind === 'privacy') {
     const privacy = dict.privacy ?? {};
     title = privacy.seo?.ogTitle ?? privacy.title ?? 'Privacy';
     description = privacy.leadParagraph ?? '';
+    variant = 'privacy';
   } else if (input.kind === 'category') {
     const node = dict.categories?.[input.category];
     const label = dict.hub?.categories?.[input.category] ?? input.category;
     title = node?.seo?.ogTitle ?? node?.name ?? label;
     description = node?.intro ?? node?.seo?.description ?? '';
+    variant = 'category';
+    gridIcons = (toolsByCategory()[input.category] ?? []).map((t) => ({
+      category: t.category,
+      id: t.id,
+    }));
   } else {
     const tool = getTool(input.category, input.id);
     const node = dict.tools?.[input.category]?.[input.id];
@@ -101,6 +112,8 @@ export async function buildOgImage(input: OgInput): Promise<ImageResponse> {
       description = node.description ?? '';
     }
     category = dict.hub?.categories?.[input.category];
+    variant = 'tool';
+    heroIcon = { category: input.category, id: input.id };
   }
 
   const templateProps: OgTemplateData = {
@@ -108,7 +121,10 @@ export async function buildOgImage(input: OgInput): Promise<ImageResponse> {
     title: truncate(title, 60),
     description: truncate(description, 180),
     privacyBadge: privacyBadge(input.locale),
+    variant,
     ...(category ? { category } : {}),
+    ...(gridIcons ? { gridIcons } : {}),
+    ...(heroIcon ? { heroIcon } : {}),
   };
 
   return new ImageResponse(<OgTemplate {...templateProps} />, OG_SIZE);

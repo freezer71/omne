@@ -234,24 +234,22 @@ const ICONS: Record<ToolCategory, (p: IconProps) => React.ReactElement> = {
   dev: Dev,
 };
 
-type CategoryIconProps = {
+type CategoryIconProps = IconProps & {
   category: ToolCategory;
-  className?: string;
 };
 
-export function CategoryIcon({ category, className }: CategoryIconProps) {
+export function CategoryIcon({ category, ...rest }: CategoryIconProps) {
   const Icon = ICONS[category];
-  return <Icon className={className} />;
+  return <Icon {...rest} />;
 }
 
-type ToolIconProps = {
+type ToolIconProps = IconProps & {
   category: ToolCategory;
   id: string;
-  className?: string;
 };
 
 /** Tool-specific glyph when one exists, otherwise the category icon. */
-export function ToolIcon({ category, id, className }: ToolIconProps) {
+export function ToolIcon({ category, id, ...rest }: ToolIconProps) {
   const Icon = TOOL_ICONS[`${category}/${id}`] ?? ICONS[category];
-  return <Icon className={className} />;
+  return <Icon {...rest} />;
 }
