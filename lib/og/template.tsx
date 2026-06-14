@@ -2,6 +2,10 @@ import type { ReactElement } from 'react';
 import { ToolIcon } from '@/components/command-palette/category-icons';
 import { TOOLS } from '@/lib/tools/registry';
 import type { ToolCategory } from '@/lib/tools/types';
+import { scatterLayout, type ScatterOptions } from './scatter';
+
+export const OG_W = 1200;
+export const OG_H = 630;
 
 export type IconSpec = { category: ToolCategory; id: string };
 
@@ -49,9 +53,12 @@ export function OgTemplate(props: OgTemplateData): ReactElement {
         color: COLORS.text,
         fontFamily: SANS,
         position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      {props.variant === 'hub' || props.variant === 'category' ? (
+      {props.variant === 'hub' ? (
+        <HubLayout {...props} />
+      ) : props.variant === 'category' ? (
         <GridLayout {...props} />
       ) : (
         <ContentLayout {...props} />
@@ -60,7 +67,103 @@ export function OgTemplate(props: OgTemplateData): ReactElement {
   );
 }
 
-/* ---------- Hub / category: a centered wall of tool icons ---------------- */
+/* ---------- Hub: a spilled-toolbox field of every tool glyph ------------- */
+
+/** Lively, prominent scatter for the homepage hero. */
+const HUB_SCATTER: ScatterOptions = {
+  width: OG_W,
+  height: OG_H,
+  bleed: 72,
+  minSize: 40,
+  maxSize: 78,
+  maxRotate: 22,
+  minOpacity: 0.5,
+  maxOpacity: 1,
+  accentRatio: 0.14,
+  jitter: 0.55,
+};
+
+function HubLayout({
+  brand,
+  title,
+  description,
+  privacyBadge,
+  gridIcons = [],
+}: OgTemplateData): ReactElement {
+  return (
+    <>
+      <ScatterField
+        icons={gridIcons}
+        opts={HUB_SCATTER}
+        stroke={COLORS.textMuted}
+        accent={COLORS.accent}
+        strokeWidth={1.7}
+      />
+      {/* Radial scrim: darkens the centre so the wordmark stays legible while
+          the toolbox still spills, bright, out to the edges. */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: `radial-gradient(ellipse 62% 70% at 50% 50%, rgba(8,9,10,0.95) 0%, rgba(8,9,10,0.86) 42%, rgba(8,9,10,0) 78%)`,
+        }}
+      />
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '24px',
+          width: '100%',
+          height: '100%',
+          padding: '56px',
+        }}
+      >
+        <Brand brand={brand} center />
+        <div
+          style={{
+            display: 'flex',
+            flexShrink: 0,
+            fontSize: title.length > 26 ? '46px' : '54px',
+            fontWeight: 600,
+            letterSpacing: '-0.03em',
+            lineHeight: 1.1,
+            color: COLORS.text,
+            textAlign: 'center',
+            maxWidth: '900px',
+            textShadow: '0 2px 24px rgba(0,0,0,0.55)',
+          }}
+        >
+          {title}
+        </div>
+        {description ? (
+          <div
+            style={{
+              display: 'flex',
+              flexShrink: 0,
+              fontSize: '25px',
+              lineHeight: 1.35,
+              color: COLORS.textMuted,
+              textAlign: 'center',
+              maxWidth: '760px',
+              textShadow: '0 1px 16px rgba(0,0,0,0.5)',
+            }}
+          >
+            {description}
+          </div>
+        ) : null}
+        <Badge text={privacyBadge} />
+      </div>
+    </>
+  );
+}
+
+/* ---------- Category: a centered wall of tool icons ---------------------- */
 
 /**
  * Pick the column count that yields the largest square tile fitting inside a
@@ -90,17 +193,13 @@ function GridLayout({
   title,
   description,
   privacyBadge,
-  variant,
   gridIcons = [],
 }: OgTemplateData): ReactElement {
-  const isHub = variant === 'hub';
-  const showDescription = !isHub && Boolean(description);
-  // Hub: a wide wall of every tool. Category: a balanced block sized to that
-  // category's tool count. Both fit their grid box so text never overflows.
-  const { columns, tile } = isHub
-    ? fitGrid(gridIcons.length, 1090, 400, 10, 54)
-    : fitGrid(gridIcons.length, 980, showDescription ? 280 : 340, 14, 86);
-  const gap = isHub ? 10 : 14;
+  const showDescription = Boolean(description);
+  // A balanced block sized to that category's tool count, fit to its grid box
+  // so the title and description never overflow.
+  const { columns, tile } = fitGrid(gridIcons.length, 980, showDescription ? 280 : 340, 14, 86);
+  const gap = 14;
 
   return (
     <div
@@ -166,10 +265,8 @@ function ContentLayout({
     <div
       style={{
         display: 'flex',
-        flexDirection: 'column',
         width: '100%',
         height: '100%',
-        padding: '64px 72px',
         position: 'relative',
       }}
     >
@@ -177,91 +274,102 @@ function ContentLayout({
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '100%',
-        }}
-      >
-        <Brand brand={brand} />
-        {category ? (
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: '10px 18px',
-              borderRadius: '999px',
-              background: COLORS.accent,
-              color: COLORS.accentFg,
-              fontSize: '20px',
-              fontWeight: 500,
-              letterSpacing: '0.01em',
-            }}
-          >
-            {category}
-          </div>
-        ) : null}
-      </div>
-
-      <div
-        style={{
-          display: 'flex',
           flexDirection: 'column',
-          flex: 1,
-          justifyContent: 'center',
-          gap: '24px',
-          marginTop: '24px',
-          marginBottom: '24px',
+          width: '100%',
+          height: '100%',
+          padding: '64px 72px',
+          position: 'relative',
         }}
       >
-        {heroIcon ? (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}
+        >
+          <Brand brand={brand} />
+          {category ? (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '10px 18px',
+                borderRadius: '999px',
+                background: COLORS.accent,
+                color: COLORS.accentFg,
+                fontSize: '20px',
+                fontWeight: 500,
+                letterSpacing: '0.01em',
+              }}
+            >
+              {category}
+            </div>
+          ) : null}
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+            justifyContent: 'center',
+            gap: '24px',
+            marginTop: '24px',
+            marginBottom: '24px',
+          }}
+        >
+          {heroIcon ? (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '92px',
+                height: '92px',
+                borderRadius: '24px',
+                background: COLORS.accent,
+                color: COLORS.accentFg,
+              }}
+            >
+              <ToolIcon
+                category={heroIcon.category}
+                id={heroIcon.id}
+                width={50}
+                height={50}
+                stroke={COLORS.accentFg}
+                strokeWidth={1.75}
+              />
+            </div>
+          ) : null}
           <div
             style={{
+              fontSize: title.length > 32 ? '64px' : '80px',
+              fontWeight: 600,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.05,
+              color: COLORS.text,
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '92px',
-              height: '92px',
-              borderRadius: '24px',
-              background: COLORS.accent,
-              color: COLORS.accentFg,
             }}
           >
-            <ToolIcon
-              category={heroIcon.category}
-              id={heroIcon.id}
-              width={50}
-              height={50}
-              stroke={COLORS.accentFg}
-              strokeWidth={1.75}
-            />
+            {title}
           </div>
-        ) : null}
-        <div
-          style={{
-            fontSize: title.length > 32 ? '64px' : '80px',
-            fontWeight: 600,
-            letterSpacing: '-0.03em',
-            lineHeight: 1.05,
-            color: COLORS.text,
-            display: 'flex',
-          }}
-        >
-          {title}
+          <div
+            style={{
+              fontSize: '28px',
+              lineHeight: 1.45,
+              color: COLORS.textMuted,
+              maxWidth: '900px',
+              display: 'flex',
+            }}
+          >
+            {description}
+          </div>
         </div>
-        <div
-          style={{
-            fontSize: '28px',
-            lineHeight: 1.45,
-            color: COLORS.textMuted,
-            maxWidth: '900px',
-            display: 'flex',
-          }}
-        >
-          {description}
-        </div>
-      </div>
 
-      <Badge text={privacyBadge} />
+        <Badge text={privacyBadge} />
+      </div>
     </div>
   );
 }
@@ -376,36 +484,83 @@ function IconGrid({
   );
 }
 
-/** Faint full-bleed texture of every tool glyph, behind the content. */
-function BackgroundWall(): ReactElement {
+/* ---------- Scatter field: the "spilled toolbox" primitive -------------- */
+
+/**
+ * Absolutely-positioned field of tool glyphs scattered across the canvas via
+ * {@link scatterLayout}. Used full-strength as the hub hero and faintly as the
+ * backdrop behind tool/privacy pages. satori supports `position: absolute` and
+ * `transform: rotate`, so each glyph is placed and tilted independently.
+ */
+function ScatterField({
+  icons,
+  opts,
+  stroke,
+  accent,
+  strokeWidth = 1.6,
+}: {
+  icons: IconSpec[];
+  opts: ScatterOptions;
+  stroke: string;
+  accent: string;
+  strokeWidth?: number;
+}): ReactElement {
+  const placed = scatterLayout(icons, opts);
   return (
-    <div
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignContent: 'flex-start',
-        gap: '30px',
-        padding: '40px',
-        opacity: 0.05,
-        color: COLORS.text,
-      }}
-    >
-      {TOOLS.map((t, i) => (
-        <ToolIcon
-          key={`${t.category}/${t.id}/${i}`}
-          category={t.category}
-          id={t.id}
-          width={54}
-          height={54}
-          stroke={COLORS.text}
-          strokeWidth={1.5}
-        />
+    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex' }}>
+      {placed.map((p, i) => (
+        <div
+          key={`${p.category}/${p.id}/${i}`}
+          style={{
+            position: 'absolute',
+            left: `${p.left}px`,
+            top: `${p.top}px`,
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            opacity: p.opacity,
+            transform: `rotate(${p.rotate.toFixed(2)}deg)`,
+            color: p.accent ? accent : stroke,
+          }}
+        >
+          <ToolIcon
+            category={p.category}
+            id={p.id}
+            width={Math.round(p.size)}
+            height={Math.round(p.size)}
+            stroke={p.accent ? accent : stroke}
+            strokeWidth={strokeWidth}
+          />
+        </div>
       ))}
     </div>
+  );
+}
+
+/** Faint full-bleed scatter of every tool glyph, behind the content. */
+const BACKDROP_SCATTER: ScatterOptions = {
+  width: OG_W,
+  height: OG_H,
+  bleed: 56,
+  minSize: 44,
+  maxSize: 66,
+  maxRotate: 16,
+  minOpacity: 0.045,
+  maxOpacity: 0.075,
+  accentRatio: 0,
+  jitter: 0.5,
+};
+
+function BackgroundWall(): ReactElement {
+  return (
+    <ScatterField
+      icons={TOOLS.map((t) => ({ category: t.category, id: t.id }))}
+      opts={BACKDROP_SCATTER}
+      stroke={COLORS.text}
+      accent={COLORS.text}
+      strokeWidth={1.5}
+    />
   );
 }
