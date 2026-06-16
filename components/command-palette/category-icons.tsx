@@ -81,6 +81,19 @@ function Json(props: IconProps) {
   );
 }
 
+function Xml(props: IconProps) {
+  // Angle brackets framing element content — markup, distinct from the
+  // curly-brace JSON glyph and the diagonal-slash Encode glyph.
+  return (
+    <svg {...SVG_PROPS} {...props}>
+      <path d="m8 7-5 5 5 5" />
+      <path d="m16 7 5 5-5 5" />
+      <path d="M11 10h2" />
+      <path d="M11 14h2" />
+    </svg>
+  );
+}
+
 function Text(props: IconProps) {
   return (
     <svg {...SVG_PROPS} {...props}>
@@ -225,6 +238,7 @@ const ICONS: Record<ToolCategory, (p: IconProps) => React.ReactElement> = {
   svg: Svg,
   password: Password,
   json: Json,
+  xml: Xml,
   text: Text,
   reading: Reading,
   encode: Encode,

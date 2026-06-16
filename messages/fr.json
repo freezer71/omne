@@ -68,7 +68,8 @@
       "color": "Outils couleur",
       "utility": "Utilitaires",
       "dev": "Outils développeur",
-      "reading": "Lecture & accessibilité"
+      "reading": "Lecture & accessibilité",
+      "xml": "Outils XML"
     },
     "comingSoon": "Bientôt disponible"
   },
@@ -4681,6 +4682,63 @@
           "forceOcrLabel": "Relire par OCR"
         }
       }
+    },
+    "xml": {
+      "format": {
+        "name": "Formatage XML",
+        "description": "Embellir, compresser, valider et convertir XML ↔ JSON — avec aperçu en direct.",
+        "content": {
+          "howItWorks": [
+            "Collez, tapez ou déposez votre XML — ou du JSON, pour le mode JSON → XML — dans le champ d'entrée. La validité est vérifiée à la frappe, avec la ligne et la colonne de la première erreur.",
+            "Choisissez un mode — Embellir, Compresser, XML → JSON ou JSON → XML — et une indentation (2 espaces, 4 espaces ou tabulation).",
+            "Le résultat se met à jour en direct ; copiez-le ou téléchargez-le en .xml ou .json."
+          ],
+          "features": [
+            "L'embellissement et la compression préservent commentaires, CDATA, attributs et déclaration XML — seuls les espaces changent.",
+            "La validation en direct localise la première erreur de syntaxe par ligne et colonne.",
+            "La conversion XML ↔ JSON bidirectionnelle conserve les attributs (clés @_) : rien n'est perdu à l'aller-retour."
+          ]
+        },
+        "seo": {
+          "title": "Formatage XML — Embellir, compresser, valider, XML vers JSON",
+          "description": "Formattez, compressez, validez et convertissez le XML en JSON et inversement, avec aperçu en direct et signalement d'erreurs. 100 % dans votre navigateur — aucun envoi.",
+          "keywords": [
+            "formatter xml en ligne",
+            "embellir xml",
+            "compresser xml",
+            "valider xml",
+            "pretty print xml",
+            "xml vers json",
+            "json vers xml",
+            "formatter xml gratuit"
+          ],
+          "ogTitle": "Formatage XML · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Entrée",
+          "inputPlaceholder": "Collez, tapez ou déposez du XML ici…",
+          "outputLabel": "Sortie",
+          "mode": "Mode",
+          "modePretty": "Embellir",
+          "modeMinify": "Compresser",
+          "modeToJson": "XML → JSON",
+          "modeFromJson": "JSON → XML",
+          "indent": "Indentation",
+          "indent2": "2 espaces",
+          "indent4": "4 espaces",
+          "indentTab": "Tabulation",
+          "copy": "Copier",
+          "copied": "Copié",
+          "download": "Télécharger",
+          "clear": "Effacer",
+          "loadSample": "Exemple",
+          "empty": "Le résultat apparaîtra ici pendant la saisie.",
+          "validBadge": "Valide",
+          "invalidBadge": "Invalide",
+          "errorTemplate": "Ligne {line}, colonne {col} — {message}",
+          "sizeTemplate": "{bytes} octets"
+        }
+      }
     }
   },
   "privacy": {
@@ -4950,6 +5008,25 @@
           "pdf dyslexie"
         ],
         "ogTitle": "Outils de lecture · 100% local"
+      }
+    },
+    "xml": {
+      "name": "Outils XML",
+      "intro": "Embellir, compresser, valider et convertir le XML — et transformer le XML en JSON ou l'inverse — entièrement dans votre navigateur, avec aperçu en direct. Aucun envoi.",
+      "seo": {
+        "title": "Outils XML gratuits — Formater, compresser, valider, XML vers JSON",
+        "description": "Boîte à outils XML dans le navigateur : embellir, compresser, valider la syntaxe avec erreurs ligne et colonne, et convertir XML ↔ JSON. Aucun envoi, aucune inscription.",
+        "keywords": [
+          "outils xml",
+          "formatter xml",
+          "embellir xml",
+          "compresser xml",
+          "valider xml",
+          "xml vers json",
+          "json vers xml",
+          "outils xml navigateur"
+        ],
+        "ogTitle": "Outils XML · 100% local"
       }
     }
   }

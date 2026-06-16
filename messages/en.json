@@ -68,7 +68,8 @@
       "color": "Color tools",
       "utility": "Utilities",
       "dev": "Developer tools",
-      "reading": "Reading & accessibility"
+      "reading": "Reading & accessibility",
+      "xml": "XML tools"
     },
     "comingSoon": "Coming soon"
   },
@@ -4681,6 +4682,63 @@
           "forceOcrLabel": "Re-read with OCR"
         }
       }
+    },
+    "xml": {
+      "format": {
+        "name": "XML formatter",
+        "description": "Beautify, minify, validate and convert XML ↔ JSON — with live preview.",
+        "content": {
+          "howItWorks": [
+            "Paste, type or drop any XML — or JSON, for the JSON → XML mode — into the input pane. Well-formedness is checked inline as you type, flagging the line and column of the first error.",
+            "Pick a mode — Beautify, Minify, XML → JSON or JSON → XML — and an indent size (2 spaces, 4 spaces or tab).",
+            "The result updates live; copy it to the clipboard or download it as a .xml or .json file."
+          ],
+          "features": [
+            "Beautify and minify preserve comments, CDATA, attributes and the XML declaration — only whitespace changes.",
+            "Inline validation pinpoints the first well-formedness error by line and column.",
+            "Two-way XML ↔ JSON conversion keeps attributes (as @_ keys) so nothing is lost on the round trip."
+          ]
+        },
+        "seo": {
+          "title": "XML Formatter — Beautify, Minify, Validate, XML to JSON",
+          "description": "Format, minify, validate and convert XML to JSON and back, with a live preview and inline error reporting. 100% in your browser — no upload, no signup.",
+          "keywords": [
+            "xml formatter online",
+            "xml beautifier",
+            "minify xml",
+            "xml validator",
+            "pretty print xml",
+            "xml to json",
+            "json to xml",
+            "free xml formatter"
+          ],
+          "ogTitle": "XML formatter · 100% local"
+        },
+        "ui": {
+          "inputLabel": "Input",
+          "inputPlaceholder": "Paste, type or drop XML here…",
+          "outputLabel": "Output",
+          "mode": "Mode",
+          "modePretty": "Beautify",
+          "modeMinify": "Minify",
+          "modeToJson": "XML → JSON",
+          "modeFromJson": "JSON → XML",
+          "indent": "Indent",
+          "indent2": "2 spaces",
+          "indent4": "4 spaces",
+          "indentTab": "Tab",
+          "copy": "Copy",
+          "copied": "Copied",
+          "download": "Download",
+          "clear": "Clear",
+          "loadSample": "Load sample",
+          "empty": "Output will appear here as you type.",
+          "validBadge": "Valid",
+          "invalidBadge": "Invalid",
+          "errorTemplate": "Line {line}, column {col} — {message}",
+          "sizeTemplate": "{bytes} bytes"
+        }
+      }
     }
   },
   "privacy": {
@@ -4950,6 +5008,25 @@
           "dyslexia friendly pdf"
         ],
         "ogTitle": "Reading tools · 100% local"
+      }
+    },
+    "xml": {
+      "name": "XML tools",
+      "intro": "Beautify, minify, validate and convert XML — and turn XML into JSON or back — entirely in your browser, with a live preview. Nothing is ever uploaded.",
+      "seo": {
+        "title": "Free XML Tools — Format, Minify, Validate, XML to JSON",
+        "description": "In-browser XML toolkit: beautify, minify, validate well-formedness with line and column errors, and convert XML to JSON and back. No upload, no signup.",
+        "keywords": [
+          "xml tools",
+          "xml formatter",
+          "xml beautifier",
+          "minify xml",
+          "xml validator",
+          "xml to json",
+          "json to xml",
+          "browser xml tools"
+        ],
+        "ogTitle": "XML tools · 100% local"
       }
     }
   }

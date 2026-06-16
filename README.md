@@ -14,7 +14,7 @@
 
 ---
 
-**omne** is a collection of 89 online tools — PDF, video, audio, image, SVG, passwords, JSON, text, encoding, QR codes, colors, developer utilities — that run **entirely client-side**. No analytics, no third-party CDN, no cookies, no server-side file processing — your files never leave the tab. The two narrow, documented exceptions (a skills.sh search proxy and a one-time AI model download) are covered in [the privacy-first promise](#the-privacy-first-promise) and on the in-app privacy page.
+**omne** is a collection of 90 online tools — PDF, video, audio, image, SVG, passwords, JSON, XML, text, encoding, QR codes, colors, developer utilities — that run **entirely client-side**. No analytics, no third-party CDN, no cookies, no server-side file processing — your files never leave the tab. The two narrow, documented exceptions (a skills.sh search proxy and a one-time AI model download) are covered in [the privacy-first promise](#the-privacy-first-promise) and on the in-app privacy page.
 
 Bilingual **English / French**, light / dark mode, `⌘K` command palette.
 
@@ -78,6 +78,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **SVG** | Viewer · Editor · Optimize (SVGO) · → PNG / JPG / WebP · → Data URL · Favicon generator |
 | **Password** | Generate · Passphrase (Diceware) · Hash (SHA) · bcrypt · Strength meter |
 | **JSON** | Format · Tree · JSONPath · Table · CSV ↔ JSON · Diff · Schema (AJV) |
+| **XML** | Beautify · Minify · Validate (line/column errors) · XML ↔ JSON |
 | **Text** | Case · Counter · Lorem Ipsum · Diff · Regex tester · Slugify · Sort lines · Escape/Unescape · Whitespace cleaner · Markdown preview · Find & Replace |
 | **Reading & accessibility** | Guided reading (bold-start / "bionic") · Text to dyslexia font (OpenDyslexic + spacing + colour overlay → HTML/PDF, reflows text incl. PDFs) · PDF to dyslexia font (keeps images & layout, swaps the font in place — same font & colour-overlay palette as the text tool) · Read aloud (on-device text-to-speech) · Immersive reading (sentence focus ruler) — both dyslexia tools offer a fullscreen reading mode right in the browser (continuous page scrolling for PDFs, auto-hiding controls, A−/A+ text sizing), and the text tools auto-detect corrupted PDF text layers (broken ligatures from Pages/Quartz exports) and scanned PDFs, and recover the text with on-device OCR (English + French) |
 | **Encoding** | Base64 · URL · JWT · Hex · HTML entities · Binary · Morse code |
@@ -100,6 +101,7 @@ Source of truth: [`lib/tools/registry.ts`](./lib/tools/registry.ts). The sitemap
 - **[@huggingface/transformers](https://huggingface.co/docs/transformers.js)** for image background removal (local ONNX model)
 - **[SVGO](https://github.com/svg/svgo)** for SVG optimization
 - **[AJV](https://ajv.js.org/)** for JSON Schema validation
+- **[fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser)** for XML validation, formatting and XML↔JSON conversion
 - **In-house i18n** — no runtime, static dictionaries at `messages/{en,fr}.json`
 - **Vitest** (unit + components + setup) + **Playwright** (e2e on chromium + webkit)
 

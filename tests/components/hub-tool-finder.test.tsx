@@ -49,6 +49,7 @@ const categoryLabels = {
   svg: 'SVG tools',
   password: 'Password tools',
   json: 'JSON tools',
+  xml: 'XML tools',
   text: 'Text tools',
   reading: 'Reading & accessibility',
   encode: 'Encoding tools',

@@ -14,7 +14,7 @@
 
 ---
 
-**omne** est une collection de 89 outils en ligne — PDF, vidéo, audio, image, SVG, mots de passe, JSON, texte, encodage, QR codes, couleurs, utilitaires développeur — qui tournent **entièrement côté client**. Pas d'analytics, pas de CDN tiers, pas de cookies, pas de traitement de fichiers côté serveur — vos fichiers ne quittent jamais l'onglet. Les deux exceptions documentées, volontairement étroites (un proxy de recherche skills.sh et un téléchargement unique de modèle d'IA), sont décrites dans [la promesse privacy-first](#la-promesse-privacy-first) et sur la page confidentialité de l'app.
+**omne** est une collection de 90 outils en ligne — PDF, vidéo, audio, image, SVG, mots de passe, JSON, XML, texte, encodage, QR codes, couleurs, utilitaires développeur — qui tournent **entièrement côté client**. Pas d'analytics, pas de CDN tiers, pas de cookies, pas de traitement de fichiers côté serveur — vos fichiers ne quittent jamais l'onglet. Les deux exceptions documentées, volontairement étroites (un proxy de recherche skills.sh et un téléchargement unique de modèle d'IA), sont décrites dans [la promesse privacy-first](#la-promesse-privacy-first) et sur la page confidentialité de l'app.
 
 Bilingue **français / anglais**, mode clair / sombre, raccourci `⌘K` pour la palette de commandes.
 
@@ -78,6 +78,7 @@ node scripts/copy-ffmpeg.mjs && node scripts/copy-pdfjs.mjs && node scripts/copy
 | **SVG** | Aperçu · Éditeur · Optimiser (SVGO) · → PNG / JPG / WebP · → Data URL · Générateur de favicon |
 | **Mot de passe** | Générer · Phrase de passe (Diceware) · Hash (SHA) · bcrypt · Vérificateur de force |
 | **JSON** | Formater · Arborescence · JSONPath · Tableau · CSV ↔ JSON · Diff · Schéma (AJV) |
+| **XML** | Embellir · Compresser · Valider (erreurs ligne/colonne) · XML ↔ JSON |
 | **Texte** | Casse · Compteur · Lorem Ipsum · Diff · Testeur regex · Slugify · Trier les lignes · Échapper/Déséchapper · Nettoyeur d'espaces · Aperçu Markdown · Rechercher & Remplacer |
 | **Lecture & accessibilité** | Lecture guidée (gras de début / « bionic ») · Texte en police dyslexie (OpenDyslexic + espacement + filtre de couleur → HTML/PDF, ré-agence le texte y compris les PDF) · PDF en police dyslexie (garde images & mise en page, remplace la police sur place — mêmes palettes de polices et filtres de couleur que l'outil texte) · Lecture à voix haute (synthèse vocale locale) · Lecture immersive (règle de focus phrase par phrase) — les deux outils dyslexie offrent un mode lecture plein écran directement dans le navigateur (défilement continu des pages PDF, contrôles auto-masqués, taille de texte A−/A+), et les outils texte détectent automatiquement les calques texte corrompus (ligatures cassées des exports Pages/Quartz) et les PDF scannés, et récupèrent le texte par OCR local (français + anglais) |
 | **Encodage** | Base64 · URL · JWT · Hex · Entités HTML · Binaire · Code Morse |
@@ -100,6 +101,7 @@ Source de vérité : [`lib/tools/registry.ts`](./lib/tools/registry.ts). Le site
 - **[@huggingface/transformers](https://huggingface.co/docs/transformers.js)** pour le détourage d'image (modèle ONNX local)
 - **[SVGO](https://github.com/svg/svgo)** pour l'optimisation SVG
 - **[AJV](https://ajv.js.org/)** pour la validation de schémas JSON
+- **[fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser)** pour la validation, le formatage XML et la conversion XML↔JSON
 - **i18n maison** — pas de runtime, dictionnaires statiques `messages/{en,fr}.json`
 - **Vitest** (unit + components + setup) + **Playwright** (e2e chromium + webkit)
 

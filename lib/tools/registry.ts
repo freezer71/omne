@@ -586,6 +586,19 @@ export const TOOLS: readonly ToolMeta[] = [
     status: 'stable',
   },
   {
+    id: 'format',
+    category: 'xml',
+    href: '/xml/format',
+    i18nKey: 'tools.xml.format',
+    keywords: [
+      'xml', 'format', 'formatter', 'beautify', 'pretty print', 'prettify', 'minify',
+      'validate', 'xml to json', 'json to xml', 'convert',
+      'formater', 'embellir', 'compresser', 'valider', 'xml vers json', 'json vers xml',
+    ],
+    acceptedMime: ['application/xml', 'text/xml'],
+    status: 'stable',
+  },
+  {
     id: 'case',
     category: 'text',
     href: '/text/case',

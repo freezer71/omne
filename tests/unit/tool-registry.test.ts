@@ -3,7 +3,7 @@ import { TOOLS, getTool, relatedTools, toolsByCategory, toolsForMime } from '@/l
 
 describe('TOOLS registry', () => {
   it('contains all current tools', () => {
-    expect(TOOLS).toHaveLength(89);
+    expect(TOOLS).toHaveLength(90);
   });
 
   it('exposes the 6 audio tools', () => {
