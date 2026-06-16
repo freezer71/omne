@@ -170,7 +170,7 @@ omne/
 │   │   ├── implementations/  # Logique pure (testable hors DOM)
 │   │   ├── registry.ts       # Source de vérité du catalogue
 │   │   └── mime-router.ts    # Routage par type MIME au drop
-│   ├── seo/                  # metadata, JSON-LD (WebApplication, CollectionPage, BreadcrumbList)
+│   ├── seo/                  # metadata, JSON-LD (WebApplication, CollectionPage, BreadcrumbList, FAQPage)
 │   └── og/                   # Template + builder d'image OG (hub / privacy / tool / category)
 │   ├── i18n/             # Dictionnaires côté serveur (server-only)
 │   ├── ffmpeg-loader.ts  # Singleton ffmpeg.wasm
