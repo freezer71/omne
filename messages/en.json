@@ -44,7 +44,8 @@
       "privacyTitleProxy": "This tool talks to skills.sh",
       "privacyBodyProxy": "Unlike every other omne tool, this one makes network requests while you use it: your search query is relayed through omne's server to skills.sh, and both see your IP address and the text you type. No files are involved — this tool accepts no file input. Every other tool on omne still runs entirely in your browser.",
       "privacyBodyModelDownload": "Your image is processed entirely in your browser — it is never uploaded. The only network request is a one-time ~44 MB download of the AI model from huggingface.co on first use; your browser caches it, and later runs need no network at all. No analytics, no cookies.",
-      "privacyLearnMore": "See the privacy page for details."
+      "privacyLearnMore": "See the privacy page for details.",
+      "faqTitle": "Frequently asked questions"
     }
   },
   "badge": {
@@ -1732,6 +1733,20 @@
             "Turns a clipboard screenshot or a copied web image into a real PNG, JPG or WebP file.",
             "Live preview shows the result and its file size as you switch formats.",
             "Reads the clipboard locally in your browser — the pasted image is never uploaded anywhere."
+          ],
+          "faq": [
+            {
+              "q": "How do I convert a clipboard screenshot to a PNG file?",
+              "a": "Copy any screenshot or image, press Cmd/Ctrl + V on the page (or click Paste from clipboard), then click Download. The pasted image is saved as a real PNG file — you can also switch the format to JPG or WebP first."
+            },
+            {
+              "q": "Can I save a pasted image as JPG or WebP instead of PNG?",
+              "a": "Yes. After pasting, pick PNG, JPG or WebP and the live preview updates with the new format and file size before you download."
+            },
+            {
+              "q": "Is my screenshot uploaded to a server?",
+              "a": "No. The clipboard is read locally in your browser and the image is converted on your device — nothing is ever uploaded, so private screenshots stay private."
+            }
           ]
         },
         "seo": {
@@ -2138,6 +2153,20 @@
             "Draws every character from crypto.getRandomValues with rejection sampling, so the output is unbiased and unpredictable.",
             "Generates up to 25 passwords at once and shows their strength rating and bits of entropy as you tune the settings.",
             "Runs entirely in your browser — no password is ever sent to a server, unlike sketchy online generators."
+          ],
+          "faq": [
+            {
+              "q": "How do I create a strong random password?",
+              "a": "Set the length and tick the character classes you want — uppercase, lowercase, digits and symbols. Longer passwords with more classes score higher; the strength and entropy update live as you tune the settings."
+            },
+            {
+              "q": "Can I generate several passwords at once?",
+              "a": "Yes. Choose 1, 5, 10 or 25, optionally exclude ambiguous look-alikes like 0/O and 1/l/I, then copy one or download them all as a .txt file."
+            },
+            {
+              "q": "Are the generated passwords stored or sent anywhere?",
+              "a": "No. Every character is drawn from crypto.getRandomValues in your browser, so passwords are unpredictable and never sent to a server — unlike many online generators."
+            }
           ]
         },
         "seo": {
@@ -2193,6 +2222,20 @@
             "Builds diceware-style passphrases from a curated 256-word list, giving exactly 8 bits of entropy per word.",
             "Produces phrases that are easy to remember and type yet hard to brute-force, ideal for master passwords.",
             "Words are picked with crypto-grade randomness in your browser, so nothing about the passphrase ever leaves your device."
+          ],
+          "faq": [
+            {
+              "q": "What is a passphrase and why use one instead of a password?",
+              "a": "A passphrase is a string of random words (like correct-horse-battery-staple) that is far easier to remember and type than a random password, yet just as hard to crack when it has enough words. It is ideal for master passwords and disk encryption."
+            },
+            {
+              "q": "How many words make a strong passphrase?",
+              "a": "Each word from the curated list adds 8 bits of entropy, so 4 words is about 32 bits, 5 about 40 and 6 about 48. Five or six words is a strong, memorable choice for most accounts; the tool shows a live entropy estimate as you adjust the count."
+            },
+            {
+              "q": "Are the passphrases generated securely and offline?",
+              "a": "Yes. Words are chosen with crypto-grade randomness (crypto.getRandomValues) entirely in your browser, so the passphrase is never sent over the network and nothing leaves your device."
+            }
           ]
         },
         "seo": {
@@ -2242,6 +2285,20 @@
             "Computes SHA-1, SHA-256, SHA-384 and SHA-512 digests using the browser's native Web Crypto (crypto.subtle.digest).",
             "Outputs the hash as lowercase hex or base64, handy for checksums, fingerprints and comparing values.",
             "Your text is hashed locally and never uploaded, so even sensitive strings stay on your machine."
+          ],
+          "faq": [
+            {
+              "q": "How do I generate a SHA-256 hash from text?",
+              "a": "Type or paste your text, choose SHA-256 (or SHA-1, SHA-384, SHA-512) and the output format — hex or base64. The digest appears instantly below as you type; click Copy to grab it."
+            },
+            {
+              "q": "Can I reverse a hash back to the original text?",
+              "a": "No. Cryptographic hashes are one-way by design, so a SHA-256 digest cannot be decrypted back to its input. This tool only generates hashes — useful for checksums, fingerprints and comparing values."
+            },
+            {
+              "q": "Is my text sent to a server to be hashed?",
+              "a": "No. Hashing uses the browser's native Web Crypto (crypto.subtle.digest) and runs entirely on your machine, so even sensitive strings never leave your device."
+            }
           ]
         },
         "seo": {
@@ -2289,6 +2346,20 @@
             "Hashes passwords with bcrypt, generating a fresh random salt and a configurable cost factor from 4 to 14.",
             "Verify mode compares a candidate password against any existing bcrypt hash and rejects malformed inputs.",
             "Everything runs client-side and reports the compute time in milliseconds — your password never leaves the browser."
+          ],
+          "faq": [
+            {
+              "q": "How do I generate a bcrypt hash?",
+              "a": "Pick Hash mode, type the password, set the rounds (cost factor), then click Hash. The tool generates a fresh random salt and returns a standard $2a$/$2b$ bcrypt hash you can copy."
+            },
+            {
+              "q": "What cost factor (rounds) should I use?",
+              "a": "10 is a solid default. Higher values (up to 14) are more resistant to brute-force but slower to compute; the tool reports the compute time in milliseconds so you can balance security and speed."
+            },
+            {
+              "q": "Can I verify a password against an existing bcrypt hash?",
+              "a": "Yes. Switch to Verify mode, paste an existing $2a$/$2b$ hash and a candidate password, and the tool shows Match or No match — all client-side, so the password never leaves your browser."
+            }
           ]
         },
         "seo": {

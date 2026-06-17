@@ -141,6 +141,35 @@ export async function toolJsonLd(
   };
 }
 
+export async function toolFaqJsonLd(
+  tool: ToolMeta,
+  locale: Locale,
+): Promise<JsonLd | null> {
+  const dict = await getDictionary(locale);
+  const tree = dict as unknown as Record<
+    string,
+    Record<string, Record<string, { content?: { faq?: { q?: string; a?: string }[] } }>>
+  >;
+  const faq = tree['tools']?.[tool.category]?.[tool.id]?.content?.faq;
+  if (!faq || faq.length === 0) return null;
+
+  const mainEntity = faq
+    .filter((item): item is { q: string; a: string } => typeof item.q === 'string' && typeof item.a === 'string')
+    .map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    }));
+  if (mainEntity.length === 0) return null;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: localeTag(locale),
+    mainEntity,
+  };
+}
+
 export async function toolBreadcrumbJsonLd(
   tool: ToolMeta,
   locale: Locale,

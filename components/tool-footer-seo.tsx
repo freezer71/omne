@@ -18,6 +18,7 @@ type ToolDictEntry = {
   content?: {
     howItWorks?: string[];
     features?: string[];
+    faq?: { q: string; a: string }[];
   };
 };
 
@@ -45,6 +46,7 @@ export async function ToolFooterSeo({ category, id, locale }: Props) {
     f.howItWorksStep3,
   ];
   const features = content?.features;
+  const faq = content?.faq;
 
   const related = relatedTools(category, id);
 
@@ -72,6 +74,20 @@ export async function ToolFooterSeo({ category, id, locale }: Props) {
           ))}
         </ol>
       </article>
+
+      {faq && faq.length > 0 && (
+        <article className="grid gap-3">
+          <h2 className="text-lg font-medium text-text-primary">{f.faqTitle}</h2>
+          <dl className="grid gap-4">
+            {faq.map((item, i) => (
+              <div key={i} className="grid gap-1">
+                <dt className="text-sm font-medium text-text-primary">{item.q}</dt>
+                <dd className="text-sm text-text-muted leading-relaxed">{item.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </article>
+      )}
 
       <article className="grid gap-2 rounded-lg border border-border bg-surface p-5">
         <h2 className="text-base font-medium text-text-primary">{privacyTitle}</h2>

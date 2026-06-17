@@ -44,7 +44,8 @@
       "privacyTitleProxy": "Cet outil communique avec skills.sh",
       "privacyBodyProxy": "Contrairement à tous les autres outils d'omne, celui-ci effectue des requêtes réseau pendant que vous l'utilisez : votre recherche est relayée via le serveur d'omne vers skills.sh, et les deux voient votre adresse IP et le texte tapé. Aucun fichier n'est en jeu — cet outil n'accepte aucun fichier en entrée. Tous les autres outils d'omne s'exécutent toujours entièrement dans votre navigateur.",
       "privacyBodyModelDownload": "Votre image est traitée entièrement dans votre navigateur — elle n'est jamais envoyée. La seule requête réseau est le téléchargement unique du modèle d'IA (~44 Mo) depuis huggingface.co au premier usage ; votre navigateur le met en cache et les usages suivants ne nécessitent plus aucun réseau. Pas d'analytics, pas de cookies.",
-      "privacyLearnMore": "Voir la page Confidentialité pour le détail."
+      "privacyLearnMore": "Voir la page Confidentialité pour le détail.",
+      "faqTitle": "Questions fréquentes"
     }
   },
   "badge": {
@@ -1732,6 +1733,20 @@
             "Transforme une capture d'écran ou une image copiée d'un site en véritable fichier PNG, JPG ou WebP.",
             "L'aperçu en direct affiche le résultat et le poids du fichier au fil des changements de format.",
             "Le presse-papiers est lu localement dans votre navigateur : l'image collée n'est jamais envoyée nulle part."
+          ],
+          "faq": [
+            {
+              "q": "Comment convertir une capture d'écran du presse-papiers en fichier PNG ?",
+              "a": "Copiez une capture d'écran ou une image, appuyez sur Cmd/Ctrl + V sur la page (ou cliquez sur Coller depuis le presse-papiers), puis cliquez sur Télécharger. L'image collée est enregistrée comme un vrai fichier PNG — vous pouvez aussi choisir le format JPG ou WebP au préalable."
+            },
+            {
+              "q": "Puis-je enregistrer une image collée en JPG ou WebP plutôt qu'en PNG ?",
+              "a": "Oui. Après le collage, choisissez PNG, JPG ou WebP : l'aperçu en direct se met à jour avec le nouveau format et la taille du fichier avant le téléchargement."
+            },
+            {
+              "q": "Ma capture d'écran est-elle envoyée sur un serveur ?",
+              "a": "Non. Le presse-papiers est lu localement dans votre navigateur et l'image est convertie sur votre appareil — rien n'est jamais envoyé, vos captures privées restent privées."
+            }
           ]
         },
         "seo": {
@@ -2138,6 +2153,20 @@
             "Chaque caractère est tiré via crypto.getRandomValues avec échantillonnage par rejet, pour un résultat non biaisé et imprévisible.",
             "Génère jusqu'à 25 mots de passe d'un coup et affiche leur note de force et leurs bits d'entropie au fil des réglages.",
             "Tout se passe dans votre navigateur — aucun mot de passe n'est envoyé à un serveur, contrairement aux générateurs en ligne douteux."
+          ],
+          "faq": [
+            {
+              "q": "Comment créer un mot de passe aléatoire robuste ?",
+              "a": "Réglez la longueur et cochez les classes de caractères voulues — majuscules, minuscules, chiffres et symboles. Plus le mot de passe est long et varié, plus son score est élevé ; la robustesse et l'entropie se mettent à jour en direct."
+            },
+            {
+              "q": "Puis-je générer plusieurs mots de passe à la fois ?",
+              "a": "Oui. Choisissez 1, 5, 10 ou 25, excluez au besoin les caractères ambigus comme 0/O et 1/l/I, puis copiez-en un ou téléchargez-les tous dans un fichier .txt."
+            },
+            {
+              "q": "Les mots de passe générés sont-ils stockés ou envoyés quelque part ?",
+              "a": "Non. Chaque caractère provient de crypto.getRandomValues dans votre navigateur : les mots de passe sont imprévisibles et ne sont jamais envoyés à un serveur, contrairement à beaucoup de générateurs en ligne."
+            }
           ]
         },
         "seo": {
@@ -2193,6 +2222,20 @@
             "Construit des phrases de passe style diceware à partir d'une liste choisie de 256 mots, soit exactement 8 bits d'entropie par mot.",
             "Produit des phrases faciles à retenir et à taper mais difficiles à forcer, idéales comme mots de passe maîtres.",
             "Les mots sont tirés avec un aléa cryptographique dans votre navigateur, donc rien de la phrase de passe ne quitte votre appareil."
+          ],
+          "faq": [
+            {
+              "q": "Qu'est-ce qu'une phrase secrète et pourquoi l'utiliser plutôt qu'un mot de passe ?",
+              "a": "Une phrase secrète est une suite de mots aléatoires (type cheval-correct-pile-agrafe) bien plus facile à retenir et à taper qu'un mot de passe aléatoire, tout en étant aussi difficile à craquer si elle compte assez de mots. Idéale pour les mots de passe maîtres et le chiffrement de disque."
+            },
+            {
+              "q": "Combien de mots pour une phrase secrète robuste ?",
+              "a": "Chaque mot de la liste ajoute 8 bits d'entropie : 4 mots font environ 32 bits, 5 environ 40 et 6 environ 48. Cinq ou six mots constituent un choix robuste et mémorisable pour la plupart des comptes ; l'outil affiche une estimation d'entropie en direct quand vous ajustez le nombre."
+            },
+            {
+              "q": "Les phrases secrètes sont-elles générées de façon sûre et hors ligne ?",
+              "a": "Oui. Les mots sont tirés avec une aléa de qualité cryptographique (crypto.getRandomValues) entièrement dans votre navigateur : la phrase n'est jamais envoyée sur le réseau et rien ne quitte votre appareil."
+            }
           ]
         },
         "seo": {
@@ -2242,6 +2285,20 @@
             "Calcule les empreintes SHA-1, SHA-256, SHA-384 et SHA-512 via le Web Crypto natif du navigateur (crypto.subtle.digest).",
             "Restitue le hash en hex minuscule ou en base64, pratique pour les sommes de contrôle, empreintes et comparaisons.",
             "Votre texte est hashé localement et jamais envoyé, donc même les chaînes sensibles restent sur votre machine."
+          ],
+          "faq": [
+            {
+              "q": "Comment générer une empreinte SHA-256 à partir d'un texte ?",
+              "a": "Saisissez ou collez votre texte, choisissez SHA-256 (ou SHA-1, SHA-384, SHA-512) et le format de sortie — hexadécimal ou base64. L'empreinte apparaît instantanément en dessous au fil de la frappe ; cliquez sur Copier pour la récupérer."
+            },
+            {
+              "q": "Peut-on retrouver le texte d'origine à partir d'une empreinte ?",
+              "a": "Non. Les empreintes cryptographiques sont à sens unique par conception : un condensé SHA-256 ne peut pas être déchiffré pour retrouver son entrée. Cet outil ne fait que générer des empreintes — utiles pour les sommes de contrôle, les empreintes et la comparaison de valeurs."
+            },
+            {
+              "q": "Mon texte est-il envoyé à un serveur pour être haché ?",
+              "a": "Non. Le hachage utilise l'API native Web Crypto (crypto.subtle.digest) et s'exécute entièrement sur votre machine : même les chaînes sensibles ne quittent jamais votre appareil."
+            }
           ]
         },
         "seo": {
@@ -2289,6 +2346,20 @@
             "Hashe les mots de passe avec bcrypt, en générant un sel aléatoire frais et un facteur de coût réglable de 4 à 14.",
             "Le mode Vérifier compare un mot de passe candidat à un hash bcrypt existant et rejette les entrées mal formées.",
             "Tout s'exécute côté client et le temps de calcul est affiché en millisecondes — votre mot de passe ne quitte jamais le navigateur."
+          ],
+          "faq": [
+            {
+              "q": "Comment générer une empreinte bcrypt ?",
+              "a": "Choisissez le mode Hacher, saisissez le mot de passe, réglez le nombre de tours (facteur de coût), puis cliquez sur Hacher. L'outil génère un sel aléatoire et renvoie une empreinte bcrypt standard $2a$/$2b$ que vous pouvez copier."
+            },
+            {
+              "q": "Quel facteur de coût (nombre de tours) choisir ?",
+              "a": "10 est une valeur par défaut solide. Des valeurs plus élevées (jusqu'à 14) résistent mieux à la force brute mais sont plus lentes ; l'outil indique le temps de calcul en millisecondes pour équilibrer sécurité et rapidité."
+            },
+            {
+              "q": "Puis-je vérifier un mot de passe face à une empreinte bcrypt existante ?",
+              "a": "Oui. Passez en mode Vérifier, collez une empreinte $2a$/$2b$ existante et un mot de passe candidat : l'outil affiche Correspond ou Ne correspond pas — le tout côté client, le mot de passe ne quitte jamais votre navigateur."
+            }
           ]
         },
         "seo": {
