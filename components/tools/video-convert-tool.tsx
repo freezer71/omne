@@ -4,9 +4,11 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { convertVideo, type VideoFormat } from '@/lib/tools/implementations/video-convert';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -28,6 +30,8 @@ type Messages = {
   largeFileWarning: string;
 };
 
+type Props = Messages & { result: ToolResultMessages };
+
 function formatRemaining(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 1) return '<1s';
   if (seconds < 60) return `${Math.ceil(seconds)}s`;
@@ -48,7 +52,7 @@ const MIME_BY_FORMAT: Record<VideoFormat, string> = {
   gif: 'image/gif',
 };
 
-export function VideoConvertTool(messages: Messages) {
+export function VideoConvertTool(messages: Props) {
   const inputId = useId();
   const formatId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -61,6 +65,7 @@ export function VideoConvertTool(messages: Messages) {
   const [dragging, setDragging] = useState(false);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${format}`);
 
   useEffect(() => {
     if (!busy) return;
@@ -108,7 +113,7 @@ export function VideoConvertTool(messages: Messages) {
       });
       const blob = new Blob([new Uint8Array(bytes)], { type: MIME_BY_FORMAT[format] });
       const name = outputName('converted', [file!.name], format);
-      downloadBlob(blob, name);
+      setResult({ blob, filename: name });
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       setError(`${messages.error} — ${detail}`);
@@ -212,16 +217,18 @@ export function VideoConvertTool(messages: Messages) {
           </select>
         </label>
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-3">
-            {error && (
-              <p role="alert" className="text-sm text-danger">
-                {error}
-              </p>
-            )}
-            <Button onClick={onConvert} disabled={!canConvert}>
-              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.convertButton}
-            </Button>
-          </div>
+          {!result && (
+            <div className="flex items-center gap-3">
+              {error && (
+                <p role="alert" className="text-sm text-danger">
+                  {error}
+                </p>
+              )}
+              <Button onClick={onConvert} disabled={!canConvert}>
+                {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.convertButton}
+              </Button>
+            </div>
+          )}
           {busy && (
             <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
               {etaSeconds === null
@@ -231,6 +238,16 @@ export function VideoConvertTool(messages: Messages) {
           )}
         </div>
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="video"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

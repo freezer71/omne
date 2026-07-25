@@ -4,9 +4,11 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { adjustVolume, buildFilter } from '@/lib/tools/implementations/audio-volume';
-import { downloadBlob, formatBytes, outputName, stripExtension } from '@/lib/file-utils';
+import { formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -27,6 +29,8 @@ type Messages = {
   largeFileWarning: string;
 };
 
+type Props = Messages & { result: ToolResultMessages };
+
 function extOf(name: string): string {
   const dot = name.lastIndexOf('.');
   return dot > 0 ? name.slice(dot + 1).toLowerCase() : 'mp3';
@@ -36,7 +40,7 @@ function gainToLinearVolume(db: number): number {
   return Math.pow(10, db / 20);
 }
 
-export function AudioVolumeTool(messages: Messages) {
+export function AudioVolumeTool(messages: Props) {
   const inputId = useId();
   const gainId = useId();
   const normalizeId = useId();
@@ -54,6 +58,7 @@ export function AudioVolumeTool(messages: Messages) {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${gainDb}|${normalize}|${fadeIn}|${fadeOut}`);
 
   const canApply = file !== null && !busy;
 
@@ -92,7 +97,7 @@ export function AudioVolumeTool(messages: Messages) {
       });
       const ext = extOf(file!.name);
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: file!.type || 'audio/mpeg' });
-      downloadBlob(blob, outputName('volume', [file!.name], ext));
+      setResult({ blob, filename: outputName('volume', [file!.name], ext) });
     } catch {
       setError(messages.error);
     } finally {
@@ -244,16 +249,28 @@ export function AudioVolumeTool(messages: Messages) {
         )}
       </Card>
 
-      <div className="flex items-center justify-end gap-3">
-        {error && (
-          <p role="alert" className="text-sm text-danger">
-            {error}
-          </p>
-        )}
-        <Button onClick={onApply} disabled={!canApply}>
-          {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.applyButton}
-        </Button>
-      </div>
+      {!result && (
+        <div className="flex items-center justify-end gap-3">
+          {error && (
+            <p role="alert" className="text-sm text-danger">
+              {error}
+            </p>
+          )}
+          <Button onClick={onApply} disabled={!canApply}>
+            {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.applyButton}
+          </Button>
+        </div>
+      )}
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="audio"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

@@ -44,6 +44,12 @@ Add matching keys to **both** `messages/en.json` and `messages/fr.json` under `t
 - The download button produces the final asset from the same parameters the preview is showing — no parameter drift between preview and output.
 - Existing references: `image-resize` (scale slider with live canvas preview) and the PDF tools' per-page grid are the patterns to follow.
 
+**Never fire a download the user did not ask for.** A tool whose pipeline costs real time (every `video/*` and `audio/*` tool) must not call `downloadBlob` at the end of its handler — after a multi-minute encode that leaves the user with a file in `~/Downloads`, no way to judge it without leaving the browser, and no way to try another preset without redoing everything. Instead:
+- Hold the output in `useToolResult(signature)` (`lib/hooks/use-tool-result.ts`) and render `<ToolResult>` (`components/ui/tool-result.tsx`), which plays/displays the file, states the size delta via `compareSizes` (`lib/tools/size-delta.ts`), and owns the **Download** and **Change settings** buttons.
+- `signature` must combine `fileSignature(file)` (or `filesSignature(files)`) with **every** option that feeds the pipeline. The hook clears the result as soon as the signature changes, which is what stops the panel from showing a file the controls no longer describe. Forgetting an option there is the bug this design exists to prevent.
+- Hide the primary action button while a result is on screen (`{!result && …}`) so there is exactly one obvious next step.
+- The panel's strings are shared: `common.result` in both dictionaries, passed from the page as `result={dict.common.result}`. Tools with multiple outputs (`video/split`, `video/frames`, `short-studio`) keep their own per-item result grids and are out of scope for this component.
+
 **i18n boundaries:**
 - `lib/i18n/config.ts` is the locale source of truth (`locales`, `defaultLocale`, `isLocale`).
 - `lib/i18n/dictionary.ts` is `import 'server-only'` — it must never be imported from a `'use client'` file. Server components call `getDictionary(locale)` and pass plain string props down to client components.

@@ -130,6 +130,8 @@ Chaque outil suit le même squelette en 5 fichiers + une entrée de registre :
 
 **Aperçu temps réel obligatoire** : tout outil doit afficher un résultat live qui reflète les paramètres courants — un debounce de ~150-250 ms sur l'effet, pas de bouton "Apply" avant l'aperçu. Pour les pipelines lourds (ffmpeg, pdf.js, remove-bg), rendre un proxy léger (résolution réduite, première page/frame).
 
+**Rien ne se télécharge dans le dos de l'utilisateur** : un outil qui exécute un pipeline coûteux confie sa sortie à `<ToolResult>` (`components/ui/tool-result.tsx`) au lieu d'appeler `downloadBlob` lui-même. Le panneau lit ou affiche le fichier produit, indique l'écart de poids par rapport à la source, et porte le seul bouton **Télécharger**, plus un bouton **Modifier les réglages** qui l'efface en gardant le fichier source chargé. La sortie est détenue par `useToolResult(signature)` (`lib/hooks/use-tool-result.ts`) : construire `signature` à partir de l'identité du fichier source et de chaque option qui alimente le pipeline, et le hook abandonne le résultat dès qu'ils divergent — le panneau ne peut donc jamais montrer un fichier que les réglages ne décrivent plus. Les libellés sont partagés entre outils sous `common.result` — les passer via `result={dict.common.result}`.
+
 Détails complets dans [`CLAUDE.md`](./CLAUDE.md).
 
 ---
@@ -200,7 +202,7 @@ omne/
 ## Contribuer un nouvel outil
 
 1. Implémenter la logique pure dans `lib/tools/implementations/<id>.ts` avec un test unitaire.
-2. Créer le composant client dans `components/tools/<id>-tool.tsx` avec un aperçu temps réel.
+2. Créer le composant client dans `components/tools/<id>-tool.tsx` avec un aperçu temps réel — et, si le pipeline est coûteux, un panneau `<ToolResult>` plutôt qu'un téléchargement automatique.
 3. Câbler la page sous `app/[locale]/<catégorie>/<id>/page.tsx` + l'`opengraph-image.tsx`.
 4. Ajouter l'entrée dans `lib/tools/registry.ts`.
 5. Ajouter les clés `tools.<catégorie>.<id>` (avec le bloc `seo`) dans `messages/en.json` **et** `messages/fr.json`.

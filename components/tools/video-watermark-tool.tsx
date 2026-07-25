@@ -4,9 +4,11 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { watermarkVideo, type WatermarkPosition } from '@/lib/tools/implementations/video-watermark';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -32,6 +34,8 @@ type Messages = {
   largeFileWarning: string;
 };
 
+type Props = Messages & { result: ToolResultMessages };
+
 const POSITIONS: WatermarkPosition[] = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'center'];
 
 function formatRemaining(seconds: number): string {
@@ -50,7 +54,7 @@ const POSITION_CLASS: Record<WatermarkPosition, string> = {
   center: 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
 };
 
-export function VideoWatermarkTool(messages: Messages) {
+export function VideoWatermarkTool(messages: Props) {
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -65,6 +69,7 @@ export function VideoWatermarkTool(messages: Messages) {
   const [dragging, setDragging] = useState(false);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${text}|${position}|${fontSize}|${opacity}`);
 
   useEffect(() => {
     if (!busy) return;
@@ -109,7 +114,7 @@ export function VideoWatermarkTool(messages: Messages) {
     try {
       const bytes = await watermarkVideo(file, { text, position, fontSize, opacity, onProgress: (r) => setProgress(r) });
       const blob = new Blob([new Uint8Array(bytes)], { type: 'video/mp4' });
-      downloadBlob(blob, outputName('watermarked', [file.name], 'mp4'));
+      setResult({ blob, filename: outputName('watermarked', [file.name], 'mp4') });
     } catch (_err) {
       setError(messages.error);
     } finally {
@@ -180,12 +185,14 @@ export function VideoWatermarkTool(messages: Messages) {
 
       <div className="flex items-end justify-end gap-3 flex-wrap">
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-3">
-            {error && <p role="alert" className="text-sm text-danger">{error}</p>}
-            <Button onClick={onApply} disabled={!file || busy}>
-              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.watermarkButton}
-            </Button>
-          </div>
+          {!result && (
+            <div className="flex items-center gap-3">
+              {error && <p role="alert" className="text-sm text-danger">{error}</p>}
+              <Button onClick={onApply} disabled={!file || busy}>
+                {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.watermarkButton}
+              </Button>
+            </div>
+          )}
           {busy && (
             <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
               {etaSeconds === null ? messages.etaCalculating : tpl(messages.etaLabel, { remaining: formatRemaining(etaSeconds) })}
@@ -193,6 +200,16 @@ export function VideoWatermarkTool(messages: Messages) {
           )}
         </div>
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="video"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

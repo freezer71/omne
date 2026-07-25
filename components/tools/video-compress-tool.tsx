@@ -4,9 +4,11 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { compressVideo, type CompressQuality } from '@/lib/tools/implementations/video-compress';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -26,6 +28,8 @@ type Messages = {
   largeFileWarning: string;
 };
 
+type Props = Messages & { result: ToolResultMessages };
+
 function formatRemaining(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 1) return '<1s';
   if (seconds < 60) return `${Math.ceil(seconds)}s`;
@@ -36,12 +40,13 @@ function formatRemaining(seconds: number): string {
 
 const QUALITIES: CompressQuality[] = ['high', 'medium', 'low'];
 
-export function VideoCompressTool(messages: Messages) {
+export function VideoCompressTool(messages: Props) {
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [file, setFile] = useState<File | null>(null);
   const [quality, setQuality] = useState<CompressQuality>('medium');
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${quality}`);
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -88,7 +93,7 @@ export function VideoCompressTool(messages: Messages) {
     try {
       const bytes = await compressVideo(file, { quality, onProgress: (r) => setProgress(r) });
       const blob = new Blob([new Uint8Array(bytes)], { type: 'video/mp4' });
-      downloadBlob(blob, outputName('compressed', [file.name], 'mp4'));
+      setResult({ blob, filename: outputName('compressed', [file.name], 'mp4') });
     } catch (_err) {
       setError(messages.error);
     } finally {
@@ -141,12 +146,14 @@ export function VideoCompressTool(messages: Messages) {
           ))}
         </fieldset>
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-3">
-            {error && <p role="alert" className="text-sm text-danger">{error}</p>}
-            <Button onClick={onCompress} disabled={!file || busy}>
-              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.compressButton}
-            </Button>
-          </div>
+          {!result && (
+            <div className="flex items-center gap-3">
+              {error && <p role="alert" className="text-sm text-danger">{error}</p>}
+              <Button onClick={onCompress} disabled={!file || busy}>
+                {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.compressButton}
+              </Button>
+            </div>
+          )}
           {busy && (
             <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
               {etaSeconds === null ? messages.etaCalculating : tpl(messages.etaLabel, { remaining: formatRemaining(etaSeconds) })}
@@ -154,6 +161,16 @@ export function VideoCompressTool(messages: Messages) {
           )}
         </div>
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="video"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

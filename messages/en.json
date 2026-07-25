@@ -47,6 +47,17 @@
       "privacyBodyModelDownload": "Your image is processed entirely in your browser — it is never uploaded. The only network request is a one-time ~44 MB download of the AI model from huggingface.co on first use; your browser caches it, and later runs need no network at all. No analytics, no cookies.",
       "privacyLearnMore": "See the privacy page for details.",
       "faqTitle": "Frequently asked questions"
+    },
+    "result": {
+      "heading": "Your file is ready",
+      "download": "Download",
+      "retry": "Change settings",
+      "originalLabel": "Original",
+      "outputLabel": "Result",
+      "smaller": "{percent}% smaller",
+      "larger": "{percent}% larger",
+      "same": "Same size",
+      "ready": "Processing complete. Your file is ready to download."
     }
   },
   "badge": {
@@ -1171,7 +1182,7 @@
           "howItWorks": [
             "Select an MP3, FLAC, M4A or OGG file — the tool reads its existing tags and fills the fields.",
             "Edit title, artist, album, album artist, year, genre, track and comment, then drop in an album cover image.",
-            "Click Apply tags & download to write the metadata and save the tagged file."
+            "Click Apply tags to write the metadata, check the result, then download the tagged file."
           ],
           "features": [
             "Edits ID3v2 fields including title, artist, album, album artist, year, genre, track number and comment.",
@@ -1196,7 +1207,7 @@
         "ui": {
           "selectButton": "Select an audio file",
           "empty": "Drop an audio file here or use the button below.",
-          "applyButton": "Apply tags & download",
+          "applyButton": "Apply tags",
           "busy": "Writing tags…",
           "error": "Tag write failed. Try a different file.",
           "removeFile": "Remove",
@@ -1322,7 +1333,7 @@
           "howItWorks": [
             "Drop an audio file to visualize it as a scrubbable waveform.",
             "Drag the start and end markers on the waveform to select the section you want to keep.",
-            "Click Trim & download to cut the clip — use the precise-cut toggle for sample-accurate results."
+            "Click Trim to cut the clip — use the precise-cut toggle for sample-accurate results — then play the result before downloading."
           ],
           "features": [
             "Interactive waveform display lets you see the audio shape and pick cut points visually.",
@@ -1347,7 +1358,7 @@
         "ui": {
           "selectButton": "Select an audio file",
           "empty": "Drop an audio file here or use the button below.",
-          "trimButton": "Trim & download",
+          "trimButton": "Trim",
           "startLabel": "Start (seconds)",
           "endLabel": "End (seconds)",
           "preciseLabel": "Precise cut",
@@ -1372,7 +1383,7 @@
           "howItWorks": [
             "Drop two or more audio files — MP3, WAV, FLAC or M4A — onto the tool.",
             "Drag files to reorder them and pick an output format and bitrate.",
-            "Click Merge & download to concatenate them into a single audio file."
+            "Click Merge to concatenate them into a single audio file, play it back, then download."
           ],
           "features": [
             "Drag-and-drop reordering lets you arrange tracks in the exact playback sequence.",
@@ -1397,7 +1408,7 @@
         "ui": {
           "selectButton": "Add audio files",
           "empty": "Drop two or more audio files here or use the button below.",
-          "mergeButton": "Merge & download",
+          "mergeButton": "Merge",
           "format": "Output format",
           "formatMp3": "MP3",
           "formatWav": "WAV",
@@ -1420,7 +1431,7 @@
           "howItWorks": [
             "Drop in an audio file, then drag the Gain slider from −20 dB to +20 dB to boost or cut volume.",
             "Or tick Normalize loudness to retarget the whole track to the EBU R128 standard of −16 LUFS.",
-            "Add a fade in and fade out of up to 15 seconds, then click Apply & download."
+            "Add a fade in and fade out of up to 15 seconds, then click Apply and listen to the result before downloading."
           ],
           "features": [
             "Adjusts gain in precise 1 dB steps across a −20 to +20 dB range, with a live filter preview.",
@@ -1445,7 +1456,7 @@
         "ui": {
           "selectButton": "Select an audio file",
           "empty": "Drop an audio file here or use the button below.",
-          "applyButton": "Apply & download",
+          "applyButton": "Apply",
           "gainLabel": "Gain",
           "normalizeLabel": "Normalize loudness (EBU R128)",
           "normalizeHint": "(targets -16 LUFS)",

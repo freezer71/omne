@@ -3,6 +3,7 @@
 import { useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import {
   inferFormat,
   mimeForFormat,
@@ -13,8 +14,9 @@ import {
   type AudioTags,
 } from '@/lib/tools/implementations/audio-tags';
 import { canvasToBytes, createCanvas, get2dContext, loadImageBitmap } from '@/lib/image-utils';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { cn } from '@/lib/cn';
 
 type Messages = {
@@ -40,6 +42,8 @@ type Messages = {
   loadingTags: string;
   loadTagsError: string;
 };
+
+type Props = Messages & { result: ToolResultMessages };
 
 const MAX_COVER_SIDE = 800;
 const COVER_JPEG_QUALITY = 0.85;
@@ -80,7 +84,7 @@ function emptyTags(): AudioTags {
   };
 }
 
-export function AudioTagsTool(messages: Messages) {
+export function AudioTagsTool(messages: Props) {
   const inputId = useId();
   const coverInputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -97,6 +101,7 @@ export function AudioTagsTool(messages: Messages) {
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [coverDragging, setCoverDragging] = useState(false);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${JSON.stringify(tags)}|${cover?.bytes.byteLength ?? 0}|${format}`);
 
   const onPickFiles = (incoming: FileList | File[] | null) => {
     if (!incoming) return;
@@ -167,7 +172,7 @@ export function AudioTagsTool(messages: Messages) {
         onProgress: (r) => setProgress(r),
       });
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: mimeForFormat(format) });
-      downloadBlob(blob, outputName('tagged', [file.name], format));
+      setResult({ blob, filename: outputName('tagged', [file.name], format) });
     } catch {
       setError(messages.error);
     } finally {
@@ -381,17 +386,29 @@ export function AudioTagsTool(messages: Messages) {
         )}
       </Card>
 
-      <div className="flex items-center justify-end gap-3">
-        {loading && <p className="text-xs text-text-faint">{messages.loadingTags}</p>}
-        {error && (
-          <p role="alert" className="text-sm text-danger">
-            {error}
-          </p>
-        )}
-        <Button onClick={onApply} disabled={!canApply}>
-          {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.applyButton}
-        </Button>
-      </div>
+      {!result && (
+        <div className="flex items-center justify-end gap-3">
+          {loading && <p className="text-xs text-text-faint">{messages.loadingTags}</p>}
+          {error && (
+            <p role="alert" className="text-sm text-danger">
+              {error}
+            </p>
+          )}
+          <Button onClick={onApply} disabled={!canApply}>
+            {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.applyButton}
+          </Button>
+        </div>
+      )}
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="audio"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

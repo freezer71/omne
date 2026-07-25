@@ -3,12 +3,14 @@
 import { useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import {
   mergeAudio,
   mergeMimeForFormat,
   type MergeFormat,
 } from '@/lib/tools/implementations/audio-merge';
-import { downloadBlob, formatBytes } from '@/lib/file-utils';
+import { formatBytes } from '@/lib/file-utils';
+import { filesSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { cn } from '@/lib/cn';
 
 type Messages = {
@@ -30,11 +32,13 @@ type Messages = {
   needMore: string;
 };
 
+type Props = Messages & { result: ToolResultMessages };
+
 const FORMATS: MergeFormat[] = ['mp3', 'wav', 'flac', 'm4a'];
 const BITRATES = [128, 192, 256, 320];
 const LOSSLESS: ReadonlySet<MergeFormat> = new Set(['wav', 'flac']);
 
-export function AudioMergeTool(messages: Messages) {
+export function AudioMergeTool(messages: Props) {
   const inputId = useId();
   const formatId = useId();
   const bitrateId = useId();
@@ -47,6 +51,7 @@ export function AudioMergeTool(messages: Messages) {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [result, setResult] = useToolResult(`${filesSignature(files)}|${format}|${bitrate}`);
 
   const canMerge = files.length >= 2 && !busy;
   const isLossless = LOSSLESS.has(format);
@@ -97,7 +102,7 @@ export function AudioMergeTool(messages: Messages) {
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], {
         type: mergeMimeForFormat(format),
       });
-      downloadBlob(blob, `merged.${format}`);
+      setResult({ blob, filename: `merged.${format}` });
     } catch {
       setError(messages.error);
     } finally {
@@ -252,17 +257,29 @@ export function AudioMergeTool(messages: Messages) {
             </label>
           )}
         </div>
-        <div className="flex items-center gap-3">
-          {error && (
-            <p role="alert" className="text-sm text-danger">
-              {error}
-            </p>
-          )}
-          <Button onClick={onMerge} disabled={!canMerge}>
-            {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.mergeButton}
-          </Button>
-        </div>
+        {!result && (
+          <div className="flex items-center gap-3">
+            {error && (
+              <p role="alert" className="text-sm text-danger">
+                {error}
+              </p>
+            )}
+            <Button onClick={onMerge} disabled={!canMerge}>
+              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.mergeButton}
+            </Button>
+          </div>
+        )}
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="audio"
+          sourceBytes={files.reduce((n, f) => n + f.size, 0)}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

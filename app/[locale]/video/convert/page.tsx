@@ -51,7 +51,7 @@ export default async function Page({
         removeFile={tool.ui.removeFile}
         etaLabel={tool.ui.etaLabel}
         etaCalculating={tool.ui.etaCalculating}
-        largeFileWarning={dict.common.largeFileWarning}
+        largeFileWarning={dict.common.largeFileWarning} result={dict.common.result}
       />
     </ToolShell>
       <ToolPageJsonLd category="video" id="convert" locale={locale} />

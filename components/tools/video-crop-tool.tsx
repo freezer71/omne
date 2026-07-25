@@ -4,9 +4,11 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { cropVideo } from '@/lib/tools/implementations/video-crop';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -26,6 +28,8 @@ type Messages = {
   largeFileWarning: string;
 };
 
+type Props = Messages & { result: ToolResultMessages };
+
 function formatRemaining(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 1) return '<1s';
   if (seconds < 60) return `${Math.ceil(seconds)}s`;
@@ -34,7 +38,7 @@ function formatRemaining(seconds: number): string {
   return s === 0 ? `${m}min` : `${m}min ${s}s`;
 }
 
-export function VideoCropTool(messages: Messages) {
+export function VideoCropTool(messages: Props) {
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -47,6 +51,7 @@ export function VideoCropTool(messages: Messages) {
   const [dragging, setDragging] = useState(false);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${crop.x}|${crop.y}|${crop.w}|${crop.h}`);
 
   useEffect(() => {
     if (!busy) return;
@@ -88,7 +93,7 @@ export function VideoCropTool(messages: Messages) {
     try {
       const bytes = await cropVideo(file, { x: crop.x, y: crop.y, width: crop.w, height: crop.h, onProgress: (r) => setProgress(r) });
       const blob = new Blob([new Uint8Array(bytes)], { type: 'video/mp4' });
-      downloadBlob(blob, outputName('cropped', [file.name], 'mp4'));
+      setResult({ blob, filename: outputName('cropped', [file.name], 'mp4') });
     } catch (_err) {
       setError(messages.error);
     } finally {
@@ -149,12 +154,14 @@ export function VideoCropTool(messages: Messages) {
 
       <div className="flex items-end justify-end gap-3 flex-wrap">
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-3">
-            {error && <p role="alert" className="text-sm text-danger">{error}</p>}
-            <Button onClick={onCrop} disabled={!file || busy}>
-              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.cropButton}
-            </Button>
-          </div>
+          {!result && (
+            <div className="flex items-center gap-3">
+              {error && <p role="alert" className="text-sm text-danger">{error}</p>}
+              <Button onClick={onCrop} disabled={!file || busy}>
+                {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.cropButton}
+              </Button>
+            </div>
+          )}
           {busy && (
             <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
               {etaSeconds === null ? messages.etaCalculating : tpl(messages.etaLabel, { remaining: formatRemaining(etaSeconds) })}
@@ -162,6 +169,16 @@ export function VideoCropTool(messages: Messages) {
           )}
         </div>
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="video"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

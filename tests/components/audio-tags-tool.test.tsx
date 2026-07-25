@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { resultMessages } from '@/tests/helpers/tool-result-messages';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -57,7 +58,7 @@ beforeEach(() => {
 
 describe('AudioTagsTool', () => {
   it('renders empty state with disabled Apply button', () => {
-    render(<AudioTagsTool {...messages} />);
+    render(<AudioTagsTool {...messages} result={resultMessages} />);
     expect(screen.getByText(messages.empty)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: messages.applyButton })).toBeDisabled();
   });
@@ -69,7 +70,7 @@ describe('AudioTagsTool', () => {
       cover: null,
       format: 'mp3',
     });
-    render(<AudioTagsTool {...messages} />);
+    render(<AudioTagsTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp3());
     await waitFor(() => {
       expect((screen.getByLabelText(messages.titleLabel) as HTMLInputElement).value).toBe('Hello');
@@ -82,7 +83,7 @@ describe('AudioTagsTool', () => {
   it('enables Apply once a file is loaded', async () => {
     const user = userEvent.setup();
     readTags.mockResolvedValue({ tags: {}, cover: null, format: 'mp3' });
-    render(<AudioTagsTool {...messages} />);
+    render(<AudioTagsTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp3());
     await waitFor(() =>
       expect(screen.getByRole('button', { name: messages.applyButton })).toBeEnabled(),
@@ -93,7 +94,7 @@ describe('AudioTagsTool', () => {
     const user = userEvent.setup();
     readTags.mockResolvedValue({ tags: { title: 'Old' }, cover: null, format: 'mp3' });
     writeTags.mockResolvedValue(new Uint8Array([0x1, 0x2]));
-    render(<AudioTagsTool {...messages} />);
+    render(<AudioTagsTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp3('clip.mp3'));
     await waitFor(() =>
       expect((screen.getByLabelText(messages.titleLabel) as HTMLInputElement).value).toBe('Old'),
@@ -104,6 +105,8 @@ describe('AudioTagsTool', () => {
     await waitFor(() => expect(writeTags).toHaveBeenCalledOnce());
     const [, tagsArg] = writeTags.mock.calls[0]!;
     expect(tagsArg).toMatchObject({ title: 'New' });
+    expect(downloadBlob).not.toHaveBeenCalled();
+    await user.click(await screen.findByRole('button', { name: resultMessages.download }));
     expect(downloadBlob).toHaveBeenCalledOnce();
     expect(downloadBlob.mock.calls[0]![1]).toBe('tagged-clip.mp3');
   });
@@ -117,7 +120,7 @@ describe('AudioTagsTool', () => {
       format: 'mp3',
     });
     writeTags.mockResolvedValue(new Uint8Array([0]));
-    render(<AudioTagsTool {...messages} />);
+    render(<AudioTagsTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp3());
     await waitFor(() =>
       expect(screen.getByRole('button', { name: messages.applyButton })).toBeEnabled(),
@@ -136,7 +139,7 @@ describe('AudioTagsTool', () => {
       format: 'mp3',
     });
     writeTags.mockResolvedValue(new Uint8Array([0]));
-    render(<AudioTagsTool {...messages} />);
+    render(<AudioTagsTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp3());
     await waitFor(() =>
       expect(screen.getByRole('button', { name: messages.coverRemove })).toBeInTheDocument(),
@@ -152,7 +155,7 @@ describe('AudioTagsTool', () => {
     const user = userEvent.setup();
     readTags.mockResolvedValue({ tags: {}, cover: null, format: 'mp3' });
     writeTags.mockRejectedValue(new Error('boom'));
-    render(<AudioTagsTool {...messages} />);
+    render(<AudioTagsTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp3());
     await waitFor(() =>
       expect(screen.getByRole('button', { name: messages.applyButton })).toBeEnabled(),
@@ -164,7 +167,7 @@ describe('AudioTagsTool', () => {
   it('shows a load error if readTags fails', async () => {
     const user = userEvent.setup();
     readTags.mockRejectedValue(new Error('parse failed'));
-    render(<AudioTagsTool {...messages} />);
+    render(<AudioTagsTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp3());
     expect(await screen.findByRole('alert')).toHaveTextContent(messages.loadTagsError);
   });

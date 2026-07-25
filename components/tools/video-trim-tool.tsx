@@ -4,10 +4,12 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { TrimTimeline } from '@/components/ui/trim-timeline';
 import { trimVideo } from '@/lib/tools/implementations/video-trim';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -30,6 +32,8 @@ type Messages = {
   unmuteLabel: string;
   largeFileWarning: string;
 };
+
+type Props = Messages & { result: ToolResultMessages };
 
 function formatClock(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
@@ -55,7 +59,7 @@ function inferExtension(name: string): string {
   return dot > 0 ? name.slice(dot + 1) : 'mp4';
 }
 
-export function VideoTrimTool(messages: Messages) {
+export function VideoTrimTool(messages: Props) {
   const inputId = useId();
   const startId = useId();
   const endId = useId();
@@ -72,6 +76,7 @@ export function VideoTrimTool(messages: Messages) {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${startSec}|${endSec}`);
 
   const start = parseFloat(startSec);
   const end = parseFloat(endSec);
@@ -186,7 +191,7 @@ export function VideoTrimTool(messages: Messages) {
       const bytes = await trimVideo(file, { startSec: start, endSec: end });
       const ext = inferExtension(file.name);
       const blob = new Blob([new Uint8Array(bytes)], { type: file.type || 'video/mp4' });
-      downloadBlob(blob, outputName('trimmed', [file.name], ext));
+      setResult({ blob, filename: outputName('trimmed', [file.name], ext) });
     } catch (_err) {
       setError(messages.error);
     } finally {
@@ -287,13 +292,25 @@ export function VideoTrimTool(messages: Messages) {
             className="h-9 w-28 rounded-md border border-border bg-surface px-3 text-sm text-text-primary"
           />
         </label>
-        <div className="ml-auto flex items-center gap-3">
-          {error && <p role="alert" className="text-sm text-danger">{error}</p>}
-          <Button onClick={onTrim} disabled={!valid || busy}>
-            {busy ? messages.busy : messages.trimButton}
-          </Button>
-        </div>
+        {!result && (
+          <div className="ml-auto flex items-center gap-3">
+            {error && <p role="alert" className="text-sm text-danger">{error}</p>}
+            <Button onClick={onTrim} disabled={!valid || busy}>
+              {busy ? messages.busy : messages.trimButton}
+            </Button>
+          </div>
+        )}
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="video"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

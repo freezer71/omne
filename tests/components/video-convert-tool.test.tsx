@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { resultMessages } from '@/tests/helpers/tool-result-messages';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -44,36 +45,51 @@ beforeEach(() => {
 
 describe('VideoConvertTool', () => {
   it('renders empty state and disables Convert', () => {
-    render(<VideoConvertTool {...messages} />);
+    render(<VideoConvertTool {...messages} result={resultMessages} />);
     expect(screen.getByText(messages.empty)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: messages.convertButton })).toBeDisabled();
   });
 
   it('enables Convert once a video is selected', async () => {
     const user = userEvent.setup();
-    render(<VideoConvertTool {...messages} />);
+    render(<VideoConvertTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), videoFile());
     expect(screen.getByText('clip.mp4')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: messages.convertButton })).toBeEnabled();
   });
 
-  it('calls convertVideo with the selected format and downloads the result', async () => {
+  it('calls convertVideo with the selected format and presents the result', async () => {
     const user = userEvent.setup();
     convertVideoMock.mockResolvedValue(new Uint8Array([0x1a, 0x45, 0xdf, 0xa3]));
-    render(<VideoConvertTool {...messages} />);
+    render(<VideoConvertTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), videoFile('movie.mp4'));
     await user.selectOptions(screen.getByLabelText(messages.format), 'webm');
     await user.click(screen.getByRole('button', { name: messages.convertButton }));
     expect(convertVideoMock).toHaveBeenCalledOnce();
     expect(convertVideoMock.mock.calls[0]![1]).toBe('webm');
+    expect(await screen.findByText(resultMessages.heading)).toBeInTheDocument();
+    expect(downloadBlobMock).not.toHaveBeenCalled();
+    await user.click(screen.getByRole('button', { name: resultMessages.download }));
     expect(downloadBlobMock).toHaveBeenCalledOnce();
     expect(downloadBlobMock.mock.calls[0]![1]).toBe('converted-movie.webm');
+  });
+
+  it('drops the result when the output format changes, so the panel never lies', async () => {
+    const user = userEvent.setup();
+    convertVideoMock.mockResolvedValue(new Uint8Array([0x1a, 0x45, 0xdf, 0xa3]));
+    render(<VideoConvertTool {...messages} result={resultMessages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), videoFile('movie.mp4'));
+    await user.click(screen.getByRole('button', { name: messages.convertButton }));
+    expect(await screen.findByText(resultMessages.heading)).toBeInTheDocument();
+    await user.selectOptions(screen.getByLabelText(messages.format), 'mov');
+    expect(screen.queryByText(resultMessages.heading)).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: messages.convertButton })).toBeEnabled();
   });
 
   it('shows an alert on conversion failure', async () => {
     const user = userEvent.setup();
     convertVideoMock.mockRejectedValue(new Error('boom'));
-    render(<VideoConvertTool {...messages} />);
+    render(<VideoConvertTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), videoFile());
     await user.click(screen.getByRole('button', { name: messages.convertButton }));
     expect(await screen.findByRole('alert')).toHaveTextContent(messages.error);
@@ -81,7 +97,7 @@ describe('VideoConvertTool', () => {
 
   it('allows removing the selected file', async () => {
     const user = userEvent.setup();
-    render(<VideoConvertTool {...messages} />);
+    render(<VideoConvertTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), videoFile());
     expect(screen.getByText('clip.mp4')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: messages.removeFile }));

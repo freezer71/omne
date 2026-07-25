@@ -4,13 +4,15 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import {
   audioMimeForFormat,
   convertAudio,
   type AudioConvertFormat,
 } from '@/lib/tools/implementations/audio-convert';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -36,6 +38,8 @@ type Messages = {
   largeFileWarning: string;
 };
 
+type Props = Messages & { result: ToolResultMessages };
+
 const FORMATS: AudioConvertFormat[] = ['mp3', 'wav', 'flac', 'aac', 'opus', 'm4a'];
 const BITRATES = [96, 128, 192, 256, 320];
 const LOSSLESS: ReadonlySet<AudioConvertFormat> = new Set(['wav', 'flac']);
@@ -60,7 +64,7 @@ function formatRemaining(seconds: number): string {
   return remMin === 0 ? `${hours}h` : `${hours}h ${remMin}min`;
 }
 
-export function AudioConvertTool(messages: Messages) {
+export function AudioConvertTool(messages: Props) {
   const inputId = useId();
   const formatId = useId();
   const bitrateId = useId();
@@ -76,6 +80,7 @@ export function AudioConvertTool(messages: Messages) {
   const [duration, setDuration] = useState<number | null>(null);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${format}|${bitrate}`);
 
   useEffect(() => {
     if (!busy) return;
@@ -132,7 +137,7 @@ export function AudioConvertTool(messages: Messages) {
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], {
         type: audioMimeForFormat(format),
       });
-      downloadBlob(blob, outputName('converted', [file!.name], EXTENSION_BY_FORMAT[format]));
+      setResult({ blob, filename: outputName('converted', [file!.name], EXTENSION_BY_FORMAT[format]) });
     } catch {
       setError(messages.error);
     } finally {
@@ -258,16 +263,18 @@ export function AudioConvertTool(messages: Messages) {
           )}
         </div>
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-3">
-            {error && (
-              <p role="alert" className="text-sm text-danger">
-                {error}
-              </p>
-            )}
-            <Button onClick={onConvert} disabled={!canConvert}>
-              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.convertButton}
-            </Button>
-          </div>
+          {!result && (
+            <div className="flex items-center gap-3">
+              {error && (
+                <p role="alert" className="text-sm text-danger">
+                  {error}
+                </p>
+              )}
+              <Button onClick={onConvert} disabled={!canConvert}>
+                {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.convertButton}
+              </Button>
+            </div>
+          )}
           {busy && (
             <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
               {etaSeconds === null
@@ -277,6 +284,16 @@ export function AudioConvertTool(messages: Messages) {
           )}
         </div>
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="audio"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

@@ -4,14 +4,16 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { TrimTimeline } from '@/components/ui/trim-timeline';
 import {
   inferOutputExtension,
   isVideoInputName,
   trimAudio,
 } from '@/lib/tools/implementations/audio-trim';
-import { downloadBlob, formatBytes, outputName, stripExtension } from '@/lib/file-utils';
+import { formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { Waveform } from '@/components/audio-waveform';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
@@ -38,6 +40,8 @@ type Messages = {
   unmuteLabel: string;
 };
 
+type Props = Messages & { result: ToolResultMessages };
+
 function formatClock(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
   const total = Math.floor(seconds);
@@ -57,7 +61,7 @@ function clamp(value: number, min: number, max: number): number {
   return value;
 }
 
-export function AudioTrimTool(messages: Messages) {
+export function AudioTrimTool(messages: Props) {
   const inputId = useId();
   const startId = useId();
   const endId = useId();
@@ -77,6 +81,7 @@ export function AudioTrimTool(messages: Messages) {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${start}|${end}|${precise}`);
 
   const canTrim = file !== null && !busy && end > start;
 
@@ -175,7 +180,7 @@ export function AudioTrimTool(messages: Messages) {
       const videoInput = isVideoInputName(file!.name);
       const mime = videoInput ? 'audio/mp4' : file!.type || 'audio/mpeg';
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: mime });
-      downloadBlob(blob, outputName('trimmed', [file!.name], ext));
+      setResult({ blob, filename: outputName('trimmed', [file!.name], ext) });
     } catch (err) {
       if (process.env.NODE_ENV !== 'production') console.error('[audio-trim]', err);
       setError(messages.error);
@@ -346,16 +351,28 @@ export function AudioTrimTool(messages: Messages) {
         )}
       </Card>
 
-      <div className="flex items-center justify-end gap-3">
-        {error && (
-          <p role="alert" className="text-sm text-danger">
-            {error}
-          </p>
-        )}
-        <Button onClick={onTrim} disabled={!canTrim}>
-          {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.trimButton}
-        </Button>
-      </div>
+      {!result && (
+        <div className="flex items-center justify-end gap-3">
+          {error && (
+            <p role="alert" className="text-sm text-danger">
+              {error}
+            </p>
+          )}
+          <Button onClick={onTrim} disabled={!canTrim}>
+            {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.trimButton}
+          </Button>
+        </div>
+      )}
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="audio"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

@@ -4,9 +4,11 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { rotateVideo, type RotateTransform } from '@/lib/tools/implementations/video-rotate';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -28,6 +30,8 @@ type Messages = {
   largeFileWarning: string;
 };
 
+type Props = Messages & { result: ToolResultMessages };
+
 const TRANSFORMS: RotateTransform[] = ['rotate90', 'rotate180', 'rotate270', 'flipH', 'flipV'];
 
 function formatRemaining(seconds: number): string {
@@ -46,7 +50,7 @@ const PREVIEW_TRANSFORM: Record<RotateTransform, string> = {
   flipV: 'scaleY(-1)',
 };
 
-export function VideoRotateTool(messages: Messages) {
+export function VideoRotateTool(messages: Props) {
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -58,6 +62,7 @@ export function VideoRotateTool(messages: Messages) {
   const [dragging, setDragging] = useState(false);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${transform}`);
 
   useEffect(() => {
     if (!busy) return;
@@ -98,7 +103,7 @@ export function VideoRotateTool(messages: Messages) {
     try {
       const bytes = await rotateVideo(file, { transform, onProgress: (r) => setProgress(r) });
       const blob = new Blob([new Uint8Array(bytes)], { type: 'video/mp4' });
-      downloadBlob(blob, outputName('rotated', [file.name], 'mp4'));
+      setResult({ blob, filename: outputName('rotated', [file.name], 'mp4') });
     } catch (_err) {
       setError(messages.error);
     } finally {
@@ -152,12 +157,14 @@ export function VideoRotateTool(messages: Messages) {
 
       <div className="flex items-end justify-end gap-3 flex-wrap">
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-3">
-            {error && <p role="alert" className="text-sm text-danger">{error}</p>}
-            <Button onClick={onRotate} disabled={!file || busy}>
-              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.rotateButton}
-            </Button>
-          </div>
+          {!result && (
+            <div className="flex items-center gap-3">
+              {error && <p role="alert" className="text-sm text-danger">{error}</p>}
+              <Button onClick={onRotate} disabled={!file || busy}>
+                {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.rotateButton}
+              </Button>
+            </div>
+          )}
           {busy && (
             <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
               {etaSeconds === null ? messages.etaCalculating : tpl(messages.etaLabel, { remaining: formatRemaining(etaSeconds) })}
@@ -165,6 +172,16 @@ export function VideoRotateTool(messages: Messages) {
           )}
         </div>
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="video"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

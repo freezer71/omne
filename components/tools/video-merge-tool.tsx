@@ -3,8 +3,10 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { mergeVideos } from '@/lib/tools/implementations/video-merge';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
+import { filesSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -23,6 +25,8 @@ type Messages = {
   etaCalculating: string;
 };
 
+type Props = Messages & { result: ToolResultMessages };
+
 function formatRemaining(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 1) return '<1s';
   if (seconds < 60) return `${Math.ceil(seconds)}s`;
@@ -31,7 +35,7 @@ function formatRemaining(seconds: number): string {
   return s === 0 ? `${m}min` : `${m}min ${s}s`;
 }
 
-export function VideoMergeTool(messages: Messages) {
+export function VideoMergeTool(messages: Props) {
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -42,6 +46,7 @@ export function VideoMergeTool(messages: Messages) {
   const [dragging, setDragging] = useState(false);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [result, setResult] = useToolResult(filesSignature(files));
 
   useEffect(() => {
     if (!busy) return;
@@ -93,7 +98,7 @@ export function VideoMergeTool(messages: Messages) {
     try {
       const bytes = await mergeVideos(files, { onProgress: (r) => setProgress(r) });
       const blob = new Blob([new Uint8Array(bytes)], { type: 'video/mp4' });
-      downloadBlob(blob, outputName('merged', [files[0]?.name ?? 'video.mp4'], 'mp4'));
+      setResult({ blob, filename: outputName('merged', [files[0]?.name ?? 'video.mp4'], 'mp4') });
     } catch (_err) {
       setError(messages.error);
     } finally {
@@ -141,13 +146,15 @@ export function VideoMergeTool(messages: Messages) {
 
       <div className="flex items-end justify-end gap-3 flex-wrap">
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-3">
-            {files.length === 1 && <p className="text-xs text-text-faint">{messages.needsTwo}</p>}
-            {error && <p role="alert" className="text-sm text-danger">{error}</p>}
-            <Button onClick={onMerge} disabled={!canMerge}>
-              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.mergeButton}
-            </Button>
-          </div>
+          {!result && (
+            <div className="flex items-center gap-3">
+              {files.length === 1 && <p className="text-xs text-text-faint">{messages.needsTwo}</p>}
+              {error && <p role="alert" className="text-sm text-danger">{error}</p>}
+              <Button onClick={onMerge} disabled={!canMerge}>
+                {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.mergeButton}
+              </Button>
+            </div>
+          )}
           {busy && (
             <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
               {etaSeconds === null ? messages.etaCalculating : tpl(messages.etaLabel, { remaining: formatRemaining(etaSeconds) })}
@@ -155,6 +162,16 @@ export function VideoMergeTool(messages: Messages) {
           )}
         </div>
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="video"
+          sourceBytes={files.reduce((n, f) => n + f.size, 0)}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

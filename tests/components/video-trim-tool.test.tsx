@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { resultMessages } from '@/tests/helpers/tool-result-messages';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -52,14 +53,14 @@ beforeEach(() => {
 
 describe('VideoTrimTool', () => {
   it('renders empty state with disabled Trim', () => {
-    render(<VideoTrimTool {...messages} />);
+    render(<VideoTrimTool {...messages} result={resultMessages} />);
     expect(screen.getByText(messages.empty)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: messages.trimButton })).toBeDisabled();
   });
 
   it('enables Trim when file selected and end > start', async () => {
     const user = userEvent.setup();
-    render(<VideoTrimTool {...messages} />);
+    render(<VideoTrimTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp4());
     await user.clear(screen.getByLabelText(messages.startLabel));
     await user.type(screen.getByLabelText(messages.startLabel), '0');
@@ -71,7 +72,7 @@ describe('VideoTrimTool', () => {
   it('calls trimVideo with start and end seconds, downloads output', async () => {
     const user = userEvent.setup();
     trimVideo.mockResolvedValue(new Uint8Array([0]));
-    render(<VideoTrimTool {...messages} />);
+    render(<VideoTrimTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp4('movie.mp4'));
     await user.clear(screen.getByLabelText(messages.startLabel));
     await user.type(screen.getByLabelText(messages.startLabel), '1');
@@ -82,13 +83,15 @@ describe('VideoTrimTool', () => {
     const opts = trimVideo.mock.calls[0]![1] as { startSec: number; endSec: number };
     expect(opts.startSec).toBe(1);
     expect(opts.endSec).toBe(3);
+    expect(downloadBlob).not.toHaveBeenCalled();
+    await user.click(await screen.findByRole('button', { name: resultMessages.download }));
     expect(downloadBlob.mock.calls[0]![1]).toBe('trimmed-movie.mp4');
   });
 
   it('shows error on failure', async () => {
     const user = userEvent.setup();
     trimVideo.mockRejectedValue(new Error('boom'));
-    render(<VideoTrimTool {...messages} />);
+    render(<VideoTrimTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp4());
     await user.clear(screen.getByLabelText(messages.startLabel));
     await user.type(screen.getByLabelText(messages.startLabel), '0');
@@ -100,7 +103,7 @@ describe('VideoTrimTool', () => {
 
   it('auto-sets end to video duration after loadedmetadata', async () => {
     const user = userEvent.setup();
-    render(<VideoTrimTool {...messages} />);
+    render(<VideoTrimTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp4());
     setVideoDuration(8);
     expect(screen.getByLabelText(messages.endLabel)).toHaveValue(8);
@@ -108,7 +111,7 @@ describe('VideoTrimTool', () => {
 
   it('increments start handle by 0.1s with ArrowRight', async () => {
     const user = userEvent.setup();
-    render(<VideoTrimTool {...messages} />);
+    render(<VideoTrimTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp4());
     setVideoDuration(10);
     const startHandle = screen.getByRole('slider', { name: messages.startHandleLabel });
@@ -119,7 +122,7 @@ describe('VideoTrimTool', () => {
 
   it('clamps start handle so it cannot pass end - MIN_GAP', async () => {
     const user = userEvent.setup();
-    render(<VideoTrimTool {...messages} />);
+    render(<VideoTrimTool {...messages} result={resultMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp4());
     setVideoDuration(5);
     await user.clear(screen.getByLabelText(messages.endLabel));
