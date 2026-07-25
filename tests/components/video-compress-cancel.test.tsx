@@ -33,6 +33,9 @@ const messages = {
   etaLabel: 'About {remaining} left',
   etaCalculating: 'Estimating…',
   largeFileWarning: 'Large file warning.',
+  estimateLabel: '~{size} after compression',
+  estimateCalculating: 'Estimating size…',
+  estimateHint: 'From a 2-second sample.',
   cancelLabel: 'Cancel',
   cancelledLabel: 'Cancelled. Nothing was changed.',
 };

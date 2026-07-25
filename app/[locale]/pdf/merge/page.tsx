@@ -43,6 +43,7 @@ export default async function Page({
         removeFile={tool.ui.removeFile}
         moveUp={tool.ui.moveUp}
         moveDown={tool.ui.moveDown}
+        dragHandle={tool.ui.dragHandle}
         busy={tool.ui.busy}
         error={tool.ui.error}
         previewLoading={dict.common.previewLoading}

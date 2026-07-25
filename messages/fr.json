@@ -211,7 +211,8 @@
           "error": "Impossible de fusionner ces PDFs. Essayez d'autres fichiers.",
           "pageLabelTemplate": "Page {n}",
           "filesCountSingular": "{n} fichier",
-          "filesCountPlural": "{n} fichiers"
+          "filesCountPlural": "{n} fichiers",
+          "dragHandle": "Glisser pour réordonner"
         }
       },
       "split": {
@@ -743,12 +744,12 @@
           "howItWorks": [
             "Déposez votre vidéo dans l'outil pour analyser sa taille actuelle.",
             "Choisissez un préréglage de qualité : haute, moyenne ou basse.",
-            "Téléchargez la vidéo compressée avec l'estimation de la réduction affichée."
+            "Vérifiez l'estimation, compressez, puis lisez le résultat et sa taille réelle avant de télécharger."
           ],
           "features": [
             "Trois préréglages de qualité pour trouver le juste équilibre taille/qualité",
-            "Estimation de la taille du fichier en temps réel avant la compression",
-            "Encodage H.264 pour une compatibilité maximale"
+            "Estimation de la taille avant de lancer, mesurée en encodant un court échantillon du début au préréglage choisi",
+            "Indicateur de progression avec temps restant estimé pendant la compression"
           ]
         },
         "seo": {
@@ -776,7 +777,10 @@
           "error": "Impossible de compresser cette vidéo.",
           "removeFile": "Retirer",
           "etaLabel": "Environ {remaining} restant",
-          "etaCalculating": "Estimation du temps restant…"
+          "etaCalculating": "Estimation du temps restant…",
+          "estimateLabel": "≈ {size} après compression",
+          "estimateCalculating": "Estimation de la taille…",
+          "estimateHint": "Mesurée en encodant les 3 premières secondes avec ce préréglage, puis mise à l'échelle. Une vidéo très hétérogène s'écartera davantage."
         }
       },
       "resize": {

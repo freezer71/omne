@@ -211,7 +211,8 @@
           "error": "Could not merge those PDFs. Please try different files.",
           "pageLabelTemplate": "Page {n}",
           "filesCountSingular": "{n} file",
-          "filesCountPlural": "{n} files"
+          "filesCountPlural": "{n} files",
+          "dragHandle": "Drag to reorder"
         }
       },
       "split": {
@@ -743,11 +744,11 @@
           "howItWorks": [
             "Drop any MP4, WebM, MOV or MKV video into the compressor.",
             "Choose a quality preset — High keeps most detail, Medium balances size and quality, Low maximizes compression.",
-            "Click Compress to re-encode the video at a lower bitrate, then download the smaller file."
+            "Check the estimate, compress, then play the result and read its real size before downloading."
           ],
           "features": [
             "Three quality presets (High, Medium, Low) give you predictable size-vs-quality trade-offs.",
-            "Accepts MP4, WebM, MOV and MKV inputs and outputs in the same format.",
+            "Size estimate before you commit, measured by encoding a short opening sample at the chosen preset",
             "Progress indicator with estimated time remaining tracks the compression in real time."
           ]
         },
@@ -776,7 +777,10 @@
           "error": "Could not compress that video.",
           "removeFile": "Remove",
           "etaLabel": "About {remaining} left",
-          "etaCalculating": "Estimating remaining time…"
+          "etaCalculating": "Estimating remaining time…",
+          "estimateLabel": "≈ {size} after compression",
+          "estimateCalculating": "Estimating size…",
+          "estimateHint": "Measured by encoding the first 3 seconds at this preset, then scaling up. Footage that changes a lot will land further off."
         }
       },
       "resize": {

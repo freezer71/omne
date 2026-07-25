@@ -5,7 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
 import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
-import { compressVideo, type CompressQuality } from '@/lib/tools/implementations/video-compress';
+import {
+  compressVideo,
+  estimateCompressedSize,
+  type CompressQuality,
+} from '@/lib/tools/implementations/video-compress';
 import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
@@ -27,6 +31,9 @@ type Messages = {
   etaLabel: string;
   etaCalculating: string;
   largeFileWarning: string;
+  estimateLabel: string;
+  estimateCalculating: string;
+  estimateHint: string;
 };
 
 type Props = Messages & {
@@ -57,6 +64,11 @@ export function VideoCompressTool(messages: Props) {
   const [dragging, setDragging] = useState(false);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [duration, setDuration] = useState<number | null>(null);
+  // Tagged with the inputs it was measured for, so a stale number is filtered
+  // out on render instead of having to be cleared from the effect.
+  const [estimate, setEstimate] = useState<{ key: string; bytes: number } | null>(null);
+  const [estimating, setEstimating] = useState(false);
   const [result, setResult] = useToolResult(`${fileSignature(file)}|${quality}`);
   const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
@@ -65,6 +77,37 @@ export function VideoCompressTool(messages: Props) {
     const id = window.setInterval(() => setNowTick(Date.now()), 250);
     return () => window.clearInterval(id);
   }, [busy]);
+
+  // Encode a couple of seconds at the chosen preset to answer "how big will
+  // this be" before committing to the full run. Debounced so clicking through
+  // the three presets does not queue three sample encodes, and skipped while a
+  // real compression owns the ffmpeg worker.
+  const estimateKey = `${fileSignature(file)}|${quality}`;
+  const estimatedBytes = estimate?.key === estimateKey ? estimate.bytes : null;
+
+  useEffect(() => {
+    if (!file || duration === null || busy) return;
+    let stale = false;
+    const handle = window.setTimeout(async () => {
+      setEstimating(true);
+      try {
+        const next = await estimateCompressedSize(file, { quality, durationSec: duration });
+        if (!stale && next) setEstimate({ key: estimateKey, bytes: next.bytes });
+      } catch (err) {
+        // An unusable estimate is not worth an error message: the user can still
+        // compress, and the result panel reports the real size afterwards. It is
+        // worth a dev-console line, since a silently absent estimate is hard to
+        // tell apart from one that is merely slow.
+        if (process.env.NODE_ENV !== 'production') console.error('[video-compress:estimate]', err);
+      } finally {
+        if (!stale) setEstimating(false);
+      }
+    }, 250);
+    return () => {
+      stale = true;
+      window.clearTimeout(handle);
+    };
+  }, [file, quality, duration, busy, estimateKey]);
 
   let etaSeconds: number | null = null;
   if (busy && startedAt !== null && progress > 0.02) {
@@ -86,6 +129,8 @@ export function VideoCompressTool(messages: Props) {
     if (!first) return;
     setFile(first);
     setError(null);
+    setDuration(null);
+    setEstimate(null);
   };
 
   const onCompress = async () => {
@@ -125,7 +170,7 @@ export function VideoCompressTool(messages: Props) {
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            <VideoPreview file={file} />
+            <VideoPreview file={file} onDuration={setDuration} />
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm text-text-primary">{file.name}</p>
@@ -151,6 +196,19 @@ export function VideoCompressTool(messages: Props) {
               {labelFor[value]}
             </label>
           ))}
+          {file && !busy && !result && (estimating || estimatedBytes !== null) && (
+            <p
+              className="ml-1 font-mono text-xs text-text-muted tabular-nums"
+              aria-live="polite"
+              title={messages.estimateHint}
+            >
+              {/* A failed sample encode shows nothing rather than a stuck
+                  "estimating…" — the real size still arrives with the result. */}
+              {estimatedBytes === null
+                ? messages.estimateCalculating
+                : tpl(messages.estimateLabel, { size: formatBytes(estimatedBytes) })}
+            </p>
+          )}
         </fieldset>
         <div className="flex flex-col items-end gap-1">
           {!result && (
@@ -186,8 +244,19 @@ export function VideoCompressTool(messages: Props) {
   );
 }
 
-function VideoPreview({ file }: { file: File }) {
+function VideoPreview({ file, onDuration }: { file: File; onDuration: (d: number) => void }) {
   const url = useBlobUrl(file);
   if (!url) return null;
-  return <video src={url} controls className="w-full max-h-72 rounded-md border border-border bg-black" />;
+  return (
+    <video
+      src={url}
+      controls
+      preload="metadata"
+      onLoadedMetadata={(e) => {
+        const d = e.currentTarget.duration;
+        if (Number.isFinite(d) && d > 0) onDuration(d);
+      }}
+      className="w-full max-h-72 rounded-md border border-border bg-black"
+    />
+  );
 }

@@ -23,6 +23,7 @@ type Messages = {
   pageLabelTemplate: string;
   filesCountSingular: string;
   filesCountPlural: string;
+  dragHandle: string;
 };
 
 export function PdfMergeTool(messages: Messages) {
@@ -32,6 +33,11 @@ export function PdfMergeTool(messages: Messages) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  // Which row is being dragged, and which row it is currently hovering over.
+  // Native HTML5 drag-and-drop is pointer-only, so the ↑/↓ buttons stay as the
+  // keyboard and screen-reader path — this is an accelerator, not a replacement.
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [overIndex, setOverIndex] = useState<number | null>(null);
 
   const canMerge = files.length >= 2 && !busy;
 
@@ -125,9 +131,44 @@ export function PdfMergeTool(messages: Messages) {
           {files.map((f, i) => (
             <li
               key={`${f.name}-${i}`}
-              className="flex flex-col gap-3 rounded-md border border-border bg-surface p-3 text-sm"
+              onDragOver={(e) => {
+                if (dragIndex === null) return;
+                e.preventDefault();
+                setOverIndex(i);
+              }}
+              onDrop={(e) => {
+                if (dragIndex === null) return;
+                e.preventDefault();
+                e.stopPropagation();
+                moveFile(dragIndex, i);
+                setDragIndex(null);
+                setOverIndex(null);
+              }}
+              className={cn(
+                'flex flex-col gap-3 rounded-md border bg-surface p-3 text-sm transition-colors',
+                dragIndex === i && 'opacity-40',
+                overIndex === i && dragIndex !== i ? 'border-accent' : 'border-border',
+              )}
             >
               <div className="flex items-center justify-between gap-3">
+                <span
+                  draggable
+                  onDragStart={(e) => {
+                    e.dataTransfer.effectAllowed = 'move';
+                    // Firefox refuses to start a drag with an empty payload.
+                    e.dataTransfer.setData('text/plain', String(i));
+                    setDragIndex(i);
+                  }}
+                  onDragEnd={() => {
+                    setDragIndex(null);
+                    setOverIndex(null);
+                  }}
+                  title={messages.dragHandle}
+                  aria-hidden
+                  className="cursor-grab select-none px-1 text-text-faint active:cursor-grabbing"
+                >
+                  ⠿
+                </span>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-text-primary">{f.name}</p>
                   <p className="font-mono text-xs text-text-faint">{formatBytes(f.size)}</p>
