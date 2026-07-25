@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { LocaleSwitcher } from '@/components/locale-switcher';
 import { PaletteButton } from '@/components/command-palette/palette-button';
-import { Logo } from '@/components/logo';
+import { BrandLockup } from '@/components/brand-lockup';
 import { GithubIcon, GITHUB_URL } from '@/components/icons/github';
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
@@ -17,9 +17,13 @@ export function Header({ locale, dict }: Props) {
     <header className="sticky top-0 z-30 border-b border-border bg-bg/80 backdrop-blur-md">
       <div className="mx-auto flex h-12 max-w-5xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6">
         <div className="flex items-center gap-3 sm:gap-6">
-          <Link href={`/${locale}`} aria-label={dict.meta.siteName}>
-            <Logo />
-          </Link>
+          <BrandLockup
+            locale={locale}
+            koumaLabel={dict.nav.koumaAriaLabel}
+            siteName={dict.meta.siteName}
+            size="xl"
+            compact
+          />
           <Link
             href={`/${locale}/privacy`}
             className="hidden sm:inline text-sm text-text-muted hover:text-text-primary transition-colors"

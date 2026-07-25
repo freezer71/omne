@@ -58,6 +58,8 @@
   /* Transparent-checkerboard pattern for image previews (matches dark surface). */
   --checker-1: #1a1a1a;
   --checker-2: #2a2a2a;
+  /* Kouma Labs app-icon tile for the co-branded lockup (see .kouma-tile below). */
+  --kouma-tile: url("/kouma-tile-dark.svg");
 }
 
 [data-theme="light"] {
@@ -80,6 +82,7 @@
   --radius: 6px;
   --checker-1: #e5e5e5;
   --checker-2: #f5f5f5;
+  --kouma-tile: url("/kouma-tile-light.svg");
 }
 
 /* ---------- Tailwind v4 theme map ---------- */
@@ -114,6 +117,18 @@ html {
 
 [data-theme="light"] {
   color-scheme: light;
+}
+
+/*
+ * Kouma Labs tile for the co-branded lockup (components/brand-lockup.tsx).
+ * The two SVGs have baked-in colors and no prefers-color-scheme query, and this
+ * project drives its theme through [data-theme] (no `dark:` variant is declared),
+ * so the swap has to happen here — via a CSS variable rather than two <img> tags,
+ * which keeps it to a single element and a single download.
+ */
+.kouma-tile {
+  background-image: var(--kouma-tile);
+  background-size: cover;
 }
 
 body {
