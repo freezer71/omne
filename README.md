@@ -184,6 +184,7 @@ omne/
 │   ├── pdfjs/            # pdf.worker.min.mjs (same)
 │   ├── ocr/              # tesseract worker + wasm cores + eng/fra traineddata (same)
 │   ├── ort/              # onnxruntime-web wasm runtime for remove-bg (same)
+│   ├── kouma-tile-*.svg  # Kouma Labs tiles for the co-branded lockup (committed)
 │   └── theme-init.js     # Static script to avoid theme flash
 ├── proxy.ts              # /[locale] redirect (replaces middleware.ts)
 ├── scripts/              # copy-ffmpeg, copy-pdfjs, copy-qr-scanner, copy-fonts, copy-ocr, copy-ort
@@ -206,6 +207,14 @@ omne/
 6. Verify: `npm test` (i18n parity + unit + components), then `npm run test:e2e`.
 
 The sitemap, MIME-based routing and the `⌘K` palette pick the new tool up automatically.
+
+---
+
+## Brand
+
+omne is a Kouma Labs product. The header and the footer carry the co-branded lockup — the Kouma Labs app-icon, a muted slash, then the omne logo — as specified in the brand kit at [koumalabs.org/brands](https://koumalabs.org/brands). The header drops the tile below `md`, where it has no room; the footer shows the full lockup at every width.
+
+Both tiles (`public/kouma-tile-{dark,light}.svg`) are self-hosted and swapped through the `--kouma-tile` CSS variable under `[data-theme]` rather than Tailwind's `dark:` variant: this project drives its theme from the `data-theme` attribute, so a `prefers-color-scheme` swap would desync from what the user actually sees. Linking to koumalabs.org adds no outbound request — the privacy promise is unchanged.
 
 ---
 

@@ -31,6 +31,16 @@ test.describe('hub page', () => {
     ).toBeVisible();
   });
 
+  test('co-brands the header and the footer with a link to Kouma Labs', async ({ page }) => {
+    await page.goto('/en');
+    const kouma = 'Kouma Labs — the studio behind omne';
+    await expect(page.locator('header').getByRole('link', { name: kouma })).toHaveAttribute(
+      'href',
+      'https://koumalabs.org',
+    );
+    await expect(page.locator('footer').getByRole('link', { name: kouma })).toBeVisible();
+  });
+
   test('header lets the user switch to French and updates the URL', async ({ page }) => {
     await page.goto('/en');
     await page.getByRole('button', { name: 'Français' }).click();

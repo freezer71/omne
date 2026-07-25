@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Logo } from '@/components/logo';
+import { BrandLockup } from '@/components/brand-lockup';
 import { GithubIcon, GITHUB_URL } from '@/components/icons/github';
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
@@ -18,9 +18,11 @@ export function Footer({ locale, dict, categoryOrder }: Props) {
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-4 py-10 sm:px-6">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
           <div className="flex flex-col gap-3">
-            <Link href={`/${locale}`} aria-label={dict.meta.siteName} className="w-fit">
-              <Logo />
-            </Link>
+            <BrandLockup
+              locale={locale}
+              koumaLabel={dict.nav.koumaAriaLabel}
+              siteName={dict.meta.siteName}
+            />
             <p className="text-sm text-text-muted max-w-xs leading-relaxed">
               {dict.home.footer.tagline}
             </p>

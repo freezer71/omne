@@ -23,7 +23,8 @@
     "home": "Accueil",
     "privacy": "Confidentialité",
     "github": "GitHub",
-    "githubAriaLabel": "Voir le code source sur GitHub"
+    "githubAriaLabel": "Voir le code source sur GitHub",
+    "koumaAriaLabel": "Kouma Labs — le studio derrière omne"
   },
   "common": {
     "skipToContent": "Aller au contenu",
