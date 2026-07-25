@@ -184,6 +184,7 @@ omne/
 │   ├── pdfjs/            # pdf.worker.min.mjs (idem)
 │   ├── ocr/              # worker tesseract + cœurs wasm + traineddata fra/eng (idem)
 │   ├── ort/              # runtime wasm onnxruntime-web pour le détourage (idem)
+│   ├── kouma-tile-*.svg  # Tuiles Kouma Labs du lockup co-brandé (committées)
 │   └── theme-init.js     # Script statique pour éviter le flash de thème
 ├── proxy.ts              # Redirection /[locale] (remplace middleware.ts)
 ├── scripts/              # copy-ffmpeg, copy-pdfjs, copy-qr-scanner, copy-fonts, copy-ocr, copy-ort
@@ -206,6 +207,14 @@ omne/
 6. Vérifier : `npm test` (parité i18n + unit + components) puis `npm run test:e2e`.
 
 Le sitemap, le routage par MIME et la palette `⌘K` se mettent à jour automatiquement.
+
+---
+
+## Marque
+
+omne est un produit Kouma Labs. Le header et le footer portent le lockup co-brandé — l'app-icon Kouma Labs, un slash atténué, puis le logo omne — tel que défini par le brand kit publié sur [koumalabs.org/brands](https://koumalabs.org/brands). Le header masque la tuile en dessous de `md`, faute de place ; le footer affiche le lockup complet à toutes les largeurs.
+
+Les deux tuiles (`public/kouma-tile-{dark,light}.svg`) sont auto-hébergées et commutées via la variable CSS `--kouma-tile` sous `[data-theme]`, et non par la variante `dark:` de Tailwind : le thème du projet est piloté par l'attribut `data-theme`, donc une bascule sur `prefers-color-scheme` se désynchroniserait de ce que l'utilisateur voit réellement. Le lien vers koumalabs.org n'ajoute aucune requête sortante — la promesse privacy est inchangée.
 
 ---
 
