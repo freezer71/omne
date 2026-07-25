@@ -58,7 +58,9 @@
       "larger": "{percent} % plus lourd",
       "same": "Poids inchangé",
       "ready": "Traitement terminé. Votre fichier est prêt à être téléchargé."
-    }
+    },
+    "cancelRun": "Annuler",
+    "runCancelled": "Annulé. Rien n'a été modifié."
   },
   "badge": {
     "privacy": "100 % local · aucun envoi"

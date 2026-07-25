@@ -9,6 +9,7 @@ import { compressVideo, type CompressQuality } from '@/lib/tools/implementations
 import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -28,7 +29,11 @@ type Messages = {
   largeFileWarning: string;
 };
 
-type Props = Messages & { result: ToolResultMessages };
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+};
 
 function formatRemaining(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 1) return '<1s';
@@ -46,13 +51,14 @@ export function VideoCompressTool(messages: Props) {
 
   const [file, setFile] = useState<File | null>(null);
   const [quality, setQuality] = useState<CompressQuality>('medium');
-  const [result, setResult] = useToolResult(`${fileSignature(file)}|${quality}`);
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${quality}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   useEffect(() => {
     if (!busy) return;
@@ -85,6 +91,7 @@ export function VideoCompressTool(messages: Props) {
   const onCompress = async () => {
     if (!file || busy) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     const started = Date.now();
@@ -95,7 +102,7 @@ export function VideoCompressTool(messages: Props) {
       const blob = new Blob([new Uint8Array(bytes)], { type: 'video/mp4' });
       setResult({ blob, filename: outputName('compressed', [file.name], 'mp4') });
     } catch (_err) {
-      setError(messages.error);
+      if (!wasCancelled()) setError(messages.error);
     } finally {
       setBusy(false);
       setStartedAt(null);
@@ -148,7 +155,11 @@ export function VideoCompressTool(messages: Props) {
         <div className="flex flex-col items-end gap-1">
           {!result && (
             <div className="flex items-center gap-3">
+              {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
               {error && <p role="alert" className="text-sm text-danger">{error}</p>}
+              {busy && (
+                <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
+              )}
               <Button onClick={onCompress} disabled={!file || busy}>
                 {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.compressButton}
               </Button>

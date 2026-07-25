@@ -50,7 +50,7 @@ export default async function Page({
           busy={tool.ui.busy}
           error={tool.ui.error}
           removeFile={tool.ui.removeFile}
-          largeFileWarning={dict.common.largeFileWarning} result={dict.common.result}
+          largeFileWarning={dict.common.largeFileWarning} result={dict.common.result} cancelLabel={dict.common.cancelRun} cancelledLabel={dict.common.runCancelled}
         />
       </ToolShell>
       <ToolPageJsonLd category="audio" id="volume" locale={locale} />

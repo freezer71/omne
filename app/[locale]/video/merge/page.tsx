@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     <>
       <ToolShell locale={locale} category="video" name={tool.name} description={tool.description}
         categoryLabel={dict.hub.categories.video} backHomeLabel={dict.common.backHome}>
-        <VideoMergeTool {...tool.ui} result={dict.common.result} />
+        <VideoMergeTool {...tool.ui} result={dict.common.result} cancelLabel={dict.common.cancelRun} cancelledLabel={dict.common.runCancelled} />
       </ToolShell>
       <ToolPageJsonLd category="video" id="merge" locale={locale} />
     </>

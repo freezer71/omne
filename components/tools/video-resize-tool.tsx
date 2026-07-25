@@ -9,6 +9,7 @@ import { resizeVideo, type ResizePreset } from '@/lib/tools/implementations/vide
 import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -32,7 +33,11 @@ type Messages = {
   largeFileWarning: string;
 };
 
-type Props = Messages & { result: ToolResultMessages };
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+};
 
 function formatRemaining(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 1) return '<1s';
@@ -60,6 +65,7 @@ export function VideoResizeTool(messages: Props) {
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
   const [result, setResult] = useToolResult(`${fileSignature(file)}|${preset}|${width}|${height}|${keepAspect}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   useEffect(() => {
     if (!busy) return;
@@ -91,6 +97,7 @@ export function VideoResizeTool(messages: Props) {
   const onResize = async () => {
     if (!file || busy) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     const started = Date.now();
@@ -110,8 +117,11 @@ export function VideoResizeTool(messages: Props) {
       const blob = new Blob([new Uint8Array(result.data)], { type: mime });
       setResult({ blob, filename: outputName('resized', [file.name], result.ext) });
     } catch (err) {
-      console.error('[video-resize]', err);
-      setError(messages.error);
+      // A cancel rejects the pending exec too; that is not a failure to report.
+      if (!wasCancelled()) {
+        console.error('[video-resize]', err);
+        setError(messages.error);
+      }
     } finally {
       setBusy(false);
       setStartedAt(null);
@@ -182,7 +192,11 @@ export function VideoResizeTool(messages: Props) {
         <div className="flex flex-col items-end gap-1">
           {!result && (
             <div className="flex items-center gap-3">
+              {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
               {error && <p role="alert" className="text-sm text-danger">{error}</p>}
+              {busy && (
+                <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
+              )}
               <Button onClick={onResize} disabled={!file || busy}>
                 {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.resizeButton}
               </Button>

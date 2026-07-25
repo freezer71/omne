@@ -9,6 +9,7 @@ import { adjustVolume, buildFilter } from '@/lib/tools/implementations/audio-vol
 import { formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -29,7 +30,11 @@ type Messages = {
   largeFileWarning: string;
 };
 
-type Props = Messages & { result: ToolResultMessages };
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+};
 
 function extOf(name: string): string {
   const dot = name.lastIndexOf('.');
@@ -59,6 +64,7 @@ export function AudioVolumeTool(messages: Props) {
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [result, setResult] = useToolResult(`${fileSignature(file)}|${gainDb}|${normalize}|${fadeIn}|${fadeOut}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   const canApply = file !== null && !busy;
 
@@ -84,6 +90,7 @@ export function AudioVolumeTool(messages: Props) {
   const onApply = async () => {
     if (!canApply) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     try {
@@ -99,7 +106,7 @@ export function AudioVolumeTool(messages: Props) {
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: file!.type || 'audio/mpeg' });
       setResult({ blob, filename: outputName('volume', [file!.name], ext) });
     } catch {
-      setError(messages.error);
+      if (!wasCancelled()) setError(messages.error);
     } finally {
       setBusy(false);
     }
@@ -251,10 +258,14 @@ export function AudioVolumeTool(messages: Props) {
 
       {!result && (
         <div className="flex items-center justify-end gap-3">
+          {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
           {error && (
             <p role="alert" className="text-sm text-danger">
               {error}
             </p>
+          )}
+          {busy && (
+            <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
           )}
           <Button onClick={onApply} disabled={!canApply}>
             {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.applyButton}

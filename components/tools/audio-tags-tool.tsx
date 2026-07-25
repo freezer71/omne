@@ -17,6 +17,7 @@ import { canvasToBytes, createCanvas, get2dContext, loadImageBitmap } from '@/li
 import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
 import { cn } from '@/lib/cn';
 
 type Messages = {
@@ -43,7 +44,11 @@ type Messages = {
   loadTagsError: string;
 };
 
-type Props = Messages & { result: ToolResultMessages };
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+};
 
 const MAX_COVER_SIDE = 800;
 const COVER_JPEG_QUALITY = 0.85;
@@ -102,6 +107,7 @@ export function AudioTagsTool(messages: Props) {
   const [dragging, setDragging] = useState(false);
   const [coverDragging, setCoverDragging] = useState(false);
   const [result, setResult] = useToolResult(`${fileSignature(file)}|${JSON.stringify(tags)}|${cover?.bytes.byteLength ?? 0}|${format}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   const onPickFiles = (incoming: FileList | File[] | null) => {
     if (!incoming) return;
@@ -154,6 +160,7 @@ export function AudioTagsTool(messages: Props) {
   const onApply = async () => {
     if (!file || busy || loading) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     try {
@@ -174,7 +181,7 @@ export function AudioTagsTool(messages: Props) {
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: mimeForFormat(format) });
       setResult({ blob, filename: outputName('tagged', [file.name], format) });
     } catch {
-      setError(messages.error);
+      if (!wasCancelled()) setError(messages.error);
     } finally {
       setBusy(false);
     }
@@ -389,10 +396,14 @@ export function AudioTagsTool(messages: Props) {
       {!result && (
         <div className="flex items-center justify-end gap-3">
           {loading && <p className="text-xs text-text-faint">{messages.loadingTags}</p>}
+          {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
           {error && (
             <p role="alert" className="text-sm text-danger">
               {error}
             </p>
+          )}
+          {busy && (
+            <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
           )}
           <Button onClick={onApply} disabled={!canApply}>
             {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.applyButton}

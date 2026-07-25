@@ -132,6 +132,8 @@ Each tool follows the same 5-file skeleton plus one registry entry:
 
 **Nothing downloads behind the user's back**: a tool that runs an expensive pipeline hands its output to `<ToolResult>` (`components/ui/tool-result.tsx`) instead of calling `downloadBlob` itself. The panel plays or displays the produced file, states the size change against the source, and carries the only **Download** button, plus a **Change settings** button that clears it while keeping the source file loaded. Hold the output with `useToolResult(signature)` (`lib/hooks/use-tool-result.ts`): build `signature` from the source file identity plus every option that feeds the pipeline, and the hook drops the result the moment they diverge, so the panel can never show a file the controls no longer describe. The strings are shared across tools under `common.result` — pass them down as `result={dict.common.result}`.
 
+**Every long run is escapable**: an ffmpeg tool calls `useFfmpegCancel(busy)` (`lib/hooks/use-ffmpeg-cancel.ts`), which renders a **Cancel** button beside the busy primary button, warns before the tab is closed mid-encode, and calls `terminateFfmpeg()` (`lib/ffmpeg-loader.ts`) to abort the worker. Terminating leaves the FFmpeg object dead, so the loader drops its cached instance and the next run loads a fresh core. Call `beginRun()` at the top of the handler and gate the failure report on `wasCancelled()` — a cancel rejects the pending `exec` too, and reporting it would tell the user their file is broken when it is not.
+
 Full details in [`CLAUDE.md`](./CLAUDE.md).
 
 ---

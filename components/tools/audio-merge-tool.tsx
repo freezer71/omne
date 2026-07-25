@@ -11,6 +11,7 @@ import {
 } from '@/lib/tools/implementations/audio-merge';
 import { formatBytes } from '@/lib/file-utils';
 import { filesSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
 import { cn } from '@/lib/cn';
 
 type Messages = {
@@ -32,7 +33,11 @@ type Messages = {
   needMore: string;
 };
 
-type Props = Messages & { result: ToolResultMessages };
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+};
 
 const FORMATS: MergeFormat[] = ['mp3', 'wav', 'flac', 'm4a'];
 const BITRATES = [128, 192, 256, 320];
@@ -52,6 +57,7 @@ export function AudioMergeTool(messages: Props) {
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [result, setResult] = useToolResult(`${filesSignature(files)}|${format}|${bitrate}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   const canMerge = files.length >= 2 && !busy;
   const isLossless = LOSSLESS.has(format);
@@ -91,6 +97,7 @@ export function AudioMergeTool(messages: Props) {
   const onMerge = async () => {
     if (!canMerge) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     try {
@@ -104,7 +111,7 @@ export function AudioMergeTool(messages: Props) {
       });
       setResult({ blob, filename: `merged.${format}` });
     } catch {
-      setError(messages.error);
+      if (!wasCancelled()) setError(messages.error);
     } finally {
       setBusy(false);
     }
@@ -259,10 +266,14 @@ export function AudioMergeTool(messages: Props) {
         </div>
         {!result && (
           <div className="flex items-center gap-3">
+            {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
             {error && (
               <p role="alert" className="text-sm text-danger">
                 {error}
               </p>
+            )}
+            {busy && (
+              <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
             )}
             <Button onClick={onMerge} disabled={!canMerge}>
               {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.mergeButton}

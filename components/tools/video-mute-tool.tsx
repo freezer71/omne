@@ -9,6 +9,7 @@ import { muteVideo } from '@/lib/tools/implementations/video-mute';
 import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -24,7 +25,11 @@ type Messages = {
   largeFileWarning: string;
 };
 
-type Props = Messages & { result: ToolResultMessages };
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+};
 
 function inferExtension(name: string): string {
   const dot = name.lastIndexOf('.');
@@ -51,6 +56,7 @@ export function VideoMuteTool(messages: Props) {
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
   const [result, setResult] = useToolResult(fileSignature(file));
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   useEffect(() => {
     if (!busy) return;
@@ -75,6 +81,7 @@ export function VideoMuteTool(messages: Props) {
   const onMute = async () => {
     if (!file || busy) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     const started = Date.now();
@@ -86,7 +93,7 @@ export function VideoMuteTool(messages: Props) {
       const blob = new Blob([new Uint8Array(bytes)], { type: file.type || 'video/mp4' });
       setResult({ blob, filename: outputName('muted', [file.name], ext) });
     } catch (_err) {
-      setError(messages.error);
+      if (!wasCancelled()) setError(messages.error);
     } finally {
       setBusy(false);
       setStartedAt(null);
@@ -126,7 +133,11 @@ export function VideoMuteTool(messages: Props) {
         <div className="flex flex-col items-end gap-1">
           {!result && (
             <div className="flex items-center gap-3">
+              {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
               {error && <p role="alert" className="text-sm text-danger">{error}</p>}
+              {busy && (
+                <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
+              )}
               <Button onClick={onMute} disabled={!file || busy}>
                 {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.muteButton}
               </Button>

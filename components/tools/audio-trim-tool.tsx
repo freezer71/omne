@@ -14,6 +14,7 @@ import {
 import { formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
 import { Waveform } from '@/components/audio-waveform';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
@@ -40,7 +41,11 @@ type Messages = {
   unmuteLabel: string;
 };
 
-type Props = Messages & { result: ToolResultMessages };
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+};
 
 function formatClock(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
@@ -82,6 +87,7 @@ export function AudioTrimTool(messages: Props) {
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [result, setResult] = useToolResult(`${fileSignature(file)}|${start}|${end}|${precise}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   const canTrim = file !== null && !busy && end > start;
 
@@ -167,6 +173,7 @@ export function AudioTrimTool(messages: Props) {
   const onTrim = async () => {
     if (!canTrim) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     try {
@@ -183,7 +190,7 @@ export function AudioTrimTool(messages: Props) {
       setResult({ blob, filename: outputName('trimmed', [file!.name], ext) });
     } catch (err) {
       if (process.env.NODE_ENV !== 'production') console.error('[audio-trim]', err);
-      setError(messages.error);
+      if (!wasCancelled()) setError(messages.error);
     } finally {
       setBusy(false);
     }
@@ -353,10 +360,14 @@ export function AudioTrimTool(messages: Props) {
 
       {!result && (
         <div className="flex items-center justify-end gap-3">
+          {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
           {error && (
             <p role="alert" className="text-sm text-danger">
               {error}
             </p>
+          )}
+          {busy && (
+            <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
           )}
           <Button onClick={onTrim} disabled={!canTrim}>
             {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.trimButton}

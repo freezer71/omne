@@ -58,7 +58,9 @@
       "larger": "{percent}% larger",
       "same": "Same size",
       "ready": "Processing complete. Your file is ready to download."
-    }
+    },
+    "cancelRun": "Cancel",
+    "runCancelled": "Cancelled. Nothing was changed."
   },
   "badge": {
     "privacy": "100% local · no upload"

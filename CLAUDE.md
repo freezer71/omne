@@ -50,6 +50,12 @@ Add matching keys to **both** `messages/en.json` and `messages/fr.json` under `t
 - Hide the primary action button while a result is on screen (`{!result && …}`) so there is exactly one obvious next step.
 - The panel's strings are shared: `common.result` in both dictionaries, passed from the page as `result={dict.common.result}`. Tools with multiple outputs (`video/split`, `video/frames`, `short-studio`) keep their own per-item result grids and are out of scope for this component.
 
+**Every long run must be escapable.** ffmpeg has no cooperative abort — the only exit is `terminate()`, which rejects all in-flight calls and kills the worker. `useFfmpegCancel(busy)` (`lib/hooks/use-ffmpeg-cancel.ts`) packages that:
+- Renders nothing itself; the tool shows `{busy && <Button onClick={cancelRun}>{messages.cancelLabel}</Button>}` beside the busy primary button and `{cancelled && <p role="status">{messages.cancelledLabel}</p>}` next to the error slot. Strings come from `common.cancelRun` / `common.runCancelled`.
+- Registers a `beforeunload` listener while `busy`. Nothing is persisted server-side, so a stray breadcrumb click during an 8-minute encode destroys the work outright.
+- `beginRun()` goes at the top of the handler, before the first await. **`catch` must gate on `wasCancelled()`** — terminate rejects the pending `exec` with `Error('called FFmpeg.terminate()')`, and reporting that as a failure tells the user their file is broken when they simply changed their mind. `wasCancelled()` reads a ref, not state, because the catch runs after an await.
+- `terminateFfmpeg()` clears the loader's cached instance on purpose: the terminated object has `loaded === false` and cannot be reused, so the next run re-downloads the core. That cost is accepted in exchange for a working exit.
+
 **i18n boundaries:**
 - `lib/i18n/config.ts` is the locale source of truth (`locales`, `defaultLocale`, `isLocale`).
 - `lib/i18n/dictionary.ts` is `import 'server-only'` — it must never be imported from a `'use client'` file. Server components call `getDictionary(locale)` and pass plain string props down to client components.

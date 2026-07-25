@@ -55,7 +55,7 @@ export default async function Page({
           estimatedSizeLabel={tool.ui.estimatedSizeLabel}
           etaLabel={tool.ui.etaLabel}
           etaCalculating={tool.ui.etaCalculating}
-          largeFileWarning={dict.common.largeFileWarning} result={dict.common.result}
+          largeFileWarning={dict.common.largeFileWarning} result={dict.common.result} cancelLabel={dict.common.cancelRun} cancelledLabel={dict.common.runCancelled}
         />
       </ToolShell>
       <ToolPageJsonLd category="audio" id="convert" locale={locale} />

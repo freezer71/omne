@@ -11,7 +11,12 @@ async function loadFixture(page: import('@playwright/test').Page) {
   await page.locator('input[type="file"]').first().setInputFiles([
     { name: 'sample.mp3', mimeType: 'audio/mpeg', buffer: fixture },
   ]);
-  await expect(page.getByLabel(/^title$/i)).toBeVisible({ timeout: 15_000 });
+  // Assert the pick landed before waiting on the tags, so a dropped input fails
+  // here rather than looking like a slow ffmpeg read below.
+  await expect(page.getByText('sample.mp3')).toBeVisible({ timeout: 15_000 });
+  // Reading the tags needs the ffmpeg core, and every parallel worker downloads
+  // its own copy — a cold run needs far more than the default 5s.
+  await expect(page.getByLabel(/^title$/i)).toBeVisible({ timeout: 45_000 });
 }
 
 test.describe('result panel', () => {
