@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { mergePdfs } from '@/lib/tools/implementations/pdf-merge';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 import { PdfPagesGrid } from '@/components/ui/pdf-pages-grid';
 
@@ -87,7 +88,7 @@ export function PdfMergeTool(messages: Messages) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);

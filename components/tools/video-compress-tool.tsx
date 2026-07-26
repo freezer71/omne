@@ -16,6 +16,7 @@ import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
 import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 
 type Messages = {
@@ -161,7 +162,7 @@ export function VideoCompressTool(messages: Props) {
       <Card
         className={cn('p-8 border-2 border-dashed transition-colors', dragging ? 'border-accent bg-surface-hover' : 'border-border')}
         onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => { e.preventDefault(); setDragging(false); onPick(e.dataTransfer.files); }}
       >
         {!file ? (

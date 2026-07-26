@@ -4,6 +4,7 @@ import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { downloadBlob } from '@/lib/file-utils';
 import { CopyButton } from '@/components/tools/json/copy-button';
 import {
@@ -324,7 +325,7 @@ export function QrScanTool(messages: Messages) {
             e.preventDefault();
             setDragging(true);
           }}
-          onDragLeave={() => setDragging(false)}
+          onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
           onDrop={(e) => {
             e.preventDefault();
             setDragging(false);

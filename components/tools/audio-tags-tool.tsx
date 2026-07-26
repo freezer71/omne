@@ -20,6 +20,7 @@ import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
 import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 
 type Messages = {
   selectButton: string;
@@ -206,7 +207,7 @@ export function AudioTagsTool(messages: Props) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);
@@ -278,7 +279,7 @@ export function AudioTagsTool(messages: Props) {
                     e.preventDefault();
                     setCoverDragging(true);
                   }}
-                  onDragLeave={() => setCoverDragging(false)}
+                  onDragLeave={(e) => { if (leftDropZone(e)) setCoverDragging(false); }}
                   onDrop={(e) => {
                     e.preventDefault();
                     setCoverDragging(false);

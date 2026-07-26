@@ -10,6 +10,7 @@ import {
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 
 type Messages = {
@@ -168,7 +169,7 @@ export function ImageCompressTool(messages: Messages) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);

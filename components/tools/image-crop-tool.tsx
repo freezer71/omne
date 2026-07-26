@@ -14,6 +14,7 @@ import { cropImage } from '@/lib/tools/implementations/image-crop';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 
 type Messages = {
   selectButton: string;
@@ -192,7 +193,7 @@ export function ImageCropTool(messages: Messages) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);

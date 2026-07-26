@@ -17,6 +17,7 @@ import { useClipMetadata } from '@/lib/hooks/use-clip-metadata';
 import { formatDuration, totalDuration } from '@/lib/tools/clip-summary';
 import { tpl } from '@/lib/tpl';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 
 type Messages = {
   selectButton: string;
@@ -136,7 +137,7 @@ export function AudioMergeTool(messages: Props) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);

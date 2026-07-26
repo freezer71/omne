@@ -18,6 +18,7 @@ import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
 import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { Waveform } from '@/components/audio-waveform';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 
 type Messages = {
@@ -209,7 +210,7 @@ export function AudioTrimTool(messages: Props) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);

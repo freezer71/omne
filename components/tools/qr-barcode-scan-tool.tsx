@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { isBarcodeDetectorAvailable, scanBarcodeFromFile, type BarcodeScanResult } from '@/lib/tools/implementations/qr-barcode-scan';
 import { CopyButton } from '@/components/tools/json/copy-button';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 
 type Messages = {
   selectButton: string;
@@ -64,7 +65,7 @@ export function QrBarcodeScanTool(messages: Messages) {
       <Card
         className={cn('p-8 border-2 border-dashed transition-colors', dragging ? 'border-accent bg-surface-hover' : 'border-border')}
         onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => { e.preventDefault(); setDragging(false); const f = e.dataTransfer.files[0]; if (f) setFile(f); }}
       >
         {!file ? (

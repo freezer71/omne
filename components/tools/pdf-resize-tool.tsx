@@ -18,6 +18,7 @@ import {
 } from '@/lib/tools/implementations/pdf-resize';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 
 type Messages = {
@@ -159,7 +160,7 @@ export function PdfResizeTool(messages: Messages) {
     <div
       className="flex flex-col gap-4"
       onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-      onDragLeave={() => setDragging(false)}
+      onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
       onDrop={(e) => { e.preventDefault(); setDragging(false); onPick(e.dataTransfer.files); }}
     >
       {!file ? (

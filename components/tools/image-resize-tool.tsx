@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { resizeImage } from '@/lib/tools/implementations/image-resize';
 import { downloadBlob, formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 
 type Messages = {
   selectButton: string;
@@ -163,7 +164,7 @@ export function ImageResizeTool(messages: Messages) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);

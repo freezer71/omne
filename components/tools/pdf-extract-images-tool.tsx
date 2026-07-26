@@ -9,6 +9,7 @@ import {
 } from '@/lib/tools/implementations/pdf-extract-images';
 import { downloadBlob, formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 
 export type PdfExtractImagesMessages = {
@@ -148,7 +149,7 @@ export function PdfExtractImagesTool(messages: PdfExtractImagesMessages) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);

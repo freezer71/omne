@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { downloadBlob } from '@/lib/file-utils';
 import { tpl } from '@/lib/tpl';
 import { formatXml, type XmlIndent, type XmlMode, type XmlResult } from '@/lib/tools/implementations/xml-format';
@@ -210,7 +211,7 @@ export function XmlFormatTool(messages: Messages) {
               e.preventDefault();
               setDragging(true);
             }}
-            onDragLeave={() => setDragging(false)}
+            onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
             onDrop={onDrop}
             placeholder={messages.inputPlaceholder}
             rows={20}

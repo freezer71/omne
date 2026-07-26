@@ -4,6 +4,7 @@ import { useRef, useState, type ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 
 type Messages = {
   pasteLabel: string;
@@ -34,7 +35,7 @@ export function SvgSourceInput({ markup, onMarkupChange, onPickFiles, messages, 
         e.preventDefault();
         setDragging(true);
       }}
-      onDragLeave={() => setDragging(false)}
+      onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
       onDrop={(e) => {
         e.preventDefault();
         setDragging(false);
