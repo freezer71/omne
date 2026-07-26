@@ -8,6 +8,7 @@ import { PdfWatermarkPreview } from '@/components/tools/pdf-watermark-preview';
 import { watermarkPdf, type WatermarkOptions } from '@/lib/tools/implementations/pdf-watermark';
 import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 
 type Messages = {
   selectButton: string;
@@ -123,7 +124,7 @@ export function PdfWatermarkTool(messages: Messages) {
         e.preventDefault();
         setDragging(true);
       }}
-      onDragLeave={() => setDragging(false)}
+      onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
       onDrop={(e) => {
         e.preventDefault();
         setDragging(false);

@@ -3,6 +3,7 @@
 import { useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import {
   inferFormat,
   mimeForFormat,
@@ -13,9 +14,13 @@ import {
   type AudioTags,
 } from '@/lib/tools/implementations/audio-tags';
 import { canvasToBytes, createCanvas, get2dContext, loadImageBitmap } from '@/lib/image-utils';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 
 type Messages = {
   selectButton: string;
@@ -39,6 +44,13 @@ type Messages = {
   coverNone: string;
   loadingTags: string;
   loadTagsError: string;
+};
+
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 const MAX_COVER_SIDE = 800;
@@ -80,7 +92,7 @@ function emptyTags(): AudioTags {
   };
 }
 
-export function AudioTagsTool(messages: Messages) {
+export function AudioTagsTool(messages: Props) {
   const inputId = useId();
   const coverInputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -97,6 +109,8 @@ export function AudioTagsTool(messages: Messages) {
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [coverDragging, setCoverDragging] = useState(false);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${JSON.stringify(tags)}|${cover?.bytes.byteLength ?? 0}|${format}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   const onPickFiles = (incoming: FileList | File[] | null) => {
     if (!incoming) return;
@@ -149,6 +163,7 @@ export function AudioTagsTool(messages: Messages) {
   const onApply = async () => {
     if (!file || busy || loading) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     try {
@@ -167,9 +182,9 @@ export function AudioTagsTool(messages: Messages) {
         onProgress: (r) => setProgress(r),
       });
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: mimeForFormat(format) });
-      downloadBlob(blob, outputName('tagged', [file.name], format));
-    } catch {
-      setError(messages.error);
+      setResult({ blob, filename: outputName('tagged', [file.name], format) });
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
     }
@@ -192,7 +207,7 @@ export function AudioTagsTool(messages: Messages) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);
@@ -264,7 +279,7 @@ export function AudioTagsTool(messages: Messages) {
                     e.preventDefault();
                     setCoverDragging(true);
                   }}
-                  onDragLeave={() => setCoverDragging(false)}
+                  onDragLeave={(e) => { if (leftDropZone(e)) setCoverDragging(false); }}
                   onDrop={(e) => {
                     e.preventDefault();
                     setCoverDragging(false);
@@ -381,17 +396,33 @@ export function AudioTagsTool(messages: Messages) {
         )}
       </Card>
 
-      <div className="flex items-center justify-end gap-3">
-        {loading && <p className="text-xs text-text-faint">{messages.loadingTags}</p>}
-        {error && (
-          <p role="alert" className="text-sm text-danger">
-            {error}
-          </p>
-        )}
-        <Button onClick={onApply} disabled={!canApply}>
-          {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.applyButton}
-        </Button>
-      </div>
+      {!result && (
+        <div className="flex items-center justify-end gap-3">
+          {loading && <p className="text-xs text-text-faint">{messages.loadingTags}</p>}
+          {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
+          {error && (
+            <p role="alert" className="text-sm text-danger">
+              {error}
+            </p>
+          )}
+          {busy && (
+            <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
+          )}
+          <Button onClick={onApply} disabled={!canApply}>
+            {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.applyButton}
+          </Button>
+        </div>
+      )}
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="audio"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

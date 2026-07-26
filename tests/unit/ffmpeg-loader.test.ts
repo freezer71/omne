@@ -1,13 +1,15 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-const { loadMock, state } = vi.hoisted(() => ({
+const { loadMock, terminateMock, state } = vi.hoisted(() => ({
   loadMock: vi.fn(),
+  terminateMock: vi.fn(),
   state: { ctorCalls: 0 },
 }));
 
 vi.mock('@ffmpeg/ffmpeg', () => ({
   FFmpeg: class {
     load = loadMock;
+    terminate = terminateMock;
     on = () => {};
     off = () => {};
     exec = vi.fn();
@@ -20,11 +22,12 @@ vi.mock('@ffmpeg/ffmpeg', () => ({
   },
 }));
 
-import { getFfmpeg, isLoaded, _resetFfmpegLoader } from '@/lib/ffmpeg-loader';
+import { getFfmpeg, isLoaded, terminateFfmpeg, _resetFfmpegLoader } from '@/lib/ffmpeg-loader';
 
 beforeEach(() => {
   loadMock.mockReset();
   loadMock.mockResolvedValue(undefined);
+  terminateMock.mockReset();
   state.ctorCalls = 0;
   _resetFfmpegLoader();
 });
@@ -63,5 +66,40 @@ describe('ffmpeg-loader', () => {
     expect(b).toBe(c);
     expect(state.ctorCalls).toBe(1);
     expect(loadMock).toHaveBeenCalledTimes(1);
+  });
+
+  describe('terminateFfmpeg', () => {
+    it('terminates the loaded instance', async () => {
+      await getFfmpeg();
+      terminateFfmpeg();
+      expect(terminateMock).toHaveBeenCalledTimes(1);
+      expect(isLoaded()).toBe(false);
+    });
+
+    it('builds and loads a fresh core afterwards, since terminate leaves the old one dead', async () => {
+      const first = await getFfmpeg();
+      terminateFfmpeg();
+      const second = await getFfmpeg();
+      expect(second).not.toBe(first);
+      expect(state.ctorCalls).toBe(2);
+      expect(loadMock).toHaveBeenCalledTimes(2);
+    });
+
+    it('reaches an instance that is still downloading its core', async () => {
+      let release: () => void = () => {};
+      loadMock.mockReturnValue(new Promise<void>((resolve) => { release = resolve; }));
+      const pending = getFfmpeg();
+      // Cancelled before load() settles: the object exists but was never cached
+      // as the loaded instance, so only the `live` reference can find it.
+      terminateFfmpeg();
+      expect(terminateMock).toHaveBeenCalledTimes(1);
+      release();
+      await pending;
+    });
+
+    it('is a no-op when nothing was ever created', () => {
+      expect(() => terminateFfmpeg()).not.toThrow();
+      expect(terminateMock).not.toHaveBeenCalled();
+    });
   });
 });

@@ -19,9 +19,9 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const tool = dict.tools.video.crop;
   return (
     <>
-      <ToolShell locale={locale} category="video" name={tool.name} description={tool.description}
+      <ToolShell wide locale={locale} category="video" name={tool.name} description={tool.description}
         categoryLabel={dict.hub.categories.video} backHomeLabel={dict.common.backHome}>
-        <VideoCropTool {...tool.ui} largeFileWarning={dict.common.largeFileWarning} />
+        <VideoCropTool {...tool.ui} largeFileWarning={dict.common.largeFileWarning} result={dict.common.result} cancelLabel={dict.common.cancelRun} cancelledLabel={dict.common.runCancelled} mediaError={dict.common.mediaError} />
       </ToolShell>
       <ToolPageJsonLd category="video" id="crop" locale={locale} />
     </>

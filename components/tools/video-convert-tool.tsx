@@ -4,10 +4,15 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { convertVideo, type VideoFormat } from '@/lib/tools/implementations/video-convert';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 
 type Messages = {
@@ -26,6 +31,13 @@ type Messages = {
   etaLabel: string;
   etaCalculating: string;
   largeFileWarning: string;
+};
+
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 function formatRemaining(seconds: number): string {
@@ -48,7 +60,7 @@ const MIME_BY_FORMAT: Record<VideoFormat, string> = {
   gif: 'image/gif',
 };
 
-export function VideoConvertTool(messages: Messages) {
+export function VideoConvertTool(messages: Props) {
   const inputId = useId();
   const formatId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -61,6 +73,8 @@ export function VideoConvertTool(messages: Messages) {
   const [dragging, setDragging] = useState(false);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${format}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   useEffect(() => {
     if (!busy) return;
@@ -97,6 +111,7 @@ export function VideoConvertTool(messages: Messages) {
   const onConvert = async () => {
     if (!canConvert) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     const started = Date.now();
@@ -108,11 +123,14 @@ export function VideoConvertTool(messages: Messages) {
       });
       const blob = new Blob([new Uint8Array(bytes)], { type: MIME_BY_FORMAT[format] });
       const name = outputName('converted', [file!.name], format);
-      downloadBlob(blob, name);
+      setResult({ blob, filename: name });
     } catch (err) {
-      const detail = err instanceof Error ? err.message : String(err);
-      setError(`${messages.error} — ${detail}`);
-      console.error('[video-convert]', err);
+      // A cancel rejects the pending exec too; that is not a failure to report.
+      if (!wasCancelled()) {
+        const detail = err instanceof Error ? err.message : String(err);
+        setError(mediaErrorMessage(err, `${messages.error} — ${detail}`, messages.mediaError));
+        console.error('[video-convert]', err);
+      }
     } finally {
       setBusy(false);
       setStartedAt(null);
@@ -130,7 +148,7 @@ export function VideoConvertTool(messages: Messages) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);
@@ -212,16 +230,22 @@ export function VideoConvertTool(messages: Messages) {
           </select>
         </label>
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-3">
-            {error && (
-              <p role="alert" className="text-sm text-danger">
-                {error}
-              </p>
-            )}
-            <Button onClick={onConvert} disabled={!canConvert}>
-              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.convertButton}
-            </Button>
-          </div>
+          {!result && (
+            <div className="flex items-center gap-3">
+              {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
+              {error && (
+                <p role="alert" className="text-sm text-danger">
+                  {error}
+                </p>
+              )}
+              {busy && (
+                <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
+              )}
+              <Button onClick={onConvert} disabled={!canConvert}>
+                {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.convertButton}
+              </Button>
+            </div>
+          )}
           {busy && (
             <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
               {etaSeconds === null
@@ -231,6 +255,16 @@ export function VideoConvertTool(messages: Messages) {
           )}
         </div>
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="video"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

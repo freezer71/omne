@@ -24,6 +24,11 @@ export function usePdfPageCount(file: File | null): State {
     let cancelled = false;
     (async () => {
       try {
+        // Deliberately pdf-lib rather than the shared pdf.js document in
+        // lib/pdf-document-cache: pdf.js needs a worker and a real canvas, which
+        // would make this hook and the five tools that use it untestable in
+        // jsdom. The cost is one extra parse per file, against the N it saves on
+        // the thumbnails.
         const { PDFDocument } = await import('pdf-lib');
         const doc = await PDFDocument.load(await file.arrayBuffer());
         if (!cancelled) setResult({ pageCount: doc.getPageCount(), error: false });

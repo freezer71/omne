@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { downloadBlob } from '@/lib/file-utils';
 import { tpl } from '@/lib/tpl';
 import {
@@ -317,7 +318,7 @@ export function EncodeBase64Tool(messages: Messages) {
                 e.preventDefault();
                 setDragging(true);
               }}
-              onDragLeave={() => setDragging(false)}
+              onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
               onDrop={onDrop}
               className={cn(
                 'flex min-h-[24rem] cursor-pointer flex-col items-center justify-center gap-3 rounded-md border-2 border-dashed px-4 py-6 text-center text-sm transition-colors',

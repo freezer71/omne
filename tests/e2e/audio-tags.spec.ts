@@ -11,7 +11,7 @@ test.describe('/en/audio/tags', () => {
       page.getByRole('heading', { level: 1, name: /edit audio tags/i }),
     ).toBeVisible();
     await expect(
-      page.getByRole('button', { name: /apply tags & download/i }),
+      page.getByRole('button', { name: /^apply tags$/i }),
     ).toBeDisabled();
   });
 
@@ -22,7 +22,7 @@ test.describe('/en/audio/tags', () => {
     ]);
     await expect(page.getByText('sample.mp3')).toBeVisible();
     await expect(
-      page.getByRole('button', { name: /apply tags & download/i }),
+      page.getByRole('button', { name: /^apply tags$/i }),
     ).toBeEnabled({ timeout: 10_000 });
   });
 

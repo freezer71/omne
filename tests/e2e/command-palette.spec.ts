@@ -83,7 +83,8 @@ test.describe('command palette', () => {
     const hubSearch = page.getByRole('searchbox', { name: 'Search tools, actions…' });
     await hubSearch.fill('fusion');
 
-    await expect(page.getByRole('link', { name: /merge pdfs/i })).toBeVisible();
+    // Scoped: the tool also sits in the "most used" strip.
+    await expect(page.locator('#cat-pdf').getByRole('link', { name: /merge pdfs/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /trim video/i })).toHaveCount(0);
   });
 

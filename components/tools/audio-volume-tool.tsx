@@ -4,10 +4,15 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { adjustVolume, buildFilter } from '@/lib/tools/implementations/audio-volume';
-import { downloadBlob, formatBytes, outputName, stripExtension } from '@/lib/file-utils';
+import { formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 
 type Messages = {
@@ -27,6 +32,13 @@ type Messages = {
   largeFileWarning: string;
 };
 
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+  mediaError: MediaErrorMessages;
+};
+
 function extOf(name: string): string {
   const dot = name.lastIndexOf('.');
   return dot > 0 ? name.slice(dot + 1).toLowerCase() : 'mp3';
@@ -36,7 +48,7 @@ function gainToLinearVolume(db: number): number {
   return Math.pow(10, db / 20);
 }
 
-export function AudioVolumeTool(messages: Messages) {
+export function AudioVolumeTool(messages: Props) {
   const inputId = useId();
   const gainId = useId();
   const normalizeId = useId();
@@ -54,6 +66,8 @@ export function AudioVolumeTool(messages: Messages) {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${gainDb}|${normalize}|${fadeIn}|${fadeOut}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   const canApply = file !== null && !busy;
 
@@ -79,6 +93,7 @@ export function AudioVolumeTool(messages: Messages) {
   const onApply = async () => {
     if (!canApply) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     try {
@@ -92,9 +107,9 @@ export function AudioVolumeTool(messages: Messages) {
       });
       const ext = extOf(file!.name);
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: file!.type || 'audio/mpeg' });
-      downloadBlob(blob, outputName('volume', [file!.name], ext));
-    } catch {
-      setError(messages.error);
+      setResult({ blob, filename: outputName('volume', [file!.name], ext) });
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
     }
@@ -111,7 +126,7 @@ export function AudioVolumeTool(messages: Messages) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);
@@ -244,16 +259,32 @@ export function AudioVolumeTool(messages: Messages) {
         )}
       </Card>
 
-      <div className="flex items-center justify-end gap-3">
-        {error && (
-          <p role="alert" className="text-sm text-danger">
-            {error}
-          </p>
-        )}
-        <Button onClick={onApply} disabled={!canApply}>
-          {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.applyButton}
-        </Button>
-      </div>
+      {!result && (
+        <div className="flex items-center justify-end gap-3">
+          {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
+          {error && (
+            <p role="alert" className="text-sm text-danger">
+              {error}
+            </p>
+          )}
+          {busy && (
+            <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
+          )}
+          <Button onClick={onApply} disabled={!canApply}>
+            {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.applyButton}
+          </Button>
+        </div>
+      )}
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="audio"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }
@@ -268,15 +299,54 @@ function AudioPreview({
   onDuration: (d: number) => void;
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const gainRef = useRef<GainNode | null>(null);
   const url = useBlobUrl(file);
+
+  // HTMLMediaElement.volume is capped at 1, so every boost from +1 to +20 dB
+  // used to sound exactly like 0 dB: the preview quietly disagreed with the
+  // file the tool was about to produce. A GainNode has no such ceiling.
+  //
+  // createMediaElementSource may only be called once per element, ever — hence
+  // the key on the <audio> below, which gives each source URL its own node.
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = Math.min(1, Math.max(0, previewVolume));
+    const el = audioRef.current;
+    if (!el) return;
+    const Ctx = window.AudioContext;
+    if (typeof Ctx !== 'function') return;
+
+    const ctx = new Ctx();
+    const source = ctx.createMediaElementSource(el);
+    const gain = ctx.createGain();
+    source.connect(gain).connect(ctx.destination);
+    gainRef.current = gain;
+
+    // Browsers start the context suspended until a gesture; pressing play is one.
+    const resume = () => void ctx.resume();
+    el.addEventListener('play', resume);
+
+    return () => {
+      el.removeEventListener('play', resume);
+      gainRef.current = null;
+      source.disconnect();
+      gain.disconnect();
+      void ctx.close();
+    };
+  }, [url]);
+
+  useEffect(() => {
+    const value = Math.max(0, previewVolume);
+    if (gainRef.current) {
+      gainRef.current.gain.value = value;
+    } else if (audioRef.current) {
+      // No Web Audio: the element's own volume is all there is, ceiling included.
+      audioRef.current.volume = Math.min(1, value);
     }
-  }, [previewVolume]);
+  }, [previewVolume, url]);
+
   if (!url) return null;
   return (
     <audio
+      key={url}
       ref={audioRef}
       src={url}
       controls

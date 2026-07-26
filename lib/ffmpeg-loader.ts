@@ -2,6 +2,10 @@ import { FFmpeg } from '@ffmpeg/ffmpeg';
 
 let instance: FFmpeg | null = null;
 let loading: Promise<FFmpeg> | null = null;
+// The FFmpeg object as soon as it is constructed, loaded or not. `instance` only
+// appears once load() resolves, so cancelling during the core download would
+// otherwise have nothing to terminate.
+let live: FFmpeg | null = null;
 
 export type ProgressCallback = (loaded: number, total: number) => void;
 
@@ -34,6 +38,7 @@ export async function getFfmpeg(): Promise<FFmpeg> {
   }
 
   const ffmpeg = new FFmpeg();
+  live = ffmpeg;
   loading = (async () => {
     // Forward ffmpeg stdout/stderr to the browser console in development so we
     // can diagnose stalls (silent decode failures, slow encoder phases, etc.).
@@ -65,7 +70,24 @@ export function isLoaded(): boolean {
   return instance !== null;
 }
 
+// Aborts whatever the worker is doing right now and throws the instance away.
+//
+// `terminate()` rejects every in-flight call with ERROR_TERMINATED and kills the
+// worker, which leaves the FFmpeg object with `loaded === false` — reusing it
+// would fail on the next call. Clearing the module-level cache means the next
+// getFfmpeg() constructs and loads a fresh core, at the cost of re-downloading
+// it. That cost is the point: without this, a user who picked the wrong preset
+// on a 500 MB video has no way out but closing the tab.
+export function terminateFfmpeg(): void {
+  const target = live;
+  instance = null;
+  loading = null;
+  live = null;
+  target?.terminate();
+}
+
 export function _resetFfmpegLoader(): void {
   instance = null;
   loading = null;
+  live = null;
 }

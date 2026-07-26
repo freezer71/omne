@@ -43,14 +43,43 @@ describe('BrandLockup', () => {
     expect(screen.getByRole('link', { name: 'omne' })).not.toHaveClass('hidden');
   });
 
-  it('sizes the tile on the brand-kit scale, xl by default', () => {
+  it('sizes the tile on the brand-kit scale, md by default', () => {
     const { container: def } = render(<BrandLockup {...props} />);
-    expect(def.querySelector('.kouma-tile')).toHaveClass('size-10');
+    expect(def.querySelector('.kouma-tile')).toHaveClass('size-6');
 
     const { container: sm } = render(<BrandLockup {...props} size="sm" />);
     expect(sm.querySelector('.kouma-tile')).toHaveClass('size-5');
 
     const { container: xxl } = render(<BrandLockup {...props} size="2xl" />);
     expect(xxl.querySelector('.kouma-tile')).toHaveClass('size-12');
+  });
+
+  it('scales the omne mark with the tile, so the pair stays balanced', () => {
+    // The two marks used to drift apart: the tile followed `size` while the omne
+    // ring was pinned at 18px, which at xl put a 40px tile beside a 15.75px ring.
+    const ringOf = (container: HTMLElement) => {
+      const svg = container.querySelector('svg');
+      // The circle is r=9 + a 3-wide stroke in a 24 viewBox: 0.875 of the box.
+      return Number(svg?.getAttribute('width')) * 0.875;
+    };
+    const tileOf = (container: HTMLElement, px: number) =>
+      container.querySelector('.kouma-tile')?.className.includes(`size-${px / 4}`);
+
+    for (const [size, tilePx] of [
+      ['sm', 20],
+      ['md', 24],
+      ['lg', 32],
+      ['xl', 40],
+      ['2xl', 48],
+    ] as const) {
+      const { container } = render(<BrandLockup {...props} size={size} />);
+      expect(tileOf(container, tilePx)).toBe(true);
+      // The solid ring outweighs the halftone tile at equal height, so it has
+      // to be visibly smaller to look like its equal — but not so small that
+      // omne disappears next to the studio mark.
+      const ring = ringOf(container);
+      expect(ring / tilePx).toBeGreaterThan(0.68);
+      expect(ring / tilePx).toBeLessThan(0.78);
+    }
   });
 });

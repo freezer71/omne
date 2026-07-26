@@ -1,13 +1,18 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { cropVideo } from '@/lib/tools/implementations/video-crop';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 
 type Messages = {
@@ -24,6 +29,14 @@ type Messages = {
   etaLabel: string;
   etaCalculating: string;
   largeFileWarning: string;
+  moveCropLabel: string;
+};
+
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 function formatRemaining(seconds: number): string {
@@ -34,7 +47,7 @@ function formatRemaining(seconds: number): string {
   return s === 0 ? `${m}min` : `${m}min ${s}s`;
 }
 
-export function VideoCropTool(messages: Messages) {
+export function VideoCropTool(messages: Props) {
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -47,6 +60,8 @@ export function VideoCropTool(messages: Messages) {
   const [dragging, setDragging] = useState(false);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${crop.x}|${crop.y}|${crop.w}|${crop.h}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   useEffect(() => {
     if (!busy) return;
@@ -80,6 +95,7 @@ export function VideoCropTool(messages: Messages) {
       return;
     }
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     const started = Date.now();
@@ -88,9 +104,9 @@ export function VideoCropTool(messages: Messages) {
     try {
       const bytes = await cropVideo(file, { x: crop.x, y: crop.y, width: crop.w, height: crop.h, onProgress: (r) => setProgress(r) });
       const blob = new Blob([new Uint8Array(bytes)], { type: 'video/mp4' });
-      downloadBlob(blob, outputName('cropped', [file.name], 'mp4'));
-    } catch (_err) {
-      setError(messages.error);
+      setResult({ blob, filename: outputName('cropped', [file.name], 'mp4') });
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
       setStartedAt(null);
@@ -102,7 +118,7 @@ export function VideoCropTool(messages: Messages) {
       <Card
         className={cn('p-8 border-2 border-dashed transition-colors', dragging ? 'border-accent bg-surface-hover' : 'border-border')}
         onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => { e.preventDefault(); setDragging(false); onPick(e.dataTransfer.files); }}
       >
         {!file ? (
@@ -113,7 +129,14 @@ export function VideoCropTool(messages: Messages) {
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            <CropPreview file={file} onMeta={onMeta} crop={crop} dims={dims} />
+            <CropPreview
+              file={file}
+              onMeta={onMeta}
+              crop={crop}
+              dims={dims}
+              onCropChange={setCrop}
+              moveLabel={messages.moveCropLabel}
+            />
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm text-text-primary">{file.name}</p>
@@ -149,12 +172,18 @@ export function VideoCropTool(messages: Messages) {
 
       <div className="flex items-end justify-end gap-3 flex-wrap">
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-3">
-            {error && <p role="alert" className="text-sm text-danger">{error}</p>}
-            <Button onClick={onCrop} disabled={!file || busy}>
-              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.cropButton}
-            </Button>
-          </div>
+          {!result && (
+            <div className="flex items-center gap-3">
+              {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
+              {error && <p role="alert" className="text-sm text-danger">{error}</p>}
+              {busy && (
+                <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
+              )}
+              <Button onClick={onCrop} disabled={!file || busy}>
+                {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.cropButton}
+              </Button>
+            </div>
+          )}
           {busy && (
             <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
               {etaSeconds === null ? messages.etaCalculating : tpl(messages.etaLabel, { remaining: formatRemaining(etaSeconds) })}
@@ -162,26 +191,119 @@ export function VideoCropTool(messages: Messages) {
           )}
         </div>
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="video"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }
 
-function CropPreview({ file, onMeta, crop, dims }: { file: File; onMeta: (w: number, h: number) => void; crop: { x: number; y: number; w: number; h: number }; dims: { w: number; h: number } }) {
+const PREVIEW_MAX_HEIGHT_REM = 18;
+
+type Crop = { x: number; y: number; w: number; h: number };
+
+// The overlay is positioned as a percentage of its container, so the container
+// has to be exactly the picture — no letterboxing.
+//
+// It used to be `w-full max-h-72` on both the box and the <video>. Browsers
+// apply `object-fit: contain` to video, so as soon as the height cap bit (any
+// 16:9 clip in a container wider than ~512px, i.e. every desktop layout) the
+// picture was letterboxed inside a wider box while the overlay stayed glued to
+// the box. The rectangle drawn on screen was not the rectangle being cropped.
+// Giving the container the clip's own aspect ratio makes the two coincide by
+// construction.
+function CropPreview({
+  file,
+  onMeta,
+  crop,
+  dims,
+  onCropChange,
+  moveLabel,
+}: {
+  file: File;
+  onMeta: (w: number, h: number) => void;
+  crop: Crop;
+  dims: { w: number; h: number };
+  onCropChange: (next: Crop) => void;
+  moveLabel: string;
+}) {
   const url = useBlobUrl(file);
-  const showOverlay = dims.w > 0 && dims.h > 0;
+  const frameRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef<{ pointerId: number; startX: number; startY: number; origin: Crop } | null>(
+    null,
+  );
+  const known = dims.w > 0 && dims.h > 0;
+
+  // Pointer travel in CSS pixels → the clip's own pixel grid.
+  const scale = () => {
+    const rect = frameRef.current?.getBoundingClientRect();
+    return rect && rect.width > 0 ? dims.w / rect.width : 1;
+  };
+
+  const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (!known) return;
+    e.preventDefault();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    dragRef.current = { pointerId: e.pointerId, startX: e.clientX, startY: e.clientY, origin: crop };
+  };
+
+  const onPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== e.pointerId) return;
+    const k = scale();
+    const { origin } = drag;
+    onCropChange({
+      ...origin,
+      x: Math.round(Math.max(0, Math.min(dims.w - origin.w, origin.x + (e.clientX - drag.startX) * k))),
+      y: Math.round(Math.max(0, Math.min(dims.h - origin.h, origin.y + (e.clientY - drag.startY) * k))),
+    });
+  };
+
+  const endDrag = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+    dragRef.current = null;
+  };
+
   if (!url) return null;
+
   return (
-    <div className="relative w-full max-h-72 overflow-hidden rounded-md border border-border bg-black">
+    <div
+      ref={frameRef}
+      className="relative mx-auto w-full overflow-hidden rounded-md border border-border bg-black"
+      style={
+        known
+          ? {
+              aspectRatio: `${dims.w} / ${dims.h}`,
+              maxWidth: `${(PREVIEW_MAX_HEIGHT_REM * dims.w) / dims.h}rem`,
+            }
+          : { maxHeight: `${PREVIEW_MAX_HEIGHT_REM}rem` }
+      }
+    >
       <video
         src={url}
         controls
         onLoadedMetadata={(e) => onMeta(e.currentTarget.videoWidth, e.currentTarget.videoHeight)}
-        className="w-full max-h-72"
+        className="h-full w-full"
       />
-      {showOverlay && (
+      {known && crop.w > 0 && crop.h > 0 && (
         <div
-          aria-hidden
-          className="pointer-events-none absolute border-2 border-accent/80"
+          role="button"
+          tabIndex={-1}
+          aria-label={moveLabel}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          className="absolute cursor-move touch-none border-2 border-accent/80 bg-accent/5"
           style={{
             left: `${(crop.x / dims.w) * 100}%`,
             top: `${(crop.y / dims.h) * 100}%`,

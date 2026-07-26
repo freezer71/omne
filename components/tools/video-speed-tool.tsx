@@ -4,10 +4,15 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import { speedVideo } from '@/lib/tools/implementations/video-speed';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 
 type Messages = {
@@ -25,6 +30,13 @@ type Messages = {
   largeFileWarning: string;
 };
 
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+  mediaError: MediaErrorMessages;
+};
+
 function formatRemaining(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 1) return '<1s';
   if (seconds < 60) return `${Math.ceil(seconds)}s`;
@@ -35,7 +47,7 @@ function formatRemaining(seconds: number): string {
 
 const PRESETS = [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4];
 
-export function VideoSpeedTool(messages: Messages) {
+export function VideoSpeedTool(messages: Props) {
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -49,6 +61,8 @@ export function VideoSpeedTool(messages: Messages) {
   const [dragging, setDragging] = useState(false);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${speed}|${keepAudio}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   useEffect(() => {
     if (!busy) return;
@@ -77,6 +91,7 @@ export function VideoSpeedTool(messages: Messages) {
   const onApply = async () => {
     if (!file || busy) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     const started = Date.now();
@@ -85,9 +100,9 @@ export function VideoSpeedTool(messages: Messages) {
     try {
       const bytes = await speedVideo(file, { speed, keepAudio, onProgress: (r) => setProgress(r) });
       const blob = new Blob([new Uint8Array(bytes)], { type: 'video/mp4' });
-      downloadBlob(blob, outputName(`speed-${speed}x`, [file.name], 'mp4'));
-    } catch (_err) {
-      setError(messages.error);
+      setResult({ blob, filename: outputName(`speed-${speed}x`, [file.name], 'mp4') });
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
       setStartedAt(null);
@@ -99,7 +114,7 @@ export function VideoSpeedTool(messages: Messages) {
       <Card
         className={cn('p-8 border-2 border-dashed transition-colors', dragging ? 'border-accent bg-surface-hover' : 'border-border')}
         onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => { e.preventDefault(); setDragging(false); onPick(e.dataTransfer.files); }}
       >
         {!file ? (
@@ -150,12 +165,18 @@ export function VideoSpeedTool(messages: Messages) {
 
       <div className="flex items-end justify-end gap-3 flex-wrap">
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-3">
-            {error && <p role="alert" className="text-sm text-danger">{error}</p>}
-            <Button onClick={onApply} disabled={!file || busy}>
-              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.speedButton}
-            </Button>
-          </div>
+          {!result && (
+            <div className="flex items-center gap-3">
+              {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
+              {error && <p role="alert" className="text-sm text-danger">{error}</p>}
+              {busy && (
+                <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
+              )}
+              <Button onClick={onApply} disabled={!file || busy}>
+                {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.speedButton}
+              </Button>
+            </div>
+          )}
           {busy && (
             <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
               {etaSeconds === null ? messages.etaCalculating : tpl(messages.etaLabel, { remaining: formatRemaining(etaSeconds) })}
@@ -163,6 +184,16 @@ export function VideoSpeedTool(messages: Messages) {
           )}
         </div>
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="video"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

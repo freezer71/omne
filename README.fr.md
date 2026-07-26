@@ -130,6 +130,18 @@ Chaque outil suit le même squelette en 5 fichiers + une entrée de registre :
 
 **Aperçu temps réel obligatoire** : tout outil doit afficher un résultat live qui reflète les paramètres courants — un debounce de ~150-250 ms sur l'effet, pas de bouton "Apply" avant l'aperçu. Pour les pipelines lourds (ffmpeg, pdf.js, remove-bg), rendre un proxy léger (résolution réduite, première page/frame).
 
+**Rien ne se télécharge dans le dos de l'utilisateur** : un outil qui exécute un pipeline coûteux confie sa sortie à `<ToolResult>` (`components/ui/tool-result.tsx`) au lieu d'appeler `downloadBlob` lui-même. Le panneau lit ou affiche le fichier produit, indique l'écart de poids par rapport à la source, et porte le seul bouton **Télécharger**, plus un bouton **Modifier les réglages** qui l'efface en gardant le fichier source chargé. La sortie est détenue par `useToolResult(signature)` (`lib/hooks/use-tool-result.ts`) : construire `signature` à partir de l'identité du fichier source et de chaque option qui alimente le pipeline, et le hook abandonne le résultat dès qu'ils divergent — le panneau ne peut donc jamais montrer un fichier que les réglages ne décrivent plus. Les libellés sont partagés entre outils sous `common.result` — les passer via `result={dict.common.result}`.
+
+**Montrer la file, pas les noms de fichiers** : les outils de fusion mesurent chaque clip en attente avec `useClipMetadata` et le résument via `lib/tools/clip-summary.ts` — vignette, durée et dimensions par ligne, durée totale, et un avertissement quand les clips n'ont pas tous la même taille. Ordonner des clips par nom de fichier est précisément là où l'utilisateur se trompe, et sans ça l'erreur n'apparaissait qu'après l'encodage.
+
+**Le focus doit atterrir sur quelque chose de visible** : les chips d'options enveloppent une radio `sr-only` dans un `<label>` stylé, et les sélecteurs de fichier placent un input `sr-only` à côté d'un bouton stylé. `sr-only` réduit le contrôle à 1×1 px : l'anneau de focus de base était donc dessiné là où personne ne pouvait le voir. Deux sélecteurs dans `app/globals.css` le déplacent sur le substitut visible — garder le contrôle masqué enfant direct de son label, ou frère immédiatement précédent de son bouton.
+
+**Ne pas promettre un chiffre incalculable** : `video/compress` encode à quantiseur fixe, sa taille de sortie ne se déduit donc pas de durée × débit. `estimateCompressedSize` y répond en encodant les premières secondes au préréglage choisi puis en mettant à l'échelle — la règle du proxy léger appliquée à un chiffre plutôt qu'à une image. C'est une approximation par construction, elle est présentée comme telle, et elle échoue en silence plutôt que d'afficher un chiffre faux.
+
+**Dire pourquoi ça a échoué, quand c'est identifiable** : les outils média passent leurs échecs par `mediaErrorMessage` (`lib/media-errors.ts`), qui distingue la perte d'isolation cross-origin (recharger, le fichier n'est pas en cause) et le manque de mémoire (extrait plus court, préréglage plus léger) du reste, et retombe sur le libellé propre à l'outil plutôt que de deviner.
+
+**Tout traitement long est interruptible** : un outil ffmpeg appelle `useFfmpegCancel(busy)` (`lib/hooks/use-ffmpeg-cancel.ts`), qui affiche un bouton **Annuler** à côté du bouton principal occupé, avertit avant la fermeture de l'onglet en plein encodage, et appelle `terminateFfmpeg()` (`lib/ffmpeg-loader.ts`) pour arrêter le worker. Terminer laisse l'objet FFmpeg mort : le loader abandonne son instance en cache et le traitement suivant recharge un core neuf. Appeler `beginRun()` en tête du handler et conditionner le rapport d'échec à `wasCancelled()` — une annulation rejette aussi l'`exec` en cours, et la signaler reviendrait à dire à l'utilisateur que son fichier est cassé alors qu'il ne l'est pas.
+
 Détails complets dans [`CLAUDE.md`](./CLAUDE.md).
 
 ---
@@ -200,7 +212,7 @@ omne/
 ## Contribuer un nouvel outil
 
 1. Implémenter la logique pure dans `lib/tools/implementations/<id>.ts` avec un test unitaire.
-2. Créer le composant client dans `components/tools/<id>-tool.tsx` avec un aperçu temps réel.
+2. Créer le composant client dans `components/tools/<id>-tool.tsx` avec un aperçu temps réel — et, si le pipeline est coûteux, un panneau `<ToolResult>` plutôt qu'un téléchargement automatique.
 3. Câbler la page sous `app/[locale]/<catégorie>/<id>/page.tsx` + l'`opengraph-image.tsx`.
 4. Ajouter l'entrée dans `lib/tools/registry.ts`.
 5. Ajouter les clés `tools.<catégorie>.<id>` (avec le bloc `seo`) dans `messages/en.json` **et** `messages/fr.json`.
@@ -212,7 +224,7 @@ Le sitemap, le routage par MIME et la palette `⌘K` se mettent à jour automati
 
 ## Marque
 
-omne est un produit Kouma Labs. Le header et le footer portent le lockup co-brandé — l'app-icon Kouma Labs, un slash atténué, puis le logo omne — tel que défini par le brand kit publié sur [koumalabs.org/brands](https://koumalabs.org/brands). Le header masque la tuile en dessous de `md`, faute de place ; le footer affiche le lockup complet à toutes les largeurs.
+omne est un produit Kouma Labs. Le header et le footer portent le lockup co-brandé — l'app-icon Kouma Labs, un slash atténué, puis le logo omne — tel que défini par le brand kit publié sur [koumalabs.org/brands](https://koumalabs.org/brands). La taille du logo omne est dérivée de celle de la tuile plutôt que figée, pour que les deux marques restent équilibrées à chaque pas de l'échelle. L'anneau vaut ~0,73 de la tuile : à hauteur égale le trait plein d'omne pèse plus que la trame Kouma, il doit donc être visiblement la plus petite forme pour faire jeu égal. Le rapport a été arrêté en comparant les candidats côte à côte, pas par le calcul. Le header masque la tuile en dessous de `md`, faute de place ; le footer affiche le lockup complet à toutes les largeurs.
 
 Les deux tuiles (`public/kouma-tile-{dark,light}.svg`) sont auto-hébergées et commutées via la variable CSS `--kouma-tile` sous `[data-theme]`, et non par la variante `dark:` de Tailwind : le thème du projet est piloté par l'attribut `data-theme`, donc une bascule sur `prefers-color-scheme` se désynchroniserait de ce que l'utilisateur voit réellement. Le lien vers koumalabs.org n'ajoute aucune requête sortante — la promesse privacy est inchangée.
 

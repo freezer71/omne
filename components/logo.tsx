@@ -24,10 +24,20 @@ export function LogoMark({ className, size = 18 }: Props) {
   );
 }
 
-export function Logo({ className }: { className?: string }) {
+export function Logo({
+  className,
+  markSize = 18,
+}: {
+  className?: string;
+  /**
+   * The mark's SVG box. Callers that sit the logo beside another brand's mark
+   * pass a size that balances the pair — see components/brand-lockup.tsx.
+   */
+  markSize?: number;
+}) {
   return (
     <span className={`inline-flex items-center gap-2 ${className ?? ''}`}>
-      <LogoMark className="text-text-primary" size={18} />
+      <LogoMark className="text-text-primary" size={markSize} />
       <span className="text-sm font-semibold tracking-tight text-text-primary">
         omne
       </span>

@@ -29,7 +29,7 @@ export default async function Page({
   return (
     <>
     <ToolShell
-      locale={locale}
+wide       locale={locale}
       category="image"
       name={tool.name}
       description={tool.description}

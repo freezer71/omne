@@ -47,6 +47,23 @@
       "privacyBodyModelDownload": "Votre image est traitée entièrement dans votre navigateur — elle n'est jamais envoyée. La seule requête réseau est le téléchargement unique du modèle d'IA (~44 Mo) depuis huggingface.co au premier usage ; votre navigateur le met en cache et les usages suivants ne nécessitent plus aucun réseau. Pas d'analytics, pas de cookies.",
       "privacyLearnMore": "Voir la page Confidentialité pour le détail.",
       "faqTitle": "Questions fréquentes"
+    },
+    "result": {
+      "heading": "Votre fichier est prêt",
+      "download": "Télécharger",
+      "retry": "Modifier les réglages",
+      "originalLabel": "Original",
+      "outputLabel": "Résultat",
+      "smaller": "{percent} % plus léger",
+      "larger": "{percent} % plus lourd",
+      "same": "Poids inchangé",
+      "ready": "Traitement terminé. Votre fichier est prêt à être téléchargé."
+    },
+    "cancelRun": "Annuler",
+    "runCancelled": "Annulé. Rien n'a été modifié.",
+    "mediaError": {
+      "memory": "Le navigateur a manqué de mémoire sur ce fichier. Essayez un extrait plus court, ou un préréglage plus léger.",
+      "isolation": "Cette page a perdu les réglages dont le moteur média a besoin. Rechargez-la et réessayez — votre fichier n'est pas en cause."
     }
   },
   "badge": {
@@ -198,7 +215,8 @@
           "error": "Impossible de fusionner ces PDFs. Essayez d'autres fichiers.",
           "pageLabelTemplate": "Page {n}",
           "filesCountSingular": "{n} fichier",
-          "filesCountPlural": "{n} fichiers"
+          "filesCountPlural": "{n} fichiers",
+          "dragHandle": "Glisser pour réordonner"
         }
       },
       "split": {
@@ -686,12 +704,12 @@
         "content": {
           "howItWorks": [
             "Ajoutez deux vidéos ou plus — MP4, WebM, MOV ou MKV — avec le bouton ou en les glissant-déposant.",
-            "Réorganisez les clips avec les boutons monter et descendre pour définir l'ordre final.",
+            "Réorganisez les clips avec les boutons monter et descendre — chaque ligne affiche sa première image, sa durée et sa taille.",
             "Cliquez sur Fusionner pour les enchaîner en un seul fichier continu, puis téléchargez."
           ],
           "features": [
             "Enchaîne bout à bout des clips MP4, WebM, MOV et MKV en un seul fichier de sortie.",
-            "La réorganisation par boutons monter/descendre permet de corriger l'ordre de lecture avant la fusion.",
+            "Vignette, durée et dimensions sur chaque clip, pour vérifier l'ordre avant l'encodage et non après",
             "Assemblez vos montages, leçons ou prises de scène en local — rien n'est envoyé en ligne."
           ]
         },
@@ -720,7 +738,9 @@
           "moveDown": "Descendre",
           "needsTwo": "Ajoutez au moins deux vidéos à fusionner.",
           "etaLabel": "Environ {remaining} restant",
-          "etaCalculating": "Estimation du temps restant…"
+          "etaCalculating": "Estimation du temps restant…",
+          "totalDurationLabel": "Total : {duration}",
+          "mixedSizesWarning": "Ces clips n'ont pas tous la même taille. La concaténation conserve les dimensions du premier : les autres seront étirés ou rognés."
         }
       },
       "compress": {
@@ -730,12 +750,12 @@
           "howItWorks": [
             "Déposez votre vidéo dans l'outil pour analyser sa taille actuelle.",
             "Choisissez un préréglage de qualité : haute, moyenne ou basse.",
-            "Téléchargez la vidéo compressée avec l'estimation de la réduction affichée."
+            "Vérifiez l'estimation, compressez, puis lisez le résultat et sa taille réelle avant de télécharger."
           ],
           "features": [
             "Trois préréglages de qualité pour trouver le juste équilibre taille/qualité",
-            "Estimation de la taille du fichier en temps réel avant la compression",
-            "Encodage H.264 pour une compatibilité maximale"
+            "Estimation de la taille avant de lancer, mesurée en encodant un court échantillon du début au préréglage choisi",
+            "Indicateur de progression avec temps restant estimé pendant la compression"
           ]
         },
         "seo": {
@@ -763,7 +783,10 @@
           "error": "Impossible de compresser cette vidéo.",
           "removeFile": "Retirer",
           "etaLabel": "Environ {remaining} restant",
-          "etaCalculating": "Estimation du temps restant…"
+          "etaCalculating": "Estimation du temps restant…",
+          "estimateLabel": "≈ {size} après compression",
+          "estimateCalculating": "Estimation de la taille…",
+          "estimateHint": "Mesurée en encodant les 3 premières secondes avec ce préréglage, puis mise à l'échelle. Une vidéo très hétérogène s'écartera davantage."
         }
       },
       "resize": {
@@ -858,7 +881,7 @@
         "content": {
           "howItWorks": [
             "Déposez un fichier MP4, WebM, MOV ou MKV pour le charger dans l'aperçu.",
-            "Réglez les valeurs X, Y, largeur et hauteur en pixels — le rectangle d'accentuation montre la zone de recadrage en direct sur l'image.",
+            "Déplacez le rectangle d'accentuation directement sur la vidéo, ou saisissez les valeurs exactes X, Y, largeur et hauteur en pixels.",
             "Cliquez sur Recadrer : FFmpeg WebAssembly exporte uniquement le rectangle sélectionné dans votre navigateur, puis téléchargez."
           ],
           "features": [
@@ -892,7 +915,8 @@
           "error": "Impossible de recadrer cette vidéo.",
           "removeFile": "Retirer",
           "etaLabel": "Environ {remaining} restant",
-          "etaCalculating": "Estimation du temps restant…"
+          "etaCalculating": "Estimation du temps restant…",
+          "moveCropLabel": "Glisser pour déplacer la zone de recadrage"
         }
       },
       "rotate": {
@@ -1171,7 +1195,7 @@
           "howItWorks": [
             "Sélectionnez un fichier MP3, FLAC, M4A ou OGG — l'outil lit les tags existants et remplit les champs.",
             "Modifiez le titre, l'artiste, l'album, l'artiste de l'album, l'année, le genre, la piste et le commentaire, puis ajoutez une pochette.",
-            "Cliquez sur Appliquer et télécharger pour écrire les métadonnées et enregistrer le fichier."
+            "Cliquez sur Appliquer les tags pour écrire les métadonnées, vérifiez le résultat, puis téléchargez le fichier."
           ],
           "features": [
             "Modifie les champs ID3v2 : titre, artiste, album, artiste de l'album, année, genre, numéro de piste et commentaire.",
@@ -1196,7 +1220,7 @@
         "ui": {
           "selectButton": "Sélectionner un fichier audio",
           "empty": "Déposez un fichier audio ici ou utilisez le bouton ci-dessous.",
-          "applyButton": "Appliquer et télécharger",
+          "applyButton": "Appliquer les tags",
           "busy": "Écriture des tags…",
           "error": "Échec de l'écriture des tags. Essayez un autre fichier.",
           "removeFile": "Retirer",
@@ -1322,7 +1346,7 @@
           "howItWorks": [
             "Déposez un fichier audio pour afficher sa forme d'onde interactive.",
             "Faites glisser les poignées de la waveform pour définir le début et la fin du clip.",
-            "Exportez la sélection dans le format d'origine ou un autre format."
+            "Cliquez sur Découper — la coupe précise donne un résultat à l'échantillon près — puis écoutez le résultat avant de le télécharger."
           ],
           "features": [
             "Forme d'onde visuelle pour repérer précisément les passages à garder",
@@ -1347,7 +1371,7 @@
         "ui": {
           "selectButton": "Sélectionner un fichier audio",
           "empty": "Déposez un fichier audio ici ou utilisez le bouton ci-dessous.",
-          "trimButton": "Découper et télécharger",
+          "trimButton": "Découper",
           "startLabel": "Début (secondes)",
           "endLabel": "Fin (secondes)",
           "preciseLabel": "Découpe précise",
@@ -1372,7 +1396,7 @@
           "howItWorks": [
             "Sélectionnez plusieurs fichiers audio depuis votre appareil ou glissez-les dans la zone.",
             "Réorganisez l'ordre des pistes par glisser-déposer.",
-            "Fusionnez le tout en un seul fichier et téléchargez le résultat."
+            "Cliquez sur Fusionner pour tout enchaîner en un seul fichier audio, réécoutez-le, puis téléchargez."
           ],
           "features": [
             "Accepte différents formats en entrée — MP3, WAV, FLAC, M4A et plus",
@@ -1397,7 +1421,7 @@
         "ui": {
           "selectButton": "Ajouter des fichiers audio",
           "empty": "Déposez au moins deux fichiers audio ici ou utilisez le bouton ci-dessous.",
-          "mergeButton": "Fusionner et télécharger",
+          "mergeButton": "Fusionner",
           "format": "Format de sortie",
           "formatMp3": "MP3",
           "formatWav": "WAV",
@@ -1410,7 +1434,8 @@
           "moveUpLabel": "Monter",
           "moveDownLabel": "Descendre",
           "totalLabel": "Taille totale",
-          "needMore": "Ajoutez au moins un fichier supplémentaire pour fusionner."
+          "needMore": "Ajoutez au moins un fichier supplémentaire pour fusionner.",
+          "totalDurationLabel": "{duration} au total"
         }
       },
       "volume": {
@@ -1420,7 +1445,7 @@
           "howItWorks": [
             "Déposez un fichier audio, puis glissez le curseur de Gain de −20 dB à +20 dB pour monter ou baisser le volume.",
             "Ou cochez Normaliser la sonie pour ramener tout le morceau au standard EBU R128 de −16 LUFS.",
-            "Ajoutez un fondu en entrée et en sortie jusqu'à 15 secondes, puis cliquez sur Appliquer et télécharger."
+            "Ajoutez un fondu en entrée et en sortie jusqu'à 15 secondes, puis cliquez sur Appliquer et écoutez le résultat avant de le télécharger."
           ],
           "features": [
             "Ajuste le gain par pas précis de 1 dB sur une plage de −20 à +20 dB, avec aperçu du filtre en direct.",
@@ -1445,7 +1470,7 @@
         "ui": {
           "selectButton": "Sélectionner un fichier audio",
           "empty": "Déposez un fichier audio ici ou utilisez le bouton ci-dessous.",
-          "applyButton": "Appliquer et télécharger",
+          "applyButton": "Appliquer",
           "gainLabel": "Gain",
           "normalizeLabel": "Normaliser la sonie (EBU R128)",
           "normalizeHint": "(cible -16 LUFS)",

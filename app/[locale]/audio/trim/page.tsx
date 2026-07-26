@@ -29,7 +29,7 @@ export default async function Page({
   return (
     <>
       <ToolShell
-        locale={locale}
+wide         locale={locale}
         category="audio"
         name={tool.name}
         description={tool.description}
@@ -55,7 +55,7 @@ export default async function Page({
           pauseLabel={tool.ui.pauseLabel}
           muteLabel={tool.ui.muteLabel}
           unmuteLabel={tool.ui.unmuteLabel}
-          largeFileWarning={dict.common.largeFileWarning}
+          largeFileWarning={dict.common.largeFileWarning} result={dict.common.result} cancelLabel={dict.common.cancelRun} cancelledLabel={dict.common.runCancelled} mediaError={dict.common.mediaError}
         />
       </ToolShell>
       <ToolPageJsonLd category="audio" id="trim" locale={locale} />

@@ -4,14 +4,19 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import {
   extractAudio,
   extractMimeForFormat,
   type AudioExtractFormat,
 } from '@/lib/tools/implementations/audio-extract';
-import { downloadBlob, formatBytes, outputName } from '@/lib/file-utils';
+import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
+import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 
 type Messages = {
@@ -34,6 +39,13 @@ type Messages = {
   largeFileWarning: string;
 };
 
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+  mediaError: MediaErrorMessages;
+};
+
 const FORMATS: AudioExtractFormat[] = ['mp3', 'wav', 'm4a', 'flac'];
 const BITRATES = [96, 128, 192, 256, 320];
 const LOSSLESS: ReadonlySet<AudioExtractFormat> = new Set(['wav', 'flac']);
@@ -49,7 +61,7 @@ function formatRemaining(seconds: number): string {
   return remMin === 0 ? `${hours}h` : `${hours}h ${remMin}min`;
 }
 
-export function AudioExtractTool(messages: Messages) {
+export function AudioExtractTool(messages: Props) {
   const inputId = useId();
   const formatId = useId();
   const bitrateId = useId();
@@ -65,6 +77,8 @@ export function AudioExtractTool(messages: Messages) {
   const [duration, setDuration] = useState<number | null>(null);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [nowTick, setNowTick] = useState(0);
+  const [result, setResult] = useToolResult(`${fileSignature(file)}|${format}|${bitrate}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   useEffect(() => {
     if (!busy) return;
@@ -106,6 +120,7 @@ export function AudioExtractTool(messages: Messages) {
   const onExtract = async () => {
     if (!canExtract) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     const started = Date.now();
@@ -119,9 +134,9 @@ export function AudioExtractTool(messages: Messages) {
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], {
         type: extractMimeForFormat(format),
       });
-      downloadBlob(blob, outputName('audio', [file!.name], format));
-    } catch {
-      setError(messages.error);
+      setResult({ blob, filename: outputName('audio', [file!.name], format) });
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
       setStartedAt(null);
@@ -139,7 +154,7 @@ export function AudioExtractTool(messages: Messages) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);
@@ -245,16 +260,22 @@ export function AudioExtractTool(messages: Messages) {
           )}
         </div>
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-3">
-            {error && (
-              <p role="alert" className="text-sm text-danger">
-                {error}
-              </p>
-            )}
-            <Button onClick={onExtract} disabled={!canExtract}>
-              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.extractButton}
-            </Button>
-          </div>
+          {!result && (
+            <div className="flex items-center gap-3">
+              {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
+              {error && (
+                <p role="alert" className="text-sm text-danger">
+                  {error}
+                </p>
+              )}
+              {busy && (
+                <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
+              )}
+              <Button onClick={onExtract} disabled={!canExtract}>
+                {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.extractButton}
+              </Button>
+            </div>
+          )}
           {busy && (
             <p className="text-xs text-text-faint tabular-nums" aria-live="polite">
               {etaSeconds === null
@@ -264,6 +285,16 @@ export function AudioExtractTool(messages: Messages) {
           )}
         </div>
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="audio"
+          sourceBytes={file?.size}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

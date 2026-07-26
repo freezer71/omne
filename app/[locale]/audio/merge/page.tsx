@@ -52,7 +52,11 @@ export default async function Page({
           moveUpLabel={tool.ui.moveUpLabel}
           moveDownLabel={tool.ui.moveDownLabel}
           totalLabel={tool.ui.totalLabel}
+          totalDurationLabel={tool.ui.totalDurationLabel}
           needMore={tool.ui.needMore}
+          result={dict.common.result}
+          cancelLabel={dict.common.cancelRun}
+          cancelledLabel={dict.common.runCancelled} mediaError={dict.common.mediaError}
         />
       </ToolShell>
       <ToolPageJsonLd category="audio" id="merge" locale={locale} />

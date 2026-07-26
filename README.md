@@ -130,6 +130,18 @@ Each tool follows the same 5-file skeleton plus one registry entry:
 
 **Real-time preview is mandatory**: every tool must render a live result that reflects the current parameters — drive it from a ~150–250 ms debounced effect, no "Apply" button before the preview shows. For heavy pipelines (ffmpeg, pdf.js, remove-bg), render a lightweight proxy (lower resolution, first page/frame).
 
+**Nothing downloads behind the user's back**: a tool that runs an expensive pipeline hands its output to `<ToolResult>` (`components/ui/tool-result.tsx`) instead of calling `downloadBlob` itself. The panel plays or displays the produced file, states the size change against the source, and carries the only **Download** button, plus a **Change settings** button that clears it while keeping the source file loaded. Hold the output with `useToolResult(signature)` (`lib/hooks/use-tool-result.ts`): build `signature` from the source file identity plus every option that feeds the pipeline, and the hook drops the result the moment they diverge, so the panel can never show a file the controls no longer describe. The strings are shared across tools under `common.result` — pass them down as `result={dict.common.result}`.
+
+**Show the queue, not the file names**: merge tools measure every queued clip with `useClipMetadata` and summarise it with `lib/tools/clip-summary.ts` — thumbnail, duration and dimensions per row, a running total, and a warning when the clips are not all the same size. Ordering clips by file name is exactly where users get it wrong, and without this the mistake only surfaced after the encode.
+
+**Focus must land on something visible**: option chips wrap an `sr-only` radio in a styled `<label>`, and file pickers put an `sr-only` input beside a styled button. `sr-only` clips the control to 1×1px, so the base focus ring was painted where nobody could see it. Two selectors in `app/globals.css` move it onto the visible proxy — keep the hidden control a direct child of its label, or the immediate previous sibling of its button.
+
+**Don't promise a number you cannot compute**: `video/compress` encodes at a fixed quantizer, so its output size cannot be derived from duration × bitrate. `estimateCompressedSize` answers it by encoding the first few seconds at the chosen preset and scaling up — the lightweight-proxy rule applied to a figure rather than a picture. It is an approximation by construction, is labelled as one, and fails silently rather than showing something wrong.
+
+**Say why it failed, when you can tell**: media tools route their failures through `mediaErrorMessage` (`lib/media-errors.ts`), which separates a lost cross-origin isolation (reload; the file is fine) and heap exhaustion (shorter clip, lighter preset) from everything else, and falls back to the tool's own wording rather than guessing.
+
+**Every long run is escapable**: an ffmpeg tool calls `useFfmpegCancel(busy)` (`lib/hooks/use-ffmpeg-cancel.ts`), which renders a **Cancel** button beside the busy primary button, warns before the tab is closed mid-encode, and calls `terminateFfmpeg()` (`lib/ffmpeg-loader.ts`) to abort the worker. Terminating leaves the FFmpeg object dead, so the loader drops its cached instance and the next run loads a fresh core. Call `beginRun()` at the top of the handler and gate the failure report on `wasCancelled()` — a cancel rejects the pending `exec` too, and reporting it would tell the user their file is broken when it is not.
+
 Full details in [`CLAUDE.md`](./CLAUDE.md).
 
 ---
@@ -200,7 +212,7 @@ omne/
 ## Contributing a new tool
 
 1. Implement the pure logic in `lib/tools/implementations/<id>.ts` with a unit test.
-2. Build the client component in `components/tools/<id>-tool.tsx` with a real-time preview.
+2. Build the client component in `components/tools/<id>-tool.tsx` with a real-time preview — and, if the pipeline is expensive, a `<ToolResult>` panel rather than an automatic download.
 3. Wire the page under `app/[locale]/<category>/<id>/page.tsx` + the `opengraph-image.tsx`.
 4. Add the entry in `lib/tools/registry.ts`.
 5. Add `tools.<category>.<id>` keys (including the `seo` block) in `messages/en.json` **and** `messages/fr.json`.
@@ -212,7 +224,7 @@ The sitemap, MIME-based routing and the `⌘K` palette pick the new tool up auto
 
 ## Brand
 
-omne is a Kouma Labs product. The header and the footer carry the co-branded lockup — the Kouma Labs app-icon, a muted slash, then the omne logo — as specified in the brand kit at [koumalabs.org/brands](https://koumalabs.org/brands). The header drops the tile below `md`, where it has no room; the footer shows the full lockup at every width.
+omne is a Kouma Labs product. The header and the footer carry the co-branded lockup — the Kouma Labs app-icon, a muted slash, then the omne logo — as specified in the brand kit at [koumalabs.org/brands](https://koumalabs.org/brands). The omne mark's size is derived from the tile's rather than fixed, so the two marks stay balanced at every step of the scale. The ring sits at ~0.73 of the tile: omne's solid stroke outweighs the Kouma halftone at equal height, so it has to be visibly the smaller shape to read as its equal. The ratio was settled by comparing candidates side by side, not by arithmetic. The header drops the tile below `md`, where it has no room; the footer shows the full lockup at every width.
 
 Both tiles (`public/kouma-tile-{dark,light}.svg`) are self-hosted and swapped through the `--kouma-tile` CSS variable under `[data-theme]` rather than Tailwind's `dark:` variant: this project drives its theme from the `data-theme` attribute, so a `prefers-color-scheme` swap would desync from what the user actually sees. Linking to koumalabs.org adds no outbound request — the privacy promise is unchanged.
 

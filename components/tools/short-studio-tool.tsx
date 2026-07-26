@@ -17,6 +17,7 @@ import { useVideoSegmentFrames } from '@/lib/hooks/use-video-segment-frames';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { downloadBlob, formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 
 type Messages = {
@@ -299,7 +300,7 @@ export function ShortStudioTool(messages: Messages) {
       <Card
         className={cn('p-8 border-2 border-dashed transition-colors', dragging ? 'border-accent bg-surface-hover' : 'border-border')}
         onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => { e.preventDefault(); setDragging(false); onPick(e.dataTransfer.files); }}
       >
         {!file ? (

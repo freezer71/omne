@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 import { tpl } from '@/lib/tpl';
 import { downloadBlob, outputName } from '@/lib/file-utils';
 import {
@@ -188,7 +189,7 @@ export function PdfFontSwapTool(m: PdfFontSwapMessages) {
             e.preventDefault();
             setDragging(true);
           }}
-          onDragLeave={() => setDragging(false)}
+          onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
           onDrop={(e) => {
             e.preventDefault();
             setDragging(false);

@@ -3,13 +3,21 @@
 import { useId, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { ToolResult, type ToolResultMessages } from '@/components/ui/tool-result';
 import {
   mergeAudio,
   mergeMimeForFormat,
   type MergeFormat,
 } from '@/lib/tools/implementations/audio-merge';
-import { downloadBlob, formatBytes } from '@/lib/file-utils';
+import { formatBytes } from '@/lib/file-utils';
+import { filesSignature, useToolResult } from '@/lib/hooks/use-tool-result';
+import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
+import { useClipMetadata } from '@/lib/hooks/use-clip-metadata';
+import { formatDuration, totalDuration } from '@/lib/tools/clip-summary';
+import { tpl } from '@/lib/tpl';
 import { cn } from '@/lib/cn';
+import { leftDropZone } from '@/lib/drag-utils';
 
 type Messages = {
   selectButton: string;
@@ -27,14 +35,22 @@ type Messages = {
   moveUpLabel: string;
   moveDownLabel: string;
   totalLabel: string;
+  totalDurationLabel: string;
   needMore: string;
+};
+
+type Props = Messages & {
+  result: ToolResultMessages;
+  cancelLabel: string;
+  cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 const FORMATS: MergeFormat[] = ['mp3', 'wav', 'flac', 'm4a'];
 const BITRATES = [128, 192, 256, 320];
 const LOSSLESS: ReadonlySet<MergeFormat> = new Set(['wav', 'flac']);
 
-export function AudioMergeTool(messages: Messages) {
+export function AudioMergeTool(messages: Props) {
   const inputId = useId();
   const formatId = useId();
   const bitrateId = useId();
@@ -47,6 +63,10 @@ export function AudioMergeTool(messages: Messages) {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const clips = useClipMetadata(files, 'audio');
+  const totalSeconds = totalDuration(clips);
+  const [result, setResult] = useToolResult(`${filesSignature(files)}|${format}|${bitrate}`);
+  const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
   const canMerge = files.length >= 2 && !busy;
   const isLossless = LOSSLESS.has(format);
@@ -86,6 +106,7 @@ export function AudioMergeTool(messages: Messages) {
   const onMerge = async () => {
     if (!canMerge) return;
     setBusy(true);
+    beginRun();
     setError(null);
     setProgress(0);
     try {
@@ -97,9 +118,9 @@ export function AudioMergeTool(messages: Messages) {
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], {
         type: mergeMimeForFormat(format),
       });
-      downloadBlob(blob, `merged.${format}`);
-    } catch {
-      setError(messages.error);
+      setResult({ blob, filename: `merged.${format}` });
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
     }
@@ -116,7 +137,7 @@ export function AudioMergeTool(messages: Messages) {
           e.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(e) => { if (leftDropZone(e)) setDragging(false); }}
         onDrop={(e) => {
           e.preventDefault();
           setDragging(false);
@@ -167,7 +188,12 @@ export function AudioMergeTool(messages: Messages) {
                     <span className="text-text-faint mr-2 font-mono">{i + 1}.</span>
                     {f.name}
                   </span>
-                  <span className="font-mono text-xs text-text-faint">{formatBytes(f.size)}</span>
+                  <span className="font-mono text-xs text-text-faint tabular-nums">
+                    {formatBytes(f.size)}
+                    {clips[i] && Number.isFinite(clips[i]!.durationSec)
+                      ? ` · ${formatDuration(clips[i]!.durationSec)}`
+                      : ''}
+                  </span>
                   <Button
                     variant="ghost"
                     size="sm"
@@ -202,7 +228,15 @@ export function AudioMergeTool(messages: Messages) {
             </ul>
             <div className="flex items-center justify-between">
               <p className="text-xs text-text-faint">
-                {files.length === 1 ? messages.needMore : `${messages.totalLabel}: ${formatBytes(totalBytes)}`}
+                {files.length === 1
+                  ? messages.needMore
+                  : `${messages.totalLabel}: ${formatBytes(totalBytes)}${
+                      totalSeconds === null
+                        ? ''
+                        : ` · ${tpl(messages.totalDurationLabel, {
+                            duration: formatDuration(totalSeconds),
+                          })}`
+                    }`}
               </p>
               <Button
                 variant="ghost"
@@ -252,17 +286,33 @@ export function AudioMergeTool(messages: Messages) {
             </label>
           )}
         </div>
-        <div className="flex items-center gap-3">
-          {error && (
-            <p role="alert" className="text-sm text-danger">
-              {error}
-            </p>
-          )}
-          <Button onClick={onMerge} disabled={!canMerge}>
-            {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.mergeButton}
-          </Button>
-        </div>
+        {!result && (
+          <div className="flex items-center gap-3">
+            {cancelled && <p role="status" className="text-xs text-text-muted">{messages.cancelledLabel}</p>}
+            {error && (
+              <p role="alert" className="text-sm text-danger">
+                {error}
+              </p>
+            )}
+            {busy && (
+              <Button variant="subtle" size="sm" onClick={cancelRun}>{messages.cancelLabel}</Button>
+            )}
+            <Button onClick={onMerge} disabled={!canMerge}>
+              {busy ? `${messages.busy} ${Math.round(progress * 100)}%` : messages.mergeButton}
+            </Button>
+          </div>
+        )}
       </div>
+
+      {result && (
+        <ToolResult
+          result={result}
+          kind="audio"
+          sourceBytes={files.reduce((n, f) => n + f.size, 0)}
+          messages={messages.result}
+          onRetry={() => setResult(null)}
+        />
+      )}
     </div>
   );
 }

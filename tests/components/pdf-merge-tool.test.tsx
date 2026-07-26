@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const mergePdfs = vi.fn();
@@ -29,6 +29,7 @@ const messages = {
   removeFile: 'Remove',
   moveUp: 'Move up',
   moveDown: 'Move down',
+  dragHandle: 'Drag to reorder',
   busy: 'Merging…',
   error: 'Something went wrong.',
   previewLoading: 'Loading',
@@ -37,6 +38,11 @@ const messages = {
   filesCountSingular: '{n} file',
   filesCountPlural: '{n} files',
 };
+
+// jsdom has no DataTransfer; the component only needs setData/effectAllowed.
+function makeDataTransfer() {
+  return { setData: () => {}, getData: () => '', effectAllowed: '' };
+}
 
 function pdfFile(name: string): File {
   return new File([new Uint8Array([0x25, 0x50, 0x44, 0x46])], name, { type: 'application/pdf' });
@@ -124,6 +130,63 @@ describe('PdfMergeTool', () => {
     await user.click(screen.getByRole('button', { name: messages.mergeButton }));
     const passed = mergePdfs.mock.calls[0]![0] as File[];
     expect(passed.map((f) => f.name)).toEqual(['c.pdf', 'a.pdf', 'b.pdf']);
+  });
+
+  it('reorders files by dragging a row onto another', async () => {
+    const user = userEvent.setup();
+    mergePdfs.mockResolvedValue(new Uint8Array([0x25, 0x50, 0x44, 0x46]));
+    render(<PdfMergeTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), [
+      pdfFile('a.pdf'),
+      pdfFile('b.pdf'),
+      pdfFile('c.pdf'),
+    ]);
+
+    const rows = screen.getAllByRole('listitem');
+    const handles = rows.map((row) => {
+      const handle = row.querySelector('[draggable="true"]');
+      if (!handle) throw new Error('row has no drag handle');
+      return handle;
+    });
+
+    // Drag the last file onto the first row.
+    fireEvent.dragStart(handles[2]!, { dataTransfer: makeDataTransfer() });
+    fireEvent.dragOver(rows[0]!, { dataTransfer: makeDataTransfer() });
+    fireEvent.drop(rows[0]!, { dataTransfer: makeDataTransfer() });
+
+    await user.click(screen.getByRole('button', { name: messages.mergeButton }));
+    const passed = mergePdfs.mock.calls[0]![0] as File[];
+    expect(passed.map((f) => f.name)).toEqual(['c.pdf', 'a.pdf', 'b.pdf']);
+  });
+
+  it('ignores a drop that did not start from a row, so a stray file drop cannot shuffle the list', async () => {
+    const user = userEvent.setup();
+    mergePdfs.mockResolvedValue(new Uint8Array([0x25, 0x50, 0x44, 0x46]));
+    render(<PdfMergeTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), [
+      pdfFile('a.pdf'),
+      pdfFile('b.pdf'),
+    ]);
+
+    const rows = screen.getAllByRole('listitem');
+    fireEvent.drop(rows[0]!, { dataTransfer: makeDataTransfer() });
+
+    await user.click(screen.getByRole('button', { name: messages.mergeButton }));
+    const passed = mergePdfs.mock.calls[0]![0] as File[];
+    expect(passed.map((f) => f.name)).toEqual(['a.pdf', 'b.pdf']);
+  });
+
+  it('keeps the buttons as the keyboard path, since native drag is pointer-only', async () => {
+    const user = userEvent.setup();
+    render(<PdfMergeTool {...messages} />);
+    await user.upload(screen.getByLabelText(messages.selectButton), [
+      pdfFile('a.pdf'),
+      pdfFile('b.pdf'),
+    ]);
+    expect(screen.getAllByRole('button', { name: messages.moveUp })).toHaveLength(2);
+    expect(screen.getAllByRole('button', { name: messages.moveDown })).toHaveLength(2);
+    // The handle is decorative: it must not add a second, unusable tab stop.
+    expect(document.querySelector('[draggable="true"]')).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('shows an error if merge fails', async () => {

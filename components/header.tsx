@@ -21,7 +21,7 @@ export function Header({ locale, dict }: Props) {
             locale={locale}
             koumaLabel={dict.nav.koumaAriaLabel}
             siteName={dict.meta.siteName}
-            size="xl"
+            size="md"
             compact
           />
           <Link
