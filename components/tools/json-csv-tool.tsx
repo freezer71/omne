@@ -217,37 +217,6 @@ export function JsonCsvTool(messages: Messages) {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="flex flex-col gap-1.5">
-          <label className="text-xs text-text-muted">
-            {mode === 'json-to-csv' ? messages.jsonInputLabel : messages.csvInputLabel}
-          </label>
-          <JsonInput
-            value={input}
-            onChange={onChangeInput}
-            placeholder={
-              mode === 'json-to-csv' ? messages.jsonInputPlaceholder : messages.csvInputPlaceholder
-            }
-            invalid={validity === 'invalid'}
-            ariaLabel={mode === 'json-to-csv' ? messages.jsonInputLabel : messages.csvInputLabel}
-          />
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <label className="text-xs text-text-muted">
-            {mode === 'json-to-csv' ? messages.csvOutputLabel : messages.jsonOutputLabel}
-          </label>
-          {outputText ? (
-            <JsonInput value={outputText} onChange={() => undefined} readOnly enableFileDrop={false} />
-          ) : (
-            <Card className="flex min-h-[24rem] items-center justify-center px-3 py-2 text-sm text-text-faint">
-              {messages.empty}
-            </Card>
-          )}
-        </div>
-      </div>
-
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
         <fieldset className="flex flex-wrap items-center gap-2 text-xs">
           <legend className="px-1 text-text-muted">{messages.delimiter}</legend>
           {(
@@ -280,6 +249,37 @@ export function JsonCsvTool(messages: Messages) {
           ))}
         </fieldset>
 
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs text-text-muted">
+            {mode === 'json-to-csv' ? messages.jsonInputLabel : messages.csvInputLabel}
+          </label>
+          <JsonInput
+            value={input}
+            onChange={onChangeInput}
+            placeholder={
+              mode === 'json-to-csv' ? messages.jsonInputPlaceholder : messages.csvInputPlaceholder
+            }
+            invalid={validity === 'invalid'}
+            ariaLabel={mode === 'json-to-csv' ? messages.jsonInputLabel : messages.csvInputLabel}
+          />
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs text-text-muted">
+            {mode === 'json-to-csv' ? messages.csvOutputLabel : messages.jsonOutputLabel}
+          </label>
+          {outputText ? (
+            <JsonInput value={outputText} onChange={() => undefined} readOnly enableFileDrop={false} />
+          ) : (
+            <Card className="flex min-h-[24rem] items-center justify-center px-3 py-2 text-sm text-text-faint">
+              {messages.empty}
+            </Card>
+          )}
+        </div>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
         <label className="flex items-center gap-2 text-xs text-text-muted">
           <input
             type="checkbox"

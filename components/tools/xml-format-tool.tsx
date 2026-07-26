@@ -169,6 +169,31 @@ export function XmlFormatTool(messages: Messages) {
         </span>
       </div>
 
+        <fieldset className="flex flex-wrap items-center gap-2 text-xs">
+          <legend className="px-1 text-text-muted">{messages.mode}</legend>
+          {MODES.map((value) => (
+            <label
+              key={value}
+              className={cn(
+                'flex cursor-pointer items-center gap-1.5 rounded-md border px-2.5 py-1 transition-colors',
+                mode === value
+                  ? 'border-accent bg-surface-hover text-text-primary'
+                  : 'border-border bg-surface text-text-muted hover:border-border-strong',
+              )}
+            >
+              <input
+                type="radio"
+                name={modeName}
+                value={value}
+                checked={mode === value}
+                onChange={() => setMode(value)}
+                className="sr-only"
+              />
+              {modeLabels[value]}
+            </label>
+          ))}
+        </fieldset>
+
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="flex flex-col gap-1.5">
           <div className="flex items-baseline justify-between">
@@ -225,31 +250,6 @@ export function XmlFormatTool(messages: Messages) {
       </div>
 
       <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-        <fieldset className="flex flex-wrap items-center gap-2 text-xs">
-          <legend className="px-1 text-text-muted">{messages.mode}</legend>
-          {MODES.map((value) => (
-            <label
-              key={value}
-              className={cn(
-                'flex cursor-pointer items-center gap-1.5 rounded-md border px-2.5 py-1 transition-colors',
-                mode === value
-                  ? 'border-accent bg-surface-hover text-text-primary'
-                  : 'border-border bg-surface text-text-muted hover:border-border-strong',
-              )}
-            >
-              <input
-                type="radio"
-                name={modeName}
-                value={value}
-                checked={mode === value}
-                onChange={() => setMode(value)}
-                className="sr-only"
-              />
-              {modeLabels[value]}
-            </label>
-          ))}
-        </fieldset>
-
         {mode === 'minify' ? null : (
           <fieldset className="flex flex-wrap items-center gap-2 text-xs">
             <legend className="px-1 text-text-muted">{messages.indent}</legend>

@@ -128,6 +128,38 @@ export function JsonFormatTool(messages: Messages) {
         </span>
       </div>
 
+        <fieldset className="flex flex-wrap items-center gap-2 text-xs">
+          <legend className="px-1 text-text-muted">{messages.indent}</legend>
+          {(
+            [
+              ['2', messages.indent2],
+              ['4', messages.indent4],
+              ['tab', messages.indentTab],
+              ['minify', messages.minify],
+            ] as const
+          ).map(([value, label]) => (
+            <label
+              key={value}
+              className={cn(
+                'flex cursor-pointer items-center gap-1.5 rounded-md border px-2.5 py-1 transition-colors',
+                indent === value
+                  ? 'border-accent bg-surface-hover text-text-primary'
+                  : 'border-border bg-surface text-text-muted hover:border-border-strong',
+              )}
+            >
+              <input
+                type="radio"
+                name={indentName}
+                value={value}
+                checked={indent === value}
+                onChange={() => setIndent(value)}
+                className="sr-only"
+              />
+              {label}
+            </label>
+          ))}
+        </fieldset>
+
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="flex flex-col gap-1.5">
           <div className="flex items-baseline justify-between">
@@ -173,38 +205,6 @@ export function JsonFormatTool(messages: Messages) {
       </div>
 
       <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-        <fieldset className="flex flex-wrap items-center gap-2 text-xs">
-          <legend className="px-1 text-text-muted">{messages.indent}</legend>
-          {(
-            [
-              ['2', messages.indent2],
-              ['4', messages.indent4],
-              ['tab', messages.indentTab],
-              ['minify', messages.minify],
-            ] as const
-          ).map(([value, label]) => (
-            <label
-              key={value}
-              className={cn(
-                'flex cursor-pointer items-center gap-1.5 rounded-md border px-2.5 py-1 transition-colors',
-                indent === value
-                  ? 'border-accent bg-surface-hover text-text-primary'
-                  : 'border-border bg-surface text-text-muted hover:border-border-strong',
-              )}
-            >
-              <input
-                type="radio"
-                name={indentName}
-                value={value}
-                checked={indent === value}
-                onChange={() => setIndent(value)}
-                className="sr-only"
-              />
-              {label}
-            </label>
-          ))}
-        </fieldset>
-
         <label htmlFor={sortId} className="flex items-center gap-2 text-xs text-text-muted">
           <input
             id={sortId}
