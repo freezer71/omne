@@ -3,18 +3,25 @@ import { test, expect } from '@playwright/test';
 test.describe('hub page', () => {
   test('renders the hero with title and subtitle', async ({ page }) => {
     await page.goto('/en');
-    await expect(page.getByRole('heading', { level: 1, name: 'omne' })).toBeVisible();
-    await expect(page.getByText(/privacy-first toolkit/i)).toBeVisible();
+    // The h1 is the hero line, not the wordmark — hub.title ("omne") is the
+    // page/meta title, home.hero.title is what the page shows.
+    await expect(
+      page.getByRole('heading', { level: 1, name: /your browser is the toolkit/i }),
+    ).toBeVisible();
+    await expect(page.getByText(/files never leave your device/i).first()).toBeVisible();
   });
 
   test('shows the PDF tools section with the 5 PDF tools', async ({ page }) => {
     await page.goto('/en');
     await expect(page.getByRole('heading', { name: /pdf tools/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /merge pdfs/i })).toHaveAttribute('href', '/en/pdf/merge');
-    await expect(page.getByRole('link', { name: /split pdf/i })).toHaveAttribute('href', '/en/pdf/split');
-    await expect(page.getByRole('link', { name: /rotate pdf/i })).toHaveAttribute('href', '/en/pdf/rotate');
-    await expect(page.getByRole('link', { name: /pdf to images/i })).toHaveAttribute('href', '/en/pdf/to-images');
-    await expect(page.getByRole('link', { name: /images to pdf/i })).toHaveAttribute('href', '/en/pdf/from-images');
+    const pdf = page.locator('#cat-pdf');
+    // Scoped to the category section: a tool also appears in the "most used"
+    // strip above, so an unscoped link lookup matches twice.
+    await expect(pdf.getByRole('link', { name: /merge pdfs/i })).toHaveAttribute('href', '/en/pdf/merge');
+    await expect(pdf.getByRole('link', { name: /split pdf/i })).toHaveAttribute('href', '/en/pdf/split');
+    await expect(pdf.getByRole('link', { name: /rotate pdf/i })).toHaveAttribute('href', '/en/pdf/rotate');
+    await expect(pdf.getByRole('link', { name: /pdf to images/i })).toHaveAttribute('href', '/en/pdf/to-images');
+    await expect(pdf.getByRole('link', { name: /images to pdf/i })).toHaveAttribute('href', '/en/pdf/from-images');
   });
 
   test('shows the video tools section with the 2 video tools', async ({ page }) => {

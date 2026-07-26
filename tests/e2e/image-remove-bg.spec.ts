@@ -8,7 +8,9 @@ test.describe('/en/image/remove-bg', () => {
   test('renders tool page with model notice and disabled button', async ({ page }) => {
     await page.goto('/en/image/remove-bg');
     await expect(page.getByRole('heading', { level: 1, name: /remove background/i })).toBeVisible();
-    await expect(page.getByText(/first use downloads/i)).toBeVisible();
+    // The how-it-works list repeats this; the assertion is about the notice
+    // shown above the tool, which comes first in the document.
+    await expect(page.getByText(/first use downloads/i).first()).toBeVisible();
     await expect(page.getByRole('button', { name: /remove background/i })).toBeDisabled();
   });
 
