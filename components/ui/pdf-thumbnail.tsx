@@ -2,28 +2,16 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/cn';
+import { getPdfDocument } from '@/lib/pdf-document-cache';
 
 type Props = {
-  file: File | Uint8Array;
+  file: File;
   pageIndex?: number;
   maxWidth?: number;
   className?: string;
   loadingLabel: string;
   errorLabel: string;
 };
-
-let workerConfigured = false;
-
-async function configureWorker(pdfjsLib: typeof import('pdfjs-dist')) {
-  if (workerConfigured) return;
-  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdfjs/pdf.worker.min.mjs';
-  workerConfigured = true;
-}
-
-async function toBytes(input: File | Uint8Array): Promise<Uint8Array> {
-  if (input instanceof Uint8Array) return input;
-  return new Uint8Array(await input.arrayBuffer());
-}
 
 export function PdfThumbnail({
   file,
@@ -34,7 +22,11 @@ export function PdfThumbnail({
   errorLabel,
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
+  // Without an observer (older engines, jsdom) there is no way to know what is
+  // on screen, so render everything rather than nothing.
+  const [visible, setVisible] = useState(() => typeof IntersectionObserver === 'undefined');
   const [trackedInput, setTrackedInput] = useState({ file, pageIndex, maxWidth });
 
   if (
@@ -46,14 +38,32 @@ export function PdfThumbnail({
     setState('loading');
   }
 
+  // Rendering every page of a long document at once locks the tab up for
+  // seconds. Wait until the thumbnail is near the viewport; `rootMargin` starts
+  // the work early enough that scrolling rarely catches an empty slot.
   useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '300px' },
+    );
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
     let cancelled = false;
     (async () => {
       try {
-        const pdfjsLib = await import('pdfjs-dist');
-        await configureWorker(pdfjsLib);
-        const bytes = await toBytes(file);
-        const doc = await pdfjsLib.getDocument({ data: bytes }).promise;
+        // Shared across every thumbnail of this file — see lib/pdf-document-cache.
+        const doc = await getPdfDocument(file);
         if (cancelled) return;
         const page = await doc.getPage(pageIndex);
         if (cancelled) return;
@@ -75,10 +85,11 @@ export function PdfThumbnail({
     return () => {
       cancelled = true;
     };
-  }, [file, pageIndex, maxWidth]);
+  }, [file, pageIndex, maxWidth, visible]);
 
   return (
     <div
+      ref={frameRef}
       className={cn(
         'relative overflow-hidden rounded border border-border bg-surface flex items-center justify-center',
         className,
