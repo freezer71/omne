@@ -298,15 +298,54 @@ function AudioPreview({
   onDuration: (d: number) => void;
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const gainRef = useRef<GainNode | null>(null);
   const url = useBlobUrl(file);
+
+  // HTMLMediaElement.volume is capped at 1, so every boost from +1 to +20 dB
+  // used to sound exactly like 0 dB: the preview quietly disagreed with the
+  // file the tool was about to produce. A GainNode has no such ceiling.
+  //
+  // createMediaElementSource may only be called once per element, ever — hence
+  // the key on the <audio> below, which gives each source URL its own node.
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = Math.min(1, Math.max(0, previewVolume));
+    const el = audioRef.current;
+    if (!el) return;
+    const Ctx = window.AudioContext;
+    if (typeof Ctx !== 'function') return;
+
+    const ctx = new Ctx();
+    const source = ctx.createMediaElementSource(el);
+    const gain = ctx.createGain();
+    source.connect(gain).connect(ctx.destination);
+    gainRef.current = gain;
+
+    // Browsers start the context suspended until a gesture; pressing play is one.
+    const resume = () => void ctx.resume();
+    el.addEventListener('play', resume);
+
+    return () => {
+      el.removeEventListener('play', resume);
+      gainRef.current = null;
+      source.disconnect();
+      gain.disconnect();
+      void ctx.close();
+    };
+  }, [url]);
+
+  useEffect(() => {
+    const value = Math.max(0, previewVolume);
+    if (gainRef.current) {
+      gainRef.current.gain.value = value;
+    } else if (audioRef.current) {
+      // No Web Audio: the element's own volume is all there is, ceiling included.
+      audioRef.current.volume = Math.min(1, value);
     }
-  }, [previewVolume]);
+  }, [previewVolume, url]);
+
   if (!url) return null;
   return (
     <audio
+      key={url}
       ref={audioRef}
       src={url}
       controls

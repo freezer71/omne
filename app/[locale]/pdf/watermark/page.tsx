@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   return (
     <>
       <ToolShell
-        locale={locale}
+wide         locale={locale}
         category="pdf"
         name={dict.tools.pdf.watermark.name}
         description={dict.tools.pdf.watermark.description}

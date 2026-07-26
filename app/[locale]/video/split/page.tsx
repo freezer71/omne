@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   return (
     <>
     <ToolShell
-      locale={locale}
+wide       locale={locale}
       category="video"
       name={tool.name}
       description={tool.description}
