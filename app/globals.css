@@ -153,6 +153,27 @@ body {
     outline-offset: 2px;
     border-radius: var(--radius);
   }
+
+  /* The rule above paints the ring on the focused element itself, which fails
+     wherever that element is deliberately invisible. Two such patterns run
+     through the whole catalogue:
+       - option chips — a styled <label> wrapping an sr-only radio/checkbox,
+       - file pickers — an sr-only <input type="file"> beside a styled button.
+     `sr-only` clips the control to a 1×1px box, so the browser dutifully drew a
+     ring nobody could see and keyboard users tabbed through the tool options
+     blind. Move the ring onto the element they are actually looking at. */
+  label:has(> input.sr-only:focus-visible),
+  input.sr-only:focus-visible + button {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+
+  /* …and drop it from the hidden control, so it is not painted in two places.
+     This wins over the :where() rule above, which has zero specificity. */
+  input.sr-only:focus-visible {
+    outline: none;
+  }
 }
 
 /* ---------- Reduced motion ---------- */
