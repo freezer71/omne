@@ -877,7 +877,7 @@
         "content": {
           "howItWorks": [
             "Déposez un fichier MP4, WebM, MOV ou MKV pour le charger dans l'aperçu.",
-            "Réglez les valeurs X, Y, largeur et hauteur en pixels — le rectangle d'accentuation montre la zone de recadrage en direct sur l'image.",
+            "Déplacez le rectangle d'accentuation directement sur la vidéo, ou saisissez les valeurs exactes X, Y, largeur et hauteur en pixels.",
             "Cliquez sur Recadrer : FFmpeg WebAssembly exporte uniquement le rectangle sélectionné dans votre navigateur, puis téléchargez."
           ],
           "features": [
@@ -911,7 +911,8 @@
           "error": "Impossible de recadrer cette vidéo.",
           "removeFile": "Retirer",
           "etaLabel": "Environ {remaining} restant",
-          "etaCalculating": "Estimation du temps restant…"
+          "etaCalculating": "Estimation du temps restant…",
+          "moveCropLabel": "Glisser pour déplacer la zone de recadrage"
         }
       },
       "rotate": {

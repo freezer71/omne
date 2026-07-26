@@ -877,7 +877,7 @@
         "content": {
           "howItWorks": [
             "Drop an MP4, WebM, MOV or MKV to load it into the preview pane.",
-            "Set the X, Y, width and height in pixels — the accent rectangle shows the crop region live on the frame.",
+            "Drag the highlighted rectangle on the video, or type exact X, Y, width and height values in pixels.",
             "Click Crop and FFmpeg WebAssembly exports just the selected rectangle in your browser, then download."
           ],
           "features": [
@@ -911,7 +911,8 @@
           "error": "Could not crop that video.",
           "removeFile": "Remove",
           "etaLabel": "About {remaining} left",
-          "etaCalculating": "Estimating remaining time…"
+          "etaCalculating": "Estimating remaining time…",
+          "moveCropLabel": "Drag to move the crop area"
         }
       },
       "rotate": {

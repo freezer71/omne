@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { HeavyFileWarning } from '@/components/ui/heavy-file-warning';
@@ -27,6 +27,7 @@ type Messages = {
   etaLabel: string;
   etaCalculating: string;
   largeFileWarning: string;
+  moveCropLabel: string;
 };
 
 type Props = Messages & {
@@ -125,7 +126,14 @@ export function VideoCropTool(messages: Props) {
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            <CropPreview file={file} onMeta={onMeta} crop={crop} dims={dims} />
+            <CropPreview
+              file={file}
+              onMeta={onMeta}
+              crop={crop}
+              dims={dims}
+              onCropChange={setCrop}
+              moveLabel={messages.moveCropLabel}
+            />
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm text-text-primary">{file.name}</p>
@@ -194,22 +202,105 @@ export function VideoCropTool(messages: Props) {
   );
 }
 
-function CropPreview({ file, onMeta, crop, dims }: { file: File; onMeta: (w: number, h: number) => void; crop: { x: number; y: number; w: number; h: number }; dims: { w: number; h: number } }) {
+const PREVIEW_MAX_HEIGHT_REM = 18;
+
+type Crop = { x: number; y: number; w: number; h: number };
+
+// The overlay is positioned as a percentage of its container, so the container
+// has to be exactly the picture — no letterboxing.
+//
+// It used to be `w-full max-h-72` on both the box and the <video>. Browsers
+// apply `object-fit: contain` to video, so as soon as the height cap bit (any
+// 16:9 clip in a container wider than ~512px, i.e. every desktop layout) the
+// picture was letterboxed inside a wider box while the overlay stayed glued to
+// the box. The rectangle drawn on screen was not the rectangle being cropped.
+// Giving the container the clip's own aspect ratio makes the two coincide by
+// construction.
+function CropPreview({
+  file,
+  onMeta,
+  crop,
+  dims,
+  onCropChange,
+  moveLabel,
+}: {
+  file: File;
+  onMeta: (w: number, h: number) => void;
+  crop: Crop;
+  dims: { w: number; h: number };
+  onCropChange: (next: Crop) => void;
+  moveLabel: string;
+}) {
   const url = useBlobUrl(file);
-  const showOverlay = dims.w > 0 && dims.h > 0;
+  const frameRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef<{ pointerId: number; startX: number; startY: number; origin: Crop } | null>(
+    null,
+  );
+  const known = dims.w > 0 && dims.h > 0;
+
+  // Pointer travel in CSS pixels → the clip's own pixel grid.
+  const scale = () => {
+    const rect = frameRef.current?.getBoundingClientRect();
+    return rect && rect.width > 0 ? dims.w / rect.width : 1;
+  };
+
+  const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (!known) return;
+    e.preventDefault();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    dragRef.current = { pointerId: e.pointerId, startX: e.clientX, startY: e.clientY, origin: crop };
+  };
+
+  const onPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== e.pointerId) return;
+    const k = scale();
+    const { origin } = drag;
+    onCropChange({
+      ...origin,
+      x: Math.round(Math.max(0, Math.min(dims.w - origin.w, origin.x + (e.clientX - drag.startX) * k))),
+      y: Math.round(Math.max(0, Math.min(dims.h - origin.h, origin.y + (e.clientY - drag.startY) * k))),
+    });
+  };
+
+  const endDrag = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+    dragRef.current = null;
+  };
+
   if (!url) return null;
+
   return (
-    <div className="relative w-full max-h-72 overflow-hidden rounded-md border border-border bg-black">
+    <div
+      ref={frameRef}
+      className="relative mx-auto w-full overflow-hidden rounded-md border border-border bg-black"
+      style={
+        known
+          ? {
+              aspectRatio: `${dims.w} / ${dims.h}`,
+              maxWidth: `${(PREVIEW_MAX_HEIGHT_REM * dims.w) / dims.h}rem`,
+            }
+          : { maxHeight: `${PREVIEW_MAX_HEIGHT_REM}rem` }
+      }
+    >
       <video
         src={url}
         controls
         onLoadedMetadata={(e) => onMeta(e.currentTarget.videoWidth, e.currentTarget.videoHeight)}
-        className="w-full max-h-72"
+        className="h-full w-full"
       />
-      {showOverlay && (
+      {known && crop.w > 0 && crop.h > 0 && (
         <div
-          aria-hidden
-          className="pointer-events-none absolute border-2 border-accent/80"
+          role="button"
+          tabIndex={-1}
+          aria-label={moveLabel}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          className="absolute cursor-move touch-none border-2 border-accent/80 bg-accent/5"
           style={{
             left: `${(crop.x / dims.w) * 100}%`,
             top: `${(crop.y / dims.h) * 100}%`,
