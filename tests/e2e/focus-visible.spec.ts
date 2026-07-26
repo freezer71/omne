@@ -27,14 +27,21 @@ async function ringOfActiveAncestor(page: import('@playwright/test').Page, sel: 
   }, sel);
 }
 
-// Tabs forward until the focused element matches, so the test does not depend on
-// how many header controls precede the tool.
-async function tabUntil(page: import('@playwright/test').Page, sel: string, max = 25) {
+// Tabs until the focused element matches, so the test does not depend on how
+// many header controls precede the tool. Direction matters: on the text tools
+// the option chips sit *above* the input, so reaching them from the textarea
+// means walking backwards.
+async function tabUntil(
+  page: import('@playwright/test').Page,
+  sel: string,
+  { back = false, max = 25 }: { back?: boolean; max?: number } = {},
+) {
+  const matches = () => page.evaluate((s) => document.activeElement?.matches(s) ?? false, sel);
   for (let i = 0; i < max; i++) {
-    if (await page.evaluate((s) => document.activeElement?.matches(s) ?? false, sel)) return true;
-    await page.keyboard.press('Tab');
+    if (await matches()) return true;
+    await page.keyboard.press(back ? 'Shift+Tab' : 'Tab');
   }
-  return page.evaluate((s) => document.activeElement?.matches(s) ?? false, sel);
+  return matches();
 }
 
 test.describe('focus is visible on controls that stand in for hidden inputs', () => {
@@ -46,7 +53,7 @@ test.describe('focus is visible on controls that stand in for hidden inputs', ()
   test('an option chip rings its label, not the clipped radio inside it', async ({ page }) => {
     await page.goto('/en/text/case');
     await page.locator('textarea').click();
-    expect(await tabUntil(page, 'input[type="radio"]')).toBe(true);
+    expect(await tabUntil(page, 'input[type="radio"]', { back: true })).toBe(true);
 
     // The control itself really is unusable as a focus target.
     const radioBox = await page.evaluate(
@@ -70,7 +77,7 @@ test.describe('focus is visible on controls that stand in for hidden inputs', ()
   test('arrowing through the group moves the visible ring', async ({ page }) => {
     await page.goto('/en/text/case');
     await page.locator('textarea').click();
-    await tabUntil(page, 'input[type="radio"]');
+    await tabUntil(page, 'input[type="radio"]', { back: true });
 
     const first = await page.evaluate(() => document.activeElement?.closest('label')?.textContent);
     await page.keyboard.press('ArrowRight');
