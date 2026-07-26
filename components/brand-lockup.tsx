@@ -4,13 +4,28 @@ import type { Locale } from '@/lib/i18n/config';
 
 const KOUMA_URL = 'https://koumalabs.org';
 
-/** Same scale as the BrandLockup published in the Kouma Labs brand kit. */
+/**
+ * Tile sizes are the scale published in the Kouma Labs brand kit; `mark` is the
+ * omne logo's SVG box, derived from each of them rather than chosen.
+ *
+ * The omne circle is r=9 with a 3-wide stroke in a 24 viewBox, so its drawn ring
+ * is only 0.875 of its box. Pairing the tile with a fixed 18px box put a 40px
+ * tile beside a 15.75px hairline ring — two and a half times the size.
+ *
+ * The ring is now ~0.9 of its tile. That ratio is about contrast, not geometry:
+ * the Kouma mark is a halftone of small dots, so it reads as a soft mid-grey
+ * mass, while the omne ring is a solid high-contrast stroke. Matched pixel for
+ * pixel the ring wins; the tile has to be the larger of the two to hold its
+ * side. That texture also sets a floor — below roughly 24px the dots collapse
+ * into a smudge and the K stops being a K, which is why the header takes `md`
+ * rather than something smaller.
+ */
 const SIZES = {
-  sm: 'size-5',
-  md: 'size-6',
-  lg: 'size-8',
-  xl: 'size-10',
-  '2xl': 'size-12',
+  sm: { tile: 'size-5', mark: 21 }, // 20px tile · 18.4px ring
+  md: { tile: 'size-6', mark: 25 }, // 24px tile · 21.9px ring
+  lg: { tile: 'size-8', mark: 33 }, // 32px tile · 28.9px ring
+  xl: { tile: 'size-10', mark: 41 }, // 40px tile · 35.9px ring
+  '2xl': { tile: 'size-12', mark: 49 }, // 48px tile · 42.9px ring
 } as const;
 
 type Props = {
@@ -37,9 +52,10 @@ export function BrandLockup({
   locale,
   koumaLabel,
   siteName,
-  size = 'xl',
+  size = 'md',
   compact = false,
 }: Props) {
+  const { tile, mark } = SIZES[size];
   return (
     <span className="inline-flex w-fit items-center gap-2">
       <a
@@ -49,10 +65,7 @@ export function BrandLockup({
         aria-label={koumaLabel}
         className={`${compact ? 'hidden md:inline-flex' : 'inline-flex'} transition-opacity hover:opacity-70`}
       >
-        <span
-          aria-hidden
-          className={`kouma-tile block shrink-0 rounded-[22%] ${SIZES[size]}`}
-        />
+        <span aria-hidden className={`kouma-tile block shrink-0 rounded-[22%] ${tile}`} />
       </a>
       <span
         aria-hidden
@@ -65,7 +78,7 @@ export function BrandLockup({
         aria-label={siteName}
         className="transition-opacity hover:opacity-70"
       >
-        <Logo />
+        <Logo markSize={mark} />
       </Link>
     </span>
   );
