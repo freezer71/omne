@@ -74,11 +74,12 @@ describe('BrandLockup', () => {
     ] as const) {
       const { container } = render(<BrandLockup {...props} size={size} />);
       expect(tileOf(container, tilePx)).toBe(true);
-      // The halftone tile reads lighter than the solid ring, so it stays the
-      // larger of the pair — but only just.
+      // The solid ring outweighs the halftone tile at equal height, so it has
+      // to be visibly smaller to look like its equal — but not so small that
+      // omne disappears next to the studio mark.
       const ring = ringOf(container);
-      expect(ring).toBeLessThan(tilePx);
-      expect(ring / tilePx).toBeGreaterThan(0.85);
+      expect(ring / tilePx).toBeGreaterThan(0.68);
+      expect(ring / tilePx).toBeLessThan(0.78);
     }
   });
 });

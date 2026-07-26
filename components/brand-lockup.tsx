@@ -12,20 +12,25 @@ const KOUMA_URL = 'https://koumalabs.org';
  * is only 0.875 of its box. Pairing the tile with a fixed 18px box put a 40px
  * tile beside a 15.75px hairline ring — two and a half times the size.
  *
- * The ring is now ~0.9 of its tile. That ratio is about contrast, not geometry:
- * the Kouma mark is a halftone of small dots, so it reads as a soft mid-grey
- * mass, while the omne ring is a solid high-contrast stroke. Matched pixel for
- * pixel the ring wins; the tile has to be the larger of the two to hold its
- * side. That texture also sets a floor — below roughly 24px the dots collapse
- * into a smudge and the K stops being a K, which is why the header takes `md`
- * rather than something smaller.
+ * The ring lands at ~0.73 of its tile. That ratio is about contrast, not
+ * geometry, and it was settled by putting the candidates side by side rather
+ * than by arithmetic. The Kouma mark is a halftone of small dots that averages
+ * out to a soft mid-grey; omne's ring is a solid #fafafa stroke a full eighth of
+ * its own diameter thick. Matched height for height the ring simply shouts
+ * louder, so it has to be visibly the smaller shape to weigh the same. Making
+ * them the same size — or the ring larger, which is what a filled-square rule of
+ * thumb would suggest — reads as omne overpowering the studio mark.
+ *
+ * The texture also sets a floor: below roughly 24px the dots collapse into a
+ * smudge and the K stops being a K, which is why the header takes `md` rather
+ * than anything smaller.
  */
 const SIZES = {
-  sm: { tile: 'size-5', mark: 21 }, // 20px tile · 18.4px ring
-  md: { tile: 'size-6', mark: 25 }, // 24px tile · 21.9px ring
-  lg: { tile: 'size-8', mark: 33 }, // 32px tile · 28.9px ring
-  xl: { tile: 'size-10', mark: 41 }, // 40px tile · 35.9px ring
-  '2xl': { tile: 'size-12', mark: 49 }, // 48px tile · 42.9px ring
+  sm: { tile: 'size-5', mark: 17 }, // 20px tile · 14.9px ring
+  md: { tile: 'size-6', mark: 20 }, // 24px tile · 17.5px ring
+  lg: { tile: 'size-8', mark: 27 }, // 32px tile · 23.6px ring
+  xl: { tile: 'size-10', mark: 33 }, // 40px tile · 28.9px ring
+  '2xl': { tile: 'size-12', mark: 40 }, // 48px tile · 35.0px ring
 } as const;
 
 type Props = {
