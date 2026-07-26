@@ -60,7 +60,11 @@
       "ready": "Processing complete. Your file is ready to download."
     },
     "cancelRun": "Cancel",
-    "runCancelled": "Cancelled. Nothing was changed."
+    "runCancelled": "Cancelled. Nothing was changed.",
+    "mediaError": {
+      "memory": "The browser ran out of memory on this file. Try a shorter clip, or a smaller preset.",
+      "isolation": "This page lost the settings the media engine needs. Reload it and try again — your file is fine."
+    }
   },
   "badge": {
     "privacy": "100% local · no upload"

@@ -138,6 +138,8 @@ Each tool follows the same 5-file skeleton plus one registry entry:
 
 **Don't promise a number you cannot compute**: `video/compress` encodes at a fixed quantizer, so its output size cannot be derived from duration × bitrate. `estimateCompressedSize` answers it by encoding the first few seconds at the chosen preset and scaling up — the lightweight-proxy rule applied to a figure rather than a picture. It is an approximation by construction, is labelled as one, and fails silently rather than showing something wrong.
 
+**Say why it failed, when you can tell**: media tools route their failures through `mediaErrorMessage` (`lib/media-errors.ts`), which separates a lost cross-origin isolation (reload; the file is fine) and heap exhaustion (shorter clip, lighter preset) from everything else, and falls back to the tool's own wording rather than guessing.
+
 **Every long run is escapable**: an ffmpeg tool calls `useFfmpegCancel(busy)` (`lib/hooks/use-ffmpeg-cancel.ts`), which renders a **Cancel** button beside the busy primary button, warns before the tab is closed mid-encode, and calls `terminateFfmpeg()` (`lib/ffmpeg-loader.ts`) to abort the worker. Terminating leaves the FFmpeg object dead, so the loader drops its cached instance and the next run loads a fresh core. Call `beginRun()` at the top of the handler and gate the failure report on `wasCancelled()` — a cancel rejects the pending `exec` too, and reporting it would tell the user their file is broken when it is not.
 
 Full details in [`CLAUDE.md`](./CLAUDE.md).

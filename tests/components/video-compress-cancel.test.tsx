@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { resultMessages } from '@/tests/helpers/tool-result-messages';
+import { resultMessages, mediaErrorMessages } from '@/tests/helpers/tool-result-messages';
 
 const compressVideo = vi.fn();
 const terminateFfmpeg = vi.fn();
@@ -55,7 +55,7 @@ function pendingRun() {
 }
 
 async function startRun(user: ReturnType<typeof userEvent.setup>) {
-  render(<VideoCompressTool {...messages} result={resultMessages} />);
+  render(<VideoCompressTool {...messages} result={resultMessages} mediaError={mediaErrorMessages} />);
   await user.upload(screen.getByLabelText(messages.selectButton), mp4());
   await user.click(screen.getByRole('button', { name: messages.compressButton }));
 }
@@ -68,7 +68,7 @@ beforeEach(() => {
 describe('VideoCompressTool — cancelling a run', () => {
   it('offers no way out until a run is actually under way', async () => {
     const user = userEvent.setup();
-    render(<VideoCompressTool {...messages} result={resultMessages} />);
+    render(<VideoCompressTool {...messages} result={resultMessages} mediaError={mediaErrorMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp4());
     expect(screen.queryByRole('button', { name: messages.cancelLabel })).not.toBeInTheDocument();
   });
@@ -145,5 +145,37 @@ describe('VideoCompressTool — cancelling a run', () => {
 
     addSpy.mockRestore();
     removeSpy.mockRestore();
+  });
+});
+
+describe('VideoCompressTool — telling the user why it failed', () => {
+  it('names the real cause when the browser ran out of memory', async () => {
+    const user = userEvent.setup();
+    const settle = pendingRun();
+    await startRun(user);
+    settle.reject(new Error('Aborted(OOM)'));
+
+    const alert = await screen.findByRole('alert');
+    expect(alert).toHaveTextContent(mediaErrorMessages.memory);
+    // The generic "could not compress" would have sent them looking at the file.
+    expect(alert).not.toHaveTextContent(messages.error);
+  });
+
+  it('says to reload when the page lost cross-origin isolation', async () => {
+    const user = userEvent.setup();
+    const settle = pendingRun();
+    await startRun(user);
+    settle.reject(new Error('ffmpeg multi-thread requires cross-origin isolation.'));
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(mediaErrorMessages.isolation);
+  });
+
+  it("keeps the tool's own wording when the cause is not identifiable", async () => {
+    const user = userEvent.setup();
+    const settle = pendingRun();
+    await startRun(user);
+    settle.reject(new Error('Invalid data found when processing input'));
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(messages.error);
   });
 });

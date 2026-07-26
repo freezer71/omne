@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { resultMessages } from '@/tests/helpers/tool-result-messages';
+import { resultMessages, mediaErrorMessages } from '@/tests/helpers/tool-result-messages';
 import type { ClipMetadata } from '@/lib/hooks/use-clip-metadata';
 
 const mergeVideos = vi.fn();
@@ -47,7 +47,7 @@ const landscape = (durationSec: number): ClipMetadata => ({
 });
 
 async function withClips(user: ReturnType<typeof userEvent.setup>, names: string[]) {
-  render(<VideoMergeTool {...messages} result={resultMessages} />);
+  render(<VideoMergeTool {...messages} result={resultMessages} mediaError={mediaErrorMessages} />);
   await user.upload(screen.getByLabelText(messages.selectButton), names.map(mp4));
 }
 

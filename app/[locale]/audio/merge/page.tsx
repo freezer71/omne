@@ -56,7 +56,7 @@ export default async function Page({
           needMore={tool.ui.needMore}
           result={dict.common.result}
           cancelLabel={dict.common.cancelRun}
-          cancelledLabel={dict.common.runCancelled}
+          cancelledLabel={dict.common.runCancelled} mediaError={dict.common.mediaError}
         />
       </ToolShell>
       <ToolPageJsonLd category="audio" id="merge" locale={locale} />

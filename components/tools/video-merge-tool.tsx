@@ -8,6 +8,7 @@ import { mergeVideos } from '@/lib/tools/implementations/video-merge';
 import { formatBytes, outputName } from '@/lib/file-utils';
 import { filesSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { useClipMetadata } from '@/lib/hooks/use-clip-metadata';
 import { formatDuration, hasMixedDimensions, totalDuration } from '@/lib/tools/clip-summary';
 import { cn } from '@/lib/cn';
@@ -34,6 +35,7 @@ type Props = Messages & {
   result: ToolResultMessages;
   cancelLabel: string;
   cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 function formatRemaining(seconds: number): string {
@@ -114,8 +116,8 @@ export function VideoMergeTool(messages: Props) {
       const bytes = await mergeVideos(files, { onProgress: (r) => setProgress(r) });
       const blob = new Blob([new Uint8Array(bytes)], { type: 'video/mp4' });
       setResult({ blob, filename: outputName('merged', [files[0]?.name ?? 'video.mp4'], 'mp4') });
-    } catch (_err) {
-      if (!wasCancelled()) setError(messages.error);
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
       setStartedAt(null);

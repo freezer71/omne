@@ -60,7 +60,11 @@
       "ready": "Traitement terminé. Votre fichier est prêt à être téléchargé."
     },
     "cancelRun": "Annuler",
-    "runCancelled": "Annulé. Rien n'a été modifié."
+    "runCancelled": "Annulé. Rien n'a été modifié.",
+    "mediaError": {
+      "memory": "Le navigateur a manqué de mémoire sur ce fichier. Essayez un extrait plus court, ou un préréglage plus léger.",
+      "isolation": "Cette page a perdu les réglages dont le moteur média a besoin. Rechargez-la et réessayez — votre fichier n'est pas en cause."
+    }
   },
   "badge": {
     "privacy": "100 % local · aucun envoi"

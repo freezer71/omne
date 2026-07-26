@@ -55,7 +55,7 @@ export default async function Page({
           pauseLabel={tool.ui.pauseLabel}
           muteLabel={tool.ui.muteLabel}
           unmuteLabel={tool.ui.unmuteLabel}
-          largeFileWarning={dict.common.largeFileWarning} result={dict.common.result} cancelLabel={dict.common.cancelRun} cancelledLabel={dict.common.runCancelled}
+          largeFileWarning={dict.common.largeFileWarning} result={dict.common.result} cancelLabel={dict.common.cancelRun} cancelledLabel={dict.common.runCancelled} mediaError={dict.common.mediaError}
         />
       </ToolShell>
       <ToolPageJsonLd category="audio" id="trim" locale={locale} />

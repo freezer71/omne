@@ -10,6 +10,7 @@ import { formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -34,6 +35,7 @@ type Props = Messages & {
   result: ToolResultMessages;
   cancelLabel: string;
   cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 function extOf(name: string): string {
@@ -105,8 +107,8 @@ export function AudioVolumeTool(messages: Props) {
       const ext = extOf(file!.name);
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: file!.type || 'audio/mpeg' });
       setResult({ blob, filename: outputName('volume', [file!.name], ext) });
-    } catch {
-      if (!wasCancelled()) setError(messages.error);
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
     }

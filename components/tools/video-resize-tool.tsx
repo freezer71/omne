@@ -10,6 +10,7 @@ import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -37,6 +38,7 @@ type Props = Messages & {
   result: ToolResultMessages;
   cancelLabel: string;
   cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 function formatRemaining(seconds: number): string {
@@ -120,7 +122,7 @@ export function VideoResizeTool(messages: Props) {
       // A cancel rejects the pending exec too; that is not a failure to report.
       if (!wasCancelled()) {
         console.error('[video-resize]', err);
-        setError(messages.error);
+        setError(mediaErrorMessage(err, messages.error, messages.mediaError));
       }
     } finally {
       setBusy(false);

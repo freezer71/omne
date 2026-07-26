@@ -57,7 +57,7 @@ export default async function Page({
           coverRemove={tool.ui.coverRemove}
           coverNone={tool.ui.coverNone}
           loadingTags={tool.ui.loadingTags}
-          loadTagsError={tool.ui.loadTagsError} result={dict.common.result} cancelLabel={dict.common.cancelRun} cancelledLabel={dict.common.runCancelled}
+          loadTagsError={tool.ui.loadTagsError} result={dict.common.result} cancelLabel={dict.common.cancelRun} cancelledLabel={dict.common.runCancelled} mediaError={dict.common.mediaError}
         />
       </ToolShell>
       <ToolPageJsonLd category="audio" id="tags" locale={locale} />

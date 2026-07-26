@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { resultMessages } from '@/tests/helpers/tool-result-messages';
+import { resultMessages, mediaErrorMessages } from '@/tests/helpers/tool-result-messages';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -68,14 +68,14 @@ beforeEach(() => {
 
 describe('AudioTrimTool', () => {
   it('renders empty state with disabled Trim button', () => {
-    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." />);
+    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." mediaError={mediaErrorMessages} />);
     expect(screen.getByText(messages.empty)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: messages.trimButton })).toBeDisabled();
   });
 
   it('exposes a visual selector with start/end handles after a file is picked', async () => {
     const user = userEvent.setup();
-    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." />);
+    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." mediaError={mediaErrorMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp3());
     setAudioDuration(4);
     expect(screen.getByRole('slider', { name: messages.startHandleLabel })).toBeInTheDocument();
@@ -85,7 +85,7 @@ describe('AudioTrimTool', () => {
 
   it('moves the end handle by 0.1s with ArrowLeft', async () => {
     const user = userEvent.setup();
-    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." />);
+    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." mediaError={mediaErrorMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp3());
     setAudioDuration(10);
     const endHandle = screen.getByRole('slider', { name: messages.endHandleLabel });
@@ -97,7 +97,7 @@ describe('AudioTrimTool', () => {
   it('accepts an mp3 file and offers the trimmed mp3 for download', async () => {
     const user = userEvent.setup();
     trimAudio.mockResolvedValue(new Uint8Array([1, 2, 3]));
-    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." />);
+    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." mediaError={mediaErrorMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp3('foo.mp3'));
     setAudioDuration(4);
     await user.click(screen.getByRole('button', { name: messages.trimButton }));
@@ -113,7 +113,7 @@ describe('AudioTrimTool', () => {
   it('accepts an mp4 file (video with audio) and offers a trimmed .m4a', async () => {
     const user = userEvent.setup();
     trimAudio.mockResolvedValue(new Uint8Array([1, 2, 3]));
-    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." />);
+    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." mediaError={mediaErrorMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp4('cleanshot.mp4'));
     setAudioDuration(50);
     await user.click(screen.getByRole('button', { name: messages.trimButton }));
@@ -128,7 +128,7 @@ describe('AudioTrimTool', () => {
     const user = userEvent.setup();
     const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     trimAudio.mockRejectedValue(new Error('ffmpeg exploded'));
-    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." />);
+    render(<AudioTrimTool {...messages} result={resultMessages} cancelLabel="Cancel" cancelledLabel="Cancelled. Nothing was changed." mediaError={mediaErrorMessages} />);
     await user.upload(screen.getByLabelText(messages.selectButton), mp3());
     setAudioDuration(3);
     await user.click(screen.getByRole('button', { name: messages.trimButton }));

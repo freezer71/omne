@@ -10,6 +10,7 @@ import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -35,6 +36,7 @@ type Props = Messages & {
   result: ToolResultMessages;
   cancelLabel: string;
   cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 const TRANSFORMS: RotateTransform[] = ['rotate90', 'rotate180', 'rotate270', 'flipH', 'flipV'];
@@ -111,8 +113,8 @@ export function VideoRotateTool(messages: Props) {
       const bytes = await rotateVideo(file, { transform, onProgress: (r) => setProgress(r) });
       const blob = new Blob([new Uint8Array(bytes)], { type: 'video/mp4' });
       setResult({ blob, filename: outputName('rotated', [file.name], 'mp4') });
-    } catch (_err) {
-      if (!wasCancelled()) setError(messages.error);
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
       setStartedAt(null);

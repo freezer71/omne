@@ -14,3 +14,9 @@ export const resultMessages: ToolResultMessages = {
   same: 'Same size',
   ready: 'Processing complete. Your file is ready to download.',
 };
+
+// The two diagnosable ffmpeg failures, shared by every media tool.
+export const mediaErrorMessages = {
+  memory: 'The browser ran out of memory on this file.',
+  isolation: 'Reload the page and try again.',
+};

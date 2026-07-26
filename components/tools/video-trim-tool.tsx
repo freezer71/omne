@@ -11,6 +11,7 @@ import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -38,6 +39,7 @@ type Props = Messages & {
   result: ToolResultMessages;
   cancelLabel: string;
   cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 function formatClock(seconds: number): string {
@@ -199,8 +201,8 @@ export function VideoTrimTool(messages: Props) {
       const ext = inferExtension(file.name);
       const blob = new Blob([new Uint8Array(bytes)], { type: file.type || 'video/mp4' });
       setResult({ blob, filename: outputName('trimmed', [file.name], ext) });
-    } catch (_err) {
-      if (!wasCancelled()) setError(messages.error);
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
     }

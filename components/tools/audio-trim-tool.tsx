@@ -15,6 +15,7 @@ import { formatBytes, outputName, stripExtension } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { Waveform } from '@/components/audio-waveform';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
@@ -45,6 +46,7 @@ type Props = Messages & {
   result: ToolResultMessages;
   cancelLabel: string;
   cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 function formatClock(seconds: number): string {
@@ -190,7 +192,7 @@ export function AudioTrimTool(messages: Props) {
       setResult({ blob, filename: outputName('trimmed', [file!.name], ext) });
     } catch (err) {
       if (process.env.NODE_ENV !== 'production') console.error('[audio-trim]', err);
-      if (!wasCancelled()) setError(messages.error);
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
     }

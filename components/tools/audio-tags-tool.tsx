@@ -18,6 +18,7 @@ import { formatBytes, outputName } from '@/lib/file-utils';
 import { useBlobUrl } from '@/lib/hooks/use-blob-url';
 import { fileSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { cn } from '@/lib/cn';
 
 type Messages = {
@@ -48,6 +49,7 @@ type Props = Messages & {
   result: ToolResultMessages;
   cancelLabel: string;
   cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 const MAX_COVER_SIDE = 800;
@@ -180,8 +182,8 @@ export function AudioTagsTool(messages: Props) {
       });
       const blob = new Blob([new Uint8Array(bytes) as BlobPart], { type: mimeForFormat(format) });
       setResult({ blob, filename: outputName('tagged', [file.name], format) });
-    } catch {
-      if (!wasCancelled()) setError(messages.error);
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
     }

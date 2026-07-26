@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { resultMessages } from '@/tests/helpers/tool-result-messages';
+import { resultMessages, mediaErrorMessages } from '@/tests/helpers/tool-result-messages';
 
 const estimateCompressedSize = vi.fn();
 const compressVideo = vi.fn();
@@ -50,7 +50,7 @@ function setVideoDuration(d: number) {
 }
 
 async function pickFile(user: ReturnType<typeof userEvent.setup>, durationSec = 60) {
-  render(<VideoCompressTool {...messages} result={resultMessages} />);
+  render(<VideoCompressTool {...messages} result={resultMessages} mediaError={mediaErrorMessages} />);
   await user.upload(screen.getByLabelText(messages.selectButton), mp4());
   setVideoDuration(durationSec);
 }
@@ -63,7 +63,7 @@ beforeEach(() => {
 
 describe('VideoCompressTool — size estimate', () => {
   it('does not guess before a file is loaded', async () => {
-    render(<VideoCompressTool {...messages} result={resultMessages} />);
+    render(<VideoCompressTool {...messages} result={resultMessages} mediaError={mediaErrorMessages} />);
     expect(screen.queryByText(/after compression/)).not.toBeInTheDocument();
     expect(estimateCompressedSize).not.toHaveBeenCalled();
   });

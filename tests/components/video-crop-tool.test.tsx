@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { resultMessages } from '@/tests/helpers/tool-result-messages';
+import { resultMessages, mediaErrorMessages } from '@/tests/helpers/tool-result-messages';
 
 const cropVideo = vi.fn();
 
@@ -48,7 +48,7 @@ function setField(label: string, value: number) {
 }
 
 async function loaded(user: ReturnType<typeof userEvent.setup>, w = 1920, h = 1080) {
-  render(<VideoCropTool {...messages} result={resultMessages} />);
+  render(<VideoCropTool {...messages} result={resultMessages} mediaError={mediaErrorMessages} />);
   await user.upload(screen.getByLabelText(messages.selectButton), mp4());
   setVideoSize(w, h);
 }

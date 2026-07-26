@@ -138,6 +138,8 @@ Chaque outil suit le même squelette en 5 fichiers + une entrée de registre :
 
 **Ne pas promettre un chiffre incalculable** : `video/compress` encode à quantiseur fixe, sa taille de sortie ne se déduit donc pas de durée × débit. `estimateCompressedSize` y répond en encodant les premières secondes au préréglage choisi puis en mettant à l'échelle — la règle du proxy léger appliquée à un chiffre plutôt qu'à une image. C'est une approximation par construction, elle est présentée comme telle, et elle échoue en silence plutôt que d'afficher un chiffre faux.
 
+**Dire pourquoi ça a échoué, quand c'est identifiable** : les outils média passent leurs échecs par `mediaErrorMessage` (`lib/media-errors.ts`), qui distingue la perte d'isolation cross-origin (recharger, le fichier n'est pas en cause) et le manque de mémoire (extrait plus court, préréglage plus léger) du reste, et retombe sur le libellé propre à l'outil plutôt que de deviner.
+
 **Tout traitement long est interruptible** : un outil ffmpeg appelle `useFfmpegCancel(busy)` (`lib/hooks/use-ffmpeg-cancel.ts`), qui affiche un bouton **Annuler** à côté du bouton principal occupé, avertit avant la fermeture de l'onglet en plein encodage, et appelle `terminateFfmpeg()` (`lib/ffmpeg-loader.ts`) pour arrêter le worker. Terminer laisse l'objet FFmpeg mort : le loader abandonne son instance en cache et le traitement suivant recharge un core neuf. Appeler `beginRun()` en tête du handler et conditionner le rapport d'échec à `wasCancelled()` — une annulation rejette aussi l'`exec` en cours, et la signaler reviendrait à dire à l'utilisateur que son fichier est cassé alors qu'il ne l'est pas.
 
 Détails complets dans [`CLAUDE.md`](./CLAUDE.md).

@@ -12,6 +12,7 @@ import {
 import { formatBytes } from '@/lib/file-utils';
 import { filesSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { mediaErrorMessage, type MediaErrorMessages } from '@/lib/media-errors';
 import { useClipMetadata } from '@/lib/hooks/use-clip-metadata';
 import { formatDuration, totalDuration } from '@/lib/tools/clip-summary';
 import { tpl } from '@/lib/tpl';
@@ -41,6 +42,7 @@ type Props = Messages & {
   result: ToolResultMessages;
   cancelLabel: string;
   cancelledLabel: string;
+  mediaError: MediaErrorMessages;
 };
 
 const FORMATS: MergeFormat[] = ['mp3', 'wav', 'flac', 'm4a'];
@@ -116,8 +118,8 @@ export function AudioMergeTool(messages: Props) {
         type: mergeMimeForFormat(format),
       });
       setResult({ blob, filename: `merged.${format}` });
-    } catch {
-      if (!wasCancelled()) setError(messages.error);
+    } catch (err) {
+      if (!wasCancelled()) setError(mediaErrorMessage(err, messages.error, messages.mediaError));
     } finally {
       setBusy(false);
     }
