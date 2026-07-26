@@ -8,6 +8,8 @@ import { mergeVideos } from '@/lib/tools/implementations/video-merge';
 import { formatBytes, outputName } from '@/lib/file-utils';
 import { filesSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { useClipMetadata } from '@/lib/hooks/use-clip-metadata';
+import { formatDuration, hasMixedDimensions, totalDuration } from '@/lib/tools/clip-summary';
 import { cn } from '@/lib/cn';
 import { tpl } from '@/lib/tpl';
 
@@ -24,6 +26,8 @@ type Messages = {
   needsTwo: string;
   etaLabel: string;
   etaCalculating: string;
+  totalDurationLabel: string;
+  mixedSizesWarning: string;
 };
 
 type Props = Messages & {
@@ -53,6 +57,10 @@ export function VideoMergeTool(messages: Props) {
   const [nowTick, setNowTick] = useState(0);
   const [result, setResult] = useToolResult(filesSignature(files));
   const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
+
+  const clips = useClipMetadata(files, 'video');
+  const total = totalDuration(clips);
+  const mixedSizes = hasMixedDimensions(clips);
 
   useEffect(() => {
     if (!busy) return;
@@ -136,19 +144,47 @@ export function VideoMergeTool(messages: Props) {
 
       {files.length > 0 && (
         <Card className="flex flex-col divide-y divide-border/50">
-          {files.map((f, i) => (
-            <div key={`${f.name}-${i}`} className="flex items-center gap-3 p-3">
-              <span className="font-mono text-xs text-text-faint tabular-nums w-6 text-right">{i + 1}.</span>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm text-text-primary">{f.name}</p>
-                <p className="font-mono text-xs text-text-faint">{formatBytes(f.size)}</p>
+          {files.map((f, i) => {
+            const clip = clips[i];
+            return (
+              <div key={`${f.name}-${i}`} className="flex items-center gap-3 p-3">
+                <span className="font-mono text-xs text-text-faint tabular-nums w-6 text-right">{i + 1}.</span>
+                <div className="h-12 w-[72px] shrink-0 overflow-hidden rounded border border-border bg-black">
+                  {clip?.poster && (
+                    // Plain <img>: a data URL drawn from the clip in-page, which
+                    // next/image cannot optimise.
+                    <img src={clip.poster} alt="" className="h-full w-full object-contain" />
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm text-text-primary">{f.name}</p>
+                  <p className="font-mono text-xs text-text-faint">
+                    {formatBytes(f.size)}
+                    {clip && Number.isFinite(clip.durationSec) && ` · ${formatDuration(clip.durationSec)}`}
+                    {clip?.width && clip.height ? ` · ${clip.width}×${clip.height}` : ''}
+                  </p>
+                </div>
+                <Button variant="ghost" size="sm" type="button" onClick={() => move(i, -1)} disabled={i === 0} aria-label={messages.moveUp}>↑</Button>
+                <Button variant="ghost" size="sm" type="button" onClick={() => move(i, 1)} disabled={i === files.length - 1} aria-label={messages.moveDown}>↓</Button>
+                <Button variant="subtle" size="sm" type="button" onClick={() => remove(i)} aria-label={messages.removeFile}>{messages.removeFile}</Button>
               </div>
-              <Button variant="ghost" size="sm" type="button" onClick={() => move(i, -1)} disabled={i === 0} aria-label={messages.moveUp}>↑</Button>
-              <Button variant="ghost" size="sm" type="button" onClick={() => move(i, 1)} disabled={i === files.length - 1} aria-label={messages.moveDown}>↓</Button>
-              <Button variant="subtle" size="sm" type="button" onClick={() => remove(i)} aria-label={messages.removeFile}>{messages.removeFile}</Button>
-            </div>
-          ))}
+            );
+          })}
+          {total !== null && (
+            <p className="px-3 py-2 font-mono text-xs text-text-muted">
+              {tpl(messages.totalDurationLabel, { duration: formatDuration(total) })}
+            </p>
+          )}
         </Card>
+      )}
+
+      {mixedSizes && (
+        <p
+          role="status"
+          className="rounded-md border border-warning/40 bg-warning/10 px-3 py-2 text-xs text-text-muted"
+        >
+          {messages.mixedSizesWarning}
+        </p>
       )}
 
       <div className="flex items-end justify-end gap-3 flex-wrap">

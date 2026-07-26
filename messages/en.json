@@ -700,12 +700,12 @@
         "content": {
           "howItWorks": [
             "Add two or more videos — MP4, WebM, MOV or MKV — using the button or by dropping them in.",
-            "Reorder the clips with the move-up and move-down controls to set the final sequence.",
+            "Reorder the clips with the up and down buttons — each row shows its first frame, duration and size.",
             "Click Merge to concatenate them into one continuous file, then download."
           ],
           "features": [
             "Joins MP4, WebM, MOV and MKV clips end to end into a single output file.",
-            "Drag-free reordering with up/down buttons lets you fix the playback order before merging.",
+            "Thumbnail, duration and dimensions on every clip, so the order is checked before the encode, not after",
             "Stitch together highlight reels, lessons or scene takes locally — nothing is uploaded."
           ]
         },
@@ -734,7 +734,9 @@
           "moveDown": "Move down",
           "needsTwo": "Add at least two videos to merge.",
           "etaLabel": "About {remaining} left",
-          "etaCalculating": "Estimating remaining time…"
+          "etaCalculating": "Estimating remaining time…",
+          "totalDurationLabel": "Total: {duration}",
+          "mixedSizesWarning": "These clips are not all the same size. Concatenating them keeps the first clip's dimensions, so the others will be stretched or cropped."
         }
       },
       "compress": {
@@ -1427,7 +1429,8 @@
           "moveUpLabel": "Move up",
           "moveDownLabel": "Move down",
           "totalLabel": "Total size",
-          "needMore": "Add at least one more file to merge."
+          "needMore": "Add at least one more file to merge.",
+          "totalDurationLabel": "{duration} total"
         }
       },
       "volume": {

@@ -700,12 +700,12 @@
         "content": {
           "howItWorks": [
             "Ajoutez deux vidéos ou plus — MP4, WebM, MOV ou MKV — avec le bouton ou en les glissant-déposant.",
-            "Réorganisez les clips avec les boutons monter et descendre pour définir l'ordre final.",
+            "Réorganisez les clips avec les boutons monter et descendre — chaque ligne affiche sa première image, sa durée et sa taille.",
             "Cliquez sur Fusionner pour les enchaîner en un seul fichier continu, puis téléchargez."
           ],
           "features": [
             "Enchaîne bout à bout des clips MP4, WebM, MOV et MKV en un seul fichier de sortie.",
-            "La réorganisation par boutons monter/descendre permet de corriger l'ordre de lecture avant la fusion.",
+            "Vignette, durée et dimensions sur chaque clip, pour vérifier l'ordre avant l'encodage et non après",
             "Assemblez vos montages, leçons ou prises de scène en local — rien n'est envoyé en ligne."
           ]
         },
@@ -734,7 +734,9 @@
           "moveDown": "Descendre",
           "needsTwo": "Ajoutez au moins deux vidéos à fusionner.",
           "etaLabel": "Environ {remaining} restant",
-          "etaCalculating": "Estimation du temps restant…"
+          "etaCalculating": "Estimation du temps restant…",
+          "totalDurationLabel": "Total : {duration}",
+          "mixedSizesWarning": "Ces clips n'ont pas tous la même taille. La concaténation conserve les dimensions du premier : les autres seront étirés ou rognés."
         }
       },
       "compress": {
@@ -1427,7 +1429,8 @@
           "moveUpLabel": "Monter",
           "moveDownLabel": "Descendre",
           "totalLabel": "Taille totale",
-          "needMore": "Ajoutez au moins un fichier supplémentaire pour fusionner."
+          "needMore": "Ajoutez au moins un fichier supplémentaire pour fusionner.",
+          "totalDurationLabel": "{duration} au total"
         }
       },
       "volume": {

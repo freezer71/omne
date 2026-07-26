@@ -12,6 +12,9 @@ import {
 import { formatBytes } from '@/lib/file-utils';
 import { filesSignature, useToolResult } from '@/lib/hooks/use-tool-result';
 import { useFfmpegCancel } from '@/lib/hooks/use-ffmpeg-cancel';
+import { useClipMetadata } from '@/lib/hooks/use-clip-metadata';
+import { formatDuration, totalDuration } from '@/lib/tools/clip-summary';
+import { tpl } from '@/lib/tpl';
 import { cn } from '@/lib/cn';
 
 type Messages = {
@@ -30,6 +33,7 @@ type Messages = {
   moveUpLabel: string;
   moveDownLabel: string;
   totalLabel: string;
+  totalDurationLabel: string;
   needMore: string;
 };
 
@@ -56,6 +60,8 @@ export function AudioMergeTool(messages: Props) {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const clips = useClipMetadata(files, 'audio');
+  const totalSeconds = totalDuration(clips);
   const [result, setResult] = useToolResult(`${filesSignature(files)}|${format}|${bitrate}`);
   const { beginRun, cancelRun, wasCancelled, cancelled } = useFfmpegCancel(busy);
 
@@ -179,7 +185,12 @@ export function AudioMergeTool(messages: Props) {
                     <span className="text-text-faint mr-2 font-mono">{i + 1}.</span>
                     {f.name}
                   </span>
-                  <span className="font-mono text-xs text-text-faint">{formatBytes(f.size)}</span>
+                  <span className="font-mono text-xs text-text-faint tabular-nums">
+                    {formatBytes(f.size)}
+                    {clips[i] && Number.isFinite(clips[i]!.durationSec)
+                      ? ` · ${formatDuration(clips[i]!.durationSec)}`
+                      : ''}
+                  </span>
                   <Button
                     variant="ghost"
                     size="sm"
@@ -214,7 +225,15 @@ export function AudioMergeTool(messages: Props) {
             </ul>
             <div className="flex items-center justify-between">
               <p className="text-xs text-text-faint">
-                {files.length === 1 ? messages.needMore : `${messages.totalLabel}: ${formatBytes(totalBytes)}`}
+                {files.length === 1
+                  ? messages.needMore
+                  : `${messages.totalLabel}: ${formatBytes(totalBytes)}${
+                      totalSeconds === null
+                        ? ''
+                        : ` · ${tpl(messages.totalDurationLabel, {
+                            duration: formatDuration(totalSeconds),
+                          })}`
+                    }`}
               </p>
               <Button
                 variant="ghost"
